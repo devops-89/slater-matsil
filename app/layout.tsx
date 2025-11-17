@@ -16,6 +16,16 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
+        {/* <main
+            style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+              padding: "80px 16px", // top/bottom spacing
+              minHeight: "100vh",
+            }}
+          >
+            {children}
+          </main> */}
         {children}
       </body>
     </html>
