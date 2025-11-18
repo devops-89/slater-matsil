@@ -44,7 +44,7 @@ const AboutSection = () => {
           //   borderRadius: 3,
           //   overflow: "hidden",
           //   width: "100%",
-          //   boxShadow: 3,
+          //   boxShadow: 3,`
           // }}
           >
             <Image
