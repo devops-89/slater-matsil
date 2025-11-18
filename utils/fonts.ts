@@ -29,3 +29,23 @@ export const adelle = localFont({
     },
   ],
 });
+
+export const inter = localFont({
+  src: [
+    {
+      path: "../public/fonts/Inter/static/Inter_18pt-Black.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Inter/static/Inter_18pt-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Inter/static/Inter_18pt-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+});
