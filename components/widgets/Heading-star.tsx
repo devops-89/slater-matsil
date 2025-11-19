@@ -11,9 +11,9 @@ const HeadingStar = () => {
         <Box
           sx={{
             backgroundColor: COLORS.PRIMARY_GREEN,
-            width: 36,
-            height: 36,
-            borderRadius: "18px",
+            width: 20,
+            height: 20,
+            borderRadius: 20,
             padding: "11px",
             display: "flex",
             alignItems: "center",
