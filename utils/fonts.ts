@@ -49,3 +49,7 @@ export const inter = localFont({
     },
   ],
 });
+
+export const georgia = localFont({
+  src: "../public/fonts/georgia/georgia.ttf",
+});

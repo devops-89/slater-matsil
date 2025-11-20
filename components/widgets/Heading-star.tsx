@@ -4,15 +4,15 @@ import React from "react";
 import whiteStar from "@/public/images/common/heading-star.png";
 import Image from "next/image";
 import { adelle } from "@/utils/fonts";
-const HeadingStar = () => {
+const HeadingStar = ({ title }: { title: string }) => {
   return (
     <div>
-      <Stack direction={"row"} alignItems={"center"} spacing={3}>
+      <Stack direction={"row"} alignItems={"center"} spacing={1}>
         <Box
           sx={{
             backgroundColor: COLORS.PRIMARY_GREEN,
-            width: 20,
-            height: 20,
+            width: 10,
+            height: 10,
             borderRadius: 20,
             padding: "11px",
             display: "flex",
@@ -29,10 +29,9 @@ const HeadingStar = () => {
             fontWeight: 400,
             color: COLORS.PRIMARY_GREEN,
             textTransform: "uppercase",
-            
           }}
         >
-          About Slatermatsil
+          {title}
         </Typography>
       </Stack>
     </div>
