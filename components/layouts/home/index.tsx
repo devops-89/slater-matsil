@@ -8,6 +8,7 @@ import { usePageData } from "@/store/usePageData";
 import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 import ServiceAreas from "./Service-Areas";
 import { WEBSITE_DATA } from "@/public/data/website-data";
+import Whoweserve from "./Who-We-Serve";
 
 const HomeLayout = () => {
   const { details, setDetails } = usePageData();
@@ -24,6 +25,7 @@ const HomeLayout = () => {
       <AboutSection />
       <MetricsSection />
       <ServiceAreas />
+      <Whoweserve />
     </div>
   );
 };

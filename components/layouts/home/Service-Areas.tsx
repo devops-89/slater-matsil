@@ -1,8 +1,16 @@
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import lightLogo from "@/public/images/home/slater-matsil-logo-light.png";
@@ -38,7 +46,7 @@ const ServiceAreas = () => {
           )}
         </Stack>
 
-        <Grid container>
+        <Grid container spacing={4}>
           {details?.homepage?.service_area?.section_Data.map((val, i) => (
             <Grid size={4} key={i}>
               <ServiceAreaCard
@@ -50,6 +58,26 @@ const ServiceAreas = () => {
             </Grid>
           ))}
         </Grid>
+        <Stack direction={"row"} alignItems={"center"} spacing={2} my={5}>
+          <Divider
+            sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
+          />
+          <Button
+            sx={{
+              color: COLORS.PRIMARY_BLUE,
+              fontFamily: adelle.style.fontFamily,
+              textDecoration: "underline",
+              fontWeight: 600,
+              fontSize: 16,
+              lineHeight: "28px",
+            }}
+          >
+            View More
+          </Button>
+          <Divider
+            sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
+          />
+        </Stack>
       </Container>
     </Box>
   );

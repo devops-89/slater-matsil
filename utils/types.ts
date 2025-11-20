@@ -7,6 +7,7 @@ export interface HOMEPAGE_DATA_PROPS {
     aboutSection: aboutSectionProps;
     our_metrics: MetricSectionProps;
     service_area: SERVICES_AREA_PROPS;
+    who_we_serve: WHO_WE_SERVE_SECTION_PROPS;
   };
 }
 
@@ -49,6 +50,27 @@ interface MetricSectionProps {
 
   ctaButton: string;
   metricsData: METRICSPROPS[];
+}
+
+interface CTA_BUTTON_PROPS {
+  text?: string;
+  href?: string;
+}
+interface WHO_WE_SERVE_SECTION_PROPS {
+  leftSection: {
+    heroImage: string;
+    small_logo: StaticImageData;
+    startingYear: string;
+    servicesLabel: string;
+    big_logo: StaticImageData;
+  };
+  rightSection: {
+    heading: string;
+    description: string;
+    section_data: { label: string }[];
+    ctaButton: CTA_BUTTON_PROPS;
+    endline: string;
+  };
 }
 
 export interface SERVICES_AREAS_DATA {

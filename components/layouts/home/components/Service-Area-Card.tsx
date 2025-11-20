@@ -18,6 +18,7 @@ const ServiceAreaCard = ({
         borderRadius: "10px",
         p: 3,
         position: "relative",
+        height: "360px",
       }}
     >
       <Box sx={{ textAlign: "center" }}>
@@ -42,7 +43,7 @@ const ServiceAreaCard = ({
           fontWeight: 400,
           fontSize: 16,
           lineHeight: "28px",
-          mb:2
+          mb: 2,
         }}
       >
         {description}
@@ -60,8 +61,8 @@ const ServiceAreaCard = ({
           justifyContent: "center",
           position: "absolute",
           left: "50%",
-          right: "50%",
           transform: "translateX(-50%)",
+          bottom: "-20px",
         }}
       >
         <Typography
