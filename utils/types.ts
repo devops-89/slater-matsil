@@ -1,3 +1,4 @@
+import { ButtonProps } from "@mui/material";
 import { StaticImageData } from "next/image";
 
 export interface HOMEPAGE_DATA_PROPS {
@@ -8,6 +9,7 @@ export interface HOMEPAGE_DATA_PROPS {
     our_metrics: MetricSectionProps;
     service_area: SERVICES_AREA_PROPS;
     who_we_serve: WHO_WE_SERVE_SECTION_PROPS;
+    insights_section: INSIGHTS_SECTION_PROPS;
   };
 }
 
@@ -70,6 +72,7 @@ interface WHO_WE_SERVE_SECTION_PROPS {
     section_data: { label: string }[];
     ctaButton: CTA_BUTTON_PROPS;
     endline: string;
+    bgImage: string;
   };
 }
 
@@ -85,4 +88,16 @@ interface SERVICES_AREA_PROPS {
   heading: string;
   img: StaticImageData;
   section_Data: SERVICES_AREAS_DATA[];
+}
+
+export interface INSIGHTS_CARD_DATA {
+  heading: string;
+  category: CTA_BUTTON_PROPS;
+  ctaButton: CTA_BUTTON_PROPS;
+}
+interface INSIGHTS_SECTION_PROPS {
+  sectionTitle: string;
+  heading: string;
+  description: string;
+  insights_data: INSIGHTS_CARD_DATA[];
 }

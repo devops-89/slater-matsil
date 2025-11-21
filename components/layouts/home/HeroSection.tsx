@@ -93,7 +93,7 @@ const HeroSection = () => {
                   lineHeight: "24px",
                 }}
               >
-               {details?.homepage?.heroSection?.videoHeading?.subTitle}
+                {details?.homepage?.heroSection?.videoHeading?.subTitle}
               </Typography>
             </Box>
           </Stack>

@@ -1,9 +1,20 @@
-import slaterMatsil from "@/public/images/home/slater-matsil.jpg";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
-import { Box, Divider, Grid, Typography } from "@mui/material";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
+import checkmark from "@/icons/checkmark.png";
+import { ArrowForward } from "@mui/icons-material";
 const Whoweserve = () => {
   const { details } = usePageData();
   return (
@@ -81,7 +92,116 @@ const Whoweserve = () => {
           )}
         </Grid>
         <Grid size={6}>
-          <Box sx={{ backgroundColor: "#ECF2F3" }}></Box>
+          <Box
+            sx={{
+              backgroundColor: "#ECF2F3",
+              height: "80vh",
+              backgroundImage: `url(${details?.homepage?.who_we_serve?.rightSection?.bgImage})`,
+              backgroundPosition: "top right",
+              backgroundSize: "40%",
+              backgroundRepeat: "no-repeat",
+              display: "grid",
+              placeItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Box sx={{ px: 4 }}>
+              <Typography
+                sx={{
+                  fontSize: 35,
+                  fontFamily: tradeGothic.style.fontFamily,
+                  fontWeight: 700,
+                  color: COLORS.PRIMARY_BLUE,
+                }}
+              >
+                {details?.homepage?.who_we_serve?.rightSection?.heading}
+              </Typography>
+              <Divider
+                sx={{
+                  borderColor: COLORS.PRIMARY_BLUE,
+                  borderWidth: 1.5,
+                  my: 2,
+                }}
+              />
+
+              <Typography
+                sx={{
+                  fontSize: 18,
+                  fontFamily: adelle.style.fontFamily,
+                  color: COLORS.TEXT_PRIMARY,
+                  fontWeight: 400,
+                }}
+              >
+                {details?.homepage?.who_we_serve?.rightSection?.description}
+              </Typography>
+
+              <Grid container>
+                {details?.homepage?.who_we_serve?.rightSection?.section_data.map(
+                  (val, i) => (
+                    <Grid size={6} key={i}>
+                      <List>
+                        <ListItem>
+                          <ListItemAvatar sx={{ minWidth: 35 }}>
+                            <Image src={checkmark} alt="" width={30} />
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={val.label}
+                            slotProps={{
+                              primary: {
+                                color: COLORS.TEXT_SECONDARY,
+                                fontFamily: adelle.style.fontFamily,
+                                fontSize: 15,
+                                fontWeight: 600,
+                                lineHeight: "28px",
+                              },
+                            }}
+                          />
+                        </ListItem>
+                      </List>
+                    </Grid>
+                  )
+                )}
+              </Grid>
+              <Button
+                sx={{
+                  padding: "15px",
+                  borderRadius: "40px",
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  color: COLORS.WHITE,
+                  width: 222,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 400,
+                  lineHeight: "26px",
+                  fontSize: 16,
+                  mt: 2,
+                }}
+                endIcon={<ArrowForward />}
+              >
+                {details?.homepage?.who_we_serve?.rightSection?.ctaButton?.text}
+              </Button>
+            </Box>
+          </Box>
+          <Box
+            sx={{
+              color: COLORS.WHITE,
+              backgroundColor: COLORS.PRIMARY_BLUE,
+              height: 110,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography
+              sx={{
+                fontSize: 20,
+                fontFamily: tradeGothic.style.fontFamily,
+                fontWeight: 700,
+                lineHeight: "31px",
+              }}
+            >
+              {details?.homepage?.who_we_serve?.rightSection?.endline}
+            </Typography>
+          </Box>
         </Grid>
       </Grid>
     </Box>

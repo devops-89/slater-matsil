@@ -9,6 +9,7 @@ import serviceAreas6 from "@/public/images/home/practice_areas/practice_areas6.s
 import whoWeServeLeftSectionHeroImage from "@/public/images/home/slater-matsil.jpg";
 import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import bigLogo from "@/public/images/home/slater-matsil-logo-light.png";
+import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -139,11 +140,49 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           },
         ],
         ctaButton: {
-          text: "More About",
-          href: "/about",
+          text: "Meet Our Team",
+          href: "/",
         },
         endline: "“Partnering with you to transform your vision into reality.”",
+        bgImage: whoWeServeRightSectionHeroImage.src,
       },
+    },
+    insights_section: {
+      sectionTitle: "Insights",
+      heading: "Recently published Insights.",
+      description: "Have Look at our Latest publication at slatermatsil.com",
+      insights_data: [
+        {
+          heading:
+            "Ira Matsil recognized by Chambers USA 2021-2025 as a Top Intellectual Property Attorney",
+          category: {
+            text: "news",
+          },
+          ctaButton: {
+            text: "Learn More",
+          },
+        },
+        {
+          heading:
+            "Steven Slater recognized by Chambers USA 2024-2025 as a Top Intellectual Property Attorney",
+          category: {
+            text: "news",
+          },
+          ctaButton: {
+            text: "Learn More",
+          },
+        },
+        {
+          heading:
+            "Srini Chakravarthi recognized by Chambers USA 2023-2025 as a Top Intellectual Property Attorney",
+          category: {
+            text: "news",
+          },
+          ctaButton: {
+            text: "Learn More",
+          },
+        },
+      ],
     },
   },
 };
