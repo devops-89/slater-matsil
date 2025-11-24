@@ -9,7 +9,7 @@ interface storeData {
 }
 
 export const usePageData = create<storeData>((set) => ({
-  details: WEBSITE_DATA,
+  details: null,
   setDetails: (details) => set({ details }),
   clearDetails: () => set({ details: null }),
 }));

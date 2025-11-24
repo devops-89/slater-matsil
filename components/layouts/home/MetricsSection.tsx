@@ -46,6 +46,20 @@ const MetricsSection: React.FC = (): JSX.Element => {
                   letterSpacing: "-2px",
                   lineHeight: "55px",
                   ml: 1,
+                  position: "relative",
+                  zIndex: 1,
+                  "&::after": {
+                    content: '""',
+                    position: "absolute",
+                    bottom: "8px",
+                    left: "-4px",
+                    right: "-8px",
+                    height: "14px",
+                    backgroundColor: COLORS.PRIMARY_GREEN,
+                    opacity: 0.4,
+                    zIndex: -1,
+                    transform: "rotate(-2deg)",
+                  },
                 }}
               >
                 {details?.homepage?.our_metrics?.heading?.subTitle}

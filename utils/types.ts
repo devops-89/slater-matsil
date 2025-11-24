@@ -101,3 +101,5 @@ interface INSIGHTS_SECTION_PROPS {
   description: string;
   insights_data: INSIGHTS_CARD_DATA[];
 }
+
+export interface SERVICES_DATA {}

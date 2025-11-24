@@ -1,15 +1,68 @@
-import { Box, Container, Grid } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
-
+import ContactForm from "./components/Contact-Form";
+import star from "@/common/heading-star.png";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import Image from "next/image";
+import contactImage from "@/home/contact-page.png";
 const ContactSection = () => {
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
-        <Grid container>
+        <Grid container spacing={4}>
           <Grid size={6}>
-            <ContactSection />
+            <ContactForm />
           </Grid>
-          <Grid size={6}></Grid>
+          <Grid size={6}>
+            <Typography
+              sx={{
+                color: COLORS.LABEL_COLOR,
+                fontFamily: adelle.style.fontFamily,
+                fontSize: 16,
+                fontWeight: 400,
+                lineHeight: "26px",
+              }}
+            >
+              (24/7 available)
+            </Typography>
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              spacing={2}
+              sx={{ mt: 3 }}
+            >
+              <Box
+                sx={{
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  width: 30,
+                  height: 30,
+                  borderRadius: "50%",
+                  padding: "11px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Image src={star} alt="" />
+              </Box>
+              <Typography
+                sx={{
+                  fontFamily: tradeGothic.style.fontFamily,
+                  fontSize: 17,
+                  fontWeight: 700,
+                  color: COLORS.PRIMARY_BLUE,
+                  lineHeight: "26px",
+                  textTransform: "uppercase",
+                }}
+              >
+                Free Consultation
+              </Typography>
+            </Stack>
+            <Box sx={{ mt: 3 }}>
+              <Image src={contactImage} alt="" />
+            </Box>
+          </Grid>
         </Grid>
       </Container>
     </Box>
