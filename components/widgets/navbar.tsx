@@ -6,6 +6,7 @@ import { Box, Stack, IconButton, Button, Container } from "@mui/material";
 import { Menu, ArrowDropDown } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import logo from "@/public/images/logo/logo.png";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -31,7 +32,9 @@ const Navbar = () => {
 
           {/* Center: Logo */}
           <Box sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}>
-            <Image src={logo} alt="Slater Matsil logo" priority />
+            <Link href="/">
+              <Image src={logo} alt="Slater Matsil logo" priority />
+            </Link>
           </Box>
 
           <Box

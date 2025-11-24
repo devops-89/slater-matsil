@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import AboutHerosection from "./About-Herosection";
 
 const AboutLayout = () => {
-  return (
-    <div>AboutLayout</div>
-  )
-}
+  // const {}
 
-export default AboutLayout
+  return (
+    <div>
+      <AboutHerosection />
+    </div>
+  );
+};
+
+export default AboutLayout;

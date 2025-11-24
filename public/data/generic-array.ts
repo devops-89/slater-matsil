@@ -1,3 +1,5 @@
+import { FOOTER_LIST_DATA } from "@/utils/types";
+
 export const SERVICES_AREAS_DATA = [
   {
     category: "Strategy",
@@ -66,5 +68,46 @@ export const SERVICES_AREAS_DATA = [
         label: "Opinions",
       },
     ],
+  },
+];
+
+export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
+  {
+    HEADING: "Firm",
+    DATA: [
+      {
+        text: "About Us",
+        href: "/about-us",
+      },
+      {
+        text: "Who We Serve",
+      },
+      {
+        text: "Practice Groups",
+      },
+      {
+        text: "Firm Leadership",
+      },
+    ],
+  },
+  {
+    HEADING: "Professionals",
+    DATA: [],
+  },
+  {
+    HEADING: "Services",
+    DATA: [],
+  },
+  {
+    HEADING: "Careers",
+    DATA: [],
+  },
+  {
+    HEADING: "Insights",
+    DATA: [],
+  },
+  {
+    HEADING: "Contact",
+    DATA: [],
   },
 ];

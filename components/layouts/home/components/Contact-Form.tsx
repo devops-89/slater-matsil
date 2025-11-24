@@ -17,7 +17,6 @@ import {
   FormControlLabel,
   Grid,
   InputAdornment,
-  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -27,8 +26,6 @@ import {
   TimePicker,
 } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import star from "@/common/heading-star.png";
-import Image from "next/image";
 
 const ContactForm = () => {
   return (
@@ -44,7 +41,7 @@ const ContactForm = () => {
         Let's Connect
       </Typography>
 
-      <Grid container sx={{ mt: 2 }} spacing={4}>
+      <Grid container sx={{ mt: 2 }} spacing={1.5}>
         <Grid size={6}>
           <TextField
             sx={{ ...TEXTFIELD_STYLES }}

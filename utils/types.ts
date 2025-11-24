@@ -1,4 +1,4 @@
-import { ButtonProps } from "@mui/material";
+import { ButtonProps, SvgIconProps } from "@mui/material";
 import { StaticImageData } from "next/image";
 
 export interface HOMEPAGE_DATA_PROPS {
@@ -10,7 +10,18 @@ export interface HOMEPAGE_DATA_PROPS {
     service_area: SERVICES_AREA_PROPS;
     who_we_serve: WHO_WE_SERVE_SECTION_PROPS;
     insights_section: INSIGHTS_SECTION_PROPS;
+    footerData: footer_data;
   };
+  aboutPage: {
+    heroSection: ABOUT_US_HEROSECTION;
+  };
+}
+
+interface ABOUT_US_HEROSECTION {
+  sectionTitle: string;
+  heading: string;
+  description: string;
+  img: StaticImageData;
 }
 
 interface HERO_SECTION_PROPS {
@@ -76,6 +87,19 @@ interface WHO_WE_SERVE_SECTION_PROPS {
   };
 }
 
+export interface SOCIAL_LINKS_PROPS {
+  icon: React.ElementType<SvgIconProps>;
+  href?: string;
+}
+
+interface footer_data {
+  footer_links: FOOTER_LIST_DATA[];
+  social_links: SOCIAL_LINKS_PROPS[];
+  privacy_pages: { title: string; href?: string }[];
+  logo: StaticImageData;
+  copyRightText: string;
+}
+
 export interface SERVICES_AREAS_DATA {
   img: StaticImageData | string;
   title: string;
@@ -102,4 +126,7 @@ interface INSIGHTS_SECTION_PROPS {
   insights_data: INSIGHTS_CARD_DATA[];
 }
 
-export interface SERVICES_DATA {}
+export interface FOOTER_LIST_DATA {
+  HEADING: string;
+  DATA?: CTA_BUTTON_PROPS[];
+}

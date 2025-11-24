@@ -10,6 +10,11 @@ import whoWeServeLeftSectionHeroImage from "@/public/images/home/slater-matsil.j
 import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import bigLogo from "@/public/images/home/slater-matsil-logo-light.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
+import { LinkedIn } from "@mui/icons-material";
+import { FOOTER_DATA } from "./generic-array";
+import { FaLinkedinIn } from "react-icons/fa";
+import footerLogo from "@/logo/big-logo.png";
+import aboutHero from "@/about/heroImage.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -183,6 +188,44 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           },
         },
       ],
+    },
+    footerData: {
+      footer_links: FOOTER_DATA,
+      social_links: [
+        {
+          icon: FaLinkedinIn,
+        },
+      ],
+      privacy_pages: [
+        {
+          title: "Terms",
+          href: "/",
+        },
+        {
+          title: "Privacy",
+          href: "/",
+        },
+        {
+          title: "Cookies",
+          href: "/",
+        },
+        {
+          title: "Disclaimer",
+          href: "/",
+        },
+      ],
+      logo: footerLogo,
+      copyRightText:
+        "© 2016 - 2025 Slater Matsil, LLP | Dallas, TX | Disclaimer | All Rights Reserved",
+    },
+  },
+  aboutPage: {
+    heroSection: {
+      sectionTitle: "About Slatermatsil",
+      heading: "The innovations that differentiate you in your market.",
+      description:
+        "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital.",
+      img: aboutHero,
     },
   },
 };

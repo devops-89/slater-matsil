@@ -8,7 +8,7 @@ import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import React, { useRef } from "react";
 import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import InsightsCard from "./components/Insights-Card";
+import InsightsCard from "./common/Insights-Card";
 
 const InsightsSection = () => {
   const { details } = usePageData();

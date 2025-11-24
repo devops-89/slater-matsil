@@ -1,16 +1,15 @@
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
-import React from "react";
-import ContactForm from "./components/Contact-Form";
 import star from "@/common/heading-star.png";
+import contactImage from "@/home/contact-page.png";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-import contactImage from "@/home/contact-page.png";
+import ContactForm from "./components/Contact-Form";
 const ContactSection = () => {
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
+        <Grid container spacing={10}>
           <Grid size={6}>
             <ContactForm />
           </Grid>
@@ -59,8 +58,12 @@ const ContactSection = () => {
                 Free Consultation
               </Typography>
             </Stack>
-            <Box sx={{ mt: 3 }}>
-              <Image src={contactImage} alt="" />
+            <Box sx={{ mt: 3, position: "relative" }}>
+              <Image
+                src={contactImage}
+                alt=""
+                style={{ width: "100%", height: "auto" }}
+              />
             </Box>
           </Grid>
         </Grid>
