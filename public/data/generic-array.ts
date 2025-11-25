@@ -1,4 +1,4 @@
-import { FOOTER_LIST_DATA } from "@/utils/types";
+import { FOOTER_LIST_DATA, METRICSPROPS } from "@/utils/types";
 
 export const SERVICES_AREAS_DATA = [
   {
@@ -109,5 +109,24 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
   {
     HEADING: "Contact",
     DATA: [],
+  },
+];
+
+export const METRICS_DATA: METRICSPROPS[] = [
+  {
+    title: "U.S. PATENTS ISSUED",
+    count: "24,180+",
+  },
+  {
+    title: "COUNTRIES WE SERVE",
+    count: "6",
+  },
+  {
+    title: "PATENTS ISSUED TO FIRM PERSONNELS",
+    count: "200+",
+  },
+  {
+    title: "NO. OF PATENT PROFESSIONALS WITH ADV. TECHNICAL DEGREES",
+    count: "50%",
   },
 ];

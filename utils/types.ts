@@ -14,6 +14,10 @@ export interface HOMEPAGE_DATA_PROPS {
   };
   aboutPage: {
     heroSection: ABOUT_US_HEROSECTION;
+    drivingInnovationEverywhere: ABOUT_US_SLATER;
+    REDEFINING_PATENT_SUCCESS: REDEFINING_PATENT_SUCCESS_PROPS;
+    innovationInsights: ABOUT_INNOVATION_INSIGHTS_PROPS;
+    AWARDSPROPS: AWARDS_ABOUT_PROPS;
   };
 }
 
@@ -33,6 +37,11 @@ interface HERO_SECTION_PROPS {
   };
 }
 
+interface ABOUT_INNOVATION_INSIGHTS_PROPS {
+  heading: string;
+  description: string;
+}
+
 interface aboutSectionProps {
   sectionTitle: string;
   heading: string;
@@ -46,6 +55,19 @@ interface aboutSectionProps {
     title: string;
     subTitle: string;
   };
+}
+
+interface ABOUT_US_SLATER {
+  heading: string;
+  description: string;
+  img: StaticImageData;
+}
+
+interface REDEFINING_PATENT_SUCCESS_PROPS {
+  heading1: string;
+  heading2: string;
+  description: string;
+  metrics_data: METRICSPROPS[];
 }
 
 export interface METRICSPROPS {
@@ -130,3 +152,11 @@ export interface FOOTER_LIST_DATA {
   HEADING: string;
   DATA?: CTA_BUTTON_PROPS[];
 }
+
+interface AWARDS_ABOUT_PROPS {
+  img: StaticImageData;
+  heading1: string;
+  heading2: string;
+  awards_img: { img: StaticImageData }[];
+}
+``;

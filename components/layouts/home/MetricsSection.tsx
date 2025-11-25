@@ -10,7 +10,7 @@ import { COLORS } from "@/utils/enum";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { Mail } from "@mui/icons-material";
-import MetricsCard from "./components/Metrics-Card";
+import MetricsCard from "../../widgets/common/Metrics-Card";
 
 const MetricsSection: React.FC = (): JSX.Element => {
   const { details } = usePageData();

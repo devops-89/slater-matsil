@@ -5,7 +5,7 @@ import { ArrowUpward } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
 
-const MetricsCard = ({title,count}:METRICSPROPS) => {
+const MetricsCard = ({ title, count }: METRICSPROPS) => {
   return (
     <Box>
       <Typography
@@ -14,12 +14,12 @@ const MetricsCard = ({title,count}:METRICSPROPS) => {
           fontFamily: adelle.style.fontFamily,
           fontSize: 14,
           fontWeight: 400,
-          lineHeight: "30px",
+          lineHeight: "154px 140px 155.875px 130px",
         }}
       >
         {title}
       </Typography>
-      <Stack direction="row" alignItems={"flex-start"} spacing={2}>
+      <Stack direction="row" alignItems={"flex-start"} spacing={2} mt={2}>
         <ArrowUpward sx={{ color: COLORS.PRIMARY_GREEN }} />
         <Typography
           sx={{
@@ -29,6 +29,7 @@ const MetricsCard = ({title,count}:METRICSPROPS) => {
             fontWeight: 700,
             lineHeight: "55px",
             letterSpacing: "-2px",
+            textAlign: "center",
           }}
         >
           {count}

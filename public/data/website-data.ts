@@ -11,10 +11,18 @@ import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import bigLogo from "@/public/images/home/slater-matsil-logo-light.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
 import { LinkedIn } from "@mui/icons-material";
-import { FOOTER_DATA } from "./generic-array";
+import { FOOTER_DATA, METRICS_DATA } from "./generic-array";
 import { FaLinkedinIn } from "react-icons/fa";
 import footerLogo from "@/logo/big-logo.png";
 import aboutHero from "@/about/heroImage.jpg";
+import drivingInnovationEverywhere from "@/about/driving-vector.png";
+import globe from "@/about/globe.png";
+import award1 from "@/about/award-1.png";
+import award2 from "@/about/award-2.png";
+import award3 from "@/about/award-3.png";
+import award4 from "@/about/award-4.png";
+import award5 from "@/about/award-5.png";
+import award6 from "@/about/award-6.png";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -38,7 +46,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       experience: {
         years: "18",
         title: "Years of",
-        subTitle: "Pro Expoeriences",
+        subTitle: "Pro Experiences",
       },
     },
     our_metrics: {
@@ -50,24 +58,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       description:
         "At Slater Matsil, we know what is required to invent something groundbreaking and we know what it takes to guard and defend your company’s intellectual capital.",
       ctaButton: "Let's Talk Now",
-      metricsData: [
-        {
-          title: "U.S. PATENTS ISSUED",
-          count: "24,180+",
-        },
-        {
-          title: "COUNTRIES WE SERVE",
-          count: "6",
-        },
-        {
-          title: "PATENTS ISSUED TO FIRM PERSONNELS",
-          count: "200+",
-        },
-        {
-          title: "NO. OF PATENT PROFESSIONALS WITH ADV. TECHNICAL DEGREES",
-          count: "50%",
-        },
-      ],
+      metricsData: METRICS_DATA,
     },
     service_area: {
       sectionTitle: "Service Area",
@@ -226,6 +217,49 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       description:
         "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital.",
       img: aboutHero,
+    },
+    drivingInnovationEverywhere: {
+      heading: "Driving innovation everywhere",
+      description:
+        "Slater Matsil is a collaboration of technology-minded individuals who practice intellectual property law. We understand that IP rights are, first and foremost, working assets that must support and advance our clients' business objectives. We maintain this client-centric perspective, whether we are discussing technology with inventors in the design room, developing IP strategies with management in the board room, or advocating for our clients' rights in the courtroom.",
+      img: drivingInnovationEverywhere,
+    },
+    REDEFINING_PATENT_SUCCESS: {
+      heading1: "“Redefining Patent Success With",
+      heading2: "Precision and Global Reach.”",
+      description:
+        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations worth approximately $4.8 billion in research and development.",
+      metrics_data: METRICS_DATA,
+    },
+    innovationInsights: {
+      heading: "Where Insight Meets Innovation In Every Patent Strategy.",
+      description:
+        "We’re engineers focused on making things work. We’re attorneys driven to defend innovation. Above all, we’re proven professionals who draw upon our firsthand experience spanning diverse industries to deliver quality, accuracy, and a meticulous level of detail in our work product.",
+    },
+    AWARDSPROPS: {
+      img: globe,
+      heading1: "Distinction Defined By",
+      heading2: "Dedication And Results.",
+      awards_img: [
+        {
+          img: award1,
+        },
+        {
+          img: award2,
+        },
+        {
+          img: award3,
+        },
+        {
+          img: award4,
+        },
+        {
+          img: award5,
+        },
+        {
+          img: award6,
+        },
+      ],
     },
   },
 };
