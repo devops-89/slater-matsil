@@ -11,7 +11,7 @@ import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import bigLogo from "@/public/images/home/slater-matsil-logo-light.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
 import { LinkedIn } from "@mui/icons-material";
-import { FOOTER_DATA, METRICS_DATA } from "./generic-array";
+import { FOOTER_DATA, INDUSTRIES_DATA, METRICS_DATA } from "./generic-array";
 import { FaLinkedinIn } from "react-icons/fa";
 import footerLogo from "@/logo/big-logo.png";
 import aboutHero from "@/about/heroImage.jpg";
@@ -23,6 +23,13 @@ import award3 from "@/about/award-3.png";
 import award4 from "@/about/award-4.png";
 import award5 from "@/about/award-5.png";
 import award6 from "@/about/award-6.png";
+import professionalsHeroImage from "@/professionals/hero_section.png";
+import professional1 from "@/professionals/Williams_Zachary_Thumb.jpg";
+import professional2 from "@/professionals/brian_c_thumb.jpg";
+import professional3 from "@/professionals/ruojian.jpg";
+import professional4 from "@/professionals/yumin_thumb.jpg";
+import professional5 from "@/professionals/steven-yates.jpg";
+import professional6 from "@/professionals/srini_thumb.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -261,5 +268,68 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
       ],
     },
+    industriesWeServe: {
+      heading1: "Industries",
+      heading2: "we Serve.",
+      description:
+        "We collaborate with a wide range of industries, delivering innovative and reliable solutions that drive efficiency, scalability, and growth.",
+      section_data: INDUSTRIES_DATA,
+    },
+  },
+  firm_professionals: {
+    professionals_hero_section: {
+      heading: "Patent professionals who share your perspective",
+      description1:
+        "When you work with Slater Matsil, you collaborate with a uniquely skilled team of engineering, technical, and legal specialists.",
+
+      img: professionalsHeroImage,
+
+      descriptions: [
+        {
+          label:
+            "Our attorneys and other professionals have significant engineering experience. Many have earned advanced technical degrees and hold patents of their own.",
+        },
+        {
+          label:
+            "We have a thorough understanding of what it takes to translate your inventive concepts and ideas into meticulously crafted, highly defendable IP rights. Just as importantly, we know how to leverage those IP rights into business assets that will advance your business objectives.",
+        },
+        {
+          label:
+            "Many have significant experience as engineers and managers in technology companies (including joint MBA-Engineering degree holders).",
+        },
+      ],
+    },
+    PROFESSIONAL_LIST_PROPS: [
+      {
+        img: professional1,
+        name: "Williams Zachary, Ph.D",
+        designation: "Technical Advisor",
+      },
+      {
+        img: professional2,
+        name: "Brian A. Carlson",
+        designation: "Attorney at Law",
+      },
+      {
+        img: professional3,
+        name: "RuoJian Zhang",
+        designation: "Distinguished Patent Agent",
+      },
+      {
+        img: professional4,
+        name: "Yumin Jeff Zhang, Ph.D",
+        designation: "Distinguished Patent Agent",
+      },
+      {
+        img: professional5,
+        name: "Steven Yates",
+        designation: "Attorney at Law",
+      },
+      {
+        img: professional6,
+        name: "Srini Chakravarthi, Ph.D",
+        designation: "Attorney at Law",
+      },
+    ],
   },
 };

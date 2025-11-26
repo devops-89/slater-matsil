@@ -1,4 +1,6 @@
-import { FOOTER_LIST_DATA, METRICSPROPS } from "@/utils/types";
+import { DATA_LIST_PROPS, FOOTER_LIST_DATA, METRICSPROPS } from "@/utils/types";
+import career_home_Image from "@/about/img1.png";
+import { TABS } from "@/utils/enum";
 
 export const SERVICES_AREAS_DATA = [
   {
@@ -128,5 +130,98 @@ export const METRICS_DATA: METRICSPROPS[] = [
   {
     title: "NO. OF PATENT PROFESSIONALS WITH ADV. TECHNICAL DEGREES",
     count: "50%",
+  },
+];
+
+export const INDUSTRIES_DATA: DATA_LIST_PROPS[] = [
+  {
+    dataList: [
+      {
+        label: "Automotive",
+      },
+      {
+        label: "Banking/Finance",
+      },
+      {
+        label: "Computers",
+      },
+      {
+        label: "Consumer Electronics",
+      },
+      {
+        label: "Defense",
+      },
+      {
+        label: "Electronic Circuits",
+      },
+    ],
+  },
+  {
+    dataList: [
+      {
+        label: "Energy",
+      },
+      {
+        label: "hardware",
+      },
+      {
+        label: "Medical",
+      },
+      {
+        label: "MicroProcessors",
+      },
+      {
+        label: "nanotechnology",
+      },
+      {
+        label: "oil and gas",
+      },
+    ],
+  },
+  {
+    dataList: [
+      {
+        label: "optics",
+      },
+      {
+        label: "Power Electronics",
+      },
+      {
+        label: "Robotics",
+      },
+      {
+        label: "Semiconductors",
+      },
+      {
+        label: "Software",
+      },
+      {
+        label: "telecommunications",
+      },
+    ],
+  },
+];
+
+export const CAREER_HOME_DATA = [
+  {
+    img: career_home_Image,
+    title: "Career",
+  },
+  {
+    img: career_home_Image,
+    title: "Connect with Slatermatsil",
+  },
+  {
+    img: career_home_Image,
+    title: "Sustainability",
+  },
+];
+
+export const TABS_DATA = [
+  {
+    label: TABS.FIRM,
+  },
+  {
+    label: TABS.PROFESSIONALS,
   },
 ];

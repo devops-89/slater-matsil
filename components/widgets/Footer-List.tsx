@@ -25,8 +25,8 @@ const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
         {HEADING}
       </Typography>
       <List>
-        {DATA?.map((item) => (
-          <ListItemButton sx={{ p: 0 }}>
+        {DATA?.map((item, i) => (
+          <ListItemButton sx={{ p: 0 }} key={i}>
             <Link href={item.href || ""} style={{ textDecoration: "none" }}>
               <ListItemText
                 primary={item.text}

@@ -18,11 +18,11 @@ const RedefiningPatent = () => {
             sx={{
               backgroundColor: "#ECF8F8",
               borderRadius: "16px",
-              padding: "50px",
+              padding: "40px",
             }}
           >
             <Container>
-              <Grid container>
+              <Grid container alignItems={"center"}>
                 <Grid size={6}>
                   <Grid container spacing={4}>
                     {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.metrics_data.map(
@@ -67,6 +67,7 @@ const RedefiningPatent = () => {
                         opacity: 0.4,
                         zIndex: -1,
                         transform: "rotate(-2deg)",
+                        width: 420,
                       },
                     }}
                   >

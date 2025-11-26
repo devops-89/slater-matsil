@@ -18,6 +18,11 @@ export interface HOMEPAGE_DATA_PROPS {
     REDEFINING_PATENT_SUCCESS: REDEFINING_PATENT_SUCCESS_PROPS;
     innovationInsights: ABOUT_INNOVATION_INSIGHTS_PROPS;
     AWARDSPROPS: AWARDS_ABOUT_PROPS;
+    industriesWeServe: INDUSTRIES_WE_SERVE_PROPS;
+  };
+  firm_professionals: {
+    professionals_hero_section: PROFESSIONALS_HEROSECTION_PROPS;
+    PROFESSIONAL_LIST_PROPS: PROFESSIONALS_CARD_PROPS[];
   };
 }
 
@@ -159,4 +164,26 @@ interface AWARDS_ABOUT_PROPS {
   heading2: string;
   awards_img: { img: StaticImageData }[];
 }
-``;
+
+export interface DATA_LIST_PROPS {
+  dataList: { label: string }[];
+}
+interface INDUSTRIES_WE_SERVE_PROPS {
+  heading1: string;
+  heading2: string;
+  description: string;
+  section_data: DATA_LIST_PROPS[];
+}
+
+interface PROFESSIONALS_HEROSECTION_PROPS {
+  heading: string;
+  description1: string;
+  descriptions: { label: string }[];
+  img: StaticImageData;
+}
+
+export interface PROFESSIONALS_CARD_PROPS {
+  img: StaticImageData;
+  name: string;
+  designation: string;
+}

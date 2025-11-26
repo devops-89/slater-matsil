@@ -12,3 +12,8 @@ export enum COLORS {
   FOOTER_TEXT_COLOR = "#D0DAF5",
   TEXT_TERTIARY = "#14363f",
 }
+
+export enum TABS {
+  FIRM = "Firm",
+  PROFESSIONALS = "Professionals",
+}
