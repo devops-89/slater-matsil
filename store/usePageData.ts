@@ -1,6 +1,5 @@
 import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 import { create } from "zustand";
-import { WEBSITE_DATA } from "@/public/data/website-data";
 
 interface storeData {
   details: HOMEPAGE_DATA_PROPS | null;

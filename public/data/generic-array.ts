@@ -1,6 +1,6 @@
 import { DATA_LIST_PROPS, FOOTER_LIST_DATA, METRICSPROPS } from "@/utils/types";
 import career_home_Image from "@/about/img1.png";
-import { TABS } from "@/utils/enum";
+import { PROFESSIONAL_TABS_DATA, TABS } from "@/utils/enum";
 
 export const SERVICES_AREAS_DATA = [
   {
@@ -223,5 +223,20 @@ export const TABS_DATA = [
   },
   {
     label: TABS.PROFESSIONALS,
+  },
+];
+
+export const PROFESSIONAL_DETAILS_TAB_DATA = [
+  {
+    label: PROFESSIONAL_TABS_DATA.BIO,
+  },
+  {
+    label: PROFESSIONAL_TABS_DATA.EDUCATION,
+  },
+  {
+    label: PROFESSIONAL_TABS_DATA.ADMISSIONS_HONORS,
+  },
+  {
+    label: PROFESSIONAL_TABS_DATA.ARTICLES_PRESENTATIONS,
   },
 ];

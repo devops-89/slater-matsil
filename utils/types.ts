@@ -26,6 +26,11 @@ export interface HOMEPAGE_DATA_PROPS {
   };
 }
 
+export interface PROFESSIONAL_DETAILS_PROPS {
+  slug: string;
+  professionals_Details_HeroSection: PROFESSIONAL_DETAILS_HERO_PROPS;
+}
+
 interface ABOUT_US_HEROSECTION {
   sectionTitle: string;
   heading: string;
@@ -186,4 +191,33 @@ export interface PROFESSIONALS_CARD_PROPS {
   img: StaticImageData;
   name: string;
   designation: string;
+  slug: string;
+}
+
+export interface PROFESSIONAL_DETAILS_HERO_PROPS {
+  img: StaticImageData;
+  name: string;
+  email: string;
+  phoneNumber: string;
+
+  vCardData: PROFESSIONAL_VCARD_PROPS;
+}
+
+export interface PROFESSIONAL_VCARD_PROPS {
+  name: string;
+  formattedName: string;
+  electronicMail: string;
+  telephoneNumber: string;
+  organization: string;
+  job_title: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    countryRegion: string;
+  };
+  url: string;
+  firstName: string;
+  lastName: string;
 }

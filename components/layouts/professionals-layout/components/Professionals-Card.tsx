@@ -5,10 +5,12 @@ import professional1 from "@/professionals/professional1.jpg";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { PROFESSIONALS_CARD_PROPS } from "@/utils/types";
+import Link from "next/link";
 const ProfessionalsCard = ({
   img,
   name,
   designation,
+  slug,
 }: PROFESSIONALS_CARD_PROPS) => {
   return (
     <Box>
@@ -42,17 +44,25 @@ const ProfessionalsCard = ({
           }}
         >
           <Box sx={{}}>
-            <Typography
-              sx={{
-                fontSize: 20,
-                fontFamily: tradeGothic.style.fontFamily,
-                fontWeight: 700,
+            <Link
+              href={`/firm-professionals/professionals/${slug}`}
+              style={{
+                textDecoration: "underline",
                 color: COLORS.PRIMARY_BLUE,
-                textAlign: "center",
               }}
             >
-              {name}
-            </Typography>
+              <Typography
+                sx={{
+                  fontSize: 20,
+                  fontFamily: tradeGothic.style.fontFamily,
+                  fontWeight: 700,
+                  color: COLORS.PRIMARY_BLUE,
+                  textAlign: "center",
+                }}
+              >
+                {name}
+              </Typography>
+            </Link>
             <Typography
               sx={{
                 fontSize: 18,

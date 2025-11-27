@@ -129,6 +129,7 @@ const ProfessionalList = () => {
                   img={val.img}
                   name={val.name}
                   designation={val.designation}
+                  slug={val.slug}
                 />
               </Grid>
             ))
