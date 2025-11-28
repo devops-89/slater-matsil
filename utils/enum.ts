@@ -11,6 +11,7 @@ export enum COLORS {
   LABEL_COLOR = "#5A7779",
   FOOTER_TEXT_COLOR = "#D0DAF5",
   TEXT_TERTIARY = "#14363f",
+  TEXT_PRIMARY_24 = "#1D8D96",
 }
 
 export enum TABS {

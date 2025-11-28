@@ -8,7 +8,8 @@ import { PROFESSIONAL_DETAILS_DATA } from "@/public/data/professionals-details-d
 import TabSection from "./Tab-Section";
 
 const ProfessionalDetailsLayout = () => {
-  const { setProfessionalDetailsData } = useProfessionalDetailsData();
+  const { setProfessionalDetailsData, clearProfessionalDetailsData } =
+    useProfessionalDetailsData();
   const { slug } = useParams();
 
   useEffect(() => {
@@ -19,6 +20,9 @@ const ProfessionalDetailsLayout = () => {
     if (filteredProfessionalData) {
       setProfessionalDetailsData(filteredProfessionalData);
     }
+    return () => {
+      clearProfessionalDetailsData();
+    };
   }, [slug, setProfessionalDetailsData]);
 
   return (

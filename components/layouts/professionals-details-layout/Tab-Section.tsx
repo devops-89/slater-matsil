@@ -1,18 +1,34 @@
+import CustomTabPanel from "@/components/widgets/Tab-panel";
 import { PROFESSIONAL_DETAILS_TAB_DATA } from "@/public/data/generic-array";
-import { COLORS } from "@/utils/enum";
+import { COLORS, PROFESSIONAL_TABS_DATA } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import ProfessionalBio from "./Professionals-Bio";
+import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
 
 const TabSection = () => {
   const [value, setValue] = useState(0);
+  const { data } = useProfessionalDetailsData();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
+  const getTabData = (label: string) => {
+    if (label === PROFESSIONAL_TABS_DATA.BIO) {
+      return data?.PROFESSIONAL_BIO_DATA;
+    }
+    if (label === PROFESSIONAL_TABS_DATA.EDUCATION) {
+      return data?.PROFESSIONAL_EDUCATION_DATA;
+    }
+    if (label === PROFESSIONAL_TABS_DATA.ADMISSIONS_HONORS) {
+      return data?.PROFESSIONAL_ADMISSIONS_DATA;
+    }
+  };
+
   return (
-    <Box>
+    <Box sx={{ pb: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={5} sx={{ mt: 20 }}>
           <Grid size={10} margin="auto">
@@ -37,9 +53,6 @@ const TabSection = () => {
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 400,
                   lineHeight: "32px",
-                  //   display: "flex",
-                  //   alignItems: "center",
-                  //   justifyContent: "center",
                 },
                 "& .Mui-selected": {
                   backgroundColor: COLORS.WHITE,
@@ -56,6 +69,11 @@ const TabSection = () => {
             </Tabs>
           </Grid>
         </Grid>
+        {PROFESSIONAL_DETAILS_TAB_DATA.map((val, i) => (
+          <CustomTabPanel index={i} value={value} key={i}>
+            <ProfessionalBio data={getTabData(val.label)} />
+          </CustomTabPanel>
+        ))}
       </Container>
     </Box>
   );

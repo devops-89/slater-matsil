@@ -50,115 +50,138 @@ const ProfessionalsDetailsHeroSection = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{ position: "relative", height: "85vh", overflow: "hidden" }}>
       <Box
         sx={{
           backgroundColor: COLORS.PRIMARY_BLUE,
-          width: "40%",
-          height: "80vh",
-          my: 5,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundPosition: "right",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          ml: "auto",
+          width: "35%",
+          height: "100%",
+          position: "absolute",
+          right: 0,
+          top: 0,
+          zIndex: 0,
         }}
       ></Box>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "62%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "100%",
-        }}
+      <Container
+        maxWidth="lg"
+        sx={{ height: "100%", position: "relative", zIndex: 1 }}
       >
-        <Container maxWidth="lg">
-          <Grid container spacing={5}>
-            <Grid size={6} sx={{ display: "flex", flexDirection: "column" }}>
+        <Grid
+          container
+          spacing={5}
+          sx={{ height: "100%", alignItems: "center" }}
+        >
+          <Grid size={6} sx={{ display: "flex", flexDirection: "column" }}>
+            <Typography
+              sx={{
+                fontSize: 60,
+                fontFamily: tradeGothic.style.fontFamily,
+                fontWeight: 700,
+                lineHeight: "1.1",
+                color: COLORS.PRIMARY_BLUE,
+                mb: 2,
+              }}
+            >
+              {data?.professionals_Details_HeroSection?.name}
+            </Typography>
+            <Typography
+              component="a"
+              href={`mailto:${data?.professionals_Details_HeroSection?.email}`}
+              sx={{
+                fontSize: 20,
+                fontFamily: adelle.style.fontFamily,
+                fontWeight: 400,
+                lineHeight: "32px",
+                color: COLORS.PRIMARY_BLUE,
+                textDecoration: "none",
+                display: "block",
+              }}
+            >
+              {data?.professionals_Details_HeroSection?.email}
+            </Typography>
+            <Typography
+              component="a"
+              href={`tel:${data?.professionals_Details_HeroSection?.phoneNumber}`}
+              sx={{
+                fontSize: 20,
+                fontFamily: adelle.style.fontFamily,
+                fontWeight: 400,
+                lineHeight: "32px",
+                color: COLORS.PRIMARY_BLUE,
+                textDecoration: "none",
+                display: "block",
+                mb: 8,
+              }}
+            >
+              {data?.professionals_Details_HeroSection?.phoneNumber}
+            </Typography>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-start",
+                flexDirection: "column",
+              }}
+            >
               <Typography
                 sx={{
-                  fontSize: 60,
-                  fontFamily: tradeGothic.style.fontFamily,
+                  fontSize: 14,
+                  fontFamily: adelle.style.fontFamily,
                   fontWeight: 700,
-                  lineHeight: "98px",
+                  lineHeight: "26px",
                   color: COLORS.PRIMARY_BLUE,
+                  mb: 1,
                 }}
               >
-                {data?.professionals_Details_HeroSection?.name}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: 25,
-                  fontFamily: adelle.style.fontFamily,
-                  fontWeight: 600,
-                  lineHeight: "32px",
-                  color: COLORS.TEXT_TERTIARY,
-                }}
-              >
-                {data?.professionals_Details_HeroSection?.email}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: 25,
-                  fontFamily: adelle.style.fontFamily,
-                  fontWeight: 600,
-                  lineHeight: "32px",
-                  color: COLORS.TEXT_TERTIARY,
-                }}
-              >
-                {data?.professionals_Details_HeroSection?.phoneNumber}
+                Print Profile & Save Contact
               </Typography>
 
+              <Stack
+                direction={"row"}
+                alignItems={"center"}
+                spacing={2}
+                justifyContent={"flex-start"}
+              >
+                <IconButton onClick={handleSaveContact} sx={{ p: 0 }}>
+                  <Image src={contact} alt="Save Contact" />
+                </IconButton>
+                <IconButton onClick={handlePrint} sx={{ p: 0 }}>
+                  <Image src={print} alt="Print Profile" />
+                </IconButton>
+              </Stack>
+            </Box>
+          </Grid>
+          <Grid
+            size={6}
+            sx={{
+              height: "100%",
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "center",
+              position: "relative",
+            }}
+          >
+            {heroImg && (
               <Box
                 sx={{
-                  mt: "auto",
-                  display: "flex",
-                  justifyContent: "flex-start",
-                  flexDirection: "column",
+                  position: "relative",
+                  width: "140%",
+                  height: 650,
+                  right: "-10%",
                 }}
               >
-                <Typography
-                  sx={{
-                    fontSize: 20,
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: 600,
-                    lineHeight: "26px",
-                    color: COLORS.TEXT_TERTIARY,
-                  }}
-                >
-                  Print Profile & Save Contact
-                </Typography>
-
-                <Stack
-                  direction={"row"}
-                  alignItems={"center"}
-                  spacing={2}
-                  justifyContent={"flex-start"}
-                >
-                  <IconButton onClick={handleSaveContact}>
-                    <Image src={contact} alt="" />
-                  </IconButton>
-                  <IconButton onClick={handlePrint}>
-                    <Image src={print} alt="" />
-                  </IconButton>
-                </Stack>
-              </Box>
-            </Grid>
-            <Grid size={6}>
-              {heroImg && (
                 <Image
                   src={heroImg}
-                  alt=""
-                  style={{ width: "100%", height: 500 }}
+                  alt={data?.professionals_Details_HeroSection?.name || ""}
+                  fill
+                  style={{ objectFit: "contain", objectPosition: "bottom" }}
+                  priority
                 />
-              )}
-            </Grid>
+              </Box>
+            )}
           </Grid>
-        </Container>
-      </Box>
+        </Grid>
+      </Container>
     </Box>
   );
 };

@@ -29,6 +29,9 @@ export interface HOMEPAGE_DATA_PROPS {
 export interface PROFESSIONAL_DETAILS_PROPS {
   slug: string;
   professionals_Details_HeroSection: PROFESSIONAL_DETAILS_HERO_PROPS;
+  PROFESSIONAL_BIO_DATA: PROFESSIONAL_BIO_PROPS[];
+  PROFESSIONAL_EDUCATION_DATA: PROFESSIONAL_BIO_PROPS[];
+  PROFESSIONAL_ADMISSIONS_DATA: PROFESSIONAL_BIO_PROPS[];
 }
 
 interface ABOUT_US_HEROSECTION {
@@ -220,4 +223,9 @@ export interface PROFESSIONAL_VCARD_PROPS {
   url: string;
   firstName: string;
   lastName: string;
+}
+
+export interface PROFESSIONAL_BIO_PROPS {
+  description?: string;
+  list?: { label: string }[];
 }
