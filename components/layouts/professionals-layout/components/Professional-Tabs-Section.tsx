@@ -21,7 +21,7 @@ const ProfessionalsTabs = () => {
               sx={{
                 backgroundColor: COLORS.PRIMARY_BLUE,
                 borderRadius: "36px",
-                height: "72px",
+                height: "62px",
                 "& .MuiTabs-indicator": {
                   display: "none",
                 },
@@ -32,10 +32,10 @@ const ProfessionalsTabs = () => {
                 "& .MuiTab-root": {
                   color: COLORS.WHITE,
                   textAlign: "center",
-                  fontSize: 24,
+                  fontSize: 18,
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 400,
-                  lineHeight: "32px",
+                  lineHeight: "24px",
                   width: "100%",
                   display: "flex",
                   alignItems: "center",

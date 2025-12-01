@@ -1,11 +1,11 @@
 import CustomTabPanel from "@/components/widgets/Tab-panel";
 import { PROFESSIONAL_DETAILS_TAB_DATA } from "@/public/data/generic-array";
+import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
 import { COLORS, PROFESSIONAL_TABS_DATA } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ProfessionalBio from "./Professionals-Bio";
-import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
 
 const TabSection = () => {
   const [value, setValue] = useState(0);
@@ -24,6 +24,9 @@ const TabSection = () => {
     }
     if (label === PROFESSIONAL_TABS_DATA.ADMISSIONS_HONORS) {
       return data?.PROFESSIONAL_ADMISSIONS_DATA;
+    }
+    if (label === PROFESSIONAL_TABS_DATA.ARTICLES_PRESENTATIONS) {
+      return data?.PROFESSIONAL_ARTICLES_DATA;
     }
   };
 
