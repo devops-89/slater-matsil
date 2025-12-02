@@ -5,12 +5,14 @@ import { adelle, tradeGothic } from "@/utils/fonts";
 import { COLORS } from "@/utils/enum";
 import careerimage from "@/career/hero-image.png";
 import Image from "next/image";
+import { usePageData } from "@/store/usePageData";
 const HeroSection = () => {
+  const { details } = usePageData();
   return (
     <Box sx={{ py: 10 }}>
       <Box
         sx={{
-          backgroundImage: `url(${career.src})`,
+          backgroundImage: `url(${details?.careerPage?.career_hero_section?.bgImage})`,
           backgroundSize: "contain",
           backgroundPosition: "center",
           height: "100px",
@@ -27,7 +29,7 @@ const HeroSection = () => {
             lineHeight: "80px",
           }}
         >
-          Your Journey Starts Here
+          {details?.careerPage?.career_hero_section?.title}
         </Typography>
       </Box>
       <Stack
@@ -56,11 +58,13 @@ const HeroSection = () => {
       </Stack>
 
       <Box sx={{ py: 4 }}>
-        <Image
-          src={careerimage}
-          alt=""
-          style={{ width: "100%", height: "auto" }}
-        />
+        {details?.careerPage?.career_hero_section?.heroImage && (
+          <Image
+            src={details?.careerPage?.career_hero_section?.heroImage}
+            alt=""
+            style={{ width: "100%", height: "auto" }}
+          />
+        )}
       </Box>
       <Container maxWidth="lg">
         <Box>
@@ -74,13 +78,7 @@ const HeroSection = () => {
               lineHeight: "45px",
             }}
           >
-            At Slater Matsil, we work at the intersection of technology and law
-            to protect the world’s most ambitious ideas. Our team is built with
-            engineers, inventors, legal strategists, and IP specialists who turn
-            complex innovations into powerful intellectual property. We serve
-            global technology leaders, high-growth startups, and visionary
-            founders — and we’re always looking for exceptional minds to join
-            us.
+            {details?.careerPage?.career_hero_section?.description}
           </Typography>
         </Box>
       </Container>

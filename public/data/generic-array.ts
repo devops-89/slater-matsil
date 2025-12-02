@@ -1,4 +1,9 @@
-import { DATA_LIST_PROPS, FOOTER_LIST_DATA, METRICSPROPS } from "@/utils/types";
+import {
+  DATA_LIST_PROPS,
+  FOOTER_LIST_DATA,
+  METRICSPROPS,
+  WORK_LIST_PROPS,
+} from "@/utils/types";
 import career_home_Image from "@/about/img1.png";
 import { PROFESSIONAL_TABS_DATA, TABS } from "@/utils/enum";
 
@@ -238,5 +243,29 @@ export const PROFESSIONAL_DETAILS_TAB_DATA = [
   },
   {
     label: PROFESSIONAL_TABS_DATA.ARTICLES_PRESENTATIONS,
+  },
+];
+
+export const CAREER_WORK_LIST_DATA: WORK_LIST_PROPS[] = [
+  {
+    title:
+      "Work directly on cutting-edge technologies including semiconductors, electronics, software, and telecommunications",
+  },
+  {
+    title:
+      "Collaborate with attorneys and technical advisors who understand engineering at a granular level",
+  },
+  {
+    title:
+      "Gain exposure to global IP strategies and cross-border innovation portfolios",
+  },
+  {
+    title:
+      "Be part of a firm that values curiosity, technical depth, ownership, and legal excellence",
+  },
+
+  {
+    title:
+      "Opportunities to grow into Patent Agent, Technical Advisor, or IP Attorney roles",
   },
 ];

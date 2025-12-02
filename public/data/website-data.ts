@@ -11,7 +11,12 @@ import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import bigLogo from "@/public/images/home/slater-matsil-logo-light.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
 import { LinkedIn } from "@mui/icons-material";
-import { FOOTER_DATA, INDUSTRIES_DATA, METRICS_DATA } from "./generic-array";
+import {
+  CAREER_WORK_LIST_DATA,
+  FOOTER_DATA,
+  INDUSTRIES_DATA,
+  METRICS_DATA,
+} from "./generic-array";
 import { FaLinkedinIn } from "react-icons/fa";
 import footerLogo from "@/logo/big-logo.png";
 import aboutHero from "@/about/heroImage.jpg";
@@ -30,6 +35,10 @@ import professional3 from "@/professionals/ruojian.jpg";
 import professional4 from "@/professionals/yumin_thumb.jpg";
 import professional5 from "@/professionals/steven-yates.jpg";
 import professional6 from "@/professionals/srini_thumb.jpg";
+import careerHeroBackgroundImage from "@/career/CAREERS.png";
+import careerHeroImage from "@/career/hero-image.png";
+import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
+import { CAREER_OPEN_ROLES_TAB_DATA } from "@/utils/enum";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -337,5 +346,52 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         slug: "srini-chakravarthi",
       },
     ],
+  },
+  careerPage: {
+    career_hero_section: {
+      title: "Your Journey Starts Here",
+      description:
+        "At Slater Matsil, we work at the intersection of technology and law to protect the world’s most ambitious ideas. Our team is built with engineers, inventors, legal strategists, and IP specialists who turn complex innovations into powerful intellectual property. We serve global technology leaders, high-growth startups, and visionary founders — and we’re always looking for exceptional minds to join us.",
+      bgImage: careerHeroBackgroundImage.src,
+      heroImage: careerHeroImage,
+    },
+    career_work_with_us: {
+      firstTitle: "Why Work",
+      secondTitle: "With Us",
+      shortDescription: "Where Your Talent Meets Purpose",
+      work_list_data: CAREER_WORK_LIST_DATA,
+      section_img: caree_work_with_us_section_img,
+    },
+    career_open_roles: {
+      title: "Open Roles / Opportunities",
+      shortDescription: "Opportunities for Problem-Solvers and Innovators",
+      description:
+        "Slater Matsil is a global intellectual property law firm headquartered in Dallas. A career at Slater Matsil is as fun and rewarding as it is challenging. You won't find our name at the top of a downtown skyscraper, and that's by design — we know how difficult it can be to launch or elevate your career in an oversized firm that won't let you do the job you're driven to do. If you're a patent professional or technical advisor who believes that your workplace should be as stimulating as your workshop, we want to hear from you.",
+      tabSectionData: {
+        tabData: [
+          {
+            title: CAREER_OPEN_ROLES_TAB_DATA.ATTORNEY,
+          },
+          {
+            title: CAREER_OPEN_ROLES_TAB_DATA.TECHNICAL_ADVISOR,
+          },
+        ],
+        tabContentData: [
+          {
+            title: "Attorney",
+            description:
+              "Slater Matsil, a firm based in Dallas concentrates in intellectual property law, seeks patent attorneys with strong legal and technical skills to join its growing practice.  ",
+          },
+          {
+            description:
+              "This position involves representing foreign and domestic clients in all aspects of patent law. Depending upon your qualifications and desires and the firm’s needs, career opportunities may include significant patent preparation and prosecution work, client advice and counseling, and IP licensing and litigation activities. We actively encourage professional growth and career development. As such, attorneys are given frequent and meaningful client contact, have substantial interaction with firm management, and are supported in their efforts to develop new client relationships and business opportunities. Compensation exceeds market rates for highly skilled and motivated individuals.",
+          },
+          {
+            description:
+              "Ideal candidates should have a J.D. degree (top 10 percent of law school class), plus engineering experience or an advanced technical degree in the electrical, telecommunications, semiconductor, mechanical, chemical, material sciences, physics, or computer science fields, and two to five years of patent law experience. Strong candidates without engineering experience or an advanced engineering degree will be considered. Current membership in good standing of any U.S. state bar and eligibility to practice patent law before the U.S. Patent and Trademark Office are required. ",
+          },
+        ],
+      },
+    },
   },
 };

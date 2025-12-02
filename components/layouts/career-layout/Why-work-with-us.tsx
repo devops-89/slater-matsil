@@ -3,7 +3,13 @@ import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import work from "@/career/work-with-us.jpg";
+import Image from "next/image";
+import WorkList from "./components/Work-list";
+import { usePageData } from "@/store/usePageData";
 const WhyWorkWithus = () => {
+  const { details } = usePageData();
+
+  const data = details?.careerPage?.career_work_with_us;
   return (
     <Box>
       <Container maxWidth="lg">
@@ -15,7 +21,7 @@ const WhyWorkWithus = () => {
             lineHeight: "72px",
           }}
         >
-          Why Work{" "}
+          {data?.firstTitle}
           <Typography
             component={"span"}
             sx={{
@@ -26,7 +32,7 @@ const WhyWorkWithus = () => {
               lineHeight: "72px",
             }}
           >
-            With Us
+            {data?.secondTitle}
           </Typography>{" "}
         </Typography>
 
@@ -61,15 +67,29 @@ const WhyWorkWithus = () => {
             color: COLORS.PRIMARY_BLUE,
             fontWeight: 400,
             lineHeight: "36px",
-            mt: 2,
+            mt: 3,
           }}
         >
-          Where Your Talent Meets Purpose
+          {data?.shortDescription}
         </Typography>
 
-        <Grid container>
-          <Grid size={6}></Grid>
-          <Grid size={6}></Grid>
+        <Grid container sx={{ mt: 4 }} spacing={4} alignItems={"center"}>
+          <Grid size={6}>
+            {data?.section_img && (
+              <Image
+                src={data?.section_img}
+                alt=""
+                style={{ width: "100%", height: "auto", borderRadius: "20px" }}
+              />
+            )}
+          </Grid>
+          <Grid size={6}>
+            {data?.work_list_data.map((val, i) => (
+              <Box sx={{ mb: 2, ml: i % 2 == 0 ? 0 : 3 }}>
+                <WorkList title={val.title} key={i} />
+              </Box>
+            ))}
+          </Grid>
         </Grid>
       </Container>
     </Box>

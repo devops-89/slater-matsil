@@ -24,6 +24,11 @@ export interface HOMEPAGE_DATA_PROPS {
     professionals_hero_section: PROFESSIONALS_HEROSECTION_PROPS;
     PROFESSIONAL_LIST_PROPS: PROFESSIONALS_CARD_PROPS[];
   };
+  careerPage: {
+    career_hero_section: CAREER_HERO_SECTION_PROPS;
+    career_work_with_us: CAREER_WORK_WITH_US_PROPS;
+    career_open_roles: OPEN_ROLES_PROPS;
+  };
 }
 
 export interface PROFESSIONAL_DETAILS_PROPS {
@@ -229,4 +234,36 @@ export interface PROFESSIONAL_VCARD_PROPS {
 export interface PROFESSIONAL_BIO_PROPS {
   description?: string;
   list?: { label: string }[];
+}
+
+export interface WORK_LIST_PROPS {
+  title: string;
+}
+
+interface CAREER_HERO_SECTION_PROPS {
+  title: string;
+  description: string;
+  bgImage: string;
+  heroImage: StaticImageData;
+}
+
+interface CAREER_WORK_WITH_US_PROPS {
+  firstTitle: string;
+  secondTitle: string;
+  shortDescription: string;
+  work_list_data: WORK_LIST_PROPS[];
+  section_img: StaticImageData;
+}
+
+interface OPEN_ROLES_PROPS {
+  title: string;
+  shortDescription: string;
+  description: string;
+  tabSectionData: {
+    tabData: { title: string }[];
+    tabContentData: {
+      title?: string;
+      description: string;
+    }[];
+  };
 }
