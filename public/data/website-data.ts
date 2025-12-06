@@ -6,7 +6,7 @@ import serviceAreas3 from "@/public/images/home/practice_areas/practice_areas3.s
 import serviceAreas4 from "@/public/images/home/practice_areas/practice_areas4.svg";
 import serviceAreas5 from "@/public/images/home/practice_areas/practice_areas5.svg";
 import serviceAreas6 from "@/public/images/home/practice_areas/practice_areas6.svg";
-import whoWeServeLeftSectionHeroImage from "@/public/images/home/slater-matsil.jpg";
+import whoWeServeLeftSectionHeroImage from "@/public/images/home/who-we-serve.jpg";
 import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import bigLogo from "@/public/images/home/slater-matsil-logo-light.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
@@ -39,6 +39,9 @@ import careerHeroBackgroundImage from "@/career/CAREERS.png";
 import careerHeroImage from "@/career/hero-image.png";
 import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
 import { CAREER_OPEN_ROLES_TAB_DATA } from "@/utils/enum";
+import practiceGroupPageHeroImage1 from "@/practice-group/hero1.jpg";
+import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
+import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -223,7 +226,12 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       ],
       logo: footerLogo,
       copyRightText:
-        "© 2016 - 2025 Slater Matsil, LLP | Dallas, TX | Disclaimer | All Rights Reserved",
+        "© 2016 - 2025 Slater Matsil, LLP | Dallas, TX | Disclaimer | All Rights Reserved",
+      contactData: {
+        email: "info@slatermatsil.com",
+        phoneNumber: "+1 214-522-2222",
+        address: "123 Main St, Dallas, TX 75201",
+      },
     },
   },
   aboutPage: {
@@ -274,6 +282,30 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
         {
           img: award6,
+        },
+      ],
+    },
+    who_we_serve_props: {
+      heading1: "Who",
+      heading2: "We serve",
+      description:
+        "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world",
+      section_data: [
+        {
+          dataList: [
+            {
+              label: "Large Corporations",
+            },
+            {
+              label: "Small Companies / Start ups",
+            },
+            {
+              label: "U.S. Law Firms",
+            },
+            {
+              label: "International Law Firms",
+            },
+          ],
         },
       ],
     },
@@ -354,6 +386,14 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         "At Slater Matsil, we work at the intersection of technology and law to protect the world’s most ambitious ideas. Our team is built with engineers, inventors, legal strategists, and IP specialists who turn complex innovations into powerful intellectual property. We serve global technology leaders, high-growth startups, and visionary founders — and we’re always looking for exceptional minds to join us.",
       bgImage: careerHeroBackgroundImage.src,
       heroImage: careerHeroImage,
+      ctaButton1: {
+        text: "Start your growth journey",
+      },
+      shortDescription:
+        "Grow with a culture that values long-term success. We simplify the path ahead so you can thrive in your career journey.",
+      ctaButton2: {
+        text: "Find the career opportunities",
+      },
     },
     career_work_with_us: {
       firstTitle: "Why Work",
@@ -376,22 +416,54 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             title: CAREER_OPEN_ROLES_TAB_DATA.TECHNICAL_ADVISOR,
           },
         ],
-        tabContentData: [
-          {
-            title: "Attorney",
-            description:
-              "Slater Matsil, a firm based in Dallas concentrates in intellectual property law, seeks patent attorneys with strong legal and technical skills to join its growing practice.  ",
+        tabContentData: {
+          tab_attorney_content_Data: {
+            data1: {
+              title: "Attorney",
+              description:
+                "Slater Matsil, a firm based in Dallas concentrates in intellectual property law, seeks patent attorneys with strong legal and technical skills to join its growing practice.",
+            },
+            data2: {
+              description:
+                "This position involves representing foreign and domestic clients in all aspects of patent law. Depending upon your qualifications and desires and the firm’s needs, career opportunities may include significant patent preparation and prosecution work, client advice and counseling, and IP licensing and litigation activities. We actively encourage professional growth and career development. As such, attorneys are given frequent and meaningful client contact, have substantial interaction with firm management, and are supported in their efforts to develop new client relationships and business opportunities. Compensation exceeds market rates for highly skilled and motivated individuals.",
+            },
+            data3: {
+              description:
+                "Ideal candidates should have a J.D. degree (top 10 percent of law school class), plus engineering experience or an advanced technical degree in the electrical, telecommunications, semiconductor, mechanical, chemical, material sciences, physics, or computer science fields, and two to five years of patent law experience. Strong candidates without engineering experience or an advanced engineering degree will be considered. Current membership in good standing of any U.S. state bar and eligibility to practice patent law before the U.S. Patent and Trademark Office are required. ",
+            },
           },
-          {
-            description:
-              "This position involves representing foreign and domestic clients in all aspects of patent law. Depending upon your qualifications and desires and the firm’s needs, career opportunities may include significant patent preparation and prosecution work, client advice and counseling, and IP licensing and litigation activities. We actively encourage professional growth and career development. As such, attorneys are given frequent and meaningful client contact, have substantial interaction with firm management, and are supported in their efforts to develop new client relationships and business opportunities. Compensation exceeds market rates for highly skilled and motivated individuals.",
+          tab_technical_advisor: {
+            data1: {
+              title: "Attorney",
+              description:
+                "Slater Matsil, a firm based in Dallas concentrates in intellectual property law, seeks patent attorneys with strong legal and technical skills to join its growing practice.",
+            },
+            data2: {
+              description:
+                "This position involves representing foreign and domestic clients in all aspects of patent law. Depending upon your qualifications and desires and the firm’s needs, career opportunities may include significant patent preparation and prosecution work, client advice and counseling, and IP licensing and litigation activities. We actively encourage professional growth and career development. As such, attorneys are given frequent and meaningful client contact, have substantial interaction with firm management, and are supported in their efforts to develop new client relationships and business opportunities. Compensation exceeds market rates for highly skilled and motivated individuals.",
+            },
+            data3: {
+              description:
+                "Ideal candidates should have a J.D. degree (top 10 percent of law school class), plus engineering experience or an advanced technical degree in the electrical, telecommunications, semiconductor, mechanical, chemical, material sciences, physics, or computer science fields, and two to five years of patent law experience. Strong candidates without engineering experience or an advanced engineering degree will be considered. Current membership in good standing of any U.S. state bar and eligibility to practice patent law before the U.S. Patent and Trademark Office are required. ",
+            },
           },
-          {
-            description:
-              "Ideal candidates should have a J.D. degree (top 10 percent of law school class), plus engineering experience or an advanced technical degree in the electrical, telecommunications, semiconductor, mechanical, chemical, material sciences, physics, or computer science fields, and two to five years of patent law experience. Strong candidates without engineering experience or an advanced engineering degree will be considered. Current membership in good standing of any U.S. state bar and eligibility to practice patent law before the U.S. Patent and Trademark Office are required. ",
-          },
-        ],
+        },
       },
+      description2:
+        "Slater Matsil is subject to United States export control laws and regulations related to the export or deemed export of technology from the United States. As such, foreign nationals may be restricted from working with controlled technologies or items or may be required to obtain an export license. As part of the employment application process, all applicants must be able to document their status as a U.S. citizen or national, asylee, refugee or lawful permanent resident or their qualification for permanent employment in the U.S.",
+    },
+  },
+  practiceGroupPage: {
+    practiceGroup_hero_section: {
+      title: "Practice Groups",
+      heading: "Technical minds. Powerful IP advocacy.",
+      description1:
+        "At Slater Matsil, our practice groups are structured to deliver specialized IP services — from patent prosecution to global portfolio strategy — so you get both deep technical knowledge and robust legal support.",
+      firstHeroImage: practiceGroupPageHeroImage1,
+      secondHeroImage: practiceGroupPageHeroImage2,
+      thirdHeroImage: practiceGroupPageHeroImage3,
+      description2:
+        "Although Slater Matsil is a full service IP practice supporting clients in diverse fields, we have several highly-specialized practice groups that bring particular expertise and experience in their respective fields. Click on the below links to meet the members of our Practice Groups:",
     },
   },
 };

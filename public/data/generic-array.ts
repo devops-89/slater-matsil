@@ -4,7 +4,10 @@ import {
   METRICSPROPS,
   WORK_LIST_PROPS,
 } from "@/utils/types";
-import career_home_Image from "@/about/img1.png";
+import aboutCareer from "@/about/career-about.jpg";
+
+import connectWithSlatermatsil from "@/about/contact-about.jpg";
+import practiceGroups from "@/about/practice-group.jpg";
 import { PROFESSIONAL_TABS_DATA, TABS } from "@/utils/enum";
 
 export const SERVICES_AREAS_DATA = [
@@ -80,42 +83,87 @@ export const SERVICES_AREAS_DATA = [
 
 export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
   {
-    HEADING: "Firm",
+    HEADING: "Quick Navigation",
     DATA: [
+      {
+        text: "Home",
+        href: "/",
+      },
       {
         text: "About Us",
         href: "/about-us",
       },
       {
-        text: "Who We Serve",
+        text: "Professionals",
+        href: "/firm-professionals",
       },
       {
-        text: "Practice Groups",
+        text: "Services",
+        href: "/services",
       },
       {
-        text: "Firm Leadership",
+        text: "Careers",
+        href: "/careers",
+      },
+      {
+        text: "Insights",
+        href: "/insights",
+      },
+      {
+        text: "Contact",
+        href: "/contact-us",
       },
     ],
   },
   {
-    HEADING: "Professionals",
-    DATA: [],
+    HEADING: "Practice Areas",
+    DATA: [
+      {
+        text: "Patent Prosecution",
+        href: "/patent-prosecution",
+      },
+      {
+        text: "IP Strategy",
+        href: "/ip-strategy",
+      },
+      {
+        text: "Portfolio Management",
+        href: "/portfolio-management",
+      },
+      {
+        text: "Licensing & Transactions",
+        href: "/licensing-transaction",
+      },
+      {
+        text: "Litigation Support",
+        href: "/litigation-support",
+      },
+    ],
   },
   {
-    HEADING: "Services",
-    DATA: [],
-  },
-  {
-    HEADING: "Careers",
-    DATA: [],
-  },
-  {
-    HEADING: "Insights",
-    DATA: [],
-  },
-  {
-    HEADING: "Contact",
-    DATA: [],
+    HEADING: "Trust & Credibility",
+    DATA: [
+      {
+        text: "Patent Experts",
+        href: "/patent-experts",
+      },
+      {
+        text: "IP Network",
+        href: "/ip-network",
+      },
+      {
+        text: "Success Proof",
+        href: "/success-proof",
+      },
+      {
+        text: "Worldwide Reach",
+        href: "/worldwide-reach",
+      },
+      {
+        text: "Who we serve",
+        href: "/who-we-serve",
+      },
+    ],
   },
 ];
 
@@ -209,16 +257,19 @@ export const INDUSTRIES_DATA: DATA_LIST_PROPS[] = [
 
 export const CAREER_HOME_DATA = [
   {
-    img: career_home_Image,
+    img: aboutCareer,
     title: "Career",
+    href: "/careers",
   },
   {
-    img: career_home_Image,
+    img: connectWithSlatermatsil,
     title: "Connect with Slatermatsil",
+    href: "/contact-us",
   },
   {
-    img: career_home_Image,
-    title: "Sustainability",
+    img: practiceGroups,
+    title: "Practice Groups",
+    href: "/practice-groups",
   },
 ];
 

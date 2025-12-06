@@ -19,6 +19,7 @@ export interface HOMEPAGE_DATA_PROPS {
     innovationInsights: ABOUT_INNOVATION_INSIGHTS_PROPS;
     AWARDSPROPS: AWARDS_ABOUT_PROPS;
     industriesWeServe: INDUSTRIES_WE_SERVE_PROPS;
+    who_we_serve_props: INDUSTRIES_WE_SERVE_PROPS;
   };
   firm_professionals: {
     professionals_hero_section: PROFESSIONALS_HEROSECTION_PROPS;
@@ -28,6 +29,10 @@ export interface HOMEPAGE_DATA_PROPS {
     career_hero_section: CAREER_HERO_SECTION_PROPS;
     career_work_with_us: CAREER_WORK_WITH_US_PROPS;
     career_open_roles: OPEN_ROLES_PROPS;
+  };
+
+  practiceGroupPage: {
+    practiceGroup_hero_section: PRACTICE_GROUPS_HEROSECTION_PROPS;
   };
 }
 
@@ -139,6 +144,13 @@ interface footer_data {
   privacy_pages: { title: string; href?: string }[];
   logo: StaticImageData;
   copyRightText: string;
+  contactData: FOOTER_CONTACT_DATA;
+}
+
+interface FOOTER_CONTACT_DATA {
+  email: string;
+  phoneNumber: string;
+  address: string;
 }
 
 export interface SERVICES_AREAS_DATA {
@@ -245,6 +257,9 @@ interface CAREER_HERO_SECTION_PROPS {
   description: string;
   bgImage: string;
   heroImage: StaticImageData;
+  shortDescription: string;
+  ctaButton1: CTA_BUTTON_PROPS;
+  ctaButton2: CTA_BUTTON_PROPS;
 }
 
 interface CAREER_WORK_WITH_US_PROPS {
@@ -255,6 +270,11 @@ interface CAREER_WORK_WITH_US_PROPS {
   section_img: StaticImageData;
 }
 
+interface open_roles_data {
+  title?: string;
+  description: string;
+}
+
 interface OPEN_ROLES_PROPS {
   title: string;
   shortDescription: string;
@@ -262,8 +282,29 @@ interface OPEN_ROLES_PROPS {
   tabSectionData: {
     tabData: { title: string }[];
     tabContentData: {
-      title?: string;
-      description: string;
-    }[];
+      tab_attorney_content_Data: {
+        data1: open_roles_data;
+        data2: open_roles_data;
+        data3: open_roles_data;
+      };
+      tab_technical_advisor: {
+        data1: open_roles_data;
+        data2: open_roles_data;
+        data3: open_roles_data;
+      };
+    };
   };
+  description2: string;
+}
+
+// practice groups
+
+interface PRACTICE_GROUPS_HEROSECTION_PROPS {
+  title: string;
+  heading: string;
+  description1: string;
+  firstHeroImage: StaticImageData;
+  secondHeroImage: StaticImageData;
+  thirdHeroImage: StaticImageData;
+  description2: string;
 }

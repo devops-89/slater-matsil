@@ -2,21 +2,40 @@
 import { COLORS } from "@/utils/enum";
 import {
   Box,
+  Button,
   Container,
   Divider,
   Grid,
   IconButton,
+  InputAdornment,
   Stack,
+  TextField,
   Typography,
 } from "@mui/material";
 import FooterList from "./Footer-List";
 import { usePageData } from "@/store/usePageData";
 import Link from "next/link";
-import { tradeGothic } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import Image from "next/image";
 import logo from "@/logo/big-logo.png";
+import { TEXTFIELD_STYLES } from "@/utils/styles";
 const Footer = () => {
   const { details } = usePageData();
+
+  const contactData = [
+    {
+      name: "Email",
+      value: details?.homepage?.footerData?.contactData?.email,
+    },
+    {
+      name: "Phone",
+      value: details?.homepage?.footerData?.contactData?.phoneNumber,
+    },
+    {
+      name: "Address",
+      value: details?.homepage?.footerData?.contactData?.address,
+    },
+  ];
   return (
     <Box sx={{ backgroundColor: COLORS.PRIMARY_BLUE, height: "100%", py: 10 }}>
       <Container maxWidth="lg">
@@ -26,6 +45,106 @@ const Footer = () => {
               <FooterList DATA={val.DATA} HEADING={val.HEADING} />
             </Grid>
           ))}
+          <Grid size={3}>
+            <Typography
+              sx={{
+                color: COLORS.WHITE,
+                fontSize: 16,
+                fontFamily: tradeGothic.style.fontFamily,
+                fontWeight: 700,
+                lineHeight: "26px",
+              }}
+            >
+              Insights & Updates
+            </Typography>
+            <Typography
+              sx={{
+                color: COLORS.FOOTER_TEXT_COLOR,
+                fontSize: 16,
+                fontFamily: adelle.style.fontFamily,
+                fontWeight: 400,
+                lineHeight: "26px",
+                opacity: 0.5,
+                py: 2,
+              }}
+            >
+              Stay updated with industry insights and professional
+              opportunities.
+            </Typography>
+
+            <TextField
+              sx={{
+                ...TEXTFIELD_STYLES,
+                backgroundColor: COLORS.WHITE,
+                mt: 3,
+              }}
+              fullWidth
+              placeholder="Email Address"
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Button
+                        sx={{
+                          padding: "14px ",
+                          borderRadius: "56px",
+                          backgroundColor: COLORS.PRIMARY_BLUE,
+                          color: COLORS.WHITE,
+                          boxShadow: "0 3px 12px 0 rgba(74, 58, 255, 0.18)",
+                          fontFamily: adelle.style.fontFamily,
+                          fontWeight: 600,
+                          lineHeight: "16px",
+                          fontSize: 12,
+                        }}
+                      >
+                        Subscribe
+                      </Button>
+                    </InputAdornment>
+                  ),
+                },
+              }}
+            />
+          </Grid>
+          <Grid size={3}>
+            <Typography
+              sx={{
+                color: COLORS.WHITE,
+                fontSize: 16,
+                fontFamily: tradeGothic.style.fontFamily,
+                fontWeight: 700,
+                lineHeight: "26px",
+                mb: 1,
+              }}
+            >
+              Contact Us
+            </Typography>
+            {contactData.map((val, i) => (
+              <Typography
+                sx={{
+                  fontSize: 16,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 600,
+                  lineHeight: "31px",
+                  color: COLORS.FOOTER_TEXT_COLOR,
+                }}
+                key={i}
+              >
+                {val.name} :{" "}
+                <Typography
+                  component="span"
+                  sx={{
+                    fontSize: 16,
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: 400,
+                    lineHeight: "31px",
+                    color: COLORS.FOOTER_TEXT_COLOR,
+                  }}
+                >
+                  {val.value}
+                </Typography>
+              </Typography>
+            ))}
+          </Grid>
         </Grid>
         <Divider sx={{ borderColor: "", my: 5 }} />
 

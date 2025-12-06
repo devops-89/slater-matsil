@@ -1,9 +1,11 @@
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import CareerTabSection from "./components/Career-Tab-Section";
+import { ArrowForward } from "@mui/icons-material";
+import StarPara from "./components/Star-Para";
 
 const OpenRoles = () => {
   const { details } = usePageData();
@@ -70,12 +72,40 @@ const OpenRoles = () => {
         >
           {data?.description}
         </Typography>
+        <Box sx={{ mt: 3 }}>
+          <CareerTabSection />
+        </Box>
+        <Button
+          endIcon={<ArrowForward sx={{ fontSize: 50 }} />}
+          sx={{
+            mt: 3,
+            borderRadius: "120px",
+            border: `1px solid ${COLORS.PRIMARY_BLUE}`,
+            backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
+            width: "286px",
+            padding: "10px",
+            fontSize: 20,
+            fontFamily: adelle.style.fontFamily,
+            fontWeight: 500,
+            lineHeight: "40px",
+            color: COLORS.PRIMARY_BLUE,
+          }}
+        >
+          Submit Resume
+        </Button>
 
-        <Grid container sx={{ mt: 2 }}>
-          <Grid size={10} margin={"auto"}>
-            <CareerTabSection />
-          </Grid>
-        </Grid>
+        <Box sx={{ mt: 5 }}>
+          <StarPara
+            description={data?.description2 || ""}
+            sx={{
+              fontSize: 20,
+              fontFamily: adelle.style.fontFamily,
+              fontWeight: 400,
+              color: COLORS.TEXT_TERTIARY,
+              mt: 3,
+            }}
+          />
+        </Box>
       </Container>
     </Box>
   );

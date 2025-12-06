@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import career from "@/career/CAREERS.png";
 import { adelle, tradeGothic } from "@/utils/fonts";
@@ -56,6 +56,59 @@ const HeroSection = () => {
           }}
         ></Box>
       </Stack>
+      <Container maxWidth="lg">
+        <Typography
+          sx={{
+            fontSize: 20,
+            fontFamily: tradeGothic.style.fontFamily,
+            textAlign: "center",
+            color: COLORS.PRIMARY_BLUE,
+            fontWeight: 400,
+            lineHeight: "35px",
+            mt: 2,
+          }}
+        >
+          {details?.careerPage?.career_hero_section?.shortDescription}
+        </Typography>
+        <Stack
+          direction={"row"}
+          alignItems="center"
+          justifyContent={"center"}
+          spacing={3}
+          sx={{ mt: 3 }}
+        >
+          <Button
+            sx={{
+              backgroundColor: COLORS.PRIMARY_BLUE,
+              borderRadius: "43px",
+              color: COLORS.WHITE,
+              fontWeight: 500,
+              fontSize: 20,
+              fontFamily: adelle.style.fontFamily,
+              textTransform: "uppercase",
+              width: "379px",
+              height: "62px",
+            }}
+          >
+            {details?.careerPage?.career_hero_section?.ctaButton1.text}
+          </Button>
+          <Button
+            sx={{
+              borderRadius: "43px",
+              color: COLORS.PRIMARY_BLUE,
+              fontWeight: 500,
+              fontSize: 20,
+              fontFamily: adelle.style.fontFamily,
+              textTransform: "uppercase",
+              width: "412px",
+              height: "62px",
+              border: "1px solid " + COLORS.PRIMARY_BLUE,
+            }}
+          >
+            {details?.careerPage?.career_hero_section?.ctaButton2.text}
+          </Button>
+        </Stack>
+      </Container>
 
       <Box sx={{ py: 4 }}>
         {details?.careerPage?.career_hero_section?.heroImage && (

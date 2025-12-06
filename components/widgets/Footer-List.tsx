@@ -15,7 +15,7 @@ const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
     <Box>
       <Typography
         sx={{
-          color: COLORS.FOOTER_TEXT_COLOR,
+          color: COLORS.WHITE,
           fontSize: 16,
           fontFamily: tradeGothic.style.fontFamily,
           fontWeight: 700,
@@ -26,7 +26,7 @@ const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
       </Typography>
       <List>
         {DATA?.map((item, i) => (
-          <ListItemButton sx={{ p: 0 }} key={i}>
+          <ListItemButton sx={{ px: 1, width: "fit-content", py: 0 }} key={i}>
             <Link href={item.href || ""} style={{ textDecoration: "none" }}>
               <ListItemText
                 primary={item.text}
