@@ -35,6 +35,7 @@ export interface HOMEPAGE_DATA_PROPS {
   practiceGroupPage: {
     practiceGroup_hero_section: PRACTICE_GROUPS_HEROSECTION_PROPS;
     practiceGroup_section: PRACTICE_GROUPS_SECTION_PROPS;
+    meetPractitioners: MEET_PRACTITIONERS_PROPS;
   };
 }
 
@@ -317,4 +318,9 @@ interface PRACTICE_GROUPS_SECTION_PROPS {
     description1: string;
     description2: string;
   }[];
+}
+
+interface MEET_PRACTITIONERS_PROPS {
+  title: string;
+  data: { primary: string; secondary: string }[];
 }

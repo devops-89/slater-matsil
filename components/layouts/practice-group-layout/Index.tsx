@@ -8,7 +8,6 @@ const PracticeGroupsLayout = () => {
     <div>
       <PracticeGroupsHeroSection />
       <PracticeGroupSection />
-      <MeetPractitioners />
     </div>
   );
 };

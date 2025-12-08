@@ -11,6 +11,7 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import Link from "next/link";
 const WhoweServe = () => {
   const { details } = usePageData();
 
@@ -80,20 +81,29 @@ const WhoweServe = () => {
                     <Grid size={5} key={i}>
                       <List>
                         {val.dataList.map((item, index) => (
-                          <ListItem key={index} disablePadding>
-                            <ListItemText
-                              primary={item.label}
-                              slotProps={{
-                                primary: {
-                                  fontSize: 20,
-                                  fontFamily: adelle.style.fontFamily,
-                                  color: COLORS.PRIMARY_BLUE,
-                                  fontWeight: 700,
-                                  lineHeight: "45px",
-                                },
-                              }}
-                            />
-                          </ListItem>
+                          <Link
+                            href={"/who-we-serve"}
+                            style={{ textDecoration: "none" }}
+                          >
+                            <ListItem
+                              key={index}
+                              disablePadding
+                              sx={{ cursor: "pointer" }}
+                            >
+                              <ListItemText
+                                primary={item.label}
+                                slotProps={{
+                                  primary: {
+                                    fontSize: 20,
+                                    fontFamily: adelle.style.fontFamily,
+                                    color: COLORS.PRIMARY_BLUE,
+                                    fontWeight: 700,
+                                    lineHeight: "45px",
+                                  },
+                                }}
+                              />
+                            </ListItem>
+                          </Link>
                         ))}
                       </List>
                     </Grid>

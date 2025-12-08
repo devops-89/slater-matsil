@@ -508,5 +508,30 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
       ],
     },
+    meetPractitioners: {
+      title: "Meet our practitioners",
+      data: [
+        {
+          primary:
+            "Benjamin E. Nise, J.D., B.S.E.E. , Group Leader, Partner & Patent Attorney -",
+          secondary:
+            "15 Years of design Experience in analog, RF, & Mixed Signal Integrated Circuits for the telecommunications, semiconductor, & medical device industries.",
+        },
+        {
+          primary: "Peter j. meza, j.d. , m.s.e.e., Patent attorney - ",
+          secondary: "12 years of design experience in analog circuit design.",
+        },
+        {
+          primary: "payam Rashidi, M.S.E.E., Patent Attorney -",
+          secondary:
+            "12 years of design experience in research and development in the field of RF systems for the defense industry.",
+        },
+        {
+          primary: 'Yumin "Jeff" Zhang, Ph.D., Patent Agent - ',
+          secondary:
+            "14 years of research and development in digital signal processing for the telecommunications, consumer electronics, semiconductor, and oil and gas industries.",
+        },
+      ],
+    },
   },
 };

@@ -3,7 +3,8 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS, PRACTICE_GROUP_TAB_DATA } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import MeetPractitioners from "./Meet-Practitioners";
 
 const PracticeGroupSection = () => {
   const { details } = usePageData();
@@ -12,8 +13,22 @@ const PracticeGroupSection = () => {
   );
 
   const [data, setData] = useState(
-    details?.practiceGroupPage?.practiceGroup_section?.tabData[0]
+    details?.practiceGroupPage?.practiceGroup_section?.tabData?.find(
+      (item) =>
+        item.title ===
+        PRACTICE_GROUP_TAB_DATA.CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING
+    )
   );
+
+  useEffect(() => {
+    if (details?.practiceGroupPage?.practiceGroup_section?.tabData) {
+      const initialData =
+        details.practiceGroupPage.practiceGroup_section.tabData.find(
+          (item) => item.title === active
+        );
+      setData(initialData);
+    }
+  }, [details, active]);
 
   const handleTabChange = (tab: PRACTICE_GROUP_TAB_DATA) => {
     setActive(tab);
@@ -61,7 +76,10 @@ const PracticeGroupSection = () => {
               )
             )}
           </Stack>
-
+        </Box>
+      </Container>
+      <Box sx={{ backgroundColor: "#F8FCF5", p: 4, mt: 4 }}>
+        <Container maxWidth="lg">
           <Grid container alignItems={"center"} spacing={4} sx={{ mt: 4 }}>
             <Grid size={6}>
               <Typography
@@ -94,8 +112,9 @@ const PracticeGroupSection = () => {
               </Typography>
             </Grid>
           </Grid>
-        </Box>
-      </Container>
+          <MeetPractitioners />
+        </Container>
+      </Box>
     </div>
   );
 };
