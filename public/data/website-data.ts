@@ -38,7 +38,10 @@ import professional6 from "@/professionals/srini_thumb.jpg";
 import careerHeroBackgroundImage from "@/career/CAREERS.png";
 import careerHeroImage from "@/career/hero-image.png";
 import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
-import { CAREER_OPEN_ROLES_TAB_DATA } from "@/utils/enum";
+import {
+  CAREER_OPEN_ROLES_TAB_DATA,
+  PRACTICE_GROUP_TAB_DATA,
+} from "@/utils/enum";
 import practiceGroupPageHeroImage1 from "@/practice-group/hero1.jpg";
 import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
 import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
@@ -464,6 +467,46 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       thirdHeroImage: practiceGroupPageHeroImage3,
       description2:
         "Although Slater Matsil is a full service IP practice supporting clients in diverse fields, we have several highly-specialized practice groups that bring particular expertise and experience in their respective fields. Click on the below links to meet the members of our Practice Groups:",
+    },
+    practiceGroup_section: {
+      tabData: [
+        {
+          title: PRACTICE_GROUP_TAB_DATA.CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING,
+          description1:
+            "Our Circuits, Systems and Signal Processing Group brings decades of engineering design and research experience to the practice. Our clients appreciate and value the enhancement this experience brings when dealing with highly complex systems and circuits.",
+          description2:
+            "Representative technologies that are handled by the Circuits, Systems, and Signal Processing Group include Semiconductor Circuits (analog and mixed signal integrated circuits, application specific integrated circuits (ASICS), radio frequency integrated circuits, memory circuits, and digital signal processing); Radio Frequency Systems (radar systems, cellular communication systems, and millimeter-wave systems); Power Systems (switched-mode power supplies, inverters, motors, high voltage switches, motor systems, and lighting systems); and Control Systems (automotive and flight control systems).",
+        },
+        {
+          title:
+            PRACTICE_GROUP_TAB_DATA.NOVEL_MATERIALS_DEVICES_AND_APPLIED_PHYSICS,
+          description1:
+            "Our Circuits, Systems and Signal Processing Group brings decades of engineering design and research experience to the practice. Our clients appreciate and value the enhancement this experience brings when dealing with highly complex systems and circuits.",
+          description2:
+            "Representative technologies that are handled by the Circuits, Systems, and Signal Processing Group include Semiconductor Circuits (analog and mixed signal integrated circuits, application specific integrated circuits (ASICS), radio frequency integrated circuits, memory circuits, and digital signal processing); Radio Frequency Systems (radar systems, cellular communication systems, and millimeter-wave systems); Power Systems (switched-mode power supplies, inverters, motors, high voltage switches, motor systems, and lighting systems); and Control Systems (automotive and flight control systems).",
+        },
+        {
+          title: PRACTICE_GROUP_TAB_DATA.LITIGATION_GROUP,
+          description1:
+            "Our Circuits, Systems and Signal Processing Group brings decades of engineering design and research experience to the practice. Our clients appreciate and value the enhancement this experience brings when dealing with highly complex systems and circuits.",
+          description2:
+            "Representative technologies that are handled by the Circuits, Systems, and Signal Processing Group include Semiconductor Circuits (analog and mixed signal integrated circuits, application specific integrated circuits (ASICS), radio frequency integrated circuits, memory circuits, and digital signal processing); Radio Frequency Systems (radar systems, cellular communication systems, and millimeter-wave systems); Power Systems (switched-mode power supplies, inverters, motors, high voltage switches, motor systems, and lighting systems); and Control Systems (automotive and flight control systems).",
+        },
+        {
+          title: PRACTICE_GROUP_TAB_DATA.ASIA_PACIFIC_GROUP,
+          description1:
+            "Our Circuits, Systems and Signal Processing Group brings decades of engineering design and research experience to the practice. Our clients appreciate and value the enhancement this experience brings when dealing with highly complex systems and circuits.",
+          description2:
+            "Representative technologies that are handled by the Circuits, Systems, and Signal Processing Group include Semiconductor Circuits (analog and mixed signal integrated circuits, application specific integrated circuits (ASICS), radio frequency integrated circuits, memory circuits, and digital signal processing); Radio Frequency Systems (radar systems, cellular communication systems, and millimeter-wave systems); Power Systems (switched-mode power supplies, inverters, motors, high voltage switches, motor systems, and lighting systems); and Control Systems (automotive and flight control systems).",
+        },
+        {
+          title: PRACTICE_GROUP_TAB_DATA.COMPUTER_SYSTEMS_AND_SOFTWARE,
+          description1:
+            "Our Circuits, Systems and Signal Processing Group brings decades of engineering design and research experience to the practice. Our clients appreciate and value the enhancement this experience brings when dealing with highly complex systems and circuits.",
+          description2:
+            "Representative technologies that are handled by the Circuits, Systems, and Signal Processing Group include Semiconductor Circuits (analog and mixed signal integrated circuits, application specific integrated circuits (ASICS), radio frequency integrated circuits, memory circuits, and digital signal processing); Radio Frequency Systems (radar systems, cellular communication systems, and millimeter-wave systems); Power Systems (switched-mode power supplies, inverters, motors, high voltage switches, motor systems, and lighting systems); and Control Systems (automotive and flight control systems).",
+        },
+      ],
     },
   },
 };

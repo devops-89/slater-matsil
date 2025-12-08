@@ -9,7 +9,7 @@ const PracticeGroupsHeroSection = () => {
   const data = details?.practiceGroupPage?.practiceGroup_hero_section;
   return (
     <div>
-      <Box>
+      <Box sx={{ py: 10 }}>
         <Container maxWidth="lg">
           <Grid container alignItems={"center"}>
             <Grid size={6}>

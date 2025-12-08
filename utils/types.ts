@@ -1,5 +1,6 @@
 import { ButtonProps, SvgIconProps } from "@mui/material";
 import { StaticImageData } from "next/image";
+import { PRACTICE_GROUP_TAB_DATA } from "./enum";
 
 export interface HOMEPAGE_DATA_PROPS {
   title: string;
@@ -33,6 +34,7 @@ export interface HOMEPAGE_DATA_PROPS {
 
   practiceGroupPage: {
     practiceGroup_hero_section: PRACTICE_GROUPS_HEROSECTION_PROPS;
+    practiceGroup_section: PRACTICE_GROUPS_SECTION_PROPS;
   };
 }
 
@@ -307,4 +309,12 @@ interface PRACTICE_GROUPS_HEROSECTION_PROPS {
   secondHeroImage: StaticImageData;
   thirdHeroImage: StaticImageData;
   description2: string;
+}
+
+interface PRACTICE_GROUPS_SECTION_PROPS {
+  tabData: {
+    title: PRACTICE_GROUP_TAB_DATA;
+    description1: string;
+    description2: string;
+  }[];
 }

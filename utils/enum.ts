@@ -13,6 +13,7 @@ export enum COLORS {
   TEXT_TERTIARY = "#14363f",
   TEXT_PRIMARY_24 = "#000202ff",
   TEXT_PRIMARY_4 = "#1D8D96",
+  TRANSPARENT = "transparent",
 }
 
 export enum TABS {
@@ -30,4 +31,12 @@ export enum PROFESSIONAL_TABS_DATA {
 export enum CAREER_OPEN_ROLES_TAB_DATA {
   ATTORNEY = "Attorney",
   TECHNICAL_ADVISOR = "Technical Advisor/Patent Agent",
+}
+
+export enum PRACTICE_GROUP_TAB_DATA {
+  CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING = "Circuits, Systems, & Signal Processing",
+  NOVEL_MATERIALS_DEVICES_AND_APPLIED_PHYSICS = "Novel Materials, Devices, & Applied Physics",
+  LITIGATION_GROUP = "Litigation Group",
+  ASIA_PACIFIC_GROUP = "Asia Pacific Group",
+  COMPUTER_SYSTEMS_AND_SOFTWARE = "COMPUTER SYSTEMS & SOFTWARE",
 }
