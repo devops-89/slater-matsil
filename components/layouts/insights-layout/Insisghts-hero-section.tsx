@@ -5,7 +5,7 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 const InsightsHeroSection = () => {
   return (
-    <Box>
+    <Box sx={{ my: 10 }}>
       <Container maxWidth="lg">
         <Box
           sx={{

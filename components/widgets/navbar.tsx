@@ -32,21 +32,35 @@ const Navbar = () => {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <IconButton>
-            <Menu />
-          </IconButton>
           <Link href="/">
             <Image src={logo} alt="Slater Matsil logo" priority />
           </Link>
+          <Stack direction="row" alignItems="center">
+            <IconButton>
+              <Menu sx={{ color: COLORS.PRIMARY_BLUE }} />
+            </IconButton>
+            <Typography
+              sx={{
+                color: COLORS.PRIMARY_GREEN,
+                textTransform: "uppercase",
+                fontFamily: adelle.style.fontFamily,
+                fontSize: 18,
+                fontWeight: 400,
+                lineHeight: "32px",
+              }}
+            >
+              MENU
+            </Typography>
+          </Stack>
           <Box
             sx={{
               textTransform: "none",
-              backgroundColor: "#0D5F6E",
-              color: "#fff",
+              backgroundColor: COLORS.PRIMARY_BLUE,
+              color: COLORS.WHITE,
               borderRadius: 1,
               px: 2.5,
               py: 0.75,
-              "&:hover": { backgroundColor: "#0B4E5B" },
+              "&:hover": { backgroundColor: COLORS.PRIMARY_BLUE },
               display: "flex",
               alignItems: "center",
               justifyContent: "center",

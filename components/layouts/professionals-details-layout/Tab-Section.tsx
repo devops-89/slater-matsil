@@ -6,6 +6,7 @@ import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 import ProfessionalBio from "./Professionals-Bio";
+import TabSwitching from "@/components/widgets/Tab-Switching";
 
 const TabSection = () => {
   const [value, setValue] = useState(0);
@@ -35,46 +36,16 @@ const TabSection = () => {
       <Container maxWidth="lg">
         <Grid container spacing={5} sx={{ mt: 20 }}>
           <Grid size={10} margin="auto">
-            <Tabs
+            <TabSwitching
               value={value}
               onChange={handleChange}
-              sx={{
-                backgroundColor: COLORS.PRIMARY_BLUE,
-                borderRadius: "36px",
-                height: "72px",
-                "& .MuiTabs-indicator": {
-                  display: "none",
-                },
-                "& .MuiTabs-list": {
-                  justifyContent: "space-around",
-                  alignItems: "center",
-                },
-                "& .MuiTab-root": {
-                  color: COLORS.WHITE,
-                  textAlign: "center",
-                  fontSize: 16,
-                  fontFamily: tradeGothic.style.fontFamily,
-                  fontWeight: 400,
-                  lineHeight: "32px",
-                },
-                "& .Mui-selected": {
-                  backgroundColor: COLORS.WHITE,
-                  color: `${COLORS.PRIMARY_BLUE} !important`,
-                  borderRadius: "32px",
-                },
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              {PROFESSIONAL_DETAILS_TAB_DATA.map((item, i) => (
-                <Tab label={item.label} key={i} />
-              ))}
-            </Tabs>
+              data={PROFESSIONAL_DETAILS_TAB_DATA}
+            />
           </Grid>
         </Grid>
         {PROFESSIONAL_DETAILS_TAB_DATA.map((val, i) => (
           <CustomTabPanel index={i} value={value} key={i}>
-            <ProfessionalBio data={getTabData(val.label)} />
+            <ProfessionalBio data={getTabData(val.title)} />
           </CustomTabPanel>
         ))}
       </Container>

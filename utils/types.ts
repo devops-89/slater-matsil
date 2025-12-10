@@ -42,7 +42,9 @@ export interface HOMEPAGE_DATA_PROPS {
     whoWeServepageHeroSection: WHO_WE_SERVE_HERO_PROPS;
     whoWeServeAboutSection: WHO_WE_SERVE_ABOUT_PROPS;
     whoWeServeTabsSection: TABS_DATA_PROPS[];
+    quote: QUOTE_CARD_DATA;
   };
+  insightsPage: INSIGHTS_PAGE_DATA;
 }
 
 export interface PROFESSIONAL_DETAILS_PROPS {
@@ -356,4 +358,24 @@ export interface TABS_DATA_PROPS {
   bigDescription: string;
   quote: string;
   data: { description: string }[];
+}
+
+export interface TAB_CARD_DATA_PROPS {
+  bigDescription: string;
+  quote: string;
+  data: { description: string }[];
+}
+
+export interface TAB_SWITCHING_PROPS {
+  data: { title: string }[];
+  value: number;
+  onChange: (event: React.SyntheticEvent, newValue: number) => void;
+}
+
+export interface INSIGHTS_PAGE_DATA {
+  heroSectionData: {
+    heading: string;
+    subHeading: string;
+    img: string;
+  };
 }
