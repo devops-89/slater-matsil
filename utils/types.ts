@@ -1,6 +1,6 @@
 import { ButtonProps, SvgIconProps } from "@mui/material";
 import { StaticImageData } from "next/image";
-import { PRACTICE_GROUP_TAB_DATA } from "./enum";
+import { PRACTICE_GROUP_TAB_DATA, WHO_WE_SERVE_PAGE_TAB_DATA } from "./enum";
 
 export interface HOMEPAGE_DATA_PROPS {
   title: string;
@@ -36,6 +36,12 @@ export interface HOMEPAGE_DATA_PROPS {
     practiceGroup_hero_section: PRACTICE_GROUPS_HEROSECTION_PROPS;
     practiceGroup_section: PRACTICE_GROUPS_SECTION_PROPS;
     meetPractitioners: MEET_PRACTITIONERS_PROPS;
+  };
+
+  whoWeServePage: {
+    whoWeServepageHeroSection: WHO_WE_SERVE_HERO_PROPS;
+    whoWeServeAboutSection: WHO_WE_SERVE_ABOUT_PROPS;
+    whoWeServeTabsSection: TABS_DATA_PROPS[];
   };
 }
 
@@ -323,4 +329,31 @@ interface PRACTICE_GROUPS_SECTION_PROPS {
 interface MEET_PRACTITIONERS_PROPS {
   title: string;
   data: { primary: string; secondary: string }[];
+}
+
+//  Who we serve page
+interface WHO_WE_SERVE_HERO_PROPS {
+  title: string;
+  heading1: string;
+  spanHeading1: string;
+  spanHeading2: string;
+  img: StaticImageData;
+}
+
+interface WHO_WE_SERVE_ABOUT_PROPS {
+  leftSideDescription: string;
+  img: StaticImageData;
+  rightSideDescription: string;
+  quoteCardData: QUOTE_CARD_DATA;
+}
+
+export interface QUOTE_CARD_DATA {
+  quote: string;
+  author: string;
+}
+export interface TABS_DATA_PROPS {
+  title: WHO_WE_SERVE_PAGE_TAB_DATA;
+  bigDescription: string;
+  quote: string;
+  data: { description: string }[];
 }

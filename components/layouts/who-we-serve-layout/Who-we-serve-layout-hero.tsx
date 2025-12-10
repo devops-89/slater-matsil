@@ -4,10 +4,12 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import hero_img from "@/who-we-serve/hero-img.jpg";
+import { usePageData } from "@/store/usePageData";
 const WhoWeServeLayoutHero = () => {
+  const { details } = usePageData();
   return (
     <div>
-      <Box>
+      <Box sx={{ py: 10 }}>
         <Container maxWidth="lg">
           <Grid container alignItems={"center"}>
             <Grid size={6}>
@@ -16,7 +18,7 @@ const WhoWeServeLayoutHero = () => {
                   backgroundColor: COLORS.PRIMARY_BLUE,
                   borderRadius: "999px",
                   width: "231px",
-                  height: "56px",
+                  height: "50px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -26,9 +28,10 @@ const WhoWeServeLayoutHero = () => {
                   lineHeight: "24px",
                   letterSpacing: "-0.54px",
                   color: COLORS.WHITE,
+                  textTransform: "uppercase",
                 }}
               >
-                UNLOCK THE VALUE
+                {details?.whoWeServePage?.whoWeServepageHeroSection?.title}
               </Box>
               <Typography
                 sx={{
@@ -40,7 +43,7 @@ const WhoWeServeLayoutHero = () => {
                   // letterSpacing: "-2px",
                 }}
               >
-                Our Global Reach Covers{" "}
+                {details?.whoWeServePage?.whoWeServepageHeroSection?.heading1}{" "}
                 <Typography
                   component={"span"}
                   sx={{
@@ -50,7 +53,10 @@ const WhoWeServeLayoutHero = () => {
                     fontWeight: 700,
                   }}
                 >
-                  Industries
+                  {
+                    details?.whoWeServePage?.whoWeServepageHeroSection
+                      ?.spanHeading1
+                  }
                 </Typography>{" "}
                 and{" "}
                 <Typography
@@ -62,16 +68,21 @@ const WhoWeServeLayoutHero = () => {
                     fontWeight: 700,
                   }}
                 >
-                  Countries
+                  {
+                    details?.whoWeServePage?.whoWeServepageHeroSection
+                      ?.spanHeading2
+                  }
                 </Typography>
               </Typography>
             </Grid>
             <Grid size={6}>
-              <Image
-                src={hero_img}
-                alt=""
-                style={{ width: "100%", height: "auto", borderRadius: 20 }}
-              />
+              {details?.whoWeServePage?.whoWeServepageHeroSection?.img && (
+                <Image
+                  src={details?.whoWeServePage?.whoWeServepageHeroSection?.img}
+                  alt=""
+                  style={{ width: "100%", height: "auto", borderRadius: 20 }}
+                />
+              )}
             </Grid>
           </Grid>
         </Container>

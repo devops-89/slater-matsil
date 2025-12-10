@@ -1,4 +1,5 @@
 import { COLORS } from "./enum";
+import { tradeGothic } from "./fonts";
 
 export const TEXTFIELD_STYLES = {
   width: "100%",
@@ -28,4 +29,32 @@ export const TEXTFIELD_STYLES = {
   "& label": {
     color: COLORS.LABEL_COLOR,
   },
+};
+
+export const TAB_STYLES = {
+  backgroundColor: COLORS.PRIMARY_BLUE,
+  borderRadius: "36px",
+  height: "72px",
+  "& .MuiTabs-indicator": {
+    display: "none",
+  },
+  "& .MuiTabs-list": {
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  "& .MuiTab-root": {
+    color: COLORS.WHITE,
+    textAlign: "center",
+    fontSize: 16,
+    fontFamily: tradeGothic.style.fontFamily,
+    fontWeight: 400,
+    lineHeight: "32px",
+  },
+  "& .Mui-selected": {
+    backgroundColor: COLORS.WHITE,
+    color: `${COLORS.PRIMARY_BLUE} !important`,
+    borderRadius: "32px",
+  },
+  display: "flex",
+  alignItems: "center",
 };

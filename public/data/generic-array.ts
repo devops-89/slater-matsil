@@ -8,7 +8,11 @@ import aboutCareer from "@/about/career-about.jpg";
 
 import connectWithSlatermatsil from "@/about/contact-about.jpg";
 import practiceGroups from "@/about/practice-group.jpg";
-import { PROFESSIONAL_TABS_DATA, TABS } from "@/utils/enum";
+import {
+  PROFESSIONAL_TABS_DATA,
+  TABS,
+  WHO_WE_SERVE_PAGE_TAB_DATA,
+} from "@/utils/enum";
 
 export const SERVICES_AREAS_DATA = [
   {
@@ -318,5 +322,20 @@ export const CAREER_WORK_LIST_DATA: WORK_LIST_PROPS[] = [
   {
     title:
       "Opportunities to grow into Patent Agent, Technical Advisor, or IP Attorney roles",
+  },
+];
+
+export const WHO_WE_SERVE_TAB_DATA = [
+  {
+    label: WHO_WE_SERVE_PAGE_TAB_DATA.LARGE_CORPORATIONS,
+  },
+  {
+    label: WHO_WE_SERVE_PAGE_TAB_DATA.SMALL_COMPANIES,
+  },
+  {
+    label: WHO_WE_SERVE_PAGE_TAB_DATA.US_LAW_FIRMS,
+  },
+  {
+    label: WHO_WE_SERVE_PAGE_TAB_DATA.INTERNATIONAL_LAW_FIRMS,
   },
 ];
