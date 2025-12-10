@@ -3,13 +3,16 @@ import React from "react";
 import bannerSection from "@/insights/insights_hero_img.jpg";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { usePageData } from "@/store/usePageData";
 const InsightsHeroSection = () => {
+  const { details } = usePageData();
+
   return (
     <Box sx={{ my: 10 }}>
       <Container maxWidth="lg">
         <Box
           sx={{
-            backgroundImage: `url(${bannerSection.src})`,
+            backgroundImage: `url(${details?.insightsPage?.heroSectionData?.img})`,
             height: "500px",
             width: "100%",
             backgroundSize: "cover",
@@ -39,7 +42,7 @@ const InsightsHeroSection = () => {
                   lineHeight: "72px",
                 }}
               >
-                Insights
+                {details?.insightsPage?.heroSectionData?.heading}
               </Typography>
               <Typography
                 sx={{
@@ -51,7 +54,7 @@ const InsightsHeroSection = () => {
                   color: COLORS.PRIMARY_BLUE_LIGHT,
                 }}
               >
-                Latest Recognition & Industry Updates
+                {details?.insightsPage?.heroSectionData?.subHeading}
               </Typography>
             </Container>
           </Box>

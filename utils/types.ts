@@ -378,4 +378,14 @@ export interface INSIGHTS_PAGE_DATA {
     subHeading: string;
     img: string;
   };
+  tab_data: {
+    title: string;
+  }[];
+  quickLinks: {
+    title: string;
+    data: {
+      title: string;
+      img: StaticImageData;
+    }[];
+  };
 }

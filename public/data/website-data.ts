@@ -40,6 +40,7 @@ import careerHeroImage from "@/career/hero-image.png";
 import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
 import {
   CAREER_OPEN_ROLES_TAB_DATA,
+  INSIGHTS_TAB_DATA,
   PRACTICE_GROUP_TAB_DATA,
   WHO_WE_SERVE_PAGE_TAB_DATA,
 } from "@/utils/enum";
@@ -47,6 +48,12 @@ import practiceGroupPageHeroImage1 from "@/practice-group/hero1.jpg";
 import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
 import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
 import whoweserveHero from "@/who-we-serve/hero-img.jpg";
+import insightsHeroImage from "@/insights/insights_hero_img.jpg";
+import building from "@/icons/building.svg";
+import globeOutline from "@/icons/globe.svg";
+import locationOutline from "@/icons/location.svg";
+import earthFilled from "@/icons/earth.svg";
+import minicutBuilding from "@/icons/stream-line.svg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -667,6 +674,52 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       quote:
         "Slater Matsil understands our technology very well and we give our most important cases to the firm. We trust them and trust the legal opinions they provide.",
       author: "Chief IP Counsel, Large Corporate Technology Leade",
+    },
+  },
+  insightsPage: {
+    heroSectionData: {
+      heading: "Insights",
+      subHeading: "Latest Recognition & Industry Updates",
+      img: insightsHeroImage.src,
+    },
+    tab_data: [
+      {
+        title: INSIGHTS_TAB_DATA.ALL,
+      },
+      {
+        title: INSIGHTS_TAB_DATA.NEWS,
+      },
+      {
+        title: INSIGHTS_TAB_DATA.ARTICLES,
+      },
+      {
+        title: INSIGHTS_TAB_DATA.LINKS,
+      },
+    ],
+    quickLinks: {
+      title: "Quick Links",
+      data: [
+        {
+          img: building,
+          title: "United State Patent and Trademark Office",
+        },
+        {
+          img: globeOutline,
+          title: "Japan Patent Office",
+        },
+        {
+          img: locationOutline,
+          title: "Canadian Intellectual Property Office",
+        },
+        {
+          img: earthFilled,
+          title: "European Patent Office",
+        },
+        {
+          img: minicutBuilding,
+          title: "China National Intellectual Property Administration",
+        },
+      ],
     },
   },
 };
