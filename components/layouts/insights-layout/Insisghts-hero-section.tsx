@@ -8,7 +8,7 @@ const InsightsHeroSection = () => {
   const { details } = usePageData();
 
   return (
-    <Box sx={{ my: 10 }}>
+    <Box sx={{ my: 5 }}>
       <Container maxWidth="lg">
         <Box
           sx={{

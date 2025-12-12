@@ -1,6 +1,7 @@
 import {
   DATA_LIST_PROPS,
   FOOTER_LIST_DATA,
+  INSIGHTS_DATA_PROPS,
   METRICSPROPS,
   WORK_LIST_PROPS,
 } from "@/utils/types";
@@ -9,6 +10,8 @@ import aboutCareer from "@/about/career-about.jpg";
 import connectWithSlatermatsil from "@/about/contact-about.jpg";
 import practiceGroups from "@/about/practice-group.jpg";
 import {
+  COLORS,
+  INSIGHTS_TAB_DATA,
   PROFESSIONAL_TABS_DATA,
   TABS,
   WHO_WE_SERVE_PAGE_TAB_DATA,
@@ -337,5 +340,60 @@ export const WHO_WE_SERVE_TAB_DATA = [
   },
   {
     label: WHO_WE_SERVE_PAGE_TAB_DATA.INTERNATIONAL_LAW_FIRMS,
+  },
+];
+
+export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
+  {
+    title:
+      "Steven Slater recognized by Chambers USA 2024 - 2025 as a Top Intellectual Property Attorney",
+    bgColor: COLORS.PRIMARY_BLUE,
+  },
+  {
+    title:
+      "Ira Matsil recognized by Chambers USA 2021 - 2025 as a Top Intellectual Property Attorney",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+  },
+  {
+    title:
+      "Ira Matsil recognized by Chambers USA 2021 - 2025 as a Top Intellectual Property Attorney",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+  },
+  {
+    title:
+      "Ira Matsil was recognized in the 2021- 2-26 editions of the U.S. News - Best Lawyers in America For Patent Litigation in Dallas, texas,",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+  },
+  {
+    title:
+      "Steven Slater was recognized in the 2020 - 2026 editions of the best lawyers in America for Patent Litigation and patent Law in Dallas, Texas.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+  },
+  {
+    title:
+      "Ira Matsil had been selected for the 2025 IAM Strategy 300: The World’s IP Strategies as a Strategy 300 Global Leader.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+  },
+  {
+    title:
+      "Slater Matsil ranked as a firm and Steven Slater, Ira Matsil, Srini Chakravarthi, and Michael Kucher were recognized individually by 2022 IAM Patent 1000 Rankings.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.ARTICLES,
+  },
+  {
+    title: "Ira Matsil was featured in IAM Global Leaders 2022.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.LINKS,
+  },
+  {
+    title:
+      "John Koetter has been selected as a Rising Star 2021 by Super Lawyers (a Thomson Reuters Service).",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
   },
 ];

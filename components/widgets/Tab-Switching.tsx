@@ -4,7 +4,7 @@ import { TAB_SWITCHING_PROPS } from "@/utils/types";
 import { Tab, Tabs } from "@mui/material";
 import React from "react";
 
-const TabSwitching = ({ value, onChange, data }: TAB_SWITCHING_PROPS) => {
+const TabSwitching = ({ value, onChange, data, sx }: TAB_SWITCHING_PROPS) => {
   return (
     <div>
       <Tabs
@@ -18,6 +18,7 @@ const TabSwitching = ({ value, onChange, data }: TAB_SWITCHING_PROPS) => {
             fontWeight: 600,
             lineHeight: "32px",
           },
+          ...sx,
         }}
         value={value}
         onChange={onChange}

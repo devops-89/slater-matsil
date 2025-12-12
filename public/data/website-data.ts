@@ -15,6 +15,7 @@ import {
   CAREER_WORK_LIST_DATA,
   FOOTER_DATA,
   INDUSTRIES_DATA,
+  INSIGHTS_CARD_DATA,
   METRICS_DATA,
 } from "./generic-array";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -40,6 +41,7 @@ import careerHeroImage from "@/career/hero-image.png";
 import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
 import {
   CAREER_OPEN_ROLES_TAB_DATA,
+  COLORS,
   INSIGHTS_TAB_DATA,
   PRACTICE_GROUP_TAB_DATA,
   WHO_WE_SERVE_PAGE_TAB_DATA,
@@ -721,5 +723,6 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
       ],
     },
+    insightsData: INSIGHTS_CARD_DATA,
   },
 };

@@ -1,4 +1,4 @@
-import { ButtonProps, SvgIconProps } from "@mui/material";
+import { ButtonProps, SvgIconProps, SxProps, Theme } from "@mui/material";
 import { StaticImageData } from "next/image";
 import { PRACTICE_GROUP_TAB_DATA, WHO_WE_SERVE_PAGE_TAB_DATA } from "./enum";
 
@@ -370,6 +370,7 @@ export interface TAB_SWITCHING_PROPS {
   data: { title: string }[];
   value: number;
   onChange: (event: React.SyntheticEvent, newValue: number) => void;
+  sx?: SxProps<Theme>;
 }
 
 export interface INSIGHTS_PAGE_DATA {
@@ -383,9 +384,18 @@ export interface INSIGHTS_PAGE_DATA {
   }[];
   quickLinks: {
     title: string;
-    data: {
-      title: string;
-      img: StaticImageData;
-    }[];
+    data: QUICK_LINKS_CARD_PROPS[];
   };
+  insightsData: INSIGHTS_DATA_PROPS[];
+}
+
+export interface QUICK_LINKS_CARD_PROPS {
+  title: string;
+  img: StaticImageData;
+}
+
+export interface INSIGHTS_DATA_PROPS {
+  title: string;
+  bgColor: string;
+  category?: string;
 }

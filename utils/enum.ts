@@ -14,6 +14,8 @@ export enum COLORS {
   TEXT_PRIMARY_24 = "#000202ff",
   TEXT_PRIMARY_4 = "#1D8D96",
   TRANSPARENT = "transparent",
+  LIGHT_GREY = "#F5F5F5",
+  PRIMARY_LIGHT_GREEN = "#C5E5A3",
 }
 
 export enum TABS {
