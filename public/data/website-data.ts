@@ -56,6 +56,7 @@ import globeOutline from "@/icons/globe.svg";
 import locationOutline from "@/icons/location.svg";
 import earthFilled from "@/icons/earth.svg";
 import minicutBuilding from "@/icons/stream-line.svg";
+import contactHeroImage from "@/contact/hero-vector-image.png";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -724,5 +725,13 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       ],
     },
     insightsData: INSIGHTS_CARD_DATA,
+  },
+  contactPage: {
+    hero_section_data: {
+      heading: "Contact Us",
+      description:
+        "Your innovations deserve global protection — let’s start the conversation.",
+      img: contactHeroImage,
+    },
   },
 };

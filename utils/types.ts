@@ -45,6 +45,7 @@ export interface HOMEPAGE_DATA_PROPS {
     quote: QUOTE_CARD_DATA;
   };
   insightsPage: INSIGHTS_PAGE_DATA;
+  contactPage: CONTACT_US_PAGE_DATA;
 }
 
 export interface PROFESSIONAL_DETAILS_PROPS {
@@ -398,4 +399,12 @@ export interface INSIGHTS_DATA_PROPS {
   title: string;
   bgColor: string;
   category?: string;
+}
+
+export interface CONTACT_US_PAGE_DATA {
+  hero_section_data: {
+    heading: string;
+    description: string;
+    img: StaticImageData;
+  };
 }
