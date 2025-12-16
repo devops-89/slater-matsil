@@ -1,5 +1,5 @@
 import { COLORS } from "./enum";
-import { tradeGothic } from "./fonts";
+import { adelle, tradeGothic } from "./fonts";
 
 export const TEXTFIELD_STYLES = {
   width: "100%",
@@ -18,6 +18,35 @@ export const TEXTFIELD_STYLES = {
   "& .MuiOutlinedInput-root": {
     borderRadius: "28px",
   },
+
+  "& .MuiOutlinedInput-notchedOutline": {
+    borderColor: "rgba(6, 50, 50, 0.15)",
+  },
+
+  "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    borderColor: COLORS.PRIMARY_BLUE,
+  },
+  "& label": {
+    color: COLORS.LABEL_COLOR,
+  },
+};
+export const FLAT_TEXTFIELD_STYLES = {
+  width: "100%",
+  // height: "56px",
+  // borderRadius: "28px",
+
+  "& .MuiInputBase-input": {
+    padding: "18px",
+    "&.MuiAutocomplete-input": {
+      paddingLeft: "18px",
+      paddingTop: "18px",
+      paddingBottom: "18px",
+      paddingRight: "50px !important",
+    },
+  },
+  // "& .MuiOutlinedInput-root": {
+  //   borderRadius: "28px",
+  // },
 
   "& .MuiOutlinedInput-notchedOutline": {
     borderColor: "rgba(6, 50, 50, 0.15)",
@@ -57,4 +86,12 @@ export const TAB_STYLES = {
   },
   display: "flex",
   alignItems: "center",
+};
+
+export const field_label_styles = {
+  color: COLORS.PRIMARY_BLUE,
+  fontFamily: adelle.style.fontFamily,
+  fontSize: 18,
+  fontWeight: 500,
+  lineHeight: "30px",
 };

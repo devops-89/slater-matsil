@@ -29,6 +29,7 @@ import {
 } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import React from "react";
+import Form from "./components/Form";
 
 const ContactForm = () => {
   return (
@@ -38,12 +39,29 @@ const ContactForm = () => {
           <Box sx={{ position: "relative", display: "inline-block" }}>
             <Typography
               sx={{
-                color: COLORS.PRIMARY_BLUE,
-                fontSize: "50px",
+                fontSize: 50,
                 fontWeight: 700,
-                lineHeight: "72px",
                 fontFamily: tradeGothic.style.fontFamily,
+                lineHeight: "72px",
+                color: COLORS.PRIMARY_BLUE,
                 textAlign: "center",
+                position: "relative",
+                zIndex: 1,
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  bottom: "10px",
+                  left: "-4px",
+                  right: "-8px",
+                  height: "20px",
+                  backgroundColor: COLORS.PRIMARY_GREEN,
+                  opacity: 0.4,
+                  zIndex: -1,
+                  transform: "rotate(-2deg)",
+                  width: 600,
+                  borderRadius: 8,
+                  //   margin: "auto",
+                },
               }}
             >
               Send Us a{" "}
@@ -60,28 +78,29 @@ const ContactForm = () => {
                 Message
               </Typography>
             </Typography>
-            <Box
-              sx={{
-                position: "absolute",
-                bottom: -10,
-                left: 0,
-                right: 0,
-                height: "8px",
-                backgroundColor: COLORS.PRIMARY_LIGHT_GREEN,
-                borderRadius: "4px",
-                rotate: "-3deg",
-              }}
-            />
           </Box>
         </Stack>
 
-        <Typography sx={{ fontSize: 24, fontFamily: adelle.style.fontFamily }}>
+        <Typography
+          sx={{
+            fontSize: 24,
+            fontFamily: adelle.style.fontFamily,
+            width: 860,
+            margin: "auto",
+            color: COLORS.TEXT_PRIMARY_4,
+            textAlign: "center",
+            fontWeight: 400,
+            lineHeight: "36px",
+            mt: 2,
+          }}
+        >
           ready to protect your intellectual property? Fill out the form below
           and our experts will get back to you within 24 hours.
         </Typography>
 
-        {/* Contact Form */}
-        <Box sx={{ mt: 8 }}></Box>
+        <Box sx={{ mt: 8 }}>
+          <Form />
+        </Box>
       </Container>
     </Box>
   );
