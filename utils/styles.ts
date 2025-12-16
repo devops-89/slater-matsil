@@ -95,3 +95,27 @@ export const field_label_styles = {
   fontWeight: 500,
   lineHeight: "30px",
 };
+
+export const para_field_styles = {
+  color: COLORS.TEXT_PRIMARY_4,
+  fontFamily: adelle.style.fontFamily,
+  fontSize: 24,
+  fontWeight: 400,
+  lineHeight: "36px",
+};
+
+export const contact_field_styles = {
+  color: COLORS.PRIMARY_BLUE,
+  fontFamily: adelle.style.fontFamily,
+  fontSize: 20,
+  fontWeight: 600,
+};
+
+export const contact_field_styles_2 = {
+  color: COLORS.TEXT_PRIMARY_4,
+  fontFamily: adelle.style.fontFamily,
+  fontSize: 18,
+  fontWeight: 400,
+  // lineHeight: "48px",
+  letterSpacing: "-0.48px",
+};

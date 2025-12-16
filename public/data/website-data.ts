@@ -13,6 +13,7 @@ import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shap
 import { LinkedIn } from "@mui/icons-material";
 import {
   CAREER_WORK_LIST_DATA,
+  CONTACT_US_CARD_DATA,
   FOOTER_DATA,
   INDUSTRIES_DATA,
   INSIGHTS_CARD_DATA,
@@ -732,6 +733,17 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       description:
         "Your innovations deserve global protection — let’s start the conversation.",
       img: contactHeroImage,
+    },
+    form_section: {
+      heading1: "Send Us a",
+      heading2: "Message",
+      description:
+        "ready to protect your intellectual property? Fill out the form below and our experts will get back to you within 24 hours.",
+    },
+    contact_card_props: {
+      heading: "Find Us Here",
+      subTitle: "Get in touch with us.",
+      contact_card_data: CONTACT_US_CARD_DATA,
     },
   },
 };

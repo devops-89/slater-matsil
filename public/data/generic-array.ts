@@ -1,4 +1,5 @@
 import {
+  CONTACT_US_CARD_PROPS,
   DATA_LIST_PROPS,
   FOOTER_LIST_DATA,
   INSIGHTS_DATA_PROPS,
@@ -16,6 +17,7 @@ import {
   TABS,
   WHO_WE_SERVE_PAGE_TAB_DATA,
 } from "@/utils/enum";
+import { Email, LocationOnOutlined, Phone } from "@mui/icons-material";
 
 export const SERVICES_AREAS_DATA = [
   {
@@ -395,5 +397,23 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
       "John Koetter has been selected as a Rising Star 2021 by Super Lawyers (a Thomson Reuters Service).",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.LINKS,
+  },
+];
+
+export const CONTACT_US_CARD_DATA: CONTACT_US_CARD_PROPS[] = [
+  {
+    heading: "Address",
+    value: "123 Innovation Drive, U.S.",
+    Icon: LocationOnOutlined,
+  },
+  {
+    heading: "Phone number",
+    value: "+91 98765 43210",
+    Icon: Phone,
+  },
+  {
+    heading: "Email Address",
+    value: "hello@slatermetsil.com",
+    Icon: Email,
   },
 ];

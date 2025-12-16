@@ -1,37 +1,11 @@
-import { SERVICES_AREAS_DATA } from "@/public/data/generic-array";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { TEXTFIELD_STYLES } from "@/utils/styles";
-import {
-  ArrowForward,
-  CalendarMonth,
-  EmailOutlined,
-  Person,
-  TimerOutlined,
-} from "@mui/icons-material";
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Grid,
-  InputAdornment,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
-import {
-  DatePicker,
-  LocalizationProvider,
-  TimePicker,
-} from "@mui/x-date-pickers";
-import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
-import React from "react";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import Form from "./components/Form";
+import { usePageData } from "@/store/usePageData";
 
 const ContactForm = () => {
+  const { details } = usePageData();
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
@@ -64,7 +38,7 @@ const ContactForm = () => {
                 },
               }}
             >
-              Send Us a{" "}
+              {details?.contactPage?.form_section?.heading1}{" "}
               <Typography
                 component={"span"}
                 sx={{
@@ -75,7 +49,7 @@ const ContactForm = () => {
                   lineHeight: "72px",
                 }}
               >
-                Message
+                {details?.contactPage?.form_section?.heading2}
               </Typography>
             </Typography>
           </Box>
@@ -94,8 +68,7 @@ const ContactForm = () => {
             mt: 2,
           }}
         >
-          ready to protect your intellectual property? Fill out the form below
-          and our experts will get back to you within 24 hours.
+          {details?.contactPage?.form_section?.description}
         </Typography>
 
         <Box sx={{ mt: 8 }}>

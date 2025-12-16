@@ -1,4 +1,10 @@
-import { ButtonProps, SvgIconProps, SxProps, Theme } from "@mui/material";
+import {
+  ButtonProps,
+  IconProps,
+  SvgIconProps,
+  SxProps,
+  Theme,
+} from "@mui/material";
 import { StaticImageData } from "next/image";
 import { PRACTICE_GROUP_TAB_DATA, WHO_WE_SERVE_PAGE_TAB_DATA } from "./enum";
 
@@ -407,4 +413,20 @@ export interface CONTACT_US_PAGE_DATA {
     description: string;
     img: StaticImageData;
   };
+  form_section: {
+    heading1: string;
+    heading2: string;
+    description: string;
+  };
+  contact_card_props: {
+    heading: string;
+    subTitle: string;
+    contact_card_data: CONTACT_US_CARD_PROPS[];
+  };
+}
+
+export interface CONTACT_US_CARD_PROPS {
+  heading: string;
+  Icon: React.ElementType<SvgIconProps>;
+  value: string;
 }
