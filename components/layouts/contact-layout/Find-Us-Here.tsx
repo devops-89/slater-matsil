@@ -30,7 +30,7 @@ const FindUsHere = () => {
             {details?.contactPage?.contact_card_props?.subTitle}
           </Typography>
 
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{ mt: 3 }}>
             {details?.contactPage?.contact_card_props?.contact_card_data.map(
               (val, i) => (
                 <Grid size={4} key={i}>

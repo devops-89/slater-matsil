@@ -3,6 +3,7 @@ import React from "react";
 import HeroSection from "./Hero-Section";
 import ContactForm from "./Contact-Form";
 import FindUsHere from "./Find-Us-Here";
+import Followus from "./Follow-us";
 
 const ContactLayout = () => {
   return (
@@ -10,6 +11,7 @@ const ContactLayout = () => {
       <HeroSection />
       <ContactForm />
       <FindUsHere />
+      <Followus />
     </div>
   );
 };
