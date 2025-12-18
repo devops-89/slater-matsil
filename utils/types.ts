@@ -53,6 +53,7 @@ export interface HOMEPAGE_DATA_PROPS {
   };
   insightsPage: INSIGHTS_PAGE_DATA;
   contactPage: CONTACT_US_PAGE_DATA;
+  servicesPage: SERVICES_PAGE_DATA;
 }
 
 export interface PROFESSIONAL_DETAILS_PROPS {
@@ -442,4 +443,14 @@ export interface CONTACT_US_CARD_PROPS {
   heading: string;
   Icon: React.ElementType<SvgIconProps>;
   value: string;
+}
+
+export interface SERVICES_PAGE_DATA {
+  pageTitle: string;
+  heroSection: {
+    heading1: string;
+    heading2: string;
+    description: string;
+    img: StaticImageData;
+  };
 }

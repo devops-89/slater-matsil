@@ -1,16 +1,23 @@
 import HeadingStar from "@/components/widgets/Heading-star";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
+import Image from "next/image";
 import React from "react";
 
 const HeroServicesSection = () => {
+  const { details } = usePageData();
+
+  const service_heroSection_data = details?.servicesPage?.heroSection;
   return (
-    <Box>
+    <Box sx={{ mt: 10 }}>
       <Container maxWidth="lg">
-        <Grid container>
+        <Grid container spacing={4}>
           <Grid size={6}>
-            <HeadingStar title="Services" />
+            {details?.servicesPage?.pageTitle && (
+              <HeadingStar title={details?.servicesPage?.pageTitle} />
+            )}
             <Typography
               sx={{
                 fontSize: 45,
@@ -22,7 +29,7 @@ const HeroServicesSection = () => {
                 mt: 2,
               }}
             >
-              Evolving Legal Services for a{" "}
+              {service_heroSection_data?.heading1}{" "}
               <Typography
                 sx={{
                   fontSize: 45,
@@ -34,7 +41,7 @@ const HeroServicesSection = () => {
                 }}
                 component={"span"}
               >
-                Global IP World
+                {service_heroSection_data?.heading2}
               </Typography>
             </Typography>
             <Typography
@@ -47,12 +54,18 @@ const HeroServicesSection = () => {
                 mt: 2,
               }}
             >
-              Technology and globalization are changing the way you do business.
-              Our firm bridges law, innovation, and technical expertise to
-              protect your ideas.
+              {service_heroSection_data?.description}
             </Typography>
           </Grid>
-          <Grid size={6}></Grid>
+          <Grid size={6}>
+            {service_heroSection_data?.img && (
+              <Image
+                src={service_heroSection_data?.img}
+                alt=""
+                style={{ width: "100%", height: "auto" }}
+              />
+            )}
+          </Grid>
         </Grid>
       </Container>
     </Box>

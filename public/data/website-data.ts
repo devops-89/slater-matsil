@@ -59,6 +59,7 @@ import earthFilled from "@/icons/earth.svg";
 import minicutBuilding from "@/icons/stream-line.svg";
 import contactHeroImage from "@/contact/hero-vector-image.png";
 import { FaFacebookF } from "react-icons/fa6";
+import serviceHeroSectionImage from "@/services/hero-section.png";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -770,6 +771,16 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         "Location in the heart of New York’s business district, our main office is easily accessible by public transportation.",
       locationLink:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.6477572155536!2d-96.8047705252068!3d32.98669387324265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c23cde07bf391%3A0x662b3a35d44e3638!2sSlater%20Matsil%2C%20LLP!5e0!3m2!1sen!2sin!4v1766042747322!5m2!1sen!2sin",
+    },
+  },
+  servicesPage: {
+    pageTitle: "Services",
+    heroSection: {
+      heading1: "Evolving Legal Services for a ",
+      heading2: "Global IP World",
+      description:
+        "Technology and globalization are changing the way you do business. Our firm bridges law, innovation, and technical expertise to protect your ideas.",
+      img: serviceHeroSectionImage,
     },
   },
 };
