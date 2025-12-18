@@ -1,6 +1,6 @@
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Form from "./components/Form";
 import { usePageData } from "@/store/usePageData";
 
@@ -72,7 +72,11 @@ const ContactForm = () => {
         </Typography>
 
         <Box sx={{ mt: 8 }}>
-          <Form />
+          <Grid container>
+            <Grid size={10} margin="auto">
+              <Form />
+            </Grid>
+          </Grid>
         </Box>
       </Container>
     </Box>

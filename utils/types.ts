@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { StaticImageData } from "next/image";
 import { PRACTICE_GROUP_TAB_DATA, WHO_WE_SERVE_PAGE_TAB_DATA } from "./enum";
+import React from "react";
 
 export interface HOMEPAGE_DATA_PROPS {
   title: string;
@@ -422,6 +423,18 @@ export interface CONTACT_US_PAGE_DATA {
     heading: string;
     subTitle: string;
     contact_card_data: CONTACT_US_CARD_PROPS[];
+  };
+  follow_props: {
+    title: string;
+    social_icons: {
+      Icon: React.ElementType<SvgIconProps>;
+      href?: string;
+    }[];
+  };
+  map_props: {
+    title: string;
+    description: string;
+    locationLink: string;
   };
 }
 

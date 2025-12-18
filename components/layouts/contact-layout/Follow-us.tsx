@@ -1,29 +1,13 @@
-import React from "react";
-import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
-import { tradeGothic } from "@/utils/fonts";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa6";
-import { X } from "@mui/icons-material";
+import { tradeGothic } from "@/utils/fonts";
+import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
 
 const Followus = () => {
-  const SOCIAL_ICONS = [
-    {
-      icon: FaLinkedinIn,
-    },
-    {
-      icon: FaFacebookF,
-    },
-    {
-      icon: X,
-    },
-    {
-      icon: FaInstagram,
-    },
-  ];
+  const { details } = usePageData();
   return (
     <div>
-      <Box>
+      <Box sx={{ mt: 5 }}>
         <Container maxWidth="lg">
           <Typography
             sx={{
@@ -33,21 +17,32 @@ const Followus = () => {
               color: COLORS.PRIMARY_BLUE,
             }}
           >
-            Follow Us
+            {details?.contactPage?.follow_props?.title}
           </Typography>
 
-          <Stack direction="row" alignItems={"center"} spacing={2}>
-            {SOCIAL_ICONS.map((val, i) => (
+          <Stack
+            direction="row"
+            alignItems={"center"}
+            spacing={2}
+            sx={{ mt: 3 }}
+          >
+            {details?.contactPage?.follow_props?.social_icons?.map((val, i) => (
               <IconButton
                 sx={{
                   backgroundColor: COLORS.PRIMARY_BLUE,
                   "& svg": {
                     color: COLORS.WHITE,
+                    fontSize: 20,
                   },
+                  ":hover": {
+                    backgroundColor: COLORS.PRIMARY_BLUE,
+                  },
+                  width: 50,
+                  height: 50,
                 }}
                 key={i}
               >
-                <val.icon />
+                <val.Icon />
               </IconButton>
             ))}
           </Stack>
