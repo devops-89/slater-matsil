@@ -453,4 +453,37 @@ export interface SERVICES_PAGE_DATA {
     description: string;
     img: StaticImageData;
   };
+  why_choose_strength_props: {
+    title: string;
+    heading: string;
+    spanHeading: string;
+    description: string;
+    our_strength: {
+      heading: string;
+      data: STRENGTH_CARD_PROPS[];
+    };
+  };
+  unparalleled_props: {
+    title: string;
+    img: StaticImageData;
+  };
+  service_framework_props: {
+    heading: string;
+    spanHeading: string;
+    description: string;
+    data: SERVICE_FRAMEWORK_CARD_PROPS[];
+  };
+}
+
+export interface STRENGTH_CARD_PROPS {
+  img: StaticImageData;
+  title: string;
+  description: string;
+}
+
+export interface SERVICE_FRAMEWORK_CARD_PROPS {
+  heading: string;
+  data: {
+    title: string;
+  }[];
 }

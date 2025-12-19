@@ -2,8 +2,13 @@ import React from "react";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { COLORS } from "@/utils/enum";
+import StrengthCard from "./components/Strength-card";
+import { usePageData } from "@/store/usePageData";
 
 const WhyChooseUs = () => {
+  const { details } = usePageData();
+
+  const strength = details?.servicesPage.why_choose_strength_props;
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
@@ -19,7 +24,7 @@ const WhyChooseUs = () => {
                 mb: 4,
               }}
             >
-              "The Foundation Behind Global Innovation"
+              "{strength?.title}"
             </Typography>
             <Typography
               sx={{
@@ -48,7 +53,7 @@ const WhyChooseUs = () => {
                 },
               }}
             >
-              Why Choose{" "}
+              {strength?.heading}{" "}
               <Typography
                 sx={{
                   fontSize: 50,
@@ -59,7 +64,7 @@ const WhyChooseUs = () => {
                 }}
                 component={"span"}
               >
-                Slater Matsil
+                {strength?.spanHeading}
               </Typography>
             </Typography>
             <Typography
@@ -73,11 +78,34 @@ const WhyChooseUs = () => {
                 color: "#272727",
               }}
             >
-              We don’t just protect ideas we empower innovation. With deep
-              technical expertise and a history of success across industries, we
-              ensure your intellectual property stands the test of time.
+              {strength?.description}
             </Typography>
           </Grid>
+        </Grid>
+
+        <Typography
+          sx={{
+            color: COLORS.BLACK,
+            fontSize: 35,
+            fontFamily: tradeGothic.style.fontFamily,
+            fontWeight: 700,
+            lineHeight: "60px",
+            mt: 5,
+          }}
+        >
+          {strength?.our_strength?.heading}:
+        </Typography>
+
+        <Grid container spacing={4} mt={3}>
+          {strength?.our_strength?.data.map((item, index) => (
+            <Grid size={3} key={index}>
+              <StrengthCard
+                img={item.img}
+                title={item.title}
+                description={item.description}
+              />
+            </Grid>
+          ))}
         </Grid>
       </Container>
     </Box>

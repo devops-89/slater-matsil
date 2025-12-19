@@ -18,6 +18,7 @@ import {
   INDUSTRIES_DATA,
   INSIGHTS_CARD_DATA,
   METRICS_DATA,
+  STRENGTH_CARD_DATA,
 } from "./generic-array";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import footerLogo from "@/logo/big-logo.png";
@@ -60,6 +61,7 @@ import minicutBuilding from "@/icons/stream-line.svg";
 import contactHeroImage from "@/contact/hero-vector-image.png";
 import { FaFacebookF } from "react-icons/fa6";
 import serviceHeroSectionImage from "@/services/hero-section.png";
+import unparalleledimage from "@/services/unparalled-legal-services.png";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -781,6 +783,28 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       description:
         "Technology and globalization are changing the way you do business. Our firm bridges law, innovation, and technical expertise to protect your ideas.",
       img: serviceHeroSectionImage,
+    },
+    why_choose_strength_props: {
+      title: "The Foundation Behind Global Innovation",
+      heading: "Why Choose",
+      spanHeading: "Slater Matsil",
+      description:
+        "We don’t just protect ideas we empower innovation. With deep technical expertise and a history of success across industries, we ensure your intellectual property stands the test of time.",
+      our_strength: {
+        heading: "Our Strength",
+        data: STRENGTH_CARD_DATA,
+      },
+    },
+    unparalleled_props: {
+      title:
+        "Slater Matsil provides unparalleled legal services throughout the life cycle of your IP rights.",
+      img: unparalleledimage,
+    },
+    service_framework_props: {
+      heading: "Our Service",
+      spanHeading: "Framework",
+      description:
+        "Comprehensive intellectual property services organized across four strategic pillars",
     },
   },
 };

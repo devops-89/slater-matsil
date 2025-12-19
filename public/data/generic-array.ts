@@ -4,6 +4,8 @@ import {
   FOOTER_LIST_DATA,
   INSIGHTS_DATA_PROPS,
   METRICSPROPS,
+  SERVICE_FRAMEWORK_CARD_PROPS,
+  STRENGTH_CARD_PROPS,
   WORK_LIST_PROPS,
 } from "@/utils/types";
 import aboutCareer from "@/about/career-about.jpg";
@@ -19,6 +21,10 @@ import {
 } from "@/utils/enum";
 import { Email, LocationOnOutlined, Phone } from "@mui/icons-material";
 
+import technicalExpertise from "@/icons/services/technical-expertise.svg";
+import globalReach from "@/icons/services/global-ip-reach.svg";
+import strategicInsight from "@/icons/services/strategic-insight.svg";
+import clientFirstApproach from "@/icons/services/client-first-approach.svg";
 export const SERVICES_AREAS_DATA = [
   {
     category: "Strategy",
@@ -415,5 +421,60 @@ export const CONTACT_US_CARD_DATA: CONTACT_US_CARD_PROPS[] = [
     heading: "Email Address",
     value: "hello@slatermetsil.com",
     Icon: Email,
+  },
+];
+
+export const STRENGTH_CARD_DATA: STRENGTH_CARD_PROPS[] = [
+  {
+    img: technicalExpertise,
+    title: "Technical Expertise",
+    description:
+      "Engineers-turned-attorneys who understand your inventions at the core",
+  },
+  {
+    img: globalReach,
+    title: "Global IP Reach",
+    description: "Coordinated Patent strategy across US, Asia, and Europe",
+  },
+  {
+    img: strategicInsight,
+    title: "Strategic Insight",
+    description: "Legal strategies allgned with your long - term businesses",
+  },
+  {
+    img: clientFirstApproach,
+    title: "Client-First Approach",
+    description: "Decades of trusted partnership and responsive service",
+  },
+];
+
+export const SERVICE_FRAMEWORK_CARD_DATA: SERVICE_FRAMEWORK_CARD_PROPS[] = [
+  {
+    heading: "Technical Expertise",
+    data: [
+      {
+        title: "Portfolio Development",
+      },
+      {
+        title: "Patent Mining",
+      },
+      {
+        title: "Process Definition",
+      },
+      {
+        title: "IP Landscape Analysis",
+      },
+    ],
+  },
+  {
+    heading: "Tactics",
+    data: [
+      {
+        title: "Patent Drafting",
+      },
+      {
+        title: "",
+      },
+    ],
   },
 ];
