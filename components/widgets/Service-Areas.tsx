@@ -14,7 +14,7 @@ import {
 import Image from "next/image";
 import React from "react";
 import lightLogo from "@/public/images/home/slater-matsil-logo-light.png";
-import ServiceAreaCard from "./components/Service-Area-Card";
+import ServiceAreaCard from "./common/Service-Area-Card";
 const ServiceAreas = () => {
   const { details } = usePageData();
   return (
@@ -46,7 +46,7 @@ const ServiceAreas = () => {
           )}
         </Stack>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={4} sx={{ mt: 7 }}>
           {details?.homepage?.service_area?.section_Data.map((val, i) => (
             <Grid size={4} key={i}>
               <ServiceAreaCard

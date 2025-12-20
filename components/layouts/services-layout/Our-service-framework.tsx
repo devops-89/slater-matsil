@@ -3,8 +3,13 @@ import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import ServiceFrameworkCard from "./components/Service-framework-card";
+import { usePageData } from "@/store/usePageData";
 
 const OurserviceFramework = () => {
+  const { details } = usePageData();
+
+  const serviceFrameWorkData = details?.servicesPage?.service_framework_props;
+
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
@@ -37,7 +42,7 @@ const OurserviceFramework = () => {
                 },
               }}
             >
-              Our Service{" "}
+              {serviceFrameWorkData?.heading}{" "}
               <Typography
                 sx={{
                   fontSize: 50,
@@ -48,7 +53,7 @@ const OurserviceFramework = () => {
                 }}
                 component={"span"}
               >
-                Framework
+                {serviceFrameWorkData?.spanHeading}
               </Typography>
             </Typography>
             <Typography
@@ -62,17 +67,18 @@ const OurserviceFramework = () => {
                 mt: 5,
               }}
             >
-              Comprehensive intellectual property services organized across four
-              strategic pillars
+              {serviceFrameWorkData?.description}
             </Typography>
           </Grid>
         </Grid>
 
-        {/* <Grid container>
-          <Grid size={3}>
-            <ServiceFrameworkCard />
-          </Grid>
-        </Grid> */}
+        <Grid container spacing={4} sx={{ mt: 4 }}>
+          {serviceFrameWorkData?.data.map((val, i) => (
+            <Grid size={3} key={i}>
+              <ServiceFrameworkCard heading={val.heading} data={val.data} />
+            </Grid>
+          ))}
+        </Grid>
       </Container>
     </Box>
   );

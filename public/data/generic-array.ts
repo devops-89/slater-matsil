@@ -473,7 +473,47 @@ export const SERVICE_FRAMEWORK_CARD_DATA: SERVICE_FRAMEWORK_CARD_PROPS[] = [
         title: "Patent Drafting",
       },
       {
-        title: "",
+        title: "Patent Prosecution",
+      },
+      {
+        title: "TM Registration",
+      },
+      {
+        title: "International Fillings",
+      },
+    ],
+  },
+  {
+    heading: "Assertions",
+    data: [
+      {
+        title: "Valuation",
+      },
+      {
+        title: "Licensing",
+      },
+      {
+        title: "Litigation",
+      },
+      {
+        title: "Competitive Analysis",
+      },
+    ],
+  },
+  {
+    heading: "Defenses",
+    data: [
+      {
+        title: "Post Grant Challenges",
+      },
+      {
+        title: "Licensing",
+      },
+      {
+        title: "Litigation",
+      },
+      {
+        title: "Opinions",
       },
     ],
   },

@@ -18,6 +18,7 @@ import {
   INDUSTRIES_DATA,
   INSIGHTS_CARD_DATA,
   METRICS_DATA,
+  SERVICE_FRAMEWORK_CARD_DATA,
   STRENGTH_CARD_DATA,
 } from "./generic-array";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
@@ -805,6 +806,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       spanHeading: "Framework",
       description:
         "Comprehensive intellectual property services organized across four strategic pillars",
+      data: SERVICE_FRAMEWORK_CARD_DATA,
     },
   },
 };

@@ -5,7 +5,7 @@ import AboutSection from "./AboutSection";
 import ContactSection from "./ContactSection";
 import HeroSection from "./HeroSection";
 import MetricsSection from "./MetricsSection";
-import ServiceAreas from "./Service-Areas";
+import ServiceAreas from "../../widgets/Service-Areas";
 import Whoweserve from "./Who-We-Serve";
 
 const HomeLayout = () => {
