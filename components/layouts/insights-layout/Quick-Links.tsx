@@ -3,7 +3,7 @@ import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
-import QuickLinksCard from "./components/Quick-Links-Card";
+import QuickLinksCard from "../../widgets/common/Quick-Links-Card";
 
 const QuickLinks = () => {
   const { details } = usePageData();

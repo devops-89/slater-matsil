@@ -3,6 +3,7 @@ import { adelle, georgia, inter } from "@/utils/fonts";
 import { SERVICES_AREAS_DATA } from "@/utils/types";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const ServiceAreaCard = ({
@@ -10,6 +11,7 @@ const ServiceAreaCard = ({
   title,
   description,
   serialNumber,
+  slug,
 }: SERVICES_AREAS_DATA) => {
   return (
     <Box
@@ -24,18 +26,20 @@ const ServiceAreaCard = ({
       <Box sx={{ textAlign: "center" }}>
         <Image src={img} alt="" />
       </Box>
-      <Typography
-        sx={{
-          textAlign: "center",
-          color: COLORS.BLACK,
-          fontFamily: georgia.style.fontFamily,
-          fontSize: 20,
-          fontWeight: 700,
-          my: 2,
-        }}
-      >
-        {title}
-      </Typography>
+      <Link href={`/services/${slug}`} style={{ textDecoration: "none" }}>
+        <Typography
+          sx={{
+            textAlign: "center",
+            color: COLORS.BLACK,
+            fontFamily: georgia.style.fontFamily,
+            fontSize: 20,
+            fontWeight: 700,
+            my: 2,
+          }}
+        >
+          {title}
+        </Typography>
+      </Link>
       <Typography
         sx={{
           textAlign: "justify",

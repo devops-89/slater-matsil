@@ -3,7 +3,6 @@ import { Box, Container } from "@mui/material";
 import React from "react";
 import InsightsHeroSection from "./Insisghts-hero-section";
 import InsightsTabSection from "./Insights-tab-section";
-import QuickLinks from "./Quick-Links";
 
 const InsightsLayout = () => {
   return (
@@ -11,7 +10,6 @@ const InsightsLayout = () => {
       <InsightsHeroSection />
 
       <InsightsTabSection />
-      {/* <QuickLinks /> */}
     </Box>
   );
 };

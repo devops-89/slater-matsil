@@ -17,7 +17,6 @@ import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 const HeroSection = () => {
   const { details } = usePageData();
 
-  console.log("Hero Section Data:", details);
   return (
     <Box>
       <Box

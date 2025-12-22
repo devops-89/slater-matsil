@@ -2,10 +2,10 @@ import TabSwitching from "@/components/widgets/Tab-Switching";
 import { usePageData } from "@/store/usePageData";
 import { Box, Container, Grid } from "@mui/material";
 import React, { useState } from "react";
-import QuickLinks from "./Quick-Links";
 import CustomTabPanel from "@/components/widgets/Tab-panel";
 import InsightsCard from "./components/Insights-Card";
 import { INSIGHTS_TAB_DATA } from "@/utils/enum";
+import QuickLinks from "./Quick-Links";
 
 const InsightsTabSection = () => {
   const [value, setValue] = useState(0);

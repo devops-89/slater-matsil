@@ -54,6 +54,7 @@ const ServiceAreas = () => {
                 title={val.title}
                 description={val.description}
                 serialNumber={val.serialNumber}
+                slug={val.slug}
               />
             </Grid>
           ))}

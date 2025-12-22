@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import {
   Box,
@@ -9,78 +9,201 @@ import {
   Button,
   Container,
   Typography,
+  Grid,
 } from "@mui/material";
-import { Menu, ArrowDropDown } from "@mui/icons-material";
+import { Menu, ArrowDropDown, Close } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import logo from "@/public/images/logo/logo.png";
 import Link from "next/link";
 import { adelle } from "@/utils/fonts";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
-    <Box
-      sx={{
-        backgroundColor: COLORS.HEADER_BG,
-        height: 100,
-        display: "flex",
-        alignItems: "center",
-      }}
-    >
-      <Container maxWidth="lg">
-        <Stack
-          direction="row"
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <Link href="/">
-            <Image src={logo} alt="Slater Matsil logo" priority />
-          </Link>
-          <Stack direction="row" alignItems="center">
-            <IconButton>
-              <Menu sx={{ color: COLORS.PRIMARY_BLUE }} />
-            </IconButton>
-            <Typography
+    <>
+      <Box
+        sx={{
+          backgroundColor: COLORS.HEADER_BG,
+          height: 100,
+          display: "flex",
+          alignItems: "center",
+          position: "relative",
+          zIndex: 10,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Stack
+            direction="row"
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Link href="/">
+              <Image src={logo} alt="Slater Matsil logo" priority />
+            </Link>
+            <Stack direction="row" alignItems="center">
+              <IconButton onClick={handleMenuToggle}>
+                {menuOpen ? (
+                  <Close sx={{ color: COLORS.PRIMARY_BLUE }} />
+                ) : (
+                  <Menu sx={{ color: COLORS.PRIMARY_BLUE }} />
+                )}
+              </IconButton>
+              <Typography
+                sx={{
+                  color: COLORS.PRIMARY_GREEN,
+                  textTransform: "uppercase",
+                  fontFamily: adelle.style.fontFamily,
+                  fontSize: 18,
+                  fontWeight: 400,
+                  lineHeight: "32px",
+                }}
+              >
+                {menuOpen ? "CLOSE" : "MENU"}
+              </Typography>
+            </Stack>
+            <Box
               sx={{
-                color: COLORS.PRIMARY_GREEN,
-                textTransform: "uppercase",
-                fontFamily: adelle.style.fontFamily,
-                fontSize: 18,
-                fontWeight: 400,
-                lineHeight: "32px",
+                textTransform: "none",
+                backgroundColor: COLORS.PRIMARY_BLUE,
+                color: COLORS.WHITE,
+                borderRadius: 1,
+                px: 2.5,
+                py: 0.75,
+                "&:hover": { backgroundColor: COLORS.PRIMARY_BLUE },
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              MENU
-            </Typography>
+              <Typography
+                sx={{
+                  fontFamily: adelle.style.fontFamily,
+                  fontSize: 14,
+                  lineHeight: "32px",
+                  fontWeight: 400,
+                }}
+              >
+                English
+              </Typography>
+              <ArrowDropDown />
+            </Box>
           </Stack>
-          <Box
+        </Container>
+      </Box>
+
+      {/* Expanding Menu Overlay */}
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: "50%",
+          transform: menuOpen
+            ? "translateX(-50%) scaleX(1)"
+            : "translateX(-50%) scaleX(0)",
+          width: "100vw",
+          height: "100vh",
+          backgroundColor: COLORS.WHITE,
+          zIndex: menuOpen ? 9 : -1,
+          transition:
+            "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease",
+          transformOrigin: "center center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          opacity: menuOpen ? 1 : 0,
+          pointerEvents: menuOpen ? "auto" : "none",
+        }}
+      >
+        <Container maxWidth="lg">
+          {/* <Box
             sx={{
-              textTransform: "none",
-              backgroundColor: COLORS.PRIMARY_BLUE,
-              color: COLORS.WHITE,
-              borderRadius: 1,
-              px: 2.5,
-              py: 0.75,
-              "&:hover": { backgroundColor: COLORS.PRIMARY_BLUE },
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
-              justifyContent: "center",
+              gap: 4,
             }}
           >
             <Typography
               sx={{
+                color: COLORS.PRIMARY_BLUE,
                 fontFamily: adelle.style.fontFamily,
-                fontSize: 14,
-                lineHeight: "32px",
-                fontWeight: 400,
+                fontSize: 48,
+                fontWeight: 700,
               }}
             >
-              English
+              Navigation Menu
             </Typography>
-            <ArrowDropDown />
-          </Box>
-        </Stack>
-      </Container>
-    </Box>
+             <Stack spacing={3} alignItems="center">
+              <Link href="/" style={{ textDecoration: "none" }}>
+                <Typography
+                  sx={{
+                    color: COLORS.PRIMARY_BLUE,
+                    fontFamily: adelle.style.fontFamily,
+                    fontSize: 24,
+                    fontWeight: 400,
+                    "&:hover": { color: COLORS.PRIMARY_GREEN },
+                    transition: "color 0.3s ease",
+                  }}
+                >
+                  Home
+                </Typography>
+              </Link>
+              <Link href="/about" style={{ textDecoration: "none" }}>
+                <Typography
+                  sx={{
+                    color: COLORS.PRIMARY_BLUE,
+                    fontFamily: adelle.style.fontFamily,
+                    fontSize: 24,
+                    fontWeight: 400,
+                    "&:hover": { color: COLORS.PRIMARY_GREEN },
+                    transition: "color 0.3s ease",
+                  }}
+                >
+                  About
+                </Typography>
+              </Link>
+              <Link href="/services" style={{ textDecoration: "none" }}>
+                <Typography
+                  sx={{
+                    color: COLORS.PRIMARY_BLUE,
+                    fontFamily: adelle.style.fontFamily,
+                    fontSize: 24,
+                    fontWeight: 400,
+                    "&:hover": { color: COLORS.PRIMARY_GREEN },
+                    transition: "color 0.3s ease",
+                  }}
+                >
+                  Services
+                </Typography>
+              </Link>
+              <Link href="/contact" style={{ textDecoration: "none" }}>
+                <Typography
+                  sx={{
+                    color: COLORS.PRIMARY_BLUE,
+                    fontFamily: adelle.style.fontFamily,
+                    fontSize: 24,
+                    fontWeight: 400,
+                    "&:hover": { color: COLORS.PRIMARY_GREEN },
+                    transition: "color 0.3s ease",
+                  }}
+                >
+                  Contact
+                </Typography>
+              </Link>
+            </Stack>
+          </Box> */}
+
+          <Grid container>
+            <Grid size={3}></Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </>
   );
 };
 

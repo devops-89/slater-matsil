@@ -178,6 +178,7 @@ export interface SERVICES_AREAS_DATA {
   title: string;
   description: string;
   serialNumber: string;
+  slug?: string;
 }
 
 interface SERVICES_AREA_PROPS {

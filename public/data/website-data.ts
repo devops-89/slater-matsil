@@ -111,6 +111,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             "We are engineers. We are lawyers. We are businessmen. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals. ",
           serialNumber: "01",
+          slug: "patent-prosecution",
         },
         {
           img: serviceAreas2,
@@ -118,6 +119,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             "Patent assertions are seldom made lightly and are never received casually. Post grant challenges should be considered an almost inevitable response to an assertion of patent infringement. ",
           serialNumber: "02",
+          slug: "post-grant-challenges",
         },
         {
           img: serviceAreas3,
@@ -125,6 +127,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             "Multinational enterprises and the global economy add even more layers of complexity to patent infringement cases — yet Slater Matsil simplifies the experience for the clients we represent and the legal firms we assist. ",
           serialNumber: "03",
+          slug: "patent-litigation",
         },
         {
           img: serviceAreas4,
@@ -132,6 +135,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             "A strong patent licensing program taps into the financial potential of your existing innovations. This not only creates the potential for substantial revenue streams over many years — it can also help fund an ongoing legacy of invention. ",
           serialNumber: "04",
+          slug: "patent-licensing",
         },
         {
           img: serviceAreas5,
@@ -139,6 +143,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             "Adverse patent assertions have become an inevitable occurrence in today’s business environment. Some of our clients receive multiple adverse assertions in any given week.",
           serialNumber: "05",
+          slug: "adverse-patent-analysis",
         },
         {
           img: serviceAreas6,
@@ -146,6 +151,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             'Slater Matsil wears proudly the mantle of "strategic partner" bestowed by our clients. ',
           serialNumber: "06",
+          slug: "trusted-advice-counsel",
         },
       ],
     },

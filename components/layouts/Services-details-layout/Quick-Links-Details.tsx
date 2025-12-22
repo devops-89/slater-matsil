@@ -1,0 +1,217 @@
+import HeadingStar from "@/components/widgets/Heading-star";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import {
+  Box,
+  Container,
+  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Stack,
+  Typography,
+} from "@mui/material";
+import React from "react";
+import lightLogo from "@/home/slater-matsil-logo-light.png";
+import Image from "next/image";
+import global from "@/icons/globe.svg";
+import building from "@/icons/building.svg";
+import location from "@/icons/location.svg";
+import globeOutline from "@/icons/earth.svg";
+import QuickLinksCard from "@/components/widgets/common/Quick-Links-Card";
+import { Circle } from "@mui/icons-material";
+const QuickLinksDetails = () => {
+  const QUICk_LINKS_DATA = [
+    {
+      img: building,
+      title: "United States Patent and Trademark Office",
+    },
+    {
+      img: global,
+      title: "Japan Patent Office",
+    },
+    {
+      img: location,
+      title: "Canadian Intellictual Property Office",
+    },
+    {
+      img: globeOutline,
+      title: "European Patent Office",
+    },
+  ];
+
+  const listItem = [
+    {
+      label: "Patent Portfolio Management",
+    },
+    {
+      label:
+        "Patent Preparation and Prosecution before the United States Patent and Trademark Office",
+    },
+    {
+      label: "International Patent Applications ",
+    },
+    {
+      label: "Reexaminations and Reissues",
+    },
+    {
+      label: "Appeals",
+    },
+  ];
+
+  return (
+    <Box sx={{ py: 5 }}>
+      <Container maxWidth="lg">
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
+          <Box>
+            <HeadingStar title="Services" />
+            <Typography
+              sx={{
+                fontSize: 42,
+                fontFamily: tradeGothic.style.fontFamily,
+                fontWeight: 700,
+                textTransform: "capitalize",
+                width: "400px",
+                color: COLORS.PRIMARY_BLUE,
+                mt: 2,
+              }}
+            >
+              Patent Prosecution
+            </Typography>
+          </Box>
+          <Image src={lightLogo} alt="" width={400} />
+        </Stack>
+      </Container>
+
+      <Box
+        sx={{
+          backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
+          boxShadow: "0 2.23px 2.98px 0 rgba(0, 0, 0, 0.15)",
+          //   py: 5,
+          height: "306px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          mt: 5,
+        }}
+      >
+        <Container maxWidth="lg">
+          <Box>
+            <Typography
+              sx={{
+                color: COLORS.PRIMARY_BLUE,
+                fontSize: 28,
+                fontFamily: adelle.style.fontFamily,
+                fontWeight: 600,
+                lineHeight: "40px",
+                position: "relative",
+                zIndex: 1,
+                "&::after": {
+                  content: '""',
+                  position: "absolute",
+                  bottom: "2px",
+                  left: "-4px",
+                  right: "-8px",
+                  height: "20px",
+                  backgroundColor: COLORS.PRIMARY_GREEN,
+                  opacity: 0.4,
+                  zIndex: -1,
+                  transform: "rotate(-2deg)",
+                  width: "200px",
+                  borderRadius: 8,
+                  margin: "auto",
+                },
+                textAlign: "center",
+              }}
+            >
+              Quick Links
+            </Typography>
+
+            <Grid container sx={{ mt: 2 }}>
+              {QUICk_LINKS_DATA.map((val, i) => (
+                <Grid size={3} key={i}>
+                  <QuickLinksCard img={val.img} title={val.title} />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </Container>
+      </Box>
+
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Grid container spacing={6}>
+          <Grid size={6}>
+            <Typography
+              sx={{
+                color: COLORS.PRIMARY_BLUE,
+                fontSize: 30,
+                fontFamily: tradeGothic.style.fontFamily,
+                fontWeight: 700,
+                lineHeight: "58px",
+                textTransform: "capitalize",
+              }}
+            >
+              We are engineers. We are lawyers. We are businessmen. We are also
+              licensing professionals and IP litigators. Because we see the
+              world from many perspectives, we are able to craft patents that
+              contribute to IP portfolios that achieve your goals. 
+            </Typography>
+          </Grid>
+          <Grid size={6}>
+            <Typography
+              sx={{
+                color: COLORS.TEXT_PRIMARY_4,
+                fontFamily: adelle.style.fontFamily,
+                fontSize: 20,
+                fontWeight: 400,
+                lineHeight: "40px",
+              }}
+            >
+              Our firsthand experience as engineers and innovators gives you a
+              direct connection to legal professionals who understand complex
+              technologies and quickly grasp technical nuances. Lessons learned
+              from years of licensing and litigating patents inform every aspect
+              of our patent drafting and prosecution practice. This level of
+              precision and depth not only strengthens the application itself
+              — it also fortifies its defendability in the event of
+              infringement. Our patent prosecution services includ
+            </Typography>
+
+            <List>
+              {listItem.map((val, i) => (
+                <ListItem sx={{ alignItems: "flex-start" }} key={i}>
+                  <ListItemAvatar sx={{ minWidth: 20 }}>
+                    <Circle
+                      sx={{ color: COLORS.TEXT_PRIMARY_4, fontSize: 8 }}
+                    />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={val.label}
+                    slotProps={{
+                      primary: {
+                        sx: {
+                          color: COLORS.TEXT_PRIMARY_4,
+                          fontFamily: adelle.style.fontFamily,
+                          fontSize: 20,
+                          fontWeight: 400,
+                          lineHeight: "28px",
+                        },
+                      },
+                    }}
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Grid>
+        </Grid>
+      </Container>
+    </Box>
+  );
+};
+
+export default QuickLinksDetails;
