@@ -197,7 +197,7 @@ const Navbar = () => {
               </Link>
             </Stack>
           </Box> */}
-          {/* site map  */}
+          {/* site map */}
           <Grid container>
             <Grid size={3}></Grid>
           </Grid>
