@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import LoadingProvider from "@/components/providers/LoadingProvider";
+import { useMediaQuery } from "@mui/material";
+import MobileNavbar from "@/components/widgets/Mobile-Navbar";
 
 export default function RootLayout({
   children,
@@ -26,6 +28,8 @@ export default function RootLayout({
 
     return () => clearTimeout(timer);
   }, [setDetails]);
+
+  const phone = useMediaQuery("(max-width:600px)");
 
   return (
     <html lang="en">
@@ -55,7 +59,7 @@ export default function RootLayout({
         ) : (
           <LoadingProvider>
             <div>
-              <Navbar />
+              {phone ? <MobileNavbar /> : <Navbar />}
               {children}
               <Footer />
             </div>

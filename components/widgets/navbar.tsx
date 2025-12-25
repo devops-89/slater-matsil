@@ -10,12 +10,16 @@ import {
   Container,
   Typography,
   Grid,
+  List,
+  ListItemButton,
+  ListItemText,
 } from "@mui/material";
 import { Menu, ArrowDropDown, Close } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import logo from "@/public/images/logo/logo.png";
 import Link from "next/link";
-import { adelle } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import { FOOTER_DATA } from "@/public/data/generic-array";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -96,7 +100,6 @@ const Navbar = () => {
         </Container>
       </Box>
 
-      {/* Expanding Menu Overlay */}
       <Box
         sx={{
           position: "fixed",
@@ -120,86 +123,37 @@ const Navbar = () => {
         }}
       >
         <Container maxWidth="lg">
-          {/* <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 4,
-            }}
-          >
-            <Typography
-              sx={{
-                color: COLORS.PRIMARY_BLUE,
-                fontFamily: adelle.style.fontFamily,
-                fontSize: 48,
-                fontWeight: 700,
-              }}
-            >
-              Navigation Menu
-            </Typography>
-             <Stack spacing={3} alignItems="center">
-              <Link href="/" style={{ textDecoration: "none" }}>
-                <Typography
-                  sx={{
-                    color: COLORS.PRIMARY_BLUE,
-                    fontFamily: adelle.style.fontFamily,
-                    fontSize: 24,
-                    fontWeight: 400,
-                    "&:hover": { color: COLORS.PRIMARY_GREEN },
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  Home
-                </Typography>
-              </Link>
-              <Link href="/about" style={{ textDecoration: "none" }}>
-                <Typography
-                  sx={{
-                    color: COLORS.PRIMARY_BLUE,
-                    fontFamily: adelle.style.fontFamily,
-                    fontSize: 24,
-                    fontWeight: 400,
-                    "&:hover": { color: COLORS.PRIMARY_GREEN },
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  About
-                </Typography>
-              </Link>
-              <Link href="/services" style={{ textDecoration: "none" }}>
-                <Typography
-                  sx={{
-                    color: COLORS.PRIMARY_BLUE,
-                    fontFamily: adelle.style.fontFamily,
-                    fontSize: 24,
-                    fontWeight: 400,
-                    "&:hover": { color: COLORS.PRIMARY_GREEN },
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  Services
-                </Typography>
-              </Link>
-              <Link href="/contact" style={{ textDecoration: "none" }}>
-                <Typography
-                  sx={{
-                    color: COLORS.PRIMARY_BLUE,
-                    fontFamily: adelle.style.fontFamily,
-                    fontSize: 24,
-                    fontWeight: 400,
-                    "&:hover": { color: COLORS.PRIMARY_GREEN },
-                    transition: "color 0.3s ease",
-                  }}
-                >
-                  Contact
-                </Typography>
-              </Link>
-            </Stack>
-          </Box> */}
-          {/* site map */}
           <Grid container>
-            <Grid size={3}></Grid>
+            {FOOTER_DATA.map((val, i) => (
+              <Grid size={4} key={i}>
+                <Typography
+                  sx={{
+                    fontSize: 20,
+                    fontFamily: tradeGothic.style.fontFamily,
+                    fontWeight: 700,
+                  }}
+                >
+                  {val.HEADING}
+                </Typography>
+                <List>
+                  {val.DATA?.map((val, i) => (
+                    <ListItemButton sx={{ width: "fit-content" }}>
+                      <ListItemText
+                        primary={val.text}
+                        slotProps={{
+                          primary: {
+                            sx: {
+                              fontFamily: tradeGothic.style.fontFamily,
+                              fontWeight: 400,
+                            },
+                          },
+                        }}
+                      />
+                    </ListItemButton>
+                  ))}
+                </List>
+              </Grid>
+            ))}
           </Grid>
         </Container>
       </Box>

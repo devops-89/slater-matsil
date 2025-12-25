@@ -22,7 +22,7 @@ const HeroSection = () => {
       <Box
         sx={{
           backgroundImage: `url(${heroImage.src})`,
-          height: "110vh",
+          height: { lg: "110vh", xs: "60vh" },
           backgroundPosition: "center",
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
@@ -35,7 +35,7 @@ const HeroSection = () => {
           <Typography
             sx={{
               color: COLORS.WHITE,
-              fontSize: 53,
+              fontSize: { lg: 53, xs: 30 },
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
               textAlign: "center",
@@ -48,7 +48,7 @@ const HeroSection = () => {
           <Typography
             sx={{
               color: COLORS.WHITE,
-              fontSize: 25,
+              fontSize: { lg: 25, xs: 15 },
               fontFamily: adelle.style.fontFamily,
               fontStyle: "italic",
               fontWeight: 300,

@@ -12,9 +12,9 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
         sx={{
           color: "#2D2C2B",
           fontFamily: adelle.style.fontFamily,
-          fontSize: 14,
+          fontSize: { lg: 14, xs: 12 },
           fontWeight: 400,
-          lineHeight: "154px 140px 155.875px 130px",
+          lineHeight: { lg: "154px 140px 155.875px 130px", xs: "20px" },
         }}
       >
         {title}
@@ -25,9 +25,9 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
           sx={{
             color: COLORS.PRIMARY_BLUE,
             fontFamily: tradeGothic.style.fontFamily,
-            fontSize: 40,
+            fontSize: { lg: 40, xs: 20 },
             fontWeight: 700,
-            lineHeight: "55px",
+            lineHeight: { lg: "55px", xs: "20px" },
             letterSpacing: "-2px",
             textAlign: "center",
           }}
