@@ -16,7 +16,7 @@ const AboutSection = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="flex-start ">
-          <Grid size={{ xs: 12, md: 5 }}>
+          <Grid size={{ xs: 12, lg: 6 }}>
             <HeadingStar
               title={details?.homepage?.aboutSection?.sectionTitle || ""}
             />
@@ -47,7 +47,7 @@ const AboutSection = () => {
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, md: 7 }}>
+          <Grid size={{ xs: 12, lg: 6 }}>
             <Box>
               <Typography
                 sx={{
