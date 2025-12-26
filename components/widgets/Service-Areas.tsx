@@ -21,9 +21,10 @@ const ServiceAreas = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Stack
-          direction={"row"}
+          direction={{ lg: "row", xs: "column" }}
           alignItems={"center"}
           justifyContent={"space-between"}
+          spacing={{ lg: 0, xs: 2 }}
         >
           <Box>
             <HeadingStar
@@ -34,21 +35,25 @@ const ServiceAreas = () => {
                 color: COLORS.PRIMARY_BLUE,
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                fontSize: 42,
-                width: "70%",
+                fontSize: { lg: 42, xs: 35 },
+                width: { lg: "70%", xs: "100%" },
               }}
             >
               {details?.homepage?.service_area?.heading}
             </Typography>
           </Box>
           {details?.homepage?.service_area?.img && (
-            <Image src={details?.homepage?.service_area?.img} alt="" />
+            <Image
+              src={details?.homepage?.service_area?.img}
+              alt=""
+              style={{ width: "100%", height: "auto" }}
+            />
           )}
         </Stack>
 
         <Grid container spacing={4} sx={{ mt: 7 }}>
           {details?.homepage?.service_area?.section_Data.map((val, i) => (
-            <Grid size={4} key={i}>
+            <Grid size={{ lg: 4, xs: 12 }} key={i}>
               <ServiceAreaCard
                 img={val.img}
                 title={val.title}

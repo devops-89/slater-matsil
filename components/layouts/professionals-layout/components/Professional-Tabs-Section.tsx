@@ -6,6 +6,7 @@ import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
 import React, { useState } from "react";
 import ProfessionalLayoutSection from "../Professional-Section-layout";
+import WhoWeServelayout from "../../who-we-serve-layout";
 
 const ProfessionalsTabs = () => {
   const [value, setValue] = useState(0);
@@ -16,7 +17,7 @@ const ProfessionalsTabs = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={8} margin="auto">
+          <Grid size={{ lg: 8, xs: 12 }} margin="auto">
             <Tabs
               sx={{
                 backgroundColor: COLORS.PRIMARY_BLUE,
@@ -32,11 +33,11 @@ const ProfessionalsTabs = () => {
                 "& .MuiTab-root": {
                   color: COLORS.WHITE,
                   textAlign: "center",
-                  fontSize: 18,
+                  fontSize: { lg: 18, xs: 14 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 400,
                   lineHeight: "24px",
-                  width: "100%",
+                  width: { lg: "100%", xs: "auto" },
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -59,7 +60,9 @@ const ProfessionalsTabs = () => {
           </Grid>
         </Grid>
       </Container>
-      <CustomTabPanel value={value} index={0}></CustomTabPanel>
+      <CustomTabPanel value={value} index={0}>
+        <WhoWeServelayout />
+      </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
         <ProfessionalLayoutSection />
       </CustomTabPanel>

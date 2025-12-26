@@ -290,7 +290,7 @@ export const CAREER_HOME_DATA = [
 
 export const TABS_DATA = [
   {
-    label: TABS.FIRM,
+    label: TABS.WHO_WE_SERVE,
   },
   {
     label: TABS.PROFESSIONALS,

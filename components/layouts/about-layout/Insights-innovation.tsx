@@ -10,13 +10,17 @@ const InsightsInnovation = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={10} margin="auto" sx={{ textAlign: "center" }}>
+          <Grid
+            size={{ lg: 10, xs: 12 }}
+            margin="auto"
+            sx={{ textAlign: "center" }}
+          >
             <Typography
               sx={{
-                fontSize: 50,
+                fontSize: { lg: 50, xs: 30 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                lineHeight: "52px",
+                lineHeight: { lg: "52px", xs: "32px" },
                 color: COLORS.TEXT_TERTIARY,
               }}
             >
@@ -24,12 +28,12 @@ const InsightsInnovation = () => {
             </Typography>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { lg: 20, xs: 15 },
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
-                lineHeight: "28px",
+                lineHeight: { lg: "28px", xs: "25px" },
                 color: COLORS.TEXT_TERTIARY,
-                mt: 4,
+                mt: { lg: 4, xs: 2 },
               }}
             >
               {details?.aboutPage?.innovationInsights?.description}

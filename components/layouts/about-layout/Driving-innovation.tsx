@@ -12,13 +12,13 @@ const DrivingInnovation = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={5}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
-                fontSize: 50,
+                fontSize: { lg: 50, xs: 30 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                lineHeight: "65px",
+                lineHeight: { lg: "65px", xs: "45px" },
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
@@ -26,11 +26,11 @@ const DrivingInnovation = () => {
             </Typography>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { lg: 20, xs: 15 },
                 fontFamily: adelle.style.fontFamily,
                 color: COLORS.TEXT_TERTIARY,
                 fontWeight: 400,
-                lineHeight: "31px",
+                lineHeight: { lg: "31px", xs: "26px" },
                 textAlign: "justify",
                 mt: 2,
               }}
@@ -38,7 +38,7 @@ const DrivingInnovation = () => {
               {details?.aboutPage?.drivingInnovationEverywhere?.description}
             </Typography>
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Image
               src={
                 details?.aboutPage?.drivingInnovationEverywhere?.img ||

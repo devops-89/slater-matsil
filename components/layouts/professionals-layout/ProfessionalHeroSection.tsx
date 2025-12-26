@@ -12,15 +12,15 @@ const ProfessionalHeroSection = () => {
     <Box>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={9} margin="auto">
+          <Grid size={{ lg: 9, xs: 12 }} margin="auto">
             <Typography
               sx={{
-                fontSize: 50,
+                fontSize: { lg: 50, xs: 25 },
                 fontFamily: tradeGothic.style.fontFamily,
                 textAlign: "center",
                 color: COLORS.PRIMARY_BLUE,
                 fontWeight: 700,
-                lineHeight: "70px",
+                lineHeight: { lg: "70px", xs: "30px" },
               }}
             >
               {details?.firm_professionals?.professionals_hero_section?.heading}
@@ -30,10 +30,10 @@ const ProfessionalHeroSection = () => {
             <Typography
               sx={{
                 color: COLORS.TEXT_TERTIARY,
-                fontSize: 16,
+                fontSize: { lg: 16, xs: 14 },
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
-                lineHeight: "47px",
+                lineHeight: { lg: "47px", xs: "20px" },
                 textAlign: "center",
                 mt: 2,
               }}
@@ -47,7 +47,7 @@ const ProfessionalHeroSection = () => {
         </Grid>
 
         <Grid container spacing={10} sx={{ mt: 4 }}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             {details?.firm_professionals?.professionals_hero_section?.descriptions.map(
               (val, i) => (
                 <Typography
@@ -55,8 +55,8 @@ const ProfessionalHeroSection = () => {
                     color: COLORS.TEXT_TERTIARY,
                     fontFamily: adelle.style.fontFamily,
                     fontWeight: 400,
-                    lineHeight: "37px",
-                    fontSize: 18,
+                    lineHeight: { lg: "37px", xs: "20px" },
+                    fontSize: { lg: 18, xs: 16 },
                     textAlign: "justify",
                     mt: 1,
                   }}
@@ -67,13 +67,14 @@ const ProfessionalHeroSection = () => {
               )
             )}
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Image
               src={
                 details?.firm_professionals?.professionals_hero_section?.img ||
                 heroImage
               }
               alt=""
+              style={{ width: "100%", height: "auto" }}
             />
           </Grid>
         </Grid>

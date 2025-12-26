@@ -2,8 +2,7 @@ import StarBox from "@/components/widgets/common/Star-box";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { TAB_CARD_DATA_PROPS } from "@/utils/types";
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
-import React from "react";
+import { Box, Container, Grid, Typography } from "@mui/material";
 
 const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
   return (
@@ -14,10 +13,10 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
             <Typography
               sx={{
                 color: COLORS.PRIMARY_BLUE,
-                fontSize: 30,
+                fontSize: { lg: 30, xs: 20 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 600,
-                lineHeight: "42px",
+                lineHeight: { lg: "42px", xs: "30px" },
                 textTransform: "capitalize",
                 mt: 4,
               }}
@@ -25,14 +24,14 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
               {bigDescription}
             </Typography>
           </Grid>
-          <Grid size={10} margin="auto">
+          <Grid size={{ lg: 10, xs: 12 }} margin="auto">
             <Typography
               sx={{
-                fontSize: 22,
+                fontSize: { lg: 22, xs: 18 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 color: COLORS.TEXT_PRIMARY_4,
-                lineHeight: "35px",
+                lineHeight: { lg: "35px", xs: "28px" },
                 textTransform: "capitalize",
                 textAlign: "center",
                 mt: 5,
@@ -45,7 +44,7 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
 
         <Grid container spacing={5} mt={4}>
           {data.map((val, i) => (
-            <Grid size={6} key={i}>
+            <Grid size={{ lg: 6, xs: 12 }} key={i}>
               <StarBox bgColor={COLORS.PRIMARY_GREEN} />
 
               <Typography
@@ -64,27 +63,6 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
             </Grid>
           ))}
         </Grid>
-        {/* <Stack direction={"row"} alignItems={"flex-start"} spacing={2}>
-          {data.map((val, i) => (
-            <Box>
-              <StarBox bgColor={COLORS.PRIMARY_GREEN} />
-
-              <Typography
-                sx={{
-                  fontSize: 24,
-                  fontFamily: adelle.style.fontFamily,
-                  fontWeight: 500,
-                  lineHeight: "30px",
-                  textTransform: "capitalize",
-                  color: COLORS.TEXT_PRIMARY_4,
-                  mt: 2,
-                }}
-              >
-                {val.description}
-              </Typography>
-            </Box>
-          ))}
-        </Stack> */}
       </Container>
     </Box>
   );

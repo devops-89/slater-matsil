@@ -9,10 +9,10 @@ const WhoWeServeLayoutHero = () => {
   const { details } = usePageData();
   return (
     <div>
-      <Box sx={{ py: 10 }}>
+      <Box sx={{ py: { lg: 10, xs: 5 } }}>
         <Container maxWidth="lg">
-          <Grid container alignItems={"center"}>
-            <Grid size={6}>
+          <Grid container alignItems={"center"} spacing={{ lg: 0, xs: 5 }}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <Box
                 sx={{
                   backgroundColor: COLORS.PRIMARY_BLUE,
@@ -29,6 +29,7 @@ const WhoWeServeLayoutHero = () => {
                   letterSpacing: "-0.54px",
                   color: COLORS.WHITE,
                   textTransform: "uppercase",
+                  mb: 2,
                 }}
               >
                 {details?.whoWeServePage?.whoWeServepageHeroSection?.title}
@@ -36,11 +37,10 @@ const WhoWeServeLayoutHero = () => {
               <Typography
                 sx={{
                   color: COLORS.PRIMARY_BLUE,
-                  fontSize: 50,
+                  fontSize: { lg: 50, xs: 30 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
-                  lineHeight: "90px",
-                  // letterSpacing: "-2px",
+                  lineHeight: { lg: "90px", xs: "50px" },
                 }}
               >
                 {details?.whoWeServePage?.whoWeServepageHeroSection?.heading1}{" "}
@@ -48,7 +48,7 @@ const WhoWeServeLayoutHero = () => {
                   component={"span"}
                   sx={{
                     color: COLORS.PRIMARY_GREEN,
-                    fontSize: 50,
+                    fontSize: { lg: 50, xs: 30 },
                     fontFamily: tradeGothic.style.fontFamily,
                     fontWeight: 700,
                   }}
@@ -63,7 +63,7 @@ const WhoWeServeLayoutHero = () => {
                   component={"span"}
                   sx={{
                     color: COLORS.PRIMARY_GREEN,
-                    fontSize: 50,
+                    fontSize: { lg: 50, xs: 30 },
                     fontFamily: tradeGothic.style.fontFamily,
                     fontWeight: 700,
                   }}
@@ -75,7 +75,7 @@ const WhoWeServeLayoutHero = () => {
                 </Typography>
               </Typography>
             </Grid>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               {details?.whoWeServePage?.whoWeServepageHeroSection?.img && (
                 <Image
                   src={details?.whoWeServePage?.whoWeServepageHeroSection?.img}

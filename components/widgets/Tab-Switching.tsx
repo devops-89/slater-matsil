@@ -14,9 +14,9 @@ const TabSwitching = ({ value, onChange, data, sx }: TAB_SWITCHING_PROPS) => {
           "& .MuiTab-root": {
             color: COLORS.WHITE,
             textAlign: "center",
-            fontSize: 15,
+            fontSize: { lg: 15, xs: 14 },
             fontWeight: 600,
-            lineHeight: "32px",
+            lineHeight: { lg: "32px", xs: "22px" },
           },
           ...sx,
         }}

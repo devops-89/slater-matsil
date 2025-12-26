@@ -29,7 +29,7 @@ const AboutLayout = () => {
       <Container maxWidth="lg" sx={{ mt: 4 }}>
         <Grid container spacing={4}>
           {CAREER_HOME_DATA.map((val, i) => (
-            <Grid size={4}>
+            <Grid size={{ lg: 4, xs: 12 }} key={i}>
               <Box
                 sx={{
                   backgroundImage: `url(${val.img.src})`,
@@ -37,7 +37,7 @@ const AboutLayout = () => {
                   backgroundPosition: "center",
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
-                  width: 350,
+                  width: { lg: 350, xs: "100%" },
 
                   borderRadius: 4,
                   pb: 1,

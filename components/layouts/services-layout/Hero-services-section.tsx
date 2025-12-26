@@ -14,17 +14,17 @@ const HeroServicesSection = () => {
     <Box sx={{ mt: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             {details?.servicesPage?.pageTitle && (
               <HeadingStar title={details?.servicesPage?.pageTitle} />
             )}
             <Typography
               sx={{
-                fontSize: 45,
+                fontSize: { lg: 45, xs: 30 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 color: COLORS.BLACK,
-                lineHeight: "71px",
+                lineHeight: { lg: "71px", xs: "45px" },
                 letterSpacing: "-1.68px",
                 mt: 2,
               }}
@@ -32,11 +32,11 @@ const HeroServicesSection = () => {
               {service_heroSection_data?.heading1}{" "}
               <Typography
                 sx={{
-                  fontSize: 45,
+                  fontSize: { lg: 45, xs: 30 },
                   fontFamily: tradeGothic.style.fontFamily,
                   color: COLORS.PRIMARY_BLUE,
                   fontWeight: 700,
-                  lineHeight: "71px",
+                  lineHeight: { lg: "71px", xs: "45px" },
                   letterSpacing: "-1.68px",
                 }}
                 component={"span"}
@@ -46,18 +46,18 @@ const HeroServicesSection = () => {
             </Typography>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { lg: 20, xs: 16 },
                 fontFamily: adelle.style.fontFamily,
                 color: COLORS.TEXT_PRIMARY_4,
                 fontWeight: 400,
-                lineHeight: "30px",
+                lineHeight: { lg: "30px", xs: "24px" },
                 mt: 2,
               }}
             >
               {service_heroSection_data?.description}
             </Typography>
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             {service_heroSection_data?.img && (
               <Image
                 src={service_heroSection_data?.img}

@@ -21,6 +21,7 @@ export enum COLORS {
 export enum TABS {
   FIRM = "Firm",
   PROFESSIONALS = "Professionals",
+  WHO_WE_SERVE = "Who We Serve",
 }
 
 export enum PROFESSIONAL_TABS_DATA {

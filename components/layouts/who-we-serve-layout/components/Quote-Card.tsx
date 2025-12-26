@@ -1,4 +1,5 @@
-import { Box, Stack, Typography } from "@mui/material";
+"use client";
+import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 import upperQuote from "@/icons/Quote.svg";
 import lowerQuote from "@/icons/Quote-Inverted.svg";
@@ -7,6 +8,7 @@ import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { QUOTE_CARD_DATA } from "@/utils/types";
 const QuoteCard = ({ quote, author }: QUOTE_CARD_DATA) => {
+  const phone = useMediaQuery("(max-width:600px)");
   return (
     <Box sx={{ position: "relative" }}>
       <Stack direction={"row"} alignItems={"flex-start"} spacing={2}>
@@ -19,10 +21,10 @@ const QuoteCard = ({ quote, author }: QUOTE_CARD_DATA) => {
           sx={{
             textAlign: "center",
             color: COLORS.PRIMARY_BLUE,
-            fontSize: 24,
+            fontSize: { lg: 24, xs: 20 },
             fontFamily: adelle.style.fontFamily,
             fontWeight: 600,
-            lineHeight: "38px",
+            lineHeight: { lg: "38px", xs: "28px" },
             textTransform: "capitalize",
           }}
         >
@@ -31,14 +33,14 @@ const QuoteCard = ({ quote, author }: QUOTE_CARD_DATA) => {
         <Image
           src={lowerQuote}
           alt={""}
-          style={{ position: "absolute", right: 0, bottom: 40 }}
+          style={{ position: "absolute", right: 0, bottom: phone ? 80 : 40 }}
         />
       </Stack>
       <Typography
         sx={{
           textAlign: "center",
           color: COLORS.TEXT_PRIMARY_4,
-          mt: 5,
+          mt: { lg: 5, xs: 10 },
           fontWeight: 400,
           fontSize: 18,
           fontFamily: adelle.style.fontFamily,

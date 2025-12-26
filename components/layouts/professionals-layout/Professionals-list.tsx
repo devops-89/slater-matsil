@@ -52,7 +52,7 @@ const ProfessionalList = () => {
     <Box sx={{ mt: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={7} margin="auto">
+          <Grid size={{ lg: 7, xs: 12 }} margin="auto">
             <TextField
               placeholder="Search by First/Last Name"
               sx={{
@@ -90,14 +90,14 @@ const ProfessionalList = () => {
               alignItems={"center"}
               spacing={1}
               justifyContent={"center"}
-              sx={{ mt: 1 }}
+              sx={{ mt: 1, flexWrap: "wrap" }}
             >
               {ALPHABETS.map((letter) => (
                 <Typography
                   key={letter}
                   sx={{
                     cursor: "pointer",
-                    fontSize: 18,
+                    fontSize: { lg: 18, xs: 20 },
                     fontWeight: 500,
                     color:
                       alphabet === letter ? COLORS.WHITE : COLORS.TEXT_TERTIARY,
@@ -124,7 +124,7 @@ const ProfessionalList = () => {
         <Grid container spacing={5} rowSpacing={20} sx={{ mt: 5 }}>
           {data?.length ? (
             data?.map((val, i) => (
-              <Grid size={4} key={i}>
+              <Grid size={{ lg: 4, xs: 6 }} key={i}>
                 <ProfessionalsCard
                   img={val.img}
                   name={val.name}

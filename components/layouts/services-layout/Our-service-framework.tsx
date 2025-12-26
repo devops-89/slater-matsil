@@ -14,13 +14,13 @@ const OurserviceFramework = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={8} mx="auto">
+          <Grid size={{ lg: 8, xs: 12 }} mx="auto">
             <Typography
               sx={{
-                fontSize: 50,
+                fontSize: { lg: 50, xs: 35 },
                 fontWeight: 700,
                 fontFamily: tradeGothic.style.fontFamily,
-                lineHeight: "72px",
+                lineHeight: { lg: "72px", xs: "50px" },
                 color: COLORS.PRIMARY_BLUE,
                 textAlign: "center",
                 position: "relative",
@@ -36,7 +36,7 @@ const OurserviceFramework = () => {
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
-                  width: 800,
+                  width: { lg: 800, xs: 250 },
                   borderRadius: 8,
                   margin: "auto",
                 },
@@ -45,10 +45,10 @@ const OurserviceFramework = () => {
               {serviceFrameWorkData?.heading}{" "}
               <Typography
                 sx={{
-                  fontSize: 50,
+                  fontSize: { lg: 50, xs: 35 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
-                  lineHeight: "72px",
+                  lineHeight: { lg: "72px", xs: "50px" },
                   color: COLORS.BLACK,
                 }}
                 component={"span"}
@@ -59,10 +59,10 @@ const OurserviceFramework = () => {
             <Typography
               sx={{
                 color: COLORS.TEXT_PRIMARY_4,
-                fontSize: 24,
+                fontSize: { lg: 24, xs: 16 },
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
-                lineHeight: "36px",
+                lineHeight: { lg: "36px", xs: "24px" },
                 textAlign: "center",
                 mt: 5,
               }}
@@ -74,7 +74,7 @@ const OurserviceFramework = () => {
 
         <Grid container spacing={4} sx={{ mt: 4 }}>
           {serviceFrameWorkData?.data.map((val, i) => (
-            <Grid size={3} key={i}>
+            <Grid size={{ lg: 3, xs: 6 }} key={i}>
               <ServiceFrameworkCard heading={val.heading} data={val.data} />
             </Grid>
           ))}

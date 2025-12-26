@@ -3,12 +3,14 @@ import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 import banner from "@/about/heroImage.jpg";
 const AboutHerosection = () => {
   const { details } = usePageData();
+
+  const phone = useMediaQuery("(max-width:600px)");
   return (
     <Box sx={{ py: 8 }}>
       <Container maxWidth="lg">
@@ -17,10 +19,10 @@ const AboutHerosection = () => {
         />
 
         <Grid container sx={{ mt: 4 }} spacing={4}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
-                fontSize: 30,
+                fontSize: { lg: 30, xs: 25 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 600,
                 color: COLORS.PRIMARY_BLUE,
@@ -29,14 +31,14 @@ const AboutHerosection = () => {
               {details?.aboutPage?.heroSection?.heading}
             </Typography>
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: { lg: 20, xs: 15 },
                 fontFamily: adelle.style.fontFamily,
                 color: COLORS.TEXT_TERTIARY,
                 fontWeight: 400,
-                lineHeight: "31px",
+                lineHeight: { lg: "31px", xs: "26px" },
                 textAlign: "justify",
               }}
             >
@@ -50,7 +52,7 @@ const AboutHerosection = () => {
             alt=""
             style={{
               width: "100%",
-              height: "90vh",
+              height: phone ? "20vh" : "90vh",
               borderRadius: "20px",
               objectFit: "cover",
             }}

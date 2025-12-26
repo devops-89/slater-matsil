@@ -12,21 +12,21 @@ const Award = () => {
     <Box sx={{ pb: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={7}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Image
               src={details?.aboutPage?.AWARDSPROPS?.img || globe}
               alt=""
               style={{ width: "100%", height: "auto" }}
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
-                fontSize: "40px",
+                fontSize: { lg: "40px", xs: "30px" },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 letterSpacing: "-3px",
-                lineHeight: "55px",
+                lineHeight: { lg: "55px", xs: "35px" },
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
@@ -35,11 +35,11 @@ const Award = () => {
             <Typography
               sx={{
                 color: COLORS.BLACK,
-                fontSize: 35,
+                fontSize: { lg: 35, xs: 25 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 letterSpacing: "-2px",
-                lineHeight: "55px",
+                lineHeight: { lg: "55px", xs: "35px" },
                 ml: 1,
                 position: "relative",
                 zIndex: 1,
@@ -54,7 +54,8 @@ const Award = () => {
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
-                  width: 420,
+                  width: { lg: 420, xs: 300 },
+                  borderRadius: "20px",
                 },
               }}
             >
@@ -62,7 +63,7 @@ const Award = () => {
             </Typography>
             <Grid container>
               {details?.aboutPage?.AWARDSPROPS?.awards_img.map((val, i) => (
-                <Grid size={4} key={i}>
+                <Grid size={{ lg: 4, xs: 6 }} key={i}>
                   <Image
                     src={val.img}
                     alt=""

@@ -13,11 +13,12 @@ const NeedAssistance = () => {
               " linear-gradient(98deg, #0D5F6E 24.37%, #24735F 34.73%, #73B72B 70.21%)",
             borderRadius: "32px",
 
-            height: "565px",
+            height: { lg: "565px", xs: "420px" },
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
+            px: { lg: 0, xs: 5 },
           }}
         >
           <Typography
@@ -25,15 +26,15 @@ const NeedAssistance = () => {
               color: COLORS.WHITE,
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
-              fontSize: 50,
-              lineHeight: "72px",
+              fontSize: { lg: 50, xs: 35 },
+              lineHeight: { lg: "72px", xs: "50px" },
             }}
           >
             Need Strategic IP Guidance?
           </Typography>
           <Typography
             sx={{
-              fontSize: 18,
+              fontSize: { lg: 18, xs: 16 },
               fontFamily: adelle.style.fontFamily,
               fontWeight: 600,
               color: COLORS.WHITE,

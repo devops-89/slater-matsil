@@ -20,7 +20,7 @@ const WhoServeTabSection = () => {
     <Box sx={{ mt: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={10} mx="auto">
+          <Grid size={{ lg: 10, xs: 12 }} mx="auto">
             <TabSwitching
               value={value}
               onChange={handleChange}

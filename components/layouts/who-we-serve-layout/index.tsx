@@ -15,7 +15,7 @@ const WhoWeServelayout = () => {
       <WhoWeServeAbout />
       <Container maxWidth="lg">
         <Grid container sx={{ mt: 6 }}>
-          <Grid size={9} mx="auto">
+          <Grid size={{ lg: 9, xs: 12 }} mx="auto">
             <QuoteCard
               quote={
                 details?.whoWeServePage?.whoWeServeAboutSection?.quoteCardData

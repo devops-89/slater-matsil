@@ -6,6 +6,7 @@ import { COLORS } from "@/utils/enum";
 import careerimage from "@/career/hero-image.png";
 import Image from "next/image";
 import { usePageData } from "@/store/usePageData";
+import StaticIndicators from "@/components/widgets/common/Indicators-static";
 const HeroSection = () => {
   const { details } = usePageData();
   return (
@@ -15,56 +16,33 @@ const HeroSection = () => {
           backgroundImage: `url(${details?.careerPage?.career_hero_section?.bgImage})`,
           backgroundSize: "contain",
           backgroundPosition: "center",
-          height: "100px",
+          height: { lg: "100px", xs: "80px" },
           backgroundRepeat: "no-repeat",
         }}
       >
         <Typography
           sx={{
-            fontSize: 70,
+            fontSize: { lg: 70, xs: 50 },
             fontFamily: tradeGothic.style.fontFamily,
             textAlign: "center",
             color: COLORS.PRIMARY_BLUE,
             fontWeight: 700,
-            lineHeight: "80px",
+            lineHeight: { lg: "80px", xs: "50px" },
           }}
         >
           {details?.careerPage?.career_hero_section?.title}
         </Typography>
       </Box>
-      <Stack
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"center"}
-        spacing={2}
-      >
-        <Box
-          sx={{
-            backgroundColor: COLORS.PRIMARY_BLUE,
-            width: 10,
-            height: 10,
-            borderRadius: "50%",
-          }}
-        ></Box>
-
-        <Box
-          sx={{
-            backgroundColor: COLORS.PRIMARY_BLUE,
-            width: 50,
-            height: 10,
-            borderRadius: 20,
-          }}
-        ></Box>
-      </Stack>
+      <StaticIndicators sx={{ justifyContent: "center", mt: 4 }} />
       <Container maxWidth="lg">
         <Typography
           sx={{
-            fontSize: 20,
+            fontSize: { lg: 20, xs: 16 },
             fontFamily: tradeGothic.style.fontFamily,
             textAlign: "center",
             color: COLORS.PRIMARY_BLUE,
             fontWeight: 400,
-            lineHeight: "35px",
+            lineHeight: { lg: "35px", xs: "25px" },
             mt: 2,
           }}
         >
@@ -83,10 +61,10 @@ const HeroSection = () => {
               borderRadius: "43px",
               color: COLORS.WHITE,
               fontWeight: 500,
-              fontSize: 20,
+              fontSize: { lg: 20, xs: 16 },
               fontFamily: adelle.style.fontFamily,
               textTransform: "uppercase",
-              width: "379px",
+              width: { lg: "379px", xs: "279px" },
               height: "62px",
             }}
           >

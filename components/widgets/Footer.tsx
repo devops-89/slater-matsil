@@ -41,11 +41,11 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           {details?.homepage?.footerData?.footer_links.map((val, i) => (
-            <Grid size={2} key={i}>
+            <Grid size={{ lg: 2, xs: 6 }} key={i}>
               <FooterList DATA={val.DATA} HEADING={val.HEADING} />
             </Grid>
           ))}
-          <Grid size={3}>
+          <Grid size={{ lg: 3, xs: 12 }}>
             <Typography
               sx={{
                 color: COLORS.WHITE,
@@ -105,7 +105,7 @@ const Footer = () => {
               }}
             />
           </Grid>
-          <Grid size={3}>
+          <Grid size={{ lg: 3, xs: 12 }}>
             <Typography
               sx={{
                 color: COLORS.WHITE,

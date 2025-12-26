@@ -30,7 +30,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 letterSpacing: "-2px",
-                lineHeight: "55px",
+                lineHeight: { lg: "55px", xs: "30px" },
                 mb: 2,
                 mt: 2,
               }}
@@ -44,7 +44,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
                   letterSpacing: "-2px",
-                  lineHeight: "55px",
+                  lineHeight: { lg: "55px", xs: "30px" },
                   ml: 1,
                   position: "relative",
                   zIndex: 1,

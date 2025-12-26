@@ -10,15 +10,15 @@ const ContactSection = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={10}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <ContactForm />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
                 color: COLORS.LABEL_COLOR,
                 fontFamily: adelle.style.fontFamily,
-                fontSize: 16,
+                fontSize: { lg: 16, xs: 14 },
                 fontWeight: 400,
                 lineHeight: "26px",
               }}

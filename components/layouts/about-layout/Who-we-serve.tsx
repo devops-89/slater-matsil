@@ -9,6 +9,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Stack,
   Typography,
 } from "@mui/material";
 import Link from "next/link";
@@ -20,47 +21,53 @@ const WhoweServe = () => {
       <Box>
         <Container maxWidth="lg">
           <Grid container spacing={10}>
-            <Grid size={4}>
-              <Typography
-                sx={{
-                  color: COLORS.PRIMARY_BLUE,
-                  fontSize: 50,
-                  fontWeight: 700,
-                  lineHeight: "55px",
-                  letterSpacing: "-3px",
-                  fontFamily: tradeGothic.style.fontFamily,
-                }}
+            <Grid size={{ lg: 4, xs: 12 }}>
+              <Stack
+                direction={{ lg: "column", xs: "row" }}
+                spacing={{ lg: 0, xs: 2 }}
               >
-                {details?.aboutPage?.who_we_serve_props?.heading1}
-              </Typography>
-              <Typography
-                sx={{
-                  color: COLORS.BLACK,
-                  fontSize: 50,
-                  fontFamily: tradeGothic.style.fontFamily,
-                  fontWeight: 700,
-                  letterSpacing: "-2px",
-                  lineHeight: "55px",
-                  ml: 1,
-                  position: "relative",
-                  zIndex: 1,
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    bottom: "10px",
-                    left: "-4px",
-                    right: "-8px",
-                    height: "20px",
-                    backgroundColor: COLORS.PRIMARY_GREEN,
-                    opacity: 0.4,
-                    zIndex: -1,
-                    transform: "rotate(-2deg)",
-                    width: 250,
-                  },
-                }}
-              >
-                {details?.aboutPage?.who_we_serve_props?.heading2}
-              </Typography>
+                <Typography
+                  sx={{
+                    color: COLORS.PRIMARY_BLUE,
+                    fontSize: { lg: 50, xs: 30 },
+                    fontWeight: { lg: 700, xs: 500 },
+                    lineHeight: { lg: "55px", xs: "35px" },
+                    letterSpacing: "-3px",
+                    fontFamily: tradeGothic.style.fontFamily,
+                  }}
+                >
+                  {details?.aboutPage?.who_we_serve_props?.heading1}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: COLORS.BLACK,
+                    fontSize: { lg: 50, xs: 30 },
+                    fontFamily: tradeGothic.style.fontFamily,
+                    fontWeight: { lg: 700, xs: 500 },
+                    letterSpacing: "-2px",
+                    lineHeight: { lg: "55px", xs: "35px" },
+                    ml: 1,
+                    position: "relative",
+                    zIndex: 1,
+                    "&::after": {
+                      content: '""',
+                      position: "absolute",
+                      bottom: "10px",
+                      left: "-4px",
+                      right: "-8px",
+                      height: "20px",
+                      backgroundColor: COLORS.PRIMARY_GREEN,
+                      opacity: 0.4,
+                      zIndex: -1,
+                      transform: "rotate(-2deg)",
+                      width: { lg: 250, xs: 200 },
+                      borderRadius: "20px",
+                    },
+                  }}
+                >
+                  {details?.aboutPage?.who_we_serve_props?.heading2}
+                </Typography>
+              </Stack>
               <Typography
                 sx={{
                   fontFamily: adelle.style.fontFamily,
@@ -74,11 +81,11 @@ const WhoweServe = () => {
                 {details?.aboutPage?.who_we_serve_props?.description}
               </Typography>
             </Grid>
-            <Grid size={8}>
+            <Grid size={{ lg: 8, xs: 12 }}>
               <Grid container spacing={4}>
                 {details?.aboutPage?.who_we_serve_props?.section_data.map(
                   (val, i) => (
-                    <Grid size={5} key={i}>
+                    <Grid size={{ lg: 5, xs: 12 }} key={i}>
                       <List>
                         {val.dataList.map((item, index) => (
                           <Link

@@ -30,7 +30,7 @@ const ProfessionalsCard = ({
             backgroundColor: COLORS.WHITE,
             borderRadius: "16px",
             position: "absolute",
-            bottom: -100,
+            bottom: { lg: -100, xs: -120 },
             width: "80%",
             zIndex: 999,
             p: 1,
@@ -53,7 +53,7 @@ const ProfessionalsCard = ({
             >
               <Typography
                 sx={{
-                  fontSize: 20,
+                  fontSize: { lg: 20, xs: 15 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
                   color: COLORS.PRIMARY_BLUE,
@@ -65,7 +65,7 @@ const ProfessionalsCard = ({
             </Link>
             <Typography
               sx={{
-                fontSize: 18,
+                fontSize: { lg: 18, xs: 14 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 color: COLORS.PRIMARY_BLUE,

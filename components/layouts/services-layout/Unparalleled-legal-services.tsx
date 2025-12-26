@@ -17,7 +17,7 @@ const UnParalleledLegalService = () => {
           sx={{
             backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
             borderRadius: "32px",
-            height: "348px",
+            height: { lg: "348px", xs: "420px" },
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -25,13 +25,13 @@ const UnParalleledLegalService = () => {
           }}
         >
           <Grid container alignItems={"center"}>
-            <Grid size={8}>
+            <Grid size={{ lg: 8, xs: 12 }}>
               <Typography
                 sx={{
-                  fontSize: 25,
+                  fontSize: { lg: 25, xs: 20 },
                   color: COLORS.BLACK,
                   fontWeight: 700,
-                  lineHeight: "35px",
+                  lineHeight: { lg: "35px", xs: "25px" },
                   fontFamily: tradeGothic.style.fontFamily,
                   textAlign: "center",
                 }}
@@ -39,7 +39,7 @@ const UnParalleledLegalService = () => {
                 "{unparalled?.title}"
               </Typography>
             </Grid>
-            <Grid size={4}>
+            <Grid size={{ lg: 4, xs: 12 }}>
               {unparalled?.img && (
                 <Image
                   src={unparalled?.img}

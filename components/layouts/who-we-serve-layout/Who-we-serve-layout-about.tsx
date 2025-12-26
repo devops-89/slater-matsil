@@ -10,20 +10,20 @@ const WhoWeServeAbout = () => {
   const { details } = usePageData();
 
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 5 } }}>
       <Box>
         <Container maxWidth="lg">
           <Grid container spacing={4}>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <Typography
                 sx={{
-                  fontSize: 35,
+                  fontSize: { lg: 35, xs: 25 },
                   fontWeight: 700,
                   fontFamily: tradeGothic.style.fontFamily,
                   textTransform: "capitalize",
-                  lineHeight: "58px",
+                  lineHeight: { lg: "58px", xs: "35px" },
                   color: COLORS.PRIMARY_BLUE,
-                  mb: 20,
+                  mb: { lg: 20, xs: 5 },
                 }}
               >
                 {
@@ -39,16 +39,16 @@ const WhoWeServeAbout = () => {
                 />
               )}
             </Grid>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <StarBox bgColor={COLORS.PRIMARY_GREEN} />
               <Typography
                 sx={{
-                  fontSize: 20,
+                  fontSize: { lg: 20, xs: 15 },
                   fontWeight: 500,
                   fontFamily: adelle.style.fontFamily,
                   textTransform: "capitalize",
                   color: COLORS.PRIMARY_BLUE,
-                  mt: 2,
+                  mt: { lg: 2, xs: 2 },
                 }}
               >
                 {

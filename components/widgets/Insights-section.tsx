@@ -17,14 +17,14 @@ const InsightsSection = () => {
   return (
     <Box sx={{ py: 10 }}>
       <Grid container>
-        <Grid size={5} sx={{ px: 10 }}>
+        <Grid size={{ lg: 5, xs: 12 }} sx={{ px: { lg: 10, xs: 2 } }}>
           <HeadingStar
             title={details?.homepage?.insights_section?.sectionTitle || ""}
           />
 
           <Typography
             sx={{
-              fontSize: 30,
+              fontSize: { lg: 30, xs: 25 },
               fontFamily: tradeGothic.style.fontFamily,
               color: COLORS.PRIMARY_BLUE,
               fontWeight: 700,
@@ -37,7 +37,7 @@ const InsightsSection = () => {
             sx={{
               color: COLORS.BLACK,
               fontFamily: adelle.style.fontFamily,
-              fontSize: 18,
+              fontSize: { lg: 18, xs: 15 },
               fontWeight: 400,
               mt: 2,
             }}
@@ -76,13 +76,19 @@ const InsightsSection = () => {
             </IconButton>
           </Stack>
         </Grid>
-        <Grid size={7}>
+        <Grid size={{ lg: 7, xs: 12 }}>
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
-            slidesPerView={3}
-            spaceBetween={40}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+              },
+              1024: {
+                slidesPerView: 3,
+              },
+            }}
           >
             {details?.homepage?.insights_section?.insights_data.map(
               (val, i) => (

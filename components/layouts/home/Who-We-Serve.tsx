@@ -20,11 +20,11 @@ const Whoweserve = () => {
   return (
     <Box>
       <Grid container>
-        <Grid size={6}>
+        <Grid size={{ lg: 6, xs: 12 }}>
           <Box
             sx={{
               backgroundImage: `url(${details?.homepage?.who_we_serve?.leftSection?.heroImage})`,
-              height: "80vh",
+              height: { lg: "80vh", xs: "50vh" },
               backgroundPosition: "center",
               backgroundSize: "cover",
               display: "flex",
@@ -36,8 +36,8 @@ const Whoweserve = () => {
               sx={{
                 backgroundColor: "rgba(236, 248, 248, 0.20)",
                 backdropFilter: "blur(350px)",
-                width: 280,
-                height: 250,
+                width: { lg: 280, xs: 200 },
+                height: { lg: 250, xs: 200 },
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -48,6 +48,7 @@ const Whoweserve = () => {
                   <Image
                     src={details.homepage.who_we_serve.leftSection.small_logo}
                     alt="small logo"
+                    style={{ width: "100%", height: "auto" }}
                   />
                 )}
                 <Divider sx={{ borderColor: COLORS.WHITE, my: 2 }} />
@@ -57,7 +58,7 @@ const Whoweserve = () => {
                     textAlign: "center",
                     fontFamily: tradeGothic.style.fontFamily,
                     color: COLORS.WHITE,
-                    fontSize: 18,
+                    fontSize: { lg: 18, xs: 15 },
                     fontWeight: 700,
                   }}
                 >
@@ -70,7 +71,7 @@ const Whoweserve = () => {
                     margin: "auto",
                     mt: 2,
                     color: COLORS.WHITE,
-                    fontSize: 15,
+                    fontSize: { lg: 15, xs: 13 },
                     fontWeight: 700,
                     lineHeight: "26px",
                     fontFamily: tradeGothic.style.fontFamily,
@@ -87,15 +88,16 @@ const Whoweserve = () => {
               <Image
                 src={details.homepage.who_we_serve.leftSection.big_logo}
                 alt="big logo"
+                style={{ width: "100%", height: "auto" }}
               />
             </Box>
           )}
         </Grid>
-        <Grid size={6}>
+        <Grid size={{ lg: 6, xs: 12 }}>
           <Box
             sx={{
               backgroundColor: "#ECF2F3",
-              height: "80vh",
+              height: { lg: "80vh", xs: "70vh" },
               backgroundImage: `url(${details?.homepage?.who_we_serve?.rightSection?.bgImage})`,
               backgroundPosition: "top right",
               backgroundSize: "40%",
@@ -108,7 +110,7 @@ const Whoweserve = () => {
             <Box sx={{ px: 4 }}>
               <Typography
                 sx={{
-                  fontSize: 35,
+                  fontSize: { lg: 35, xs: 25 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
                   color: COLORS.PRIMARY_BLUE,
@@ -126,7 +128,7 @@ const Whoweserve = () => {
 
               <Typography
                 sx={{
-                  fontSize: 18,
+                  fontSize: { lg: 18, xs: 15 },
                   fontFamily: adelle.style.fontFamily,
                   color: COLORS.TEXT_PRIMARY,
                   fontWeight: 400,
@@ -150,7 +152,7 @@ const Whoweserve = () => {
                               primary: {
                                 color: COLORS.TEXT_SECONDARY,
                                 fontFamily: adelle.style.fontFamily,
-                                fontSize: 15,
+                                fontSize: { lg: 15, xs: 13 },
                                 fontWeight: 600,
                                 lineHeight: "28px",
                               },

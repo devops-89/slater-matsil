@@ -13,10 +13,10 @@ const WhyChooseUs = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={10} mx={"auto"}>
+          <Grid size={{ lg: 10, xs: 12 }} mx={"auto"}>
             <Typography
               sx={{
-                fontSize: 17,
+                fontSize: { lg: 17, xs: 15 },
                 fontFamily: adelle.style.fontFamily,
                 color: COLORS.TEXT_PRIMARY_4,
                 fontWeight: 600,
@@ -28,10 +28,10 @@ const WhyChooseUs = () => {
             </Typography>
             <Typography
               sx={{
-                fontSize: 50,
+                fontSize: { lg: 50, xs: 35 },
                 fontWeight: 700,
                 fontFamily: tradeGothic.style.fontFamily,
-                lineHeight: "72px",
+                lineHeight: { lg: "72px", xs: "50px" },
                 color: COLORS.PRIMARY_BLUE,
                 textAlign: "center",
                 position: "relative",
@@ -47,7 +47,7 @@ const WhyChooseUs = () => {
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
-                  width: 800,
+                  width: { lg: 800, xs: 200 },
                   borderRadius: 8,
                   margin: "auto",
                 },
@@ -56,10 +56,10 @@ const WhyChooseUs = () => {
               {strength?.heading}{" "}
               <Typography
                 sx={{
-                  fontSize: 50,
+                  fontSize: { lg: 50, xs: 35 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
-                  lineHeight: "72px",
+                  lineHeight: { lg: "72px", xs: "50px" },
                   color: COLORS.BLACK,
                 }}
                 component={"span"}
@@ -72,9 +72,9 @@ const WhyChooseUs = () => {
                 mt: 5,
                 textAlign: "center",
                 fontFamily: adelle.style.fontFamily,
-                fontSize: 20,
+                fontSize: { lg: 20, xs: 16 },
                 fontWeight: 400,
-                lineHeight: "36px",
+                lineHeight: { lg: "36px", xs: "24px" },
                 color: "#272727",
               }}
             >
@@ -86,10 +86,10 @@ const WhyChooseUs = () => {
         <Typography
           sx={{
             color: COLORS.BLACK,
-            fontSize: 35,
+            fontSize: { lg: 35, xs: 25 },
             fontFamily: tradeGothic.style.fontFamily,
             fontWeight: 700,
-            lineHeight: "60px",
+            lineHeight: { lg: "60px", xs: "40px" },
             mt: 5,
           }}
         >
@@ -98,7 +98,7 @@ const WhyChooseUs = () => {
 
         <Grid container spacing={4} mt={3}>
           {strength?.our_strength?.data.map((item, index) => (
-            <Grid size={3} key={index}>
+            <Grid size={{ lg: 3, xs: 12 }} key={index}>
               <StrengthCard
                 img={item.img}
                 title={item.title}
