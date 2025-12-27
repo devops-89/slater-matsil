@@ -12,14 +12,14 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
         sx={{
           color: "#2D2C2B",
           fontFamily: adelle.style.fontFamily,
-          fontSize: { lg: 14, xs: 12 },
+          fontSize: { lg: 14, xs: 10 },
           fontWeight: 400,
-          lineHeight: { lg: "154px 140px 155.875px 130px", xs: "20px" },
+          lineHeight: { lg: "154px 140px 155.875px 130px", xs: "18px" },
         }}
       >
         {title}
       </Typography>
-      <Stack direction="row" alignItems={"flex-start"} spacing={2} mt={2}>
+      <Stack direction="row" alignItems={"flex-start"} justifyContent={{ xs: "flex-start" }} spacing={{ lg: 2, xs: 1 }} mt={2}>
         <ArrowUpward sx={{ color: COLORS.PRIMARY_GREEN }} />
         <Typography
           sx={{

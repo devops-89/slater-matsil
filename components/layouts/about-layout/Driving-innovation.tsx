@@ -9,16 +9,16 @@ import drivingInnovation from "@/about/driving-vector.png";
 const DrivingInnovation = () => {
   const { details } = usePageData();
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 4 } }}>
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
-                fontSize: { lg: 50, xs: 30 },
+                fontSize: { lg: 50, xs: 25 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                lineHeight: { lg: "65px", xs: "45px" },
+                lineHeight: { lg: "65px", xs: "40px" },
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
@@ -30,7 +30,7 @@ const DrivingInnovation = () => {
                 fontFamily: adelle.style.fontFamily,
                 color: COLORS.TEXT_TERTIARY,
                 fontWeight: 400,
-                lineHeight: { lg: "31px", xs: "26px" },
+                lineHeight: { lg: "31px", xs: "20px" },
                 textAlign: "justify",
                 mt: 2,
               }}
@@ -45,7 +45,7 @@ const DrivingInnovation = () => {
                 drivingInnovation
               }
               alt=""
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "100%", height: "auto" }}
             />
           </Grid>
         </Grid>

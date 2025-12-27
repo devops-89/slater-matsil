@@ -18,7 +18,7 @@ const IndustriesWeServe = () => {
   return (
     <Box>
       <Container maxWidth="lg">
-        <Grid container spacing={10}>
+        <Grid container spacing={{ lg: 10, xs: 4 }}>
           <Grid size={{ lg: 4, xs: 12 }}>
             <Stack
               direction={{ lg: "column", xs: "row" }}
@@ -53,7 +53,7 @@ const IndustriesWeServe = () => {
                     bottom: "10px",
                     left: "-4px",
                     right: "-8px",
-                    height: "20px",
+                    height: { lg: "20px", xs: "10px" },
                     backgroundColor: COLORS.PRIMARY_GREEN,
                     opacity: 0.4,
                     zIndex: -1,
@@ -69,10 +69,10 @@ const IndustriesWeServe = () => {
             <Typography
               sx={{
                 fontFamily: adelle.style.fontFamily,
-                fontSize: 20,
+                fontSize: { lg: 20, xs: 15 },
                 textAlign: "justify",
                 fontWeight: 300,
-                lineHeight: "30px",
+                lineHeight: { lg: "30px", xs: "25px" },
                 mt: 3,
               }}
             >
@@ -91,11 +91,12 @@ const IndustriesWeServe = () => {
                             primary={item.label}
                             slotProps={{
                               primary: {
-                                fontSize: 20,
+                                fontSize: { lg: 20, xs: 15 },
                                 fontFamily: adelle.style.fontFamily,
                                 color: COLORS.PRIMARY_BLUE,
                                 fontWeight: 700,
-                                lineHeight: "45px",
+                                lineHeight: { lg: "45px", xs: "25px" },
+                                textTransform: "capitalize"
                               },
                             }}
                           />

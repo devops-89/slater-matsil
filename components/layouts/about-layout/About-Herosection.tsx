@@ -12,17 +12,17 @@ const AboutHerosection = () => {
 
   const phone = useMediaQuery("(max-width:600px)");
   return (
-    <Box sx={{ py: 8 }}>
+    <Box sx={{ py: { lg: 8, xs: 4 } }}>
       <Container maxWidth="lg">
         <HeadingStar
           title={details?.aboutPage?.heroSection?.sectionTitle || ""}
         />
 
-        <Grid container sx={{ mt: 4 }} spacing={4}>
+        <Grid container sx={{ mt: 4 }} spacing={{ lg: 4, xs: 2 }}>
           <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
-                fontSize: { lg: 30, xs: 25 },
+                fontSize: { lg: 30, xs: 20 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 600,
                 color: COLORS.PRIMARY_BLUE,
@@ -38,7 +38,7 @@ const AboutHerosection = () => {
                 fontFamily: adelle.style.fontFamily,
                 color: COLORS.TEXT_TERTIARY,
                 fontWeight: 400,
-                lineHeight: { lg: "31px", xs: "26px" },
+                lineHeight: { lg: "31px", xs: "20px" },
                 textAlign: "justify",
               }}
             >
@@ -46,13 +46,13 @@ const AboutHerosection = () => {
             </Typography>
           </Grid>
         </Grid>
-        <Box sx={{ mt: 10 }}>
+        <Box sx={{ mt: { lg: 10, xs: 5 } }}>
           <Image
             src={details?.aboutPage?.heroSection?.img || banner}
             alt=""
             style={{
               width: "100%",
-              height: phone ? "20vh" : "90vh",
+              height: phone ? "40vh" : "90vh",
               borderRadius: "20px",
               objectFit: "cover",
             }}

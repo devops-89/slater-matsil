@@ -17,15 +17,15 @@ const WhoWeServeLayoutHero = () => {
                 sx={{
                   backgroundColor: COLORS.PRIMARY_BLUE,
                   borderRadius: "999px",
-                  width: "231px",
-                  height: "50px",
+                  width: { lg: "231px", xs: "180px" },
+                  height: { lg: "50px", xs: "42px" },
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   fontFamily: adelle.style.fontFamily,
-                  fontSize: 18,
+                  fontSize: { lg: 18, xs: 15 },
                   fontWeight: 400,
-                  lineHeight: "24px",
+                  lineHeight: { lg: "24px", xs: "15px" },
                   letterSpacing: "-0.54px",
                   color: COLORS.WHITE,
                   textTransform: "uppercase",
@@ -37,7 +37,7 @@ const WhoWeServeLayoutHero = () => {
               <Typography
                 sx={{
                   color: COLORS.PRIMARY_BLUE,
-                  fontSize: { lg: 50, xs: 30 },
+                  fontSize: { lg: 50, xs: 25 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
                   lineHeight: { lg: "90px", xs: "50px" },

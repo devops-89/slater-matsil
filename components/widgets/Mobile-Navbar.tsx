@@ -4,6 +4,7 @@ import { COLORS } from "@/utils/enum";
 import { Box, Stack } from "@mui/material";
 import Hamburger from "hamburger-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 const MobileNavbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -16,7 +17,10 @@ const MobileNavbar = () => {
           justifyContent="space-between"
           sx={{ p: 2 }}
         >
-          <Image src={logo} alt="" width={180} />
+          <Link href="/">
+
+            <Image src={logo} alt="" width={180} />
+          </Link>
           <Hamburger
             toggled={isOpen}
             toggle={setOpen}

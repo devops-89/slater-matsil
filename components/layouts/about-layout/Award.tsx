@@ -9,7 +9,7 @@ import { COLORS } from "@/utils/enum";
 const Award = () => {
   const { details } = usePageData();
   return (
-    <Box sx={{ pb: 10 }}>
+    <Box sx={{ pb: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
         <Grid container spacing={7}>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -22,7 +22,7 @@ const Award = () => {
           <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
-                fontSize: { lg: "40px", xs: "30px" },
+                fontSize: { lg: "40px", xs: "25px" },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 letterSpacing: "-3px",
@@ -49,12 +49,12 @@ const Award = () => {
                   bottom: "10px",
                   left: "-4px",
                   right: "-8px",
-                  height: "20px",
+                  height: { lg: "20px", xs: "10px" },
                   backgroundColor: COLORS.PRIMARY_GREEN,
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
-                  width: { lg: 420, xs: 300 },
+                  width: { lg: 420, xs: 100 },
                   borderRadius: "20px",
                 },
               }}

@@ -24,10 +24,10 @@ const RedefiningPatent = () => {
             <Container>
               <Grid container alignItems={"center"}>
                 <Grid size={{ lg: 6, xs: 12 }}>
-                  <Grid container spacing={4}>
+                  <Grid container spacing={{ lg: 4, xs: 5 }}>
                     {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.metrics_data.map(
                       (val, i) => (
-                        <Grid size={{ lg: 6, xs: 6 }} key={i}>
+                        <Grid size={{ lg: 6, xs: 12 }} key={i}>
                           <MetricsCard title={val.title} count={val.count} />
                         </Grid>
                       )
@@ -63,7 +63,7 @@ const RedefiningPatent = () => {
                         bottom: "10px",
                         left: "-4px",
                         right: "-8px",
-                        height: "20px",
+                        height: { lg: "20px", xs: "10px" },
                         backgroundColor: COLORS.PRIMARY_GREEN,
                         opacity: 0.4,
                         zIndex: -1,

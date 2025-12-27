@@ -17,7 +17,7 @@ const InsightsInnovation = () => {
           >
             <Typography
               sx={{
-                fontSize: { lg: 50, xs: 30 },
+                fontSize: { lg: 50, xs: 25 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 lineHeight: { lg: "52px", xs: "32px" },

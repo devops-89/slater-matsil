@@ -17,10 +17,10 @@ const WhoweServe = () => {
   const { details } = usePageData();
 
   return (
-    <Box sx={{ pb: 10 }}>
+    <Box sx={{ pb: { lg: 10, xs: 5 } }}>
       <Box>
         <Container maxWidth="lg">
-          <Grid container spacing={10}>
+          <Grid container spacing={{ lg: 10, xs: 4 }}>
             <Grid size={{ lg: 4, xs: 12 }}>
               <Stack
                 direction={{ lg: "column", xs: "row" }}
@@ -55,12 +55,12 @@ const WhoweServe = () => {
                       bottom: "10px",
                       left: "-4px",
                       right: "-8px",
-                      height: "20px",
+                      height: { lg: "20px", xs: "10px" },
                       backgroundColor: COLORS.PRIMARY_GREEN,
                       opacity: 0.4,
                       zIndex: -1,
                       transform: "rotate(-2deg)",
-                      width: { lg: 250, xs: 200 },
+                      width: { lg: 250, xs: 150 },
                       borderRadius: "20px",
                     },
                   }}
@@ -71,10 +71,10 @@ const WhoweServe = () => {
               <Typography
                 sx={{
                   fontFamily: adelle.style.fontFamily,
-                  fontSize: 20,
+                  fontSize: { lg: 20, xs: 15 },
                   textAlign: "justify",
                   fontWeight: 300,
-                  lineHeight: "30px",
+                  lineHeight: { lg: "30px", xs: "25px" },
                   mt: 3,
                 }}
               >
@@ -101,11 +101,11 @@ const WhoweServe = () => {
                                 primary={item.label}
                                 slotProps={{
                                   primary: {
-                                    fontSize: 20,
+                                    fontSize: { lg: 20, xs: 15 },
                                     fontFamily: adelle.style.fontFamily,
                                     color: COLORS.PRIMARY_BLUE,
                                     fontWeight: 700,
-                                    lineHeight: "45px",
+                                    lineHeight: { lg: "45px", xs: "25px" },
                                   },
                                 }}
                               />

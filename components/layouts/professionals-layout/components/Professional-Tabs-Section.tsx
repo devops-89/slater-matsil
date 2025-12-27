@@ -14,7 +14,7 @@ const ProfessionalsTabs = () => {
     setValue(newValue);
   };
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 6 } }}>
       <Container maxWidth="lg">
         <Grid container>
           <Grid size={{ lg: 8, xs: 12 }} margin="auto">
@@ -36,7 +36,7 @@ const ProfessionalsTabs = () => {
                   fontSize: { lg: 18, xs: 14 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 400,
-                  lineHeight: "24px",
+                  lineHeight: { lg: "24px", xs: "15px" },
                   width: { lg: "100%", xs: "auto" },
                   display: "flex",
                   alignItems: "center",
