@@ -22,7 +22,7 @@ const OurserviceFramework = () => {
                 fontFamily: tradeGothic.style.fontFamily,
                 lineHeight: { lg: "72px", xs: "50px" },
                 color: COLORS.PRIMARY_BLUE,
-                textAlign: "center",
+                textAlign: { lg: "center", xs: "left" },
                 position: "relative",
                 zIndex: 1,
                 "&::after": {
@@ -31,14 +31,14 @@ const OurserviceFramework = () => {
                   bottom: "2px",
                   left: "-4px",
                   right: "-8px",
-                  height: "20px",
+                  height: { lg: "20px", xs: "15px" },
                   backgroundColor: COLORS.PRIMARY_GREEN,
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
                   width: { lg: 800, xs: 250 },
                   borderRadius: 8,
-                  margin: "auto",
+                  margin: { lg: "auto", xs: "0" },
                 },
               }}
             >
@@ -63,7 +63,7 @@ const OurserviceFramework = () => {
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
                 lineHeight: { lg: "36px", xs: "24px" },
-                textAlign: "center",
+                textAlign: { lg: "center", xs: "justify" },
                 mt: 5,
               }}
             >
@@ -74,7 +74,7 @@ const OurserviceFramework = () => {
 
         <Grid container spacing={4} sx={{ mt: 4 }}>
           {serviceFrameWorkData?.data.map((val, i) => (
-            <Grid size={{ lg: 3, xs: 6 }} key={i}>
+            <Grid size={{ lg: 3, xs: 12 }} key={i}>
               <ServiceFrameworkCard heading={val.heading} data={val.data} />
             </Grid>
           ))}

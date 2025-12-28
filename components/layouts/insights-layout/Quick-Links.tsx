@@ -12,10 +12,10 @@ const QuickLinks = () => {
       <Box>
         <Typography
           sx={{
-            fontSize: 50,
+            fontSize: { lg: 50, xs: 30 },
             fontWeight: 700,
             fontFamily: tradeGothic.style.fontFamily,
-            lineHeight: "72px",
+            lineHeight: { lg: "72px", xs: "30px" },
             color: COLORS.PRIMARY_BLUE,
             textAlign: "center",
             position: "relative",
@@ -26,12 +26,12 @@ const QuickLinks = () => {
               bottom: "10px",
               left: "-4px",
               right: "-8px",
-              height: "20px",
+              height: { lg: "20px", xs: "15px" },
               backgroundColor: COLORS.PRIMARY_GREEN,
               opacity: 0.4,
               zIndex: -1,
               transform: "rotate(-3deg)",
-              width: 350,
+              width: { lg: 350, xs: 250 },
               borderRadius: 8,
               margin: "auto",
             },
@@ -44,7 +44,7 @@ const QuickLinks = () => {
         <Container maxWidth="lg">
           <Grid container spacing={2}>
             {details?.insightsPage?.quickLinks?.data.map((val, i) => (
-              <Grid size={2.4} key={i}>
+              <Grid size={{ lg: 2.4, xs: 12 }} key={i}>
                 <QuickLinksCard title={val.title} img={val.img} />
               </Grid>
             ))}

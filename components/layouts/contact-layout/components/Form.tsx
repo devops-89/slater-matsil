@@ -16,7 +16,7 @@ const Form = () => {
     <Box>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <InputLabel
               sx={{
                 ...field_label_styles,
@@ -29,7 +29,7 @@ const Form = () => {
               placeholder="Enter your first name"
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <InputLabel
               sx={{
                 ...field_label_styles,
@@ -42,7 +42,7 @@ const Form = () => {
               placeholder="Enter your last name"
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <InputLabel
               sx={{
                 ...field_label_styles,
@@ -55,7 +55,7 @@ const Form = () => {
               placeholder="Enter your email address"
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <InputLabel
               sx={{
                 ...field_label_styles,
@@ -69,7 +69,7 @@ const Form = () => {
               placeholder="+1 (555) 123-4567"
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <InputLabel
               sx={{
                 ...field_label_styles,
@@ -82,7 +82,7 @@ const Form = () => {
               placeholder="Your company name"
             />
           </Grid>
-          <Grid size={12}>
+          <Grid size={{ lg: 12, xs: 12 }}>
             <InputLabel
               sx={{
                 ...field_label_styles,

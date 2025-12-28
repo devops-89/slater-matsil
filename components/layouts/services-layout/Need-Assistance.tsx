@@ -26,7 +26,7 @@ const NeedAssistance = () => {
               color: COLORS.WHITE,
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
-              fontSize: { lg: 50, xs: 35 },
+              fontSize: { lg: 50, xs: 30 },
               lineHeight: { lg: "72px", xs: "50px" },
             }}
           >

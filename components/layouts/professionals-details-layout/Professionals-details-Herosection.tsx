@@ -12,10 +12,12 @@ import {
   IconButton,
   Stack,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import Image from "next/image";
 
 const ProfessionalsDetailsHeroSection = () => {
+  const phone = useMediaQuery("(max-width:600px)");
   const { data } = useProfessionalDetailsData();
   const heroImg = data?.professionals_Details_HeroSection?.img;
 
@@ -50,31 +52,55 @@ const ProfessionalsDetailsHeroSection = () => {
   };
 
   return (
-    <Box sx={{ position: "relative", height: "85vh", overflow: "hidden" }}>
+    <Box
+      sx={{
+        position: "relative",
+        minHeight: { xs: "auto", lg: "85vh" },
+        height: { xs: "auto", lg: "85vh" },
+        overflow: "hidden",
+        pt: { xs: 5, lg: 0 },
+        pb: { xs: 0, lg: 0 },
+      }}
+    >
       <Box
         sx={{
           backgroundColor: COLORS.PRIMARY_BLUE,
-          width: "35%",
-          height: "100%",
+          width: { xs: "100%", lg: "35%" },
+          height: { xs: "300px", lg: "100%" },
           position: "absolute",
           right: 0,
           top: 0,
           zIndex: 0,
+          display: { xs: "none", md: "block" },
         }}
       ></Box>
       <Container
         maxWidth="lg"
-        sx={{ height: "100%", position: "relative", zIndex: 1 }}
+        sx={{
+          height: "100%",
+          position: "relative",
+          zIndex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
       >
         <Grid
           container
-          spacing={5}
+          spacing={{ xs: 1, md: 5 }}
           sx={{ height: "100%", alignItems: "center" }}
         >
-          <Grid size={6} sx={{ display: "flex", flexDirection: "column" }}>
+          <Grid
+            size={{ lg: 6, xs: 12 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              pt: { xs: 0, lg: 0 },
+            }}
+          >
             <Typography
               sx={{
-                fontSize: 60,
+                fontSize: { xs: 30, md: 48, lg: 60 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 lineHeight: "1.1",
@@ -88,7 +114,7 @@ const ProfessionalsDetailsHeroSection = () => {
               component="a"
               href={`mailto:${data?.professionals_Details_HeroSection?.email}`}
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 16, lg: 20 },
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
                 lineHeight: "32px",
@@ -103,14 +129,14 @@ const ProfessionalsDetailsHeroSection = () => {
               component="a"
               href={`tel:${data?.professionals_Details_HeroSection?.phoneNumber}`}
               sx={{
-                fontSize: 20,
+                fontSize: { xs: 16, lg: 20 },
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
                 lineHeight: "32px",
                 color: COLORS.PRIMARY_BLUE,
                 textDecoration: "none",
                 display: "block",
-                mb: 8,
+                mb: { xs: 2, lg: 8 },
               }}
             >
               {data?.professionals_Details_HeroSection?.phoneNumber}
@@ -152,29 +178,33 @@ const ProfessionalsDetailsHeroSection = () => {
             </Box>
           </Grid>
           <Grid
-            size={6}
+            size={{ lg: 6, xs: 12 }}
             sx={{
               height: "100%",
-              display: "flex",
-              alignItems: "flex-end",
+              display: { xs: "none", lg: "flex" },
+              alignItems: { xs: "center", lg: "flex-end" },
               justifyContent: "center",
               position: "relative",
+              minHeight: { xs: 300, lg: "auto" },
             }}
           >
             {heroImg && (
               <Box
                 sx={{
                   position: "relative",
-                  width: "140%",
-                  height: 650,
-                  right: "-10%",
+                  width: { lg: "140%", xs: "100%" },
+                  height: { lg: 650, xs: 400 },
+                  right: { lg: "-10%", xs: "0" },
                 }}
               >
                 <Image
                   src={heroImg}
                   alt={data?.professionals_Details_HeroSection?.name || ""}
                   fill
-                  style={{ objectFit: "contain", objectPosition: "bottom" }}
+                  style={{
+                    objectFit: phone ? "contain" : "contain", // refined
+                    objectPosition: usingMobileImageStyles(phone),
+                  }}
                   priority
                 />
               </Box>
@@ -184,6 +214,10 @@ const ProfessionalsDetailsHeroSection = () => {
       </Container>
     </Box>
   );
+};
+
+const usingMobileImageStyles = (isPhone: boolean) => {
+  return isPhone ? "center" : "bottom";
 };
 
 export default ProfessionalsDetailsHeroSection;

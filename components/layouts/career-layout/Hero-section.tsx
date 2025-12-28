@@ -10,7 +10,7 @@ import StaticIndicators from "@/components/widgets/common/Indicators-static";
 const HeroSection = () => {
   const { details } = usePageData();
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 5 } }}>
       <Box
         sx={{
           backgroundImage: `url(${details?.careerPage?.career_hero_section?.bgImage})`,
@@ -22,7 +22,7 @@ const HeroSection = () => {
       >
         <Typography
           sx={{
-            fontSize: { lg: 70, xs: 50 },
+            fontSize: { lg: 70, xs: 40 },
             fontFamily: tradeGothic.style.fontFamily,
             textAlign: "center",
             color: COLORS.PRIMARY_BLUE,
@@ -49,9 +49,9 @@ const HeroSection = () => {
           {details?.careerPage?.career_hero_section?.shortDescription}
         </Typography>
         <Stack
-          direction={"row"}
-          alignItems="center"
-          justifyContent={"center"}
+          direction={{ lg: "row", xs: "column" }}
+          alignItems={{ lg: "center", xs: "justify" }}
+          justifyContent={{ lg: "center", xs: "justify" }}
           spacing={3}
           sx={{ mt: 3 }}
         >
@@ -61,10 +61,10 @@ const HeroSection = () => {
               borderRadius: "43px",
               color: COLORS.WHITE,
               fontWeight: 500,
-              fontSize: { lg: 20, xs: 16 },
+              fontSize: { lg: 20, xs: 14 },
               fontFamily: adelle.style.fontFamily,
               textTransform: "uppercase",
-              width: { lg: "379px", xs: "279px" },
+              width: { lg: "379px", xs: "100%" },
               height: "62px",
             }}
           >
@@ -75,10 +75,10 @@ const HeroSection = () => {
               borderRadius: "43px",
               color: COLORS.PRIMARY_BLUE,
               fontWeight: 500,
-              fontSize: 20,
+              fontSize: { lg: 20, xs: 14 },
               fontFamily: adelle.style.fontFamily,
               textTransform: "uppercase",
-              width: "412px",
+              width: { lg: "412px", xs: "100%" },
               height: "62px",
               border: "1px solid " + COLORS.PRIMARY_BLUE,
             }}
@@ -101,12 +101,12 @@ const HeroSection = () => {
         <Box>
           <Typography
             sx={{
-              fontSize: 25,
+              fontSize: { lg: 25, xs: 20 },
               fontFamily: adelle.style.fontFamily,
               fontWeight: 500,
               color: COLORS.PRIMARY_BLUE,
               textAlign: "justify",
-              lineHeight: "45px",
+              lineHeight: { lg: "45px", xs: "25px" },
             }}
           >
             {details?.careerPage?.career_hero_section?.description}

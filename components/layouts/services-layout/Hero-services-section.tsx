@@ -11,7 +11,7 @@ const HeroServicesSection = () => {
 
   const service_heroSection_data = details?.servicesPage?.heroSection;
   return (
-    <Box sx={{ mt: 10 }}>
+    <Box sx={{ mt: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -62,7 +62,7 @@ const HeroServicesSection = () => {
               <Image
                 src={service_heroSection_data?.img}
                 alt=""
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: "100%", height: "auto", margin: "auto" }}
               />
             )}
           </Grid>

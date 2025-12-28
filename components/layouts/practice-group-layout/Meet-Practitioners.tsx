@@ -21,26 +21,26 @@ const MeetPractitioners = () => {
         <Typography
           sx={{
             color: COLORS.PRIMARY_BLUE,
-            fontSize: 30,
+            fontSize: { lg: 30, xs: 24 },
             fontFamily: tradeGothic.style.fontFamily,
             fontWeight: 700,
             letterSpacing: "-2px",
-            lineHeight: "55px",
+            lineHeight: { lg: "55px", xs: "24px" },
             ml: 1,
             position: "relative",
             zIndex: 1,
             "&::after": {
               content: '""',
               position: "absolute",
-              bottom: "10px",
+              bottom: { lg: "10px", xs: "8px" },
               left: "-4px",
               right: "-8px",
-              height: "20px",
+              height: { lg: "20px", xs: "16px" },
               backgroundColor: COLORS.PRIMARY_GREEN,
               opacity: 0.4,
               zIndex: -1,
-              transform: "rotate(-2deg)",
-              width: 350,
+              transform: "rotate(-1deg)",
+              width: { lg: 350, xs: 250 },
               borderRadius: 2,
             },
           }}
@@ -48,11 +48,11 @@ const MeetPractitioners = () => {
           {details?.practiceGroupPage?.meetPractitioners?.title}:
         </Typography>
         <Grid container>
-          <Grid size={9}>
+          <Grid size={{ lg: 9, xs: 12 }}>
             <List>
               {details?.practiceGroupPage?.meetPractitioners?.data.map(
                 (val, i) => (
-                  <ListItem sx={{ alignItems: "flex-start" }}>
+                  <ListItem sx={{ alignItems: "flex-start" }} disablePadding>
                     <ListItemAvatar sx={{ mt: 2, minWidth: 30 }}>
                       <Circle
                         sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 10 }}
@@ -64,20 +64,20 @@ const MeetPractitioners = () => {
                       slotProps={{
                         primary: {
                           sx: {
-                            fontSize: 24,
+                            fontSize: { lg: 24, xs: 20 },
                             fontFamily: tradeGothic.style.fontFamily,
                             fontWeight: 700,
-                            lineHeight: "40px",
+                            lineHeight: { lg: "40px", xs: "20px" },
                             textTransform: "capitalize",
                             color: COLORS.PRIMARY_BLUE,
                           },
                         },
                         secondary: {
                           sx: {
-                            fontSize: 16,
+                            fontSize: { lg: 16, xs: 14 },
                             fontFamily: tradeGothic.style.fontFamily,
                             fontWeight: 500,
-                            lineHeight: "30px",
+                            lineHeight: { lg: "30px", xs: "20px" },
                             textTransform: "capitalize",
                             color: COLORS.TEXT_PRIMARY_4,
                           },

@@ -19,7 +19,7 @@ const CareerTabSection = () => {
   return (
     <Box sx={{ mt: 5 }}>
       <Grid container>
-        <Grid size={8} margin="auto">
+        <Grid size={{ lg: 8, xs: 12 }} margin="auto">
           <Tabs
             sx={{
               backgroundColor: COLORS.PRIMARY_BLUE,
@@ -51,9 +51,18 @@ const CareerTabSection = () => {
               },
               display: "flex",
               alignItems: "center",
+              "& .MuiTabs-flexContainer": {
+                justifyContent: { lg: "space-around", xs: "flex-start" },
+              },
+              "& .MuiTabs-scrollButtons": {
+                color: COLORS.WHITE,
+              },
             }}
             onChange={handleChangeTab}
             value={value}
+            variant="scrollable"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
           >
             {data?.tabData.map((val, i) => (
               <Tab label={val?.title} key={i} />
@@ -64,7 +73,7 @@ const CareerTabSection = () => {
 
       <CustomTabPanel index={0} value={value}>
         <Grid container spacing={5} sx={{ mt: 3 }}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <StarPara
               description={
                 data?.tabContentData?.tab_attorney_content_Data?.data1
@@ -75,17 +84,17 @@ const CareerTabSection = () => {
                 ""
               }
               sx={{
-                fontSize: 35,
+                fontSize: { lg: 35, xs: 20 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                lineHeight: "50px",
+                lineHeight: { lg: "50px", xs: "25px" },
                 textTransform: "capitalize",
                 mt: 2,
                 color: COLORS.PRIMARY_BLUE,
               }}
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <StarPara
               description={
                 data?.tabContentData?.tab_attorney_content_Data?.data2
@@ -131,7 +140,7 @@ const CareerTabSection = () => {
       </CustomTabPanel>
       <CustomTabPanel index={1} value={value}>
         <Grid container spacing={5} sx={{ mt: 3 }}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <StarPara
               description={
                 data?.tabContentData?.tab_technical_advisor?.data1
@@ -141,17 +150,17 @@ const CareerTabSection = () => {
                 data?.tabContentData?.tab_technical_advisor?.data1?.title || ""
               }
               sx={{
-                fontSize: 35,
+                fontSize: { lg: 35, xs: 20 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                lineHeight: "50px",
+                lineHeight: { lg: "50px", xs: "25px" },
                 textTransform: "capitalize",
                 mt: 2,
                 color: COLORS.PRIMARY_BLUE,
               }}
             />
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             <StarPara
               description={
                 data?.tabContentData?.tab_technical_advisor?.data2

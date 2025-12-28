@@ -112,6 +112,7 @@ const ProfessionalList = () => {
                     width: 30,
                     height: 30,
                     borderRadius: 2,
+                    display: { lg: "block", xs: "none" },
                   }}
                   onClick={() => searchByAlphabets(letter)}
                 >
@@ -124,7 +125,7 @@ const ProfessionalList = () => {
         <Grid container spacing={5} rowSpacing={20} sx={{ mt: 5 }}>
           {data?.length ? (
             data?.map((val, i) => (
-              <Grid size={{ lg: 4, xs: 6 }} key={i}>
+              <Grid size={{ lg: 4, xs: 12 }} key={i}>
                 <ProfessionalsCard
                   img={val.img}
                   name={val.name}

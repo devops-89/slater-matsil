@@ -28,7 +28,7 @@ const ServiceFrameworkCard = ({
         <Typography
           sx={{
             color: COLORS.BLACK,
-            fontSize: { lg: 20, xs: 16 },
+            fontSize: { lg: 20, xs: 20 },
             fontFamily: adelle.style.fontFamily,
             fontWeight: 600,
             lineHeight: { lg: "43px", xs: "26px" },
@@ -54,7 +54,7 @@ const ServiceFrameworkCard = ({
                   primary: {
                     sx: {
                       color: COLORS.TEXT_PRIMARY_4,
-                      fontSize: { lg: 18, xs: 16 },
+                      fontSize: { lg: 18, xs: 18 },
                       fontFamily: adelle.style.fontFamily,
                       fontWeight: 400,
                       lineHeight: { lg: "26px", xs: "20px" },

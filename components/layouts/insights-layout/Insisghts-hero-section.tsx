@@ -8,12 +8,12 @@ const InsightsHeroSection = () => {
   const { details } = usePageData();
 
   return (
-    <Box sx={{ my: 5 }}>
+    <Box sx={{ my: { lg: 5, xs: 3 } }}>
       <Container maxWidth="lg">
         <Box
           sx={{
             backgroundImage: `url(${details?.insightsPage?.heroSectionData?.img})`,
-            height: "500px",
+            height: { lg: "500px", xs: "300px" },
             width: "100%",
             backgroundSize: "cover",
             backgroundPosition: "center",
@@ -36,22 +36,23 @@ const InsightsHeroSection = () => {
                 sx={{
                   color: COLORS.PRIMARY_GREEN,
                   textAlign: "center",
-                  fontSize: 70,
+                  fontSize: { lg: 70, xs: 40 },
                   fontWeight: 700,
                   fontFamily: tradeGothic.style.fontFamily,
-                  lineHeight: "72px",
+                  lineHeight: { lg: "72px", xs: "40px" },
                 }}
               >
                 {details?.insightsPage?.heroSectionData?.heading}
               </Typography>
               <Typography
                 sx={{
-                  fontSize: 25,
+                  fontSize: { lg: 25, xs: 20 },
                   fontFamily: adelle.style.fontFamily,
                   textAlign: "center",
                   fontWeight: 600,
-                  lineHeight: "72px",
+                  lineHeight: { lg: "72px", xs: "25px" },
                   color: COLORS.PRIMARY_BLUE_LIGHT,
+                  mt: { xs: 2, lg: 0 },
                 }}
               >
                 {details?.insightsPage?.heroSectionData?.subHeading}

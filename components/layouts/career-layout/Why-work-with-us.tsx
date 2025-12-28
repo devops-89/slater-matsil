@@ -15,10 +15,10 @@ const WhyWorkWithus = () => {
       <Container maxWidth="lg">
         <Typography
           sx={{
-            fontSize: 64,
+            fontSize: { lg: 64, xs: 45 },
             fontFamily: tradeGothic.style.fontFamily,
             fontWeight: 700,
-            lineHeight: "72px",
+            lineHeight: { lg: "72px", xs: "50px" },
           }}
         >
           {data?.firstTitle}
@@ -26,10 +26,11 @@ const WhyWorkWithus = () => {
             component={"span"}
             sx={{
               color: COLORS.PRIMARY_GREEN,
-              fontSize: 64,
+              fontSize: { lg: 64, xs: 45 },
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
-              lineHeight: "72px",
+              lineHeight: { lg: "72px", xs: "50px" },
+              ml: { lg: 0, xs: 1 },
             }}
           >
             {data?.secondTitle}
@@ -74,7 +75,7 @@ const WhyWorkWithus = () => {
         </Typography>
 
         <Grid container sx={{ mt: 4 }} spacing={4} alignItems={"center"}>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             {data?.section_img && (
               <Image
                 src={data?.section_img}
@@ -83,7 +84,7 @@ const WhyWorkWithus = () => {
               />
             )}
           </Grid>
-          <Grid size={6}>
+          <Grid size={{ lg: 6, xs: 12 }}>
             {data?.work_list_data.map((val, i) => (
               <Box sx={{ mb: 2, ml: i % 2 == 0 ? 0 : 3 }}>
                 <WorkList title={val.title} key={i} />

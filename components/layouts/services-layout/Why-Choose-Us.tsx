@@ -10,7 +10,7 @@ const WhyChooseUs = () => {
 
   const strength = details?.servicesPage.why_choose_strength_props;
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
         <Grid container>
           <Grid size={{ lg: 10, xs: 12 }} mx={"auto"}>
@@ -28,12 +28,12 @@ const WhyChooseUs = () => {
             </Typography>
             <Typography
               sx={{
-                fontSize: { lg: 50, xs: 35 },
+                fontSize: { lg: 50, xs: 40 },
                 fontWeight: 700,
                 fontFamily: tradeGothic.style.fontFamily,
                 lineHeight: { lg: "72px", xs: "50px" },
                 color: COLORS.PRIMARY_BLUE,
-                textAlign: "center",
+                textAlign: { lg: "center", xs: "left" },
                 position: "relative",
                 zIndex: 1,
                 "&::after": {
@@ -42,21 +42,21 @@ const WhyChooseUs = () => {
                   bottom: "2px",
                   left: "-4px",
                   right: "-8px",
-                  height: "20px",
+                  height: { lg: "20px", xs: "15px" },
                   backgroundColor: COLORS.PRIMARY_GREEN,
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
-                  width: { lg: 800, xs: 200 },
+                  width: { lg: 800, xs: 280 },
                   borderRadius: 8,
-                  margin: "auto",
+                  margin: { lg: "auto", xs: "0" },
                 },
               }}
             >
               {strength?.heading}{" "}
               <Typography
                 sx={{
-                  fontSize: { lg: 50, xs: 35 },
+                  fontSize: { lg: 50, xs: 40 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
                   lineHeight: { lg: "72px", xs: "50px" },
@@ -70,7 +70,7 @@ const WhyChooseUs = () => {
             <Typography
               sx={{
                 mt: 5,
-                textAlign: "center",
+                textAlign: { lg: "center", xs: "justify" },
                 fontFamily: adelle.style.fontFamily,
                 fontSize: { lg: 20, xs: 16 },
                 fontWeight: 400,

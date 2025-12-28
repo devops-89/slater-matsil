@@ -46,10 +46,11 @@ const PracticeGroupSection = () => {
         <Box>
           <Stack
             direction={"row"}
-            alignItems={"center"}
+            alignItems={{ lg: "center", xs: "flex-start" }}
             spacing={2}
             flexWrap={"wrap"}
             rowGap={2}
+            justifyContent={{ xs: "flex-start" }}
           >
             {details?.practiceGroupPage?.practiceGroup_section?.tabData.map(
               (val, i) => (
@@ -65,7 +66,7 @@ const PracticeGroupSection = () => {
                         : COLORS.PRIMARY_BLUE,
                     border: "2px solid" + COLORS.PRIMARY_BLUE,
                     borderRadius: "50px",
-                    fontSize: 16,
+                    fontSize: { lg: 16, xs: 12 },
                     fontFamily: adelle.style.fontFamily,
                     fontWeight: 500,
                     textTransform: "uppercase",
@@ -78,31 +79,31 @@ const PracticeGroupSection = () => {
           </Stack>
         </Box>
       </Container>
-      <Box sx={{ backgroundColor: "#F8FCF5", p: 4, mt: 4 }}>
+      <Box sx={{ backgroundColor: "#F8FCF5", p: 4, mt: { lg: 4, xs: 2 } }}>
         <Container maxWidth="lg">
           <Grid container alignItems={"center"} spacing={4} sx={{ mt: 4 }}>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <Typography
                 sx={{
-                  fontSize: 24,
+                  fontSize: { lg: 24, xs: 18 },
                   fontFamily: tradeGothic.style.fontFamily,
                   color: COLORS.PRIMARY_BLUE,
                   fontWeight: 700,
-                  lineHeight: "40px",
+                  lineHeight: { lg: "40px", xs: "28px" },
                   textTransform: "capitalize",
                 }}
               >
                 {data?.description1}
               </Typography>
             </Grid>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <StarBox bgColor={COLORS.PRIMARY_GREEN} />
               <Typography
                 sx={{
-                  fontSize: 20,
+                  fontSize: { lg: 20, xs: 16 },
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 500,
-                  lineHeight: "30px",
+                  lineHeight: { lg: "30px", xs: "24px" },
                   textTransform: "capitalize",
                   color: COLORS.TEXT_PRIMARY_4,
                   mt: 2,

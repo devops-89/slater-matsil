@@ -7,14 +7,14 @@ import React from "react";
 const Map = () => {
   const { details } = usePageData();
   return (
-    <Box sx={{ color: COLORS.PRIMARY_BLUE_LIGHT, py: 10 }}>
+    <Box sx={{ color: COLORS.PRIMARY_BLUE_LIGHT, py: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
         <Typography
           sx={{
-            fontSize: 50,
+            fontSize: { lg: 50, xs: 25 },
             fontWeight: 700,
             fontFamily: tradeGothic.style.fontFamily,
-            lineHeight: "72px",
+            lineHeight: { lg: "72px", xs: "25px" },
             color: COLORS.PRIMARY_BLUE,
             textAlign: "center",
             position: "relative",
@@ -25,12 +25,12 @@ const Map = () => {
               bottom: "2px",
               left: "-4px",
               right: "-8px",
-              height: "20px",
+              height: { lg: "20px", xs: "15px" },
               backgroundColor: COLORS.PRIMARY_GREEN,
               opacity: 0.4,
               zIndex: -1,
               transform: "rotate(-2deg)",
-              width: 450,
+              width: { lg: 450, xs: 200 },
               borderRadius: 8,
               margin: "auto",
             },
@@ -42,11 +42,11 @@ const Map = () => {
           sx={{
             color: COLORS.TEXT_PRIMARY_4,
             textAlign: "center",
-            width: "850px",
+            width: { lg: "850px", xs: "100%" },
             mx: "auto",
             fontWeight: 400,
-            lineHeight: "36px",
-            fontSize: 20,
+            lineHeight: { lg: "36px", xs: "24px" },
+            fontSize: { lg: 20, xs: 16 },
             fontFamily: adelle.style.fontFamily,
             mt: 3,
           }}

@@ -15,10 +15,10 @@ const FindUsHere = () => {
         <Box>
           <Typography
             sx={{
-              fontSize: 50,
+              fontSize: { lg: 50, xs: 25 },
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
-              lineHeight: "72px",
+              lineHeight: { lg: "72px", xs: "25px" },
               color: COLORS.PRIMARY_BLUE,
             }}
           >
@@ -33,7 +33,7 @@ const FindUsHere = () => {
           <Grid container spacing={3} sx={{ mt: 3 }}>
             {details?.contactPage?.contact_card_props?.contact_card_data.map(
               (val, i) => (
-                <Grid size={4} key={i}>
+                <Grid size={{ lg: 4, xs: 12 }} key={i}>
                   <ContactCard
                     heading={val.heading}
                     Icon={val.Icon}

@@ -13,16 +13,16 @@ const OpenRoles = () => {
   const data = details?.careerPage?.career_open_roles;
 
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={11} margin={"auto"}>
+          <Grid size={{ lg: 11, xs: 12 }} margin={"auto"}>
             <Typography
               sx={{
-                fontSize: 50,
+                fontSize: { lg: 50, xs: 30 },
                 fontWeight: 700,
                 fontFamily: tradeGothic.style.fontFamily,
-                lineHeight: "72px",
+                lineHeight: { lg: "72px", xs: "40px" },
                 color: COLORS.PRIMARY_BLUE,
                 textAlign: "center",
                 position: "relative",
@@ -33,12 +33,12 @@ const OpenRoles = () => {
                   bottom: "10px",
                   left: "-4px",
                   right: "-8px",
-                  height: "20px",
+                  height: { lg: "20px", xs: "10px" },
                   backgroundColor: COLORS.PRIMARY_GREEN,
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-1deg)",
-                  width: 800,
+                  width: { lg: 800, xs: 250 },
                   borderRadius: 8,
                   margin: "auto",
                 },
@@ -48,7 +48,7 @@ const OpenRoles = () => {
             </Typography>
             <Typography
               sx={{
-                fontSize: 24,
+                fontSize: { lg: 24, xs: 16 },
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
                 color: COLORS.TEXT_PRIMARY_24,
@@ -63,10 +63,10 @@ const OpenRoles = () => {
         <Typography
           sx={{
             mt: 3,
-            fontSize: 24,
+            fontSize: { lg: 24, xs: 16 },
             fontFamily: adelle.style.fontFamily,
             fontWeight: 500,
-            lineHeight: "40px",
+            lineHeight: { lg: "40px", xs: "24px" },
             color: COLORS.PRIMARY_BLUE,
           }}
         >

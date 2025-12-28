@@ -99,9 +99,9 @@ export const field_label_styles = {
 export const para_field_styles = {
   color: COLORS.TEXT_PRIMARY_4,
   fontFamily: adelle.style.fontFamily,
-  fontSize: 24,
+  fontSize: { lg: 24, xs: 16 },
   fontWeight: 400,
-  lineHeight: "36px",
+  lineHeight: { lg: "36px", xs: "24px" },
 };
 
 export const contact_field_styles = {

@@ -40,7 +40,7 @@ const WhoWeServeLayoutHero = () => {
                   fontSize: { lg: 50, xs: 25 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
-                  lineHeight: { lg: "90px", xs: "50px" },
+                  lineHeight: { lg: "90px", xs: "40px" },
                 }}
               >
                 {details?.whoWeServePage?.whoWeServepageHeroSection?.heading1}{" "}
@@ -48,7 +48,7 @@ const WhoWeServeLayoutHero = () => {
                   component={"span"}
                   sx={{
                     color: COLORS.PRIMARY_GREEN,
-                    fontSize: { lg: 50, xs: 30 },
+                    fontSize: { lg: 50, xs: 25 },
                     fontFamily: tradeGothic.style.fontFamily,
                     fontWeight: 700,
                   }}
@@ -63,7 +63,7 @@ const WhoWeServeLayoutHero = () => {
                   component={"span"}
                   sx={{
                     color: COLORS.PRIMARY_GREEN,
-                    fontSize: { lg: 50, xs: 30 },
+                    fontSize: { lg: 50, xs: 25 },
                     fontFamily: tradeGothic.style.fontFamily,
                     fontWeight: 700,
                   }}

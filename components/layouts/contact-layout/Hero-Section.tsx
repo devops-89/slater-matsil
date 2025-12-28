@@ -13,14 +13,14 @@ const HeroSection = () => {
           sx={{
             backgroundColor: "#ECF8F8",
             borderRadius: "32px",
-            padding: 10,
+            padding: { lg: 10, xs: 5 },
           }}
         >
           <Grid container alignItems={"center"}>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <Typography
                 sx={{
-                  fontSize: 72,
+                  fontSize: { lg: 72, xs: 40 },
                   fontFamily: tradeGothic.style.fontFamily,
                   color: COLORS.PRIMARY_BLUE,
                   lineHeight: "72px",
@@ -33,10 +33,10 @@ const HeroSection = () => {
                 sx={{
                   color: COLORS.TEXT_PRIMARY_4,
                   fontFamily: adelle.style.fontFamily,
-                  fontSize: 24,
+                  fontSize: { lg: 24, xs: 16 },
                   fontWeight: 600,
-                  lineHeight: "36px",
-                  mt: 3,
+                  lineHeight: { lg: "36px", xs: "24px" },
+                  mt: { lg: 3, xs: 2 },
                 }}
               >
                 {details?.contactPage?.hero_section_data?.description}
@@ -54,7 +54,7 @@ const HeroSection = () => {
                 ></Box>
               </Stack>
             </Grid>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               {details?.contactPage?.hero_section_data?.img && (
                 <Image
                   src={details?.contactPage?.hero_section_data?.img}

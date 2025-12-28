@@ -13,7 +13,7 @@ const WhoWeServeAbout = () => {
     <Box sx={{ py: { lg: 10, xs: 5 } }}>
       <Box>
         <Container maxWidth="lg">
-          <Grid container spacing={4}>
+          <Grid container spacing={{ lg: 4, xs: 2 }}>
             <Grid size={{ lg: 6, xs: 12 }}>
               <Typography
                 sx={{
@@ -21,7 +21,7 @@ const WhoWeServeAbout = () => {
                   fontWeight: 700,
                   fontFamily: tradeGothic.style.fontFamily,
                   textTransform: "capitalize",
-                  lineHeight: { lg: "58px", xs: "35px" },
+                  lineHeight: { lg: "58px", xs: "30px" },
                   color: COLORS.PRIMARY_BLUE,
                   mb: { lg: 20, xs: 5 },
                 }}

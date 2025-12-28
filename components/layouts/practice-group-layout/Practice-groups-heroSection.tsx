@@ -9,20 +9,20 @@ const PracticeGroupsHeroSection = () => {
   const data = details?.practiceGroupPage?.practiceGroup_hero_section;
   return (
     <div>
-      <Box sx={{ py: 10 }}>
+      <Box sx={{ py: { lg: 10, xs: 5 } }}>
         <Container maxWidth="lg">
           <Grid container alignItems={"center"}>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <Box
                 sx={{
                   backgroundColor: COLORS.PRIMARY_BLUE,
-                  p: "12px 24px",
+                  p: { lg: "12px 24px", xs: "12px" },
                   width: "fit-content",
                   color: COLORS.WHITE,
                   textTransform: "uppercase",
                   borderRadius: "40px",
                   fontFamily: adelle.style.fontFamily,
-                  fontSize: 18,
+                  fontSize: { lg: 18, xs: 12 },
                   fontWeight: 400,
                   lineHeight: "24px",
                   letterSpacing: "-0.54px",
@@ -36,25 +36,25 @@ const PracticeGroupsHeroSection = () => {
 
               <Typography
                 sx={{
-                  fontSize: 40,
+                  fontSize: { lg: 40, xs: 24 },
                   color: COLORS.PRIMARY_BLUE,
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
-                  lineHeight: "84px",
+                  lineHeight: { lg: "84px", xs: "30px" },
                   mt: 3,
                 }}
               >
                 {data?.heading}
               </Typography>
             </Grid>
-            <Grid size={6}>
+            <Grid size={{ lg: 6, xs: 12 }}>
               <Typography
                 sx={{
-                  fontSize: 20,
+                  fontSize: { lg: 20, xs: 16 },
                   color: COLORS.TEXT_PRIMARY_4,
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 400,
-                  lineHeight: "37px",
+                  lineHeight: { lg: "37px", xs: "20px" },
                   mt: 3,
                 }}
               >
@@ -63,8 +63,8 @@ const PracticeGroupsHeroSection = () => {
             </Grid>
           </Grid>
 
-          <Grid container spacing={2}>
-            <Grid size={7}>
+          <Grid container spacing={2} sx={{ mt: { lg: 0, xs: 3 } }}>
+            <Grid size={{ lg: 7, xs: 12 }}>
               {data?.firstHeroImage && (
                 <Image
                   src={data?.firstHeroImage}
@@ -78,7 +78,7 @@ const PracticeGroupsHeroSection = () => {
                 />
               )}
             </Grid>
-            <Grid size={5}>
+            <Grid size={{ lg: 5, xs: 12 }}>
               <Stack spacing={2}>
                 {data?.secondHeroImage && (
                   <Image
@@ -111,10 +111,10 @@ const PracticeGroupsHeroSection = () => {
           </Grid>
           <Typography
             sx={{
-              fontSize: 25,
+              fontSize: { lg: 25, xs: 16 },
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
-              lineHeight: "58px",
+              lineHeight: { lg: "58px", xs: "20px" },
               mt: 5,
               textTransform: "capitalize",
               color: COLORS.PRIMARY_BLUE,

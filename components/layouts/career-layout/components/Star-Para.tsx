@@ -15,8 +15,8 @@ const StarPara = ({ title, description, sx }: Props) => {
         <Box
           sx={{
             backgroundColor: COLORS.PRIMARY_GREEN,
-            width: 40,
-            height: 40,
+            width: { lg: 40, xs: 30 },
+            height: { lg: 40, xs: 30 },
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -27,7 +27,7 @@ const StarPara = ({ title, description, sx }: Props) => {
         </Box>
         <Typography
           sx={{
-            fontSize: 16,
+            fontSize: { lg: 16, xs: 12 },
             fontFamily: adelle.style.fontFamily,
             textTransform: "uppercase",
             fontWeight: 400,

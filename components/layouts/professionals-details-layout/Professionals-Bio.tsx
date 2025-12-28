@@ -16,7 +16,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           {data?.map((val, i) => (
-            <Grid size={6} key={i}>
+            <Grid size={{ lg: 6, xs: 12 }} key={i}>
               <Box
                 sx={{
                   backgroundColor: COLORS.PRIMARY_GREEN,
@@ -32,7 +32,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
               </Box>
               <Typography
                 sx={{
-                  fontSize: 17,
+                  fontSize: { lg: 17, xs: 15 },
                   color: COLORS.TEXT_PRIMARY_24,
                   mt: 3,
                   fontWeight: 600,
@@ -48,7 +48,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                       component="li"
                       key={index}
                       sx={{
-                        fontSize: 17,
+                        fontSize: { lg: 17, xs: 15 },
                         color: COLORS.TEXT_PRIMARY_24,
                         fontWeight: 600,
                         mb: 1,

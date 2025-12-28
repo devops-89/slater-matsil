@@ -11,7 +11,7 @@ const Followus = () => {
         <Container maxWidth="lg">
           <Typography
             sx={{
-              fontSize: 50,
+              fontSize: { lg: 50, xs: 25 },
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
               color: COLORS.PRIMARY_BLUE,

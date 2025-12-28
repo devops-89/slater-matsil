@@ -32,10 +32,10 @@ const InsightsTabSection = () => {
   return (
     <Box>
       <Box sx={{ backgroundColor: "#ECF8F8", pb: 3 }}>
-        <Box sx={{ padding: "30px" }}>
+        <Box sx={{ padding: { lg: "30px", xs: "20px" } }}>
           <Container maxWidth="lg">
             <Grid container>
-              <Grid size={6} margin="auto">
+              <Grid size={{ lg: 6, xs: 12 }} margin="auto">
                 <TabSwitching
                   value={value}
                   onChange={handleChange}
@@ -52,7 +52,7 @@ const InsightsTabSection = () => {
           <Container maxWidth="lg" sx={{ my: 5 }}>
             <Grid container spacing={3}>
               {insightsData?.map((val, i) => (
-                <Grid size={4} key={i}>
+                <Grid size={{ lg: 4, xs: 12 }} key={i}>
                   <InsightsCard
                     title={val.title}
                     category={val.category}

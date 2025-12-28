@@ -34,8 +34,8 @@ const TabSection = () => {
   return (
     <Box sx={{ pb: 10 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={5} sx={{ mt: 20 }}>
-          <Grid size={10} margin="auto">
+        <Grid container spacing={5} sx={{ mt: { lg: 20, xs: 5 } }}>
+          <Grid size={{ lg: 10, xs: 12 }} margin="auto">
             <TabSwitching
               value={value}
               onChange={handleChange}

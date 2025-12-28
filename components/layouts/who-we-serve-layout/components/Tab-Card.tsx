@@ -13,10 +13,10 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
             <Typography
               sx={{
                 color: COLORS.PRIMARY_BLUE,
-                fontSize: { lg: 30, xs: 20 },
+                fontSize: { lg: 30, xs: 18 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 600,
-                lineHeight: { lg: "42px", xs: "30px" },
+                lineHeight: { lg: "42px", xs: "25px" },
                 textTransform: "capitalize",
                 mt: 4,
               }}
@@ -27,11 +27,11 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
           <Grid size={{ lg: 10, xs: 12 }} margin="auto">
             <Typography
               sx={{
-                fontSize: { lg: 22, xs: 18 },
+                fontSize: { lg: 22, xs: 16 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 color: COLORS.TEXT_PRIMARY_4,
-                lineHeight: { lg: "35px", xs: "28px" },
+                lineHeight: { lg: "35px", xs: "20px" },
                 textTransform: "capitalize",
                 textAlign: "center",
                 mt: 5,
@@ -49,13 +49,13 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
 
               <Typography
                 sx={{
-                  fontSize: 24,
+                  fontSize: { lg: 24, xs: 16 },
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 500,
-                  lineHeight: "30px",
+                  lineHeight: { lg: "30px", xs: "20px" },
                   textTransform: "capitalize",
                   color: COLORS.TEXT_PRIMARY_4,
-                  mt: 2,
+                  mt: { lg: 2, xs: 1 },
                 }}
               >
                 {val.description}

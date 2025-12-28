@@ -7,16 +7,16 @@ import { usePageData } from "@/store/usePageData";
 const ContactForm = () => {
   const { details } = usePageData();
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
         <Stack alignItems={"center"} spacing={2}>
           <Box sx={{ position: "relative", display: "inline-block" }}>
             <Typography
               sx={{
-                fontSize: 50,
+                fontSize: { lg: 50, xs: 30 },
                 fontWeight: 700,
                 fontFamily: tradeGothic.style.fontFamily,
-                lineHeight: "72px",
+                lineHeight: { lg: "72px", xs: "30px" },
                 color: COLORS.PRIMARY_BLUE,
                 textAlign: "center",
                 position: "relative",
@@ -25,16 +25,16 @@ const ContactForm = () => {
                   content: '""',
                   position: "absolute",
                   bottom: "10px",
-                  left: "-4px",
+                  left: { lg: "-4px", xs: "auto" },
                   right: "-8px",
-                  height: "20px",
+                  height: { lg: "20px", xs: "10px" },
                   backgroundColor: COLORS.PRIMARY_GREEN,
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
-                  width: 600,
+                  width: { lg: 600, xs: "100%" },
                   borderRadius: 8,
-                  //   margin: "auto",
+                  margin: { lg: 0, xs: "auto" },
                 },
               }}
             >
@@ -43,10 +43,10 @@ const ContactForm = () => {
                 component={"span"}
                 sx={{
                   color: COLORS.BLACK,
-                  fontSize: 50,
+                  fontSize: { lg: 50, xs: 30 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
-                  lineHeight: "72px",
+                  lineHeight: { lg: "72px", xs: "30px" },
                 }}
               >
                 {details?.contactPage?.form_section?.heading2}
@@ -57,14 +57,14 @@ const ContactForm = () => {
 
         <Typography
           sx={{
-            fontSize: 24,
+            fontSize: { lg: 24, xs: 16 },
             fontFamily: adelle.style.fontFamily,
-            width: 860,
+            width: { lg: 860, xs: "100%" },
             margin: "auto",
             color: COLORS.TEXT_PRIMARY_4,
             textAlign: "center",
             fontWeight: 400,
-            lineHeight: "36px",
+            lineHeight: { lg: "36px", xs: "24px" },
             mt: 2,
           }}
         >
@@ -73,7 +73,7 @@ const ContactForm = () => {
 
         <Box sx={{ mt: 8 }}>
           <Grid container>
-            <Grid size={10} margin="auto">
+            <Grid size={{ lg: 10, xs: 12 }} margin="auto">
               <Form />
             </Grid>
           </Grid>
