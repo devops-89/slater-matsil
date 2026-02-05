@@ -53,7 +53,7 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 500,
                   lineHeight: { lg: "30px", xs: "20px" },
-                  textTransform: "capitalize",
+                  // textTransform: "capitalize",
                   color: COLORS.TEXT_PRIMARY_4,
                   mt: { lg: 2, xs: 1 },
                 }}

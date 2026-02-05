@@ -109,7 +109,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas1,
           title: "PATENT PROSECUTION",
           description:
-            "We are engineers. We are lawyers. We are businessmen. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals. ",
+            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals. ",
           serialNumber: "01",
           slug: "patent-prosecution",
         },
@@ -117,7 +117,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas2,
           title: "POST GRANT CHALLENGES",
           description:
-            "Patent assertions are seldom made lightly and are never received casually. Post grant challenges should be considered an almost inevitable response to an assertion of patent infringement. ",
+            "Our experience in litigation and prosecution allows us to confidently protect your work during a post-grant challenge. ",
           serialNumber: "02",
           slug: "post-grant-challenges",
         },
@@ -125,7 +125,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas3,
           title: "PATENT LITIGATION",
           description:
-            "Multinational enterprises and the global economy add even more layers of complexity to patent infringement cases — yet Slater Matsil simplifies the experience for the clients we represent and the legal firms we assist. ",
+            "Global economics can complicate the patent journey, but we make the process clear and manageable for our clients.",
           serialNumber: "03",
           slug: "patent-litigation",
         },
@@ -133,7 +133,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas4,
           title: "PATENT LICENSING",
           description:
-            "A strong patent licensing program taps into the financial potential of your existing innovations. This not only creates the potential for substantial revenue streams over many years — it can also help fund an ongoing legacy of invention. ",
+            "We partner with technology leaders to design and implement licensing strategies tailored to their goals. Let us unlock new value from your existing innovations, creating long‑term revenue and supporting future inventions.",
           serialNumber: "04",
           slug: "patent-licensing",
         },
@@ -149,7 +149,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas6,
           title: "TRUSTED ADVICE  COUNSEL",
           description:
-            'Slater Matsil wears proudly the mantle of "strategic partner" bestowed by our clients. ',
+            'Slater Matsil is proud to be known as a "strategic partner," helping our clients reach their intellectual property goals all around the world.',
           serialNumber: "06",
           slug: "trusted-advice-counsel",
         },
@@ -185,14 +185,14 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           text: "Meet Our Team",
           href: "/",
         },
-        endline: "“Partnering with you to transform your vision into reality.”",
+        endline: "“Transforming your vision into reality.”",
         bgImage: whoWeServeRightSectionHeroImage.src,
       },
     },
     insights_section: {
       sectionTitle: "Insights",
       heading: "Recently published Insights.",
-      description: "Have Look at our Latest publication at slatermatsil.com",
+      // description: "Have Look at our Latest publication at slatermatsil.com",
       insights_data: [
         {
           heading:
@@ -276,16 +276,16 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       img: drivingInnovationEverywhere,
     },
     REDEFINING_PATENT_SUCCESS: {
-      heading1: "“Redefining Patent Success With",
+      heading1: "“Redefining Patent Success with",
       heading2: "Precision and Global Reach.”",
       description:
-        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations worth approximately $4.8 billion in research and development.",
+        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations worth approximately $4.8 billion in research and development.",
       metrics_data: METRICS_DATA,
     },
     innovationInsights: {
       heading: "Where Insight Meets Innovation In Every Patent Strategy.",
       description:
-        "We’re engineers focused on making things work. We’re attorneys driven to defend innovation. Above all, we’re proven professionals who draw upon our firsthand experience spanning diverse industries to deliver quality, accuracy, and a meticulous level of detail in our work product.",
+        "We're engineers focused on making things work, attorneys driven to defend innovation, and—above all— proven professionals. Our firsthand experience spans diverse industries, allowing us to deliver quality, accuracy, and a meticulous level of detail to our work.",
     },
     AWARDSPROPS: {
       img: globe,
@@ -340,7 +340,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       heading1: "Industries",
       heading2: "we Serve.",
       description:
-        "We collaborate with a wide range of industries, delivering innovative and reliable solutions that drive efficiency, scalability, and growth.",
+        "We collaborate with a wide range of industries to deliver innovative, reliable solutions.",
       section_data: INDUSTRIES_DATA,
     },
   },
@@ -355,15 +355,15 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       descriptions: [
         {
           label:
-            "Our attorneys and other professionals have significant engineering experience. Many have earned advanced technical degrees and hold patents of their own.",
-        },
-        {
-          label:
-            "We have a thorough understanding of what it takes to translate your inventive concepts and ideas into meticulously crafted, highly defendable IP rights. Just as importantly, we know how to leverage those IP rights into business assets that will advance your business objectives.",
+            "Our attorneys and legal professionals are also experienced engineers, often with advanced technical degrees and patents of their own.",
         },
         {
           label:
             "Many have significant experience as engineers and managers in technology companies (including joint MBA-Engineering degree holders).",
+        },
+        {
+          label:
+            "Just as importantly, we know how to leverage those rights into business assets that will advance your career and secure your place in the market.",
         },
       ],
     },

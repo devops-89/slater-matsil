@@ -196,7 +196,7 @@ export interface INSIGHTS_CARD_DATA {
 interface INSIGHTS_SECTION_PROPS {
   sectionTitle: string;
   heading: string;
-  description: string;
+  // description: string;
   insights_data: INSIGHTS_CARD_DATA[];
 }
 

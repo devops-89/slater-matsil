@@ -46,7 +46,7 @@ const WhoWeServeAbout = () => {
                   fontSize: { lg: 20, xs: 15 },
                   fontWeight: 500,
                   fontFamily: adelle.style.fontFamily,
-                  textTransform: "capitalize",
+                  // textTransform: "capitalize",
                   color: COLORS.PRIMARY_BLUE,
                   mt: { lg: 2, xs: 2 },
                 }}
