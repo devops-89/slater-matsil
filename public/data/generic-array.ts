@@ -135,47 +135,129 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
     DATA: [
       {
         text: "Patent Prosecution",
-        href: "/patent-prosecution",
+        href: "/services/patent-prosecution",
       },
       {
         text: "IP Strategy",
-        href: "/ip-strategy",
+        href: "/services/ip-strategy",
       },
       {
         text: "Portfolio Management",
-        href: "/portfolio-management",
+        href: "/services/portfolio-management",
       },
       {
         text: "Licensing & Transactions",
-        href: "/licensing-transaction",
+        href: "/services/licensing-transaction",
       },
       {
         text: "Litigation Support",
-        href: "/litigation-support",
+        href: "/services/litigation-support",
+      },
+    ],
+  },
+  // {
+  //   HEADING: "Trust & Credibility",
+  //   DATA: [
+  //     {
+  //       text: "Patent Experts",
+  //       href: "/patent-experts",
+  //     },
+  //     {
+  //       text: "IP Network",
+  //       href: "/ip-network",
+  //     },
+  //     {
+  //       text: "Success Proof",
+  //       href: "/success-proof",
+  //     },
+  //     {
+  //       text: "Worldwide Reach",
+  //       href: "/worldwide-reach",
+  //     },
+  //     {
+  //       text: "Who we serve",
+  //       href: "/who-we-serve",
+  //     },
+  //   ],
+  // },
+];
+
+export const HEADER_DATA: FOOTER_LIST_DATA[] = [
+  {
+    HEADING: "Quick Navigation",
+    DATA: [
+      {
+        text: "Home",
+        href: "/",
+      },
+      {
+        text: "About Us",
+        href: "/about-us",
+      },
+      {
+        text: "Professionals",
+        href: "/firm-professionals",
+      },
+      {
+        text: "Services",
+        href: "/services",
+      },
+      {
+        text: "Careers",
+        href: "/careers",
+      },
+      {
+        text: "Insights",
+        href: "/insights",
+      },
+      {
+        text: "Contact",
+        href: "/contact-us",
       },
     ],
   },
   {
-    HEADING: "Trust & Credibility",
+    HEADING: "Practice Areas",
     DATA: [
       {
-        text: "Patent Experts",
-        href: "/patent-experts",
+        text: "Patent Prosecution",
+        href: "/services/patent-prosecution",
       },
       {
-        text: "IP Network",
-        href: "/ip-network",
+        text: "IP Strategy",
+        href: "/services/ip-strategy",
       },
       {
-        text: "Success Proof",
-        href: "/success-proof",
+        text: "Portfolio Management",
+        href: "/services/portfolio-management",
       },
       {
-        text: "Worldwide Reach",
-        href: "/worldwide-reach",
+        text: "Licensing & Transactions",
+        href: "/services/licensing-transaction",
       },
       {
-        text: "Who we serve",
+        text: "Litigation Support",
+        href: "/services/litigation-support",
+      },
+    ],
+  },
+  {
+    HEADING: "Who We Serve",
+    DATA: [
+      {
+        text: "Startups",
+        href: "/who-we-serve",
+      },
+      {
+        text: "Universities",
+        href: "/who-we-serve",
+      },
+      {
+        text: "Corporates",
+        href: "/who-we-serve",
+      },
+      {
+        text: "Government",
         href: "/who-we-serve",
       },
     ],

@@ -4,15 +4,42 @@ import { INSIGHTS_DATA_PROPS } from "@/utils/types";
 import { ArrowForward, CallMade } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
 
+import { motion } from "framer-motion";
+
 const InsightsCard = ({ bgColor, category, title }: INSIGHTS_DATA_PROPS) => {
   return (
-    <Box sx={{ position: "relative" }}>
+    <Box
+      component={motion.div}
+      whileHover={{ y: -10 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      sx={{
+        position: "relative",
+        cursor: "pointer",
+        "&:hover": {
+          "& .main-card": {
+            boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+          },
+          "& .arrow-icon": {
+            transform: "translateX(5px)",
+          },
+          "& .top-icon-box": {
+            backgroundColor: COLORS.PRIMARY_BLUE,
+            transform: "rotate(45deg) scale(1.1)",
+          },
+          "& .top-icon": {
+            color: COLORS.WHITE,
+          },
+        },
+      }}
+    >
       <Box
+        className="main-card"
         sx={{
           backgroundColor: bgColor,
           height: "347px",
           borderRadius: "10px",
           p: 3,
+          transition: "box-shadow 0.3s ease",
         }}
       >
         <Box
@@ -48,6 +75,7 @@ const InsightsCard = ({ bgColor, category, title }: INSIGHTS_DATA_PROPS) => {
               {title}
             </Typography>
             <Button
+              className="arrow-icon"
               sx={{
                 color:
                   bgColor === COLORS.PRIMARY_BLUE
@@ -57,6 +85,7 @@ const InsightsCard = ({ bgColor, category, title }: INSIGHTS_DATA_PROPS) => {
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 500,
                 mt: 3,
+                transition: "transform 0.3s ease",
               }}
               endIcon={<ArrowForward />}
             >
@@ -79,6 +108,7 @@ const InsightsCard = ({ bgColor, category, title }: INSIGHTS_DATA_PROPS) => {
         justifyContent={"space-between"}
       >
         <Box
+          className="top-icon-box"
           sx={{
             width: 20,
             height: 20,
@@ -89,9 +119,13 @@ const InsightsCard = ({ bgColor, category, title }: INSIGHTS_DATA_PROPS) => {
             aspectRatio: "20/20",
             borderRadius: "50%",
             backgroundColor: COLORS.BLACK,
+            transition: "all 0.3s ease",
           }}
         >
-          <CallMade sx={{ color: COLORS.WHITE }} />
+          <CallMade
+            className="top-icon"
+            sx={{ color: COLORS.WHITE, transition: "color 0.3s ease" }}
+          />
         </Box>
       </Stack>
     </Box>

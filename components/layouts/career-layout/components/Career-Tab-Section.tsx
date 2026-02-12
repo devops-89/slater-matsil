@@ -2,9 +2,10 @@ import CustomTabPanel from "@/components/widgets/Tab-panel";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { Box, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Button, Grid, Tab, Tabs } from "@mui/material";
 import React, { SyntheticEvent, useState } from "react";
 import StarPara from "./Star-Para";
+import { ArrowForward } from "@mui/icons-material";
 
 const CareerTabSection = () => {
   const { details } = usePageData();
@@ -14,7 +15,16 @@ const CareerTabSection = () => {
 
   const handleChangeTab = (e: SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    if (newValue === 0) {
+      setRoleData(data?.tabContentData?.tab_attorney_content_Data);
+    } else if (newValue === 1) {
+      setRoleData(data?.tabContentData?.tab_technical_advisor);
+    }
   };
+
+  const [roleData, setRoleData] = useState(
+    data?.tabContentData?.tab_attorney_content_Data,
+  );
 
   return (
     <Box sx={{ mt: 5 }}>
@@ -71,136 +81,88 @@ const CareerTabSection = () => {
         </Grid>
       </Grid>
 
-      <CustomTabPanel index={0} value={value}>
-        <Grid container spacing={5} sx={{ mt: 3 }}>
-          <Grid size={{ lg: 6, xs: 12 }}>
-            <StarPara
-              description={
-                data?.tabContentData?.tab_attorney_content_Data?.data1
-                  ?.description || ""
-              }
-              title={
-                data?.tabContentData?.tab_attorney_content_Data?.data1?.title ||
-                ""
-              }
+      <CustomTabPanel index={value} value={value}>
+        {roleData?.map((val, i) => (
+          <Grid container spacing={5} sx={{ mt: 3 }} key={i}>
+            <Grid size={{ lg: 6, xs: 12 }}>
+              <StarPara
+                description={val.description1 || ""}
+                title={val.title}
+                sx={{
+                  fontSize: { lg: 35, xs: 20 },
+                  fontFamily: tradeGothic.style.fontFamily,
+                  fontWeight: 700,
+                  lineHeight: { lg: "50px", xs: "25px" },
+                  textTransform: "capitalize",
+                  mt: 2,
+                  color: COLORS.PRIMARY_BLUE,
+                }}
+              />
+            </Grid>
+            <Grid size={{ lg: 6, xs: 12 }}>
+              <StarPara
+                description={val.description2 || ""}
+                sx={{
+                  fontSize: 20,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 500,
+                  lineHeight: "30px",
+                  textTransform: "capitalize",
+                  mt: 2,
+                  color: COLORS.PRIMARY_BLUE,
+                }}
+              />
+            </Grid>
+            <Grid size={12}>
+              <StarPara
+                description={val.description3 || ""}
+                sx={{
+                  fontSize: 20,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 500,
+                  lineHeight: "30px",
+                  textTransform: "capitalize",
+                  mt: 2,
+                  color: COLORS.PRIMARY_BLUE,
+                }}
+              />
+            </Grid>
+
+            <Button
+              endIcon={<ArrowForward sx={{ fontSize: 50 }} />}
               sx={{
-                fontSize: { lg: 35, xs: 20 },
-                fontFamily: tradeGothic.style.fontFamily,
-                fontWeight: 700,
-                lineHeight: { lg: "50px", xs: "25px" },
-                textTransform: "capitalize",
-                mt: 2,
-                color: COLORS.PRIMARY_BLUE,
-              }}
-            />
-          </Grid>
-          <Grid size={{ lg: 6, xs: 12 }}>
-            <StarPara
-              description={
-                data?.tabContentData?.tab_attorney_content_Data?.data2
-                  ?.description || ""
-              }
-              title={
-                data?.tabContentData?.tab_attorney_content_Data?.data2?.title ||
-                ""
-              }
-              sx={{
+                mt: 3,
+                borderRadius: "120px",
+                border: `1px solid ${COLORS.PRIMARY_BLUE}`,
+                backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
+                width: "286px",
+                padding: "10px",
                 fontSize: 20,
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 500,
-                lineHeight: "30px",
-                textTransform: "capitalize",
-                mt: 2,
+                lineHeight: "40px",
                 color: COLORS.PRIMARY_BLUE,
               }}
-            />
+            >
+              Submit Resume
+            </Button>
+
+            <Grid size={12}>
+              <StarPara
+                description={val.description4 || ""}
+                sx={{
+                  fontSize: 20,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 500,
+                  lineHeight: "30px",
+                  textTransform: "capitalize",
+                  mt: 2,
+                  color: COLORS.PRIMARY_BLUE,
+                }}
+              />
+            </Grid>
           </Grid>
-          <Grid size={12}>
-            <StarPara
-              description={
-                data?.tabContentData?.tab_attorney_content_Data?.data3
-                  ?.description || ""
-              }
-              title={
-                data?.tabContentData?.tab_attorney_content_Data?.data3?.title ||
-                ""
-              }
-              sx={{
-                fontSize: 20,
-                fontFamily: adelle.style.fontFamily,
-                fontWeight: 500,
-                lineHeight: "30px",
-                textTransform: "capitalize",
-                mt: 2,
-                color: COLORS.PRIMARY_BLUE,
-              }}
-            />
-          </Grid>
-        </Grid>
-      </CustomTabPanel>
-      <CustomTabPanel index={1} value={value}>
-        <Grid container spacing={5} sx={{ mt: 3 }}>
-          <Grid size={{ lg: 6, xs: 12 }}>
-            <StarPara
-              description={
-                data?.tabContentData?.tab_technical_advisor?.data1
-                  ?.description || ""
-              }
-              title={
-                data?.tabContentData?.tab_technical_advisor?.data1?.title || ""
-              }
-              sx={{
-                fontSize: { lg: 35, xs: 20 },
-                fontFamily: tradeGothic.style.fontFamily,
-                fontWeight: 700,
-                lineHeight: { lg: "50px", xs: "25px" },
-                textTransform: "capitalize",
-                mt: 2,
-                color: COLORS.PRIMARY_BLUE,
-              }}
-            />
-          </Grid>
-          <Grid size={{ lg: 6, xs: 12 }}>
-            <StarPara
-              description={
-                data?.tabContentData?.tab_technical_advisor?.data2
-                  ?.description || ""
-              }
-              title={
-                data?.tabContentData?.tab_technical_advisor?.data2?.title || ""
-              }
-              sx={{
-                fontSize: 20,
-                fontFamily: adelle.style.fontFamily,
-                fontWeight: 500,
-                lineHeight: "30px",
-                textTransform: "capitalize",
-                mt: 2,
-                color: COLORS.PRIMARY_BLUE,
-              }}
-            />
-          </Grid>
-          <Grid size={12}>
-            <StarPara
-              description={
-                data?.tabContentData?.tab_technical_advisor?.data3
-                  ?.description || ""
-              }
-              title={
-                data?.tabContentData?.tab_technical_advisor?.data3?.title || ""
-              }
-              sx={{
-                fontSize: 20,
-                fontFamily: adelle.style.fontFamily,
-                fontWeight: 500,
-                lineHeight: "30px",
-                textTransform: "capitalize",
-                mt: 2,
-                color: COLORS.PRIMARY_BLUE,
-              }}
-            />
-          </Grid>
-        </Grid>
+        ))}
       </CustomTabPanel>
     </Box>
   );

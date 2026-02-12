@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { Box, Grid, Typography, Button, Container } from "@mui/material";
 import AboutImage from "@/public/images/home/about.jpg";
@@ -10,13 +10,25 @@ import FlowerImage from "@/public/images/home/Image.png";
 import { COLORS } from "@/utils/enum";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
+import Link from "next/link";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const AboutSection = () => {
   const { details } = usePageData();
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  }, []);
+
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="flex-start ">
-          <Grid size={{ xs: 12, lg: 6 }}>
+          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-right">
             <HeadingStar
               title={details?.homepage?.aboutSection?.sectionTitle || ""}
             />
@@ -47,7 +59,7 @@ const AboutSection = () => {
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, lg: 6 }}>
+          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-left">
             <Box>
               <Typography
                 sx={{
@@ -59,26 +71,28 @@ const AboutSection = () => {
               >
                 {details?.homepage?.aboutSection?.description}
               </Typography>
-
-              <Button
-                variant="outlined"
-                sx={{
-                  borderRadius: 4,
-                  px: 2,
-                  py: 1,
-                  textTransform: "none",
-                  mr: 3,
-                  border: "1px solid #063232",
-                  color: "#063232",
-                  fontFamily: adelle.style.fontFamily,
-                  fontSize: 16,
-                }}
-              >
-                More About
-                <ArrowRightAltIcon fontSize="small" sx={{ ml: 1 }} />
-              </Button>
+              <Link href={"/about-us"}>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderRadius: 4,
+                    px: 2,
+                    py: 1,
+                    textTransform: "none",
+                    mr: 3,
+                    border: "1px solid #063232",
+                    color: "#063232",
+                    fontFamily: adelle.style.fontFamily,
+                    fontSize: 16,
+                  }}
+                >
+                  More About
+                  <ArrowRightAltIcon fontSize="small" sx={{ ml: 1 }} />
+                </Button>
+              </Link>
 
               <Box
+                data-aos="fade-up"
                 sx={{
                   display: "flex",
                   alignItems: "center",

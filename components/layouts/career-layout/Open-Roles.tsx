@@ -75,37 +75,6 @@ const OpenRoles = () => {
         <Box sx={{ mt: 3 }}>
           <CareerTabSection />
         </Box>
-        <Button
-          endIcon={<ArrowForward sx={{ fontSize: 50 }} />}
-          sx={{
-            mt: 3,
-            borderRadius: "120px",
-            border: `1px solid ${COLORS.PRIMARY_BLUE}`,
-            backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
-            width: "286px",
-            padding: "10px",
-            fontSize: 20,
-            fontFamily: adelle.style.fontFamily,
-            fontWeight: 500,
-            lineHeight: "40px",
-            color: COLORS.PRIMARY_BLUE,
-          }}
-        >
-          Submit Resume
-        </Button>
-
-        <Box sx={{ mt: 5 }}>
-          <StarPara
-            description={data?.description2 || ""}
-            sx={{
-              fontSize: 20,
-              fontFamily: adelle.style.fontFamily,
-              fontWeight: 400,
-              color: COLORS.TEXT_TERTIARY,
-              mt: 3,
-            }}
-          />
-        </Box>
       </Container>
     </Box>
   );

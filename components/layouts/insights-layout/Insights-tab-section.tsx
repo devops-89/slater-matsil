@@ -19,7 +19,7 @@ const InsightsTabSection = () => {
     } else {
       const filteredData = details?.insightsPage?.insightsData?.filter(
         (item) =>
-          item.category === details?.insightsPage?.tab_data?.[newValue]?.title
+          item.category === details?.insightsPage?.tab_data?.[newValue]?.title,
       );
       setInsightsData(filteredData);
     }
@@ -27,7 +27,7 @@ const InsightsTabSection = () => {
 
   const { details } = usePageData();
   const [insightsData, setInsightsData] = useState(
-    details?.insightsPage?.insightsData
+    details?.insightsPage?.insightsData,
   );
   return (
     <Box>

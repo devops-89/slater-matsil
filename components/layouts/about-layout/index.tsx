@@ -40,34 +40,80 @@ const AboutLayout = () => {
                   width: { lg: 350, xs: "100%" },
 
                   borderRadius: 4,
-                  pb: 1,
+                  // pb: 1, // Removed to allow full gradient
+                  position: "relative",
+                  overflow: "hidden", // Important for cleaner borders and rounded edges on zoom
+                  transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+                  cursor: "pointer",
+                  border: "1px solid transparent",
+                  "&:hover": {
+                    transform: "translateY(-10px)",
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
+                    border: `1px solid ${COLORS.PRIMARY_BLUE}`,
+                    "& .overlay-box": {
+                      background:
+                        "linear-gradient(to top, rgba(13,95,110,0.9), rgba(0,0,0,0))", // PRIMARY_BLUE dark
+                      paddingBottom: "20px", // Subtle lift feeling for content
+                    },
+                    "& .arrow-icon": {
+                      transform: "translateX(5px) scale(1.1)",
+                      backgroundColor: COLORS.WHITE,
+                      color: COLORS.PRIMARY_BLUE,
+                    },
+                    "& .card-title": {
+                      transform: "translateY(-5px)",
+                    },
+                  },
                 }}
               >
                 <Box
+                  className="overlay-box"
                   sx={{
                     display: "flex",
                     alignItems: "flex-end",
                     justifyContent: "space-between",
                     height: "100%",
-                    backgroundColor: "rgba(0,0,0,0.5)",
-                    // p: 2,
-                    px: 2,
-                    pb: 1,
+                    background:
+                      "linear-gradient(to top, rgba(0,0,0,0.7), rgba(0,0,0,0.1))",
+                    px: 3,
+                    pb: 2,
                     borderRadius: 4,
+                    transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
                   }}
                 >
                   <Typography
+                    className="card-title"
                     sx={{
                       fontFamily: tradeGothic.style.fontFamily,
                       color: COLORS.WHITE,
-                      fontSize: 18,
+                      fontSize: 22,
                       fontWeight: 700,
+                      lineHeight: "28px",
+                      maxWidth: "200px",
+                      transition: "transform 0.3s ease",
+                      textShadow: "0 2px 4px rgba(0,0,0,0.5)",
                     }}
                   >
                     {val.title}
                   </Typography>
-                  <Link href={val.href} style={{ color: COLORS.WHITE }}>
-                    <IconButton sx={{ color: COLORS.WHITE, mt: 3 }}>
+                  <Link
+                    href={val.href}
+                    style={{ color: COLORS.WHITE, display: "block" }}
+                  >
+                    <IconButton
+                      className="arrow-icon"
+                      sx={{
+                        color: COLORS.WHITE,
+                        backgroundColor: "rgba(255,255,255,0.1)",
+                        backdropFilter: "blur(5px)",
+                        mt: 0,
+                        transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+                        "&:hover": {
+                          backgroundColor: COLORS.WHITE,
+                          color: COLORS.PRIMARY_BLUE,
+                        },
+                      }}
+                    >
                       <ArrowForward />
                     </IconButton>
                   </Link>

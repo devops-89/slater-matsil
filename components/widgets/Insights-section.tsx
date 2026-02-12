@@ -33,7 +33,7 @@ const InsightsSection = () => {
           >
             {details?.homepage?.insights_section?.heading}
           </Typography>
-          <Typography
+          {/* <Typography
             sx={{
               color: COLORS.BLACK,
               fontFamily: adelle.style.fontFamily,
@@ -43,7 +43,7 @@ const InsightsSection = () => {
             }}
           >
             {details?.homepage?.insights_section?.description}
-          </Typography>
+          </Typography> */}
           <Stack
             direction={"row"}
             alignItems={"center"}
@@ -87,6 +87,7 @@ const InsightsSection = () => {
               },
               1024: {
                 slidesPerView: 3,
+                spaceBetween: 20,
               },
             }}
           >
@@ -99,7 +100,7 @@ const InsightsSection = () => {
                     ctaButton={val.ctaButton}
                   />
                 </SwiperSlide>
-              )
+              ),
             )}
           </Swiper>
         </Grid>

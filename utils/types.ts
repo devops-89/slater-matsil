@@ -296,6 +296,15 @@ interface open_roles_data {
   description: string;
 }
 
+interface OPEN_ROLE_DATA_PROPS {
+  title?: string;
+  description1?: string;
+  description2?: string;
+  description3?: string;
+  description4?: string;
+  description5?: string;
+}
+
 interface OPEN_ROLES_PROPS {
   title: string;
   shortDescription: string;
@@ -303,19 +312,22 @@ interface OPEN_ROLES_PROPS {
   tabSectionData: {
     tabData: { title: string }[];
     tabContentData: {
-      tab_attorney_content_Data: {
-        data1: open_roles_data;
-        data2: open_roles_data;
-        data3: open_roles_data;
-      };
-      tab_technical_advisor: {
-        data1: open_roles_data;
-        data2: open_roles_data;
-        data3: open_roles_data;
-      };
+      // tab_attorney_content_Data: {
+      //   data1: open_roles_data;
+      //   data2: open_roles_data;
+      //   data3: open_roles_data;
+      // };
+      // tab_technical_advisor: {
+      //   data1: open_roles_data;
+      //   data2: open_roles_data;
+      //   data3: open_roles_data;
+      // };
+
+      tab_attorney_content_Data: OPEN_ROLE_DATA_PROPS[];
+      tab_technical_advisor: OPEN_ROLE_DATA_PROPS[];
     };
   };
-  description2: string;
+  // description2: string;
 }
 
 // practice groups
@@ -372,7 +384,7 @@ export interface TABS_DATA_PROPS {
 
 export interface TAB_CARD_DATA_PROPS {
   bigDescription: string;
-  quote: string;
+  quote?: string;
   data: { description: string }[];
 }
 

@@ -24,22 +24,24 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
               {bigDescription}
             </Typography>
           </Grid>
-          <Grid size={{ lg: 10, xs: 12 }} margin="auto">
-            <Typography
-              sx={{
-                fontSize: { lg: 22, xs: 16 },
-                fontFamily: tradeGothic.style.fontFamily,
-                fontWeight: 700,
-                color: COLORS.TEXT_PRIMARY_4,
-                lineHeight: { lg: "35px", xs: "20px" },
-                textTransform: "capitalize",
-                textAlign: "center",
-                mt: 5,
-              }}
-            >
-              {quote}
-            </Typography>
-          </Grid>
+          {quote && (
+            <Grid size={{ lg: 10, xs: 12 }} margin="auto">
+              <Typography
+                sx={{
+                  fontSize: { lg: 22, xs: 16 },
+                  fontFamily: tradeGothic.style.fontFamily,
+                  fontWeight: 700,
+                  color: COLORS.TEXT_PRIMARY_4,
+                  lineHeight: { lg: "35px", xs: "20px" },
+                  textTransform: "capitalize",
+                  textAlign: "center",
+                  mt: 5,
+                }}
+              >
+                {quote}
+              </Typography>
+            </Grid>
+          )}
         </Grid>
 
         <Grid container spacing={5} mt={4}>

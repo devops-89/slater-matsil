@@ -41,7 +41,7 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           {details?.homepage?.footerData?.footer_links.map((val, i) => (
-            <Grid size={{ lg: 2, xs: 6 }} key={i}>
+            <Grid size={{ lg: 3, xs: 6 }} key={i}>
               <FooterList DATA={val.DATA} HEADING={val.HEADING} />
             </Grid>
           ))}

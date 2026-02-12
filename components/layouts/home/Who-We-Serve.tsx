@@ -88,7 +88,7 @@ const Whoweserve = () => {
               <Image
                 src={details.homepage.who_we_serve.leftSection.big_logo}
                 alt="big logo"
-                style={{ width: "100%", height: "auto" }}
+                style={{ width: "90%", height: "auto", margin: "auto" }}
               />
             </Box>
           )}
@@ -161,7 +161,7 @@ const Whoweserve = () => {
                         </ListItem>
                       </List>
                     </Grid>
-                  )
+                  ),
                 )}
               </Grid>
               <Button

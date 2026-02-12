@@ -19,7 +19,7 @@ import { COLORS } from "@/utils/enum";
 import logo from "@/public/images/logo/logo.png";
 import Link from "next/link";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { FOOTER_DATA } from "@/public/data/generic-array";
+import { FOOTER_DATA, HEADER_DATA } from "@/public/data/generic-array";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -124,7 +124,7 @@ const Navbar = () => {
       >
         <Container maxWidth="lg">
           <Grid container>
-            {FOOTER_DATA.map((val, i) => (
+            {HEADER_DATA.map((val, i) => (
               <Grid size={4} key={i}>
                 <Typography
                   sx={{
@@ -136,20 +136,26 @@ const Navbar = () => {
                   {val.HEADING}
                 </Typography>
                 <List>
-                  {val.DATA?.map((val, i) => (
-                    <ListItemButton sx={{ width: "fit-content" }}>
-                      <ListItemText
-                        primary={val.text}
-                        slotProps={{
-                          primary: {
-                            sx: {
-                              fontFamily: tradeGothic.style.fontFamily,
-                              fontWeight: 400,
+                  {val.DATA?.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.href || "#"}
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <ListItemButton sx={{ width: "fit-content" }}>
+                        <ListItemText
+                          primary={item.text}
+                          slotProps={{
+                            primary: {
+                              sx: {
+                                fontFamily: tradeGothic.style.fontFamily,
+                                fontWeight: 400,
+                              },
                             },
-                          },
-                        }}
-                      />
-                    </ListItemButton>
+                          }}
+                        />
+                      </ListItemButton>
+                    </Link>
                   ))}
                 </List>
               </Grid>

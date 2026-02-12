@@ -14,6 +14,15 @@ const InsightsCard = ({ heading, category, ctaButton }: INSIGHTS_CARD_DATA) => {
         height: 250,
         display: "flex",
         alignItems: "center",
+        cursor: "pointer",
+        transition: "all 0.3s ease",
+        "&:hover": {
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+          border: `1px solid ${COLORS.PRIMARY_BLUE}`,
+          "& .add-icon": {
+            color: COLORS.PRIMARY_BLUE,
+          },
+        },
       }}
     >
       <CardContent>
@@ -33,8 +42,20 @@ const InsightsCard = ({ heading, category, ctaButton }: INSIGHTS_CARD_DATA) => {
             fontSize: 14,
             textTransform: "lowercase",
             color: COLORS.BLACK,
+            "&:hover": {
+              textDecoration: "underline",
+              backgroundColor: "transparent",
+            },
           }}
-          startIcon={<Add sx={{ fontSize: 10 }} />}
+          startIcon={
+            <Add
+              className="add-icon"
+              sx={{
+                fontSize: 10,
+                transition: "color 0.3s ease",
+              }}
+            />
+          }
         >
           {category?.text}
         </Button>
@@ -50,6 +71,10 @@ const InsightsCard = ({ heading, category, ctaButton }: INSIGHTS_CARD_DATA) => {
               color: COLORS.WHITE,
               width: 150,
               mt: 2,
+              transition: "background-color 0.3s ease",
+              "&:hover": {
+                backgroundColor: COLORS.PRIMARY_GREEN,
+              },
             }}
           >
             {ctaButton?.text}

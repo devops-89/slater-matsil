@@ -13,6 +13,10 @@ const WhoServeTabSection = () => {
   const [value, setValue] = useState(0);
   const { details } = usePageData();
 
+  const [serveData, setServeData] = useState(
+    details?.whoWeServePage?.whoWeServeTabsSection,
+  );
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -36,14 +40,14 @@ const WhoServeTabSection = () => {
             quote={val.quote}
             data={val.data}
           />
+          <Container maxWidth="lg" sx={{ my: 7 }}>
+            <QuoteCard
+              quote={details?.whoWeServePage?.quote?.quote || ""}
+              author={details?.whoWeServePage?.quote?.author || ""}
+            />
+          </Container>
         </CustomTabPanel>
       ))}
-      <Container maxWidth="lg" sx={{ my: 7 }}>
-        <QuoteCard
-          quote={details?.whoWeServePage?.quote?.quote || ""}
-          author={details?.whoWeServePage?.quote?.author || ""}
-        />
-      </Container>
     </Box>
   );
 };

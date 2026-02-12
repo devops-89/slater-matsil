@@ -21,6 +21,21 @@ const ServiceAreaCard = ({
         p: 3,
         position: "relative",
         height: "360px",
+        transition: "all 0.3s ease-in-out",
+        cursor: "pointer",
+        "&:hover": {
+          transform: "translateY(-10px)",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+          backgroundColor: COLORS.WHITE,
+          "& .serial-number-box": {
+            backgroundColor: COLORS.PRIMARY_BLUE,
+            color: COLORS.WHITE,
+          },
+          border: `1px solid ${COLORS.PRIMARY_BLUE}`,
+          "& .card-title": {
+            color: COLORS.PRIMARY_BLUE,
+          },
+        },
       }}
     >
       <Box sx={{ textAlign: "center" }}>
@@ -28,6 +43,7 @@ const ServiceAreaCard = ({
       </Box>
       <Link href={`/services/${slug}`} style={{ textDecoration: "none" }}>
         <Typography
+          className="card-title"
           sx={{
             textAlign: "center",
             color: COLORS.BLACK,
@@ -35,6 +51,7 @@ const ServiceAreaCard = ({
             fontSize: 20,
             fontWeight: 700,
             my: 2,
+            transition: "color 0.3s ease-in-out",
           }}
         >
           {title}
@@ -54,6 +71,7 @@ const ServiceAreaCard = ({
       </Typography>
 
       <Box
+        className="serial-number-box"
         sx={{
           display: "flex",
           alignItems: "center",
@@ -67,11 +85,13 @@ const ServiceAreaCard = ({
           left: "50%",
           transform: "translateX(-50%)",
           bottom: "-20px",
+          transition: "all 0.3s ease-in-out",
+          color: COLORS.PRIMARY_BLUE,
         }}
       >
         <Typography
           sx={{
-            color: COLORS.PRIMARY_BLUE,
+            color: "inherit",
             fontFamily: inter.style.fontFamily,
             fontSize: 20,
             fontWeight: 500,

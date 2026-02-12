@@ -5,9 +5,15 @@ import settings from "@/icons/services/technical-expertise.svg";
 import Image from "next/image";
 import { adelle } from "@/utils/fonts";
 import { STRENGTH_CARD_PROPS } from "@/utils/types";
+import { motion } from "framer-motion";
+
 const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
   return (
-    <Box>
+    <Box
+      component={motion.div}
+      whileHover={{ y: -10 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+    >
       <Box
         sx={{
           backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
@@ -18,9 +24,17 @@ const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
           justifyContent: "center",
           padding: "20px",
           height: 220,
+          transition: "all 0.3s ease-in-out",
+          cursor: "pointer",
+          "&:hover": {
+            boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+            backgroundColor: COLORS.WHITE,
+            border: `1px solid ${COLORS.PRIMARY_BLUE}`,
+          },
         }}
       >
         <Box
+          className="icon-box"
           sx={{
             backgroundColor: COLORS.WHITE,
             width: 50,
@@ -30,6 +44,7 @@ const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
             alignItems: "center",
             justifyContent: "center",
             borderRadius: "8px",
+            transition: "background-color 0.3s ease",
           }}
         >
           <Image src={img} alt="settings" />

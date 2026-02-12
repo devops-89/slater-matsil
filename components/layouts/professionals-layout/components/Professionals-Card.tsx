@@ -14,18 +14,45 @@ const ProfessionalsCard = ({
 }: PROFESSIONALS_CARD_PROPS) => {
   return (
     <Box>
-      <Box sx={{ position: "relative", height: "100%" }}>
-        <Image
-          src={img}
-          alt=""
-          style={{
-            width: "100%",
+      <Box
+        sx={{
+          position: "relative",
+          height: "100%",
+          cursor: "pointer",
+          "&:hover": {
+            "& .profile-image": {
+              transform: "scale(1.05)",
+            },
+            "& .info-box": {
+              transform: "translateX(-50%) translateY(-10px)",
+              borderTop: `5px solid ${COLORS.PRIMARY_BLUE}`,
+              boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+            },
+          },
+        }}
+      >
+        <Box
+          sx={{
             height: "100%",
-            objectFit: "cover",
+            width: "100%",
+            overflow: "hidden",
             borderRadius: "16px",
           }}
-        />
+        >
+          <Image
+            className="profile-image"
+            src={img}
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              transition: "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }}
+          />
+        </Box>
         <Box
+          className="info-box"
           sx={{
             backgroundColor: COLORS.WHITE,
             borderRadius: "16px",
@@ -41,14 +68,15 @@ const ProfessionalsCard = ({
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            transition: "all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.05)",
           }}
         >
           <Box sx={{}}>
             <Link
               href={`/firm-professionals/professionals/${slug}`}
               style={{
-                textDecoration: "underline",
-                color: COLORS.PRIMARY_BLUE,
+                textDecoration: "none", // Removed underline for cleaner look
               }}
             >
               <Typography
@@ -58,6 +86,10 @@ const ProfessionalsCard = ({
                   fontWeight: 700,
                   color: COLORS.PRIMARY_BLUE,
                   textAlign: "center",
+                  transition: "color 0.3s ease",
+                  "&:hover": {
+                    color: COLORS.PRIMARY_GREEN,
+                  },
                 }}
               >
                 {name}
@@ -68,8 +100,9 @@ const ProfessionalsCard = ({
                 fontSize: { lg: 18, xs: 14 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                color: COLORS.PRIMARY_BLUE,
+                color: COLORS.PRIMARY_BLUE, // Keeping consistent color
                 textAlign: "center",
+                opacity: 0.8,
               }}
             >
               {designation}
