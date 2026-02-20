@@ -96,7 +96,7 @@ const IndustriesWeServe = () => {
                                 color: COLORS.PRIMARY_BLUE,
                                 fontWeight: 700,
                                 lineHeight: { lg: "45px", xs: "25px" },
-                                textTransform: "capitalize"
+                                textTransform: "capitalize",
                               },
                             }}
                           />
@@ -104,7 +104,7 @@ const IndustriesWeServe = () => {
                       ))}
                     </List>
                   </Grid>
-                )
+                ),
               )}
             </Grid>
           </Grid>

@@ -114,7 +114,7 @@ const WhoweServe = () => {
                         ))}
                       </List>
                     </Grid>
-                  )
+                  ),
                 )}
               </Grid>
             </Grid>

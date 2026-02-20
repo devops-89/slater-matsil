@@ -380,12 +380,15 @@ export interface TABS_DATA_PROPS {
   bigDescription: string;
   quote: string;
   data: { description: string }[];
+  author?: string;
+  quoteCardData?: QUOTE_CARD_DATA;
 }
 
 export interface TAB_CARD_DATA_PROPS {
   bigDescription: string;
   quote?: string;
   data: { description: string }[];
+  quoteCardData?: QUOTE_CARD_DATA;
 }
 
 export interface TAB_SWITCHING_PROPS {
@@ -498,5 +501,14 @@ export interface SERVICE_FRAMEWORK_CARD_PROPS {
   heading: string;
   data: {
     title: string;
+  }[];
+}
+
+export interface SERVICES_DETAILS_DATA_PROPS {
+  slug: string;
+  title: string;
+  data: {
+    description: string;
+    dataList?: { label: string }[];
   }[];
 }

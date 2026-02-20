@@ -35,7 +35,7 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
         }}
       >
         <DotLottieReact
-          src="/images/common/preloader.json"
+          src="/images/loading2.json"
           loop
           autoplay
           style={{ width: 250, height: 250 }}

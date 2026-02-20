@@ -15,6 +15,7 @@ import {
 import Image from "next/image";
 import checkmark from "@/icons/checkmark.png";
 import { ArrowForward } from "@mui/icons-material";
+import Link from "next/link";
 const Whoweserve = () => {
   const { details } = usePageData();
   return (
@@ -164,23 +165,28 @@ const Whoweserve = () => {
                   ),
                 )}
               </Grid>
-              <Button
-                sx={{
-                  padding: "15px",
-                  borderRadius: "40px",
-                  backgroundColor: COLORS.PRIMARY_BLUE,
-                  color: COLORS.WHITE,
-                  width: 222,
-                  fontFamily: adelle.style.fontFamily,
-                  fontWeight: 400,
-                  lineHeight: "26px",
-                  fontSize: 16,
-                  mt: 2,
-                }}
-                endIcon={<ArrowForward />}
-              >
-                {details?.homepage?.who_we_serve?.rightSection?.ctaButton?.text}
-              </Button>
+              <Link href="/firm-professionals">
+                <Button
+                  sx={{
+                    padding: "15px",
+                    borderRadius: "40px",
+                    backgroundColor: COLORS.PRIMARY_BLUE,
+                    color: COLORS.WHITE,
+                    width: 222,
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: 400,
+                    lineHeight: "26px",
+                    fontSize: 16,
+                    mt: 2,
+                  }}
+                  endIcon={<ArrowForward />}
+                >
+                  {
+                    details?.homepage?.who_we_serve?.rightSection?.ctaButton
+                      ?.text
+                  }
+                </Button>
+              </Link>
             </Box>
           </Box>
           <Box

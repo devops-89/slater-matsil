@@ -18,9 +18,9 @@ const ServiceAreaCard = ({
       sx={{
         backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
         borderRadius: "10px",
-        p: 3,
+        p: 4,
         position: "relative",
-        height: "360px",
+        height: "450px",
         transition: "all 0.3s ease-in-out",
         cursor: "pointer",
         "&:hover": {

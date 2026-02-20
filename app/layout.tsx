@@ -50,7 +50,7 @@ export default function RootLayout({
             }}
           >
             <DotLottieReact
-              src="/images/common/preloader.json"
+              src="/images/loading2.json"
               loop
               autoplay
               style={{ width: 250, height: 250 }}
@@ -58,9 +58,15 @@ export default function RootLayout({
           </div>
         ) : (
           <LoadingProvider>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+              }}
+            >
               {phone ? <MobileNavbar /> : <Navbar />}
-              {children}
+              <div style={{ flex: 1 }}>{children}</div>
               <Footer />
             </div>
           </LoadingProvider>

@@ -40,7 +40,7 @@ const FindUsHere = () => {
                     value={val.value}
                   />
                 </Grid>
-              )
+              ),
             )}
           </Grid>
         </Box>

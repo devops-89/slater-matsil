@@ -30,7 +30,7 @@ const RedefiningPatent = () => {
                         <Grid size={{ lg: 6, xs: 12 }} key={i}>
                           <MetricsCard title={val.title} count={val.count} />
                         </Grid>
-                      )
+                      ),
                     )}
                   </Grid>
                 </Grid>

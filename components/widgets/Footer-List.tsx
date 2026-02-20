@@ -38,8 +38,13 @@ const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
                       fontFamily: adelle.style.fontFamily,
                       fontWeight: 400,
                       lineHeight: "26px",
-                      opacity: 0.5,
-                      py: 1,
+                      opacity: 0.8,
+                      py: 0.5,
+                      transition: "color 0.2s",
+                      "&:hover": {
+                        color: COLORS.WHITE,
+                        opacity: 1,
+                      },
                     },
                   },
                 }}

@@ -1,5 +1,7 @@
+"use client";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { COLORS } from "@/utils/enum";
+import { SERVICES_DETAILS_DATA_PROPS } from "@/utils/types";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import {
   Box,
@@ -12,7 +14,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import lightLogo from "@/home/slater-matsil-logo-light.png";
 import Image from "next/image";
 import global from "@/icons/globe.svg";
@@ -21,6 +23,8 @@ import location from "@/icons/location.svg";
 import globeOutline from "@/icons/earth.svg";
 import QuickLinksCard from "@/components/widgets/common/Quick-Links-Card";
 import { Circle } from "@mui/icons-material";
+import { useParams } from "next/navigation";
+import { SERVICES_DETAILS } from "@/public/data/generic-array";
 const QuickLinksDetails = () => {
   const QUICk_LINKS_DATA = [
     {
@@ -41,24 +45,36 @@ const QuickLinksDetails = () => {
     },
   ];
 
-  const listItem = [
-    {
-      label: "Patent Portfolio Management",
-    },
-    {
-      label:
-        "Patent Preparation and Prosecution before the United States Patent and Trademark Office",
-    },
-    {
-      label: "International Patent Applications ",
-    },
-    {
-      label: "Reexaminations and Reissues",
-    },
-    {
-      label: "Appeals",
-    },
-  ];
+  // const listItem = [
+  //   {
+  //     label: "Patent Portfolio Management",
+  //   },
+  //   {
+  //     label:
+  //       "Patent Preparation and Prosecution before the United States Patent and Trademark Office",
+  //   },
+  //   {
+  //     label: "International Patent Applications ",
+  //   },
+  //   {
+  //     label: "Reexaminations and Reissues",
+  //   },
+  //   {
+  //     label: "Appeals",
+  //   },
+  // ];
+
+  const { slug } = useParams();
+
+  // console.log("params", slug);
+  const [data, setData] = useState<
+    SERVICES_DETAILS_DATA_PROPS | null | undefined
+  >(null);
+
+  useEffect(() => {
+    const filteredData = SERVICES_DETAILS.find((item) => item.slug === slug);
+    setData(filteredData);
+  }, [slug]);
 
   return (
     <Box sx={{ py: 5 }}>
@@ -81,7 +97,7 @@ const QuickLinksDetails = () => {
                 mt: 2,
               }}
             >
-              Patent Prosecution
+              {data?.title}
             </Typography>
           </Box>
           <Image src={lightLogo} alt="" width={400} />
@@ -145,24 +161,51 @@ const QuickLinksDetails = () => {
 
       <Container maxWidth="lg" sx={{ py: 10 }}>
         <Grid container spacing={6}>
-          <Grid size={6}>
-            <Typography
-              sx={{
-                color: COLORS.PRIMARY_BLUE,
-                fontSize: 30,
-                fontFamily: tradeGothic.style.fontFamily,
-                fontWeight: 700,
-                lineHeight: "58px",
-                textTransform: "capitalize",
-              }}
-            >
-              We are engineers. We are lawyers. We are businessmen. We are also
-              licensing professionals and IP litigators. Because we see the
-              world from many perspectives, we are able to craft patents that
-              contribute to IP portfolios that achieve your goals. 
-            </Typography>
-          </Grid>
-          <Grid size={6}>
+          {data?.data.map((val, i) => (
+            <Grid size={6} key={i}>
+              <Typography
+                sx={{
+                  color: i === 0 ? COLORS.PRIMARY_BLUE : COLORS.TEXT_PRIMARY_4,
+                  fontSize: i === 0 ? 30 : 20,
+                  fontFamily:
+                    i === 0
+                      ? tradeGothic.style.fontFamily
+                      : adelle.style.fontFamily,
+                  fontWeight: i === 0 ? 700 : 400,
+                  lineHeight: i === 0 ? "58px" : "28px",
+                  textTransform: i === 0 ? "capitalize" : "none",
+                }}
+              >
+                {val.description} 
+              </Typography>
+              <List>
+                {val.dataList?.map((item, index) => (
+                  <ListItem sx={{ alignItems: "flex-start" }} key={index}>
+                    <ListItemAvatar sx={{ minWidth: 20 }}>
+                      <Circle
+                        sx={{ color: COLORS.TEXT_PRIMARY_4, fontSize: 8 }}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={item.label}
+                      slotProps={{
+                        primary: {
+                          sx: {
+                            color: COLORS.TEXT_PRIMARY_4,
+                            fontFamily: adelle.style.fontFamily,
+                            fontSize: 20,
+                            fontWeight: 400,
+                            lineHeight: "28px",
+                          },
+                        },
+                      }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Grid>
+          ))}
+          {/* <Grid size={6}>
             <Typography
               sx={{
                 color: COLORS.TEXT_PRIMARY_4,
@@ -181,33 +224,7 @@ const QuickLinksDetails = () => {
               — it also fortifies its defendability in the event of
               infringement. Our patent prosecution services includ
             </Typography>
-
-            <List>
-              {listItem.map((val, i) => (
-                <ListItem sx={{ alignItems: "flex-start" }} key={i}>
-                  <ListItemAvatar sx={{ minWidth: 20 }}>
-                    <Circle
-                      sx={{ color: COLORS.TEXT_PRIMARY_4, fontSize: 8 }}
-                    />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={val.label}
-                    slotProps={{
-                      primary: {
-                        sx: {
-                          color: COLORS.TEXT_PRIMARY_4,
-                          fontFamily: adelle.style.fontFamily,
-                          fontSize: 20,
-                          fontWeight: 400,
-                          lineHeight: "28px",
-                        },
-                      },
-                    }}
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Box>

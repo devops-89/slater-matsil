@@ -15,6 +15,7 @@ import Image from "next/image";
 import React from "react";
 import lightLogo from "@/public/images/home/slater-matsil-logo-light.png";
 import ServiceAreaCard from "./common/Service-Area-Card";
+import Link from "next/link";
 const ServiceAreas = () => {
   const { details } = usePageData();
   return (
@@ -68,18 +69,20 @@ const ServiceAreas = () => {
           <Divider
             sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
           />
-          <Button
-            sx={{
-              color: COLORS.PRIMARY_BLUE,
-              fontFamily: adelle.style.fontFamily,
-              textDecoration: "underline",
-              fontWeight: 600,
-              fontSize: 16,
-              lineHeight: "28px",
-            }}
-          >
-            View More
-          </Button>
+          <Link href="/services" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                color: COLORS.PRIMARY_BLUE,
+                fontFamily: adelle.style.fontFamily,
+                textDecoration: "underline",
+                fontWeight: 600,
+                fontSize: 16,
+                lineHeight: "28px",
+              }}
+            >
+              View More
+            </Button>
+          </Link>
           <Divider
             sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
           />

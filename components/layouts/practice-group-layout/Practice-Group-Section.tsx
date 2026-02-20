@@ -9,22 +9,22 @@ import MeetPractitioners from "./Meet-Practitioners";
 const PracticeGroupSection = () => {
   const { details } = usePageData();
   const [active, setActive] = useState(
-    PRACTICE_GROUP_TAB_DATA.CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING
+    PRACTICE_GROUP_TAB_DATA.CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING,
   );
 
   const [data, setData] = useState(
     details?.practiceGroupPage?.practiceGroup_section?.tabData?.find(
       (item) =>
         item.title ===
-        PRACTICE_GROUP_TAB_DATA.CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING
-    )
+        PRACTICE_GROUP_TAB_DATA.CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING,
+    ),
   );
 
   useEffect(() => {
     if (details?.practiceGroupPage?.practiceGroup_section?.tabData) {
       const initialData =
         details.practiceGroupPage.practiceGroup_section.tabData.find(
-          (item) => item.title === active
+          (item) => item.title === active,
         );
       setData(initialData);
     }
@@ -34,7 +34,7 @@ const PracticeGroupSection = () => {
     setActive(tab);
     const newData =
       details?.practiceGroupPage?.practiceGroup_section?.tabData.find(
-        (item) => item.title === tab
+        (item) => item.title === tab,
       );
 
     setData(newData);
@@ -74,7 +74,7 @@ const PracticeGroupSection = () => {
                 >
                   {val.title}
                 </Button>
-              )
+              ),
             )}
           </Stack>
         </Box>

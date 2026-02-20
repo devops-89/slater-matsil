@@ -64,7 +64,7 @@ const ProfessionalHeroSection = () => {
                 >
                   {val.label}
                 </Typography>
-              )
+              ),
             )}
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>

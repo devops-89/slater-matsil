@@ -14,7 +14,7 @@ const ProfessionalDetailsLayout = () => {
 
   useEffect(() => {
     const filteredProfessionalData = PROFESSIONAL_DETAILS_DATA.find(
-      (item) => item.slug === slug
+      (item) => item.slug === slug,
     );
 
     if (filteredProfessionalData) {

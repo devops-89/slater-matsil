@@ -37,22 +37,33 @@ const Footer = () => {
     },
   ];
   return (
-    <Box sx={{ backgroundColor: COLORS.PRIMARY_BLUE, height: "100%", py: 10 }}>
+    <Box
+      sx={{
+        backgroundColor: COLORS.PRIMARY_BLUE,
+        py: { xs: 6, md: 10 },
+        mt: "auto",
+      }}
+    >
       <Container maxWidth="lg">
-        <Grid container spacing={4}>
+        <Grid
+          container
+          spacing={{ xs: 4, md: 8 }}
+          justifyContent="space-between"
+        >
           {details?.homepage?.footerData?.footer_links.map((val, i) => (
-            <Grid size={{ lg: 3, xs: 6 }} key={i}>
+            <Grid size={{ md: 2.5, sm: 6, xs: 12 }} key={i}>
               <FooterList DATA={val.DATA} HEADING={val.HEADING} />
             </Grid>
           ))}
-          <Grid size={{ lg: 3, xs: 12 }}>
+          <Grid size={{ md: 3, sm: 6, xs: 12 }}>
             <Typography
               sx={{
                 color: COLORS.WHITE,
-                fontSize: 16,
+                fontSize: 18,
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 lineHeight: "26px",
+                mb: 2,
               }}
             >
               Insights & Updates
@@ -60,12 +71,12 @@ const Footer = () => {
             <Typography
               sx={{
                 color: COLORS.FOOTER_TEXT_COLOR,
-                fontSize: 16,
+                fontSize: 14,
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 400,
-                lineHeight: "26px",
-                opacity: 0.5,
-                py: 2,
+                lineHeight: "24px",
+                opacity: 0.8,
+                mb: 3,
               }}
             >
               Stay updated with industry insights and professional
@@ -76,7 +87,10 @@ const Footer = () => {
               sx={{
                 ...TEXTFIELD_STYLES,
                 backgroundColor: COLORS.WHITE,
-                mt: 3,
+                borderRadius: 1,
+                "& .MuiOutlinedInput-root": {
+                  paddingRight: 1,
+                },
               }}
               fullWidth
               placeholder="Email Address"
@@ -86,15 +100,18 @@ const Footer = () => {
                     <InputAdornment position="end">
                       <Button
                         sx={{
-                          padding: "14px ",
-                          borderRadius: "56px",
+                          py: 1,
+                          px: 3,
+                          borderRadius: "50px",
                           backgroundColor: COLORS.PRIMARY_BLUE,
                           color: COLORS.WHITE,
-                          boxShadow: "0 3px 12px 0 rgba(74, 58, 255, 0.18)",
                           fontFamily: adelle.style.fontFamily,
                           fontWeight: 600,
-                          lineHeight: "16px",
                           fontSize: 12,
+                          textTransform: "none",
+                          "&:hover": {
+                            backgroundColor: COLORS.PRIMARY_GREEN,
+                          },
                         }}
                       >
                         Subscribe
@@ -105,111 +122,138 @@ const Footer = () => {
               }}
             />
           </Grid>
-          <Grid size={{ lg: 3, xs: 12 }}>
+          <Grid size={{ md: 3, sm: 6, xs: 12 }}>
             <Typography
               sx={{
                 color: COLORS.WHITE,
-                fontSize: 16,
+                fontSize: 18,
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 lineHeight: "26px",
-                mb: 1,
+                mb: 2,
               }}
             >
               Contact Us
             </Typography>
-            {contactData.map((val, i) => (
-              <Typography
-                sx={{
-                  fontSize: 16,
-                  fontFamily: adelle.style.fontFamily,
-                  fontWeight: 600,
-                  lineHeight: "31px",
-                  color: COLORS.FOOTER_TEXT_COLOR,
-                }}
-                key={i}
-              >
-                {val.name} :{" "}
-                <Typography
-                  component="span"
-                  sx={{
-                    fontSize: 16,
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: 400,
-                    lineHeight: "31px",
-                    color: COLORS.FOOTER_TEXT_COLOR,
-                  }}
-                >
-                  {val.value}
-                </Typography>
-              </Typography>
-            ))}
+            <Stack spacing={2}>
+              {contactData.map((val, i) => (
+                <Box key={i}>
+                  <Typography
+                    sx={{
+                      fontSize: 14,
+                      fontFamily: tradeGothic.style.fontFamily,
+                      fontWeight: 700,
+                      color: COLORS.FOOTER_TEXT_COLOR,
+                      opacity: 0.6,
+                      mb: 0.5,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    {val.name}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: 16,
+                      fontFamily: adelle.style.fontFamily,
+                      fontWeight: 400,
+                      color: COLORS.WHITE,
+                      lineHeight: "24px",
+                    }}
+                  >
+                    {val.value}
+                  </Typography>
+                </Box>
+              ))}
+            </Stack>
           </Grid>
         </Grid>
-        <Divider sx={{ borderColor: "", my: 5 }} />
 
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          spacing={2}
-        >
-          {details?.homepage?.footerData?.social_links.map((val, i) => (
-            <IconButton
-              key={i}
-              sx={{ color: COLORS.WHITE, border: "1px solid #D0DAF5" }}
-            >
-              <val.icon />
-            </IconButton>
-          ))}
-        </Stack>
+        <Divider sx={{ borderColor: "rgba(255,255,255,0.1)", my: 6 }} />
 
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          justifyContent={"center"}
+        <Grid
+          container
           spacing={4}
-          sx={{ my: 3 }}
+          alignItems="center"
+          justifyContent="space-between"
+          direction={{ xs: "column-reverse", md: "row" }}
         >
-          {details?.homepage?.footerData?.privacy_pages?.map((val, i) => (
-            <Link href={val.href || ""} style={{ textDecoration: "none" }}>
-              <Typography
-                sx={{
-                  color: COLORS.FOOTER_TEXT_COLOR,
-                  fontSize: 14,
-                  fontWeight: 700,
-                  lineHeight: "26px",
-                  fontFamily: tradeGothic.style.fontFamily,
-                }}
-                key={i}
-              >
-                {val.title}
-              </Typography>
-            </Link>
-          ))}
-        </Stack>
+          <Grid size={{ xs: 12, md: 4 }}>
+            <Box sx={{ maxWidth: 200, mx: { xs: "auto", md: 0 } }}>
+              <Image
+                src={details?.homepage?.footerData?.logo || logo}
+                alt="Slater Matsil Logo"
+                style={{ width: "100%", height: "auto" }}
+              />
+            </Box>
+            <Typography
+              sx={{
+                color: COLORS.FOOTER_TEXT_COLOR,
+                fontSize: 12,
+                fontFamily: adelle.style.fontFamily,
+                fontWeight: 400,
+                opacity: 0.6,
+                mt: 2,
+                textAlign: { xs: "center", md: "left" },
+              }}
+            >
+              {details?.homepage?.footerData?.copyRightText}
+            </Typography>
+          </Grid>
 
-        <Box>
-          <Image
-            src={details?.homepage?.footerData?.logo || logo}
-            alt=""
-            style={{ width: "100%", height: "100%" }}
-          />
-        </Box>
-
-        <Typography
-          sx={{
-            color: COLORS.WHITE,
-            textAlign: "center",
-            fontSize: 16,
-            fontFamily: tradeGothic.style.fontFamily,
-            fontWeight: 400,
-            lineHeight: "26px",
-            mt: 5,
-          }}
-        >
-          {details?.homepage?.footerData?.copyRightText}
-        </Typography>
+          <Grid size={{ xs: 12, md: 8 }}>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              alignItems="center"
+              justifyContent={{ xs: "center", md: "flex-end" }}
+              spacing={{ xs: 2, sm: 4 }}
+            >
+              <Stack direction="row" spacing={3}>
+                {details?.homepage?.footerData?.privacy_pages?.map((val, i) => (
+                  <Link
+                    href={val.href || ""}
+                    key={i}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Typography
+                      sx={{
+                        color: COLORS.FOOTER_TEXT_COLOR,
+                        fontSize: 14,
+                        fontFamily: tradeGothic.style.fontFamily,
+                        fontWeight: 600,
+                        transition: "color 0.2s",
+                        "&:hover": {
+                          color: COLORS.WHITE,
+                        },
+                      }}
+                    >
+                      {val.title}
+                    </Typography>
+                  </Link>
+                ))}
+              </Stack>
+              <Stack direction="row" spacing={2}>
+                {details?.homepage?.footerData?.social_links.map((val, i) => (
+                  <IconButton
+                    key={i}
+                    sx={{
+                      color: COLORS.WHITE,
+                      border: `1px solid ${COLORS.FOOTER_TEXT_COLOR}`,
+                      opacity: 0.8,
+                      "&:hover": {
+                        backgroundColor: COLORS.WHITE,
+                        color: COLORS.PRIMARY_BLUE,
+                        opacity: 1,
+                      },
+                    }}
+                  >
+                    <val.icon fontSize="small" />
+                  </IconButton>
+                ))}
+              </Stack>
+            </Stack>
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   );

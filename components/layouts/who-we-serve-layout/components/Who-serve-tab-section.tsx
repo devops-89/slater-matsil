@@ -14,11 +14,13 @@ const WhoServeTabSection = () => {
   const { details } = usePageData();
 
   const [serveData, setServeData] = useState(
-    details?.whoWeServePage?.whoWeServeTabsSection,
+    details?.whoWeServePage?.whoWeServeTabsSection[0],
   );
-
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setServeData(details?.whoWeServePage?.whoWeServeTabsSection[newValue]);
+
+    // console.log("teste", newValue);
   };
   return (
     <Box sx={{ mt: 10 }}>
@@ -33,17 +35,17 @@ const WhoServeTabSection = () => {
           </Grid>
         </Grid>
       </Container>
-      {details?.whoWeServePage?.whoWeServeTabsSection?.map((val, i) => (
+      {details?.whoWeServePage?.whoWeServeTabsSection.map((val, i) => (
         <CustomTabPanel index={i} value={value}>
           <TabCard
-            bigDescription={val.bigDescription}
-            quote={val.quote}
-            data={val.data}
+            bigDescription={serveData?.bigDescription || ""}
+            quote={serveData?.quote || ""}
+            data={serveData?.data || []}
           />
           <Container maxWidth="lg" sx={{ my: 7 }}>
             <QuoteCard
-              quote={details?.whoWeServePage?.quote?.quote || ""}
-              author={details?.whoWeServePage?.quote?.author || ""}
+              quote={serveData?.quoteCardData?.quote || ""}
+              author={serveData?.quoteCardData?.author || ""}
             />
           </Container>
         </CustomTabPanel>

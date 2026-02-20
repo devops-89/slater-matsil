@@ -4,6 +4,7 @@ import {
   Grid,
   IconButton,
   InputAdornment,
+  Pagination,
   Stack,
   TextField,
   Typography,
@@ -27,15 +28,19 @@ const ProfessionalList = () => {
   };
 
   const [data, setData] = useState(
-    details?.firm_professionals?.PROFESSIONAL_LIST_PROPS
+    details?.firm_professionals?.PROFESSIONAL_LIST_PROPS,
   );
+
+  const [page, setPage] = useState(1);
+  const ITEMS_PER_PAGE = 6;
 
   const handleSearch = () => {
     const filteredData =
       details?.firm_professionals?.PROFESSIONAL_LIST_PROPS.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase())
+        item.name.toLowerCase().includes(search.toLowerCase()),
       );
     setData(filteredData);
+    setPage(1);
   };
   const [alphabet, setAlphabet] = useState("");
 
@@ -43,10 +48,23 @@ const ProfessionalList = () => {
     setAlphabet(letter);
     const filteredData =
       details?.firm_professionals?.PROFESSIONAL_LIST_PROPS.filter((item) =>
-        item.name.toLowerCase().startsWith(letter)
+        item.name.toLowerCase().startsWith(letter),
       );
     setData(filteredData);
+    setPage(1);
   };
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number,
+  ) => {
+    setPage(value);
+  };
+
+  const paginatedData = data?.slice(
+    (page - 1) * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE,
+  );
 
   return (
     <Box sx={{ mt: 10 }}>
@@ -123,8 +141,8 @@ const ProfessionalList = () => {
           </Grid>
         </Grid>
         <Grid container spacing={5} rowSpacing={20} sx={{ mt: 5 }}>
-          {data?.length ? (
-            data?.map((val, i) => (
+          {paginatedData?.length ? (
+            paginatedData?.map((val, i) => (
               <Grid size={{ lg: 4, xs: 12 }} key={i}>
                 <ProfessionalsCard
                   img={val.img}
@@ -142,12 +160,35 @@ const ProfessionalList = () => {
                 color: COLORS.PRIMARY_BLUE,
                 fontWeight: 700,
                 textAlign: "center",
+                width: "100%",
               }}
             >
               No Data Found
             </Typography>
           )}
         </Grid>
+        {data && data?.length > ITEMS_PER_PAGE && (
+          <Stack direction="row" justifyContent="center" sx={{ mt: 20 }}>
+            <Pagination
+              count={Math.ceil(data.length / ITEMS_PER_PAGE)}
+              page={page}
+              onChange={handlePageChange}
+              sx={{
+                "& .MuiPaginationItem-root": {
+                  color: COLORS.PRIMARY_BLUE,
+                  borderColor: COLORS.PRIMARY_BLUE,
+                  "&.Mui-selected": {
+                    backgroundColor: COLORS.PRIMARY_BLUE,
+                    color: COLORS.WHITE,
+                    "&:hover": {
+                      backgroundColor: COLORS.PRIMARY_BLUE,
+                    },
+                  },
+                },
+              }}
+            />
+          </Stack>
+        )}
       </Container>
     </Box>
   );

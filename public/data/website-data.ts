@@ -18,6 +18,7 @@ import {
   INDUSTRIES_DATA,
   INSIGHTS_CARD_DATA,
   METRICS_DATA,
+  professionalsListData,
   SERVICE_FRAMEWORK_CARD_DATA,
   STRENGTH_CARD_DATA,
 } from "./generic-array";
@@ -39,6 +40,7 @@ import professional3 from "@/professionals/ruojian.jpg";
 import professional4 from "@/professionals/yumin_thumb.jpg";
 import professional5 from "@/professionals/steven-yates.jpg";
 import professional6 from "@/professionals/srini_thumb.jpg";
+import professional7 from "@/professionals/transparent/amitava-chatterjee.png";
 import careerHeroBackgroundImage from "@/career/CAREERS.png";
 import careerHeroImage from "@/career/hero-image.png";
 import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
@@ -242,10 +244,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           title: "Privacy",
           href: "/privacy-policy",
         },
-        {
-          title: "Cookies",
-          href: "/",
-        },
+
         {
           title: "Disclaimer",
           href: "/disclaimer",
@@ -367,44 +366,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
       ],
     },
-    PROFESSIONAL_LIST_PROPS: [
-      {
-        img: professional1,
-        name: "Williams Zachary, Ph.D",
-        designation: "Technical Advisor",
-        slug: "zachary-williams",
-      },
-      {
-        img: professional2,
-        name: "Brian A. Carlson",
-        designation: "Attorney at Law",
-        slug: "brian-carlson",
-      },
-      {
-        img: professional3,
-        name: "RuoJian Zhang",
-        designation: "Distinguished Patent Agent",
-        slug: "ruojian-zhang",
-      },
-      {
-        img: professional4,
-        name: "Yumin Jeff Zhang, Ph.D",
-        designation: "Distinguished Patent Agent",
-        slug: "yumin-jeff-zhang",
-      },
-      {
-        img: professional5,
-        name: "Steven Yates",
-        designation: "Attorney at Law",
-        slug: "steven-yates",
-      },
-      {
-        img: professional6,
-        name: "Srini Chakravarthi, Ph.D",
-        designation: "Attorney at Law",
-        slug: "srini-chakravarthi",
-      },
-    ],
+    PROFESSIONAL_LIST_PROPS: professionalsListData,
   },
   careerPage: {
     career_hero_section: {
@@ -631,6 +593,11 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
               "Our clients demand a return on their IP investments. For some, a defensive IP strategy guaranteeing them freedom to operate and the ability to protect market share is foremost. For others, IP rights are tangible evidence of their technology leadership. Leveraging IP rights to gain access to other technologies through cross-licenses or otherwise monetizing IP rights is another way to provide a return on the IP investment. Of course, the more successful a company is in the marketplace, the more likely that company is to be the target of adverse patent assertions. Slater Matsil’s licensing and litigation practice group has decades of collective experience in asserting and defending IP rights. In fact, Slater Matsil was one of the first firms to bring Inter Partes Review challenges under the AIA in 2013. There is a reason why our clients contact us when the outcome is simply too important to compromise.",
           },
         ],
+        quoteCardData: {
+          quote:
+            "Slater Matsil understands our technology very well and we give our most important cases to the firm. We trust them and trust the legal opinions they provide.",
+          author: "Chief IP Counsel, Large Corporate Technology Leader",
+        },
       },
       {
         title: WHO_WE_SERVE_PAGE_TAB_DATA.SMALL_COMPANIES,
@@ -652,58 +619,59 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
               "We understand that funding is the lifeline that sustains nascent technologies and companies. Slater Matsil is well-versed in the metrics that venture capital firms and other funding sources look to when considering investment decisions and evaluating performance. We can assist in tailoring IP strategies to these criteria when appropriate. “Strategic partners” is more than just a buzz phrase at Slater Matsil. We are open to a wide range of alternative fee structures, including success-sharing arrangements, when circumstances permit.",
           },
         ],
+        quoteCardData: {
+          quote:
+            "Slater Matsil is a well-rounded, professional patent firm that can handle a full range of patent work from the basic to the more complex.",
+          author: "Founder and CEO of a Start-Up Company",
+        },
       },
       {
         title: WHO_WE_SERVE_PAGE_TAB_DATA.US_LAW_FIRMS,
         bigDescription:
-          "Slater Matsil is a one-stop destination for managing large patent portfolios. Our corporate clients are market leaders that depend heavily on innovation. As first movers in their respective industries, our clients understand the importance of IP leadership and rely on us to develop and execute their IP strategy. Because of our experience in all aspects of IP law",
-        quote:
-          "— from prosecution to licensing to litigation — we provide our clients the knowledge and insights they need to maintain this leadership role.",
+          "IP disputes generate incredibly complex litigation, frequently lasting years and spanning multiple borders and time zones. The stakes are great, the issues are complicated, and time pressures are intense.",
+        quote: "",
         data: [
           {
             description:
-              "We manage prolific portfolios without compromising attention to detail and quality. ",
+              "IP-centric litigation of this nature requires a team of professionals offering diverse skills.  Slater Matsil’s litigation support practice works seamlessly with our partner law firms to provide services as part of an integrated effort. Some law firms engage us to manage IP issues that are outside their typical practice areas. Other law firms have an established IP litigation practice, but simply need additional boots on the ground or skilled support. For example, we have worked with many trial law firms to provide patent litigation expertise, including providing expert witness testimony on matters of patent prosecution practice and inequitable conduct issues. We have worked side by side with trial counsel on discovery and pre-trial preparation matters, liaised with expert witnesses, played a key role in claim construction briefing and Markman hearings, and provided expert testimony on an assortment of processes and technologies. We also routinely work with other firms in performing prior art searches, pre-filing diligence, and the like to complement the work being done at these firms. ",
           },
 
           {
             description:
-              "Although a relatively small firm, Slater Matsil is one of the largest pure play IP boutiques in the southwest region and has a dedicated patent practice that rivals that of many national firms employing hundreds of lawyers. We achieve this by assigning a dedicated team of Slater Matsil professionals to each client. This ensures that our clients, with portfolios big and small, receive personalized treatment from Slater Matsil professionals who quickly drill down to the technical depth necessary to complete each specific project.",
-          },
-          {
-            description:
-              "Many of our corporate clients invest billions of dollars per year in Research and Development, which results in sophisticated and complex technological improvements. Some of these same clients file thousands of applications per year (in the U.S. and abroad) to protect these improvements, resulting in a substantial number of cases being active at any given time. Because of our technical depth and our dedicated team approach, we are able to come up to speed quickly on the most complex technologies and ensure our clients’ investments in R&D are protected timely and efficiently. ",
-          },
-          {
-            description:
-              "Our clients demand a return on their IP investments. For some, a defensive IP strategy guaranteeing them freedom to operate and the ability to protect market share is foremost. For others, IP rights are tangible evidence of their technology leadership. Leveraging IP rights to gain access to other technologies through cross-licenses or otherwise monetizing IP rights is another way to provide a return on the IP investment. Of course, the more successful a company is in the marketplace, the more likely that company is to be the target of adverse patent assertions. Slater Matsil’s licensing and litigation practice group has decades of collective experience in asserting and defending IP rights. In fact, Slater Matsil was one of the first firms to bring Inter Partes Review challenges under the AIA in 2013. There is a reason why our clients contact us when the outcome is simply too important to compromise.",
+              "Our familiarity with the challenges facing litigation counsel, from discovery issues to concerns about privilege and waiver, make us ideal candidates for handling Patent Office matters relating to or preceding litigation. We have assisted litigation counsel from simple matters such as correcting procedural deficiencies, filing certificates of correction, and correcting assignment records, to must-win matters such as challenging and defending post grant challenges (e.g., Inter Partes Reviews) arising from litigation.",
           },
         ],
+        quoteCardData: {
+          quote:
+            "Slater Matsil is a jewel box, a best-in-class patent firm universally known for a superlative quality work product and wonderful people.",
+          author: "Managing Partner, IP Boutique Law Firm",
+        },
       },
       {
         title: WHO_WE_SERVE_PAGE_TAB_DATA.INTERNATIONAL_LAW_FIRMS,
         bigDescription:
-          "Slater Matsil is a one-stop destination for managing large patent portfolios. Our corporate clients are market leaders that depend heavily on innovation. As first movers in their respective industries, our clients understand the importance of IP leadership and rely on us to develop and execute their IP strategy. Because of our experience in all aspects of IP law",
-        quote:
-          "— from prosecution to licensing to litigation — we provide our clients the knowledge and insights they need to maintain this leadership role.",
+          "Perhaps because so many of our clients are based outside the U.S., Slater Matsil cultivates relationships with firms in countries throughout the world. Firms outside the U.S. routinely rely on us for all IP matters related to U.S. law.",
+        quote: "",
         data: [
           {
             description:
-              "We manage prolific portfolios without compromising attention to detail and quality. ",
+              "These clients are well-versed in their local laws and appreciate the importance of having an exemplary U.S. professional handle their client’s IP issues. We, in turn, rely upon those firms to assist our U.S. based clients when seeking IP counsel elsewhere. ",
           },
 
           {
             description:
-              "Although a relatively small firm, Slater Matsil is one of the largest pure play IP boutiques in the southwest region and has a dedicated patent practice that rivals that of many national firms employing hundreds of lawyers. We achieve this by assigning a dedicated team of Slater Matsil professionals to each client. This ensures that our clients, with portfolios big and small, receive personalized treatment from Slater Matsil professionals who quickly drill down to the technical depth necessary to complete each specific project.",
+              "We work with our international partners to file and prosecute U.S. patent applications at the U.S. Patent Office, based upon innovations originating outside the U.S. Our international clients also rely upon us for numerous and varied non-prosecution matters including advice, post grant proceedings, licensing, and litigation. We are the first firm of choice for many of our law firm clients based outside the U.S. who have come to appreciate our services on all issues relating to U.S. law.",
           },
           {
             description:
-              "Many of our corporate clients invest billions of dollars per year in Research and Development, which results in sophisticated and complex technological improvements. Some of these same clients file thousands of applications per year (in the U.S. and abroad) to protect these improvements, resulting in a substantial number of cases being active at any given time. Because of our technical depth and our dedicated team approach, we are able to come up to speed quickly on the most complex technologies and ensure our clients’ investments in R&D are protected timely and efficiently. ",
-          },
-          {
-            description:
-              "Our clients demand a return on their IP investments. For some, a defensive IP strategy guaranteeing them freedom to operate and the ability to protect market share is foremost. For others, IP rights are tangible evidence of their technology leadership. Leveraging IP rights to gain access to other technologies through cross-licenses or otherwise monetizing IP rights is another way to provide a return on the IP investment. Of course, the more successful a company is in the marketplace, the more likely that company is to be the target of adverse patent assertions. Slater Matsil’s licensing and litigation practice group has decades of collective experience in asserting and defending IP rights. In fact, Slater Matsil was one of the first firms to bring Inter Partes Review challenges under the AIA in 2013. There is a reason why our clients contact us when the outcome is simply too important to compromise.",
+              "Among our various professionals, Slater Matsil is conversant in many of the major languages of the world. Having professionals who are multilingual increases the possibility that we can understand and discuss your clients’ needs in their native language, which we have found to be helpful in litigation and licensing, and even during patent preparation and prosecution.",
           },
         ],
+        quoteCardData: {
+          quote:
+            "There are big IP firms on the East and West coasts whose quality is not any better but those firms are much more expensive. Slater Matsil does very good work and has a high level of responsibility.",
+          author: "Partner, Major European Law Firm",
+        },
       },
     ],
     quote: {
