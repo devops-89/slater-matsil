@@ -9,6 +9,11 @@ import QuickLinks from "./Quick-Links";
 
 const InsightsTabSection = () => {
   const [value, setValue] = useState(0);
+  const { details } = usePageData();
+  const [insightsData, setInsightsData] = useState(
+    details?.insightsPage?.insightsData,
+  );
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     if (
@@ -25,10 +30,6 @@ const InsightsTabSection = () => {
     }
   };
 
-  const { details } = usePageData();
-  const [insightsData, setInsightsData] = useState(
-    details?.insightsPage?.insightsData,
-  );
   return (
     <Box>
       <Box sx={{ backgroundColor: "#ECF8F8", pb: 3 }}>
@@ -48,11 +49,11 @@ const InsightsTabSection = () => {
         <QuickLinks />
       </Box>
       {details?.insightsPage?.tab_data.map((_, i) => (
-        <CustomTabPanel value={value} index={i}>
+        <CustomTabPanel value={value} index={i} key={i}>
           <Container maxWidth="lg" sx={{ my: 5 }}>
             <Grid container spacing={3}>
-              {insightsData?.map((val, i) => (
-                <Grid size={{ lg: 4, xs: 12 }} key={i}>
+              {insightsData?.map((val, index) => (
+                <Grid size={{ lg: 4, xs: 12 }} key={index}>
                   <InsightsCard
                     title={val.title}
                     category={val.category}

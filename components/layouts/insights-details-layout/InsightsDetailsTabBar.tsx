@@ -14,60 +14,77 @@ interface InsightsDetailsTabBarProps {
   onTabChange: (index: number) => void;
 }
 
-const InsightsDetailsTabBar = ({ activeTab, onTabChange }: InsightsDetailsTabBarProps) => {
+const InsightsDetailsTabBar = ({
+  activeTab,
+  onTabChange,
+}: InsightsDetailsTabBarProps) => {
   return (
     <Box sx={{ py: 0 }}>
       <Container maxWidth="lg">
-        {/* Combined pill: ABOUT (active = light grey + teal) | Lawyer Rankings (inactive = teal + white) */}
-        <Stack
-          direction="row"
-          alignItems="stretch"
-          justifyContent={{ xs: "center", md: "flex-start" }}
+        <Box
           sx={{
-            borderRadius: "72px",
-            overflow: "hidden",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            width: "fit-content",
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          {TABS.map((tab, index) => {
-            const isActive = activeTab === index;
-            return (
-              <Box
-                key={tab.id}
-                onClick={() => onTabChange(index)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") onTabChange(index);
-                }}
-                sx={{
-                  px: { xs: 3, md: 5.75 },
-                  py: 2.25,
-                  bgcolor: isActive ? "#E8E8E8" : COLORS.PRIMARY_BLUE,
-                  cursor: "pointer",
-                  transition: "background-color 0.2s",
-                  "&:hover": {
-                    bgcolor: isActive ? "#DEDEDE" : "#0a4d55",
-                  },
-                }}
-              >
+          {/* Outer pill: teal background, fixed height/width similar to Figma */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "stretch",
+              borderRadius: "36px",
+              bgcolor: COLORS.PRIMARY_BLUE,
+              p: 0.75,
+              minWidth: { md: 587, xs: "auto" },
+              height: { md: 72, xs: 56 },
+              boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
+            }}
+          >
+            {TABS.map((tab, index) => {
+              const isActive = activeTab === index;
+              return (
                 <Box
-                  component="span"
+                  key={tab.id}
+                  onClick={() => onTabChange(index)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") onTabChange(index);
+                  }}
                   sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: 700,
-                    fontSize: { xs: 18, md: 24 },
-                    color: isActive ? COLORS.PRIMARY_BLUE : "white",
-                    textTransform: "uppercase",
+                    flex: 1,
+                    px: { xs: 2.5, md: 4 },
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "30px",
+                    bgcolor: isActive ? COLORS.WHITE : "transparent",
+                    cursor: "pointer",
+                    transition: "background-color 0.2s, color 0.2s",
+                    "&:hover": {
+                      bgcolor: isActive ? "#F5F5F5" : "rgba(255,255,255,0.08)",
+                    },
                   }}
                 >
-                  {tab.label}
+                  <Box
+                    component="span"
+                    sx={{
+                      fontFamily: adelle.style.fontFamily,
+                      fontWeight: 700,
+                      fontSize: { xs: 16, md: 20 },
+                      color: isActive ? COLORS.PRIMARY_BLUE : COLORS.WHITE,
+                      textTransform: "uppercase",
+                      textAlign: "center",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {tab.label}
+                  </Box>
                 </Box>
-              </Box>
-            );
-          })}
-        </Stack>
+              );
+            })}
+          </Box>
+        </Box>
       </Container>
     </Box>
   );

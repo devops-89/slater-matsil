@@ -65,6 +65,8 @@ import contactHeroImage from "@/contact/hero-vector-image.png";
 import { FaFacebookF } from "react-icons/fa6";
 import serviceHeroSectionImage from "@/services/hero-section.png";
 import unparalleledimage from "@/services/unparalled-legal-services.png";
+import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
+import blogCard from "@/public/images/blog/blog1.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -682,8 +684,9 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   },
   insightsPage: {
     heroSectionData: {
-      heading: "Insights",
-      subHeading: "Latest Recognition & Industry Updates",
+      heading: "Insights & Intellectual Perspectives",
+      subHeading:
+        "Stay informed with expert analysis, legal updates, and strategic insights from our patent professionals.",
       img: insightsHeroImage.src,
     },
     tab_data: [
@@ -726,6 +729,94 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       ],
     },
     insightsData: INSIGHTS_CARD_DATA,
+    blogSection: {
+      upcomingTitle: "Upcoming",
+      watchPastTitle: "Watch Past Webinars",
+      ctaTitle: "Ready to Safeguard Your Innovation?",
+      ctaDescription:
+        "At Slater Matsil, our patent professionals provide strategic guidance to protect your intellectual property and support your long-term growth.",
+      ctaButtonText: "SCHEDULE A CONSULTATION",
+      upcoming: [
+        {
+          id: 1,
+          tag: "Upcoming",
+          title: "Emerging Trends in AI Patent Law",
+          subtitle: "Navigating Patent Challenges in the Age of AI",
+          date: "March 12, 2026",
+          description:
+            "Explore how artificial intelligence is reshaping patent regulations and what innovators must know to stay protected.",
+          img: blogUpcoming,
+          bg: "#E4E3F8",
+        },
+        {
+          id: 2,
+          tag: "Upcoming",
+          title: "Emerging Trends in AI Patent Law",
+          subtitle: "Navigating Patent Challenges in the Age of AI",
+          date: "March 12, 2026",
+          description:
+            "Explore how artificial intelligence is reshaping patent regulations and what innovators must know to stay protected.",
+          img: blogUpcoming,
+          bg: "#F4F7E6",
+        },
+      ],
+      pastWebinars: [
+        {
+          id: 1,
+          date: "22 July 2024",
+          readTime: "4 min",
+          title: "Our SaaS Product Just Launched!",
+          description:
+            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
+          img: blogCard,
+        },
+        {
+          id: 2,
+          date: "22 July 2024",
+          readTime: "4 min",
+          title: "Our SaaS Product Just Launched!",
+          description:
+            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
+          img: blogCard,
+        },
+        {
+          id: 3,
+          date: "22 July 2024",
+          readTime: "4 min",
+          title: "Our SaaS Product Just Launched!",
+          description:
+            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
+          img: blogCard,
+        },
+        {
+          id: 4,
+          date: "22 July 2024",
+          readTime: "4 min",
+          title: "Our SaaS Product Just Launched!",
+          description:
+            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
+          img: blogCard,
+        },
+        {
+          id: 5,
+          date: "22 July 2024",
+          readTime: "4 min",
+          title: "Our SaaS Product Just Launched!",
+          description:
+            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
+          img: blogCard,
+        },
+        {
+          id: 6,
+          date: "22 July 2024",
+          readTime: "4 min",
+          title: "Our SaaS Product Just Launched!",
+          description:
+            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
+          img: blogCard,
+        },
+      ],
+    },
   },
   contactPage: {
     hero_section_data: {

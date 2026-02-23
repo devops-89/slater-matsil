@@ -33,7 +33,8 @@ const InsightsDetailsHeroSection = () => {
         overflow: "hidden",
         pt: { xs: 3, md: 4 },
         pb: { xs: 4, md: 6 },
-        background: "linear-gradient(to right, rgba(236, 248, 248, 0.9) 0%, rgba(244, 248, 236, 0.5) 50%, #fff 100%)",
+        background:
+          "linear-gradient(to right, rgba(236, 248, 248, 0.9) 0%, rgba(244, 248, 236, 0.5) 50%, #fff 100%)",
       }}
     >
       {/* Subtle blur orbs (kept minimal so gradient shows) */}
@@ -65,18 +66,20 @@ const InsightsDetailsHeroSection = () => {
       />
 
       <Container maxWidth="lg">
-        <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
-          {/* Left: profile image + name block */}
-          <Grid size={{ xs: 12, md: 8 }}>
+        <Grid container spacing={{ xs: 4, md: 8 }} justifyContent="center">
+          {/* Main content: profile image + name block + badge */}
+          <Grid size={12}>
             <Stack
               direction={{ xs: "column", lg: "row" }}
-              spacing={{ xs: 3, lg: 6 }}
-              alignItems={{ xs: "center", lg: "flex-start" }}
+              spacing={{ xs: 5, md: 8 }}
+              alignItems="center"
+              justifyContent="center"
             >
               <Stack
                 direction={{ xs: "column", sm: "row" }}
-                spacing={3}
+                spacing={{ xs: 4, md: 6 }}
                 alignItems="center"
+                justifyContent="center"
               >
                 <Box
                   sx={{
@@ -87,6 +90,7 @@ const InsightsDetailsHeroSection = () => {
                     borderRadius: "50%",
                     overflow: "hidden",
                     bgcolor: COLORS.PRIMARY_BLUE,
+                    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
                   }}
                 >
                   <Image
@@ -97,58 +101,70 @@ const InsightsDetailsHeroSection = () => {
                     priority
                   />
                 </Box>
-                <Stack spacing={1.5} sx={{ maxWidth: 479 }}>
+                <Stack
+                  spacing={2}
+                  sx={{
+                    maxWidth: 500,
+                    textAlign: { xs: "center", sm: "left" },
+                  }}
+                >
                   <Typography
                     sx={{
                       fontFamily: tradeGothic.style.fontFamily,
                       fontWeight: 700,
-                      fontSize: { xs: 36, md: 60 },
-                      lineHeight: 1.31,
+                      fontSize: { xs: 32, md: 56 },
+                      lineHeight: 1.2,
                       color: COLORS.PRIMARY_BLUE,
                     }}
                   >
                     {hero.name}
                   </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: adelle.style.fontFamily,
-                      fontWeight: 600,
-                      fontSize: { xs: 18, md: 25 },
-                      color: COLORS.TEXT_PRIMARY_4,
-                    }}
-                  >
-                    {hero.band}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: adelle.style.fontFamily,
-                      fontWeight: 600,
-                      fontSize: { xs: 16, md: 25 },
-                      color: COLORS.TEXT_PRIMARY_4,
-                    }}
-                  >
-                    {hero.guide}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontFamily: adelle.style.fontFamily,
-                      fontWeight: 600,
-                      fontSize: { xs: 16, md: 25 },
-                      color: COLORS.TEXT_PRIMARY_4,
-                    }}
-                  >
-                    {hero.yearsRanked}
-                  </Typography>
+                  <Stack spacing={1}>
+                    <Typography
+                      sx={{
+                        fontFamily: adelle.style.fontFamily,
+                        fontWeight: 600,
+                        fontSize: { xs: 18, md: 24 },
+                        color: COLORS.TEXT_PRIMARY_4,
+                      }}
+                    >
+                      {hero.band}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: adelle.style.fontFamily,
+                        fontWeight: 500,
+                        fontSize: { xs: 16, md: 22 },
+                        color: COLORS.TEXT_PRIMARY_4,
+                        opacity: 0.9,
+                      }}
+                    >
+                      {hero.guide}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontFamily: adelle.style.fontFamily,
+                        fontWeight: 500,
+                        fontSize: { xs: 14, md: 20 },
+                        color: COLORS.TEXT_PRIMARY_4,
+                        opacity: 0.8,
+                      }}
+                    >
+                      {hero.yearsRanked}
+                    </Typography>
+                  </Stack>
                 </Stack>
               </Stack>
-              {/* Optional badge image - right side on large screens */}
+
+              {/* Ranking badge image */}
               {hero.badgeImage && (
                 <Box
                   sx={{
-                    width: { xs: 280, md: 428 },
-                    height: { xs: 220, md: 377 },
+                    width: { xs: 240, md: 360 },
+                    height: { xs: 180, md: 280 },
                     position: "relative",
                     flexShrink: 0,
+                    mt: { xs: 2, lg: 0 },
                   }}
                 >
                   <Image
@@ -176,7 +192,12 @@ const InsightsDetailsHeroSection = () => {
           }}
         >
           {/* Company: circular logo (stylized S) + firm name + url */}
-          <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1.5}
+            sx={{ minWidth: 0 }}
+          >
             <Box
               sx={{
                 width: 50,
@@ -229,7 +250,12 @@ const InsightsDetailsHeroSection = () => {
           </Stack>
 
           {/* Email */}
-          <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1.5}
+            sx={{ minWidth: 0 }}
+          >
             <Box
               sx={{
                 width: 50,
@@ -271,7 +297,12 @@ const InsightsDetailsHeroSection = () => {
           </Stack>
 
           {/* Contact number */}
-          <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1.5}
+            sx={{ minWidth: 0 }}
+          >
             <Box
               sx={{
                 width: 50,
@@ -313,7 +344,12 @@ const InsightsDetailsHeroSection = () => {
           </Stack>
 
           {/* Share + 4 social icons: X, LinkedIn, Facebook, Email */}
-          <Stack direction="row" alignItems="center" spacing={1.5} sx={{ minWidth: 0 }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1.5}
+            sx={{ minWidth: 0 }}
+          >
             <Box
               sx={{
                 width: 50,
@@ -352,8 +388,12 @@ const InsightsDetailsHeroSection = () => {
                 onClick={() =>
                   window.open(
                     "https://twitter.com/intent/tweet?url=" +
-                      encodeURIComponent(typeof window !== "undefined" ? window.location.href : ""),
-                    "_blank"
+                      encodeURIComponent(
+                        typeof window !== "undefined"
+                          ? window.location.href
+                          : "",
+                      ),
+                    "_blank",
                   )
                 }
                 aria-label="Share on X (Twitter)"
@@ -373,8 +413,12 @@ const InsightsDetailsHeroSection = () => {
                 onClick={() =>
                   window.open(
                     "https://www.linkedin.com/sharing/share-offsite/?url=" +
-                      encodeURIComponent(typeof window !== "undefined" ? window.location.href : ""),
-                    "_blank"
+                      encodeURIComponent(
+                        typeof window !== "undefined"
+                          ? window.location.href
+                          : "",
+                      ),
+                    "_blank",
                   )
                 }
                 aria-label="Share on LinkedIn"
@@ -394,8 +438,12 @@ const InsightsDetailsHeroSection = () => {
                 onClick={() =>
                   window.open(
                     "https://www.facebook.com/sharer/sharer.php?u=" +
-                      encodeURIComponent(typeof window !== "undefined" ? window.location.href : ""),
-                    "_blank"
+                      encodeURIComponent(
+                        typeof window !== "undefined"
+                          ? window.location.href
+                          : "",
+                      ),
+                    "_blank",
                   )
                 }
                 aria-label="Share on Facebook"
@@ -413,9 +461,15 @@ const InsightsDetailsHeroSection = () => {
                   "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
                 }}
                 onClick={() => {
-                  const url = typeof window !== "undefined" ? window.location.href : "";
-                  const subject = encodeURIComponent(data?.hero?.name || "Profile");
-                  window.open(`mailto:?subject=${subject}&body=${encodeURIComponent(url)}`, "_blank");
+                  const url =
+                    typeof window !== "undefined" ? window.location.href : "";
+                  const subject = encodeURIComponent(
+                    data?.hero?.name || "Profile",
+                  );
+                  window.open(
+                    `mailto:?subject=${subject}&body=${encodeURIComponent(url)}`,
+                    "_blank",
+                  );
                 }}
                 aria-label="Share via Email"
               >

@@ -398,6 +398,26 @@ export interface TAB_SWITCHING_PROPS {
   sx?: SxProps<Theme>;
 }
 
+export interface BLOG_UPCOMING_ITEM {
+  id: number;
+  tag: string;
+  title: string;
+  subtitle: string;
+  date: string;
+  description: string;
+  img: StaticImageData;
+  bg: string;
+}
+
+export interface BLOG_PAST_WEBINAR_ITEM {
+  id: number;
+  date: string;
+  readTime: string;
+  title: string;
+  description: string;
+  img: StaticImageData;
+}
+
 export interface INSIGHTS_PAGE_DATA {
   heroSectionData: {
     heading: string;
@@ -412,6 +432,15 @@ export interface INSIGHTS_PAGE_DATA {
     data: QUICK_LINKS_CARD_PROPS[];
   };
   insightsData: INSIGHTS_DATA_PROPS[];
+  blogSection?: {
+    upcomingTitle: string;
+    watchPastTitle: string;
+    ctaTitle: string;
+    ctaDescription: string;
+    ctaButtonText: string;
+    upcoming: BLOG_UPCOMING_ITEM[];
+    pastWebinars: BLOG_PAST_WEBINAR_ITEM[];
+  };
 }
 
 export interface QUICK_LINKS_CARD_PROPS {
