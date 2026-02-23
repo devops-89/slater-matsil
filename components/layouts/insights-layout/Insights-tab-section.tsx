@@ -57,6 +57,7 @@ const InsightsTabSection = () => {
                     title={val.title}
                     category={val.category}
                     bgColor={val.bgColor}
+                    slug={val.slug}
                   />
                 </Grid>
               ))}

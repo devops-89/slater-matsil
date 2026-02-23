@@ -423,6 +423,48 @@ export interface INSIGHTS_DATA_PROPS {
   title: string;
   bgColor: string;
   category?: string;
+  slug?: string;
+}
+
+export interface INSIGHT_DETAIL_HERO_PROPS {
+  name: string;
+  band: string;
+  guide: string;
+  yearsRanked: string;
+  profileImage: StaticImageData;
+  badgeImage?: StaticImageData;
+}
+
+export interface INSIGHT_CONTACT_ITEM_PROPS {
+  label: string;
+  value: string;
+  href?: string;
+}
+
+export interface INSIGHT_CONTENT_SECTION_PROPS {
+  heading: string;
+  content: string;
+}
+
+export interface INSIGHTS_DETAIL_PROPS {
+  slug: string;
+  hero: INSIGHT_DETAIL_HERO_PROPS;
+  contact: {
+    firm: string;
+    firmUrl: string;
+    email: string;
+    phone: string;
+    shareLabel: string;
+  };
+  contentSections: {
+    aboutProvidedBy: string;
+    aboutProvidedByName: string;
+    region: string;
+    practiceAreas: INSIGHT_CONTENT_SECTION_PROPS;
+    professionalMemberships: INSIGHT_CONTENT_SECTION_PROPS;
+    career: INSIGHT_CONTENT_SECTION_PROPS;
+    personal: INSIGHT_CONTENT_SECTION_PROPS;
+  };
 }
 
 export interface CONTACT_US_PAGE_DATA {

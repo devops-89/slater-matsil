@@ -3,11 +3,11 @@ import { adelle } from "@/utils/fonts";
 import { INSIGHTS_DATA_PROPS } from "@/utils/types";
 import { ArrowForward, CallMade } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
-
+import Link from "next/link";
 import { motion } from "framer-motion";
 
-const InsightsCard = ({ bgColor, category, title }: INSIGHTS_DATA_PROPS) => {
-  return (
+const InsightsCard = ({ bgColor, category, title, slug }: INSIGHTS_DATA_PROPS) => {
+  const cardContent = (
     <Box
       component={motion.div}
       whileHover={{ y: -10 }}
@@ -130,6 +130,15 @@ const InsightsCard = ({ bgColor, category, title }: INSIGHTS_DATA_PROPS) => {
       </Stack>
     </Box>
   );
+
+  if (slug) {
+    return (
+      <Link href={`/insights/${slug}`} style={{ textDecoration: "none" }}>
+        {cardContent}
+      </Link>
+    );
+  }
+  return cardContent;
 };
 
 export default InsightsCard;

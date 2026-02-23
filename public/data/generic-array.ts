@@ -463,6 +463,7 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     title:
       "Steven Slater recognized by Chambers USA 2024 - 2025 as a Top Intellectual Property Attorney",
     bgColor: COLORS.PRIMARY_BLUE,
+    slug: "steven-slater-chambers-usa-2025",
   },
   {
     title:
