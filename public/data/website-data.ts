@@ -66,7 +66,12 @@ import { FaFacebookF } from "react-icons/fa6";
 import serviceHeroSectionImage from "@/services/hero-section.png";
 import unparalleledimage from "@/services/unparalled-legal-services.png";
 import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
-import blogCard from "@/public/images/blog/blog1.jpg";
+import blog1 from "@/public/images/blog/blog1.jpg";
+import blog2 from "@/public/images/blog/blog2.jpg";
+import blog3 from "@/public/images/blog/blog3.jpg";
+import blog4 from "@/public/images/blog/blog4.png";
+import blog5 from "@/public/images/blog/blog5.jpg";
+import blog6 from "@/public/images/blog/blog6.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -747,17 +752,19 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "Explore how artificial intelligence is reshaping patent regulations and what innovators must know to stay protected.",
           img: blogUpcoming,
           bg: "#E4E3F8",
+          slug: "emerging-trends-ai-patent-law",
         },
         {
           id: 2,
           tag: "Upcoming",
-          title: "Emerging Trends in AI Patent Law",
-          subtitle: "Navigating Patent Challenges in the Age of AI",
-          date: "March 12, 2026",
+          title: "Future of Quantum Computing IP",
+          subtitle: "Protecting the Next Frontier of Computation",
+          date: "April 05, 2026",
           description:
-            "Explore how artificial intelligence is reshaping patent regulations and what innovators must know to stay protected.",
-          img: blogUpcoming,
+            "A deep dive into the unique legal frameworks required to safeguard quantum computing breakthroughs.",
+          img: blog2,
           bg: "#F4F7E6",
+          slug: "future-quantum-computing-ip",
         },
       ],
       pastWebinars: [
@@ -768,52 +775,58 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           title: "Our SaaS Product Just Launched!",
           description:
             "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
-          img: blogCard,
+          img: blog1,
+          slug: "saas-product-just-launched",
         },
         {
           id: 2,
-          date: "22 July 2024",
-          readTime: "4 min",
-          title: "Our SaaS Product Just Launched!",
+          date: "15 June 2024",
+          readTime: "6 min",
+          title: "Mastering Intellectual Property",
           description:
-            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
-          img: blogCard,
+            "Understanding the core principles of IP is essential for any modern business to maintain a competitive advantage.",
+          img: blog2,
+          slug: "mastering-intellectual-property",
         },
         {
           id: 3,
-          date: "22 July 2024",
-          readTime: "4 min",
-          title: "Our SaaS Product Just Launched!",
+          date: "10 May 2024",
+          readTime: "5 min",
+          title: "The Role of Patents in Biotech",
           description:
-            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
-          img: blogCard,
+            "Biotechnology innovation relies heavily on strong patent protection. Here's what you need to know about the current landscape.",
+          img: blog3,
+          slug: "patents-in-biotech",
         },
         {
           id: 4,
-          date: "22 July 2024",
-          readTime: "4 min",
-          title: "Our SaaS Product Just Launched!",
+          date: "18 April 2024",
+          readTime: "8 min",
+          title: "Cybersecurity & Legal Compliance",
           description:
-            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
-          img: blogCard,
+            "As digital threats evolve, so do the legal requirements for data protection and cybersecurity resilience.",
+          img: blog4,
+          slug: "cybersecurity-legal-compliance",
         },
         {
           id: 5,
-          date: "22 July 2024",
-          readTime: "4 min",
-          title: "Our SaaS Product Just Launched!",
+          date: "05 March 2024",
+          readTime: "3 min",
+          title: "Sustainable Tech Innovations",
           description:
-            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
-          img: blogCard,
+            "Green technology is more than just a trend; it's a critical sector for future patent development and global impact.",
+          img: blog5,
+          slug: "sustainable-tech-innovations",
         },
         {
           id: 6,
-          date: "22 July 2024",
-          readTime: "4 min",
-          title: "Our SaaS Product Just Launched!",
+          date: "22 February 2024",
+          readTime: "5 min",
+          title: "Global IP Strategy for Startups",
           description:
-            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
-          img: blogCard,
+            "How small companies can navigate international patent systems without breaking the bank.",
+          img: blog6,
+          slug: "global-ip-strategy-startups",
         },
       ],
     },

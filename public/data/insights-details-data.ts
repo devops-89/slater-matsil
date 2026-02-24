@@ -3,7 +3,6 @@ import steven from "@/professionals/transparent/steven-slater.png";
 import ira from "@/professionals/transparent/ira-matsil.png";
 import john from "@/professionals/transparent/john-koetter.png";
 import stevenBadge from "@/insights/Screenshot 2025-11-18 113225 1.png";
-
 const commonContact = {
   firm: "SlaterMatsil, LLP",
   firmUrl: "www.slatermatsil.com",

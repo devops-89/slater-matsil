@@ -6,7 +6,12 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-const InsightsCard = ({ bgColor, category, title, slug }: INSIGHTS_DATA_PROPS) => {
+const InsightsCard = ({
+  bgColor,
+  category,
+  title,
+  slug,
+}: INSIGHTS_DATA_PROPS) => {
   const cardContent = (
     <Box
       component={motion.div}

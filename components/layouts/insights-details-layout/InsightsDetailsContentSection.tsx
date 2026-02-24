@@ -1,5 +1,6 @@
 "use client";
 
+import HeadingStar from "@/components/widgets/Heading-star";
 import { useInsightDetails } from "@/store/useInsightDetails";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
@@ -13,30 +14,7 @@ const SectionBlock = ({
   content: string;
 }) => (
   <Stack spacing={3} sx={{ mb: 8 }}>
-    <Stack direction="row" alignItems="center" spacing={2}>
-      <Box
-        sx={{
-          width: 32,
-          height: 32,
-          borderRadius: "50%",
-          bgcolor: COLORS.PRIMARY_GREEN,
-          flexShrink: 0,
-          boxShadow: "0 4px 10px rgba(114, 181, 43, 0.2)",
-        }}
-      />
-      <Typography
-        sx={{
-          fontFamily: adelle.style.fontFamily,
-          fontSize: 14,
-          fontWeight: 600,
-          color: COLORS.PRIMARY_GREEN,
-          textTransform: "uppercase",
-          letterSpacing: "0.1em",
-        }}
-      >
-        {heading}
-      </Typography>
-    </Stack>
+    <HeadingStar title={heading} />
     <Typography
       sx={{
         fontFamily: adelle.style.fontFamily,
@@ -44,7 +22,7 @@ const SectionBlock = ({
         fontSize: { xs: 18, md: 22 },
         lineHeight: 1.6,
         color: COLORS.TEXT_PRIMARY_4,
-        pl: { md: 6 },
+        textAlign: "justify",
       }}
     >
       {content}
@@ -70,32 +48,9 @@ const InsightsDetailsContentSection = ({
     return (
       <Box sx={{ py: { xs: 4, md: 8 }, pb: 10 }}>
         <Container maxWidth="lg">
-          <Stack
-            direction="row"
-            alignItems="center"
-            spacing={1.5}
-            sx={{ mb: 3 }}
-          >
-            <Box
-              sx={{
-                width: 36,
-                height: 36,
-                borderRadius: "18px",
-                bgcolor: COLORS.PRIMARY_GREEN,
-                flexShrink: 0,
-              }}
-            />
-            <Typography
-              sx={{
-                fontFamily: adelle.style.fontFamily,
-                fontSize: 16,
-                color: COLORS.PRIMARY_GREEN,
-                textTransform: "uppercase",
-              }}
-            >
-              Lawyer Rankings
-            </Typography>
-          </Stack>
+          <Box sx={{ mb: 3 }}>
+            <HeadingStar title="Lawyer Rankings" />
+          </Box>
           <Box
             sx={{
               p: 3,
@@ -152,35 +107,9 @@ const InsightsDetailsContentSection = ({
           sx={{ mb: 8, position: "relative" }}
         >
           <Box sx={{ maxWidth: { xs: "100%", md: "60%" } }}>
-            <Stack
-              direction="row"
-              alignItems="center"
-              spacing={2}
-              sx={{ mb: 2 }}
-            >
-              <Box
-                sx={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "50%",
-                  bgcolor: COLORS.PRIMARY_GREEN,
-                  flexShrink: 0,
-                  boxShadow: "0 4px 10px rgba(114, 181, 43, 0.2)",
-                }}
-              />
-              <Typography
-                sx={{
-                  fontFamily: adelle.style.fontFamily,
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: COLORS.PRIMARY_GREEN,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                }}
-              >
-                About
-              </Typography>
-            </Stack>
+            <Box sx={{ mb: 2 }}>
+              <HeadingStar title="About" />
+            </Box>
             <Typography
               sx={{
                 fontFamily: tradeGothic.style.fontFamily,

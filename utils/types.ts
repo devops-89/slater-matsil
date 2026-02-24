@@ -407,6 +407,7 @@ export interface BLOG_UPCOMING_ITEM {
   description: string;
   img: StaticImageData;
   bg: string;
+  slug: string;
 }
 
 export interface BLOG_PAST_WEBINAR_ITEM {
@@ -416,6 +417,7 @@ export interface BLOG_PAST_WEBINAR_ITEM {
   title: string;
   description: string;
   img: StaticImageData;
+  slug: string;
 }
 
 export interface INSIGHTS_PAGE_DATA {
@@ -581,5 +583,33 @@ export interface SERVICES_DETAILS_DATA_PROPS {
   data: {
     description: string;
     dataList?: { label: string }[];
+  }[];
+}
+
+export interface BLOG_DETAIL_PROPS {
+  slug: string;
+  hero: {
+    title: string;
+    category: string;
+    date: string;
+    readTime: string;
+    author: string;
+    authorImage?: StaticImageData;
+    authorTitle?: string;
+    bgImage?: StaticImageData;
+    badge?: string;
+  };
+  content: {
+    intro: string;
+    sections: {
+      heading: string;
+      content: string | string[];
+    }[];
+  };
+  relatedPosts?: {
+    slug: string;
+    title: string;
+    img: StaticImageData;
+    date: string;
   }[];
 }

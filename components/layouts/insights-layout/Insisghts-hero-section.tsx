@@ -3,11 +3,12 @@ import React from "react";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
+
 const InsightsHeroSection = () => {
   const { details } = usePageData();
 
   return (
-    <Box sx={{ my: { lg: 6, xs: 4 } }}>
+    <Box sx={{ mt: { lg: 3, xs: 2 }, mb: { lg: 6, xs: 4 } }}>
       <Container maxWidth="lg">
         <Box
           sx={{
