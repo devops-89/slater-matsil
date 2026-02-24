@@ -262,8 +262,8 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         "© 2016 - 2025 Slater Matsil, LLP | Dallas, TX | All Rights Reserved",
       contactData: {
         email: "info@slatermatsil.com",
-        phoneNumber: "+1 214-522-2222",
-        address: "123 Main St, Dallas, TX 75201",
+        phoneNumber: "972.732.1001",
+        address: "17304 Preston Rd, Suite 900, Dallas, TX 75252",
       },
     },
   },

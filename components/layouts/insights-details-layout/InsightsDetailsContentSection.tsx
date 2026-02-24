@@ -12,23 +12,26 @@ const SectionBlock = ({
 }: {
   heading: string;
   content: string;
-}) => (
-  <Stack spacing={3} sx={{ mb: 8 }}>
-    <HeadingStar title={heading} />
-    <Typography
-      sx={{
-        fontFamily: adelle.style.fontFamily,
-        fontWeight: 400,
-        fontSize: { xs: 18, md: 22 },
-        lineHeight: 1.6,
-        color: COLORS.TEXT_PRIMARY_4,
-        textAlign: "justify",
-      }}
-    >
-      {content}
-    </Typography>
-  </Stack>
-);
+}) => {
+  if (!content || !heading) return null;
+  return (
+    <Stack spacing={3} sx={{ mb: 8 }}>
+      <HeadingStar title={heading} />
+      <Typography
+        sx={{
+          fontFamily: adelle.style.fontFamily,
+          fontWeight: 400,
+          fontSize: { xs: 18, md: 22 },
+          lineHeight: 1.6,
+          color: COLORS.TEXT_PRIMARY_4,
+          textAlign: "justify",
+        }}
+      >
+        {content}
+      </Typography>
+    </Stack>
+  );
+};
 
 interface InsightsDetailsContentSectionProps {
   activeTab: number;
@@ -170,7 +173,7 @@ const InsightsDetailsContentSection = ({
         </Box>
 
         {/* Two-column content */}
-        <Grid container spacing={{ xs: 6, md: 12 }}>
+        <Grid container spacing={{ xs: 6, md: 12 }} sx={{ mb: 10 }}>
           <Grid size={{ xs: 12, md: 6 }}>
             <SectionBlock
               heading={sections.practiceAreas.heading}
@@ -192,6 +195,20 @@ const InsightsDetailsContentSection = ({
             />
           </Grid>
         </Grid>
+
+        {/* New full-width sections */}
+        {sections.chambersReview && (
+          <SectionBlock
+            heading={sections.chambersReview.heading}
+            content={sections.chambersReview.content}
+          />
+        )}
+        {sections.strengths && (
+          <SectionBlock
+            heading={sections.strengths.heading}
+            content={sections.strengths.content}
+          />
+        )}
       </Container>
     </Box>
   );

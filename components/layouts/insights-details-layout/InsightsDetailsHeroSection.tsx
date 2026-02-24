@@ -81,26 +81,54 @@ const InsightsDetailsHeroSection = () => {
                 alignItems="center"
                 justifyContent="center"
               >
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: { xs: 280, md: 400 },
-                    height: { xs: 280, md: 400 },
-                    flexShrink: 0,
-                    borderRadius: "50%",
-                    overflow: "hidden",
-                    bgcolor: COLORS.PRIMARY_BLUE,
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
-                  }}
-                >
-                  <Image
-                    src={hero.profileImage}
-                    alt={hero.name}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    priority
-                  />
-                </Box>
+                {hero.profileImage ? (
+                  <Box
+                    sx={{
+                      position: "relative",
+                      width: { xs: 280, md: 400 },
+                      height: { xs: 280, md: 400 },
+                      flexShrink: 0,
+                      borderRadius: "50%",
+                      overflow: "hidden",
+                      bgcolor: COLORS.PRIMARY_BLUE,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                    }}
+                  >
+                    <Image
+                      src={hero.profileImage}
+                      alt={hero.name}
+                      fill
+                      style={{ objectFit: "cover" }}
+                      priority
+                    />
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      width: { xs: 200, md: 280 },
+                      height: { xs: 200, md: 280 },
+                      flexShrink: 0,
+                      borderRadius: "50%",
+                      bgcolor: COLORS.PRIMARY_BLUE,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontFamily: tradeGothic.style.fontFamily,
+                        fontWeight: 700,
+                        fontSize: { xs: 56, md: 80 },
+                        color: "white",
+                        letterSpacing: "-2px",
+                      }}
+                    >
+                      SM
+                    </Typography>
+                  </Box>
+                )}
                 <Stack
                   spacing={2}
                   sx={{

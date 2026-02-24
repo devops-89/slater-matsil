@@ -4,7 +4,7 @@ import { Box, Container, Grid } from "@mui/material";
 import React, { useState } from "react";
 import CustomTabPanel from "@/components/widgets/Tab-panel";
 import InsightsCard from "./components/Insights-Card";
-import { INSIGHTS_TAB_DATA } from "@/utils/enum";
+import { COLORS, INSIGHTS_TAB_DATA } from "@/utils/enum";
 import QuickLinks from "./Quick-Links";
 
 const InsightsTabSection = () => {

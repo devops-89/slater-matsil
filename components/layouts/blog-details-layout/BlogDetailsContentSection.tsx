@@ -140,7 +140,7 @@ const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
                 {relatedPosts?.map((post, i) => (
                   <Link
                     key={i}
-                    href={`/blog/${post.slug}`}
+                    href={`/blogs/${post.slug}`}
                     style={{ textDecoration: "none" }}
                   >
                     <Stack

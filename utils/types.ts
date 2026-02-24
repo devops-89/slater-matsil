@@ -462,7 +462,7 @@ export interface INSIGHT_DETAIL_HERO_PROPS {
   band: string;
   guide: string;
   yearsRanked: string;
-  profileImage: StaticImageData;
+  profileImage?: StaticImageData;
   badgeImage?: StaticImageData;
 }
 
@@ -495,6 +495,8 @@ export interface INSIGHTS_DETAIL_PROPS {
     professionalMemberships: INSIGHT_CONTENT_SECTION_PROPS;
     career: INSIGHT_CONTENT_SECTION_PROPS;
     personal: INSIGHT_CONTENT_SECTION_PROPS;
+    chambersReview?: INSIGHT_CONTENT_SECTION_PROPS;
+    strengths?: INSIGHT_CONTENT_SECTION_PROPS;
   };
 }
 

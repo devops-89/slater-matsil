@@ -142,8 +142,8 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
         href: "/services",
       },
       {
-        text: "Blog",
-        href: "/blog",
+        text: "Blogs",
+        href: "/blogs",
       },
       {
         text: "Careers",
@@ -232,8 +232,8 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
         href: "/services",
       },
       {
-        text: "Blog",
-        href: "/blog",
+        text: "Blogs",
+        href: "/blogs",
       },
       {
         text: "Careers",
@@ -468,82 +468,118 @@ export const WHO_WE_SERVE_TAB_DATA = [
 
 export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   {
-    title:
-      "Steven Slater recognized by Chambers USA 2024 - 2025 as a Top Intellectual Property Attorney",
+    title: "Steven Slater Recognized by Chambers USA as Top Attorney",
     bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
     slug: "steven-slater-chambers-usa-2025",
   },
   {
-    title:
-      "Ira Matsil recognized by Chambers USA 2021 - 2025 as a Top Intellectual Property Attorney",
+    title: "Srini Chakravarthi recognized by Chamber USA as Top Attorney",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-chambers-usa-2025",
+  },
+  {
+    title: "Ira Matsil recognized by Chamber USA as Top Attorney",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "ira-matsil-chambers-usa-2025",
   },
   {
     title:
-      "Ira Matsil recognized by Chambers USA 2021 - 2025 as a Top Intellectual Property Attorney",
-    bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-chambers-usa-2025-2",
-  },
-  {
-    title:
-      "Ira Matsil was recognized in the 2021- 2-26 editions of the U.S. News - Best Lawyers in America For Patent Litigation in Dallas, texas,",
+      "Slater Matsil recognized by Chambers USA as 2024-2025 Top Intellectual Property Law Firm",
     bgColor: COLORS.PRIMARY_LIGHT_GREEN,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-best-lawyers-2026",
+    slug: "slater-matsil-chambers-usa-2025",
   },
   {
-    title:
-      "Steven Slater was recognized in the 2020 - 2026 editions of the best lawyers in America for Patent Litigation and patent Law in Dallas, Texas.",
-    bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "steven-slater-best-lawyers-2026",
-  },
-  {
-    title:
-      "Ira Matsil had been selected for the 2025 IAM Strategy 300: The World’s IP Strategies as a Strategy 300 Global Leader.",
-    bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-iam-strategy-300-2025",
-  },
-  {
-    title:
-      "Slater Matsil ranked as a firm and Steven Slater, Ira Matsil, Srini Chakravarthi, and Michael Kucher were recognized individually by 2022 IAM Patent 1000 Rankings.",
+    title: "Ira Matsil recognized The Best Lawyers in America",
     bgColor: COLORS.PRIMARY_LIGHT_GREEN,
-    category: INSIGHTS_TAB_DATA.ARTICLES,
-    slug: "slater-matsil-iam-patent-1000-2022",
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-best-lawyers-america",
   },
   {
-    title: "Ira Matsil was featured in IAM Global Leaders 2022.",
+    title: "Steve Slater recognized The Best Lawyers in America",
     bgColor: COLORS.PRIMARY_BLUE,
-    category: INSIGHTS_TAB_DATA.LINKS,
-    slug: "ira-matsil-iam-global-leaders-2022",
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steve-slater-best-lawyers-america",
+  },
+  {
+    title: "Ira Matsil selected as Strategy 300 Global Leader",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-strategy-300-global-leader",
   },
   {
     title:
-      "John Koetter has been selected as a Rising Star 2021 by Super Lawyers (a Thomson Reuters Service).",
+      "Slater Matsil ranked 15th for Most U.S. Utility Patents Issues in 2025",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.ARTICLES,
+    slug: "slater-matsil-ranked-15th-for-most-us-utility-patents-issues-in-2025",
+  },
+  {
+    title: "Slater Matsil Lawyers Present at Dallas Bar",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.LINKS,
-    slug: "john-koetter-rising-star-2021",
+    slug: "slater-matsil-lawyers-present-at-dallas-bar",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil #2 in Best Performing Law Firms Overall",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "patexia-ranked-slater-matsil-2-in-best-performing-law-firms-overall",
+  },
+
+  {
+    title: "Srini Chakravarthi Moderates CLE for Dallas Bar Association",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "srini-chakravarthi-moderates-cle-for-dallas-bar-association",
+  },
+  {
+    title: "Slater Matsil Attorneys Ranked by Patexia",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "slater-matsil-attorneys-ranked-by-patexia",
+  },
+  {
+    title:
+      "Srini Chakravarthi Leads Honorable Barbara M.G. Lynn American Inn of Court Sessions",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "srini-chakravarthi-leads-honorable-barbara",
+  },
+  {
+    title:
+      "Slater Matsil Recognized as “highly recommended” Prosecution Firm by IAM Patent 1000 Rankings",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "slater-matsil-recognized-as-highly-recommended",
+  },
+  {
+    title:
+      "Srini Chakravarthi Organizes CLE session, “Ethical Considerations in Your IP Practice,” for Dallas Bar Association",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "srini-chakravarthi-organizes-cle-session",
   },
 ];
 
 export const CONTACT_US_CARD_DATA: CONTACT_US_CARD_PROPS[] = [
   {
     heading: "Address",
-    value: "123 Innovation Drive, U.S.",
+    value: "17304 Preston Rd, Suite 900, Dallas, TX 75252",
     Icon: LocationOnOutlined,
   },
   {
     heading: "Phone number",
-    value: "+91 98765 43210",
+    value: "972.732.1001",
     Icon: Phone,
   },
   {
     heading: "Email Address",
-    value: "hello@slatermetsil.com",
+    value: "info@slatermatsil.com",
     Icon: Email,
   },
 ];

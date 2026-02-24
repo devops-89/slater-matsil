@@ -52,7 +52,7 @@ const BlogSection = () => {
                   sx={{ height: "100%" }}
                 >
                   <Link
-                    href={`/blog/${webinar.slug}`}
+                    href={`/blogs/${webinar.slug}`}
                     style={{
                       textDecoration: "none",
                       color: "inherit",
@@ -230,7 +230,7 @@ const BlogSection = () => {
                 sx={{ height: "100%" }}
               >
                 <Link
-                  href={`/blog/${webinar.slug}`}
+                  href={`/blogs/${webinar.slug}`}
                   style={{
                     textDecoration: "none",
                     color: "inherit",
