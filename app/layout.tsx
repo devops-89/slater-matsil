@@ -1,4 +1,4 @@
-    "use client";
+"use client";
 
 import Navbar from "@/components/widgets/navbar";
 import "./globals.css";
@@ -11,6 +11,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import LoadingProvider from "@/components/providers/LoadingProvider";
 import { useMediaQuery } from "@mui/material";
 import MobileNavbar from "@/components/widgets/Mobile-Navbar";
+import Modal from "@/components/widgets/Modal";
 
 export default function RootLayout({
   children,
@@ -34,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Modal />
         {initialLoading ? (
           <div
             style={{

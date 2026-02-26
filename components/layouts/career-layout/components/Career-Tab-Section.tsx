@@ -2,13 +2,17 @@ import CustomTabPanel from "@/components/widgets/Tab-panel";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { Box, Button, Grid, Tab, Tabs } from "@mui/material";
+import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
 import React, { SyntheticEvent, useState } from "react";
 import StarPara from "./Star-Para";
 import { ArrowForward } from "@mui/icons-material";
+import { useModal } from "@/store/useModal";
+import Form from "../../contact-layout/components/Form";
+import CareerApplicationForm from "./CareerApplicationForm";
 
 const CareerTabSection = () => {
   const { details } = usePageData();
+  const { showModal } = useModal();
   const data = details?.careerPage?.career_open_roles?.tabSectionData;
 
   const [value, setValue] = useState(0);
@@ -127,8 +131,37 @@ const CareerTabSection = () => {
                 }}
               />
             </Grid>
+            <Grid size={12}>
+              <Typography
+                sx={{
+                  fontSize: 20,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 500,
+                  lineHeight: "30px",
+                  textTransform: "capitalize",
+                  mt: 2,
+                  color: COLORS.PRIMARY_BLUE,
+                }}
+              >
+                If you would like to join our team, please fill out the form
+                below.
+              </Typography>
+            </Grid>
 
             <Button
+              onClick={() =>
+                showModal(
+                  <Box
+                    sx={{
+                      background: "#fff",
+                      padding: "20px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <CareerApplicationForm />
+                  </Box>,
+                )
+              }
               endIcon={<ArrowForward sx={{ fontSize: 50 }} />}
               sx={{
                 mt: 3,
@@ -144,7 +177,7 @@ const CareerTabSection = () => {
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
-              Submit Resume
+              Apply Now
             </Button>
 
             <Grid size={12}>
