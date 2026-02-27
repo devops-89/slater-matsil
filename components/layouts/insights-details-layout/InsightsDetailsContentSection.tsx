@@ -117,13 +117,13 @@ const InsightsDetailsContentSection = ({
               sx={{
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                fontSize: { xs: 32, md: 52 },
-                lineHeight: 1.1,
+                fontSize: { xs: 24, md: 36 },
+                lineHeight: 1.2,
                 color: COLORS.PRIMARY_BLUE,
                 textTransform: "capitalize",
               }}
             >
-              {sections.aboutProvidedBy}{" "}
+              {sections.aboutProvidedBy && `${sections.aboutProvidedBy} `}
               <Box component="span" sx={{ color: COLORS.PRIMARY_GREEN }}>
                 {sections.aboutProvidedByName}
               </Box>

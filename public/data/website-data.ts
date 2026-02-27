@@ -713,23 +713,43 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       data: [
         {
           img: building,
-          title: "United State Patent and Trademark Office",
+          title: "The European Patent Office (EPO)",
+          href: "http://www.epo.org/index.html",
         },
         {
           img: globeOutline,
-          title: "Japan Patent Office",
+          title: "The American Intellectual Property Law Association (AIPLA)",
+          href: "http://www.aipla.org/Pages/default.aspx",
         },
         {
-          img: locationOutline,
-          title: "Canadian Intellectual Property Office",
-        },
-        {
-          img: earthFilled,
-          title: "European Patent Office",
+          img: globeOutline,
+          title: "The International Trademark Association (INTA)",
+          href: "http://www.inta.org/Pages/Home.aspx",
         },
         {
           img: minicutBuilding,
-          title: "China National Intellectual Property Administration",
+          title: "China National Intellectual Property Administration (CNIPA)",
+          href: "https://english.cnipa.gov.cn/",
+        },
+        {
+          img: globeOutline,
+          title: "The World Intellectual Property Organization (WIPO)",
+          href: "http://www.wipo.int/portal/en/index.html",
+        },
+        {
+          img: building,
+          title: "The United States Patent & Trademark Office (USPTO)",
+          href: "http://www.uspto.gov/",
+        },
+        {
+          img: globeOutline,
+          title: "The Japanese Patent Office (JPO)",
+          href: "http://www.jpo.go.jp/",
+        },
+        {
+          img: locationOutline,
+          title: "The Canadian Intellectual Property Office (CIPO)",
+          href: "http://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/Home?OpenDocument",
         },
       ],
     },

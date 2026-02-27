@@ -448,6 +448,8 @@ export interface INSIGHTS_PAGE_DATA {
 export interface QUICK_LINKS_CARD_PROPS {
   title: string;
   img: StaticImageData;
+  href?: string;
+  description?: string;
 }
 
 export interface INSIGHTS_DATA_PROPS {

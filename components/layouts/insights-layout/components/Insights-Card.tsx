@@ -42,97 +42,122 @@ const InsightsCard = ({
         sx={{
           backgroundColor: bgColor,
           height: "347px",
-          borderRadius: "10px",
-          p: 3,
+          borderRadius: "20px",
+          p: 4,
           transition: "box-shadow 0.3s ease",
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          // Circular notch at top-right
+          maskImage:
+            "radial-gradient(circle at 100% 0%, transparent 55px, black 56px)",
+          WebkitMaskImage:
+            "radial-gradient(circle at 100% 0%, transparent 55px, black 56px)",
         }}
       >
         <Box
           sx={{
-            width: "72px",
-            height: "26px",
-            padding: "10px",
+            width: "fit-content",
+            height: "36px",
+            px: 3,
             borderRadius: "54px",
-            backgroundColor: category ? "#DFFFFF" : "",
+            backgroundColor: "#DFFFFF",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             color: COLORS.BLACK,
             fontFamily: adelle.style.fontFamily,
-            fontWeight: 600,
+            fontWeight: 700,
             fontSize: 14,
-            textTransform: "capitalize",
+            letterSpacing: "0.05em",
+            textTransform: "uppercase",
           }}
         >
           {category}
         </Box>
-        <Box sx={{ height: "90%", display: "grid", alignItems: "end" }}>
-          <Box>
+
+        <Box>
+          <Typography
+            sx={{
+              fontSize: title.length > 150 ? 18 : 24,
+              fontFamily: adelle.style.fontFamily,
+              fontWeight: 600,
+              lineHeight: 1.3,
+              mb: 3,
+              color: bgColor === COLORS.PRIMARY_BLUE ? COLORS.WHITE : "#14363F",
+            }}
+          >
+            {title}
+          </Typography>
+          <Stack
+            direction="row"
+            alignItems="center"
+            spacing={1}
+            className="arrow-icon"
+            sx={{
+              color:
+                bgColor === COLORS.PRIMARY_BLUE
+                  ? COLORS.WHITE
+                  : COLORS.PRIMARY_BLUE,
+              transition: "transform 0.3s ease",
+            }}
+          >
             <Typography
               sx={{
-                fontSize: 20,
+                fontSize: 14,
                 fontFamily: adelle.style.fontFamily,
-                fontWeight: 500,
-                color:
-                  bgColor === COLORS.PRIMARY_BLUE ? COLORS.WHITE : COLORS.BLACK,
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
               }}
-            >
-              {title}
-            </Typography>
-            <Button
-              className="arrow-icon"
-              sx={{
-                color:
-                  bgColor === COLORS.PRIMARY_BLUE
-                    ? COLORS.WHITE
-                    : COLORS.PRIMARY_BLUE,
-                fontSize: 16,
-                fontFamily: adelle.style.fontFamily,
-                fontWeight: 500,
-                mt: 3,
-                transition: "transform 0.3s ease",
-              }}
-              endIcon={<ArrowForward />}
             >
               Learn More
-            </Button>
-          </Box>
+            </Typography>
+            <ArrowForward sx={{ fontSize: 18 }} />
+          </Stack>
         </Box>
       </Box>
-      <Stack
+
+      {/* Top Right Arrow Circle */}
+      <Box
         sx={{
           position: "absolute",
-          top: -5,
+          top: -10,
           right: -10,
+          width: 80,
+          height: 80,
           backgroundColor: COLORS.WHITE,
-          borderRadius: 6,
-          padding: "10px",
+          borderRadius: "50%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          zIndex: 2,
         }}
-        direction={"row"}
-        alignItems={"center"}
-        justifyContent={"space-between"}
       >
         <Box
           className="top-icon-box"
           sx={{
-            width: 20,
-            height: 20,
-            padding: "13px",
+            width: 44,
+            height: 44,
+            borderRadius: "50%",
+            backgroundColor: COLORS.BLACK,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            aspectRatio: "20/20",
-            borderRadius: "50%",
-            backgroundColor: COLORS.BLACK,
             transition: "all 0.3s ease",
           }}
         >
           <CallMade
             className="top-icon"
-            sx={{ color: COLORS.WHITE, transition: "color 0.3s ease" }}
+            sx={{
+              color: COLORS.WHITE,
+              fontSize: 20,
+              transition: "color 0.3s ease",
+            }}
           />
         </Box>
-      </Stack>
+      </Box>
     </Box>
   );
 

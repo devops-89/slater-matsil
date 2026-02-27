@@ -28,20 +28,44 @@ import { SERVICES_DETAILS } from "@/public/data/generic-array";
 const QuickLinksDetails = () => {
   const QUICk_LINKS_DATA = [
     {
-      img: building,
-      title: "United States Patent and Trademark Office",
-    },
-    {
-      img: global,
-      title: "Japan Patent Office",
-    },
-    {
-      img: location,
-      title: "Canadian Intellictual Property Office",
+      img: globeOutline,
+      title: "The European Patent Office (EPO)",
+      href: "http://www.epo.org/index.html",
     },
     {
       img: globeOutline,
-      title: "European Patent Office",
+      title: "The American Intellectual Property Law Association (AIPLA)",
+      href: "http://www.aipla.org/Pages/default.aspx",
+    },
+    {
+      img: globeOutline,
+      title: "The International Trademark Association (INTA)",
+      href: "http://www.inta.org/Pages/Home.aspx",
+    },
+    {
+      img: building,
+      title: "China National Intellectual Property Administration (CNIPA)",
+      href: "https://english.cnipa.gov.cn/",
+    },
+    {
+      img: global,
+      title: "The World Intellectual Property Organization (WIPO)",
+      href: "http://www.wipo.int/portal/en/index.html",
+    },
+    {
+      img: building,
+      title: "The United States Patent & Trademark Office (USPTO)",
+      href: "http://www.uspto.gov/",
+    },
+    {
+      img: global,
+      title: "The Japanese Patent Office (JPO)",
+      href: "http://www.jpo.go.jp/",
+    },
+    {
+      img: location,
+      title: "The Canadian Intellectual Property Office (CIPO)",
+      href: "http://www.ic.gc.ca/eic/site/cipointernet-internetopic.nsf/eng/Home?OpenDocument",
     },
   ];
 
@@ -160,7 +184,7 @@ const QuickLinksDetails = () => {
         sx={{
           backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
           boxShadow: "0 2.23px 2.98px 0 rgba(0, 0, 0, 0.15)",
-          height: "306px",
+          py: 8,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -200,10 +224,14 @@ const QuickLinksDetails = () => {
               Quick Links
             </Typography>
 
-            <Grid container sx={{ mt: 2 }}>
+            <Grid container spacing={4} sx={{ mt: 4 }}>
               {QUICk_LINKS_DATA.map((val, i) => (
-                <Grid size={3} key={i}>
-                  <QuickLinksCard img={val.img} title={val.title} />
+                <Grid size={{ lg: 3, md: 6, xs: 12 }} key={i}>
+                  <QuickLinksCard
+                    img={val.img}
+                    title={val.title}
+                    href={val.href}
+                  />
                 </Grid>
               ))}
             </Grid>

@@ -514,55 +514,726 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     title:
       "Slater Matsil ranked 15th for Most U.S. Utility Patents Issues in 2025",
     bgColor: COLORS.PRIMARY_BLUE,
-    category: INSIGHTS_TAB_DATA.ARTICLES,
+    category: INSIGHTS_TAB_DATA.NEWS,
     slug: "slater-matsil-ranked-15th-for-most-us-utility-patents-issues-in-2025",
   },
-  {
-    title: "Slater Matsil Lawyers Present at Dallas Bar",
-    bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.LINKS,
-    slug: "slater-matsil-lawyers-present-at-dallas-bar",
-  },
+
   {
     title:
-      "Patexia ranked Slater Matsil #2 in Best Performing Law Firms Overall",
+      "Patexia ranked Slater Matsil #2 in Best Performing Law Firms Overall, #5 in the Overall Best Performing Law Firms in High-Tech Sector and #11 in Most Active Law Firms in High Tech in 2025.",
     bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.LINKS,
+    category: INSIGHTS_TAB_DATA.NEWS,
     slug: "patexia-ranked-slater-matsil-2-in-best-performing-law-firms-overall",
   },
 
   {
     title: "Srini Chakravarthi Moderates CLE for Dallas Bar Association",
     bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.LINKS,
+    category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-moderates-cle-for-dallas-bar-association",
   },
   {
     title: "Slater Matsil Attorneys Ranked by Patexia",
     bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.LINKS,
+    category: INSIGHTS_TAB_DATA.NEWS,
     slug: "slater-matsil-attorneys-ranked-by-patexia",
   },
   {
     title:
       "Srini Chakravarthi Leads Honorable Barbara M.G. Lynn American Inn of Court Sessions",
     bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.LINKS,
+    category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-leads-honorable-barbara",
   },
   {
     title:
       "Slater Matsil Recognized as “highly recommended” Prosecution Firm by IAM Patent 1000 Rankings",
     bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.LINKS,
+    category: INSIGHTS_TAB_DATA.NEWS,
     slug: "slater-matsil-recognized-as-highly-recommended",
+  },
+
+  {
+    title:
+      "Patexia ranked Slater Matsil #2 in Best Performing Law Firms Overall, #5 in the Overall Best Performing Law Firms in High-Tech Sector and #11 in Most Active Law Firms in High Tech in 2025.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-ranked-slater-matsil-2025-rankings",
   },
   {
     title:
-      "Srini Chakravarthi Organizes CLE session, “Ethical Considerations in Your IP Practice,” for Dallas Bar Association",
+      "Slater Matsil Attorney John Koetter's Latest Publication by Dallas Bar Association",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.ARTICLES,
+    slug: "john-koetter-latest-publication-dallas-bar",
+  },
+  {
+    title: "Slater Matsil Lawyers Present at Dallas Bar",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.ARTICLES,
+    slug: "slater-matsil-lawyers-present-at-dallas-bar",
+  },
+  {
+    title:
+      "On October 24, 2024, Srini Chakravarthi took part in the Dallas Bar Association’s CLE meeting by moderating a session on IP and Ethics.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-organizes-cle-session",
+  },
+  {
+    title:
+      "Patexia ranked Roger Knapp #1 in Best Performing Attorneys in High-Tech in 2025. Ruojian Zhang was ranked #4 and Roger Knapp was ranked #5 in Best Performing Attorneys Overall for the same time period. Also, in 2025 Ira Matsil, Brian Mair and Stephen Cortiaus ranked in both the Top 100 Best Performing Attorneys Overall and the Best Performing Attorneys in High-Tech in 2025.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-ranked-roger-knapp-2025-rankings",
+  },
+  {
+    title:
+      "Patexia ranked Ira Matsil, Brian Mair and Stephen Cortiaus in both the Top 100 Best Performing Attorneys Overall and the Best Performing Attorneys in High-Tech in 2025.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-ranked-matsil-mair-cortiaus-2025",
+  },
+  {
+    title:
+      "Ira Matsil ranked by Strategy 300 - IAM 2025 in IP management consultancy, licensing",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-strategy-300-iam-2025",
+  },
+  {
+    title:
+      "Slater Matsil ranked as a firm and Steven Slater, Ira Matsil, Srini Chakravarthi and Michael Kucher were recognized individually by the 2025 IAM Patent 1000 Rankings.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "iam-patent-1000-rankings-2025",
+  },
+  {
+    title:
+      "Srini Chakravarthi recently concluded a three-part series as co-organizer of the Community Project Outreach for the Honorable Barbara M.G. Lynn American Inn of Court.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-community-project-outreach",
+  },
+  {
+    title:
+      "Slater Matsil has been named as a Tier 1 firm in Litigation – Patent and a Tier 2 firm in Patent Law (Dallas/Fort Worth) by U.S. News – Best Lawyers® “Best Law Firm” in 2023, 2024, and 2025.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "best-lawyers-best-law-firm-2023-2025",
+  },
+
+  {
+    title:
+      "Slater Matsil ranked as a firm and Steven Slater, Ira Matsil, Srini Chakravarthi, and Michael Kucher were recognized individually by 2024 IAM Patent 1000 Rankings.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "iam-patent-1000-rankings-2024",
+  },
+  {
+    title:
+      "Patexia has ranked Ruojian Zhang number 1 in Overall High-Tech Performance, and number 3 in Overall Best Performance in 2024. Roger Knapp was ranked number 2 in Overall High-Tech Performance and number 4 in Overall Best Performance the same period.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-attorney-rankings-2024",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil number 2 in Best Performing Law Firm Overall, number 8 in the Overall High-Tech Sector and number 11 in Most Active Law Firms in High-Tech in 2024.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-law-firm-rankings-2024",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil attorneys Ira Matsil as Top 20 and Brian Mair as Top 50 Best Performing Attorneys Overall in Patent Prosecution. Stephen Cortiaus and Brian Mair were ranked as Top 50 in Overall High-Tech Performance in 2024.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-prosecution-rankings-2024",
+  },
+  {
+    title:
+      "John Koetter was appointed to be Co-Chair of the Publications Committee of the Dallas Bar Association for 2024.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "john-koetter-publications-committee-2024",
+  },
+  {
+    title:
+      "Srini Chakravarthi was appointed to the Council of the Dallas Bar Association, IP Section. Srini will also be Co-Chair of the CLE Committee of the IP Section.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-dba-ip-council-2024",
+  },
+  {
+    title:
+      "Srini Chakravarthi has been appointed as Adjunct Professor of Law at Texas A&M Law School, where he taught a course on Patent Law (Spring 2024).",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-adjunct-professor-tamu",
+  },
+  {
+    title:
+      "Srini Chakravarthi was Organizer / MC of moderated session on “Strategies for Drafting Claims and Ethics in Patent Prosecution,” North Dallas DBA IP Section CLE, Wednesday, April 12, 2023.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-dba-cle-2023",
+  },
+  {
+    title:
+      "Srini Chakravarthi was selected to join The Honorable Barbara M.G. Lynn American Inn of Court as a Barrister.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-inn-of-court-barrister",
+  },
+  {
+    title:
+      "The Harrity Analytics Team ranked Slater Matsil as 17th for most U.S. utility patents issued in 2023.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "harrity-analytics-ranking-2023",
+  },
+  {
+    title:
+      "Ira Matsil was included in the 2024 edition of the Best Lawyers in America ® for Litigation - Patent in Dallas, Texas",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-best-lawyers-2024",
+  },
+  {
+    title:
+      "Slater Matsil ranked as a firm and Steven Slater, Ira Matsil, Srini Chakravarthi, Benjamin Nise, and Michael Kucher were recognized individually by 2023 IAM Patent 1000 Rankings.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "iam-patent-1000-rankings-2023",
+  },
+  {
+    title:
+      "Ira Matsil Recognized by Chambers USA 2021 - 2023 as a Top Intellectual Property Attorney",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-chambers-usa-2021-2023",
+  },
+  {
+    title:
+      "Srini Chakravarthi Recognized by Chambers USA 2023 as a Top Intellectual Property Attorney",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-chambers-usa-2023",
+  },
+  {
+    title:
+      "Patexia has ranked Roger Knapp number 1 and Ruojian Zhang number 2 as Top 100 Best Performing Attorneys in High Tech in 2023. Also, Ruojian Zhang was ranked number 1 and Roger Knapp was ranked number 3 as Top 100 Best Performing Attorneys Overall in 2023.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-attorney-rankings-2023",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil attorneys Brian A. Mair and Ira Matsil as 2023 Top 50 Best Performing Attorneys Overall in Patent Prosecution",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-top-50-attorneys-2023",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil attorneys Stephen Cortiaus, John Koetter, and Yumin Zhang as 2023 Top 100 Best Performing Attorneys Overall in Patent Prosecution",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-top-100-attorneys-2023",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil attorney Brian A. Mair as a 2023 Top 50 Best Performing Attorneys in High-Tech",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-high-tech-top-50-2023",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil number 2 in Best Performing Law Firm Overall, number 8 in the Overall High-Tech Sector and number 11 in Most Active Law Firms in High-Tech for the period from January 1, 2019 to December 31, 2023.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-firm-rankings-2023",
+  },
+  {
+    title:
+      "The Harrity Analytics Team ranked Slater Matsil as 18th for most U.S. utility patents issued in 2022.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "harrity-analytics-ranking-2022",
+  },
+  {
+    title:
+      "Slater Matsil was named by IE 100 Awards as the 2023 winner of the U.S. Patent Prosecution Adviser of the Year for China – USA.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ie-100-awards-2023",
+  },
+  {
+    title:
+      "Elizabeth Iglesias and Ben Nise gave a presentation for the DBA IP Section CLE regarding “Patent Prosecution Practice Tips for Emerging Technologies” on Thursday, May 26, 2022.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "dba-cle-iglesias-nise-2022",
+  },
+  {
+    title:
+      "Srini Chakravarthi conducted a moderated session on “Strategies in Developing a Global Patent Portfolio and Ethical Considerations in Patent Prosecution” for the North Dallas DBA IP Section CLE on Thursday, May 19, 2022.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "dba-cle-srini-2022",
+  },
+  {
+    title:
+      "Srini Chakravarthi delivered a presentation regarding Engineering a Patent Portfolio – Augmenting R&D Value with Patent Protection on December 9, 2022 at the UTD Colloquium Lecture Series, Department of Materials Science & Engineering.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "utd-colloquium-srini-2022",
+  },
+  {
+    title:
+      "Steven Slater was named U.S. News – Best Lawyers® 2023 Litigation – Patent “Lawyer of the Year” in Dallas/Fort Worth.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steven-slater-lawyer-of-the-year-2023",
+  },
+  {
+    title:
+      "Steven Slater was included in the 2020 - 2024 editions of the Best Lawyers in America® for Litigation – Patent and Patent Law in Dallas, Texas.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steven-slater-best-lawyers-2020-2024",
+  },
+  {
+    title: "Ira Matsil was featured in IAM Global Leaders 2022.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-iam-global-leaders-2022",
+  },
+  {
+    title:
+      "Slater Matsil ranked as a firm and Steven Slater, Ira Matsil, Srini Chakravarthi, and Michael Kucher were recognized individually by 2022 IAM Patent 1000 Rankings.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-iam-patent-1000-2022",
+  },
+  {
+    title: "Steven Slater was featured in IAM Global Leaders 2022.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steven-slater-iam-global-leaders-2022",
+  },
+  {
+    title:
+      "Ira Matsil Recognized by Chambers USA 2022 as a Top Intellectual Property Attorney",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-chambers-usa-2022",
+  },
+  {
+    title:
+      "Slater Matsil ranked as one of the nation’s leading IP and Patent Law Firms by Chambers USA 2022",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-chambers-usa-2022",
+  },
+  {
+    title:
+      "Patexia has ranked Roger Knapp number 1 and Ruojian Zhang number 2 as Top 100 Best Performing Attorneys in High-Tech in 2022",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-high-tech-attorneys-2022",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil #2 Best Performing Patent Firms Overall in 2022. Patexia also ranked Slater Matsil #7 Best Performing Patent Law Firms in High Tech in 2022.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-patexia-rankings-2022",
+  },
+  {
+    title:
+      "Slater Matsil ranked first in Juristat's 2021 Top Patent Firms list in Semiconductors, Electrical and Optical Systems and Components.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-juristat-semiconductors-2021",
+  },
+  {
+    title:
+      "Answering Un-asked Questions: Patent Disclosures for Analog, Mixed-Signal, and RF Circuit Design by Benjamin E. Nise",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.ARTICLES,
+    slug: "benjamin-nise-patent-disclosures-article",
+  },
+  {
+    title:
+      "U.S. News ranked Slater Matsil as a Best Law Firm in Tier 1 for Patent Litigation and as Tier 2 firm for Patent Law in 2022.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-best-law-firm-2022",
+  },
+  {
+    title:
+      "Patexia ranked Slater Matsil #4 Best Performing Patent Firm in 2021. Patexia also ranked Slater Matsil #9 Most active Law Firm in High Tech in 2021.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-patexia-rankings-2021",
+  },
+  {
+    title: "Ira Matsil Recognized by Chambers USA 2021",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-chambers-usa-2021",
+  },
+  {
+    title:
+      "Slater Matsil is pleased to announce that Chambers USA 2021 has ranked the firm as one of the nation’s leading IP and Patent Law Firms.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-chambers-usa-2021",
+  },
+  {
+    title:
+      "Slater Matsil ranked as a firm, Ira Matsil, Steven Slater, Srini Chakravarthi, and Michael Kucher recognized individually by the 2021 IAM Patent 1000 rankings",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-iam-patent-1000-2021",
+  },
+  {
+    title:
+      "John Koetter has been selected as a Rising Star 2021 by Super Lawyers",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "john-koetter-rising-star-2021",
+  },
+  {
+    title: "Slater Matsil announced new partners",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.ARTICLES,
+    slug: "slater-matsil-new-partners-announcement",
+  },
+  {
+    title:
+      "Slater Matsil is pleased to announce that Chambers USA 2020 has ranked the firm as one of the nation’s leading IP and Patent Law Firms.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-chambers-usa-2020",
+  },
+  {
+    title:
+      "Slater Matsil ranked first in Juristat's Top 25 growing Patent firms in the last decade.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-juristat-growing-firms-2020",
+  },
+  {
+    title:
+      "Srini Chakravarthi delivered a presentation on Building and Monetizing the “Perfect” Patent Portfolio on November 19, 2020 at the 2020 ACP MetroCon.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-metrocon-2020",
+  },
+  {
+    title:
+      "D Magazine named Steven H. Slater as “Best Lawyers in Dallas 2020, 2018, 2017, 2016, 2015” in the Intellectual Property Category",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steven-slater-d-magazine-best-lawyers",
+  },
+  {
+    title:
+      "Patexia named Slater Matsil the Best Performing #2 Patent Firm Overall in 2020. Patexia also ranked Slater Matsil #9 of the 2020 Top 100 Most Active Law Firms in High Tech.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-firm-rankings-2020",
+  },
+  {
+    title:
+      "Steven H. Slater has been honored as a Texas Super Lawyer from 2009-2021",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steven-slater-super-lawyer-honors",
+  },
+  {
+    title:
+      "Ira S. Matsil has been honored as a Texas Super Lawyer from 2012-2025",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-super-lawyer-honors",
+  },
+  {
+    title:
+      "Slater Matsil ranked fourth in Juristat's 2020 Top Patent Firms list in Semiconductors, Electrical and Optical Systems and Components.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "juristat-semiconductors-2020",
+  },
+  {
+    title:
+      "Slater Matsil ranked as a firm, Ira Matsil, Steven Slater and Srini Chakravarthi recognized individually by the 2020 IAM Patent 1000 rankings",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "iam-patent-1000-rankings-2020",
+  },
+  {
+    title:
+      "Slater Matsil ranked sixth in Juristat's 2019 Top Patent Firms list in Semiconductors, Electrical and Optical Systems and Components.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "juristat-semiconductors-2019",
+  },
+  {
+    title: "Slater Matsil named Top Patent Law Firm",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "dallas-business-journal-top-firm-2019",
+  },
+  {
+    title:
+      "D Magazine named Ira S. Matsil among “Best Lawyers in Dallas 2019, 2018, 2017, 2015” in the Intellectual Property Category.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-d-magazine-best-lawyers",
+  },
+  {
+    title:
+      "Mandy Barsilai Fernandez has been named winner of the 2019 Don M. Smart Directed Research Award by the SMU Dedman School of Law.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "mandy-fernandez-research-award-2019",
+  },
+  {
+    title:
+      "John Koetter has been selected to join the Honorable Barbara M.G. Lynn American Inn of Court",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "john-koetter-rising-star-2021",
+  },
+  {
+    title:
+      "Patexia named Slater Matsil the Best Performing Patent Firm Overall in 2019. Patexia also ranked Slater Matsil #10 of the 2019 Top 100 Most Active Law Firms in High Tech.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patexia-firm-rankings-2019",
+  },
+  {
+    title:
+      "Slater Matsil ranked as a firm and Steven Slater recognized individually by the 2018 IAM Patent 1000 rankings (7th annual edition)",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "iam-patent-1000-rankings-2018",
+  },
+  {
+    title:
+      "John Koetter and Steve Slater presented “Practice Tips for Raising or Surviving Section 102 and 103 Challenges” to the Intellectual Property Section of the Dallas Bar Association on May 25, 2018",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "koetter-slater-dba-presentation-2018",
+  },
+  {
+    title:
+      "Slater Matsil ranked third in Juristat's 2018 Top 100 Patent Firms list",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "juristat-top-100-firms-2018",
+  },
+  {
+    title:
+      "IPWatchdog named Slater Matsil as a Top Patent Firm for 2017 based on the total number of U.S. utility patents that issued in 2017.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ipwatchdog-top-patent-firm-2017",
+  },
+  {
+    title:
+      "A renewed focus on patent quality – implications for patent owners. By Ira S. Matsil and Srini Chakravarthi.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.ARTICLES,
+    slug: "patent-quality-article-2018",
+  },
+  {
+    title:
+      "IPWatchdog named Slater Matsil as a Top Patent Firm for 2016 based on the total number of U.S. utility patents that issued in 2016.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ipwatchdog-top-patent-firm-2016",
+  },
+  {
+    title:
+      "Corporate Vision named Slater Matsil, LLP as Best in Patent Procurement 2016 - Southern USA",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "corporate-vision-best-procurement-2016",
+  },
+  {
+    title:
+      "Corporate Vision named Slater Matsil, LLP as Best Tech-Focused IP Law Firm - Southern USA and Best in Patent Procurement 2016 - Southern USA",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "corporate-vision-tech-focused-firm-2016",
+  },
+  {
+    title:
+      "Ocean Tomo ranked Slater Matsil first in both Information Technology and Overall, All Industries in 2016 Top 10 Patent Law Firm in the U.S.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ocean-tomo-top-quality-rankings-2016",
+  },
+  {
+    title:
+      "Slater Matsil ranked second in Juristat's 2017 Top 100 Patent Firms list",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "juristat-top-100-rankings-2017",
+  },
+  {
+    title:
+      "Slater Matsil ranked by Juristat's 2016 as the second highest growth rate among IP Today's Top Patent Firms",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "juristat-growth-rate-rankings-2016",
+  },
+  {
+    title: "Slater Matsil named Top Patent Law Firm",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "slater-matsil-top-patent-law-firm",
+  },
+  {
+    title:
+      "Slater Matsil recognized by Juristat as one of the 2015 Top 10 Patent Law Firms that Lose the Fewest Independent Claims",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "juristat-fewest-claims-lost-2015",
+  },
+  {
+    title:
+      "Ocean Tomo ranked Slater Matsil as a 2015 Top 10 Patent Law Firm in the U.S.",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ocean-tomo-top-10-firm-2015",
+  },
+  {
+    title:
+      "Slater Matsil recognized as a 2013 Go-To Law Firm for Patent Prosecution",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "go-to-law-firm-2013",
+  },
+  {
+    title:
+      "Slater Matsil ranked in the top 100 Patent Law Firms by IP Today from 2009-2014",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ip-today-top-100-firms",
+  },
+  {
+    title: "Slater Matsil named as a Top 100 IP Firm by PatentBuddy",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patentbuddy-top-100-ip-firm",
+  },
+  {
+    title: "PatentBuddy named Slater Matsil partners as Top Patent Prosecutors",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "patentbuddy-top-prosecutors-2011",
+  },
+  {
+    title: "Ira S. Matsil presented at the 53rd Annual IP Law Program",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-indefiniteness-presentation-2015",
+  },
+  {
+    title: "Ira S. Matsil served as session moderator at CAILAW",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-session-moderator-2013",
+  },
+  {
+    title:
+      "Ira S. Matsil served as director of IP Section of the Dallas Bar Association",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-dba-director-2013",
+  },
+  {
+    title:
+      "Steven H. Slater served as a panelist at the 49th Annual IP Law Program",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steven-slater-panelist-2011",
+  },
+  {
+    title:
+      "Steven H. Slater served as a panelist at the Dallas Bar Association IP Section meeting",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "steven-slater-dba-panelist-2011",
+  },
+  {
+    title:
+      "Ira S. Matsil served as panelist at the State Bar of Texas Annual Meeting",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-state-bar-panelist-2010",
+  },
+  {
+    title:
+      "Ocean Tomo ranked Slater Matsil as a 2014 Top 10 Patent Law Firm in the U.S.",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ocean-tomo-top-10-firm-2014",
+  },
+  {
+    title: "The European Patent Office (EPO)",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "european-patent-office-info",
+  },
+  {
+    title: "The American Intellectual Property Law Association (AIPLA)",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.LINKS,
-    slug: "srini-chakravarthi-organizes-cle-session",
+    slug: "aipla-info",
+  },
+  {
+    title: "The International Trademark Association (INTA)",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "inta-info",
+  },
+  {
+    title: "China National Intellectual Property Administration (CNIPA)",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "cnipa-info",
+  },
+  {
+    title: "The World Intellectual Property Organization (WIPO)",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "wipo-info",
+  },
+  {
+    title: "The United States Patent & Trademark Office (USPTO)",
+    bgColor: COLORS.PRIMARY_BLUE,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "uspto-info",
+  },
+  {
+    title: "The Japanese Patent Office (JPO)",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "jpo-info",
+  },
+  {
+    title: "The Canadian Intellectual Property Office (CIPO)",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.LINKS,
+    slug: "cipo-info",
   },
 ];
 

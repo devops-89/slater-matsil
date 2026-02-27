@@ -98,7 +98,11 @@ const InsightsDetailsHeroSection = () => {
                       src={hero.profileImage}
                       alt={hero.name}
                       fill
-                      style={{ objectFit: "cover" }}
+                      style={{
+                        objectFit: "contain",
+                        objectPosition: "center",
+                        padding: "10px", // Add slight padding so the subject doesn't touch the edges
+                      }}
                       priority
                     />
                   </Box>
@@ -140,8 +144,8 @@ const InsightsDetailsHeroSection = () => {
                     sx={{
                       fontFamily: tradeGothic.style.fontFamily,
                       fontWeight: 700,
-                      fontSize: { xs: 32, md: 56 },
-                      lineHeight: 1.2,
+                      fontSize: { xs: 28, md: 40 },
+                      lineHeight: 1.1,
                       color: COLORS.PRIMARY_BLUE,
                     }}
                   >
@@ -392,117 +396,119 @@ const InsightsDetailsHeroSection = () => {
             >
               <ShareIcon sx={{ color: "white", fontSize: 24 }} />
             </Box>
-            <Typography
-              sx={{
-                fontFamily: adelle.style.fontFamily,
-                fontWeight: 600,
-                fontSize: { xs: 13, sm: 15, md: 22 },
-                color: COLORS.PRIMARY_BLUE,
-              }}
-            >
-              {contact.shareLabel}
-            </Typography>
-            <Stack direction="row" spacing={0.5} alignItems="center">
-              <IconButton
-                size="small"
+            <Stack spacing={0.5}>
+              <Typography
                 sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  bgcolor: "rgba(114, 181, 43, 0.8)",
-                  color: "white",
-                  "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 600,
+                  fontSize: { xs: 13, sm: 15, md: 22 },
+                  color: COLORS.PRIMARY_BLUE,
                 }}
-                onClick={() =>
-                  window.open(
-                    "https://twitter.com/intent/tweet?url=" +
-                      encodeURIComponent(
-                        typeof window !== "undefined"
-                          ? window.location.href
-                          : "",
-                      ),
-                    "_blank",
-                  )
-                }
-                aria-label="Share on X (Twitter)"
               >
-                <FaXTwitter style={{ fontSize: 18 }} />
-              </IconButton>
-              <IconButton
-                size="small"
-                sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  bgcolor: "rgba(114, 181, 43, 0.8)",
-                  color: "white",
-                  "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
-                }}
-                onClick={() =>
-                  window.open(
-                    "https://www.linkedin.com/sharing/share-offsite/?url=" +
-                      encodeURIComponent(
-                        typeof window !== "undefined"
-                          ? window.location.href
-                          : "",
-                      ),
-                    "_blank",
-                  )
-                }
-                aria-label="Share on LinkedIn"
-              >
-                <FaLinkedinIn style={{ fontSize: 18 }} />
-              </IconButton>
-              <IconButton
-                size="small"
-                sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  bgcolor: "rgba(114, 181, 43, 0.8)",
-                  color: "white",
-                  "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
-                }}
-                onClick={() =>
-                  window.open(
-                    "https://www.facebook.com/sharer/sharer.php?u=" +
-                      encodeURIComponent(
-                        typeof window !== "undefined"
-                          ? window.location.href
-                          : "",
-                      ),
-                    "_blank",
-                  )
-                }
-                aria-label="Share on Facebook"
-              >
-                <FaFacebookF style={{ fontSize: 18 }} />
-              </IconButton>
-              <IconButton
-                size="small"
-                sx={{
-                  width: 40,
-                  height: 40,
-                  borderRadius: "50%",
-                  bgcolor: "rgba(114, 181, 43, 0.8)",
-                  color: "white",
-                  "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
-                }}
-                onClick={() => {
-                  const url =
-                    typeof window !== "undefined" ? window.location.href : "";
-                  const subject = encodeURIComponent(
-                    data?.hero?.name || "Profile",
-                  );
-                  window.open(
-                    `mailto:?subject=${subject}&body=${encodeURIComponent(url)}`,
-                    "_blank",
-                  );
-                }}
-                aria-label="Share via Email"
-              >
-                <EmailIcon sx={{ fontSize: 18 }} />
-              </IconButton>
+                {contact.shareLabel}
+              </Typography>
+              <Stack direction="row" spacing={0.5} alignItems="center">
+                <IconButton
+                  size="small"
+                  sx={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: "50%",
+                    bgcolor: "rgba(114, 181, 43, 0.8)",
+                    color: "white",
+                    "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
+                  }}
+                  onClick={() =>
+                    window.open(
+                      "https://twitter.com/intent/tweet?url=" +
+                        encodeURIComponent(
+                          typeof window !== "undefined"
+                            ? window.location.href
+                            : "",
+                        ),
+                      "_blank",
+                    )
+                  }
+                  aria-label="Share on X (Twitter)"
+                >
+                  <FaXTwitter style={{ fontSize: 14 }} />
+                </IconButton>
+                <IconButton
+                  size="small"
+                  sx={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: "50%",
+                    bgcolor: "rgba(114, 181, 43, 0.8)",
+                    color: "white",
+                    "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
+                  }}
+                  onClick={() =>
+                    window.open(
+                      "https://www.linkedin.com/sharing/share-offsite/?url=" +
+                        encodeURIComponent(
+                          typeof window !== "undefined"
+                            ? window.location.href
+                            : "",
+                        ),
+                      "_blank",
+                    )
+                  }
+                  aria-label="Share on LinkedIn"
+                >
+                  <FaLinkedinIn style={{ fontSize: 14 }} />
+                </IconButton>
+                <IconButton
+                  size="small"
+                  sx={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: "50%",
+                    bgcolor: "rgba(114, 181, 43, 0.8)",
+                    color: "white",
+                    "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
+                  }}
+                  onClick={() =>
+                    window.open(
+                      "https://www.facebook.com/sharer/sharer.php?u=" +
+                        encodeURIComponent(
+                          typeof window !== "undefined"
+                            ? window.location.href
+                            : "",
+                        ),
+                      "_blank",
+                    )
+                  }
+                  aria-label="Share on Facebook"
+                >
+                  <FaFacebookF style={{ fontSize: 14 }} />
+                </IconButton>
+                <IconButton
+                  size="small"
+                  sx={{
+                    width: 30,
+                    height: 30,
+                    borderRadius: "50%",
+                    bgcolor: "rgba(114, 181, 43, 0.8)",
+                    color: "white",
+                    "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
+                  }}
+                  onClick={() => {
+                    const url =
+                      typeof window !== "undefined" ? window.location.href : "";
+                    const subject = encodeURIComponent(
+                      data?.hero?.name || "Profile",
+                    );
+                    window.open(
+                      `mailto:?subject=${subject}&body=${encodeURIComponent(url)}`,
+                      "_blank",
+                    );
+                  }}
+                  aria-label="Share via Email"
+                >
+                  <EmailIcon sx={{ fontSize: 14 }} />
+                </IconButton>
+              </Stack>
             </Stack>
           </Stack>
         </Stack>

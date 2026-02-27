@@ -42,10 +42,14 @@ const QuickLinks = () => {
       </Box>
       <Box sx={{ mt: 3 }}>
         <Container maxWidth="lg">
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             {details?.insightsPage?.quickLinks?.data.map((val, i) => (
-              <Grid size={{ lg: 2.4, xs: 12 }} key={i}>
-                <QuickLinksCard title={val.title} img={val.img} />
+              <Grid size={{ lg: 3, md: 6, xs: 12 }} key={i}>
+                <QuickLinksCard
+                  title={val.title}
+                  img={val.img}
+                  href={val.href}
+                />
               </Grid>
             ))}
           </Grid>
