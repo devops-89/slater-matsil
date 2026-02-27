@@ -104,16 +104,68 @@ const QuickLinksDetails = () => {
         </Stack>
       </Container>
 
+      <Container maxWidth="lg" sx={{ pt: 5, pb: 2 }}>
+        <Grid container>
+          {data?.data.map((val, i) => (
+            <Grid size={12} key={i}>
+              <Typography
+                sx={{
+                  color: COLORS.TEXT_PRIMARY_4,
+                  fontSize: 20,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 400,
+                  lineHeight: "34px",
+                  textTransform: "none",
+                  mb: 4,
+                  textAlign: "justify",
+                  textJustify: "inter-word",
+                }}
+              >
+                {val.description}
+              </Typography>
+              <List sx={{ p: 0, mb: 4 }}>
+                {val.dataList?.map((item, index) => (
+                  <ListItem
+                    sx={{ alignItems: "flex-start", py: 0.5, px: 0 }}
+                    key={index}
+                  >
+                    <ListItemAvatar sx={{ minWidth: 20 }}>
+                      <Circle
+                        sx={{ color: COLORS.TEXT_PRIMARY_4, fontSize: 8 }}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={item.label}
+                      slotProps={{
+                        primary: {
+                          sx: {
+                            color: COLORS.TEXT_PRIMARY_4,
+                            fontFamily: adelle.style.fontFamily,
+                            fontSize: 20,
+                            fontWeight: 400,
+                            lineHeight: "28px",
+                          },
+                        },
+                      }}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+
       <Box
         sx={{
           backgroundColor: COLORS.PRIMARY_BLUE_LIGHT,
           boxShadow: "0 2.23px 2.98px 0 rgba(0, 0, 0, 0.15)",
-          //   py: 5,
           height: "306px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          mt: 5,
+          mt: 4,
+          mb: 5,
         }}
       >
         <Container maxWidth="lg">
@@ -158,75 +210,6 @@ const QuickLinksDetails = () => {
           </Box>
         </Container>
       </Box>
-
-      <Container maxWidth="lg" sx={{ py: 10 }}>
-        <Grid container spacing={6}>
-          {data?.data.map((val, i) => (
-            <Grid size={6} key={i}>
-              <Typography
-                sx={{
-                  color: i === 0 ? COLORS.PRIMARY_BLUE : COLORS.TEXT_PRIMARY_4,
-                  fontSize: i === 0 ? 30 : 20,
-                  fontFamily:
-                    i === 0
-                      ? tradeGothic.style.fontFamily
-                      : adelle.style.fontFamily,
-                  fontWeight: i === 0 ? 700 : 400,
-                  lineHeight: i === 0 ? "58px" : "28px",
-                  textTransform: i === 0 ? "capitalize" : "none",
-                }}
-              >
-                {val.description} 
-              </Typography>
-              <List>
-                {val.dataList?.map((item, index) => (
-                  <ListItem sx={{ alignItems: "flex-start" }} key={index}>
-                    <ListItemAvatar sx={{ minWidth: 20 }}>
-                      <Circle
-                        sx={{ color: COLORS.TEXT_PRIMARY_4, fontSize: 8 }}
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={item.label}
-                      slotProps={{
-                        primary: {
-                          sx: {
-                            color: COLORS.TEXT_PRIMARY_4,
-                            fontFamily: adelle.style.fontFamily,
-                            fontSize: 20,
-                            fontWeight: 400,
-                            lineHeight: "28px",
-                          },
-                        },
-                      }}
-                    />
-                  </ListItem>
-                ))}
-              </List>
-            </Grid>
-          ))}
-          {/* <Grid size={6}>
-            <Typography
-              sx={{
-                color: COLORS.TEXT_PRIMARY_4,
-                fontFamily: adelle.style.fontFamily,
-                fontSize: 20,
-                fontWeight: 400,
-                lineHeight: "40px",
-              }}
-            >
-              Our firsthand experience as engineers and innovators gives you a
-              direct connection to legal professionals who understand complex
-              technologies and quickly grasp technical nuances. Lessons learned
-              from years of licensing and litigating patents inform every aspect
-              of our patent drafting and prosecution practice. This level of
-              precision and depth not only strengthens the application itself
-              — it also fortifies its defendability in the event of
-              infringement. Our patent prosecution services includ
-            </Typography>
-          </Grid> */}
-        </Grid>
-      </Container>
     </Box>
   );
 };

@@ -681,6 +681,54 @@ export const SERVICE_FRAMEWORK_CARD_DATA: SERVICE_FRAMEWORK_CARD_PROPS[] = [
 
 export const SERVICES_DETAILS = [
   {
+    slug: "ip-strategy",
+    title: "IP Strategy",
+    data: [
+      {
+        description:
+          "Not every innovation needs a patent. Some are better protected as trade secrets. Some need both. The companies that get the most out of their intellectual property are the ones that ask the right questions before they start filing, and keep asking them as the business evolves.",
+      },
+      {
+        description:
+          "Slater Matsil works with clients to determine what kind of protection makes sense for each innovation, brand, and competitive advantage. Patents, trade secrets, trademarks, copyrights. Each has its strengths and its costs. A single product might call for a utility patent on the core technology, a design patent on its appearance, trade secret protection for the manufacturing know-how, a trademark on the brand, and copyright on the software. The options add up fast, and no company has an unlimited budget. Pursuing everything is not a strategy. Pursuing the right things is. We help clients make those calls, weighing the value of each form of protection against its cost and the realistic likelihood that it will matter down the road.",
+      },
+      {
+        description:
+          "For companies competing in global markets, those decisions multiply. An innovation worth patenting in the United States may also warrant protection in Europe, Asia, or elsewhere, but not necessarily everywhere. Each jurisdiction adds cost, complexity, and ongoing maintenance obligations. We work with clients to identify the markets that matter most to their business and build filing strategies accordingly. Through our established relationships with foreign associates in virtually every jurisdiction, we coordinate international filings and manage global portfolios so that protection is where it needs to be.",
+      },
+      {
+        description:
+          "Getting the protection right is the first step. Knowing what to do with it once you have it is where real value gets created. An issued patent sitting in a drawer is not a strategy. We counsel clients on enforcement, licensing, cross-licensing, monetization, and when it makes sense to let a right go. For clients raising capital, pursuing acquisitions, or entering new markets, we help position IP assets to support those objectives.",
+      },
+      {
+        description:
+          "We have been doing this long enough to know that the best IP strategy is the one that serves the business, not the one that produces the most filings. Our clients expect us to tell them when to invest and when to hold back. That is the kind of counsel we provide.",
+      },
+    ],
+  },
+  {
+    slug: "portfolio-management",
+    title: "IP Portfolio Management",
+    data: [
+      {
+        description:
+          "A patent collecting dust is a cost, not an asset. The same is true for any intellectual property right that is not actively managed with purpose. Slater Matsil helps clients build IP portfolios that work, and then makes sure they keep working.",
+      },
+      {
+        description:
+          "We sit down with engineering teams early and often. We want to know what is being developed, what is on the roadmap, and where the competitive pressure is coming from. That is how filing decisions get made well. Not by reacting to a finished product, but by identifying protectable innovations as they take shape. We help clients set up invention disclosure processes that actually get used, and we prioritize filings based on what matters to the business, not just what is novel.",
+      },
+      {
+        description:
+          "Building the portfolio is only half the job. Portfolios that grow without discipline become expensive and unwieldy. We conduct regular reviews with our clients to take a hard look at what they own. Which assets are core? Which are candidates for licensing or sale? Which are no longer worth the maintenance fees? These are not easy conversations, but they are necessary ones, and our clients count on us to have them. For companies going through acquisitions, fundraising, or partnership discussions, these reviews become portfolio assessments that give decision-makers a clear and honest picture of what the IP covers, where it is strong, and where there are gaps or risks.",
+      },
+      {
+        description:
+          "We manage portfolios that span patents, trademarks, trade secrets, and copyrights, coordinating with foreign associates to maintain protection across the jurisdictions that matter to each client. The goal is always the same: every right in the portfolio should earn its place.",
+      },
+    ],
+  },
+  {
     slug: "patent-prosecution",
     title: "Patent Prosecution",
     data: [
