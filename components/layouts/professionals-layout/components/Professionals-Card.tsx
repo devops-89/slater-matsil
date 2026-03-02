@@ -76,7 +76,7 @@ const ProfessionalsCard = ({
             <Link
               href={`/firm-professionals/professionals/${slug}`}
               style={{
-                textDecoration: "none", // Removed underline for cleaner look
+                textDecoration: "none", 
               }}
             >
               <Typography
@@ -100,7 +100,7 @@ const ProfessionalsCard = ({
                 fontSize: { lg: 18, xs: 14 },
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
-                color: COLORS.PRIMARY_BLUE, // Keeping consistent color
+                color: COLORS.PRIMARY_BLUE, 
                 textAlign: "center",
                 opacity: 0.8,
               }}

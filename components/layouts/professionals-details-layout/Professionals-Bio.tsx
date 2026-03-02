@@ -42,7 +42,14 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                 {val.description && val.description}
               </Typography>
               {val.list && (
-                <Box component="ul" sx={{ mt: 3, pl: 2 }}>
+                <Box
+                  component="ul"
+                  sx={{
+                    mt: 3,
+                    pl: val.listStyle === "none" ? 0 : 2,
+                    listStyle: val.listStyle || "disc",
+                  }}
+                >
                   {val.list.map((item, index) => (
                     <Typography
                       component="li"
@@ -56,6 +63,25 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                       }}
                     >
                       {item.label}
+                      {item.subList && (
+                        <Box component="ul" sx={{ mt: 1, pl: 2 }}>
+                          {item.subList.map((subItem, idx) => (
+                            <Typography
+                              component="li"
+                              key={idx}
+                              sx={{
+                                fontSize: { lg: 17, xs: 15 },
+                                color: COLORS.TEXT_PRIMARY_24,
+                                fontWeight: 600,
+                                mb: 1,
+                                textAlign: "justify",
+                              }}
+                            >
+                              {subItem.label}
+                            </Typography>
+                          ))}
+                        </Box>
+                      )}
                     </Typography>
                   ))}
                 </Box>

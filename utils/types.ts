@@ -266,7 +266,8 @@ export interface PROFESSIONAL_VCARD_PROPS {
 
 export interface PROFESSIONAL_BIO_PROPS {
   description?: string;
-  list?: { label: string }[];
+  listStyle?: "none" | "disc" | "decimal";
+  list?: { label: string; subList?: { label: string }[] }[];
 }
 
 export interface WORK_LIST_PROPS {

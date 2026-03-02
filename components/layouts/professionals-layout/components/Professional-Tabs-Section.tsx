@@ -9,7 +9,7 @@ import ProfessionalLayoutSection from "../Professional-Section-layout";
 import WhoWeServelayout from "../../who-we-serve-layout";
 
 const ProfessionalsTabs = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

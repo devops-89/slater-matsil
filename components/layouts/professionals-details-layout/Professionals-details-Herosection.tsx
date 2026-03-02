@@ -202,7 +202,7 @@ const ProfessionalsDetailsHeroSection = () => {
                   alt={data?.professionals_Details_HeroSection?.name || ""}
                   fill
                   style={{
-                    objectFit: phone ? "contain" : "contain", // refined
+                    objectFit: phone ? "contain" : "contain", 
                     objectPosition: usingMobileImageStyles(phone),
                   }}
                   priority
