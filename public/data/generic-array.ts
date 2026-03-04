@@ -50,6 +50,21 @@ import john from "@/professionals/transparent/john-koetter.png";
 import fantai from "@/professionals/transparent/fantai-kong.png";
 import michael from "@/professionals/transparent/michael-kucher.png";
 import soonshin from "@/professionals/transparent/soonshin.png";
+import brian_mair from "@/professionals/transparent/brian-mair.png";
+import ira from "@/professionals/transparent/ira-matsil.png";
+import joseph from "@/professionals/transparent/joseph-mcmanis.png";
+import marc from "@/professionals/transparent/marc-mcwilliams.png";
+import peter from "@/professionals/transparent/peter-meza.png";
+import benjamin_nise from "@/professionals/transparent/benjamin-nise.png";
+import payam from "@/professionals/transparent/payam-rashidi.png";
+import rameez from "@/professionals/transparent/rameez-samnakay.png";
+import steven_slater from "@/professionals/transparent/steven-slater.png";
+import chad from "@/professionals/transparent/chad-terrell.png";
+import lizabeth from "@/professionals/transparent/lizabeth-vice.png";
+import julian from "@/professionals/transparent/julian-wang.png";
+import jonathan_ward from "@/professionals/transparent/jonathan-ward.png";
+import chuanming from "@/professionals/transparent/chuanming-wei.png";
+
 export const SERVICES_AREAS_DATA = [
   {
     category: "Strategy",
@@ -1699,5 +1714,143 @@ export const professionalsListData = [
     name: "Zhu He",
     designation: "Attorney at Law",
     slug: "zhu-he",
+  },
+  {
+    img: elizabeth,
+    name: "Elizabeth D. Iglesias",
+    designation: "Attorney at Law",
+    slug: "elizabeth-iglesias",
+  },
+  {
+    img: jonathan,
+    name: "Jonathan Insler, Ph.D.",
+    designation: "Patent Agent",
+    slug: "jonathan-insler",
+  },
+  {
+    img: paata,
+    name: "Paata Kakashvili, Ph.D.",
+    designation: "Patent Agent",
+    slug: "paata-kakashvili",
+  },
+  {
+    img: james,
+    name: "James C. Kesterson",
+    designation: "Attorney at Law",
+    slug: "james-kesterson",
+  },
+  {
+    img: roger,
+    name: "Roger C. Knapp",
+    designation: "Attorney at Law",
+    slug: "roger-knapp",
+  },
+  {
+    img: john,
+    name: "John D. Koetter",
+    designation: "Attorney at Law",
+    slug: "john-koetter",
+  },
+  {
+    img: fantai,
+    name: "Fantai Kong, Ph.D.",
+    designation: "Technical Advisor",
+    slug: "fantai-kong",
+  },
+  {
+    img: michael,
+    name: "Michael Kucher",
+    designation: "Attorney at Law",
+    slug: "michael-kucher",
+  },
+  {
+    img: soonshin,
+    name: "Soonshin D. Kwon, Ph.D.",
+    designation: "Technical Advisor",
+    slug: "soonshin-kwon",
+  },
+  {
+    img: brian_mair,
+    name: "Brian A. Mair",
+    designation: "Attorney at Law",
+    slug: "brian-mair",
+  },
+  {
+    img: ira,
+    name: "Ira S. Matsil",
+    designation: "Attorney at Law",
+    slug: "ira-matsil",
+  },
+  {
+    img: joseph,
+    name: "Joseph E. McManis, Ph.D.",
+    designation: "Patent Agent",
+    slug: "joseph-mcmanis",
+  },
+  {
+    img: marc,
+    name: "Marc McWilliams, Ph.D.",
+    designation: "Attorney at Law",
+    slug: "marc-mcwilliams",
+  },
+  {
+    img: peter,
+    name: "Peter J. Meza",
+    designation: "Attorney at Law",
+    slug: "peter-meza",
+  },
+  {
+    img: benjamin_nise,
+    name: "Benjamin E. Nise",
+    designation: "Attorney at Law",
+    slug: "benjamin-nise",
+  },
+  {
+    img: payam,
+    name: "Payam Rashidi",
+    designation: "Attorney at Law",
+    slug: "payam-rashidi",
+  },
+  {
+    img: rameez,
+    name: "Rameez Samnakay, Ph.D.",
+    designation: "Patent Agent",
+    slug: "rameez-samnakay",
+  },
+  {
+    img: steven_slater,
+    name: "Steven H. Slater",
+    designation: "Attorney at Law",
+    slug: "steven-slater",
+  },
+  {
+    img: chad,
+    name: "Chad Terrell",
+    designation: "Attorney at Law",
+    slug: "chad-terrell",
+  },
+  {
+    img: lizabeth,
+    name: "Lizabeth Vice",
+    designation: "Attorney at Law",
+    slug: "lizabeth-vice",
+  },
+  {
+    img: julian,
+    name: "Julian Wang, Ph.D.",
+    designation: "Technical Advisor",
+    slug: "julian-wang",
+  },
+  {
+    img: jonathan_ward,
+    name: "Jonathan Ward",
+    designation: "Attorney at Law",
+    slug: "jonathan-ward",
+  },
+  {
+    img: chuanming,
+    name: "Chuanming Wei, Ph.D.",
+    designation: "Attorney at Law",
+    slug: "chuanming-wei",
   },
 ];

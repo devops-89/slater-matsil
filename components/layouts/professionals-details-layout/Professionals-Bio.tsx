@@ -62,7 +62,26 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                         textAlign: "justify",
                       }}
                     >
-                      {item.label}
+                      {item.href ? (
+                        <Box
+                          component="a"
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{
+                            color: "inherit",
+                            textDecoration: "none",
+                            "&:hover": {
+                              textDecoration: "underline",
+                              color: "primary.main",
+                            },
+                          }}
+                        >
+                          {item.label}
+                        </Box>
+                      ) : (
+                        item.label
+                      )}
                       {item.subList && (
                         <Box component="ul" sx={{ mt: 1, pl: 2 }}>
                           {item.subList.map((subItem, idx) => (
@@ -77,7 +96,26 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                                 textAlign: "justify",
                               }}
                             >
-                              {subItem.label}
+                              {subItem.href ? (
+                                <Box
+                                  component="a"
+                                  href={subItem.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  sx={{
+                                    color: "inherit",
+                                    textDecoration: "none",
+                                    "&:hover": {
+                                      textDecoration: "underline",
+                                      color: "primary.main",
+                                    },
+                                  }}
+                                >
+                                  {subItem.label}
+                                </Box>
+                              ) : (
+                                subItem.label
+                              )}
                             </Typography>
                           ))}
                         </Box>

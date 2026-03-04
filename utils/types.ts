@@ -267,7 +267,11 @@ export interface PROFESSIONAL_VCARD_PROPS {
 export interface PROFESSIONAL_BIO_PROPS {
   description?: string;
   listStyle?: "none" | "disc" | "decimal";
-  list?: { label: string; subList?: { label: string }[] }[];
+  list?: {
+    label: string;
+    href?: string;
+    subList?: { label: string; href?: string }[];
+  }[];
 }
 
 export interface WORK_LIST_PROPS {

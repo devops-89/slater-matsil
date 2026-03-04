@@ -15,6 +15,30 @@ import zhu from "@/professionals/transparent/zhu-he.png";
 import shervin from "@/professionals/transparent/shervin-fatehi.png";
 import robert from "@/professionals/transparent/robert-graham.png";
 import jeffrey from "@/professionals/transparent/jeffrey-robert.png";
+import elizabeth from "@/professionals/transparent/elizabeth.png";
+import jonathan from "@/professionals/transparent/jonathan-insler.png";
+import paata from "@/professionals/transparent/patta-kakashvili.png";
+import james from "@/professionals/transparent/james-kesterson.png";
+import roger from "@/professionals/transparent/roger-knapp.png";
+import john from "@/professionals/transparent/john-koetter.png";
+import fantai from "@/professionals/transparent/fantai-kong.png";
+import michael from "@/professionals/transparent/michael-kucher.png";
+import soonshin from "@/professionals/transparent/soonshin.png";
+import brian_mair from "@/professionals/transparent/brian-mair.png";
+import ira from "@/professionals/transparent/ira-matsil.png";
+import joseph from "@/professionals/transparent/joseph-mcmanis.png";
+import marc from "@/professionals/transparent/marc-mcwilliams.png";
+import peter from "@/professionals/transparent/peter-meza.png";
+import benjamin_nise from "@/professionals/transparent/benjamin-nise.png";
+import payam from "@/professionals/transparent/payam-rashidi.png";
+import rameez from "@/professionals/transparent/rameez-samnakay.png";
+import steven_slater from "@/professionals/transparent/steven-slater.png";
+import chad from "@/professionals/transparent/chad-terrell.png";
+import lizabeth from "@/professionals/transparent/lizabeth-vice.png";
+import julian from "@/professionals/transparent/julian-wang.png";
+import jonathan_ward from "@/professionals/transparent/jonathan-ward.png";
+import chuanming from "@/professionals/transparent/chuanming-wei.png";
+
 import { Label } from "@mui/icons-material";
 export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
   {
@@ -1302,6 +1326,1287 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
           "Jeff is a member of the State Bar of Texas and is registered to practice before the United States Patent and Trademark Office.",
       },
     ],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "elizabeth-iglesias",
+    professionals_Details_HeroSection: {
+      name: "Elizabeth D. Iglesias",
+      email: "eiglesias@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: elizabeth,
+      vCardData: {
+        name: "Elizabeth D. Iglesias",
+        formattedName: "Elizabeth D. Iglesias",
+        electronicMail: "eiglesias@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Elizabeth",
+        lastName: "Iglesias",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Elizabeth Iglesias, one of the partners of the firm, is a patent attorney with over 15 years of experience. A former patent litigator, she now focuses her practice on all aspects of patent portfolio management and patent prosecution. Elizabeth’s technical expertise includes telecommunications, enterprise networks, computer hardware and software, consumer electronic products, and semiconductors. Her practice routinely involves prosecuting patent applications to become standard essential patents (SEPs) and advising clients on complex issues relating thereto. Many of the inventions Elizabeth works on are being patented in multiple jurisdictions around the world, and Elizabeth helps her clients to navigate complex interjurisdictional patent issues.",
+      },
+      {
+        description:
+          "Previously, Elizabeth was a judicial extern for The Honorable Ronald M. Whyte of the United States District Court for the Northern District of California.",
+      },
+      {
+        description:
+          "Prior to becoming an attorney, Elizabeth worked as an engineer for West Fraser Mills Ltd. and Newterra Ltd. Her experience includes software development, hardware design, and project management.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Elizabeth graduated with a bachelor's degree in electrical engineering from Carleton University in 2006 where she received the Senate Medal for academic achievement. In 2009, Elizabeth graduated from the University of California, Berkeley School of Law where she received an American Jurisprudence award in patent law and served as an Articles Editor for the Berkeley Technology Law Journal.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Elizabeth is admitted to practice before the following Bars and Courts:",
+        list: [
+          {
+            label: "California",
+          },
+          {
+            label: "United States Patent and Trademark Office",
+          },
+          {
+            label: "United States Court of Appeals for the Federal Circuit",
+          },
+          {
+            label: "United States Court of Appeals for the Ninth Circuit",
+          },
+          {
+            label:
+              "United States District Court for the Central District of California",
+          },
+          {
+            label:
+              "United States District Court for the Southern District of California",
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label:
+              'Author, "Will the Proposed Amendments to the Federal Rules of Civil Procedure Reduce Discovery Burdens?" Westlaw J. Computer & Internet, August 22, 2013',
+          },
+          {
+            label:
+              'Coauthor, "Discoverability of Settlement Negotiation Docs Post-MSTG," Law360, February 26, 2013, http://www.law360.com/articles/415119/a-snapshot-of-the-post-mstg-landscape',
+            href: "http://www.law360.com/articles/415119/a-snapshot-of-the-post-mstg-landscape",
+          },
+          {
+            label:
+              'Coauthor, "Inter Partes Review is the New Normal: What Has Been Lost? What Has Been Gained?" 40 AIPLA Q. J. 539, 2012',
+          },
+          {
+            label:
+              'Coauthor, "Proving Willful Infringement: Is There a Role for Experts?" Landslide: A Publication of the ABA Section of Intellectual Property Law, November/December 2012',
+          },
+          {
+            label:
+              'Coauthor, "Rethinking Protective Orders," The Recorder, September 11, 2012',
+          },
+          {
+            label:
+              'Coauthor, "Challenging Validity of Issued Patents Before the PTO: Inter Partes Reexam Now or Inter Partes Review Later?" 94 J. PAT. & Trademark Off. Soc\'y 148, 2012',
+          },
+          {
+            label:
+              'Coauthor, "Toward Streamlined Patent Litigation: Will Early Disclosure of Damages Improve the System?" L.A.& S.F. Daily J., February 23, 2012',
+          },
+          {
+            label:
+              'Coauthor, "New Developments In Controlling E-Discovery Costs," Law360, January 30, 2012, http://www.law360.com/articles/301238/new-developments-in-controlling-e-discovery-costs',
+            href: "http://www.law360.com/articles/301238/new-developments-in-controlling-e-discovery-costs",
+          },
+          {
+            label:
+              'Coauthor, "Patent Reexamination is the New Shield in Patent Litigation," The Recorder, December 27, 2010',
+          },
+          {
+            label:
+              'Coauthor, "Patent Reexamination: Strategic Considerations In Patent Litigation," The Intellectual Property Strategist, October 2010',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "jonathan-insler",
+    professionals_Details_HeroSection: {
+      name: "Jonathan Insler, Ph.D.",
+      email: "jinsler@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: jonathan,
+      vCardData: {
+        name: "Jonathan Insler",
+        formattedName: "Jonathan Insler, Ph.D.",
+        electronicMail: "jinsler@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Patent Agent",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Jonathan",
+        lastName: "Insler",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Jonathan is a registered patent agent admitted to practice before the United States Patent and Trademark Office and is currently attending the University of New Hampshire Franklin Pierce School of Law. Jonathan has extensive experience in experimental particle physics, focusing on neutrino oscillations and the physics of charmed mesons. Jonathan served as deputy run coordinator during the commissioning and running of the Deep Neutrino Underground Experiment (DUNE) 35 ton prototype liquid argon detector at Fermi National Accelerator Laboratory, specializing on quantifying the performance of the 35 ton prototype’s silicon photomultiplier-based photon detectors. Jonathan also has experience with Monte Carlo simulation and the analysis of large data sets.",
+      },
+      {
+        description:
+          "Prior to joining Slater Matsil, Jonathan worked as a postdoctoral research associate at Drexel University's Department of Physics on the DUNE and Precision Reactor Oscillation and Spectrum (PROSPECT) collaborations. As an adjunct professor at Rowan University, Jonathan taught calculus-based introductory mechanics. Jonathan also worked as a postdoctoral associate for Louisiana State University on the T2K and DUNE collaborations. Jonathan’s dissertation topic was on the measurement of exclusive semileptonic branching fractions of Ds meson decays as part of the CLEO collaboration.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Jonathan graduated from Cornell University with a Bachelor of Arts in 2003, majoring in physics and mathematics. Jonathan obtained a Master of Arts in physics from the University of Rochester in 2005, and he received his Ph.D. in experimental particle physics from the University of Rochester in 2011. Jonathan is currently attending the University of New Hampshire Franklin Pierce School of Law studying for his Juris Doctor degree with a focus on Intellectual Property, Technology, and Information Law.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Jonathan is registered to practice before the United States Patent and Trademark Office.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        description:
+          "D.L. Adams et al. (DUNE Collaboration), “Design and performance of a 35-ton liquid argon time projection chamber as a prototype for future very large detectors.” arXiv:1912.08739 [physics.ins-det]. JINST 15 (2020) no. 03, P03035.",
+      },
+      {
+        description:
+          "J. Ashenfelter et al. (PROSPECT Collaboration), “First search for short-baseline neutrino oscillations at HFIR with PROSPECT.” arXiv:1806.02784 [hep-ex].",
+      },
+      {
+        description:
+          "J. Ashenfelter et al. (PROSPECT Collaboration), “Performance of a segmented 6Li-loaded liquid scintillator detector for the PROSPECT experiment.”arXiv:1805.09245 [physics.ins-det]. JINST 13 (2018) no.06, P06023.",
+      },
+      {
+        description:
+          "D.L. Adams et al. (DUNE Collaboration), “Photon detector system timing performance in the DUNE 35-ton prototype liquid argon time projection chamber.” arXiv:1803.06379 [physics.ins-det]. JINST 13 (2018) no.06, P06022.",
+      },
+      {
+        description:
+          "K. Abe et al. (T2K Collaboration), “First measurement of the νμ charged-current cross section on a water target without pions in the final state.” arXiv:1708.06771 [hep-ex]. Phys.Rev. D97 (2018) no.1, 012001.",
+      },
+      {
+        description:
+          "K. Abe et al. (T2K Collaboration), “Measurement of neutrino and antineutrino oscillations by the T2K experiment including a new additional sample of νe interactions at the far detector.” arXiv:1707.01048 [hep-ex]. Phys.Rev. D96 (2017) no.9, 092006.",
+      },
+      {
+        description:
+          "B. Abi et al. (DUNE Collaboration), “The Single-Phase ProtoDUNE Technical Design Report,” arXiv:1706.07081 [physics.ins-det].",
+      },
+      {
+        description: "Invited talks:",
+        list: [
+          {
+            label:
+              "Lake Louise Winter Institute, 2/23/2017, Chateau Lake Louise, Alberta, Canada. “Status of DUNE.",
+          },
+          {
+            label:
+              "Experimental Particle Physics Seminar, 9/20/2016, University of Pennsylvania, Philadelphia, PA. “Results from the DUNE 35-ton Prototype Detector.",
+          },
+          {
+            label:
+              "International Workshop for the Next Generation Nucleon Decay and Neutrino Detector (NNN15), 10/28/2015, Stony Brook University, Stony Brook, NY. “DUNE Single Phase Liquid Argon TPC prototyping at CERN and Fermilab.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "paata-kakashvili",
+    professionals_Details_HeroSection: {
+      name: "Paata Kakashvili, Ph.D.",
+      email: "pkakashvili@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: paata,
+      vCardData: {
+        name: "Paata Kakashvili",
+        formattedName: "Paata Kakashvili, Ph.D.",
+        electronicMail: "pkakashvili@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Patent Agent",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Paata",
+        lastName: "Kakashvili",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Paata has extensive research experience in theoretical condensed matter physics and the physics of ultracold atoms, specifically focusing on low-dimensional meso- and nanoscopic systems, quantum magnetism, and superconductivity. He has a strong background in statistical data analysis and computer modeling.",
+      },
+      {
+        description:
+          "Paata worked as a research associate at the Department of Physics and Astronomy at Rutgers University. He studied nonequilibrium properties of quantum systems such as the steady-state transport in one-dimensional quantum impurity systems.",
+      },
+      {
+        description:
+          "Prior to his work at Rutgers University, Paata was a Fellow at the Nordic Institute of Theoretical Physics (NORDITA), a postdoctoral research associate at the Department of Physics and Astronomy at Rice University, and an engineer at Radiocarbon and Low-level Counting Lab at Tbilisi State University. He worked on numerous problems relevant to quantum magnetism and ultracold atom physics. He collaborated closely with experimentalists to test his research results. In addition, Paata gave several lectures at the University of Gothenburg and at NORDITA Winter School on Condensed Matter Physics.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Paata received his Bachelor of Science degree in physics from Tbilisi State University in 1999 and a Master of Science degree in solid state physics from Tbilisi State University in 2001. He obtained a Ph.D. in theoretical physics from Chalmers University of Technology in 2006.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label:
+              'P. Kakashvili and E. Ardonne, Phys. Rev. B 85, 115116, "Integrability in anyonic quantum spin chains via a composite height model,” 2012',
+          },
+          {
+            label:
+              'Sangwoo S. Chung, P. Kakashvili, and C. J. Bolech, Phys. Rev. B 86, 134525, "Numerical Simulation of the Nernst Effect in Extreme Type-II Superconductors: A Negative Nernst Signal and its Noise Power Spectra," 2012',
+          },
+          {
+            label:
+              'S. G. Bhongale, P. Kakashvili, H. Pu, and C. J. Bolech, Phys. Rev. A 82, 053632, "Dissipative transport of a Bose-Einstein condensate in an optical speckle potential," 2010',
+          },
+          {
+            label:
+              'P. Kakashvili and C. J. Bolech, Phys. Rev. A 79, 041603(R), "Paired states in spin- imbalanced atomic Fermi gases in one dimension," 2009',
+          },
+          {
+            label:
+              'P. Kakashvili, H. Johannesson, and S. Eggert, Phys. Rev. B 74, 085114, "Local spectral weight of a Luttinger liquid: effects from edges and impurities," 2006',
+          },
+          {
+            label:
+              'P. Kakashvili and H. Johannesson, Phys. Rev. Lett. 91, 186403, "Measuring Luttinger liquid correlations from charge fluctuations in a nanoscale structure," 2003',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "james-kesterson",
+    professionals_Details_HeroSection: {
+      name: "James C. Kesterson",
+      email: "jkesterson@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: james,
+      vCardData: {
+        name: "James C. Kesterson",
+        formattedName: "James C. Kesterson",
+        electronicMail: "jkesterson@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "James",
+        lastName: "Kesterson",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Jim has over 30 years of legal experience in intellectual property matters. He has held a series of positions as in-house counsel at a number of well-known companies, including high-level positions at The Singer Company and the Laitram Corporation. He also served as vice president and deputy general patent counsel at Texas Instruments.",
+      },
+      {
+        description:
+          "For a number of years, Jim ran Texas Instruments’ patent prosecution activities, covering DSP’s (Digital Signal Processors), DMD (Digital Micromirror Devices), Wireless, and Tiris. His substantial experience has also made him knowledgeable in a broad range of intellectual property matters and issues, including copyright and trademark matters and all types of patent and copyright litigation. Jim’s current practice focuses on patent prosecution planning and strategy, as well as patent opinion work.",
+      },
+      {
+        description:
+          "Jim draws on the full range and depth of his experience when working with clients. He interfaces with in-house technical specialists and business executives to integrate the client’s technological and legal objectives into a coordinated strategic plan. Jim’s efforts are directed towards providing his clients with the very best product possible. He strives to make each client’s patent prosecution program as effective as possible from the outset so that unnecessary litigation is avoided.",
+      },
+      {
+        description:
+          "Before entering law school, Jim was an engineer at Lockheed Electronic Corporation, North American Aviation, and for the United States Air Force. His technical expertise includes microprocessors, other semiconductor devices, electrical and electromechanical devices and processes, food processing machinery, optical communication systems, well logging systems, and flight simulators.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Jim graduated with a degree in electrical engineering from the University of Tennessee in 1959 and received his Juris Doctor from the University of Houston in 1969.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Jim is a member of the State Bars of Texas, New York, and Tennessee and is registered to practice before the United States Patent and Trademark Office.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "roger-knapp",
+    professionals_Details_HeroSection: {
+      name: "Roger C. Knapp",
+      email: "rknapp@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: roger,
+      vCardData: {
+        name: "Roger C. Knapp",
+        formattedName: "Roger C. Knapp",
+        electronicMail: "rknapp@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Roger",
+        lastName: "Knapp",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Roger represents clients in all aspects of intellectual property, including patent portfolio management and all phases of patent preparation and prosecution. His practice also involves providing patent litigation support, assisting with claims analysis, infringement and validity issues, and Markman hearings. Roger also provides opinion letters regarding invalidity and non-infringement studies.",
+      },
+      {
+        description:
+          "Roger has more than 15 years of engineering experience with several major technology and telecommunications companies. While at Texas Instruments and Alcatel, he was involved in designing and developing telecommunications networks, telecommunications platforms, and providing voice-activated products to service providers. In addition to his background in telecommunications, Roger also has experience in optics, computer architecture, computer hardware and software, electrical and mechanical systems, Internet services and signaling, business methods, and computer networking.",
+      },
+      {
+        description:
+          "As the holder of a business degree and a former manager, Roger is attuned to the need for a company to maximize the value of its intellectual property portfolio in line with the company’s business goals and priorities. Roger’s clients appreciate the depth of his technical background and the benefits his experience brings to their representation.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Roger received his Bachelor of Science in computer science from the University of Iowa in 1983, his Masters of Business Association with highest honors from the University of Dallas in 1994, and his Juris Doctor cum laude from Southern Methodist University’s Dedman School of Law in 2000.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Roger is a member of the State Bar of Texas and is admitted to practice before the Northern and Eastern Districts of Texas. He is registered to practice before the United States Patent and Trademark Office. Roger was honored to be named Top Patent Prosecutor by PatentBuddy (2011) and top patent attorney in Top 100 Best Performing Attorneys in High-Tech by Patexia (2022).",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        description:
+          "Roger is a member of the American Intellectual Property Law Association, and the Dallas Bar Association.",
+      },
+    ],
+  },
+  {
+    slug: "john-koetter",
+    professionals_Details_HeroSection: {
+      name: "John D. Koetter",
+      email: "jkoetter@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: john,
+      vCardData: {
+        name: "John D. Koetter",
+        formattedName: "John D. Koetter",
+        electronicMail: "jkoetter@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "John",
+        lastName: "Koetter",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "John, one of the partners of the firm, practices in all aspects of intellectual property law with an emphasis on patent prosecution across a wide range of technologies, including CPU and GPU architectures, semiconductor processing and packaging, high-performance computing, data center technologies, electrical circuits, computer hardware and software, and mechanical devices. In addition to his patent prosecution practice, John handles opinion letters, licensing matters, and inter partes reviews, bringing valuable perspective from his experience representing both petitioners and patent owners before the Patent Trial and Appeal Board.",
+      },
+      {
+        description:
+          "John leverages his deep technical background to serve clients' intellectual property needs. Prior to joining Slater Matsil, he gained extensive hands-on experience in software engineering and system design in the aerospace and aviation industries. At Honeywell FM&T and FlightSafety, John designed and developed software for nuclear weapons test systems, created web-based aviation certification platforms, and contributed to simulation-based aviation training systems. His technical expertise spans software engineering, computer architecture, hardware design, electrical systems, and networking.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "John graduated with a Bachelor of Science in computer engineering from the University of Oklahoma in 2003. He received his Juris Doctor cum laude from Southern Methodist University's Dedman School of Law in 2012 where he was an Articles Editor on the SMU Science and Technology Law Review.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "John is a member of the State Bar of Texas and is registered to practice before the United States Patent and Trademark Office.",
+      },
+      {
+        list: [
+          {
+            label:
+              "Named Texas Super Lawyers Rising Star by Thomson Reuters (2021)",
+          },
+          {
+            label:
+              "Member of Honorable Barbara M.G. Lynn American Inn of Court (2019-2021)",
+          },
+          {
+            label:
+              "Mentor in Dallas Bar Association (DBA) STEER Mentoring Program (2021)",
+          },
+          {
+            label: "Dean’s List in law school, multiple times",
+          },
+          {
+            label: "Article’s Editor at SMU Science and Technology Law Review",
+          },
+        ],
+      },
+    ],
+
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        description:
+          "John is a member of Dallas Bar Association (DBA) Publications Committee (2019-2021)",
+      },
+    ],
+  },
+  {
+    slug: "fantai-kong",
+    professionals_Details_HeroSection: {
+      name: "Fantai Kong, Ph.D.",
+      email: "fkong@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: fantai,
+      vCardData: {
+        name: "Fantai Kong",
+        formattedName: "Fantai Kong, Ph.D.",
+        electronicMail: "fkong@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Technical Advisor",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Fantai",
+        lastName: "Kong",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Fantai is a technical advisor with extensive experience in condensed matter physics, semiconductors, energy conversion, and storage materials and devices. He holds a Ph.D. in Materials Science and Engineering with his doctoral research focusing on semiconductor and battery materials and devices, including multi-scale modeling, device fabrication, and characterization. Before joining Slater Matsil, Fantai served as a Senior Device Engineer and Project Manager at Hunt Energy, where he led the research and development of innovative energy storage technologies. He is the inventor of 11 applied patents, five of which have been granted, and the author of 33 peer-reviewed publications. Additionally, he contributed to the academic community as a peer reviewer for over 15 journals. Fantai aims to leverage his technical and intellectual property expertise to protect and advance technological innovations.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Fantai earned his Bachelor of Engineering degree in Materials Science and Engineering from the Central South University in 2012 and his Ph.D. in Materials Science and Engineering from the University of Texas at Dallas in 2017.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description: "Fantai holds five patents granted by the USPTO.",
+      },
+      {
+        list: [
+          {
+            label:
+              'US 11,469,452 “Capacity Regenerable Excess Electrolyte Zinc Ion Battery"',
+          },
+          {
+            label: 'US 11,469,460 “Subsurface Electrical Storage Batteries"',
+          },
+          {
+            label: "US 11,788,241 “Road Based Electrical Storage Batteries”",
+          },
+          {
+            label:
+              "US 11,342,556 “Coating of Electrode Materials for Energy Storage Devices”",
+          },
+          {
+            label: "US 12,002,941 “Control of Electrolyte Inside Battery”",
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        description:
+          "Fantai has authored over 33 original research publications that have received more than 1700 citations. He has also presented his work at various meetings and conferences. Selected publications include:",
+      },
+      {
+        list: [
+          {
+            label:
+              "F. Kong, C. Liang, L. Wang, K. Cho, et al., “Kinetic Stability of Bulk LiNiO2 and Surface Degradation by Oxygen Evolution in LiNiO2-Based Cathode Materials”, Advanced Energy Materials, 9 (2019) 1802586.",
+          },
+          {
+            label:
+              "F. Kong, H. Zhang, R. Longo, K. Cho, et al., “A Large Scale Simulation Method on the Complex Ternary Li-Mn-O Compound”, Computational Materials Science, 112 (2016) 193-204.",
+          },
+          {
+            label:
+              "F. Kong, C. Liang, R. Longo, K. Cho, et al., “Conflicting Roles of Anion Doping on the Electrochemical Performances of Li-ion Battery Cathode Materials”, Chemistry of Materials, 28 (2016) 6942.",
+          },
+          {
+            label:
+              "Y. Zou, Z. Chen, F. Kong, J. Zou, et al., “Planar Vacancies in Sn1-xBixTe Nanoribbons”, ACS Nano, 10 (2016), 5507-5515.",
+          },
+          {
+            label:
+              "Y. Zou, Z. Chen, F. Kong, J. Zou, et al., “Surface-Energy Engineered Bi-doped SnTe Nanoribbons”, Nanoscale, 8 (2016) 19383-19389.",
+          },
+          {
+            label:
+              "F. Kong, H. Tao, H. Gong, “Interstitial Hydrogen in ZnO and BeZnO”, International Journal of Hydrogen Energy, 38 (2013) 5974-5982",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "michael-kucher",
+    professionals_Details_HeroSection: {
+      name: "Michael Kucher",
+      email: "mkucher@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: michael,
+      vCardData: {
+        name: "Michael Kucher",
+        formattedName: "Michael Kucher",
+        electronicMail: "mkucher@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Michael",
+        lastName: "Kucher",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Michael, one of the partners of the firm, focuses his practice on all aspects of patent prosecution and litigation, including licensing and post grant proceedings. His practice also involves opinion work, including infringement and validity studies.",
+      },
+      {
+        description:
+          "Prior to joining the firm, Michael was head of the U.S. patent department of a large semiconductor company. As in-house attorney, Michael participated in prosecution, litigation, licensing, M&A and patent portfolio management activities (including invention disclosure harvesting). He has extensive experience of all issues stemming from differences in European/German patent prosecution and U.S. patent prosecution.",
+      },
+      {
+        description:
+          "Michael has worked in many technology fields, in particular technologies related to the electrical, medical, and mechanical arts.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Michael holds a Bachelor of Laws (First State Exam) from the University Munich School of Law (Ludwigs-Maximilians-Universität) and a Master of Laws from the Duke University School of Law, Durham, North Carolina. Michael also received a Master of Science (Diplom Physiker) from the University Bonn (Rheinische Friedrich-Wilhelms-Universität).",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Michael is registered to practice before the United States Patent and Trademark Office and is also a member of the State Bar of New York, and the German bar.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "soonshin-kwon",
+    professionals_Details_HeroSection: {
+      name: "Soonshin D. Kwon, Ph.D.",
+      email: "skwon@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: soonshin,
+      vCardData: {
+        name: "Soonshin D. Kwon",
+        formattedName: "Soonshin D. Kwon, Ph.D.",
+        electronicMail: "skwon@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Technical Advisor",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Soonshin",
+        lastName: "Kwon",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Soonshin is a Technical Advisor with extensive experience in semiconductor and nanotechnology research and development. His doctoral research focused on semiconductor nanomaterial synthesis, nanoelectromechanical field-effect transistors (NEMFETs), biochemical sensors, nanoscale thermal transport, and thermoelectrics. He has deep expertise in microfabrication, material and device characterization, and data analysis, including statistical methods and finite element modeling. Prior to joining Slater Matsil, Soonshin was a Senior Process Engineer at Intel’s Logic Technology Development group in Portland, where he led dry etch module development for FinFET and GAA transistor fabrication and served as a key stakeholder across multiple process development teams. He also collaborated closely with equipment vendors to develop advanced plasma etch systems.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Soonshin received his Bachelor of Science degree in Physics with a sub-major in Electrical Engineering from Kyungpook National University, Republic of Korea. He obtained a Master of Science in Materials Science and Engineering from the Gwangju Institute of Science and Technology (GIST), Republic in Korea. He later completed his Ph.D. in Materials Science and Engineering at the University of California, San Diego. Following his doctorate, he pursued postdoctoral research with a focus on nanoscale thermal transport and led a U.S. Department of Energy ARPA-E project aimed at developing thermally adaptive smart textiles.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Soonshin was honored by ACS Publications as one of the most cited and widely read authors. He also served as a peer reviewer for scientific journals. At Intel, he received two departmental awards in recognition of his contributions to defect reduction, metrology and analysis (MA), and yield improvement.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        description:
+          "Soonshin has authored over 20 publications in multiple high-impact journals, with his work cited more than 1,600 times. He has also presented his research at various conferences. Selected publications include:",
+      },
+      {
+        list: [
+          {
+            label:
+              "Soonshin Kwon, Jianlin Zheng, Matthew C.Wingert, Shuang Cui, Renkun Chen, “Unusually High and Anisotropic Thermal Conductivity in Amorphous Silicon Nanostructure” ACS Nano, 2017, 11(3), 2470",
+          },
+          {
+            label:
+              "Soonshin Kwon, Dylan Lu, Zhelin Sun, Deli Wang, Zhaowei Liu, and Jie Xiang, “Highly stretchable, printable nanowire array optical polarizer”, Nanoscale, 2016, 8, 15850",
+          },
+          {
+            label:
+              "Matthew C. Wingert‡, Soonshin Kwon‡, Ming Hu‡, Dimos Poulikakos, Jie Xiang, and Renkun Chen, “Sub-Amorphous Thermal Conductivity in Ultra-Thin Crystalline Silicon Nanotubes” Nano Letters, 2015, 15 (4), 2605-2611. (‡ equal contribution)",
+          },
+          {
+            label:
+              "Matthew C. Wingert, Soonshin Kwon, Shengqiang Cai, Renkun Chen, “Fluid-like surface layer and its flow Characteristics in glassy nanotubes” Nano Letters, 2016, 16(12), 7545 (‡ equal contribution)",
+          },
+          {
+            label:
+              "Soonshin Kwon‡, Zack C. Y. Chen‡, Hyunwoo Noh‡, Ju Hun Lee, Hang Liu, Jennifer N. Cha, and Jie Xiang, “Selective Functionalization and Loading of Biomolecules in Crystalline Silicon Nanotube Field-Effect-Transistors”, Nanoscale, 2014,6, 7847-7852 (‡ equal contribution)",
+          },
+          {
+            label:
+              'Ji-Hun Kim, Zack C. Y. Chen, Soonshin Kwon, and Jie Xiang, "Three-Terminal nanoelectromechanical Field Effect Transistor with Abrupt Subthreshold Slope", Nano Letters, 14, 1687–1691 (2014).',
+          },
+          {
+            label:
+              'Soonshin Kwon, Zack C. Y. Chen, Ji-Hun Kim, and Jie Xiang, "Misfit-guided self-organization of anticorrelated Ge quantum dot arrays on Si nanowires", Nano Letters, 12, 4757–4762 (2012)',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "brian-mair",
+    professionals_Details_HeroSection: {
+      name: "Brian A. Mair",
+      email: "bmair@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: brian_mair,
+      vCardData: {
+        name: "Brian A. Mair",
+        formattedName: "Brian A. Mair",
+        electronicMail: "bmair@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Brian",
+        lastName: "Mair",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Brian, one of the partners of the firm, provides his technologically diverse clients a wide range of services in the patent field. He prepares and prosecutes patents in such technology fields as semiconductor manufacturing, telecommunications, and chemical processing. He works with clients to not only generate and file patent applications, but to actively shepherd the applications through the United States Patent and Trademark Office so that the patent applications provide an enhanced amount of protection for the client. He is especially versed in preparing and prosecuting patent applications dealing with the complicated processes, chemistry, and controls surrounding the manufacturing of semiconductors.",
+      },
+      {
+        description:
+          "Brian also helps clients during patent license negotiations. He has actively defended his clients’ right in patent licensing meetings, both asserting and defending against patents for them. From initial strategy, through patent analysis and infringement contentions, Brian works with clients to reach a successful resolution of the negotiations.",
+      },
+      {
+        description:
+          "Prior to returning to law school, Brian spent years honing his chemical and process engineering skills as a consultant to numerous facilities (chemical plants, refineries, and power plants) throughout the southeast. As a consultant, Brian worked closely with clients at all levels in defining their needs and producing meaningful results. He brings that same focus and client-oriented performance and commitment to the clients in his patent practice.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Brian has an undergraduate degree in chemical engineering from Louisiana State University. He obtained his Juris Doctor and a bachelor’s degree in civil law from the Paul M. Hebert School of Law. Brian ranked in the top ten percent of his law school graduating class and served on the Louisiana Law Review Association.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Brian is registered to practice as a patent attorney before the United States Patent and Trademark Office.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label:
+              '"The Consequences of In re Bilski in the Courts and at the Board of Patent Appeals and Interferences," 2009',
+          },
+          {
+            label:
+              '"Obviousness in the Patent Office: Implications of KSR on Patent Prosecution," 45th Annual Intellectual Property Law Program at The Center for American and International Law, November 2007',
+          },
+          {
+            label:
+              'Brian Mair, "Calculating Plantwide NOx Emission Limitations under the Newly Proposed NOx RACT Plan," URS Corporate Seminar, Baton Rouge, 2001',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ira-matsil",
+    professionals_Details_HeroSection: {
+      name: "Ira S. Matsil",
+      email: "imatsil@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: ira,
+      vCardData: {
+        name: "Ira S. Matsil",
+        formattedName: "Ira S. Matsil",
+        electronicMail: "imatsil@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Ira",
+        lastName: "Matsil",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Ira, one of the founders of the firm, focuses his practice on the technical aspects of patent portfolio management and strategy, including patent licensing, patent litigation support, and all phases of patent prosecution, including reexaminations and reissues. His practice also involves patent opinion work, including infringement and validity studies.",
+      },
+      {
+        description:
+          "Ira’s background at a Fortune 200 technology company allows him to fully appreciate his clients’ overall business needs and objectives. Using his experience as an electrical engineer, Ira helps his clients to reach their business goals by protecting and leveraging their intellectual property assets. Ira’s clients appreciate his in-depth understanding of their technology and his innovative approaches to their legal and business needs.",
+      },
+      {
+        description:
+          "Ira routinely works with large corporate clients, both domestic and foreign, on their most complex and challenging intellectual property matters. He also works with growing companies to devise ways to develop their portfolios. This includes working with engineers, managers, and in-house attorneys to determine what can and should be protected.",
+      },
+      {
+        description:
+          "Ira has been retained as a technical resource on patent infringement cases and has worked with litigation teams at law firms nationwide. In these matters, Ira assists with critically important, highly technical patent and technology issues. Ira's technical expertise includes electronic circuits, semiconductors, telecommunications, optics, and computer hardware and software.",
+      },
+      {
+        description:
+          "Prior to working in private practice, Ira worked at Texas Instruments as a lead engineer and program manager and later in the TI legal department as a patent agent during law school and then as an attorney. At TI, Ira was involved in semiconductor license negotiations and patent prosecution in numerous fields.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Ira graduated with a bachelor of science degree in electrical engineering from The University of Texas at Austin in 1987, received a master’s degree in electrical engineering from The University of Texas at Arlington in 1992, and graduated magna cum laude from Southern Methodist University’s Dedman School of Law in 1995. Ira was an Editor of the SMU Law Review and an Order of the Coif law school graduate.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Ira is a member of the State Bar of Texas and is registered to practice before the United States Patent and Trademark Office. Ira’s honors include:",
+      },
+      {
+        list: [
+          {
+            label: "Chambers ranked 2021-2025",
+          },
+          {
+            label: "Texas Super Lawyer from 2012-2025",
+          },
+          {
+            label: "IAM Patent 1000 Recommended for Patent Prosecution",
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        //         list:[
+        //           {
+        //             label:'Speaker. “Preparing & Prosecuting Patent Applications To Defeat 101 Challenges,” 59th Annual Intellectual Property Law Program at The Center for American and International Law, November 2021'
+        //           },
+        //           {
+        //             label:'Speaker. “Navigating IP Issues in Your Practice: A Primer for Non-Patent Lawyers,” Dallas Bar Association, June 2019'
+        //           },
+        //           {
+        //             label:'Speaker. “Management of an IP Portfolio: In-house Counsel's Perspectives,” Intellectual Property Section of Dallas Bar Association, April 2016'
+        //           },
+        //           {
+        //             label:'Speaker. "Indefiniteness in Patent Prosecution," 53rd Annual Intellectual Property Law Program at The Center for American and International Law, November 2015'
+        //           },
+        //           {
+        //             label:'Panelist. “A Panel Discussion of Section 101 – Substance and Procedure at the Patent Office and in Court,” Intellectual Property Section of Dallas Bar Association, March 2015'
+        //           },
+        //           {
+        //             label:'Session moderator. "Patent Prosecution," Annual Intellectual Property Law Program at The Center for American and International Law, November 2008-2013'
+        //           },
+        //           {
+        //             label:'Panelist. "Method Patents in view of In re Bilski," State Bar of Texas, Annual Meeting, June 2010'
+        //           },
+        //           {
+        //             label:'Speaker. "Software Patents in view of In re Bilski," State Bar of Texas, Annual Meeting, June 2009'
+        //           },
+        //           {
+        //             label:'Presenter. "Patent Prosecution Update," January 2008 meeting of the Dallas Bar Association's Intellectual Property Section',
+        //           },
+        //           {
+        // label:'Presenter. "Obviousness in the Patent Office: Implications of KSR on Patent Prosecution," 45th Annual Intellectual Property Law Program at The Center for American and International Law, November 2007'
+        //           }
+        //         ]
+      },
+    ],
+  },
+  {
+    slug: "joseph-mcmanis",
+    professionals_Details_HeroSection: {
+      name: "Joseph E. McManis, Ph.D.",
+      email: "jmcmanis@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: joseph,
+      vCardData: {
+        name: "Joseph E. McManis",
+        formattedName: "Joseph E. McManis, Ph.D.",
+        electronicMail: "jmcmanis@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Patent Agent",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Joseph",
+        lastName: "McManis",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "marc-mcwilliams",
+    professionals_Details_HeroSection: {
+      name: "Marc McWilliams, Ph.D.",
+      email: "mmcwilliams@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: marc,
+      vCardData: {
+        name: "Marc McWilliams",
+        formattedName: "Marc McWilliams, Ph.D.",
+        electronicMail: "mmcwilliams@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Marc",
+        lastName: "McWilliams",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "peter-meza",
+    professionals_Details_HeroSection: {
+      name: "Peter J. Meza",
+      email: "pmeza@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: peter,
+      vCardData: {
+        name: "Peter J. Meza",
+        formattedName: "Peter J. Meza",
+        electronicMail: "pmeza@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Peter",
+        lastName: "Meza",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "benjamin-nise",
+    professionals_Details_HeroSection: {
+      name: "Benjamin E. Nise",
+      email: "bnise@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: benjamin_nise,
+      vCardData: {
+        name: "Benjamin E. Nise",
+        formattedName: "Benjamin E. Nise",
+        electronicMail: "bnise@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Benjamin",
+        lastName: "Nise",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "payam-rashidi",
+    professionals_Details_HeroSection: {
+      name: "Payam Rashidi",
+      email: "prashidi@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: payam,
+      vCardData: {
+        name: "Payam Rashidi",
+        formattedName: "Payam Rashidi",
+        electronicMail: "prashidi@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Payam",
+        lastName: "Rashidi",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "rameez-samnakay",
+    professionals_Details_HeroSection: {
+      name: "Rameez Samnakay, Ph.D.",
+      email: "rsamnakay@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: rameez,
+      vCardData: {
+        name: "Rameez Samnakay",
+        formattedName: "Rameez Samnakay, Ph.D.",
+        electronicMail: "rsamnakay@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Patent Agent",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Rameez",
+        lastName: "Samnakay",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "steven-slater",
+    professionals_Details_HeroSection: {
+      name: "Steven H. Slater",
+      email: "sslater@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: steven_slater,
+      vCardData: {
+        name: "Steven H. Slater",
+        formattedName: "Steven H. Slater",
+        electronicMail: "sslater@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Steven",
+        lastName: "Slater",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "chad-terrell",
+    professionals_Details_HeroSection: {
+      name: "Chad Terrell",
+      email: "cterrell@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: chad,
+      vCardData: {
+        name: "Chad Terrell",
+        formattedName: "Chad Terrell",
+        electronicMail: "cterrell@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Chad",
+        lastName: "Terrell",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "lizabeth-vice",
+    professionals_Details_HeroSection: {
+      name: "Lizabeth Vice",
+      email: "lvice@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: lizabeth,
+      vCardData: {
+        name: "Lizabeth Vice",
+        formattedName: "Lizabeth Vice",
+        electronicMail: "lvice@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Lizabeth",
+        lastName: "Vice",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "julian-wang",
+    professionals_Details_HeroSection: {
+      name: "Julian Wang, Ph.D.",
+      email: "jwang@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: julian,
+      vCardData: {
+        name: "Julian Wang",
+        formattedName: "Julian Wang, Ph.D.",
+        electronicMail: "jwang@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Technical Advisor",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Julian",
+        lastName: "Wang",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "jonathan-ward",
+    professionals_Details_HeroSection: {
+      name: "Jonathan Ward",
+      email: "jward@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: jonathan_ward,
+      vCardData: {
+        name: "Jonathan Ward",
+        formattedName: "Jonathan Ward",
+        electronicMail: "jward@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Jonathan",
+        lastName: "Ward",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ARTICLES_DATA: [],
+  },
+  {
+    slug: "chuanming-wei",
+    professionals_Details_HeroSection: {
+      name: "Chuanming Wei, Ph.D.",
+      email: "cwei@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: chuanming,
+      vCardData: {
+        name: "Chuanming Wei",
+        formattedName: "Chuanming Wei, Ph.D.",
+        electronicMail: "cwei@slatermatsil.com",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Attorney at Law",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Chuanming",
+        lastName: "Wei",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [],
+    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_ADMISSIONS_DATA: [],
     PROFESSIONAL_ARTICLES_DATA: [],
   },
 ];
