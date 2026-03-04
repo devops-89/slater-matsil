@@ -12,6 +12,9 @@ import LoadingProvider from "@/components/providers/LoadingProvider";
 import { useMediaQuery } from "@mui/material";
 import MobileNavbar from "@/components/widgets/Mobile-Navbar";
 import Modal from "@/components/widgets/Modal";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({
   children,
@@ -20,8 +23,17 @@ export default function RootLayout({
 }>) {
   const { setDetails } = usePageData();
   const [initialLoading, setInitialLoading] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
+    AOS.refresh();
+  }, [pathname]);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+    });
     const timer = setTimeout(() => {
       setDetails(WEBSITE_DATA);
       setInitialLoading(false);

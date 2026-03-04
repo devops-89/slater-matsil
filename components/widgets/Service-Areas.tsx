@@ -27,7 +27,7 @@ const ServiceAreas = () => {
           justifyContent={"space-between"}
           spacing={{ lg: 0, xs: 2 }}
         >
-          <Box>
+          <Box data-aos="fade-right">
             <HeadingStar
               title={details?.homepage?.service_area?.sectionTitle || ""}
             />
@@ -54,7 +54,12 @@ const ServiceAreas = () => {
 
         <Grid container spacing={4} sx={{ mt: 7 }}>
           {details?.homepage?.service_area?.section_Data.map((val, i) => (
-            <Grid size={{ lg: 4, xs: 12 }} key={i}>
+            <Grid
+              size={{ lg: 4, xs: 12 }}
+              key={i}
+              data-aos="fade-up"
+              data-aos-delay={i * 150}
+            >
               <ServiceAreaCard
                 img={val.img}
                 title={val.title}

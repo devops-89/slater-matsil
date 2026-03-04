@@ -20,6 +20,7 @@ const HeroSection = () => {
   return (
     <Box>
       <Box
+        data-aos="fade-in"
         sx={{
           backgroundImage: `url(${heroImage.src})`,
           height: { lg: "110vh", xs: "60vh" },
@@ -33,6 +34,8 @@ const HeroSection = () => {
       >
         <Container maxWidth="lg">
           <Typography
+            data-aos="fade-up"
+            data-aos-delay="200"
             sx={{
               color: COLORS.WHITE,
               fontSize: { lg: 53, xs: 30 },
@@ -46,6 +49,8 @@ const HeroSection = () => {
           <Divider sx={{ borderColor: COLORS.WHITE, mb: 4, width: "100%" }} />
 
           <Typography
+            data-aos="fade-up"
+            data-aos-delay="400"
             sx={{
               color: COLORS.WHITE,
               fontSize: { lg: 25, xs: 15 },
@@ -60,6 +65,8 @@ const HeroSection = () => {
           </Typography>
 
           <Stack
+            data-aos="zoom-in"
+            data-aos-delay="600"
             direction={"row"}
             alignItems={"center"}
             justifyContent={"center"}

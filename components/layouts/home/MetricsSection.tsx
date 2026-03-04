@@ -11,6 +11,7 @@ import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { Mail } from "@mui/icons-material";
 import MetricsCard from "../../widgets/common/Metrics-Card";
+import Link from "next/link";
 
 const MetricsSection: React.FC = (): JSX.Element => {
   const { details } = usePageData();
@@ -18,7 +19,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
     <Box>
       <Container maxWidth="lg">
         <Grid container spacing={6}>
-          <Grid size={{ lg: 6, xs: 12 }}>
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-right">
             <HeadingStar
               title={details?.homepage?.our_metrics?.sectionTitle || ""}
             />
@@ -79,26 +80,28 @@ const MetricsSection: React.FC = (): JSX.Element => {
             >
               {details?.homepage?.our_metrics?.description}
             </Typography>
-            <Button
-              endIcon={<MailOutlineIcon />}
-              sx={{
-                backgroundColor: COLORS.PRIMARY_BLUE,
-                color: COLORS.WHITE,
-                borderRadius: "50px",
-                boxShadow: "0 5px 20px 0 rgba(0, 0, 0, 0.10)",
-                padding: { lg: "22px 32.23px 18px 26px", xs: "22px" },
-                textTransform: "uppercase",
-                height: "61px",
-                fontFamily: adelle.style.fontFamily,
-                fontSize: 16,
-                mt: 2,
-              }}
-            >
-              {details?.homepage?.our_metrics?.ctaButton}
-            </Button>
+            <Link href="/contact-us">
+              <Button
+                endIcon={<MailOutlineIcon />}
+                sx={{
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  color: COLORS.WHITE,
+                  borderRadius: "50px",
+                  boxShadow: "0 5px 20px 0 rgba(0, 0, 0, 0.10)",
+                  padding: { lg: "22px 32.23px 18px 26px", xs: "22px" },
+                  textTransform: "uppercase",
+                  height: "61px",
+                  fontFamily: adelle.style.fontFamily,
+                  fontSize: 16,
+                  mt: 2,
+                }}
+              >
+                {details?.homepage?.our_metrics?.ctaButton}
+              </Button>
+            </Link>
           </Grid>
 
-          <Grid size={{ lg: 6, xs: 12 }}>
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-left">
             <Grid container spacing={8}>
               {details?.homepage?.our_metrics?.metricsData.map((val, i) => (
                 <Grid size={{ lg: 6, xs: 6 }} key={i}>

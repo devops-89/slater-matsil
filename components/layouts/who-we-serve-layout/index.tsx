@@ -11,9 +11,13 @@ const WhoWeServelayout = () => {
   const { details } = usePageData();
   return (
     <Box>
-      <WhoWeServeLayoutHero />
-      <WhoWeServeAbout />
-      <Container maxWidth="lg">
+      <div data-aos="fade-in">
+        <WhoWeServeLayoutHero />
+      </div>
+      <div data-aos="fade-up">
+        <WhoWeServeAbout />
+      </div>
+      <Container maxWidth="lg" data-aos="zoom-in">
         <Grid container sx={{ mt: 6 }}>
           <Grid size={{ lg: 9, xs: 12 }} mx="auto">
             <QuoteCard
@@ -29,7 +33,9 @@ const WhoWeServelayout = () => {
           </Grid>
         </Grid>
       </Container>
-      <WhoServeTabSection />
+      <div data-aos="fade-up">
+        <WhoServeTabSection />
+      </div>
     </Box>
   );
 };

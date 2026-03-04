@@ -17,13 +17,6 @@ import "aos/dist/aos.css";
 const AboutSection = () => {
   const { details } = usePageData();
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-    });
-  }, []);
-
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">

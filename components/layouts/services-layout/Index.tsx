@@ -10,12 +10,22 @@ import NeedAssistance from "./Need-Assistance";
 const ServicesLayout = () => {
   return (
     <div>
-      <HeroServicesSection />
-      <WhyChooseUs />
-      <UnParalleledLegalService />
-      <OurserviceFramework />
+      <div data-aos="fade-in">
+        <HeroServicesSection />
+      </div>
+      <div data-aos="fade-up">
+        <WhyChooseUs />
+      </div>
+      <div data-aos="fade-up">
+        <UnParalleledLegalService />
+      </div>
+      <div data-aos="fade-up">
+        <OurserviceFramework />
+      </div>
       <ServiceAreas />
-      <NeedAssistance />
+      <div data-aos="zoom-in">
+        <NeedAssistance />
+      </div>
     </div>
   );
 };

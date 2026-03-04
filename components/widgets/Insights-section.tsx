@@ -8,7 +8,7 @@ import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
 import React, { useRef } from "react";
 import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import InsightsCard from "./common/Insights-Card";
+import InsightsCard from "@/components/layouts/insights-layout/components/Insights-Card";
 
 const InsightsSection = () => {
   const { details } = usePageData();
@@ -17,7 +17,11 @@ const InsightsSection = () => {
   return (
     <Box sx={{ py: 10 }}>
       <Grid container>
-        <Grid size={{ lg: 5, xs: 12 }} sx={{ px: { lg: 10, xs: 2 } }}>
+        <Grid
+          size={{ lg: 5, xs: 12 }}
+          sx={{ px: { lg: 10, xs: 2 } }}
+          data-aos="fade-right"
+        >
           <HeadingStar
             title={details?.homepage?.insights_section?.sectionTitle || ""}
           />
@@ -33,17 +37,7 @@ const InsightsSection = () => {
           >
             {details?.homepage?.insights_section?.heading}
           </Typography>
-          {/* <Typography
-            sx={{
-              color: COLORS.BLACK,
-              fontFamily: adelle.style.fontFamily,
-              fontSize: { lg: 18, xs: 15 },
-              fontWeight: 400,
-              mt: 2,
-            }}
-          >
-            {details?.homepage?.insights_section?.description}
-          </Typography> */}
+
           <Stack
             direction={"row"}
             alignItems={"center"}
@@ -76,7 +70,7 @@ const InsightsSection = () => {
             </IconButton>
           </Stack>
         </Grid>
-        <Grid size={{ lg: 7, xs: 12 }}>
+        <Grid size={{ lg: 7, xs: 12 }} data-aos="fade-left">
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
@@ -91,17 +85,16 @@ const InsightsSection = () => {
               },
             }}
           >
-            {details?.homepage?.insights_section?.insights_data.map(
-              (val, i) => (
-                <SwiperSlide key={i}>
-                  <InsightsCard
-                    heading={val.heading}
-                    category={val.category}
-                    ctaButton={val.ctaButton}
-                  />
-                </SwiperSlide>
-              ),
-            )}
+            {details?.insightsPage?.insightsData?.map((val, i) => (
+              <SwiperSlide key={i}>
+                <InsightsCard
+                  title={val.title}
+                  category={val.category}
+                  bgColor={val.bgColor}
+                  slug={val.slug}
+                />
+              </SwiperSlide>
+            ))}
           </Swiper>
         </Grid>
       </Grid>

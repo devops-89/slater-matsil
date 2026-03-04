@@ -10,9 +10,15 @@ const CareerLayout = () => {
   return (
     <div>
       <Box>
-        <HeroSection />
-        <WhyWorkWithus />
-        <OpenRoles />
+        <div data-aos="fade-in">
+          <HeroSection />
+        </div>
+        <div data-aos="fade-up">
+          <WhyWorkWithus />
+        </div>
+        <div data-aos="fade-up">
+          <OpenRoles />
+        </div>
         <InsightsSection />
       </Box>
     </div>

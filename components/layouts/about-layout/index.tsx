@@ -29,7 +29,12 @@ const AboutLayout = () => {
       <Container maxWidth="lg" sx={{ mt: 4 }}>
         <Grid container spacing={4}>
           {CAREER_HOME_DATA.map((val, i) => (
-            <Grid size={{ lg: 4, xs: 12 }} key={i}>
+            <Grid
+              size={{ lg: 4, xs: 12 }}
+              key={i}
+              data-aos="fade-up"
+              data-aos-delay={i * 150}
+            >
               <Box
                 sx={{
                   backgroundImage: `url(${val.img.src})`,

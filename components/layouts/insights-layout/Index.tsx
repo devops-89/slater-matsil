@@ -7,8 +7,12 @@ import InsightsTabSection from "./Insights-tab-section";
 const InsightsLayout = () => {
   return (
     <Box>
-      <InsightsHeroSection />
-      <InsightsTabSection />
+      <div data-aos="fade-in">
+        <InsightsHeroSection />
+      </div>
+      <div data-aos="fade-up">
+        <InsightsTabSection />
+      </div>
     </Box>
   );
 };
