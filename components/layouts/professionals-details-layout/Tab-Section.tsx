@@ -29,6 +29,9 @@ const TabSection = () => {
     if (label === PROFESSIONAL_TABS_DATA.ARTICLES_PRESENTATIONS) {
       return data?.PROFESSIONAL_ARTICLES_DATA;
     }
+    if (label === PROFESSIONAL_TABS_DATA.ASSOCIATIONS) {
+      return data?.PROFESSIONAL_ASSOCIATIONS_DATA;
+    }
   };
 
   return (
@@ -39,7 +42,12 @@ const TabSection = () => {
             <TabSwitching
               value={value}
               onChange={handleChange}
-              data={PROFESSIONAL_DETAILS_TAB_DATA}
+              data={PROFESSIONAL_DETAILS_TAB_DATA.filter((tab) => {
+                if (tab.title === PROFESSIONAL_TABS_DATA.ASSOCIATIONS) {
+                  return !!data?.PROFESSIONAL_ASSOCIATIONS_DATA;
+                }
+                return true;
+              })}
             />
           </Grid>
         </Grid>

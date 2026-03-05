@@ -101,6 +101,12 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
     PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        description:
+          "Ming is admitted to practice in Texas and is a registered practitioner with the United States Patent and Trademark Office.",
+      },
+    ],
   },
   {
     slug: "steven-yates",
@@ -352,6 +358,30 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
           {
             label:
               "Technical Program Committee of the international semiconductor modeling conference (SISPAD), 2006",
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        list: [
+          {
+            label: `Adjunct Professor of Law, Texas A&M School of Law`,
+          },
+          {
+            label: `The Honorable Barbara M.G. Lynn American Inn of Court`,
+          },
+          {
+            label: `Dallas Bar Association, IP Section`,
+          },
+          {
+            label: `Dallas Bar Association`,
+          },
+          {
+            label: `Dallas Asian American Bar Association`,
+          },
+          {
+            label: `South Asian Bar Association of Dallas/Fort Worth`,
           },
         ],
       },
@@ -1185,7 +1215,8 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
           "Shervin graduated from the Massachusetts Institute of Technology in 2004 with the SB in Course V (Chemistry). Shervin was awarded the PhD in Chemistry (with a concentration in Physical Chemistry) from the University of California, Berkeley in 2010. His dissertation, Excursions in Chemical Dynamics, summarizes his research in approximate methods for quantum dynamics (with William H. Miller) and the theory of X-ray spectroscopy (with Richard J. Saykally). Shervin completed his training with postdoctoral appointments in Chemistry at the University of Pennsylvania (2011–2013), where he worked with Joseph E. Subotnik on several interconnected aspects of quantum chemistry relating to nonadiabatic dynamics and photochemistry, and at the University of Utah (2013–2015), where he developed multiple-timestep ab initio molecular dynamics methods with Ryan P. Steele.",
       },
     ],
-    PROFESSIONAL_ADMISSIONS_DATA: [
+    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
       {
         description:
           "Shervin has been a member of the American Chemical Society since 2006 and is currently a member of the Division of Physical Chemistry (PHYS); the associated Theoretical Subdivision; the Division of the History of Chemistry (HIST); and the Division of Chemistry and the Law (CHAL).",
@@ -1735,7 +1766,8 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
           "Roger is a member of the State Bar of Texas and is admitted to practice before the Northern and Eastern Districts of Texas. He is registered to practice before the United States Patent and Trademark Office. Roger was honored to be named Top Patent Prosecutor by PatentBuddy (2011) and top patent attorney in Top 100 Best Performing Attorneys in High-Tech by Patexia (2022).",
       },
     ],
-    PROFESSIONAL_ARTICLES_DATA: [
+    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
       {
         description:
           "Roger is a member of the American Intellectual Property Law Association, and the Dallas Bar Association.",
@@ -1813,7 +1845,8 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
 
-    PROFESSIONAL_ARTICLES_DATA: [
+    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
       {
         description:
           "John is a member of Dallas Bar Association (DBA) Publications Committee (2019-2021)",
@@ -2202,38 +2235,54 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     ],
     PROFESSIONAL_ARTICLES_DATA: [
       {
-        //         list:[
-        //           {
-        //             label:'Speaker. “Preparing & Prosecuting Patent Applications To Defeat 101 Challenges,” 59th Annual Intellectual Property Law Program at The Center for American and International Law, November 2021'
-        //           },
-        //           {
-        //             label:'Speaker. “Navigating IP Issues in Your Practice: A Primer for Non-Patent Lawyers,” Dallas Bar Association, June 2019'
-        //           },
-        //           {
-        //             label:'Speaker. “Management of an IP Portfolio: In-house Counsel's Perspectives,” Intellectual Property Section of Dallas Bar Association, April 2016'
-        //           },
-        //           {
-        //             label:'Speaker. "Indefiniteness in Patent Prosecution," 53rd Annual Intellectual Property Law Program at The Center for American and International Law, November 2015'
-        //           },
-        //           {
-        //             label:'Panelist. “A Panel Discussion of Section 101 – Substance and Procedure at the Patent Office and in Court,” Intellectual Property Section of Dallas Bar Association, March 2015'
-        //           },
-        //           {
-        //             label:'Session moderator. "Patent Prosecution," Annual Intellectual Property Law Program at The Center for American and International Law, November 2008-2013'
-        //           },
-        //           {
-        //             label:'Panelist. "Method Patents in view of In re Bilski," State Bar of Texas, Annual Meeting, June 2010'
-        //           },
-        //           {
-        //             label:'Speaker. "Software Patents in view of In re Bilski," State Bar of Texas, Annual Meeting, June 2009'
-        //           },
-        //           {
-        //             label:'Presenter. "Patent Prosecution Update," January 2008 meeting of the Dallas Bar Association's Intellectual Property Section',
-        //           },
-        //           {
-        // label:'Presenter. "Obviousness in the Patent Office: Implications of KSR on Patent Prosecution," 45th Annual Intellectual Property Law Program at The Center for American and International Law, November 2007'
-        //           }
-        //         ]
+        list: [
+          {
+            label:
+              "Speaker. “Preparing & Prosecuting Patent Applications To Defeat 101 Challenges,” 59th Annual Intellectual Property Law Program at The Center for American and International Law, November 2021",
+          },
+          {
+            label:
+              "Speaker. “Navigating IP Issues in Your Practice: A Primer for Non-Patent Lawyers,” Dallas Bar Association, June 2019",
+          },
+          {
+            label:
+              "Speaker. “Management of an IP Portfolio: In-house Counsel's Perspectives,” Intellectual Property Section of Dallas Bar Association, April 2016",
+          },
+          {
+            label:
+              'Speaker. "Indefiniteness in Patent Prosecution," 53rd Annual Intellectual Property Law Program at The Center for American and International Law, November 2015',
+          },
+          {
+            label:
+              "Panelist. “A Panel Discussion of Section 101 – Substance and Procedure at the Patent Office and in Court,” Intellectual Property Section of Dallas Bar Association, March 2015",
+          },
+          {
+            label:
+              'Session moderator. "Patent Prosecution," Annual Intellectual Property Law Program at The Center for American and International Law, November 2008-2013',
+          },
+          {
+            label:
+              'Panelist. "Method Patents in view of In re Bilski," State Bar of Texas, Annual Meeting, June 2010',
+          },
+          {
+            label:
+              'Speaker. "Software Patents in view of In re Bilski," State Bar of Texas, Annual Meeting, June 2009',
+          },
+          {
+            label:
+              'Presenter. "Patent Prosecution Update," January 2008 meeting of the Dallas Bar Association\'s Intellectual Property Section',
+          },
+          {
+            label:
+              'Presenter. "Obviousness in the Patent Office: Implications of KSR on Patent Prosecution," 45th Annual Intellectual Property Law Program at The Center for American and International Law, November 2007',
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        description:
+          "Ira is a member of the Institute of Electrical and Electronic Engineers, the American Intellectual Property Law Association, and the Dallas Bar Association. He is a member and former director for the Intellectual Property Section of the Dallas Bar Association.",
       },
     ],
   },
@@ -2263,8 +2312,22 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "McManis",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Joseph is a registered patent agent with patent prosecution experience in telecommunications, semiconductors, software, oil/natural gas engineering, aircraft engineering, and consumer products.",
+      },
+      {
+        description:
+          "Joseph has a Ph.D. in applied physics. His graduate research dealt with investigating, developing, and fabricating semiconductor optoelectronics; in particular, novel gallium arsenide infrared LEDs. Prior to joining Slater Matsil, Joseph was a Failure Analysis Engineer and Yield Analysis Engineer at Texas Instruments for six years, where he worked with various aspects of semiconductor technology including processing, layout, component design, and circuit design.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Joseph earned a Bachelor of Arts cum laude from Rice University in 2000. He obtained a Ph.D. in applied physics from Yale University in 2006.",
+      },
+    ],
     PROFESSIONAL_ADMISSIONS_DATA: [],
     PROFESSIONAL_ARTICLES_DATA: [],
   },
@@ -2294,10 +2357,86 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "McWilliams",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
-    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Marc focuses his practice on patent preparation and prosecution in a variety of diverse technical areas including semiconductor devices, packaging, and fabrication, integrated circuits, computer hardware and software, artificial intelligence, photonic circuits, telecommunications, sensors, and others. He has also provided litigation support and strategic portfolio advice.",
+      },
+      {
+        description:
+          "Marc has research experience in fundamental charge transport through organic materials. Specifically, his work has encompassed such diverse areas as DNA synthesis and modification, device fabrication using photolithography and electron beam lithography, electrospun nanofibers, DNA nanowires, electrochemical characterization and computer simulation of DNA monolayers, nonlinear optimization and big data analysis, and real-time sensing of enzymes using DNA electrochemistry.",
+      },
+      {
+        description:
+          "Marc has a broad range of experience in physics, materials science, chemistry, biology, and computer science with a desire to understand technology at a fundamental level. He has always taken a hands-on approach to his research by making his own devices, developing his own lab protocols, and writing his own analysis software. Marc published several papers while at The University of Texas at Dallas as well as serving as a Teaching Assistant for more than five years, where he taught a variety of physics labs and courses, both undergraduate and graduate.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Marc graduated magna cum laude with his J.D. from the University of New Hampshire Franklin Pierce School of Law in 2022. He has also received a Ph.D. in physics from The University of Texas at Dallas in 2015 and obtained his Master of Science in physics from The University of Texas at Dallas in 2010. He also graduated cum laude with a Bachelor of Science and a double major in computer science and physics from The University of Texas at Dallas in 2008.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Marc is admitted to practice in Texas and is a registered practitioner with the United States Patent and Trademark Office. He is a member of the State Bar of Texas.",
+      },
+      {
+        list: [
+          {
+            label:
+              "Several CALI awards recognizing the top performing student in various law school courses",
+          },
+          {
+            label:
+              "Hyer Award recipient for excellence in research from the Texas Section of the American Physical Society (2014)",
+          },
+          {
+            label: "Graduated cum laude and with Collegium V honors (2008)",
+          },
+          {
+            label: "Academic Excellence Scholarship recipient (2004)",
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        list: [
+          { label: "Dallas Bar Association" },
+          {
+            label: "Dallas Association of Young Lawyers",
+          },
+          {
+            label: "American Physical Society",
+          },
+        ],
+      },
+    ],
+
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label:
+              "“The Electronic Influence of Abasic Sites in DNA,” MA McWilliams, R Bhui, DW Taylor, JD Slinker, Journal of the American Chemical Society, 137 (34) 11150-11155 (2015)",
+          },
+          {
+            label:
+              "“Sensitive and Selective Real-time Electrochemical Monitoring of DNA Repair,” MA McWilliams, FH Anka, KJ Balkus, JD Slinker, Biosensors & Bioelectronics, 54, 541-546 (2013)",
+          },
+          {
+            label:
+              "“DNA as a Molecular Wire: Distance and Sequence Dependence,” CH Wohlgamuth, MA McWilliams, JD Slinker, Analytical Chemistry, 85 (18), 8634-8640 (2013)",
+          },
+          {
+            label:
+              "“Using Chip-Based Synthetic Biology to Track Anticancer Drug Activity,” D Kahanda, G Chakrabarti, MA McWilliams, DA Bootman, JD Slinker, Biosensors & Bioelectronics, (2016)",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "peter-meza",
@@ -2325,10 +2464,43 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Meza",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Peter Meza is a registered patent attorney. His background includes nine years of engineering experience working in the semiconductor industry (Texas Instruments, Harris Semiconductor, and Tektronix) specializing in analog integrated circuit design and device modeling. He is an inventor of two issued patents. Peter’s years of experience in the semiconductor industry allow him to understand both the technical aspects of inventions and the business issues surrounding them. Subsequent to obtaining his law degree, Peter represented semiconductor and other related technology clients in a boutique patent firm, as in-house patent counsel, and at a large international law firm.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Peter received a Bachelor of Science degree in Electrical Engineering from Lehigh University in 1975, a Master of Science degree in Electrical Engineering from Southern Methodist University in 1979, and a Juris Doctor degree from Lewis & Clark Law School in 1987.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Peter is a member of the State Bars of Colorado and Oregon and is registered to practice as a patent attorney before the United States Patent and Trademark Office and the Court of Appeals for the Federal Circuit. Patents:",
+      },
+      {
+        list: [
+          {
+            label:
+              'P. Meza, "High voltage current mirror," U.S. Patent Number: 4,532,481',
+          },
+          {
+            label:
+              'P. Meza, A. Plaza, "SLIC II--common-mode current rejection," U.S. Patent Number: 4,524,246',
+          },
+        ],
+      },
+    ],
     PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        description:
+          "Peter is a past member of the Institute of Electrical and Electronic Engineers, the American Bar Association Section of Patent, Trademark, and Copyright Law, as well as the American Intellectual Property Law Association.",
+      },
+    ],
   },
   {
     slug: "benjamin-nise",
@@ -2356,10 +2528,85 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Nise",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
-    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Benjamin, one of the partners of the firm, focuses his practice on all aspects of patent prosecution. His practice also involves post-grant proceedings, patent opinion work, due diligence studies, and patent litigation support including infringement analysis and invalidity studies.",
+      },
+      {
+        description:
+          "Benjamin leads a patent prosecution practice group that has an emphasis on challenging technologies including analog, radio frequency (RF) and mixed-signal circuit design, switched-mode power supplies, radar systems, communication systems and tightly coupled digitally controlled analog and mechanical systems. Because of the wide range of technical specialties of the firm’s patent professionals and the firm’s collaborative culture, Benjamin's practice group can draft and prosecute complex, legally effective, multidisciplinary patent applications that maintain their depth and breadth over multiple technical areas.",
+      },
+      {
+        description:
+          "Benjamin's technical background includes 14 years of engineering experience designing analog, RF, and mixed signal integrated circuits for such commercial applications as television tuners, cable television transmitters, hearing aids, and cell phones. He is also the named inventor on six patents.",
+      },
+      {
+        description:
+          "Having been a member of the initial design teams of three venture capital funded startup companies, Benjamin has a first-hand understanding of the importance of protecting intellectual property in fast-paced, rapidly growing companies. Benjamin's engineering design experience, as well as his experience working with outside counsel on his own inventions, makes him uniquely perceptive to the needs of inventors working in challenging technical fields.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Benjamin graduated summa cum laude with a degree in electrical engineering from Cal Poly, Pomona in 1991, and graduated cum laude from Southern Methodist University's Dedman School of Law in 2008.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Benjamin is a member of the State Bar of Texas and is registered to practice as a patent attorney before the United States Patent and Trademark Office.",
+      },
+      {
+        description: "Patents:",
+      },
+      {
+        list: [
+          {
+            label:
+              'N. Yousefi, K. McClellan, and B. Nise, "Analog PLL Clock Recovery Circuit and LAN Transceiver Employing the Same," U.S. Patent 5448598',
+          },
+          {
+            label:
+              'B. Nise "Method and Apparatus for Autocalibrating the Center Frequency of a Voltage Controlled Oscillator of a Phase Locked Loop," U.S. Patent 5696468',
+          },
+          {
+            label:
+              'T. Blyth, B. Nise, D. Wayne, "Double-sided pulse width modulator," U.S. Patent 5963106',
+          },
+          {
+            label:
+              'B. Nise, C. Mead, X Fang, "Passive switched capacitor delta analog-to-digital converter with programmable gain control," U.S. Patent 5995036',
+          },
+          {
+            label:
+              'R. Green, B. Nise, "Apparatus and method for detecting a low-battery power condition and generating a user perceptible warning," U.S. Patent 6310556',
+          },
+          {
+            label:
+              'B. Nise, "Efficient Polyphase Filter Having a Compact Structure," U.S. Patent 7190942',
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        description:
+          "Benjamin is a member of the Dallas Bar Association and the Institute of Electrical and Electronic Engineers.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label: `K. Ashby, B. Greene, B. Nise, M. Womac, D. Stout, and A. Taddikan, "A SiGe Transmitter Chipset for CATV Video-on-Demand Systems," in Dig. ISSCC '03, February 2003, San Francisco, California`,
+          },
+          {
+            label: `M. Nettles, M. Chang, G. McAllister, B. Nise, C. Persico, K. Sahota, and J. Tero, "Analog Baseband Processor for CDMA/FM Portable Cellular Telephones," in Dig. ISSCC '95, February 1995, San Francisco, California, pp. 328-329`,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "payam-rashidi",
@@ -2387,10 +2634,46 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Rashidi",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
-    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Payam’s practice primarily focuses on patent preparation and prosecution. His primary area of expertise is in analog and digital circuits.",
+      },
+      {
+        description:
+          "Before joining Slater Matsil in 2016, Payam worked as an RF engineer at Raytheon, where he helped design and support a variety of antennas used in space and airborne systems.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Payam received his bachelor’s degree cum laude in electrical engineering from the University of Arkansas in 2004, his master’s degree in electrical engineering from the University of Arkansas in 2005, and his Doctor of Jurisprudence magna cum laude from the University of Houston Law Center in 2022.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Payam is a member of the State Bar of Texas. He is registered to practice before the United States Patent and Trademark Office.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label:
+              "Payam Rashidi, Douglas Woten, John Lusth, Magda El-Shenawee, “Neural Networks as Statistical Indicator of Breast Cancer using Scattered Electromagnetic Data,” Piers 2006 in Cambridge, Cambridge, Massachusetts, March 26-29, 2006.",
+          },
+          {
+            label:
+              "Payam Rashidi, Magda El-Shenawee, Demetrio Macías, “Microwave Imaging of Malignant Tumors Employing an Enhanced Evolution Strategy,” 2005 IEEE International Symposium on Antennas and Propagation, Washington D.C., July 3-8, 2005.",
+          },
+          {
+            label:
+              "Payam Rashidi, Magda El-Shenawee, Demetrio Macías, Eric Miller, “Microwave Imaging of Three-Dimensional Dielectric Objects Employing Evolution Strategies,” 2005 IEEE/ACES International Conference, Honolulu, Hawaii, April 3-7, 2005.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "rameez-samnakay",
@@ -2418,10 +2701,54 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Samnakay",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Rameez is a registered patent agent admitted to practice before the United States Patent and Trademark Office. He works primarily with patent application preparation and prosecution in the specialized areas of semiconductor devices and materials, solid-state electronics, fabrication processes, cleanroom tool and design, sensors, hybrid cloud environments, networking in cloud environments, and storage across hybrid cloud environments.",
+      },
+      {
+        description:
+          "Rameez has extensive research and development experience in multiple areas of the semiconductor industry. The main body of his research work involved working with semiconductor thin films of different kinds, device and transistor design and fabrication, materials characterization and thermal conductivity analysis as well as studies of low-frequency electronic noise on fabricated thin film devices and planar high-k MOSFETs. Prior to joining Slater Matsil, he worked at the Intel Corporation in their Research and Development facility in Portland. Rameez was a Technology Development Engineer and he worked on developing and improving thin films destined for use in emerging technologies and future electronics.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Rameez received his Bachelor of Science degree in Mechanical Engineering from the University of Nairobi in 2010 and a Master of Science degree in Electrical Engineering from the University of California - Riverside in 2015. He obtained a Ph.D. in Materials Science and Engineering from the University of California - Riverside in 2016.",
+      },
+    ],
     PROFESSIONAL_ADMISSIONS_DATA: [],
-    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        description:
+          "Rameez was inducted to the University of California-Riverside (UCR) IEEE Honors society - Eta Kappa Nu, Lambda Sigma Chapter and was the President of both the UCR chapters of the Institute of Electrical and Electronics Engineers (IEEE) and the International Society for Optics and Photonics (SPIE). He was also awarded the Dean’s Distinguished Fellowship Award (2012-2016).",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        description:
+          "Rameez has authored over 15 publications in leading journals and conferences and is a peer reviewer for at least eight leading scientific journals in his field, including Applied Physics Letters, 2D Materials, Nanotechnology, Semiconductor Science and Technology and Journal of Physics: Condensed Matter. A few of his articles and presentations are listed below:",
+      },
+      {
+        list: [
+          {
+            label: `R. Samnakay, C. Jiang, S. L. Rumyantsev, M. S. Shur and A. A. Balandin, "Selective Chemical Vapor Sensing with MoS2 Thin-Film Transistors: Comparison with Graphene Devices." App. Phys. Lett. 106 ,2, 023115 (2015).`,
+          },
+          {
+            label: `R. Samnakay, D. Wickramaratne, T.R. Pope, R.K. Lake, T.T. Salguero and A. A. Balandin, "Zone-Folded Phonons and the Commensurate-Incommensurate Charge-Density-Wave Transition in 1T-TaSe2 Thin Films." Nano Lett. 15, 5, 2965-73 (2015).`,
+          },
+          {
+            label: `R. Samnakay, A. Balandin and S. Purushothaman, "Reliability Characterization of SiON and MGHK MOSFETs Using Flicker Noise and its Correlation with the Bias Temperature Instability." Solid State Electron. 135,37-42 (2017).`,
+          },
+          {
+            label: `J. Renteria, R. Samnakay, S. L. Rumyantsev, C. Jiang, P. Goli, M. S. Shur and A. A. Balandin, "Low-Frequency 1/f Noise in Molybdenum Disulfide Transistors." App. Phys. Lett. 104, 15, 153104 (2014).`,
+          },
+          {
+            label: `J. Renteria, R. Samnakay, C. Jiang, T.R. Pope, P. Goli, Z. yan, D. Wickramaratne, T. T. Salguero, A. G. Khitun, R. K. Lake and A. A. Balandin, "All-metallic electrically gated 2H-TaSe2 thin-film switches and logic circuits." Journ. App. Phys. 115, 3, 34305 (2014).`,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "steven-slater",
@@ -2449,10 +2776,80 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Slater",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
-    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Steve, one of the founders of the firm, negotiates complex patent licenses, technology transfers, and alliance agreements, and represents his clients in related patent preparation and prosecution matters. Formerly a trial attorney at a well-known litigation boutique, Steve is in the unique position of being able to draw upon his substantial litigation background to help his clients to fully assess their patent portfolios, take the steps needed to safeguard highly valuable intellectual property assets, and avoid litigation risk.",
+      },
+      {
+        description:
+          "Steve is regularly called upon to work in tandem with litigation teams at other law firms throughout the United States to provide technical expertise and patent-in-case assessments in substantial patent infringement matters. He has prepared attorney opinion letters, participated in Markman hearings, and testified as an expert witness.",
+      },
+      {
+        description:
+          "Steve also helps his clients to develop and implement effective licensing programs, whether licensing technology in or licensing technology out. Steve has represented both domestic and foreign corporations in complex patent cross-license negotiations that involve businesses, technologies, and patent portfolios that literally span the globe.",
+      },
+      {
+        description:
+          "Whether creating licensing programs, negotiating license terms, prosecuting a patent, or providing technical assistance to a litigation team, Steve ensures that no stone goes unturned in protecting his client’s intellectual property. Steve thoroughly considers all aspects at play in any given situation – procedural, legal, and business-related – always striving to optimize his client’s position.",
+      },
+      {
+        description:
+          "Steve previously was a product engineer and patent agent at Texas Instruments, where he prosecuted patent applications in the semiconductor, microprocessor, and software areas. He has additional technical expertise in electronics, telecommunications, analysis equipment for the oil and gas industry, and computer consumer products.",
+      },
+      {
+        description:
+          "In addition to Fortune 500 companies, Steve also works closely with a wide variety of clients, including international clients. Steve supports these clients on a wide range of patent-related issues, including international patent prosecution strategies and international licensing transactions.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Steve graduated with a degree in electrical engineering from the University of South Florida in 1985 and received his Juris Doctor cum laude from Southern Methodist University’s Dedman School of Law in 1992. Steve was an Associate Managing Editor of the SMU Law Review, an Order of the Coif law school graduate, and a member of the American Inns of Court.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description: `Steve is a member of the State Bar of Texas and is admitted to practice before all federal district courts in Texas, the Fifth Circuit Court of Appeals, and is registered with the United States Patent and Trademark Office. Steve was honored to become an inaugural Master of the Honorable Barbara M.G. Lynn American Inn of Court, one of the few Inns of Court in the U.S. focused on Intellectual Property practice. Steve was also honored as a Texas Super Lawyer (a Thomson Reuters Service) from 2009-2021 and by D Magazine as "Best Lawyers in Dallas in 2015-2018, 2020."`,
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        description:
+          "Steve has presented a variety of intellectual property seminars to his clients on an individual basis. He has formally spoken and written on a number of topics that include:",
+      },
+      {
+        list: [
+          {
+            label: `Presenter, “Negotiating and Drafting Effective Patent Litigation Settlements,” State Bar of Texas’ 2015 Advanced Patent Litigation, July 2015`,
+          },
+          {
+            label: `Panelist, "Impact of IP Licenses on Third Parties," 49th Annual Intellectual Property Law Program at The Center for American and International Law, November 2011`,
+          },
+          {
+            label: `Panelist, "IP Agreement Terms and Conditions," Dallas Bar Association IP Section, September 2011`,
+          },
+          {
+            label: `Speaker, "Patent Law's Next Top Model," 47th Annual Intellectual Property Law Program at The Center for American and International Law, November 2009`,
+          },
+          {
+            label: `Speaker and contributor, "Building a Better Patent License," 46th Annual Intellectual Property Law Program at The Center for American and International Law, November 2008.`,
+          },
+          {
+            label: `Speaker and contributor, "Patent Prosecution Update," 41st Annual Program on Intellectual Property Law, Institute for Law and Technology of the Center for American and International Law, Dallas, Texas, November 6-7, 2003`,
+          },
+          {
+            label: `Speaker, Responding to Allegations of Patent Infringement, Science Based Industrial Park Consortium, Hsin-chu, Taiwan, 2002`,
+          },
+          {
+            label: `Panelist, "Best Practices for Patent Prosecution," Annual Meeting of the State Bar of Texas, Dallas, Texas. 2002`,
+          },
+          {
+            label: `Panelist, Alternative Career Paths for Engineering Majors, College of Engineering of the University of South Florida, Tampa, Florida 2002`,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "chad-terrell",
@@ -2480,10 +2877,56 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Terrell",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
-    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Chad’s law practice covers all areas of intellectual property law, with an emphasis on patent portfolio development and assessment, patent procurement, licensing and litigation involving a wide range of technologies. He helps clients of all sizes identify, develop, and protect their intellectual property assets. He has prepared and prosecuted patent applications in many technology areas, including software, business methods, information technology management, supply chain management, touch sensors, telecommunications, RFID, wireless components, network infrastructure, electronics, semiconductors, medical equipment, and the mechanical arts. He also has participated in various clients’ patent committees, helping to sort through inventor submissions to identify those worth pursuing and reviewing outside counsel’s work.",
+      },
+      {
+        description:
+          "Chad has performed offensive and defensive patent studies regarding the possible applicability of a client’s patents to third-party products and activities or, conversely, the potential applicability of third-party patents to products or activities of a client. He has also performed due diligence reviews, including evaluating the intellectual property assets of potential acquisition targets and evaluating and categorizing patent portfolios of clients.",
+      },
+      {
+        description:
+          "Chad’s litigation experience includes controversies related to patent infringement and breach of agreements governing intellectual property assets.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Chad graduated with bachelor's degrees in computer science and economics, both cum laude, from Southern Methodist University in 1998, and graduated, with honors, from the University of Texas School of Law in 2001. While in law school, Chad participated in the Texas Intellectual Property Law Journal and moot court competitions, and completed a semester abroad in London at both University College London and Queen Mary & Westfield College.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Chad is a member of the State Bar of Texas and is admitted to practice before the Northern and Eastern Districts of Texas. He is registered to practice before the United States Patent and Trademark Office.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label: `“Patentable Subject Matter - I Know It When I See It,” presented internally at prior law firm and to the Dallas Bar Association, Computer Law Section, June and August 2012.`,
+          },
+          {
+            label: `“Patent Prosecution Overview;” annual internal presentation at prior law firm to new IP associates firm-wide.`,
+          },
+          {
+            label: `“Design Patents - Protecting Your Client’s Product Design,” presented internally at prior law firm to firm-wide IP section, March 2010.`,
+          },
+          {
+            label: `“Does Recent Acacia Media Markman Order Signal Increased Scrutiny of ‘Junk Patents’ under 35 U.S.C. Section 112?,” Baker Botts Intellectual Property Report, October 2004.`,
+          },
+          {
+            label: `“Infringement Notice Letters Alone may not Subject Patentee to Personal Jurisdiction of a Foreign Forum in a Declaratory Judgment Action,” Baker Botts Intellectual Property Report, June 2003.`,
+          },
+          {
+            label: `“The Federal Circuit Refuses to Apply the Doctrine of Equivalents to Subject Matter Disclosed but not Claimed,” Baker Botts Intellectual Property Report, May 2002.`,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "lizabeth-vice",
@@ -2511,9 +2954,32 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Vice",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Lizabeth, one of the partners of the firm, advises clients in all areas of patent law including patent prosecution, protection, enforcement, and portfolio management. She assists her clients in all stages of drafting and prosecuting patent applications through the USPTO. Lizabeth’s practice also includes experience in claims analysis, infringement, and validity issues in district court and ITC patent proceedings; opinion work; and post-grant proceedings. Lizabeth has extensive experience prosecuting and litigating patents in the semiconductor, electronic device, and telecommunications fields.",
+      },
+      {
+        description:
+          "In addition to advising established companies, Lizabeth also is experienced in advising start-up companies on patent protection and filing strategy to leverage the best patent protection for their inventions. Lizabeth has helped a start-up company obtain and manage a global patent portfolio, and she helped successfully transition the start-up company’s portfolio through a large corporate acquisition.",
+      },
+      {
+        description:
+          "Lizabeth is fluent in Mandarin Chinese as well as English.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Lizabeth graduated with a Bachelor of Science in electrical engineering and a Bachelor of Arts in economics from The University of Texas at Austin in 2008. She graduated with a Juris Doctor with Honors from The University of Texas School of Law in 2011.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Lizabeth is a member of the State Bar of Texas and is a trained and qualified mediator in the State of Texas. Lizabeth is also registered to practice before the United States Patent And Trademark Office.",
+      },
+    ],
     PROFESSIONAL_ARTICLES_DATA: [],
   },
   {
@@ -2542,10 +3008,42 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Wang",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Julian is a technical advisor with experience in semiconductors, materials science, and chemistry. He has a Ph.D. degree in Chemistry. His doctoral research focuses on polymer photovoltaics, which includes design and synthesis of novel active layer material, optimization of device fabrication and characterization techniques, and thin film morphology characterization. He also enjoyed teaching undergraduate Chemistry courses. Prior to joining Slater Matsil, Julian was a Process Engineer at Leonardo DRS for three years, where he worked on various aspects of infra-red detector fabrication, including process development and sustaining, tool release and maintenance, capacity expansion, failure analysis, and yield improvement.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Julian received a Bachelor’s degree in Materials Chemistry from Beijing Institute of Technology in 2010. He attended graduate school in the University of Florida, where he obtained a Master’s degree in Materials Science and Engineering in 2012, as well as a Ph.D. degree in Chemistry in 2017.",
+      },
+    ],
     PROFESSIONAL_ADMISSIONS_DATA: [],
-    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        description: "Julian is a member of the American Chemical Society.",
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [
+      {
+        list: [
+          {
+            label: `Interaction of a Poly(phenylene vinylene) with an Organometallic Lewis Acid Additive: Fundamentals and Application in Polymer Solar Cells, Chemistry of Materials 2018 30 (17)`,
+          },
+          {
+            label: `The Interaction Between Perfluoro-arynes and Conjugated Polymers and Its Application in Polymer Solar Cells, University of Florida Dissertation, 2017`,
+          },
+          {
+            label: `Cyclometalated Platinum-Containing Diketopyrrolopyrrole Complexes and Polymers: Photophysics and Photovoltaic Applications, Chemistry of Materials 2017 29 (19)`,
+          },
+          {
+            label: `π-Conjugated Organometallic Isoindigo Oligomer and Polymer Chromophores: Singlet and Triplet Excited State Dynamics and Application in Polymer Solar Cells, ACS Applied Materials & Interfaces 2015 7 (48)`,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "jonathan-ward",
@@ -2573,10 +3071,41 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Ward",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Jonathan has been practicing law for over 20 years, with more than 10 years devoted to patent prosecution. With a background in computer science and software development, Jonathan has prepared patents covering a broad range of technologies, including telecommunications, systems and circuit design, artificial intelligence, augmented and virtual reality (AR/VR), Internet of Things, cloud computing, signal processing, semiconductor fabrication, embedded systems, mechanical and electro-mechanical devices, and medical devices. He enjoys diving in-depth into the technical aspects of his clients’ inventions as well as their business goals, which allows him to provide advice specifically tailored to best advance his clients’ interests.",
+      },
+      {
+        description:
+          "In the course of his practice, Jonathan has counseled businesses of all sizes, from startups to Fortune 500 companies. He has helped startup businesses develop their patent portfolios from initial filings to dozens of granted patents. In addition to patent prosecution, Jonathan also has experience in contract negotiation including licensing, and litigation. He has helped in due diligence review of IP assets in corporate transactions. Jonathan further has prepared a number of different opinions for clients concerning patent non-infringement, invalidity, patentability, and freedom-to-operate, and has successfully appealed cases to the Patent Trial and Appeal Board.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Jonathan graduated with a Bachelor of Science degree in computer science from the University of California, Riverside in 1997. He received his Juris Dotor, magna cum laude, from Marquette University Law School in 2001.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Jonathan is admitted to practice in Alaska and Oregon. He has been a registered practioner with the United States Patent and Trademark Office since 2005.",
+      },
+    ],
     PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        list: [
+          {
+            label: `Former Adjunct Clinical Professor of Law – Patent Prosecution, Lewis & Clark Law School, Spring 2020`,
+          },
+          {
+            label: `Oregon Patent Law Association (past board member)`,
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "chuanming-wei",
@@ -2604,9 +3133,44 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         lastName: "Wei",
       },
     },
-    PROFESSIONAL_BIO_DATA: [],
-    PROFESSIONAL_EDUCATION_DATA: [],
-    PROFESSIONAL_ADMISSIONS_DATA: [],
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Chuanming (Ming) Wei is a patent attorney with a background in Electrical and Computer Engineering. Ming represents clients across a range of industries, including telecommunications, FinTech, artificial intelligence, semiconductors, fabrication, and computing hardware.",
+      },
+      {
+        description:
+          "Ming earned his Ph.D. in Electrical and Computer Engineering from Lehigh University, his J.D. from Southern Methodist University, and undergraduate and master’s degrees in Electrical Engineering and Information Science from the University of Science and Technology of China. Prior to entering the legal field, Ming worked as a scientist at a leading telecommunications and semiconductor company. He has conducted academic research in wireless sensor networks, smart grids, and medical imaging.",
+      },
+      {
+        description:
+          "Admitted to practice in Texas and before the U.S. Patent and Trademark Office, Ming is passionate about helping clients protect their innovations with technically sound and strategically tailored IP solutions.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        list: [
+          {
+            label: `Southern Methodist University, JD, 2021`,
+          },
+          {
+            label: `Lehigh University, PhD (Electrical & Computer Engineering), 2012`,
+          },
+          {
+            label: `University of Science and Technology of China, ME (Electrical Engineering & Information Science) 2006`,
+          },
+          {
+            label: `University of Science and Technology of China, BE (Dept of Special Class for the Gifted Young), 2003`,
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        description:
+          "Ming is admitted to practice in Texas and is a registered practitioner with the United States Patent and Trademark Office.",
+      },
+    ],
     PROFESSIONAL_ARTICLES_DATA: [],
   },
 ];
