@@ -6,8 +6,11 @@ import UnParalleledLegalService from "./Unparalleled-legal-services";
 import OurserviceFramework from "./Our-service-framework";
 import ServiceAreas from "@/components/widgets/Service-Areas";
 import NeedAssistance from "./Need-Assistance";
+import { usePageData } from "@/store/usePageData";
 
 const ServicesLayout = () => {
+  const { details } = usePageData();
+
   return (
     <div>
       <div data-aos="fade-in">
@@ -22,7 +25,7 @@ const ServicesLayout = () => {
       <div data-aos="fade-up">
         <OurserviceFramework />
       </div>
-      <ServiceAreas />
+      <ServiceAreas data={details?.homepage?.service_area?.section_Data} />
       <div data-aos="zoom-in">
         <NeedAssistance />
       </div>

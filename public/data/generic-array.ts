@@ -280,12 +280,24 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
         href: "/services/portfolio-management",
       },
       {
-        text: "Licensing & Transactions",
-        href: "/services/licensing-transaction",
+        text: "Patent Licensing",
+        href: "/services/patent-licensing",
       },
       {
-        text: "Litigation Support",
-        href: "/services/litigation-support",
+        text: "Patent Litigation",
+        href: "/services/patent-litigation",
+      },
+      {
+        text: "Post Grant Challenges",
+        href: "/services/post-grant-challenges",
+      },
+      {
+        text: "Adverse Patent Analysis",
+        href: "/services/adverse-patent-analysis",
+      },
+      {
+        text: "Trusted Advice Counsel",
+        href: "/services/trusted-advice-counsel",
       },
     ],
   },

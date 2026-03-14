@@ -14,7 +14,7 @@ const HomeLayout = () => {
       <HeroSection />
       <AboutSection />
       <MetricsSection />
-      <ServiceAreas />
+      <ServiceAreas limit={6} />
       <Whoweserve />
       <InsightsSection />
       <ContactSection />

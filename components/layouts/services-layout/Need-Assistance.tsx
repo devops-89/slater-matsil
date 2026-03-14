@@ -1,6 +1,7 @@
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Button, Container, Typography } from "@mui/material";
+import Link from "next/link";
 import React from "react";
 
 const NeedAssistance = () => {
@@ -45,22 +46,24 @@ const NeedAssistance = () => {
             of ypour intellectual property portfolio.
           </Typography>
 
-          <Button
-            sx={{
-              backgroundColor: COLORS.WHITE,
-              borderRadius: "8px",
-              color: COLORS.PRIMARY_BLUE,
-              mt: 5,
-              width: 310,
-              height: 62,
-              fontFamily: adelle.style.fontFamily,
-              fontWeight: 600,
-              fontSize: 20,
-              textTransform: "capitalize",
-            }}
-          >
-            Contact Our Team
-          </Button>
+          <Link href="/contact-us">
+            <Button
+              sx={{
+                backgroundColor: COLORS.WHITE,
+                borderRadius: "8px",
+                color: COLORS.PRIMARY_BLUE,
+                mt: 5,
+                width: 310,
+                height: 62,
+                fontFamily: adelle.style.fontFamily,
+                fontWeight: 600,
+                fontSize: 20,
+                textTransform: "capitalize",
+              }}
+            >
+              Contact Our Team
+            </Button>
+          </Link>
         </Box>
       </Container>
     </Box>

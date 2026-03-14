@@ -1,16 +1,61 @@
-import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
-import lightLogo from "@/public/images/home/slater-matsil-logo-light.png";
+import award1 from "@/about/award-1.png";
+import award2 from "@/about/award-2.png";
+import award3 from "@/about/award-3.png";
+import award4 from "@/about/award-4.png";
+import award5 from "@/about/award-5.png";
+import award6 from "@/about/award-6.png";
+import drivingInnovationEverywhere from "@/about/driving-vector.png";
+import globe from "@/about/globe.png";
+import aboutHero from "@/about/heroImage.jpg";
+import careerHeroBackgroundImage from "@/career/CAREERS.png";
+import careerHeroImage from "@/career/hero-image.png";
+import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
+import contactHeroImage from "@/contact/hero-vector-image.png";
+import building from "@/icons/building.svg";
+import globeOutline from "@/icons/globe.svg";
+import locationOutline from "@/icons/location.svg";
+import minicutBuilding from "@/icons/stream-line.svg";
+import insightsHeroImage from "@/insights/insights_hero_img.jpg";
+import footerLogo from "@/logo/big-logo.png";
+import practiceGroupPageHeroImage1 from "@/practice-group/hero1.jpg";
+import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
+import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
+import professionalsHeroImage from "@/professionals/hero_section.png";
+import blog1 from "@/public/images/blog/blog1.jpg";
+import blog2 from "@/public/images/blog/blog2.jpg";
+import blog3 from "@/public/images/blog/blog3.jpg";
+import blog4 from "@/public/images/blog/blog4.png";
+import blog5 from "@/public/images/blog/blog5.jpg";
+import blog6 from "@/public/images/blog/blog6.jpg";
+import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
 import serviceAreas1 from "@/public/images/home/practice_areas/practice_areas1.svg";
 import serviceAreas2 from "@/public/images/home/practice_areas/practice_areas2.svg";
 import serviceAreas3 from "@/public/images/home/practice_areas/practice_areas3.svg";
 import serviceAreas4 from "@/public/images/home/practice_areas/practice_areas4.svg";
 import serviceAreas5 from "@/public/images/home/practice_areas/practice_areas5.svg";
 import serviceAreas6 from "@/public/images/home/practice_areas/practice_areas6.svg";
-import whoWeServeLeftSectionHeroImage from "@/public/images/home/who-we-serve.jpg";
+import serviceAreas7 from "@/public/images/icons/services/ip-strategy.png";
+import serviceAreas8 from "@/public/images/icons/services/portfolio-management.png";
+import {
+  default as bigLogo,
+  default as lightLogo,
+} from "@/public/images/home/slater-matsil-logo-light.png";
 import smallLogo from "@/public/images/home/slater-matsil-white.png";
-import bigLogo from "@/public/images/home/slater-matsil-logo-light.png";
+import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.jpg";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
-import { LinkedIn, X } from "@mui/icons-material";
+import serviceHeroSectionImage from "@/services/hero-section.png";
+import unparalleledimage from "@/services/unparalled-legal-services.png";
+import {
+  CAREER_OPEN_ROLES_TAB_DATA,
+  INSIGHTS_TAB_DATA,
+  PRACTICE_GROUP_TAB_DATA,
+  WHO_WE_SERVE_PAGE_TAB_DATA,
+} from "@/utils/enum";
+import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
+import whoweserveHero from "@/who-we-serve/hero-img.jpg";
+import { X } from "@mui/icons-material";
+import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa6";
 import {
   CAREER_WORK_LIST_DATA,
   CONTACT_US_CARD_DATA,
@@ -22,56 +67,6 @@ import {
   SERVICE_FRAMEWORK_CARD_DATA,
   STRENGTH_CARD_DATA,
 } from "./generic-array";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import footerLogo from "@/logo/big-logo.png";
-import aboutHero from "@/about/heroImage.jpg";
-import drivingInnovationEverywhere from "@/about/driving-vector.png";
-import globe from "@/about/globe.png";
-import award1 from "@/about/award-1.png";
-import award2 from "@/about/award-2.png";
-import award3 from "@/about/award-3.png";
-import award4 from "@/about/award-4.png";
-import award5 from "@/about/award-5.png";
-import award6 from "@/about/award-6.png";
-import professionalsHeroImage from "@/professionals/hero_section.png";
-import professional1 from "@/professionals/Williams_Zachary_Thumb.jpg";
-import professional2 from "@/professionals/brian_c_thumb.jpg";
-import professional3 from "@/professionals/ruojian.jpg";
-import professional4 from "@/professionals/yumin_thumb.jpg";
-import professional5 from "@/professionals/steven-yates.jpg";
-import professional6 from "@/professionals/srini_thumb.jpg";
-import professional7 from "@/professionals/transparent/amitava-chatterjee.png";
-import careerHeroBackgroundImage from "@/career/CAREERS.png";
-import careerHeroImage from "@/career/hero-image.png";
-import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
-import {
-  CAREER_OPEN_ROLES_TAB_DATA,
-  COLORS,
-  INSIGHTS_TAB_DATA,
-  PRACTICE_GROUP_TAB_DATA,
-  WHO_WE_SERVE_PAGE_TAB_DATA,
-} from "@/utils/enum";
-import practiceGroupPageHeroImage1 from "@/practice-group/hero1.jpg";
-import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
-import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
-import whoweserveHero from "@/who-we-serve/hero-img.jpg";
-import insightsHeroImage from "@/insights/insights_hero_img.jpg";
-import building from "@/icons/building.svg";
-import globeOutline from "@/icons/globe.svg";
-import locationOutline from "@/icons/location.svg";
-import earthFilled from "@/icons/earth.svg";
-import minicutBuilding from "@/icons/stream-line.svg";
-import contactHeroImage from "@/contact/hero-vector-image.png";
-import { FaFacebookF } from "react-icons/fa6";
-import serviceHeroSectionImage from "@/services/hero-section.png";
-import unparalleledimage from "@/services/unparalled-legal-services.png";
-import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
-import blog1 from "@/public/images/blog/blog1.jpg";
-import blog2 from "@/public/images/blog/blog2.jpg";
-import blog3 from "@/public/images/blog/blog3.jpg";
-import blog4 from "@/public/images/blog/blog4.png";
-import blog5 from "@/public/images/blog/blog5.jpg";
-import blog6 from "@/public/images/blog/blog6.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -162,6 +157,22 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           serialNumber: "06",
           slug: "trusted-advice-counsel",
         },
+        {
+          img: serviceAreas7,
+          title: "IP Strategy",
+          description:
+            "We help clients develop and implement IP strategies that align with their business goals, protect their innovations, and create long-term value.",
+          serialNumber: "07",
+          slug: "ip-strategy",
+        },
+        {
+          img: serviceAreas8,
+          title: "PORTFOLIO MANAGEMENT",
+          description:
+            "We help clients manage their IP portfolios efficiently and effectively, ensuring that their intellectual property assets are protected and leveraged to achieve their business goals.",
+          serialNumber: "08",
+          slug: "portfolio-management",
+        },
       ],
     },
     who_we_serve: {
@@ -240,6 +251,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       social_links: [
         {
           icon: FaLinkedinIn,
+          href: "https://www.linkedin.com/company/slater-matsil-llp/",
         },
       ],
       privacy_pages: [
@@ -874,10 +886,11 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       social_icons: [
         {
           Icon: FaLinkedinIn,
+          href: "https://www.linkedin.com/company/slater-matsil-llp/",
         },
         {
           Icon: FaFacebookF,
-          href: "#",
+          href: "https://www.facebook.com/slatermatsil/?ref=hl",
         },
         {
           Icon: X,

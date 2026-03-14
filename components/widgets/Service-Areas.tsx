@@ -1,3 +1,4 @@
+"use client";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
@@ -12,12 +13,24 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import React from "react";
-import lightLogo from "@/public/images/home/slater-matsil-logo-light.png";
-import ServiceAreaCard from "./common/Service-Area-Card";
 import Link from "next/link";
-const ServiceAreas = () => {
+import { usePathname } from "next/navigation";
+import ServiceAreaCard from "./common/Service-Area-Card";
+import { SERVICES_AREAS_DATA } from "@/utils/types";
+
+interface ServiceAreasProps {
+  data?: SERVICES_AREAS_DATA[];
+  limit?: number;
+}
+
+const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
   const { details } = usePageData();
+  const pathname = usePathname();
+  let displayData = data || details?.homepage?.service_area?.section_Data || [];
+
+  if (limit) {
+    displayData = displayData.slice(0, limit);
+  }
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
@@ -53,7 +66,7 @@ const ServiceAreas = () => {
         </Stack>
 
         <Grid container spacing={4} sx={{ mt: 7 }}>
-          {details?.homepage?.service_area?.section_Data.map((val, i) => (
+          {displayData.map((val: SERVICES_AREAS_DATA, i: number) => (
             <Grid
               size={{ lg: 4, xs: 12 }}
               key={i}
@@ -70,28 +83,30 @@ const ServiceAreas = () => {
             </Grid>
           ))}
         </Grid>
-        <Stack direction={"row"} alignItems={"center"} spacing={2} my={5}>
-          <Divider
-            sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
-          />
-          <Link href="/services" style={{ textDecoration: "none" }}>
-            <Button
-              sx={{
-                color: COLORS.PRIMARY_BLUE,
-                fontFamily: adelle.style.fontFamily,
-                textDecoration: "underline",
-                fontWeight: 600,
-                fontSize: 16,
-                lineHeight: "28px",
-              }}
-            >
-              View More
-            </Button>
-          </Link>
-          <Divider
-            sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
-          />
-        </Stack>
+        {pathname !== '/services' && (
+          <Stack direction={"row"} alignItems={"center"} spacing={2} my={5}>
+            <Divider
+              sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
+            />
+            <Link href="/services" style={{ textDecoration: "none" }}>
+              <Button
+                sx={{
+                  color: COLORS.PRIMARY_BLUE,
+                  fontFamily: adelle.style.fontFamily,
+                  textDecoration: "underline",
+                  fontWeight: 600,
+                  fontSize: 16,
+                  lineHeight: "28px",
+                }}
+              >
+                View More
+              </Button>
+            </Link>
+            <Divider
+              sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
+            />
+          </Stack>
+        )}
       </Container>
     </Box>
   );

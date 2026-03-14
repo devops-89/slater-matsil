@@ -39,7 +39,7 @@ const ServiceAreaCard = ({
       }}
     >
       <Box sx={{ textAlign: "center" }}>
-        <Image src={img} alt="" />
+        <Image src={img} alt="" style={{ width: 100, height: 100 }} />
       </Box>
       <Link href={`/services/${slug}`} style={{ textDecoration: "none" }}>
         <Typography

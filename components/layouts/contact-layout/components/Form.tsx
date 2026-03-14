@@ -8,12 +8,44 @@ import {
   Grid,
   InputLabel,
   TextField,
+  FormHelperText,
 } from "@mui/material";
 import React from "react";
 import { MuiTelInput } from "mui-tel-input";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  phoneNumber: Yup.string().required("Phone number is required"),
+  company: Yup.string().required("Company name is required"),
+  message: Yup.string().required("Message is required"),
+});
+
 const Form = () => {
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      company: "",
+      message: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values, { resetForm }) => {
+      console.log("Form values:", values);
+      alert("Message sent successfully!");
+      resetForm();
+    },
+  });
+
   return (
-    <Box>
+    <Box component="form" onSubmit={formik.handleSubmit}>
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -27,6 +59,15 @@ const Form = () => {
             <TextField
               sx={{ ...FLAT_TEXTFIELD_STYLES, mt: 2 }}
               placeholder="Enter your first name"
+              id="firstName"
+              name="firstName"
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={
+                formik.touched.firstName && Boolean(formik.errors.firstName)
+              }
+              helperText={formik.touched.firstName && formik.errors.firstName}
             />
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -40,6 +81,13 @@ const Form = () => {
             <TextField
               sx={{ ...FLAT_TEXTFIELD_STYLES, mt: 2 }}
               placeholder="Enter your last name"
+              id="lastName"
+              name="lastName"
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+              helperText={formik.touched.lastName && formik.errors.lastName}
             />
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -53,6 +101,13 @@ const Form = () => {
             <TextField
               sx={{ ...FLAT_TEXTFIELD_STYLES, mt: 2 }}
               placeholder="Enter your email address"
+              id="email"
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
             />
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -67,6 +122,16 @@ const Form = () => {
               sx={{ ...FLAT_TEXTFIELD_STYLES, mt: 2 }}
               defaultCountry="US"
               placeholder="+1 (555) 123-4567"
+              value={formik.values.phoneNumber}
+              onChange={(value) => formik.setFieldValue("phoneNumber", value)}
+              onBlur={() => formik.setFieldTouched("phoneNumber", true)}
+              error={
+                formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+              }
+              helperText={
+                formik.touched.phoneNumber &&
+                (formik.errors.phoneNumber as string)
+              }
             />
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -80,6 +145,13 @@ const Form = () => {
             <TextField
               sx={{ ...FLAT_TEXTFIELD_STYLES, mt: 2 }}
               placeholder="Your company name"
+              id="company"
+              name="company"
+              value={formik.values.company}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.company && Boolean(formik.errors.company)}
+              helperText={formik.touched.company && formik.errors.company}
             />
           </Grid>
           <Grid size={{ lg: 12, xs: 12 }}>
@@ -105,10 +177,18 @@ const Form = () => {
               }}
               multiline
               placeholder="Please provide details about your intellectual property needs..."
+              id="message"
+              name="message"
+              value={formik.values.message}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.message && Boolean(formik.errors.message)}
+              helperText={formik.touched.message && formik.errors.message}
             />
           </Grid>
           <Grid size={12}>
             <Button
+              type="submit"
               sx={{
                 backgroundColor: COLORS.PRIMARY_BLUE,
                 color: COLORS.WHITE,

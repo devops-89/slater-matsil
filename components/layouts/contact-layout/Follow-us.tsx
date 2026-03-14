@@ -2,6 +2,7 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
+import Link from "next/link";
 
 const Followus = () => {
   const { details } = usePageData();
@@ -27,23 +28,24 @@ const Followus = () => {
             sx={{ mt: 3 }}
           >
             {details?.contactPage?.follow_props?.social_icons?.map((val, i) => (
-              <IconButton
-                sx={{
-                  backgroundColor: COLORS.PRIMARY_BLUE,
-                  "& svg": {
-                    color: COLORS.WHITE,
-                    fontSize: 20,
-                  },
-                  ":hover": {
+              <Link key={i} href={val.href || "#"}>
+                <IconButton
+                  sx={{
                     backgroundColor: COLORS.PRIMARY_BLUE,
-                  },
-                  width: 50,
-                  height: 50,
-                }}
-                key={i}
-              >
-                <val.Icon />
-              </IconButton>
+                    "& svg": {
+                      color: COLORS.WHITE,
+                      fontSize: 20,
+                    },
+                    ":hover": {
+                      backgroundColor: COLORS.PRIMARY_BLUE,
+                    },
+                    width: 50,
+                    height: 50,
+                  }}
+                >
+                  <val.Icon />
+                </IconButton>
+              </Link>
             ))}
           </Stack>
         </Container>
