@@ -334,7 +334,7 @@ export const METRICS_DATA: METRICSPROPS[] = [
     count: "6",
   },
   {
-    title: "PATENTS ISSUED TO FIRM PERSONNELS",
+    title: "PATENTS ISSUED TO FIRM PERSONNEL",
     count: "200+",
   },
   {
@@ -460,7 +460,7 @@ export const PROFESSIONAL_DETAILS_TAB_DATA = [
 export const CAREER_WORK_LIST_DATA: WORK_LIST_PROPS[] = [
   {
     title:
-      "Work directly on cutting-edge technologies including semiconductors, electronics, software, and telecommunications",
+      "Work directly on cutting-edge technologies, including semiconductors, electronics, software, and telecommunications",
   },
   {
     title:
@@ -1289,8 +1289,7 @@ export const STRENGTH_CARD_DATA: STRENGTH_CARD_PROPS[] = [
   {
     img: technicalExpertise,
     title: "Technical Expertise",
-    description:
-      "Engineers-turned-attorneys who understand your inventions at the core",
+    description: "Engineers-turned-attorneys who understand your inventions.",
   },
   {
     img: globalReach,
@@ -1300,7 +1299,7 @@ export const STRENGTH_CARD_DATA: STRENGTH_CARD_PROPS[] = [
   {
     img: strategicInsight,
     title: "Strategic Insight",
-    description: "Legal strategies allgned with your long - term businesses",
+    description: "Legal strategies allgned with your long-term businesses",
   },
   {
     img: clientFirstApproach,
@@ -1365,7 +1364,7 @@ export const SERVICE_FRAMEWORK_CARD_DATA: SERVICE_FRAMEWORK_CARD_PROPS[] = [
     heading: "Defenses",
     data: [
       {
-        title: "Post Grant Challenges",
+        title: "Post-Grant Challenges",
       },
       {
         title: "Licensing",
@@ -1435,7 +1434,7 @@ export const SERVICES_DETAILS = [
     data: [
       {
         description:
-          "We are engineers. We are lawyers. We are businessmen. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals.",
+          "We are engineers. We are lawyers. We are business professionals. We are also Licensing experts and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals.",
       },
       {
         description:

@@ -104,7 +104,9 @@ interface aboutSectionProps {
 
 interface ABOUT_US_SLATER {
   heading: string;
-  description: string;
+  description: {
+    label: string;
+  }[];
   img: StaticImageData;
 }
 

@@ -80,9 +80,9 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     },
     aboutSection: {
       sectionTitle: "About Slatermatsil",
-      heading: "Fluent in technology. proven in law.",
+      heading: "Fluent in technology. Proven in law.",
       description:
-        "Slater Matsil is a collaboration of technology-minded individuals who practice intellectual property law. We understand that IP rights are, first and foremost, working assets that must support and advance our clients' business objectives. We maintain this client-centric perspective, whether we are discussing technology with inventors in the design room, developing IP strategies with management in the board room, or advocating for our clients' rights in the courtroom.",
+        "Slater Matsil is a collaboration of technology-minded individuals who practice intellectual property law. We understand that IP rights are, first and foremost, working assets that must support and advance our clients' business objectives.",
       ctaButton: {
         text: "More About",
         link: "/about",
@@ -100,20 +100,20 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         subTitle: "respected.",
       },
       description:
-        "At Slater Matsil, we know what is required to invent something groundbreaking and we know what it takes to guard and defend your company’s intellectual capital.",
+        "Slater Matsil understands what it takes to create groundbreaking inventions and we know how to protect your company’s capital.",
       ctaButton: "Let's Talk Now",
       metricsData: METRICS_DATA,
     },
     service_area: {
       sectionTitle: "Service Area",
-      heading: "A range of Practice Areas",
+      heading: "A Range Of Practice Areas",
       img: lightLogo,
       section_Data: [
         {
           img: serviceAreas1,
           title: "PATENT PROSECUTION",
           description:
-            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals. ",
+            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents and contribute to IP portfolios that achieve your goals. ",
           serialNumber: "01",
           slug: "patent-prosecution",
         },
@@ -137,7 +137,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas4,
           title: "PATENT LICENSING",
           description:
-            "We partner with technology leaders to design and implement licensing strategies tailored to their goals. Let us unlock new value from your existing innovations, creating long‑term revenue and supporting future inventions.",
+            "We partner with technology leaders to design and implement licensing strategies tailored to their goals. Let us unlock new value from your existing innovations to create long‑term revenue and supporting future inventions.",
           serialNumber: "04",
           slug: "patent-licensing",
         },
@@ -189,7 +189,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world. ",
         section_data: [
           {
-            label: "large Corporations",
+            label: "Large Corporations",
           },
           {
             label: "Small Companies / Start-ups",
@@ -203,7 +203,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         ],
         ctaButton: {
           text: "Meet Our Team",
-          href: "/",
+          href: "/firm-professionals",
         },
         endline: "“Transforming your vision into reality.”",
         bgImage: whoWeServeRightSectionHeroImage.src,
@@ -211,7 +211,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     },
     insights_section: {
       sectionTitle: "Insights",
-      heading: "Recently published Insights.",
+      heading: "Recently Published Insights.",
       // description: "Have Look at our Latest publication at slatermatsil.com",
       insights_data: [
         {
@@ -282,20 +282,28 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   aboutPage: {
     heroSection: {
       sectionTitle: "About Slatermatsil",
-      heading: "The innovations that differentiate you in your market.",
+      heading: "The innovations that set you apart.",
       description:
-        "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital.",
+        "Slater Matsil understands what it takes to create groundbreaking inventions and we know how to protect your company’s capital",
       img: aboutHero,
     },
     drivingInnovationEverywhere: {
       heading: "Driving innovation everywhere",
-      description:
-        "Slater Matsil is a collaboration of technology-minded individuals who practice intellectual property law. We understand that IP rights are, first and foremost, working assets that must support and advance our clients' business objectives. We maintain this client-centric perspective, whether we are discussing technology with inventors in the design room, developing IP strategies with management in the board room, or advocating for our clients' rights in the courtroom.",
+      description: [
+        {
+          label:
+            "Slater Matsil is a collaboration of technology-minded individuals who practice intellectual property law. We understand that IP rights are, first and foremost, working assets that must support and advance our clients' business objectives.",
+        },
+        {
+          label:
+            "We maintain this client-centric perspective, whether we are discussing technology with inventors in the design room, developing IP strategies with management in the board room, or advocating for our clients' rights in the courtroom.",
+        },
+      ],
       img: drivingInnovationEverywhere,
     },
     REDEFINING_PATENT_SUCCESS: {
-      heading1: "“Redefining Patent Success with",
-      heading2: "Precision and Global Reach.”",
+      heading1: "Redefining Patent Success with",
+      heading2: "Precision and Global Reach.",
       description:
         "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations worth approximately $4.8 billion in research and development.",
       metrics_data: METRICS_DATA,
@@ -332,7 +340,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     },
     who_we_serve_props: {
       heading1: "Who",
-      heading2: "We serve",
+      heading2: "We Serve",
       description:
         "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world",
       section_data: [
@@ -356,7 +364,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     },
     industriesWeServe: {
       heading1: "Industries",
-      heading2: "we Serve.",
+      heading2: "We Serve.",
       description:
         "We collaborate with a wide range of industries to deliver innovative, reliable solutions.",
       section_data: INDUSTRIES_DATA,
@@ -398,13 +406,13 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         text: "Start your growth journey",
       },
       shortDescription:
-        "Grow with a culture that values long-term success. We simplify the path ahead so you can thrive in your career journey.",
+        "Join a culture that values long-term success. Let us simplify the path so your career can thrive.",
       ctaButton2: {
-        text: "Find the career opportunities",
+        text: "Career Opportunities",
       },
     },
     career_work_with_us: {
-      firstTitle: "Why Work",
+      firstTitle: "Why Work ",
       secondTitle: "With Us",
       shortDescription: "Where Your Talent Meets Purpose",
       work_list_data: CAREER_WORK_LIST_DATA,
@@ -412,9 +420,9 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     },
     career_open_roles: {
       title: "Open Roles / Opportunities",
-      shortDescription: "Opportunities for Problem-Solvers and Innovators",
+      shortDescription: "Opportunities for Problem Solvers and Innovators",
       description:
-        "Slater Matsil is a global intellectual property law firm headquartered in Dallas. A career at Slater Matsil is as fun and rewarding as it is challenging. You won't find our name at the top of a downtown skyscraper, and that's by design — we know how difficult it can be to launch or elevate your career in an oversized firm that won't let you do the job you're driven to do. If you're a patent professional or technical advisor who believes that your workplace should be as stimulating as your workshop, we want to hear from you.",
+        "Slater Matsil is a global intellectual property law firm headquartered in Dallas, Texas. We believe your work should be as rewarding as it is challenging, and we understand how difficult it can be to elevate your career in an oversized firm that limits your potential. If you're a patent professional or technical advisor who believes that your workplace should be as stimulating as your workbench, we want to hear from you.",
       tabSectionData: {
         tabData: [
           {
@@ -874,7 +882,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       heading1: "Send Us a",
       heading2: "Message",
       description:
-        "ready to protect your intellectual property? Fill out the form below and our experts will get back to you within 24 hours.",
+        "Ready to protect your intellectual property? Fill out the form below, and our experts will get back to you within 24 hours.",
     },
     contact_card_props: {
       heading: "Find Us Here",
@@ -892,18 +900,12 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           Icon: FaFacebookF,
           href: "https://www.facebook.com/slatermatsil/?ref=hl",
         },
-        {
-          Icon: X,
-        },
-        {
-          Icon: FaInstagram,
-        },
       ],
     },
     map_props: {
       title: "Visit Our Office",
       description:
-        "Location in the heart of New York’s business district, our main office is easily accessible by public transportation.",
+        "Our lovely offices are located in Dallas, Texas, where we would be happy to meet with you.",
       locationLink:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.6477572155536!2d-96.8047705252068!3d32.98669387324265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c23cde07bf391%3A0x662b3a35d44e3638!2sSlater%20Matsil%2C%20LLP!5e0!3m2!1sen!2sin!4v1766042747322!5m2!1sen!2sin",
     },
@@ -922,7 +924,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       heading: "Why Choose",
       spanHeading: "Slater Matsil",
       description:
-        "We don’t just protect ideas we empower innovation. With deep technical expertise and a history of success across industries, we ensure your intellectual property stands the test of time.",
+        "We don’t just protect ideas—we empower innovation. With deep technical expertise and a history of success across several industries, we ensure your intellectual property stands the test of time.",
       our_strength: {
         heading: "Our Strength",
         data: STRENGTH_CARD_DATA,

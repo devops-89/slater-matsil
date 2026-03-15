@@ -20,7 +20,7 @@ const AboutSection = () => {
   return (
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={6} alignItems="flex-start ">
+        <Grid container spacing={6} alignItems="center ">
           <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-right">
             <HeadingStar
               title={details?.homepage?.aboutSection?.sectionTitle || ""}

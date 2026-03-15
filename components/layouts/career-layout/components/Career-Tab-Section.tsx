@@ -111,7 +111,7 @@ const CareerTabSection = () => {
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 500,
                   lineHeight: "30px",
-                  textTransform: "capitalize",
+                  // textTransform: "capitalize",
                   mt: 2,
                   color: COLORS.PRIMARY_BLUE,
                 }}
@@ -125,7 +125,7 @@ const CareerTabSection = () => {
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 500,
                   lineHeight: "30px",
-                  textTransform: "capitalize",
+                  // textTransform: "capitalize",
                   mt: 2,
                   color: COLORS.PRIMARY_BLUE,
                 }}
@@ -138,7 +138,7 @@ const CareerTabSection = () => {
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 500,
                   lineHeight: "30px",
-                  textTransform: "capitalize",
+                  // textTransform: "capitalize",
                   mt: 2,
                   color: COLORS.PRIMARY_BLUE,
                 }}
@@ -188,7 +188,7 @@ const CareerTabSection = () => {
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 500,
                   lineHeight: "30px",
-                  textTransform: "capitalize",
+                  // textTransform: "capitalize",
                   mt: 2,
                   color: COLORS.PRIMARY_BLUE,
                 }}

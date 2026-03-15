@@ -42,8 +42,8 @@ const NeedAssistance = () => {
               mt: 2,
             }}
           >
-            Our experience team is ready to help protect and maximize the value
-            of ypour intellectual property portfolio.
+            Our experienced team is ready to protect and maximize the value of
+            your intellectual property portfolio.
           </Typography>
 
           <Link href="/contact-us">

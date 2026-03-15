@@ -1,16 +1,10 @@
-import { INSIGHTS_DETAIL_PROPS } from "@/utils/types";
-import steven from "@/professionals/transparent/steven-slater.png";
+import stevenBadge from "@/insights/Screenshot 2025-11-18 113225 1.png";
 import ira from "@/professionals/transparent/ira-matsil.png";
 import john from "@/professionals/transparent/john-koetter.png";
-import stevenBadge from "@/insights/Screenshot 2025-11-18 113225 1.png";
-import srini from "@/professionals/transparent/srini.png";
-import zachary from "@/professionals/transparent/zachary-williams.png";
-import brian from "@/professionals/transparent/brian-carlson.png";
-import ruojian from "@/professionals/transparent/ruojian-zhang.png";
-import yumin from "@/professionals/transparent/yumin.png";
-import amitava from "@/professionals/transparent/amitava-chatterjee.png";
 import roger from "@/professionals/transparent/roger-knapp.png";
-import stephen from "@/professionals/transparent/stephen-cortiaus.png";
+import srini from "@/professionals/transparent/srini.png";
+import steven from "@/professionals/transparent/steven-slater.png";
+import { INSIGHTS_DETAIL_PROPS } from "@/utils/types";
 const commonContact = {
   firm: "SlaterMatsil, LLP",
   firmUrl: "www.slatermatsil.com",

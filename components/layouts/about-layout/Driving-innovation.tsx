@@ -24,19 +24,24 @@ const DrivingInnovation = () => {
             >
               {details?.aboutPage?.drivingInnovationEverywhere?.heading}
             </Typography>
-            <Typography
-              sx={{
-                fontSize: { lg: 20, xs: 15 },
-                fontFamily: adelle.style.fontFamily,
-                color: COLORS.TEXT_TERTIARY,
-                fontWeight: 400,
-                lineHeight: { lg: "31px", xs: "20px" },
-                textAlign: "justify",
-                mt: 2,
-              }}
-            >
-              {details?.aboutPage?.drivingInnovationEverywhere?.description}
-            </Typography>
+
+            {details?.aboutPage?.drivingInnovationEverywhere?.description.map(
+              (val, i) => (
+                <Typography
+                  sx={{
+                    fontSize: { lg: 20, xs: 15 },
+                    fontFamily: adelle.style.fontFamily,
+                    color: COLORS.TEXT_TERTIARY,
+                    fontWeight: 400,
+                    lineHeight: { lg: "31px", xs: "20px" },
+                    textAlign: "justify",
+                    mt: 2,
+                  }}
+                >
+                  {val?.label}
+                </Typography>
+              ),
+            )}
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
             <Image
