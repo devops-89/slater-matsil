@@ -26,7 +26,7 @@ const HeroSection = () => {
   return (
     <>
       {/* Fullscreen Video Modal */}
-      <Modal
+      {/* <Modal
         open={videoOpen}
         onClose={() => setVideoOpen(false)}
         closeAfterTransition
@@ -44,7 +44,6 @@ const HeroSection = () => {
               outline: "none",
             }}
           >
-            {/* Close Button */}
             <IconButton
               onClick={() => setVideoOpen(false)}
               sx={{
@@ -58,7 +57,6 @@ const HeroSection = () => {
               <CloseIcon sx={{ fontSize: 32 }} />
             </IconButton>
 
-            {/* Video Player */}
             <Box
               component="video"
               controls
@@ -76,7 +74,7 @@ const HeroSection = () => {
             </Box>
           </Box>
         </Fade>
-      </Modal>
+      </Modal> */}
 
       <Box>
         <Box
@@ -151,7 +149,7 @@ const HeroSection = () => {
               {details?.homepage?.heroSection?.subHeading}
             </Typography>
 
-            <Stack
+            {/* <Stack
               direction={"row"}
               alignItems={"center"}
               justifyContent={"center"}
@@ -193,7 +191,7 @@ const HeroSection = () => {
                   {details?.homepage?.heroSection?.videoHeading?.subTitle}
                 </Typography>
               </Box>
-            </Stack>
+            </Stack> */}
           </Container>
         </Box>
       </Box>
