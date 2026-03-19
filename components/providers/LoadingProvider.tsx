@@ -13,7 +13,7 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
     setLoading(true);
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [pathname, searchParams]);
