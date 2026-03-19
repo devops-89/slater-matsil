@@ -73,16 +73,16 @@ const ServicesDetailsHeroSection = () => {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Guiding Your{" "}
+                Global intellectual
                 <Box
                   component="span"
                   sx={{
                     color: COLORS.PRIMARY_GREEN,
                   }}
                 >
-                  Patent
+                  property
                 </Box>{" "}
-                From Application to Approval
+                services
               </Typography>
             </Box>
           </Box>

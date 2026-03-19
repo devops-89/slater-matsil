@@ -280,7 +280,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       ],
       logo: footerLogo,
       copyRightText:
-        "© 2016 - 2025 Slater Matsil, LLP | Dallas, TX | All Rights Reserved",
+        "© 2016 - 2026 Slater Matsil, LLP | Dallas, TX | All Rights Reserved",
       contactData: {
         email: "info@slatermatsil.com",
         phoneNumber: "972.732.1001",

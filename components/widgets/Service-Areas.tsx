@@ -73,17 +73,22 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
               data-aos="fade-up"
               data-aos-delay={i * 150}
             >
-              <ServiceAreaCard
-                img={val.img}
-                title={val.title}
-                description={val.description}
-                serialNumber={val.serialNumber}
-                slug={val.slug}
-              />
+              <Link
+                href={`/services/${val.slug}`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <ServiceAreaCard
+                  img={val.img}
+                  title={val.title}
+                  description={val.description}
+                  serialNumber={val.serialNumber}
+                  slug={val.slug}
+                />
+              </Link>
             </Grid>
           ))}
         </Grid>
-        {pathname !== '/services' && (
+        {pathname !== "/services" && (
           <Stack direction={"row"} alignItems={"center"} spacing={2} my={5}>
             <Divider
               sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}

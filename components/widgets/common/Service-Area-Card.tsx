@@ -41,22 +41,22 @@ const ServiceAreaCard = ({
       <Box sx={{ textAlign: "center" }}>
         <Image src={img} alt="" style={{ width: 100, height: 100 }} />
       </Box>
-      <Link href={`/services/${slug}`} style={{ textDecoration: "none" }}>
-        <Typography
-          className="card-title"
-          sx={{
-            textAlign: "center",
-            color: COLORS.BLACK,
-            fontFamily: georgia.style.fontFamily,
-            fontSize: 20,
-            fontWeight: 700,
-            my: 2,
-            transition: "color 0.3s ease-in-out",
-          }}
-        >
-          {title}
-        </Typography>
-      </Link>
+
+      <Typography
+        className="card-title"
+        sx={{
+          textAlign: "center",
+          color: COLORS.BLACK,
+          fontFamily: georgia.style.fontFamily,
+          fontSize: 20,
+          fontWeight: 700,
+          my: 2,
+          transition: "color 0.3s ease-in-out",
+        }}
+      >
+        {title}
+      </Typography>
+
       <Typography
         sx={{
           textAlign: "justify",

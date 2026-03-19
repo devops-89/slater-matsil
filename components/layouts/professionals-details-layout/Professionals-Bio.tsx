@@ -57,7 +57,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                       sx={{
                         fontSize: { lg: 17, xs: 15 },
                         color: COLORS.TEXT_PRIMARY_24,
-                        fontWeight: 600,
+                        fontWeight: 500,
                         mb: 1,
                         textAlign: "justify",
                       }}
@@ -91,7 +91,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                               sx={{
                                 fontSize: { lg: 17, xs: 15 },
                                 color: COLORS.TEXT_PRIMARY_24,
-                                fontWeight: 600,
+                                fontWeight: 500,
                                 mb: 1,
                                 textAlign: "justify",
                               }}

@@ -48,7 +48,7 @@ const HeroSection = () => {
         >
           {details?.careerPage?.career_hero_section?.shortDescription}
         </Typography>
-        <Stack
+        {/* <Stack
           direction={{ lg: "row", xs: "column" }}
           alignItems={{ lg: "center", xs: "justify" }}
           justifyContent={{ lg: "center", xs: "justify" }}
@@ -85,7 +85,7 @@ const HeroSection = () => {
           >
             {details?.careerPage?.career_hero_section?.ctaButton2.text}
           </Button>
-        </Stack>
+        </Stack> */}
       </Container>
 
       <Box sx={{ py: 4 }}>

@@ -179,13 +179,32 @@ const Footer = () => {
           direction={{ xs: "column-reverse", md: "row" }}
         >
           <Grid size={{ xs: 12, md: 4 }}>
-            <Box sx={{ maxWidth: 200, mx: { xs: "auto", md: 0 } }}>
-              <Image
-                src={details?.homepage?.footerData?.logo || logo}
-                alt="Slater Matsil Logo"
-                style={{ width: "100%", height: "auto" }}
+            <Stack direction={"row"} alignItems={"center"} spacing={2}>
+              <Box sx={{ maxWidth: 200, mx: { xs: "auto", md: 0 } }}>
+                <Image
+                  src={details?.homepage?.footerData?.logo || logo}
+                  alt="Slater Matsil Logo"
+                  style={{ width: "100%", height: "auto" }}
+                />
+              </Box>
+              <Divider
+                orientation="vertical"
+                sx={{ height: 50, opacity: 1, borderWidth: 2 }}
               />
-            </Box>
+              <Typography
+                sx={{
+                  color: COLORS.FOOTER_TEXT_COLOR,
+                  fontSize: 12,
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 400,
+                  opacity: 0.6,
+                  mt: 2,
+                  textAlign: { xs: "center", md: "left" },
+                }}
+              >
+                Fluent in technology. Proven in law.{" "}
+              </Typography>
+            </Stack>
             <Typography
               sx={{
                 color: COLORS.FOOTER_TEXT_COLOR,
