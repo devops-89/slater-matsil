@@ -37,7 +37,7 @@ export default function RootLayout({
     const timer = setTimeout(() => {
       setDetails(WEBSITE_DATA);
       setInitialLoading(false);
-    }, 5000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [setDetails]);
