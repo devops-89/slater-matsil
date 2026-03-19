@@ -36,6 +36,7 @@ import serviceAreas5 from "@/public/images/home/practice_areas/practice_areas5.s
 import serviceAreas6 from "@/public/images/home/practice_areas/practice_areas6.svg";
 import serviceAreas7 from "@/public/images/icons/services/ip-strategy.png";
 import serviceAreas8 from "@/public/images/icons/services/portfolio-management.png";
+import serviceAreas9 from "@/public/images/icons/services/trademarks.png";
 import {
   default as bigLogo,
   default as lightLogo,
@@ -72,17 +73,17 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   homepage: {
     heroSection: {
       heading: "A unique team of patent professionals",
-      subHeading: "Safegaurding innovation through legal insight.",
+      subHeading: "Safeguarding innovation through legal insight.",
       videoHeading: {
         title: "Watch",
-        subTitle: "Thats how we make it work?",
+        subTitle: "That's how we make it work?",
       },
     },
     aboutSection: {
       sectionTitle: "About Slatermatsil",
       heading: "Fluent in technology. Proven in law.",
       description:
-        "Slater Matsil is a collaboration of technology-minded individuals who practice intellectual property law. We understand that IP rights are, first and foremost, working assets that must support and advance our clients' business objectives.",
+        "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital. ",
       ctaButton: {
         text: "More About",
         link: "/about",
@@ -113,7 +114,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas1,
           title: "PATENT PROSECUTION",
           description:
-            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents and contribute to IP portfolios that achieve your goals. ",
+            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents contribute to IP portfolios that achieve your goals. ",
           serialNumber: "01",
           slug: "patent-prosecution",
         },
@@ -121,7 +122,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas2,
           title: "POST GRANT CHALLENGES",
           description:
-            "Our experience in litigation and prosecution allows us to confidently protect your work during a post-grant challenge. ",
+            "Our experience in litigation and prosecution provides us with the insight necessary to successfully defend and attack patents in any one of the available post grant procedures. ",
           serialNumber: "02",
           slug: "post-grant-challenges",
         },
@@ -172,6 +173,14 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "We help clients manage their IP portfolios efficiently and effectively, ensuring that their intellectual property assets are protected and leveraged to achieve their business goals.",
           serialNumber: "08",
           slug: "portfolio-management",
+        },
+        {
+          img: serviceAreas9,
+          title: "Trademarks",
+          description:
+            "At every stage of creation, registration, and renewal, the trademark professionals of Slater Matsil deliver exceptional counsel to preserve the integrity of your brand.",
+          serialNumber: "09",
+          slug: "trademarks",
         },
       ],
     },
@@ -292,7 +301,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       description: [
         {
           label:
-            "Slater Matsil is a collaboration of technology-minded individuals who practice intellectual property law. We understand that IP rights are, first and foremost, working assets that must support and advance our clients' business objectives.",
+            "We’re engineers focused on making things work. We’re attorneys driven to defend innovation. Above all, we’re proven professionals who draw upon our firsthand experience spanning diverse industries to deliver quality, accuracy, and a meticulous level of detail in our work product.",
         },
         {
           label:

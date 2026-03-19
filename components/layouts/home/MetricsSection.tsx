@@ -18,7 +18,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
   return (
     <Box>
       <Container maxWidth="lg">
-        <Grid container spacing={6}>
+        <Grid container spacing={6} alignItems="center">
           <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-right">
             <HeadingStar
               title={details?.homepage?.our_metrics?.sectionTitle || ""}
@@ -79,6 +79,25 @@ const MetricsSection: React.FC = (): JSX.Element => {
               }}
             >
               {details?.homepage?.our_metrics?.description}
+            </Typography>
+            <Typography
+              sx={{
+                color: COLORS.TEXT_PRIMARY,
+                fontSize: { lg: 20, xs: 15 },
+                fontWeight: 400,
+                fontFamily: adelle.style.fontFamily,
+                lineHeight: { lg: "30px", xs: "20px" },
+                textAlign: "justify",
+                mt: 2,
+              }}
+            >
+              Slater Matsil partners with the world's leading innovators to
+              protect their most valuable intellectual property. Our firm
+              successfully prosecuted over 1,650 patents in 2024 for our top
+              clients alone—companies representing nearly $36 billion in annual
+              R&D investment. These clients entrust us with securing patent
+              protection for breakthrough innovations worth approximately $4.8
+              billion in research and development.
             </Typography>
             <Link href="/contact-us">
               <Button

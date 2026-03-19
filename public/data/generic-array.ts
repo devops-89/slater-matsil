@@ -327,7 +327,7 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
 export const METRICS_DATA: METRICSPROPS[] = [
   {
     title: "U.S. PATENTS ISSUED",
-    count: "24,180+",
+    count: "25,030+",
   },
   {
     title: "COUNTRIES WE SERVE",
@@ -1434,11 +1434,11 @@ export const SERVICES_DETAILS = [
     data: [
       {
         description:
-          "We are engineers. We are lawyers. We are business professionals. We are also Licensing experts and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals.",
+          "We are engineers. We are lawyers. We are businessmen. We are also Licensing experts and IP litigators. Because we see the world from many perspectives, we are able to craft patents contribute to IP portfolios that achieve your goals.",
       },
       {
         description:
-          "Our firsthand experience as engineers and innovators gives you a direct connection to legal professionals who understand complex technologies and quickly grasp technical nuances. Lessons learned from years of licensing and litigating patents inform every aspect of our patent drafting and prosecution practice. This level of precision and depth not only strengthens the application itself — it also fortifies its defendability in the event of infringement. Our patent prosecution services include",
+          "Our firsthand experience as engineers and innovators gives you a direct connection to legal professionals who understand complex technologies and quickly grasp technical nuances. Lessons learned from years of licensing and litigating patents inform every aspect of our patent drafting and prosecution practice. This level of precision and depth not only strengthens the application itself — it also fortifies its defendability in the event of infringement. Our patent prosecution services include:",
         dataList: [
           {
             label: "Patent Portfolio Management",
@@ -1525,7 +1525,7 @@ export const SERVICES_DETAILS = [
           },
           {
             label:
-              "Supporting Claim Construction Development, Briefing, Hearing",
+              "Supporting Claim Construction Development, Briefing, Hearings",
           },
           {
             label:
@@ -1627,6 +1627,41 @@ export const SERVICES_DETAILS = [
       {
         description:
           "No matter where your offices are located, or where you conduct business, Slater Matsil delivers trusted advice and counsel in all matters relating to intellectual property. ",
+      },
+    ],
+  },
+  {
+    slug: "trademarks",
+    title: "Trademarks",
+    data: [
+      {
+        description:
+          "Product names. Logos. Domain names. When it comes to the trademarks that identify your business and products and help reinforce brand value, you need a trademark advocate with the experience to protect your interests across the nation and around the world.",
+      },
+      {
+        description:
+          "At every stage of creation, registration, and renewal, the trademark professionals of Slater Matsil deliver exceptional counsel to preserve the integrity of your brand. Our trademark practice includes: ",
+        dataList: [
+          {
+            label: "Trademark Strategy and Counseling",
+          },
+          {
+            label:
+              "Trademark Preparation and Prosecution before the United States Patent and Trademark Office ",
+          },
+          {
+            label: "Trademark Protection Programs ",
+          },
+          {
+            label: "Trademark Infringement Assessments",
+          },
+          {
+            label: "Trademark Licensing",
+          },
+          {
+            label: "Trademark Assignment Agreements",
+          },
+        ],
       },
     ],
   },

@@ -35,7 +35,7 @@ const QuickLinksDetails = () => {
     {
       img: globeOutline,
       title: "The American Intellectual Property Law Association (AIPLA)",
-      href: "http://www.aipla.org/Pages/default.aspx",
+      href: "https://www.aipla.org/",
     },
     {
       img: globeOutline,
@@ -69,28 +69,8 @@ const QuickLinksDetails = () => {
     },
   ];
 
-  // const listItem = [
-  //   {
-  //     label: "Patent Portfolio Management",
-  //   },
-  //   {
-  //     label:
-  //       "Patent Preparation and Prosecution before the United States Patent and Trademark Office",
-  //   },
-  //   {
-  //     label: "International Patent Applications ",
-  //   },
-  //   {
-  //     label: "Reexaminations and Reissues",
-  //   },
-  //   {
-  //     label: "Appeals",
-  //   },
-  // ];
-
   const { slug } = useParams();
 
-  // console.log("params", slug);
   const [data, setData] = useState<
     SERVICES_DETAILS_DATA_PROPS | null | undefined
   >(null);
