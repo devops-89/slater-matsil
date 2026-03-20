@@ -82,7 +82,7 @@ const PracticeGroupSection = () => {
       <Box sx={{ backgroundColor: "#F8FCF5", p: 4, mt: { lg: 4, xs: 2 } }}>
         <Container maxWidth="lg">
           <Grid container alignItems={"center"} spacing={4} sx={{ mt: 4 }}>
-            <Grid size={{ lg: 6, xs: 12 }}>
+            <Grid size={{ lg: data?.description2 ? 6 : 12, xs: 12 }}>
               <Typography
                 sx={{
                   fontSize: { lg: 24, xs: 18 },
@@ -96,24 +96,26 @@ const PracticeGroupSection = () => {
                 {data?.description1}
               </Typography>
             </Grid>
-            <Grid size={{ lg: 6, xs: 12 }}>
-              <StarBox bgColor={COLORS.PRIMARY_GREEN} />
-              <Typography
-                sx={{
-                  fontSize: { lg: 20, xs: 16 },
-                  fontFamily: adelle.style.fontFamily,
-                  fontWeight: 500,
-                  lineHeight: { lg: "30px", xs: "24px" },
-                  textTransform: "capitalize",
-                  color: COLORS.TEXT_PRIMARY_4,
-                  mt: 2,
-                }}
-              >
-                {data?.description2}
-              </Typography>
-            </Grid>
+            {data?.description2 && (
+              <Grid size={{ lg: 6, xs: 12 }}>
+                <StarBox bgColor={COLORS.PRIMARY_GREEN} />
+                <Typography
+                  sx={{
+                    fontSize: { lg: 20, xs: 16 },
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: 500,
+                    lineHeight: { lg: "30px", xs: "24px" },
+                    textTransform: "capitalize",
+                    color: COLORS.TEXT_PRIMARY_4,
+                    mt: 2,
+                  }}
+                >
+                  {data?.description2}
+                </Typography>
+              </Grid>
+            )}
           </Grid>
-          <MeetPractitioners />
+          <MeetPractitioners data={data?.data} />
         </Container>
       </Box>
     </div>

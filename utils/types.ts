@@ -354,13 +354,14 @@ interface PRACTICE_GROUPS_SECTION_PROPS {
   tabData: {
     title: PRACTICE_GROUP_TAB_DATA;
     description1: string;
-    description2: string;
+    description2?: string;
+    data?: { primary: string; secondary?: string; isHeader?: boolean }[];
   }[];
 }
 
 interface MEET_PRACTITIONERS_PROPS {
   title: string;
-  data: { primary: string; secondary: string }[];
+  data: { primary: string; secondary?: string; isHeader?: boolean }[];
 }
 
 //  Who we serve page

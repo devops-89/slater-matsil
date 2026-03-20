@@ -34,12 +34,8 @@ export default function RootLayout({
       duration: 800,
       once: true,
     });
-    const timer = setTimeout(() => {
-      setDetails(WEBSITE_DATA);
-      setInitialLoading(false);
-    }, 500);
-
-    return () => clearTimeout(timer);
+    setDetails(WEBSITE_DATA);
+    setInitialLoading(false);
   }, [setDetails]);
 
   const phone = useMediaQuery("(max-width:600px)");

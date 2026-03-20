@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const MeetPractitioners = () => {
+const MeetPractitioners = ({ data }: { data: any }) => {
   const { details } = usePageData();
   return (
     <Box sx={{ mt: 10 }}>
@@ -48,47 +48,80 @@ const MeetPractitioners = () => {
           {details?.practiceGroupPage?.meetPractitioners?.title}:
         </Typography>
         <Grid container>
-          <Grid size={{ lg: 9, xs: 12 }}>
-            <List>
-              {details?.practiceGroupPage?.meetPractitioners?.data.map(
-                (val, i) => (
-                  <ListItem sx={{ alignItems: "flex-start" }} disablePadding>
-                    <ListItemAvatar sx={{ mt: 2, minWidth: 30 }}>
-                      <Circle
-                        sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 10 }}
-                      />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={val?.primary}
-                      secondary={val?.secondary}
-                      slotProps={{
-                        primary: {
-                          sx: {
-                            fontSize: { lg: 24, xs: 20 },
+          {data && (
+            <Grid size={{ lg: 9, xs: 12 }}>
+              <List>
+                {data.map(
+                  (
+                    val: {
+                      primary: string;
+                      secondary?: string;
+                      isHeader?: boolean;
+                    },
+                    i: number,
+                  ) => {
+                    if (val.isHeader) {
+                      return (
+                        <Typography
+                          key={i}
+                          sx={{
+                            fontSize: { lg: 20, xs: 16 },
                             fontFamily: tradeGothic.style.fontFamily,
                             fontWeight: 700,
-                            lineHeight: { lg: "40px", xs: "20px" },
-                            textTransform: "capitalize",
                             color: COLORS.PRIMARY_BLUE,
-                          },
-                        },
-                        secondary: {
-                          sx: {
-                            fontSize: { lg: 16, xs: 14 },
-                            fontFamily: tradeGothic.style.fontFamily,
-                            fontWeight: 500,
-                            lineHeight: { lg: "30px", xs: "20px" },
-                            textTransform: "capitalize",
-                            color: COLORS.TEXT_PRIMARY_4,
-                          },
-                        },
-                      }}
-                    />
-                  </ListItem>
-                ),
-              )}
-            </List>
-          </Grid>
+                            mt: i === 0 ? 0 : 4,
+                            mb: 2,
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          {val.primary}
+                        </Typography>
+                      );
+                    }
+                    return (
+                      <ListItem
+                        key={i}
+                        sx={{ alignItems: "flex-start" }}
+                        disablePadding
+                      >
+                        <ListItemAvatar sx={{ mt: 2, minWidth: 30 }}>
+                          <Circle
+                            sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 10 }}
+                          />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={val?.primary}
+                          secondary={val?.secondary}
+                          slotProps={{
+                            primary: {
+                              sx: {
+                                fontSize: { lg: 24, xs: 20 },
+                                fontFamily: tradeGothic.style.fontFamily,
+                                fontWeight: 500,
+                                lineHeight: { lg: "40px", xs: "20px" },
+                                textTransform: "capitalize",
+                                color: COLORS.PRIMARY_BLUE,
+                              },
+                            },
+                            secondary: {
+                              sx: {
+                                fontSize: { lg: 16, xs: 14 },
+                                fontFamily: tradeGothic.style.fontFamily,
+                                fontWeight: 500,
+                                lineHeight: { lg: "30px", xs: "20px" },
+                                textTransform: "capitalize",
+                                color: COLORS.TEXT_PRIMARY_4,
+                              },
+                            },
+                          }}
+                        />
+                      </ListItem>
+                    );
+                  },
+                )}
+              </List>
+            </Grid>
+          )}
         </Grid>
       </Container>
     </Box>
