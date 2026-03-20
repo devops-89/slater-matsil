@@ -73,7 +73,7 @@ const ServicesDetailsHeroSection = () => {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Global intellectual
+                Global intellectual{" "}
                 <Box
                   component="span"
                   sx={{

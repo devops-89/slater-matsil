@@ -34,7 +34,9 @@ const WhoWeServelayout = () => {
         </Grid>
       </Container>
       <div data-aos="fade-up">
-        <WhoServeTabSection />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <WhoServeTabSection />
+        </React.Suspense>
       </div>
     </Box>
   );

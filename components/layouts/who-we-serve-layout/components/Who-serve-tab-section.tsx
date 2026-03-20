@@ -4,7 +4,8 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { TAB_STYLES } from "@/utils/styles";
 import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
-import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
 import TabCard from "./Tab-Card";
 import QuoteCard from "./Quote-Card";
 import TabSwitching from "@/components/widgets/Tab-Switching";
@@ -12,18 +13,44 @@ import TabSwitching from "@/components/widgets/Tab-Switching";
 const WhoServeTabSection = () => {
   const [value, setValue] = useState(0);
   const { details } = usePageData();
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   const [serveData, setServeData] = useState(
     details?.whoWeServePage?.whoWeServeTabsSection[0],
   );
+
+  useEffect(() => {
+    if (tabParam !== null && details?.whoWeServePage?.whoWeServeTabsSection) {
+      const index = parseInt(tabParam);
+      if (
+        !isNaN(index) &&
+        index >= 0 &&
+        index < details.whoWeServePage.whoWeServeTabsSection.length
+      ) {
+        setValue(index);
+        setServeData(details.whoWeServePage.whoWeServeTabsSection[index]);
+
+        // Scroll to the section
+        setTimeout(() => {
+          if (sectionRef.current) {
+            sectionRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        }, 300); // Small delay to allow page to load and layout to stabilize
+      }
+    }
+  }, [tabParam, details]);
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     setServeData(details?.whoWeServePage?.whoWeServeTabsSection[newValue]);
-
-    // console.log("teste", newValue);
   };
   return (
-    <Box sx={{ mt: 10 }}>
+    <Box sx={{ mt: 10 }} ref={sectionRef}>
       <Container maxWidth="lg">
         <Grid container>
           <Grid size={{ lg: 10, xs: 12 }} mx="auto">

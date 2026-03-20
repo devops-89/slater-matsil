@@ -131,6 +131,7 @@ const Navbar = () => {
                     fontSize: 20,
                     fontFamily: tradeGothic.style.fontFamily,
                     fontWeight: 700,
+                    textAlign: "center",
                   }}
                 >
                   {val.HEADING}
@@ -142,7 +143,9 @@ const Navbar = () => {
                       href={item.href || "#"}
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      <ListItemButton sx={{ width: "fit-content" }}>
+                      <ListItemButton
+                        sx={{ width: "fit-content", margin: "auto" }}
+                      >
                         <ListItemText
                           primary={item.text}
                           slotProps={{
@@ -150,6 +153,7 @@ const Navbar = () => {
                               sx: {
                                 fontFamily: tradeGothic.style.fontFamily,
                                 fontWeight: 400,
+                                textAlign: "center",
                               },
                             },
                           }}

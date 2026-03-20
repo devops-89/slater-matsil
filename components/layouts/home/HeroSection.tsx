@@ -105,7 +105,7 @@ const HeroSection = () => {
             }}
           >
             <source
-              src="https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video.mp4"
+              src="https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"
               type="video/mp4"
             />
           </Box>

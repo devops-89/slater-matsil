@@ -9,7 +9,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import ProfessionalsCard from "./components/Professionals-Card";
 import { usePageData } from "@/store/usePageData";
 import { TEXTFIELD_STYLES } from "@/utils/styles";
@@ -27,18 +27,24 @@ const ProfessionalList = () => {
     setSearch(e.target.value);
   };
 
-  const [data, setData] = useState(
-    details?.firm_professionals?.PROFESSIONAL_LIST_PROPS,
-  );
+  const sortedFullList = useMemo(() => {
+    const list = details?.firm_professionals?.PROFESSIONAL_LIST_PROPS || [];
+    return [...list].sort((a, b) => a.name.localeCompare(b.name));
+  }, [details]);
+
+  const [data, setData] = useState(sortedFullList);
+
+  useEffect(() => {
+    setData(sortedFullList);
+  }, [sortedFullList]);
 
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
 
   const handleSearch = () => {
-    const filteredData =
-      details?.firm_professionals?.PROFESSIONAL_LIST_PROPS.filter((item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()),
-      );
+    const filteredData = sortedFullList.filter((item: any) =>
+      item.name.toLowerCase().includes(search.toLowerCase()),
+    );
     setData(filteredData);
     setPage(1);
   };
@@ -46,10 +52,9 @@ const ProfessionalList = () => {
 
   const searchByAlphabets = (letter: string) => {
     setAlphabet(letter);
-    const filteredData =
-      details?.firm_professionals?.PROFESSIONAL_LIST_PROPS.filter((item) =>
-        item.name.toLowerCase().startsWith(letter),
-      );
+    const filteredData = sortedFullList.filter((item: any) =>
+      item.name.toLowerCase().startsWith(letter),
+    );
     setData(filteredData);
     setPage(1);
   };

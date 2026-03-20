@@ -88,29 +88,29 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
             </Grid>
           ))}
         </Grid>
-        {pathname !== "/services" && (
-          <Stack direction={"row"} alignItems={"center"} spacing={2} my={5}>
-            <Divider
-              sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
-            />
-            <Link href="/services" style={{ textDecoration: "none" }}>
-              <Button
-                sx={{
-                  color: COLORS.PRIMARY_BLUE,
-                  fontFamily: adelle.style.fontFamily,
-                  textDecoration: "underline",
-                  fontWeight: 600,
-                  fontSize: 16,
-                  lineHeight: "28px",
-                }}
-              >
-                View More
-              </Button>
-            </Link>
-            <Divider
-              sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
-            />
-          </Stack>
+        {!pathname.startsWith("/services") && (
+            <Stack direction={"row"} alignItems={"center"} spacing={2} my={5}>
+              <Divider
+                sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
+              />
+              <Link href="/services" style={{ textDecoration: "none" }}>
+                <Button
+                  sx={{
+                    color: COLORS.PRIMARY_BLUE,
+                    fontFamily: adelle.style.fontFamily,
+                    textDecoration: "underline",
+                    fontWeight: 600,
+                    fontSize: 16,
+                    lineHeight: "28px",
+                  }}
+                >
+                  View More
+                </Button>
+              </Link>
+              <Divider
+                sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
+              />
+            </Stack>
         )}
       </Container>
     </Box>

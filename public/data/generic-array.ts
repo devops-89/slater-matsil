@@ -305,20 +305,20 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
     HEADING: "Who We Serve",
     DATA: [
       {
-        text: "Startups",
-        href: "/who-we-serve",
+        text: "Large Corporations",
+        href: "/who-we-serve?tab=0",
       },
       {
-        text: "Universities",
-        href: "/who-we-serve",
+        text: "Small Companies/Start-Ups",
+        href: "/who-we-serve?tab=1",
       },
       {
-        text: "Corporates",
-        href: "/who-we-serve",
+        text: "U.S. Law Firms",
+        href: "/who-we-serve?tab=2",
       },
       {
-        text: "Government",
-        href: "/who-we-serve",
+        text: "International Law Firms",
+        href: "/who-we-serve?tab=3",
       },
     ],
   },

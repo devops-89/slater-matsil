@@ -189,7 +189,12 @@ const Footer = () => {
               </Box>
               <Divider
                 orientation="vertical"
-                sx={{ height: 50, opacity: 1, borderWidth: 2 }}
+                sx={{
+                  height: 50,
+                  opacity: 1,
+                  borderWidth: 2,
+                  borderColor: COLORS.PRIMARY_GREEN,
+                }}
               />
               <Typography
                 sx={{
