@@ -24,6 +24,7 @@ import globeOutline from "@/icons/earth.svg";
 import QuickLinksCard from "@/components/widgets/common/Quick-Links-Card";
 import { Circle } from "@mui/icons-material";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import { SERVICES_DETAILS } from "@/public/data/generic-array";
 const QuickLinksDetails = () => {
   const QUICk_LINKS_DATA = [
@@ -75,9 +76,27 @@ const QuickLinksDetails = () => {
     SERVICES_DETAILS_DATA_PROPS | null | undefined
   >(null);
 
+  const [navigation, setNavigation] = useState<{
+    prev: { slug: string; title: string } | null;
+    next: { slug: string; title: string } | null;
+  }>({ prev: null, next: null });
+
   useEffect(() => {
-    const filteredData = SERVICES_DETAILS.find((item) => item.slug === slug);
-    setData(filteredData);
+    const currentIndex = SERVICES_DETAILS.findIndex((item) => item.slug === slug);
+    if (currentIndex !== -1) {
+      setData(SERVICES_DETAILS[currentIndex]);
+
+      const prev = currentIndex > 0 ? SERVICES_DETAILS[currentIndex - 1] : null;
+      const next =
+        currentIndex < SERVICES_DETAILS.length - 1
+          ? SERVICES_DETAILS[currentIndex + 1]
+          : null;
+
+      setNavigation({
+        prev: prev ? { slug: prev.slug, title: prev.title } : null,
+        next: next ? { slug: next.slug, title: next.title } : null,
+      });
+    }
   }, [slug]);
 
   return (
@@ -158,6 +177,93 @@ const QuickLinksDetails = () => {
             </Grid>
           ))}
         </Grid>
+      </Container>
+
+      {/* Navigation Buttons */}
+      <Container maxWidth="lg" sx={{ mb: 6 }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{
+            py: 4,
+            borderTop: `1px solid ${COLORS.PRIMARY_BLUE}20`,
+            borderBottom: `1px solid ${COLORS.PRIMARY_BLUE}20`,
+          }}
+        >
+          <Box sx={{ minWidth: "200px" }}>
+            {navigation.prev && (
+              <Link
+                href={`/services/${navigation.prev.slug}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Stack direction="column" spacing={0.5}>
+                  <Typography
+                    sx={{
+                      color: COLORS.PRIMARY_BLUE,
+                      fontSize: 14,
+                      fontFamily: tradeGothic.style.fontFamily,
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: 1,
+                      opacity: 0.7,
+                    }}
+                  >
+                    ← Previous Service
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: COLORS.PRIMARY_BLUE,
+                      fontSize: 18,
+                      fontFamily: adelle.style.fontFamily,
+                      fontWeight: 700,
+                      "&:hover": { color: COLORS.PRIMARY_GREEN },
+                      transition: "color 0.3s ease",
+                    }}
+                  >
+                    {navigation.prev.title}
+                  </Typography>
+                </Stack>
+              </Link>
+            )}
+          </Box>
+          <Box sx={{ minWidth: "200px", textAlign: "right" }}>
+            {navigation.next && (
+              <Link
+                href={`/services/${navigation.next.slug}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Stack direction="column" spacing={0.5} alignItems="flex-end">
+                  <Typography
+                    sx={{
+                      color: COLORS.PRIMARY_BLUE,
+                      fontSize: 14,
+                      fontFamily: tradeGothic.style.fontFamily,
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: 1,
+                      opacity: 0.7,
+                    }}
+                  >
+                    Next Service →
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: COLORS.PRIMARY_BLUE,
+                      fontSize: 18,
+                      fontFamily: adelle.style.fontFamily,
+                      fontWeight: 700,
+                      "&:hover": { color: COLORS.PRIMARY_GREEN },
+                      transition: "color 0.3s ease",
+                    }}
+                  >
+                    {navigation.next.title}
+                  </Typography>
+                </Stack>
+              </Link>
+            )}
+          </Box>
+        </Stack>
       </Container>
 
       <Box

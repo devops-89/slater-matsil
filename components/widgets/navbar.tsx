@@ -70,7 +70,7 @@ const Navbar = () => {
                 {menuOpen ? "CLOSE" : "MENU"}
               </Typography>
             </Stack>
-            <Box
+            {/* <Box
               sx={{
                 textTransform: "none",
                 backgroundColor: COLORS.PRIMARY_BLUE,
@@ -95,7 +95,7 @@ const Navbar = () => {
                 English
               </Typography>
               <ArrowDropDown />
-            </Box>
+            </Box> */}
           </Stack>
         </Container>
       </Box>
@@ -142,6 +142,7 @@ const Navbar = () => {
                       key={index}
                       href={item.href || "#"}
                       style={{ textDecoration: "none", color: "inherit" }}
+                      onClick={handleMenuToggle}
                     >
                       <ListItemButton
                         sx={{ width: "fit-content", margin: "auto" }}

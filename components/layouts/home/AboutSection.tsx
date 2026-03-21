@@ -22,9 +22,7 @@ const AboutSection = () => {
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center ">
           <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-right">
-            <HeadingStar
-              title={details?.homepage?.aboutSection?.sectionTitle || ""}
-            />
+            <HeadingStar title="About Slatermatsil" />
 
             <Typography
               sx={{
@@ -35,7 +33,7 @@ const AboutSection = () => {
                 fontFamily: tradeGothic.style.fontFamily,
               }}
             >
-              {details?.homepage?.aboutSection?.heading}
+              Fluent in technology. Proven in law.
             </Typography>
             <Box>
               <Image
@@ -62,7 +60,9 @@ const AboutSection = () => {
                   fontFamily: adelle.style.fontFamily,
                 }}
               >
-                {details?.homepage?.aboutSection?.description}
+                At Slater Matsil, we know what is required to invent something
+                groundbreaking — and we know what it takes to guard and defend
+                your company’s intellectual capital.
               </Typography>
               <Link href={"/about-us"}>
                 <Button
@@ -111,7 +111,7 @@ const AboutSection = () => {
                  `,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.years}
+                      18
                     </Typography>
                     <Box
                       sx={{
@@ -146,7 +146,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.title}
+                      Years of
                     </Typography>
                     <Typography
                       sx={{
@@ -154,7 +154,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.subTitle}
+                      Pro Experiences
                     </Typography>
                   </Box>
                 </Box>

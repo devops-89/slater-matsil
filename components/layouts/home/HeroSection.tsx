@@ -131,7 +131,7 @@ const HeroSection = () => {
                 textAlign: "center",
               }}
             >
-              {details?.homepage?.heroSection?.heading}
+              A unique team of patent professionals
             </Typography>
             <Divider sx={{ borderColor: COLORS.WHITE, mb: 4, width: "100%" }} />
 
@@ -146,7 +146,7 @@ const HeroSection = () => {
                 textAlign: "center",
               }}
             >
-              {details?.homepage?.heroSection?.subHeading}
+              Safeguarding innovation through legal insight.
             </Typography>
 
             {/* <Stack

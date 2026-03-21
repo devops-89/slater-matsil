@@ -20,9 +20,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
           <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-right">
-            <HeadingStar
-              title={details?.homepage?.our_metrics?.sectionTitle || ""}
-            />
+            <HeadingStar title="Our Metrics" />
 
             <Typography
               sx={{
@@ -36,7 +34,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              {details?.homepage?.our_metrics?.heading?.title}
+              Our firm is globally connected. Internationally
               <Typography
                 component={"span"}
                 sx={{
@@ -63,7 +61,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                   },
                 }}
               >
-                {details?.homepage?.our_metrics?.heading?.subTitle}
+                respected
               </Typography>
             </Typography>
 
@@ -78,7 +76,8 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              {details?.homepage?.our_metrics?.description}
+              Slater Matsil understands what it takes to create groundbreaking
+              inventions and we know how to protect your company’s capital.
             </Typography>
             <Typography
               sx={{
