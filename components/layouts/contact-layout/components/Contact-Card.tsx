@@ -32,7 +32,13 @@ const ContactCard = ({ Icon, heading, value }: CONTACT_US_CARD_PROPS) => {
           </Box>
           <Box>
             <Typography sx={{ ...contact_field_styles }}>{heading}</Typography>
-            <Typography sx={{ ...contact_field_styles_2 }}>{value}</Typography>
+            {heading === "Email Address" ? (
+              <a href={`mailto:${value}`} style={{ textDecoration: "none" }}>
+                <Typography sx={{ ...contact_field_styles_2, cursor: "pointer", "&:hover": { textDecoration: "underline" } }}>{value}</Typography>
+              </a>
+            ) : (
+              <Typography sx={{ ...contact_field_styles_2 }}>{value}</Typography>
+            )}
           </Box>
         </Stack>
       </Box>

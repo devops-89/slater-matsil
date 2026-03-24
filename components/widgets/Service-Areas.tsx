@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
@@ -26,9 +27,11 @@ interface ServiceAreasProps {
 const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
   const { details } = usePageData();
   const pathname = usePathname();
+  const [showAll, setShowAll] = useState(false);
+  
   let displayData = data || details?.homepage?.service_area?.section_Data || [];
 
-  if (limit) {
+  if (limit && !showAll) {
     displayData = displayData.slice(0, limit);
   }
   return (
@@ -88,25 +91,24 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
             </Grid>
           ))}
         </Grid>
-        {!pathname.startsWith("/services") && (
+        {!pathname.startsWith("/services") && !showAll && (
           <Stack direction={"row"} alignItems={"center"} spacing={2} my={5}>
             <Divider
               sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
             />
-            <Link href="/services" style={{ textDecoration: "none" }}>
-              <Button
-                sx={{
-                  color: COLORS.PRIMARY_BLUE,
-                  fontFamily: adelle.style.fontFamily,
-                  textDecoration: "underline",
-                  fontWeight: 600,
-                  fontSize: 16,
-                  lineHeight: "28px",
-                }}
-              >
-                View More
-              </Button>
-            </Link>
+            <Button
+              onClick={() => setShowAll(true)}
+              sx={{
+                color: COLORS.PRIMARY_BLUE,
+                fontFamily: adelle.style.fontFamily,
+                textDecoration: "underline",
+                fontWeight: 600,
+                fontSize: 16,
+                lineHeight: "28px",
+              }}
+            >
+              View More
+            </Button>
             <Divider
               sx={{ flex: 1, borderColor: COLORS.PRIMARY_BLUE, opacity: 1 }}
             />

@@ -60,11 +60,9 @@ const AboutSection = () => {
                   fontFamily: adelle.style.fontFamily,
                 }}
               >
-                At Slater Matsil, we know what is required to invent something
-                groundbreaking — and we know what it takes to guard and defend
-                your company’s intellectual capital.
+                {details?.homepage?.aboutSection?.description}
               </Typography>
-              <Link href={"/about-us"}>
+              <Link href={details?.homepage?.aboutSection?.ctaButton?.link || "/about-us"}>
                 <Button
                   variant="outlined"
                   sx={{
@@ -79,7 +77,7 @@ const AboutSection = () => {
                     fontSize: 16,
                   }}
                 >
-                  More About
+                  {details?.homepage?.aboutSection?.ctaButton?.text}
                   <ArrowRightAltIcon fontSize="small" sx={{ ml: 1 }} />
                 </Button>
               </Link>
@@ -111,7 +109,7 @@ const AboutSection = () => {
                  `,
                       }}
                     >
-                      18
+                      {details?.homepage?.aboutSection?.experience?.years}
                     </Typography>
                     <Box
                       sx={{
@@ -146,7 +144,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      Years of
+                      {details?.homepage?.aboutSection?.experience?.title}
                     </Typography>
                     <Typography
                       sx={{
@@ -154,7 +152,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      Pro Experiences
+                      {details?.homepage?.aboutSection?.experience?.subTitle}
                     </Typography>
                   </Box>
                 </Box>

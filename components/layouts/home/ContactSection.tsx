@@ -14,7 +14,7 @@ const ContactSection = () => {
             <ContactForm />
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-left">
-            <Typography
+            {/* <Typography
               sx={{
                 color: COLORS.LABEL_COLOR,
                 fontFamily: adelle.style.fontFamily,
@@ -23,8 +23,7 @@ const ContactSection = () => {
                 lineHeight: "26px",
               }}
             >
-              (24/7 available)
-            </Typography>
+            </Typography> */}
             <Stack
               direction={"row"}
               alignItems={"center"}

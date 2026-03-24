@@ -129,6 +129,7 @@ interface MetricSectionProps {
     subTitle: string;
   };
   description: string;
+  description2?: string;
 
   ctaButton: string;
   metricsData: METRICSPROPS[];

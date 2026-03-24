@@ -1,4 +1,4 @@
-import stevenBadge from "@/insights/Screenshot 2025-11-18 113225 1.png";
+
 import ira from "@/professionals/transparent/ira-matsil.png";
 import john from "@/professionals/transparent/john-koetter.png";
 import roger from "@/professionals/transparent/roger-knapp.png";
@@ -186,7 +186,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Ranked Firm : Intellectual Property – Texas",
       guide: "USA Guide 2025",
       yearsRanked: "1 Department · 3 Ranked Lawyers",
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: {
@@ -233,7 +232,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       guide: "USA Guide 2025",
       yearsRanked: "2 years Ranked",
       profileImage: steven,
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: stevenSections(),
@@ -246,7 +244,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       guide: "USA Guide 2025",
       yearsRanked: "5 years Ranked",
       profileImage: ira,
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: iraSections(),
@@ -259,7 +256,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       guide: "USA Guide 2025",
       yearsRanked: "5 years Ranked",
       profileImage: ira,
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: iraSections(),
@@ -309,7 +305,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       guide: "USA Guide 2025",
       yearsRanked: "3 years Ranked",
       profileImage: srini,
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: sriniSections(),
@@ -430,7 +425,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       guide: "UT Dallas Career Sessions",
       yearsRanked: "Career Advisor & Speaker",
       profileImage: srini,
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: {
@@ -464,7 +458,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       guide: "Inns of Court Sessions",
       yearsRanked: "Session Leader",
       profileImage: srini,
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: {
@@ -570,7 +563,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       guide: "Chambers USA Guide",
       yearsRanked: "2023 Ranked Attorney",
       profileImage: srini,
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: {
@@ -1834,7 +1826,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "IAM Patent 1000 Rankings",
       guide: "Individual and Firm Recognition",
       yearsRanked: "2023 Edition",
-      badgeImage: stevenBadge,
     },
     contact: commonContact,
     contentSections: {

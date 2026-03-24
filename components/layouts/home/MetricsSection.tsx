@@ -20,7 +20,9 @@ const MetricsSection: React.FC = (): JSX.Element => {
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
           <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-right">
-            <HeadingStar title="Our Metrics" />
+            <HeadingStar
+              title={details?.homepage?.our_metrics?.sectionTitle || ""}
+            />
 
             <Typography
               sx={{
@@ -34,7 +36,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              Our firm is globally connected. Internationally
+              {details?.homepage?.our_metrics?.heading?.title}
               <Typography
                 component={"span"}
                 sx={{
@@ -61,7 +63,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                   },
                 }}
               >
-                respected
+                {details?.homepage?.our_metrics?.heading?.subTitle}
               </Typography>
             </Typography>
 
@@ -76,8 +78,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              Slater Matsil understands what it takes to create groundbreaking
-              inventions and we know how to protect your company’s capital.
+              {details?.homepage?.our_metrics?.description}
             </Typography>
             <Typography
               sx={{
@@ -90,13 +91,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              Slater Matsil partners with the world's leading innovators to
-              protect their most valuable intellectual property. Our firm
-              successfully prosecuted over 1,650 patents in 2024 for our top
-              clients alone—companies representing nearly $36 billion in annual
-              R&D investment. These clients entrust us with securing patent
-              protection for breakthrough innovations worth approximately $4.8
-              billion in research and development.
+              {details?.homepage?.our_metrics?.description2}
             </Typography>
             <Link href="/contact-us">
               <Button

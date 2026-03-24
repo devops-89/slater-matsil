@@ -197,6 +197,18 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
         text: "Litigation Support",
         href: "/services/litigation-support",
       },
+      {
+        text: "Post Grant Challenges",
+        href: "/services/post-grant-challenges",
+      },
+      {
+        text: "Adverse Patent Analysis",
+        href: "/services/adverse-patent-analysis",
+      },
+      {
+        text: "Trusted Advice and Counsel",
+        href: "/services/trusted-advice-counsel",
+      },
     ],
   },
   // {
@@ -296,7 +308,7 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
         href: "/services/adverse-patent-analysis",
       },
       {
-        text: "Trusted Advice Counsel",
+        text: "Trusted Advice and Counsel",
         href: "/services/trusted-advice-counsel",
       },
     ],
@@ -331,7 +343,7 @@ export const METRICS_DATA: METRICSPROPS[] = [
   },
   {
     title: "COUNTRIES WE SERVE",
-    count: "6",
+    count: "150+",
   },
   {
     title: "PATENTS ISSUED TO FIRM PERSONNEL",
@@ -1434,7 +1446,7 @@ export const SERVICES_DETAILS = [
     data: [
       {
         description:
-          "We are engineers. We are lawyers. We are businessmen. We are also Licensing experts and IP litigators. Because we see the world from many perspectives, we are able to craft patents contribute to IP portfolios that achieve your goals.",
+          "We are engineers. We are lawyers. We are business professionals. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals.",
       },
       {
         description:

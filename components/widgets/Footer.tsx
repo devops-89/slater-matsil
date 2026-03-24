@@ -152,17 +152,35 @@ const Footer = () => {
                   >
                     {val.name}
                   </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: 16,
-                      fontFamily: adelle.style.fontFamily,
-                      fontWeight: 400,
-                      color: COLORS.WHITE,
-                      lineHeight: "24px",
-                    }}
-                  >
-                    {val.value}
-                  </Typography>
+                  {val.name === "Email" ? (
+                    <a href={`mailto:${val.value}`} style={{ textDecoration: "none" }}>
+                      <Typography
+                        sx={{
+                          fontSize: 16,
+                          fontFamily: adelle.style.fontFamily,
+                          fontWeight: 400,
+                          color: COLORS.WHITE,
+                          lineHeight: "24px",
+                          cursor: "pointer",
+                          "&:hover": { textDecoration: "underline" },
+                        }}
+                      >
+                        {val.value}
+                      </Typography>
+                    </a>
+                  ) : (
+                    <Typography
+                      sx={{
+                        fontSize: 16,
+                        fontFamily: adelle.style.fontFamily,
+                        fontWeight: 400,
+                        color: COLORS.WHITE,
+                        lineHeight: "24px",
+                      }}
+                    >
+                      {val.value}
+                    </Typography>
+                  )}
                 </Box>
               ))}
             </Stack>

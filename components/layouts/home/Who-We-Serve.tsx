@@ -165,7 +165,12 @@ const Whoweserve = () => {
                   ),
                 )}
               </Grid>
-              <Link href="/firm-professionals">
+              <Link
+                href={
+                  details?.homepage?.who_we_serve?.rightSection?.ctaButton
+                    ?.href || "/who-we-serve"
+                }
+              >
                 <Button
                   sx={{
                     padding: "15px",

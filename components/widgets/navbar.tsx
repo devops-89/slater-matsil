@@ -49,8 +49,13 @@ const Navbar = () => {
             <Link href="/">
               <Image src={logo} alt="Slater Matsil logo" priority />
             </Link>
-            <Stack direction="row" alignItems="center">
-              <IconButton onClick={handleMenuToggle}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              onClick={handleMenuToggle}
+              sx={{ cursor: "pointer" }}
+            >
+              <IconButton sx={{ p: 0.5, }}>
                 {menuOpen ? (
                   <Close sx={{ color: COLORS.PRIMARY_BLUE }} />
                 ) : (
@@ -59,12 +64,13 @@ const Navbar = () => {
               </IconButton>
               <Typography
                 sx={{
+                  mt: 0.6,
                   color: COLORS.PRIMARY_GREEN,
                   textTransform: "uppercase",
                   fontFamily: adelle.style.fontFamily,
                   fontSize: 18,
                   fontWeight: 400,
-                  lineHeight: "32px",
+                  lineHeight: 1,
                 }}
               >
                 {menuOpen ? "CLOSE" : "MENU"}

@@ -83,13 +83,13 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       sectionTitle: "About Slatermatsil",
       heading: "Fluent in technology. Proven in law.",
       description:
-        "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital. ",
+        "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital.",
       ctaButton: {
         text: "More About",
-        link: "/about",
+        link: "/about-us",
       },
       experience: {
-        years: "18",
+        years: "25",
         title: "Years of",
         subTitle: "Pro Experiences",
       },
@@ -101,7 +101,9 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         subTitle: "respected.",
       },
       description:
-        "Slater Matsil understands what it takes to create groundbreaking inventions and we know how to protect your company’s capital.",
+        "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital.",
+      description2:
+        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations worth approximately $4.8 billion in research and development.",
       ctaButton: "Let's Talk Now",
       metricsData: METRICS_DATA,
     },
@@ -114,7 +116,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas1,
           title: "PATENT PROSECUTION",
           description:
-            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents contribute to IP portfolios that achieve your goals. ",
+            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals. ",
           serialNumber: "01",
           slug: "patent-prosecution",
         },
@@ -128,7 +130,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
         {
           img: serviceAreas3,
-          title: "PATENT LITIGATION",
+          title: "Patent Litigation/Litigation Support",
           description:
             "Global economics can complicate the patent journey, but we make the process clear and manageable for our clients.",
           serialNumber: "03",
@@ -138,7 +140,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas4,
           title: "PATENT LICENSING",
           description:
-            "We partner with technology leaders to design and implement licensing strategies tailored to their goals. Let us unlock new value from your existing innovations to create long‑term revenue and supporting future inventions.",
+            "We partner with technology leaders to design and implement licensing strategies tailored to their goals. Let us unlock new value from your existing innovations to create long‑term revenue and support future inventions.",
           serialNumber: "04",
           slug: "patent-licensing",
         },
@@ -152,7 +154,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
         {
           img: serviceAreas6,
-          title: "TRUSTED ADVICE  COUNSEL",
+          title: "TRUSTED ADVICE AND COUNSEL",
           description:
             'Slater Matsil is proud to be known as a "strategic partner," helping our clients reach their intellectual property goals all around the world.',
           serialNumber: "06",
@@ -211,9 +213,9 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           },
         ],
         ctaButton: {
-          text: "Meet Our Team",
-          href: "/firm-professionals",
-        },
+        text: "OUR CLIENTS",
+        href: "/who-we-serve",
+      },
         endline: "“Transforming your vision into reality.”",
         bgImage: whoWeServeRightSectionHeroImage.src,
       },
@@ -293,7 +295,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       sectionTitle: "About Slatermatsil",
       heading: "The innovations that set you apart.",
       description:
-        "Slater Matsil understands what it takes to create groundbreaking inventions and we know how to protect your company’s capital",
+        "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital.",
       img: aboutHero,
     },
     drivingInnovationEverywhere: {
@@ -319,8 +321,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     },
     innovationInsights: {
       heading: "Where Insight Meets Innovation In Every Patent Strategy.",
-      description:
-        "We're engineers focused on making things work, attorneys driven to defend innovation, and—above all— proven professionals. Our firsthand experience spans diverse industries, allowing us to deliver quality, accuracy, and a meticulous level of detail to our work.",
+      description: "",
     },
     AWARDSPROPS: {
       img: globe,
@@ -874,7 +875,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     quote: {
       quote:
         "Slater Matsil understands our technology very well and we give our most important cases to the firm. We trust them and trust the legal opinions they provide.",
-      author: "Chief IP Counsel, Large Corporate Technology Leade",
+      author: "Chief IP Counsel, Large Corporate Technology Leader",
     },
   },
   insightsPage: {
@@ -1051,8 +1052,8 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     form_section: {
       heading1: "Send Us a",
       heading2: "Message",
-      description:
-        "Ready to protect your intellectual property? Fill out the form below, and our experts will get back to you within 24 hours.",
+        description:
+          "Ready to protect your intellectual property? Fill out the form below, and our experts will be in touch to assist you.",
     },
     contact_card_props: {
       heading: "Find Us Here",
