@@ -13,7 +13,7 @@ import { usePageData } from "@/store/usePageData";
 import Link from "next/link";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+//about section
 const AboutSection = () => {
   const { details } = usePageData();
 
