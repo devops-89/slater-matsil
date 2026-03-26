@@ -69,6 +69,7 @@ const WhyWorkWithus = () => {
             fontWeight: 400,
             lineHeight: "36px",
             mt: 3,
+            textAlign: "justify",
           }}
         >
           {data?.shortDescription}
