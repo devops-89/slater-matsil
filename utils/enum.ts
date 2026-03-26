@@ -38,11 +38,14 @@ export enum CAREER_OPEN_ROLES_TAB_DATA {
 }
 
 export enum PRACTICE_GROUP_TAB_DATA {
-  CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING = "Circuits, Systems, & Signal Processing",
-  NOVEL_MATERIALS_DEVICES_AND_APPLIED_PHYSICS = "Novel Materials, Devices, & Applied Physics",
-  LITIGATION_GROUP = "Litigation Group",
-  ASIA_PACIFIC_GROUP = "Asia Pacific Group",
-  COMPUTER_SYSTEMS_AND_SOFTWARE = "COMPUTER SYSTEMS & SOFTWARE",
+  CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING = "Circuits, Systems and Signal Processing Group",
+  NOVEL_MATERIALS_DEVICES_AND_APPLIED_PHYSICS = "Novel Materials, Devices, and Applied Physics Practice Group",
+  ARTIFICIAL_INTELLIGENCE = "Artificial Intelligence Practice Group",
+  COMMUNICATIONS_AND_NETWORK_TECHNOLOGIES = "Communications and Network Technologies Practice Group",
+  CHEMISTRY_AND_MATERIALS_SCIENCE = "Chemistry and Materials Science Practice Group",
+  LITIGATION_GROUP = "Litigation Practice Group",
+  ASIA_PACIFIC_GROUP = "Asia Pacific Practice Group",
+  COMPUTER_SYSTEMS_AND_SOFTWARE = "Computer Systems and Software Practice Group",
 }
 
 export enum WHO_WE_SERVE_PAGE_TAB_DATA {

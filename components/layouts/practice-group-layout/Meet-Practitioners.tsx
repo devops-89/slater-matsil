@@ -12,7 +12,6 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-
 const MeetPractitioners = ({ data }: { data: any }) => {
   const { details } = usePageData();
   return (
@@ -28,6 +27,7 @@ const MeetPractitioners = ({ data }: { data: any }) => {
             lineHeight: { lg: "55px", xs: "24px" },
             ml: 1,
             position: "relative",
+            display: "inline-block",
             zIndex: 1,
             "&::after": {
               content: '""',
@@ -40,7 +40,6 @@ const MeetPractitioners = ({ data }: { data: any }) => {
               opacity: 0.4,
               zIndex: -1,
               transform: "rotate(-1deg)",
-              width: { lg: 350, xs: 250 },
               borderRadius: 2,
             },
           }}
@@ -99,7 +98,6 @@ const MeetPractitioners = ({ data }: { data: any }) => {
                                 fontFamily: tradeGothic.style.fontFamily,
                                 fontWeight: 500,
                                 lineHeight: { lg: "40px", xs: "20px" },
-                                textTransform: "capitalize",
                                 color: COLORS.PRIMARY_BLUE,
                               },
                             },
@@ -109,7 +107,6 @@ const MeetPractitioners = ({ data }: { data: any }) => {
                                 fontFamily: tradeGothic.style.fontFamily,
                                 fontWeight: 500,
                                 lineHeight: { lg: "30px", xs: "20px" },
-                                textTransform: "capitalize",
                                 color: COLORS.TEXT_PRIMARY_4,
                               },
                             },
@@ -127,5 +124,4 @@ const MeetPractitioners = ({ data }: { data: any }) => {
     </Box>
   );
 };
-
 export default MeetPractitioners;

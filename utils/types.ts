@@ -353,6 +353,7 @@ interface PRACTICE_GROUPS_HEROSECTION_PROPS {
 
 interface PRACTICE_GROUPS_SECTION_PROPS {
   tabData: {
+    groupNumber?: string;
     title: PRACTICE_GROUP_TAB_DATA;
     description1: string;
     description2?: string;

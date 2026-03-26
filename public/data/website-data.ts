@@ -520,25 +520,26 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     practiceGroup_section: {
       tabData: [
         {
+          groupNumber: "Group 1",
           title: PRACTICE_GROUP_TAB_DATA.CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING,
           description1:
             "Our Circuits, Systems and Signal Processing Group brings decades of engineering design and research experience to the practice. Our clients appreciate and value the enhancement this experience brings when dealing with highly complex systems and circuits.",
           description2:
-            "Representative technologies that are handled by the Circuits, Systems, and Signal Processing Group include Semiconductor Circuits (analog and mixed signal integrated circuits, application specific integrated circuits (ASICS), radio frequency integrated circuits, memory circuits, and digital signal processing); Radio Frequency Systems (radar systems, cellular communication systems, and millimeter-wave systems); Power Systems (switched-mode power supplies, inverters, motors, high voltage switches, motor systems, and lighting systems); and Control Systems (automotive and flight control systems).",
+            "Representative technologies that are handled by the Circuits, Systems, and Signal Processing Group include Semiconductor Circuits (analog and mixed signal integrated circuits, application specific integrated circuits (ASICS), data converters, radio frequency integrated circuits, memory circuits, and digital signal processing); Radio Frequency Systems (radar systems, cellular communication systems, and millimeter-wave systems); Power Systems (switched-mode power supplies, inverters, motors, high voltage switches, motor systems, and lighting systems); and Control Systems (automotive and flight control systems).",
           data: [
             {
               primary:
-                "Benjamin E. Nise, J.D., B.S.E.E. , Group Leader, Partner & Patent Attorney -",
+                "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney -",
               secondary:
-                "15 Years of design Experience in analog, RF, & Mixed Signal Integrated Circuits for the telecommunications, semiconductor, & medical device industries.",
+                "15 years of design experience in analog, RF, and mixed signal integrated circuits for the telecommunications, semiconductor, and medical device industries.",
             },
             {
-              primary: "Peter j. meza, j.d. , m.s.e.e., Patent attorney - ",
+              primary: "Peter J. Meza, J.D., M.S.E.E., Patent Attorney - ",
               secondary:
                 "12 years of design experience in analog circuit design.",
             },
             {
-              primary: "payam Rashidi, M.S.E.E., Patent Attorney -",
+              primary: "Payam Rashidi, M.S.E.E., Patent Attorney -",
               secondary:
                 "12 years of design experience in research and development in the field of RF systems for the defense industry.",
             },
@@ -550,92 +551,265 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           ],
         },
         {
+          groupNumber: "Group 2",
           title:
             PRACTICE_GROUP_TAB_DATA.NOVEL_MATERIALS_DEVICES_AND_APPLIED_PHYSICS,
           description1:
-            "Our Novel Materials, Devices, and Applied Physics Practice Group is a team of forward-thinking domain specialists, many with Ph.D.’s, who have both industry and legal expertise. In addition to the hundreds of patents they have obtained for our clients in related fields, many of our group members are inventors in their own right, with 181 patents issued to them collectively.",
+            "Our Novel Materials, Devices, and Applied Physics Practice Group is a team of forward-thinking domain specialists, many with Ph.D.’s, who have both industry and legal expertise. In addition to the hundreds of patents they have obtained for our clients in related fields, many of our group members are inventors in their own right, with 150+ patents issued to them collectively.",
           description2:
             "Representative technologies that fall under the Novel Materials, Device and Applied Physics group include photonics such as lasers, solid state lighting, and displays; semiconductor devices including devices for flexible electronics, organic semiconductors, photonic, photovoltaic, and quantum devices, and spintronics based devices; devices for digital and quantum communications and computing; imaging devices; 3-D printing; sensors including quantum sensors; other nanotechnology; and bioscience including medical imaging.",
           data: [
             {
-              primary:
-                "Srini Chakravarthi, J.D., Ph.D., Group Leader, Partner & Patent Attorney ",
+              primary: "Srini Chakravarthi, J.D., Ph.D., Partner & Patent Attorney -",
               secondary:
                 "10 years of experience in semiconductor process/device modeling, process integration, and device design. Inventor on 25 issued patents.",
             },
             {
-              primary: "Joseph E. McManis, Ph.D., Patent Agent ",
+              primary:
+                "Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney -",
               secondary:
-                "12 years of experience in semiconductor device design and fabrication and failure analysis.",
+                "More than a decade\u2019s experience in prosecuting semiconductor process technology.",
             },
             {
-              primary: "Marc McWilliams, Ph.D., Patent Attorney ",
-              secondary:
-                "6 years of experience in biosensing, nanoscale self-assembly, semiconductor processing, e-beam lithography, and computer simulation.",
-            },
-            {
-              primary: "Amitava Chatterjee, Ph.D., Technical Advisor ",
+              primary: "Amitava Chatterjee, Ph.D., Technical Advisor -",
               secondary:
                 "27 years of experience in process integration, device design, and electrostatic discharge protection. IEEE Fellow.",
             },
             {
-              primary: "Rameez Samnakay, Ph.D., Technical Advisor ",
-              secondary: "6.5 years of experience in process technology.",
+              primary: "Jonathan Insler, Ph.D., Patent Agent -",
+              secondary:
+                "12 years of research and academic experience in particle physics.",
+            },
+            {
+              primary: "Joseph E. McManis, Ph.D., Patent Agent -",
+              secondary:
+                "12 years of experience in semiconductor device design and fabrication and failure analysis.",
+            },
+            {
+              primary: "Marc McWilliams, Ph.D., Patent Attorney -",
+              secondary:
+                "6 years of experience in biosensing, nanoscale self-assembly, semiconductor processing, e-beam lithography, and computer simulation.",
+            },
+            {
+              primary: "Rameez Samnakay, Ph.D., Patent Agent -",
+              secondary:
+                "6.5 years of experience in developing semiconductor process technology.",
+            },
+            {
+              primary: "Paata Kakashvili, Ph.D., Physics, Patent Agent -",
+              secondary:
+                "Over a decade\u2019s research in condensed matter physics.",
+            },
+            {
+              primary: "Zachary Williams, Ph.D., Technical Advisor -",
+              secondary:
+                "6 years of experience in detection of neutrinos and associated hardware.",
             },
           ],
         },
         {
+          groupNumber: "Group 3",
+          title: PRACTICE_GROUP_TAB_DATA.ARTIFICIAL_INTELLIGENCE,
+          description1:
+            "Our Artificial Intelligence Practice Group is a team of technically trained professionals with hands-on experience in both industry and legal practice. Our group members bring advanced degrees in computer science, electrical engineering, and related fields, along with real-world experience developing and deploying the AI systems they now help protect.",
+          description2:
+            "Representative technologies that fall under the Artificial Intelligence group include machine learning and deep learning frameworks; neural network architectures including convolutional, recurrent, and transformer-based models; natural language processing and large language models; computer vision and image recognition; generative AI systems; AI-enabled hardware including inference accelerators and neuromorphic chips; autonomous systems and robotics; and AI applications in areas such as healthcare, financial technology, and industrial automation.",
+          data: [
+            {
+              primary: "Payam Rashidi, J.D., M.S.E.E., Patent Attorney -",
+              secondary:
+                "Conducted research on neural networks as statistical indicators in analyzing electromagnetic signals for healthcare applications.",
+            },
+            {
+              primary:
+                "Robert G. Graham, J.D., B.S.E.E., Partner & Patent Attorney -",
+              secondary:
+                "9 years of experience in software development, software project management, IOT and sensor network design.",
+            },
+            {
+              primary: "Zhu He, J.D., M.S.C.S, Patent Attorney -",
+              secondary: "10 years of experience in software engineering.",
+            },
+            {
+              primary:
+                "Jeffrey Robert Guinn, J.D., M.S.E.E., Patent Attorney -",
+              secondary:
+                "6 years experience in software, networking, and cloud computing",
+            },
+            {
+              primary: "Chuanming Wei, J.D., Ph.D. E.E., Patent Attorney -",
+              secondary:
+                "9 years experience designing embedded hardware for telecommunications",
+            },
+          ],
+        },
+        {
+          groupNumber: "Group 4",
+          title:
+            PRACTICE_GROUP_TAB_DATA.COMMUNICATIONS_AND_NETWORK_TECHNOLOGIES,
+          description1:
+            "Our Communications and Network Technologies Practice Group brings together attorneys and technical professionals with hands-on engineering and research experience in the telecommunications and networking industries. Our professionals hold advanced degrees in electrical engineering, computer engineering, and computer science, and many have worked directly in the telecommunications industry prior to entering legal practice. The group has particular depth in standard essential patents and complex multi-jurisdictional prosecution strategies for communications technologies.",
+          description2:
+            "Representative technologies that fall under the Communications and Network Technologies group include wireless communications systems and protocols; antenna and RF systems; optical and wireline communications; network infrastructure and architecture; data networking and routing; Internet of Things and embedded communications systems; signal processing for communications; VoIP and unified communications; augmented and virtual reality communications; smart grid and sensor networks; FinTech and cloud-based communications platforms; and semiconductor devices for communications applications.",
+          data: [
+            {
+              primary:
+                "Elizabeth D. Iglesias, J.D., B.S.E.E., Partner & Patent Attorney -",
+              secondary:
+                "6+ years of experience in patent litigation with current focus on telecommunications, enterprise networks, and standard essential patents.",
+            },
+            {
+              primary:
+                "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney -",
+              secondary:
+                "15 years of design experience in analog, RF, and mixed signal integrated circuits for the telecommunications, semiconductor, and medical device industries.",
+            },
+            {
+              primary: "Zhu He, J.D., M.S.C.S., Partner & Patent Attorney -",
+              secondary:
+                "10 years as a senior software engineer at a Fortune 500 company with expertise in telecommunications, data networking, VoIP, and network management.",
+            },
+            {
+              primary: "Chuanming Wei, Ph.D., J.D., Patent Attorney -",
+              secondary:
+                "9 years of prior research and industry experience in telecommunications, wireless sensor networks, and smart grids.",
+            },
+            {
+              primary: "Jonathan Ward, J.D., B.S.C.S., Patent Attorney -",
+              secondary:
+                "Over 20 years of legal experience covering telecommunications, IoT, cloud computing, signal processing, and embedded systems.",
+            },
+          ],
+        },
+        {
+          groupNumber: "Group 5",
+          title: PRACTICE_GROUP_TAB_DATA.COMPUTER_SYSTEMS_AND_SOFTWARE,
+          description1:
+            "Innovators in an evolving digital landscape need to work with IP professionals who have their finger on the pulse of advancements in areas such as computer hardware, storage systems, network communications, telecommunications, mobile applications, mobility technologies, cloud computing, and cybersecurity. Our professionals have real-world experience in emerging fields such as distributed parallel processing, software engineering, image processing, and cyber security solutions.",
+          description2:
+            "Representative technologies that fall under the Computer Systems and Software practice group include processor and microprocessor architecture including CPU, GPU, and APU design; memory systems and storage architectures; firmware and embedded software; operating systems and virtualization; cloud computing and distributed systems; mobile and web applications; cybersecurity and network security; computer graphics and image processing; augmented and virtual reality; Internet of Things platforms; and software-enabled applications in areas such as financial technology, autonomous systems, and enterprise infrastructure.",
+          data: [
+            {
+              primary: "Ira Matsil, J.D., M.S.E.E., Partner & Patent Attorney -",
+              secondary:
+                "Besides spending almost a decade inhouse in a large chip company and being actively involved in licensing of leading semiconductor technologies, Ira also spent a few years in engineering research and testing.",
+            },
+            {
+              primary: "John D. Koetter, J.D., B.S.C.E., Patent Attorney -",
+              secondary:
+                "7 years of experience in software and hardware engineering in the aerospace industry.",
+            },
+            {
+              primary: "Stephen A. Cortiaus, J.D., B.S.E.E., Patent Attorney -",
+              secondary:
+                "3 years of engineering experience in computer hardware, firmware, and software.",
+            },
+            {
+              primary:
+                "Jeffrey Robert Guinn, J.D., M.S.E.E., Patent Attorney -",
+              secondary:
+                "6 years experience in software, networking, and cloud computing",
+            },
+            {
+              primary:
+                "Roger C. Knapp, J.D., M.B.A., B.S.C.S., Partner & Patent Attorney -",
+              secondary:
+                "15 years of engineering experience and technical management in the telecommunication industry.",
+            },
+          ],
+        },
+        {
+          groupNumber: "Group 6",
+          title: PRACTICE_GROUP_TAB_DATA.CHEMISTRY_AND_MATERIALS_SCIENCE,
+          description1:
+            "As industries from energy, specialty chemicals, and consumer products to advanced materials and medical devices push the boundaries of chemical innovation, IP protection demands professionals with deep scientific fluency across the chemical disciplines. Our professionals bring firsthand research and industry experience spanning electrochemistry and catalysis, organometallic chemistry, computational and theoretical chemistry, polymer science, analytical method development, and materials characterization.",
+          description2:
+            "Representative technologies that fall under the Chemistry and Materials Science practice group include chemical formulations for photolithography, oil and gas, and consumer products; design and manufacturing of quantum computers including qubit materials and cryogenic systems; battery and energy storage materials and devices; instrumentation and analytical testing methods; and coatings and surface treatments.",
+          data: [
+            {
+              primary:
+                "Srini Chakravarthi, J.D., Ph.D., Partner & Patent Attorney \u2013",
+              secondary:
+                "over a decade of academic and industrial research experience spanning nanotechnology, materials science, and advanced semiconductor technologies.",
+            },
+            {
+              primary: "Hsin-Ya Kuo, Ph.D., Chemistry, Patent Agent \u2013",
+              secondary: "11 years research experience as an organic chemist",
+            },
+            {
+              primary: "Fantai Kong, Ph.D., M.S.E., Technical Advisor \u2013",
+              secondary: "12 years research experience in energy storage",
+            },
+            {
+              primary:
+                "Shervin Fatehi, Ph.D., Chemistry, Technical Advisor \u2013",
+              secondary:
+                "20 years with broad research and academic experience in physical, theoretical, and computational chemistry.",
+            },
+            {
+              primary: "Soonshin D. Kwon, Ph.D., M.S.E., Technical Advisor \u2013",
+              secondary:
+                "15 years of research and development experience in semiconductor process technology.",
+            },
+          ],
+        },
+        {
+          groupNumber: "Group 7",
           title: PRACTICE_GROUP_TAB_DATA.LITIGATION_GROUP,
           description1:
             "Intellectual Property Right assertions are a multi-billion dollar industry in the U.S. and even greater world-wide. Our Litigation Group members are frequently brought into litigation matters to offer the strategic support that our backgrounds as technologists provide. We pride ourselves on our ability to bridge the oftentimes different perspectives of and languages used by lawyers and courts, on the one hand, and inventors and clients, on the other hand.",
           description2:
-            "Our Litigation Group typically works in tandem with lead litigation counsel to provide strategic support, including: asserting or defending against post-grant challenges (e.g., IPR’s); claim construction development, including Markman briefing and hearings; expert witnesses discovery, including report drafting and depositions; infringement analysis for both patent assertions and defensive analysis; and developing defenses, such as prior art searching, and invalidity and non-infringement contentions. We have supported many of the nation’s preeminent patent litigation law firms and frequently are brought in time and again for additional matters.",
+            "Our Litigation Group typically works in tandem with lead litigation counsel to provide strategic support, including: asserting or defending against post-grant challenges (e.g., IPR\u2019s); claim construction development, including Markman briefing and hearings; expert witnesses discovery, including report drafting and depositions; infringement analysis for both patent assertions and defensive analysis; and developing defenses, such as prior art searching, and invalidity and non-infringement contentions. We have supported many of the nation\u2019s preeminent patent litigation law firms and frequently are brought in time and again for additional matters.",
           data: [
             {
               primary:
-                "Steven H. Slater, J.D., B.S.E.E., Group Leader, Partner & Patent Attorney",
+                "Steven H. Slater, J.D., B.S.E.E., Group Leader, Partner & Patent Attorney -",
               secondary:
                 "25 years of experience representing clients in District Court, the International Trade Commission (ITC), and before the Patent Trial and Appeal Board (PTAB).",
             },
             {
               primary:
-                "Michael Kucher, J.D., L.L.M., M.S. Physics, Partner & Patent Attorney",
+                "Michael Kucher, J.D., L.L.M., M.S. Physics, Partner & Patent Attorney -",
               secondary:
-                "Licensed to practice law in both the U.S. and Europe, with over ten years of experience managing patent assertions in both an in-house and an outside counsel capacity.",
+                "licensed to practice law in both the U.S. and Europe, with over ten years of experience managing patent assertions in both an in-house and an outside counsel capacity.",
             },
             {
-              primary: "Brian A. Carlson, J.D., M.S.E.E., Patent Attorney",
+              primary: "Brian A. Carlson, J.D., M.S.E.E., Patent Attorney -",
               secondary:
-                "Experience in litigation support including expert witness discovery and developing non-infringement and invalidity defenses in District Court and before the Patent Trial and Appeal Board (PTAB).",
+                "experience in litigation support including expert witness discovery and developing non-infringement and invalidity defenses in District Court and before the Patent Trial and Appeal Board (PTAB).",
             },
             {
-              primary: "Robert G. Graham, J.D., B.S.E.E., Patent Attorney",
+              primary:
+                "Robert G. Graham, J.D., B.S.E.E., Partner & Patent Attorney -",
               secondary:
-                "Experience in representing numerous patent owners in District Court litigation, as well as general counseling on litigation matters.",
+                "experience in representing numerous patent owners in District Court litigation, as well as general counseling on litigation matters.",
             },
             {
-              primary: "Vijay D. Desai, J.D., B.S.Ch.E., Patent Attorney",
+              primary: "Vijay D. Desai, J.D., B.S.Ch.E., Patent Attorney -",
               secondary:
-                "Experience in mass tort litigation as well as multi-party intellectual property litigation.",
+                "experience in mass tort litigation as well as multi-party intellectual property litigation.",
             },
             {
-              primary: "John D. Koetter, J.D., B.S.C.E., Patent Attorney",
+              primary:
+                "John D. Koetter, J.D., B.S.C.E., Partner & Patent Attorney -",
               secondary:
-                "Experience in District Court litigation and post-grant challenges before the Patent Trial and Appeal Board (PTAB).",
+                "experience in District Court litigation and post-grant challenges before the Patent Trial and Appeal Board (PTAB).",
             },
             {
-              primary: "Lizabeth Vice, J.D., B.S.E.E., Patent Attorney",
+              primary:
+                "Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney -",
               secondary:
-                "Experience in District Court litigation and post-grant challenges before the Patent Trial and Appeal Board (PTAB).",
+                "experience in District Court litigation and post-grant challenges before the Patent Trial and Appeal Board (PTAB).",
             },
             {
-              primary: "Chad Terrell, J.D., B.S.C.E., Patent Attorney",
+              primary: "Chad Terrell, J.D., B.S.C.E., Patent Attorney -",
               secondary:
-                "Experience in District Court litigation and post-grant challenges before the Patent and Appeal Board (PTAB).",
+                "experience in District Court litigation and post-grant challenges before the Patent and Appeal Board (PTAB).",
             },
           ],
         },
         {
+          groupNumber: "Group 8",
           title: PRACTICE_GROUP_TAB_DATA.ASIA_PACIFIC_GROUP,
           description1:
             "While not a separate practice area, per se, we recognize that the field of intellectual property rights is rapidly moving and increasingly important for clients in the Asia Pacific region, particularly China and Taiwan. Understanding the cultural and business needs of our clients can, at times, be as important as thoroughly understanding their technologies.",
@@ -643,26 +817,27 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "Our Asia Pacific Group was formed to assist both newly formed and established Asian companies navigate the unfamiliar and sometimes-treacherous waters of U.S. intellectual property law and practices. Having lawyers and other patent professionals who literally speak their language and understand their culture greatly assists our clients in becoming familiar and comfortable with doing business in the U.S., and with working in their own home countries with U.S. businesses.",
           data: [
             {
-              isHeader: true,
               primary: "OUR PRACTITIONERS WHO ARE FLUENT IN MANDARIN INCLUDE:",
+              isHeader: true,
             },
             {
-              primary: "冒揚 Lizabeth Vice, J.D., B.S.E.E., Patent Attorney",
+              primary: "\u5192\u63da Lizabeth Vice, J.D., B.S.E.E., Patent Attorney",
             },
             {
-              primary: "何著 Zhu He, J.D., M.S.C.S., Patent Attorney",
+              primary: "\u4f55\u8457 Zhu He, J.D., M.S.C.S., Patent Attorney",
             },
             {
               primary:
-                "張若劍 Ruojian Zhang, M.S.E.E., Distinguished Patent Agent",
+                "\u5f35\u82e5\u524d Ruojian Zhang, M.S.E.E., Distinguished Patent Agent",
             },
             {
-              primary: '張豫民 Yumin "Jeff" Zhang, Ph.D. (E.E.), Patent Agent',
+              primary:
+                "\u5f35\u8c6b\u6c11 Yumin \"Jeff\" Zhang, Ph.D. (E.E.), Patent Agent",
             },
             {
-              isHeader: true,
               primary:
                 "OUR PRACTITIONERS WHO ARE FLUENT IN OTHER ASIAN LANGUAGES INCLUDE:",
+              isHeader: true,
             },
             {
               primary:
@@ -678,61 +853,32 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
               secondary: "Hindi and Bangla",
             },
             {
-              primary: "Rameez Samnakay, Ph.D., Technical Advisor -",
+              primary: "Rameez Samnakay, Ph.D., Patent Agent -",
               secondary: "Hindi, Kiswahili and Urdu",
             },
-          ],
-        },
-        {
-          title: PRACTICE_GROUP_TAB_DATA.COMPUTER_SYSTEMS_AND_SOFTWARE,
-          description1:
-            "Innovators in an evolving digital landscape need to work with IP professionals who have their finger on the pulse of advancements in areas such as computer hardware, storage systems, network communications, telecommunications, mobile applications, mobility technologies, cloud computing, and cybersecurity. Our professionals have real-world experience in emerging fields such as distributed parallel processing, software engineering, image processing, and cyber security solutions.",
-
-          data: [
             {
-              primary:
-                "Roger C. Knapp, J.D., M.B.A., B.S.C.S., Group Leader, Partner & Patent Attorney",
-              secondary:
-                "15 years of engineering experience and technical management in the telecommunication industry.",
-            },
-            {
-              primary: "Stephen A. Cortiaus, J.D., B.S.E.E., Patent Attorney",
-              secondary:
-                "3 years of engineering experience in computer hardware, firmware, and software.",
-            },
-            {
-              primary: "Robert G. Graham, J.D., B.S.E.E., Patent Attorney",
-              secondary:
-                "9 years of experience in software development, software project management, IOT and sensor network design.",
-            },
-            {
-              primary: "Zhu He, J.D., M.S.C.S, Patent Attorney",
-              secondary: "10 years of experience in software engineering.",
-            },
-            {
-              primary: "John D. Koetter, J.D., B.S.C.E., Patent Attorney",
-              secondary:
-                "7 years of experience in software and hardware engineering in the aerospace industry.",
+              primary: "Shervin Fatehi, Ph.D., Technical Advisor -",
+              secondary: "Farsi",
             },
           ],
         },
       ],
     },
     meetPractitioners: {
-      title: "Meet our practitioners",
+      title: "MEET OUR PRACTITIONERS",
       data: [
         {
           primary:
-            "Benjamin E. Nise, J.D., B.S.E.E. , Group Leader, Partner & Patent Attorney -",
+            "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney -",
           secondary:
-            "15 Years of design Experience in analog, RF, & Mixed Signal Integrated Circuits for the telecommunications, semiconductor, & medical device industries.",
+            "15 years of design experience in analog, RF, and mixed signal integrated circuits for the telecommunications, semiconductor, and medical device industries.",
         },
         {
-          primary: "Peter j. meza, j.d. , m.s.e.e., Patent attorney - ",
+          primary: "Peter J. Meza, J.D., M.S.E.E., Patent Attorney - ",
           secondary: "12 years of design experience in analog circuit design.",
         },
         {
-          primary: "payam Rashidi, M.S.E.E., Patent Attorney -",
+          primary: "Payam Rashidi, M.S.E.E., Patent Attorney -",
           secondary:
             "12 years of design experience in research and development in the field of RF systems for the defense industry.",
         },

@@ -81,16 +81,31 @@ const PracticeGroupSection = () => {
       </Container>
       <Box sx={{ backgroundColor: "#F8FCF5", p: 4, mt: { lg: 4, xs: 2 } }}>
         <Container maxWidth="lg">
-          <Grid container alignItems={"center"} spacing={4} sx={{ mt: 4 }}>
+          {data?.groupNumber && data?.title && (
+            <Typography
+              sx={{
+                fontSize: { lg: 32, xs: 24 },
+                fontFamily: tradeGothic.style.fontFamily,
+                color: COLORS.PRIMARY_BLUE,
+                fontWeight: 700,
+                mb: 2,
+                textDecoration: "underline",
+                textUnderlineOffset: "8px",
+                textDecorationColor: COLORS.PRIMARY_GREEN,
+              }}
+            >
+              {data.groupNumber}: {data.title}
+            </Typography>
+          )}
+          <Grid container alignItems={"flex-start"} spacing={4} sx={{ mt: 4 }}>
             <Grid size={{ lg: data?.description2 ? 6 : 12, xs: 12 }}>
               <Typography
                 sx={{
-                  fontSize: { lg: 24, xs: 18 },
+                  fontSize: { lg: 22, xs: 18 },
                   fontFamily: tradeGothic.style.fontFamily,
                   color: COLORS.PRIMARY_BLUE,
                   fontWeight: 700,
-                  lineHeight: { lg: "40px", xs: "28px" },
-                  textTransform: "capitalize",
+                  lineHeight: { lg: "38px", xs: "28px" },
                 }}
               >
                 {data?.description1}
@@ -104,8 +119,7 @@ const PracticeGroupSection = () => {
                     fontSize: { lg: 20, xs: 16 },
                     fontFamily: adelle.style.fontFamily,
                     fontWeight: 500,
-                    lineHeight: { lg: "30px", xs: "24px" },
-                    textTransform: "capitalize",
+                    lineHeight: { lg: "32px", xs: "24px" },
                     color: COLORS.TEXT_PRIMARY_4,
                     mt: 2,
                   }}
