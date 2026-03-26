@@ -8,7 +8,7 @@ import WorkList from "./components/Work-list";
 import { usePageData } from "@/store/usePageData";
 const WhyWorkWithus = () => {
   const { details } = usePageData();
-
+//add 
   const data = details?.careerPage?.career_work_with_us;
   return (
     <Box>
