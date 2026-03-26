@@ -58,6 +58,7 @@ const AboutSection = () => {
                   mb: 3,
                   fontSize: 20,
                   fontFamily: adelle.style.fontFamily,
+                  textAlign: "justify",
                 }}
               >
                 Your most valuable ideas deserve unmatched patent protection,and

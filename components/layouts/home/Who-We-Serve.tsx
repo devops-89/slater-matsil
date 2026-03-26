@@ -133,6 +133,7 @@ const Whoweserve = () => {
                   fontFamily: adelle.style.fontFamily,
                   color: COLORS.TEXT_PRIMARY,
                   fontWeight: 400,
+                  textAlign: "justify",
                 }}
               >
                 {details?.homepage?.who_we_serve?.rightSection?.description}

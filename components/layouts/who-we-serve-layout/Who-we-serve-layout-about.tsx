@@ -49,6 +49,7 @@ const WhoWeServeAbout = () => {
                   // textTransform: "capitalize",
                   color: COLORS.PRIMARY_BLUE,
                   mt: { lg: 2, xs: 2 },
+                  textAlign: "justify",
                 }}
               >
                 {

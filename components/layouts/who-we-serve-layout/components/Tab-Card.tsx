@@ -19,6 +19,7 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
                 lineHeight: { lg: "42px", xs: "25px" },
                 textTransform: "capitalize",
                 mt: 4,
+                textAlign: "justify",
               }}
             >
               {bigDescription}
@@ -58,6 +59,7 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
                   // textTransform: "capitalize",
                   color: COLORS.TEXT_PRIMARY_4,
                   mt: { lg: 2, xs: 1 },
+                  textAlign: "justify",
                 }}
               >
                 {val.description}

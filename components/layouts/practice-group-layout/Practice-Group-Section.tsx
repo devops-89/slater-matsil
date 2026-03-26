@@ -106,6 +106,7 @@ const PracticeGroupSection = () => {
                   color: COLORS.PRIMARY_BLUE,
                   fontWeight: 700,
                   lineHeight: { lg: "38px", xs: "28px" },
+                  textAlign: "justify",
                 }}
               >
                 {data?.description1}
@@ -122,6 +123,7 @@ const PracticeGroupSection = () => {
                     lineHeight: { lg: "32px", xs: "24px" },
                     color: COLORS.TEXT_PRIMARY_4,
                     mt: 2,
+                    textAlign: "justify",
                   }}
                 >
                   {data?.description2}

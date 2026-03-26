@@ -108,6 +108,7 @@ const MeetPractitioners = ({ data }: { data: any }) => {
                                 fontWeight: 500,
                                 lineHeight: { lg: "30px", xs: "20px" },
                                 color: COLORS.TEXT_PRIMARY_4,
+                                textAlign: "justify",
                               },
                             },
                           }}
