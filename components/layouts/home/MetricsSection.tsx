@@ -67,7 +67,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
               </Typography>
             </Typography>
 
-            <Typography
+            {/* <Typography
               sx={{
                 color: COLORS.TEXT_PRIMARY,
                 fontSize: { lg: 20, xs: 15 },
@@ -92,7 +92,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
               }}
             >
               {details?.homepage?.our_metrics?.description2}
-            </Typography>
+            </Typography> */}
             <Link href="/contact-us">
               <Button
                 endIcon={<MailOutlineIcon />}

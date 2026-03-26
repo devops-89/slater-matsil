@@ -60,9 +60,27 @@ const AboutSection = () => {
                   fontFamily: adelle.style.fontFamily,
                 }}
               >
-                {details?.homepage?.aboutSection?.description}
+                Your most valuable ideas deserve unmatched patent protection,and
+                that’s what Slater Matsil delivers.
               </Typography>
-              <Link href={details?.homepage?.aboutSection?.ctaButton?.link || "/about-us"}>
+              <Typography
+                sx={{
+                  color: COLORS.TEXT_PRIMARY,
+                  mb: 3,
+                  fontSize: 20,
+                  fontFamily: adelle.style.fontFamily,
+                }}
+              >
+                Our clients trust us with patent protection for breakthrough
+                innovations worth approximately $4.8 billion in research and
+                development.
+              </Typography>
+              <Link
+                href={
+                  details?.homepage?.aboutSection?.ctaButton?.link ||
+                  "/about-us"
+                }
+              >
                 <Button
                   variant="outlined"
                   sx={{
@@ -144,7 +162,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.title}
+                      years of
                     </Typography>
                     <Typography
                       sx={{
@@ -152,7 +170,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.subTitle}
+                      serving clients
                     </Typography>
                   </Box>
                 </Box>
