@@ -82,7 +82,9 @@ const QuickLinksDetails = () => {
   }>({ prev: null, next: null });
 
   useEffect(() => {
-    const currentIndex = SERVICES_DETAILS.findIndex((item) => item.slug === slug);
+    const currentIndex = SERVICES_DETAILS.findIndex(
+      (item) => item.slug === slug,
+    );
     if (currentIndex !== -1) {
       setData(SERVICES_DETAILS[currentIndex]);
 
@@ -219,6 +221,7 @@ const QuickLinksDetails = () => {
                       fontWeight: 700,
                       "&:hover": { color: COLORS.PRIMARY_GREEN },
                       transition: "color 0.3s ease",
+                      textTransform: "uppercase",
                     }}
                   >
                     {navigation.prev.title}
@@ -255,6 +258,7 @@ const QuickLinksDetails = () => {
                       fontWeight: 700,
                       "&:hover": { color: COLORS.PRIMARY_GREEN },
                       transition: "color 0.3s ease",
+                      textTransform: "uppercase",
                     }}
                   >
                     {navigation.next.title}
