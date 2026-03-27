@@ -149,6 +149,10 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
         href: "/about-us",
       },
       {
+        text: "Leadership",
+        href: "/leadership",
+      },
+      {
         text: "Professionals",
         href: "/firm-professionals",
       },
@@ -157,9 +161,10 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
         href: "/services",
       },
       {
-        text: "Blogs",
-        href: "/blogs",
+        text: "Practice Groups",
+        href: "/practice-groups",
       },
+
       {
         text: "Careers",
         href: "/careers",
@@ -167,6 +172,10 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
       {
         text: "Insights",
         href: "/insights",
+      },
+      {
+        text: "Blogs",
+        href: "/blogs",
       },
       {
         text: "Contact",
@@ -209,33 +218,12 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
         text: "Trusted Advice and Counsel",
         href: "/services/trusted-advice-counsel",
       },
+      {
+        text: "Trademarks",
+        href: "/services/trademarks",
+      },
     ],
   },
-  // {
-  //   HEADING: "Trust & Credibility",
-  //   DATA: [
-  //     {
-  //       text: "Patent Experts",
-  //       href: "/patent-experts",
-  //     },
-  //     {
-  //       text: "IP Network",
-  //       href: "/ip-network",
-  //     },
-  //     {
-  //       text: "Success Proof",
-  //       href: "/success-proof",
-  //     },
-  //     {
-  //       text: "Worldwide Reach",
-  //       href: "/worldwide-reach",
-  //     },
-  //     {
-  //       text: "Who we serve",
-  //       href: "/who-we-serve",
-  //     },
-  //   ],
-  // },
 ];
 
 export const HEADER_DATA: FOOTER_LIST_DATA[] = [
@@ -251,6 +239,10 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
         href: "/about-us",
       },
       {
+        text: "Leadership",
+        href: "/leadership",
+      },
+      {
         text: "Professionals",
         href: "/firm-professionals",
       },
@@ -259,9 +251,10 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
         href: "/services",
       },
       {
-        text: "Blogs",
-        href: "/blogs",
+        text: "Practice Groups",
+        href: "/practice-groups",
       },
+
       {
         text: "Careers",
         href: "/careers",
@@ -269,6 +262,10 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       {
         text: "Insights",
         href: "/insights",
+      },
+      {
+        text: "Blogs",
+        href: "/blogs",
       },
       {
         text: "Contact",
@@ -311,6 +308,10 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
         text: "Trusted Advice and Counsel",
         href: "/services/trusted-advice-counsel",
       },
+      {
+        text: "Trademarks",
+        href: "/services/trademarks",
+      },
     ],
   },
   {
@@ -334,6 +335,27 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       },
     ],
   },
+  // {
+  //   HEADING: "Who We Serve",
+  //   DATA: [
+  //     {
+  //       text: "Large Corporations",
+  //       href: "/who-we-serve?tab=0",
+  //     },
+  //     {
+  //       text: "Small Companies/Start-Ups",
+  //       href: "/who-we-serve?tab=1",
+  //     },
+  //     {
+  //       text: "U.S. Law Firms",
+  //       href: "/who-we-serve?tab=2",
+  //     },
+  //     {
+  //       text: "International Law Firms",
+  //       href: "/who-we-serve?tab=3",
+  //     },
+  //   ],
+  // },
 ];
 
 export const METRICS_DATA: METRICSPROPS[] = [
