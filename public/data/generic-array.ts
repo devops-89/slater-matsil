@@ -150,7 +150,7 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Leadership",
-        href: "/leadership",
+        href: "/firm-leadership",
       },
       {
         text: "Professionals",
@@ -240,7 +240,7 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Leadership",
-        href: "/leadership",
+        href: "/firm-leadership",
       },
       {
         text: "Professionals",
