@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 import { Box, Grid, Typography, Button, Container } from "@mui/material";
-import AboutImage from "@/public/images/home/about-us.jpg";
+import AboutImage from "@/public/images/home/about-us.png";
 import Signature from "@/public/images/home/signature.png";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { adelle, tradeGothic, inter } from "@/utils/fonts";

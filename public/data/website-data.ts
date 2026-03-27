@@ -42,7 +42,7 @@ import {
   default as lightLogo,
 } from "@/public/images/home/slater-matsil-logo-light.png";
 import smallLogo from "@/public/images/home/slater-matsil-white.png";
-import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.jpg";
+import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
 import serviceHeroSectionImage from "@/services/hero-section.png";
 import unparalleledimage from "@/services/unparalled-legal-services.png";

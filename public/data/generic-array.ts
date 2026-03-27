@@ -10,8 +10,8 @@ import {
 } from "@/utils/types";
 import aboutCareer from "@/about/career-about.jpg";
 
-import connectWithSlatermatsil from "@/about/contact-about.jpg";
-import practiceGroups from "@/about/practice-group.jpg";
+import connectWithSlatermatsil from "@/about/contact-about.png";
+import practiceGroups from "@/about/practise-group.png";
 import {
   COLORS,
   INSIGHTS_TAB_DATA,
