@@ -52,6 +52,7 @@ const ServiceAreaCard = ({
           fontWeight: 700,
           my: 2,
           transition: "color 0.3s ease-in-out",
+          textTransform: "uppercase",
         }}
       >
         {title}
