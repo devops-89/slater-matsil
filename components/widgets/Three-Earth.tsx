@@ -7,7 +7,6 @@ import * as THREE from "three";
 import { Box } from "@mui/material";
 
 const EarthModel = () => {
-  // Use the verified PBR-converted model
   const { scene } = useGLTF("/images/home/earth/earth_ultra_pbr.glb");
   const earthRef = useRef<THREE.Group>(null);
 
