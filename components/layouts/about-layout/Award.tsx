@@ -6,18 +6,16 @@ import { usePageData } from "@/store/usePageData";
 import globe from "@/about/globe.png";
 import { tradeGothic } from "@/utils/fonts";
 import { COLORS } from "@/utils/enum";
+import ThreeEarth from "@/components/widgets/Three-Earth";
+
 const Award = () => {
   const { details } = usePageData();
   return (
     <Box sx={{ pb: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
-        <Grid container spacing={7}>
+        <Grid container spacing={7} alignItems="center">
           <Grid size={{ lg: 6, xs: 12 }}>
-            <Image
-              src={details?.aboutPage?.AWARDSPROPS?.img || globe}
-              alt=""
-              style={{ width: "100%", height: "auto" }}
-            />
+            <ThreeEarth height={{ lg: "500px", xs: "300px" }} />
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
             <Typography

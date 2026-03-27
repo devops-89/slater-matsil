@@ -51,77 +51,10 @@ const Footer = () => {
           justifyContent="space-between"
         >
           {details?.homepage?.footerData?.footer_links.map((val, i) => (
-            <Grid size={{ md: 2.5, sm: 6, xs: 12 }} key={i}>
+            <Grid size={{ md: 4.5, sm: 6, xs: 12 }} key={i}>
               <FooterList DATA={val.DATA} HEADING={val.HEADING} />
             </Grid>
           ))}
-          <Grid size={{ md: 3, sm: 6, xs: 12 }}>
-            <Typography
-              sx={{
-                color: COLORS.WHITE,
-                fontSize: 18,
-                fontFamily: tradeGothic.style.fontFamily,
-                fontWeight: 700,
-                lineHeight: "26px",
-                mb: 2,
-              }}
-            >
-              Insights & Updates
-            </Typography>
-            <Typography
-              sx={{
-                color: COLORS.FOOTER_TEXT_COLOR,
-                fontSize: 14,
-                fontFamily: adelle.style.fontFamily,
-                fontWeight: 400,
-                lineHeight: "24px",
-                opacity: 0.8,
-                mb: 3,
-              }}
-            >
-              Stay updated with industry insights and professional
-              opportunities.
-            </Typography>
-
-            <TextField
-              sx={{
-                ...TEXTFIELD_STYLES,
-                backgroundColor: COLORS.WHITE,
-                borderRadius: 1,
-                "& .MuiOutlinedInput-root": {
-                  paddingRight: 1,
-                },
-              }}
-              fullWidth
-              placeholder="Email Address"
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <Button
-                        sx={{
-                          py: 1,
-                          px: 3,
-                          borderRadius: "50px",
-                          backgroundColor: COLORS.PRIMARY_BLUE,
-                          color: COLORS.WHITE,
-                          fontFamily: adelle.style.fontFamily,
-                          fontWeight: 600,
-                          fontSize: 12,
-                          textTransform: "none",
-                          "&:hover": {
-                            backgroundColor: COLORS.PRIMARY_GREEN,
-                          },
-                        }}
-                      >
-                        Subscribe
-                      </Button>
-                    </InputAdornment>
-                  ),
-                },
-              }}
-            />
-          </Grid>
           <Grid size={{ md: 3, sm: 6, xs: 12 }}>
             <Typography
               sx={{

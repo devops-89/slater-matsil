@@ -17,7 +17,7 @@ import heroImage from "@/public/images/home/banner.png";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
-import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
+ import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 
 const HeroSection = () => {
   const { details } = usePageData();
@@ -109,6 +109,7 @@ const HeroSection = () => {
               type="video/mp4"
             />
           </Box>
+
           {/* Dark overlay for text readability */}
           <Box
             sx={{
@@ -129,6 +130,7 @@ const HeroSection = () => {
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 textAlign: "center",
+                textShadow: "0px 4px 10px rgba(0,0,0,0.5)",
               }}
             >
               {details?.homepage?.heroSection?.heading}
@@ -144,6 +146,7 @@ const HeroSection = () => {
                 fontWeight: 300,
                 lineHeight: "32px",
                 textAlign: "center",
+                textShadow: "0px 2px 5px rgba(0,0,0,0.5)",
               }}
             >
               {details?.homepage?.heroSection?.subHeading}
