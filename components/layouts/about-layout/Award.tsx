@@ -1,12 +1,16 @@
+"use client";
+
 import { Box, Container, Grid, Typography } from "@mui/material";
 import React from "react";
 import Image from "next/image";
 import { usePageData } from "@/store/usePageData";
 
-import globe from "@/about/globe.png";
 import { tradeGothic } from "@/utils/fonts";
 import { COLORS } from "@/utils/enum";
-import ThreeEarth from "@/components/widgets/Three-Earth";
+import { clientLocations } from "@/public/data/client-locations";
+import dynamic from "next/dynamic";
+
+const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
 const Award = () => {
   const { details } = usePageData();
@@ -14,9 +18,34 @@ const Award = () => {
     <Box sx={{ pb: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
         <Grid container spacing={7} alignItems="center">
-          <Grid size={{ lg: 6, xs: 12 }}>
-            <ThreeEarth height={{ lg: "500px", xs: "300px" }} />
+          <Grid
+            size={{ lg: 6, xs: 12 }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              minHeight: "550px",
+            }}
+          >
+            <Globe
+              globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+              bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+              pointsData={clientLocations}
+              pointLat={(d: any) => d.lat}
+              pointLng={(d: any) => d.lng}
+              pointColor={() => "#4facfe"}
+              pointAltitude={0.06}
+              pointRadius={0.4}
+              pointsMerge={false}
+              pointLabel="name"
+              showAtmosphere={false}
+              width={550}
+              height={550}
+              backgroundColor="rgba(0,0,0,0)"
+            />
+
           </Grid>
+
           <Grid size={{ lg: 6, xs: 12 }}>
             <Typography
               sx={{
