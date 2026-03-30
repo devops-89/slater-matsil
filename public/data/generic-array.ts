@@ -372,7 +372,7 @@ export const METRICS_DATA: METRICSPROPS[] = [
     count: "200+",
   },
   {
-    title: "NO. OF PATENT PROFESSIONALS WITH ADV. TECHNICAL DEGREES",
+    title: "Patent Professionals with Advanced Technical Degrees",
     count: "50%",
   },
 ];
@@ -1656,7 +1656,7 @@ export const SERVICES_DETAILS = [
       },
       {
         description:
-          "Our clients need well-supported and thoughtful answers. They expect comprehensive advice. They demand direct and unvarnished counsel. We deliver. If we know the answer, we'll tell you. If we don't know the answer, we'll find out. If you don't like our answer, we'll discuss it with you and either defend it or identify another solution. Like many of our clients, we are businessmen, technologists, entrepreneurs, and managers. We understand the support you need. Your goals. Our experience. Mutual success.",
+          "Our clients need well-supported and thoughtful answers. They expect comprehensive advice. They demand direct and unvarnished counsel. We deliver. If we know the answer, we'll tell you. If we don't know the answer, we'll find out. If you don't like our answer, we'll discuss it with you and either defend it or identify another solution. Like many of our clients, we are business professionals, technologists, entrepreneurs, and managers. We understand the support you need. Your goals. Our experience. Mutual success.",
       },
       {
         description:

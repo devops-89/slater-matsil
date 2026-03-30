@@ -61,7 +61,7 @@ const AboutSection = () => {
                   textAlign: "justify",
                 }}
               >
-                Your most valuable ideas deserve unmatched patent protection,and
+                Your most valuable ideas deserve unmatched patent protection, and
                 that’s what Slater Matsil delivers.
               </Typography>
               <Typography

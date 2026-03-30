@@ -209,21 +209,27 @@ const Footer = () => {
               </Stack>
               <Stack direction="row" spacing={2}>
                 {details?.homepage?.footerData?.social_links.map((val, i) => (
-                  <IconButton
+                  <a
                     key={i}
-                    sx={{
-                      color: COLORS.WHITE,
-                      border: `1px solid ${COLORS.FOOTER_TEXT_COLOR}`,
-                      opacity: 0.8,
-                      "&:hover": {
-                        backgroundColor: COLORS.WHITE,
-                        color: COLORS.PRIMARY_BLUE,
-                        opacity: 1,
-                      },
-                    }}
+                    href={val.href || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <val.icon fontSize="small" />
-                  </IconButton>
+                    <IconButton
+                      sx={{
+                        color: COLORS.WHITE,
+                        border: `1px solid ${COLORS.FOOTER_TEXT_COLOR}`,
+                        opacity: 0.8,
+                        "&:hover": {
+                          backgroundColor: COLORS.WHITE,
+                          color: COLORS.PRIMARY_BLUE,
+                          opacity: 1,
+                        },
+                      }}
+                    >
+                      <val.icon fontSize="small" />
+                    </IconButton>
+                  </a>
                 ))}
               </Stack>
             </Stack>
