@@ -10,7 +10,7 @@ import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import Link from "next/link";
-
+//
 const ProfessionalDetailsLayout = () => {
   const { setProfessionalDetailsData, clearProfessionalDetailsData } =
     useProfessionalDetailsData();
