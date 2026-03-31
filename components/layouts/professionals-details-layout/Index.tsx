@@ -17,14 +17,22 @@ const ProfessionalDetailsLayout = () => {
   const { slug } = useParams();
   const router = useRouter();
 
-  const currentIndex = PROFESSIONAL_DETAILS_DATA.findIndex(
+  const sortedProfessionals = React.useMemo(() => {
+    return [...PROFESSIONAL_DETAILS_DATA].sort((a, b) =>
+      a.professionals_Details_HeroSection.name.localeCompare(
+        b.professionals_Details_HeroSection.name,
+      ),
+    );
+  }, []);
+
+  const currentIndex = sortedProfessionals.findIndex(
     (item) => item.slug === slug,
   );
   const prevProfessional =
-    currentIndex > 0 ? PROFESSIONAL_DETAILS_DATA[currentIndex - 1] : null;
+    currentIndex > 0 ? sortedProfessionals[currentIndex - 1] : null;
   const nextProfessional =
-    currentIndex < PROFESSIONAL_DETAILS_DATA.length - 1
-      ? PROFESSIONAL_DETAILS_DATA[currentIndex + 1]
+    currentIndex < sortedProfessionals.length - 1
+      ? sortedProfessionals[currentIndex + 1]
       : null;
 
   useEffect(() => {
