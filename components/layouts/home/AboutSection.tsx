@@ -21,7 +21,7 @@ const AboutSection = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-right">
+          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-up">
             <HeadingStar title="About Slatermatsil" />
 
             <Typography
@@ -50,7 +50,7 @@ const AboutSection = () => {
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-left">
+          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-down">
             <Box>
               <Typography
                 sx={{

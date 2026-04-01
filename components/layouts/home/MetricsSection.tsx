@@ -19,7 +19,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
     <Box>
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-right">
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up">
             <HeadingStar
               title={details?.homepage?.our_metrics?.sectionTitle || ""}
             />
@@ -114,7 +114,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
             </Link>
           </Grid>
 
-          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-left">
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down">
             <Grid container spacing={8}>
               {details?.homepage?.our_metrics?.metricsData.map((val, i) => (
                 <Grid size={{ lg: 6, xs: 6 }} key={i}>

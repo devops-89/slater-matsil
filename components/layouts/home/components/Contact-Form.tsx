@@ -55,10 +55,26 @@ const ContactForm = () => {
       terms: false,
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log("Form values:", values);
-      alert("Appointment requested successfully!");
-      resetForm();
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      try {
+        const response = await fetch("/api/appointment", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+
+        if (response.ok) {
+          alert("Appointment requested successfully!");
+          resetForm();
+        } else {
+          alert("Failed to request appointment. Please try again.");
+        }
+      } catch (error) {
+        console.error("Submission error:", error);
+        alert("Something went wrong. Please check your connection.");
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 

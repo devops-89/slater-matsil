@@ -20,7 +20,7 @@ const InsightsSection = () => {
         <Grid
           size={{ lg: 5, xs: 12 }}
           sx={{ px: { lg: 10, xs: 2 } }}
-          data-aos="fade-right"
+          data-aos="fade-up"
         >
           <HeadingStar
             title={details?.homepage?.insights_section?.sectionTitle || ""}
@@ -70,7 +70,7 @@ const InsightsSection = () => {
             </IconButton>
           </Stack>
         </Grid>
-        <Grid size={{ lg: 7, xs: 12 }} data-aos="fade-left">
+        <Grid size={{ lg: 7, xs: 12 }} data-aos="fade-down">
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;

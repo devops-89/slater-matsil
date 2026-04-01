@@ -21,7 +21,7 @@ const Whoweserve = () => {
   return (
     <Box>
       <Grid container>
-        <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-right">
+        <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up">
           <Box
             sx={{
               backgroundImage: `url(${details?.homepage?.who_we_serve?.leftSection?.heroImage})`,
@@ -94,7 +94,7 @@ const Whoweserve = () => {
             </Box>
           )}
         </Grid>
-        <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-left">
+        <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down">
           <Box
             sx={{
               backgroundColor: "#ECF2F3",

@@ -10,10 +10,10 @@ const ContactSection = () => {
     <Box sx={{ py: 10 }}>
       <Container maxWidth="lg">
         <Grid container spacing={10}>
-          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-right">
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up">
             <ContactForm />
           </Grid>
-          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-left">
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down">
             {/* <Typography
               sx={{
                 color: COLORS.LABEL_COLOR,

@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { usePageData } from "@/store/usePageData";
 
@@ -14,6 +14,8 @@ const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
 const Award = () => {
   const { details } = usePageData();
+  const globeRef = useRef<any>(null);
+
   return (
     <Box sx={{ pb: { lg: 10, xs: 5 } }}>
       <Container maxWidth="lg">
@@ -28,14 +30,22 @@ const Award = () => {
             }}
           >
             <Globe
+              ref={globeRef}
+              onGlobeReady={() => {
+                if (globeRef.current) {
+                  globeRef.current.controls().autoRotate = true;
+                  globeRef.current.controls().autoRotateSpeed = 0.5;
+                }
+              }}
               globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
               bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
               pointsData={clientLocations}
               pointLat={(d: any) => d.lat}
               pointLng={(d: any) => d.lng}
               pointColor={() => "#4facfe"}
-              pointAltitude={0.06}
-              pointRadius={0.4}
+              pointAltitude={0.01}
+              pointRadius={0.5}
+              pointResolution={32}
               pointsMerge={false}
               pointLabel="name"
               showAtmosphere={false}
@@ -43,7 +53,6 @@ const Award = () => {
               height={550}
               backgroundColor="rgba(0,0,0,0)"
             />
-
           </Grid>
 
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -89,7 +98,7 @@ const Award = () => {
               {details?.aboutPage?.AWARDSPROPS?.heading2}
             </Typography>
             <Grid container>
-              {details?.aboutPage?.AWARDSPROPS?.awards_img.map((val, i) => (
+              {details?.aboutPage?.AWARDSPROPS?.awards_img?.map((val, i) => (
                 <Grid size={{ lg: 4, xs: 6 }} key={i}>
                   <Image
                     src={val.img}

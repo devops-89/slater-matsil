@@ -37,10 +37,26 @@ const Form = () => {
       message: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log("Form values:", values);
-      alert("Message sent successfully!");
-      resetForm();
+    onSubmit: async (values, { resetForm, setSubmitting }) => {
+      try {
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(values),
+        });
+
+        if (response.ok) {
+          alert("Message sent successfully!");
+          resetForm();
+        } else {
+          alert("Failed to send message. Please try again.");
+        }
+      } catch (error) {
+        console.error("Submission error:", error);
+        alert("Something went wrong. Please check your connection.");
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 

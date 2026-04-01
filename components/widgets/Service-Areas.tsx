@@ -43,7 +43,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
           justifyContent={"space-between"}
           spacing={{ lg: 0, xs: 2 }}
         >
-          <Box data-aos="fade-right">
+          <Box data-aos="fade-up">
             <HeadingStar
               title={details?.homepage?.service_area?.sectionTitle || ""}
             />
