@@ -1,5 +1,5 @@
 import star from "@/common/heading-star.png";
-import contactImage from "@/home/contact.png";
+import contactImage from "@/home/contact.jpeg";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
@@ -70,16 +70,15 @@ const ContactSection = () => {
                 }}
               /> */}
 
-              <Box
-                sx={{
-                  backgroundImage: `url(${contactImage.src})`,
-                  height: "400px",
+              <Image
+                src={contactImage}
+                alt=""
+                style={{
                   width: "100%",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center center",
+                  height: "auto",
                   borderRadius: "20px",
                 }}
-              ></Box>
+              />
             </Box>
           </Grid>
         </Grid>
