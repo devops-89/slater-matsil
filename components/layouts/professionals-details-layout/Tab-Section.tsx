@@ -34,6 +34,12 @@ const TabSection = () => {
     }
   };
 
+  // Filter out tabs with no data
+  const filteredTabs = PROFESSIONAL_DETAILS_TAB_DATA.filter((tab) => {
+    const tabData = getTabData(tab.title);
+    return Array.isArray(tabData) && tabData.length > 0;
+  });
+
   return (
     <Box sx={{ pb: 10 }}>
       <Container maxWidth="lg">
@@ -42,16 +48,11 @@ const TabSection = () => {
             <TabSwitching
               value={value}
               onChange={handleChange}
-              data={PROFESSIONAL_DETAILS_TAB_DATA.filter((tab) => {
-                if (tab.title === PROFESSIONAL_TABS_DATA.ASSOCIATIONS) {
-                  return !!data?.PROFESSIONAL_ASSOCIATIONS_DATA;
-                }
-                return true;
-              })}
+              data={filteredTabs}
             />
           </Grid>
         </Grid>
-        {PROFESSIONAL_DETAILS_TAB_DATA.map((val, i) => (
+        {filteredTabs.map((val, i) => (
           <CustomTabPanel index={i} value={value} key={i}>
             <ProfessionalBio data={getTabData(val.title)} />
           </CustomTabPanel>

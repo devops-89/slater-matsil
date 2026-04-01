@@ -56,7 +56,6 @@ import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 import whoweserveHero from "@/who-we-serve/hero-img.jpg";
 import { X } from "@mui/icons-material";
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
-import { FaFacebookF } from "react-icons/fa6";
 import {
   CAREER_WORK_LIST_DATA,
   CONTACT_US_CARD_DATA,
@@ -262,7 +261,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       social_links: [
         {
           icon: FaLinkedinIn,
-          href: "https://www.linkedin.com/company/slater-matsil-llp/",
+          href: "https://www.linkedin.com/company/slater-&-matsil-l-l-p-/",
         },
       ],
       privacy_pages: [
@@ -374,7 +373,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     },
     industriesWeServe: {
       heading1: "Industries",
-      heading2: "We Serve.",
+      heading2: "We Serve",
       description:
         "We collaborate with a wide range of industries to deliver innovative, reliable solutions.",
       section_data: INDUSTRIES_DATA,
@@ -1211,18 +1210,14 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       social_icons: [
         {
           Icon: FaLinkedinIn,
-          href: "https://www.linkedin.com/company/slater-matsil-llp/",
-        },
-        {
-          Icon: FaFacebookF,
-          href: "https://www.facebook.com/slatermatsil/?ref=hl",
+          href: "https://www.linkedin.com/company/slater-&-matsil-l-l-p-/",
         },
       ],
     },
     map_props: {
       title: "Visit Our Office",
       description:
-        "Our lovely offices are located in Dallas, Texas, where we would be happy to meet with you.",
+        "We would be happy to meet with you at our office located in Dallas, Texas.",
       locationLink:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3346.6477572155536!2d-96.8047705252068!3d32.98669387324265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x864c23cde07bf391%3A0x662b3a35d44e3638!2sSlater%20Matsil%2C%20LLP!5e0!3m2!1sen!2sin!4v1766042747322!5m2!1sen!2sin",
     },

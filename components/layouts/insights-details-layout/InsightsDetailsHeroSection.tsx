@@ -17,7 +17,7 @@ import {
   Phone as PhoneIcon,
   Share as ShareIcon,
 } from "@mui/icons-material";
-import { FaFacebookF, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 const InsightsDetailsHeroSection = () => {
   const { data } = useInsightDetails();
@@ -458,31 +458,7 @@ const InsightsDetailsHeroSection = () => {
                 >
                   <FaLinkedinIn style={{ fontSize: 14 }} />
                 </IconButton>
-                <IconButton
-                  size="small"
-                  sx={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: "50%",
-                    bgcolor: "rgba(114, 181, 43, 0.8)",
-                    color: "white",
-                    "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
-                  }}
-                  onClick={() =>
-                    window.open(
-                      "https://www.facebook.com/sharer/sharer.php?u=" +
-                        encodeURIComponent(
-                          typeof window !== "undefined"
-                            ? window.location.href
-                            : "",
-                        ),
-                      "_blank",
-                    )
-                  }
-                  aria-label="Share on Facebook"
-                >
-                  <FaFacebookF style={{ fontSize: 14 }} />
-                </IconButton>
+
                 <IconButton
                   size="small"
                   sx={{
