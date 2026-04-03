@@ -64,10 +64,10 @@ const ContactForm = () => {
         });
 
         if (response.ok) {
-          alert("Appointment requested successfully!");
+          // alert("Appointment requested successfully!");
           resetForm();
         } else {
-          alert("Failed to request appointment. Please try again.");
+          // alert("Failed to request appointment. Please try again.");
         }
       } catch (error) {
         console.error("Submission error:", error);
@@ -91,7 +91,7 @@ const ContactForm = () => {
         Let's Connect
       </Typography>
 
-      <Grid container sx={{ mt: 2 }} spacing={1.5}>
+      <Grid container sx={{ mt: 2 }} spacing={3}>
         <Grid size={6}>
           <TextField
             sx={{ ...TEXTFIELD_STYLES }}

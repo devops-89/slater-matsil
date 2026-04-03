@@ -14,11 +14,10 @@ export async function POST(req: Request) {
       console.error("Mailchimp API key or Audience ID missing.");
       return NextResponse.json(
         { error: "Configuration error" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
-    // 1. Add Appointment Request to Mailchimp Audience (as a tag or custom field)
     const mcResponse = await fetch(
       `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`,
       {
@@ -39,13 +38,15 @@ export async function POST(req: Request) {
           },
           tags: ["Appointment Request"],
         }),
-      }
+      },
     );
 
     const mcData = await mcResponse.json();
 
     if (!mcResponse.ok && mcData.title !== "Member Exists") {
-      throw new Error(mcData.detail || "Failed to add appointment to Mailchimp");
+      throw new Error(
+        mcData.detail || "Failed to add appointment to Mailchimp",
+      );
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
@@ -53,7 +54,7 @@ export async function POST(req: Request) {
     console.error("Error in appointment API:", error.message);
     return NextResponse.json(
       { error: "Failed to process appointment request" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
