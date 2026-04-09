@@ -268,7 +268,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "IAM Patent 1000 Ranked Firm",
       guide: "IAM Patent 1000 – 2022",
       yearsRanked: "Firm and individual rankings",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: baseSections("Slater Matsil Team"),
@@ -634,7 +633,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Leading IP Law Firm",
       guide: "Chambers USA Guide 2022",
       yearsRanked: "Multiple Years Ranked",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -670,7 +668,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Patexia Top Ranked",
       guide: "Patexia 2022 Intelligence Report",
       yearsRanked: "Ranked #2 and #7 Overall",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -706,7 +703,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Juristat #1 Ranking",
       guide: "Juristat Technology Center Rankings",
       yearsRanked: "Ranked First in 2021",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -742,7 +738,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Patexia #4 Ranking",
       guide: "Patexia 2021 Intelligence Report",
       yearsRanked: "Top 10 High-Tech Firm",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -814,7 +809,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Growth & Leadership",
       guide: "Partner Announcements",
       yearsRanked: "2016 - 2021 Appointments",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -850,7 +844,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Juristat Top Ranked",
       guide: "Juristat Growth Analysis",
       yearsRanked: "Ranked #1 Growth Firm",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -922,7 +915,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Patexia Top Ranked",
       guide: "Patexia 2020 Intelligence Report",
       yearsRanked: "Ranked #2 and #9 Overall",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -958,7 +950,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Juristat #4 Ranking",
       guide: "Juristat 2020 Top Patent Firms",
       yearsRanked: "Top 10 Performance",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -994,7 +985,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Juristat #6 Ranking",
       guide: "Juristat 2019 Top Patent Firms",
       yearsRanked: "Top 10 Performance",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -1030,7 +1020,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Patexia Overall #1",
       guide: "Patexia 2019 Intelligence Report",
       yearsRanked: "Ranked #1 and #10",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -1066,7 +1055,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Juristat #3 Ranking",
       guide: "Juristat 2018 Top 100",
       yearsRanked: "Nationwide Top Performance",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -1102,7 +1090,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Thought Leadership",
       guide: "IAM Yearbook 2018",
       yearsRanked: "Featured Article",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -1138,7 +1125,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Corporate Vision Winner",
       guide: "2016 Mid-Market Achievement Awards",
       yearsRanked: "Best in Patent Procurement",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -1174,7 +1160,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Ocean Tomo #1 Ranking",
       guide: "IAM/Ocean Tomo Quality Ratings",
       yearsRanked: "Ranked First in IT and Overall",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -1210,7 +1195,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Juristat #2 Ranking",
       guide: "Juristat 2017 Top 100",
       yearsRanked: "Nationwide Top Performance",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -1246,7 +1230,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Juristat High Growth",
       guide: "2016 Firm Growth Analysis",
       yearsRanked: "Ranked #2 Growth Rate",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -1282,7 +1265,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Ocean Tomo Top 10",
       guide: "2015 Patent Quality Ratings",
       yearsRanked: "Featured Nationwide Firm",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -1318,7 +1300,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Go-To Law Firm",
       guide: "In-House Law Departments Guide",
       yearsRanked: "Fortune 500 Trusted",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -1532,7 +1513,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Ocean Tomo Top 10",
       guide: "2014 Patent Quality Ratings",
       yearsRanked: "Featured Nationwide Firm",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -1969,7 +1949,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "CLE Presentation",
       guide: "Dallas Bar IP Section",
       yearsRanked: "July 24, 2025",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -2036,7 +2015,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Firm Ranking",
       guide: "Harrity Analytics 2025",
       yearsRanked: "15th Nationwide",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -2070,7 +2048,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Attorney Rankings",
       guide: "Patexia 2025",
       yearsRanked: "Best Performing Attorneys",
-      profileImage: roger,
     },
     contact: commonContact,
     contentSections: {
@@ -2104,7 +2081,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Attorney Rankings",
       guide: "Patexia 2025",
       yearsRanked: "#1 Best Performing in High-Tech",
-      profileImage: roger,
     },
     contact: commonContact,
     contentSections: {
@@ -2138,7 +2114,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Attorney Rankings",
       guide: "Patexia 2025",
       yearsRanked: "Top 100 Best Performing",
-      profileImage: ira,
     },
     contact: commonContact,
     contentSections: {
@@ -2172,7 +2147,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Firm Performance Ranking",
       guide: "Patexia Intelligence 2025",
       yearsRanked: "Best Performing Law Firm",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -2206,7 +2180,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Firm Recognition",
       guide: "IAM Patent 1000",
       yearsRanked: "Highly Recommended Prosecution Firm",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {
@@ -2240,7 +2213,6 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       band: "Firm Performance Ranking",
       guide: "Patexia Intelligence 2025",
       yearsRanked: "Best Performing Law Firm",
-      profileImage: steven,
     },
     contact: commonContact,
     contentSections: {

@@ -55,7 +55,7 @@ const Navbar = () => {
               onClick={handleMenuToggle}
               sx={{ cursor: "pointer" }}
             >
-              <IconButton sx={{ p: 0.5, }}>
+              <IconButton sx={{ p: 0.5 }}>
                 {menuOpen ? (
                   <Close sx={{ color: COLORS.PRIMARY_BLUE }} />
                 ) : (

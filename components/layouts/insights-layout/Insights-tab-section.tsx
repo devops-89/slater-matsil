@@ -8,33 +8,27 @@ import { COLORS, INSIGHTS_TAB_DATA } from "@/utils/enum";
 import QuickLinks from "./Quick-Links";
 
 const InsightsTabSection = () => {
-  const [value, setValue] = useState(0);
-  const { details } = usePageData();
-  const [insightsData, setInsightsData] = useState(
-    details?.insightsPage?.insightsData,
-  );
-  const [currentPage, setCurrentPage] = useState(1);
+  const { details, insightsTab, setInsightsTab, insightsPage, setInsightsPage } = usePageData();
+  
+  const value = insightsTab;
+  const currentPage = insightsPage;
   const itemsPerPage = 6;
 
-  useEffect(() => {
-    setInsightsData(details?.insightsPage?.insightsData);
-  }, [details]);
+  const insightsData = (() => {
+    const allData = details?.insightsPage?.insightsData;
+    if (!allData) return [];
+    
+    const currentTabTitle = details?.insightsPage?.tab_data?.[value]?.title;
+    if (!currentTabTitle || currentTabTitle === INSIGHTS_TAB_DATA.ALL) {
+      return allData;
+    }
+    
+    return allData.filter((item) => item.category === currentTabTitle);
+  })();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-    setCurrentPage(1); // Reset to first page on tab change
-    if (
-      details?.insightsPage?.tab_data?.[newValue]?.title ===
-      INSIGHTS_TAB_DATA.ALL
-    ) {
-      setInsightsData(details?.insightsPage?.insightsData);
-    } else {
-      const filteredData = details?.insightsPage?.insightsData?.filter(
-        (item) =>
-          item.category === details?.insightsPage?.tab_data?.[newValue]?.title,
-      );
-      setInsightsData(filteredData);
-    }
+    setInsightsTab(newValue);
+    setInsightsPage(1); // Reset to first page on tab change
   };
 
   const totalPages = Math.ceil((insightsData?.length || 0) / itemsPerPage);
@@ -43,7 +37,7 @@ const InsightsTabSection = () => {
   const currentItems = insightsData?.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+    setInsightsPage(pageNumber);
     window.scrollTo({ top: 400, behavior: "smooth" });
   };
 

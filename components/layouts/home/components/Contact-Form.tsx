@@ -38,7 +38,7 @@ const validationSchema = Yup.object({
     .required("Email is required"),
   service: Yup.object().nullable().required("Service is required"),
   date: Yup.mixed().nullable().required("Date is required"),
-  time: Yup.mixed().nullable().required("Time is required"),
+  // time: Yup.mixed().nullable().required("Time is required"),
   message: Yup.string().required("Message is required"),
   terms: Yup.boolean().oneOf([true], "You must agree to the terms"),
 });
@@ -50,7 +50,7 @@ const ContactForm = () => {
       email: "",
       service: null,
       date: null,
-      time: null,
+      // time: null,
       message: "",
       terms: false,
     },
@@ -197,7 +197,7 @@ const ContactForm = () => {
             }}
           />
         </Grid>
-        <Grid size={6}>
+        <Grid size={12}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DatePicker
               value={formik.values.date}
@@ -239,7 +239,7 @@ const ContactForm = () => {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid size={6}>
+        {/* <Grid size={6}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <TimePicker
               value={formik.values.time}
@@ -280,7 +280,7 @@ const ContactForm = () => {
               }}
             />
           </LocalizationProvider>
-        </Grid>
+        </Grid> */}
         <Grid size={12}>
           <TextField
             id="message"

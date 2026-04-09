@@ -17,7 +17,7 @@ import heroImage from "@/public/images/home/banner.png";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
- import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
+import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 
 const HeroSection = () => {
   const { details } = usePageData();
@@ -25,57 +25,6 @@ const HeroSection = () => {
 
   return (
     <>
-      {/* Fullscreen Video Modal */}
-      {/* <Modal
-        open={videoOpen}
-        onClose={() => setVideoOpen(false)}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{ backdrop: { timeout: 300 } }}
-      >
-        <Fade in={videoOpen}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: { xs: "95vw", md: "85vw", lg: "75vw" },
-              outline: "none",
-            }}
-          >
-            <IconButton
-              onClick={() => setVideoOpen(false)}
-              sx={{
-                position: "absolute",
-                top: -48,
-                right: 0,
-                color: "#fff",
-                zIndex: 10,
-              }}
-            >
-              <CloseIcon sx={{ fontSize: 32 }} />
-            </IconButton>
-
-            <Box
-              component="video"
-              controls
-              autoPlay
-              sx={{
-                width: "100%",
-                borderRadius: 2,
-                boxShadow: "0 25px 80px rgba(0, 0, 0, 0.9)",
-              }}
-            >
-              <source
-                src="https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video.mp4"
-                type="video/mp4"
-              />
-            </Box>
-          </Box>
-        </Fade>
-      </Modal> */}
-
       <Box>
         <Box
           sx={{

@@ -94,7 +94,7 @@ const PracticeGroupSection = () => {
                 textDecorationColor: COLORS.PRIMARY_GREEN,
               }}
             >
-              {data.groupNumber}: {data.title}
+              {data.title}
             </Typography>
           )}
           <Grid container alignItems={"flex-start"} spacing={4} sx={{ mt: 4 }}>

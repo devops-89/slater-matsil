@@ -981,12 +981,13 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
         ],
       },
     ],
-    PROFESSIONAL_ARTICLES_DATA: [
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
       {
         description:
           "Vijay is a member of the State Bar of Texas, the Dallas Bar Association, the Dallas Association of Young Lawyers, the Dallas Asian American Bar Association, and the South Asian Bar Association.",
       },
     ],
+    PROFESSIONAL_ARTICLES_DATA: [],
   },
   {
     slug: "barry-dove",

@@ -44,7 +44,7 @@ import {
 import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
-import serviceHeroSectionImage from "@/services/hero-section.png";
+import serviceHeroSectionImage from "@/services/practice_Areas_banner.png";
 import unparalleledimage from "@/services/unparalled-legal-services.png";
 import {
   CAREER_OPEN_ROLES_TAB_DATA,
@@ -196,7 +196,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       rightSection: {
         heading: "Who we serve",
         description:
-          "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world. ",
+          "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world.",
         section_data: [
           {
             label: "Large Corporations",
@@ -212,9 +212,9 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           },
         ],
         ctaButton: {
-        text: "OUR CLIENTS",
-        href: "/who-we-serve",
-      },
+          text: "OUR CLIENTS",
+          href: "/who-we-serve",
+        },
         endline: "“Transforming your vision into reality.”",
         bgImage: whoWeServeRightSectionHeroImage.src,
       },
@@ -222,7 +222,6 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     insights_section: {
       sectionTitle: "Insights",
       heading: "Recently Published Insights.",
-      // description: "Have Look at our Latest publication at slatermatsil.com",
       insights_data: [
         {
           heading:
@@ -459,7 +458,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             {
               title: "Technical Advisor/Patent Agent",
               description1:
-                "Slater Matsil, a firm based in Dallas concentrates in intellectual property law, seeks patent attorneys with strong legal and technical skills to join its growing practice.  ",
+                "Slater Matsil, a firm based in Dallas concentrates in intellectual property law, seeks Patent Agents And Technical Advisors With Strong Technical Skills to join its growing practice.  ",
               description2:
                 "The position involves patent preparation and prosecution services for some of the world’s leading technology innovators.",
               description3:
@@ -528,22 +527,22 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           data: [
             {
               primary:
-                "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney -",
+                "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney",
               secondary:
                 "15 years of design experience in analog, RF, and mixed signal integrated circuits for the telecommunications, semiconductor, and medical device industries.",
             },
             {
-              primary: "Peter J. Meza, J.D., M.S.E.E., Patent Attorney - ",
+              primary: "Peter J. Meza, J.D., M.S.E.E., Patent Attorney ",
               secondary:
                 "12 years of design experience in analog circuit design.",
             },
             {
-              primary: "Payam Rashidi, M.S.E.E., Patent Attorney -",
+              primary: "Payam Rashidi, M.S.E.E., Patent Attorney",
               secondary:
                 "12 years of design experience in research and development in the field of RF systems for the defense industry.",
             },
             {
-              primary: 'Yumin "Jeff" Zhang, Ph.D., Patent Agent - ',
+              primary: 'Yumin "Jeff" Zhang, Ph.D., Patent Agent ',
               secondary:
                 "14 years of research and development in digital signal processing for the telecommunications, consumer electronics, semiconductor, and oil and gas industries.",
             },
@@ -559,48 +558,49 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "Representative technologies that fall under the Novel Materials, Device and Applied Physics group include photonics such as lasers, solid state lighting, and displays; semiconductor devices including devices for flexible electronics, organic semiconductors, photonic, photovoltaic, and quantum devices, and spintronics based devices; devices for digital and quantum communications and computing; imaging devices; 3-D printing; sensors including quantum sensors; other nanotechnology; and bioscience including medical imaging.",
           data: [
             {
-              primary: "Srini Chakravarthi, J.D., Ph.D., Partner & Patent Attorney -",
+              primary:
+                "Srini Chakravarthi, J.D., Ph.D., Partner & Patent Attorney",
               secondary:
                 "10 years of experience in semiconductor process/device modeling, process integration, and device design. Inventor on 25 issued patents.",
             },
             {
               primary:
-                "Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney -",
+                "Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney",
               secondary:
                 "More than a decade\u2019s experience in prosecuting semiconductor process technology.",
             },
             {
-              primary: "Amitava Chatterjee, Ph.D., Technical Advisor -",
+              primary: "Amitava Chatterjee, Ph.D., Technical Advisor",
               secondary:
                 "27 years of experience in process integration, device design, and electrostatic discharge protection. IEEE Fellow.",
             },
             {
-              primary: "Jonathan Insler, Ph.D., Patent Agent -",
+              primary: "Jonathan Insler, Ph.D., Patent Agent",
               secondary:
                 "12 years of research and academic experience in particle physics.",
             },
             {
-              primary: "Joseph E. McManis, Ph.D., Patent Agent -",
+              primary: "Joseph E. McManis, Ph.D., Patent Agent",
               secondary:
                 "12 years of experience in semiconductor device design and fabrication and failure analysis.",
             },
             {
-              primary: "Marc McWilliams, Ph.D., Patent Attorney -",
+              primary: "Marc McWilliams, Ph.D., Patent Attorney",
               secondary:
                 "6 years of experience in biosensing, nanoscale self-assembly, semiconductor processing, e-beam lithography, and computer simulation.",
             },
             {
-              primary: "Rameez Samnakay, Ph.D., Patent Agent -",
+              primary: "Rameez Samnakay, Ph.D., Patent Agent",
               secondary:
                 "6.5 years of experience in developing semiconductor process technology.",
             },
             {
-              primary: "Paata Kakashvili, Ph.D., Physics, Patent Agent -",
+              primary: "Paata Kakashvili, Ph.D., Physics, Patent Agent",
               secondary:
                 "Over a decade\u2019s research in condensed matter physics.",
             },
             {
-              primary: "Zachary Williams, Ph.D., Technical Advisor -",
+              primary: "Zachary Williams, Ph.D., Technical Advisor",
               secondary:
                 "6 years of experience in detection of neutrinos and associated hardware.",
             },
@@ -615,28 +615,27 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "Representative technologies that fall under the Artificial Intelligence group include machine learning and deep learning frameworks; neural network architectures including convolutional, recurrent, and transformer-based models; natural language processing and large language models; computer vision and image recognition; generative AI systems; AI-enabled hardware including inference accelerators and neuromorphic chips; autonomous systems and robotics; and AI applications in areas such as healthcare, financial technology, and industrial automation.",
           data: [
             {
-              primary: "Payam Rashidi, J.D., M.S.E.E., Patent Attorney -",
+              primary: "Payam Rashidi, J.D., M.S.E.E., Patent Attorney ",
               secondary:
                 "Conducted research on neural networks as statistical indicators in analyzing electromagnetic signals for healthcare applications.",
             },
             {
               primary:
-                "Robert G. Graham, J.D., B.S.E.E., Partner & Patent Attorney -",
+                "Robert G. Graham, J.D., B.S.E.E., Partner & Patent Attorney ",
               secondary:
                 "9 years of experience in software development, software project management, IOT and sensor network design.",
             },
             {
-              primary: "Zhu He, J.D., M.S.C.S, Patent Attorney -",
+              primary: "Zhu He, J.D., M.S.C.S, Partner & Patent Attorney ",
               secondary: "10 years of experience in software engineering.",
             },
             {
-              primary:
-                "Jeffrey Robert Guinn, J.D., M.S.E.E., Patent Attorney -",
+              primary: "Jeffrey Robert Guinn, J.D., M.S.E.E., Patent Attorney ",
               secondary:
                 "6 years experience in software, networking, and cloud computing",
             },
             {
-              primary: "Chuanming Wei, J.D., Ph.D. E.E., Patent Attorney -",
+              primary: "Chuanming Wei, J.D., Ph.D. E.E., Patent Attorney ",
               secondary:
                 "9 years experience designing embedded hardware for telecommunications",
             },
@@ -653,28 +652,28 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           data: [
             {
               primary:
-                "Elizabeth D. Iglesias, J.D., B.S.E.E., Partner & Patent Attorney -",
+                "Elizabeth D. Iglesias, J.D., B.S.E.E., Partner & Patent Attorney",
               secondary:
                 "6+ years of experience in patent litigation with current focus on telecommunications, enterprise networks, and standard essential patents.",
             },
             {
               primary:
-                "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney -",
+                "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney",
               secondary:
                 "15 years of design experience in analog, RF, and mixed signal integrated circuits for the telecommunications, semiconductor, and medical device industries.",
             },
             {
-              primary: "Zhu He, J.D., M.S.C.S., Partner & Patent Attorney -",
+              primary: "Zhu He, J.D., M.S.C.S., Partner & Patent Attorney",
               secondary:
                 "10 years as a senior software engineer at a Fortune 500 company with expertise in telecommunications, data networking, VoIP, and network management.",
             },
             {
-              primary: "Chuanming Wei, Ph.D., J.D., Patent Attorney -",
+              primary: "Chuanming Wei, Ph.D., J.D., Patent Attorney",
               secondary:
                 "9 years of prior research and industry experience in telecommunications, wireless sensor networks, and smart grids.",
             },
             {
-              primary: "Jonathan Ward, J.D., B.S.C.S., Patent Attorney -",
+              primary: "Jonathan Ward, J.D., B.S.C.S., Patent Attorney",
               secondary:
                 "Over 20 years of legal experience covering telecommunications, IoT, cloud computing, signal processing, and embedded systems.",
             },
@@ -689,29 +688,30 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "Representative technologies that fall under the Computer Systems and Software practice group include processor and microprocessor architecture including CPU, GPU, and APU design; memory systems and storage architectures; firmware and embedded software; operating systems and virtualization; cloud computing and distributed systems; mobile and web applications; cybersecurity and network security; computer graphics and image processing; augmented and virtual reality; Internet of Things platforms; and software-enabled applications in areas such as financial technology, autonomous systems, and enterprise infrastructure.",
           data: [
             {
-              primary: "Ira Matsil, J.D., M.S.E.E., Partner & Patent Attorney -",
+              primary: "Ira Matsil, J.D., M.S.E.E., Partner & Patent Attorney",
               secondary:
                 "Besides spending almost a decade inhouse in a large chip company and being actively involved in licensing of leading semiconductor technologies, Ira also spent a few years in engineering research and testing.",
             },
             {
-              primary: "John D. Koetter, J.D., B.S.C.E., Patent Attorney -",
+              primary:
+                "John D. Koetter, J.D., B.S.C.E., Partner & Patent Attorney",
               secondary:
                 "7 years of experience in software and hardware engineering in the aerospace industry.",
             },
             {
-              primary: "Stephen A. Cortiaus, J.D., B.S.E.E., Patent Attorney -",
+              primary:
+                "Stephen A. Cortiaus, J.D., B.S.E.E.,Partner & Patent Attorney",
               secondary:
                 "3 years of engineering experience in computer hardware, firmware, and software.",
             },
             {
-              primary:
-                "Jeffrey Robert Guinn, J.D., M.S.E.E., Patent Attorney -",
+              primary: "Jeffrey Robert Guinn, J.D., M.S.E.E., Patent Attorney",
               secondary:
                 "6 years experience in software, networking, and cloud computing",
             },
             {
               primary:
-                "Roger C. Knapp, J.D., M.B.A., B.S.C.S., Partner & Patent Attorney -",
+                "Roger C. Knapp, J.D., M.B.A., B.S.C.S., Patent Attorney",
               secondary:
                 "15 years of engineering experience and technical management in the telecommunication industry.",
             },
@@ -727,26 +727,25 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           data: [
             {
               primary:
-                "Srini Chakravarthi, J.D., Ph.D., Partner & Patent Attorney \u2013",
+                "Srini Chakravarthi, J.D., Ph.D., Partner & Patent Attorney",
               secondary:
                 "over a decade of academic and industrial research experience spanning nanotechnology, materials science, and advanced semiconductor technologies.",
             },
             {
-              primary: "Hsin-Ya Kuo, Ph.D., Chemistry, Patent Agent \u2013",
+              primary: "Hsin-Ya Kuo, Ph.D., Chemistry, Patent Agent",
               secondary: "11 years research experience as an organic chemist",
             },
             {
-              primary: "Fantai Kong, Ph.D., M.S.E., Technical Advisor \u2013",
+              primary: "Fantai Kong, Ph.D., M.S.E., Technical Advisor",
               secondary: "12 years research experience in energy storage",
             },
             {
-              primary:
-                "Shervin Fatehi, Ph.D., Chemistry, Technical Advisor \u2013",
+              primary: "Shervin Fatehi, Ph.D., Chemistry, Technical Advisor",
               secondary:
                 "20 years with broad research and academic experience in physical, theoretical, and computational chemistry.",
             },
             {
-              primary: "Soonshin D. Kwon, Ph.D., M.S.E., Technical Advisor \u2013",
+              primary: "Soonshin D. Kwon, Ph.D., M.S.E., Technical Advisor",
               secondary:
                 "15 years of research and development experience in semiconductor process technology.",
             },
@@ -762,46 +761,46 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           data: [
             {
               primary:
-                "Steven H. Slater, J.D., B.S.E.E., Group Leader, Partner & Patent Attorney -",
+                "Steven H. Slater, J.D., B.S.E.E., Group Leader, Partner & Patent Attorney",
               secondary:
                 "25 years of experience representing clients in District Court, the International Trade Commission (ITC), and before the Patent Trial and Appeal Board (PTAB).",
             },
             {
               primary:
-                "Michael Kucher, J.D., L.L.M., M.S. Physics, Partner & Patent Attorney -",
+                "Michael Kucher, J.D., L.L.M., M.S. Physics, Partner & Patent Attorney",
               secondary:
                 "licensed to practice law in both the U.S. and Europe, with over ten years of experience managing patent assertions in both an in-house and an outside counsel capacity.",
             },
             {
-              primary: "Brian A. Carlson, J.D., M.S.E.E., Patent Attorney -",
+              primary: "Brian A. Carlson, J.D., M.S.E.E., Patent Attorney",
               secondary:
                 "experience in litigation support including expert witness discovery and developing non-infringement and invalidity defenses in District Court and before the Patent Trial and Appeal Board (PTAB).",
             },
             {
               primary:
-                "Robert G. Graham, J.D., B.S.E.E., Partner & Patent Attorney -",
+                "Robert G. Graham, J.D., B.S.E.E., Partner & Patent Attorney",
               secondary:
                 "experience in representing numerous patent owners in District Court litigation, as well as general counseling on litigation matters.",
             },
             {
-              primary: "Vijay D. Desai, J.D., B.S.Ch.E., Patent Attorney -",
+              primary: "Vijay D. Desai, J.D., B.S.Ch.E., Patent Attorney",
               secondary:
                 "experience in mass tort litigation as well as multi-party intellectual property litigation.",
             },
             {
               primary:
-                "John D. Koetter, J.D., B.S.C.E., Partner & Patent Attorney -",
+                "John D. Koetter, J.D., B.S.C.E., Partner & Patent Attorney",
               secondary:
                 "experience in District Court litigation and post-grant challenges before the Patent Trial and Appeal Board (PTAB).",
             },
             {
               primary:
-                "Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney -",
+                "Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney",
               secondary:
                 "experience in District Court litigation and post-grant challenges before the Patent Trial and Appeal Board (PTAB).",
             },
             {
-              primary: "Chad Terrell, J.D., B.S.C.E., Patent Attorney -",
+              primary: "Chad Terrell, J.D., B.S.C.E., Patent Attorney",
               secondary:
                 "experience in District Court litigation and post-grant challenges before the Patent and Appeal Board (PTAB).",
             },
@@ -820,7 +819,8 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
               isHeader: true,
             },
             {
-              primary: "\u5192\u63da Lizabeth Vice, J.D., B.S.E.E., Patent Attorney",
+              primary:
+                "\u5192\u63da Lizabeth Vice, J.D., B.S.E.E., Patent Attorney",
             },
             {
               primary: "\u4f55\u8457 Zhu He, J.D., M.S.C.S., Patent Attorney",
@@ -831,7 +831,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             },
             {
               primary:
-                "\u5f35\u8c6b\u6c11 Yumin \"Jeff\" Zhang, Ph.D. (E.E.), Patent Agent",
+                '\u5f35\u8c6b\u6c11 Yumin "Jeff" Zhang, Ph.D. (E.E.), Distinguished Patent Agent',
             },
             {
               primary:
@@ -840,23 +840,23 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             },
             {
               primary:
-                "Srini Chakravarthi, J.D., Ph.D. (Mat. Sc.), Partner & Patent Attorney -",
+                "Srini Chakravarthi, J.D., Ph.D. (Mat. Sc.), Partner & Patent Attorney",
               secondary: "Hindi and Tamil",
             },
             {
-              primary: "Payam Rashidi, M.S.E.E., Patent Attorney -",
+              primary: "Payam Rashidi, M.S.E.E., Patent Attorney",
               secondary: "Farsi",
             },
             {
-              primary: "Amitava Chatterjee, Ph.D. (E.E.), Technical Advisor -",
+              primary: "Amitava Chatterjee, Ph.D. (E.E.), Technical Advisor",
               secondary: "Hindi and Bangla",
             },
             {
-              primary: "Rameez Samnakay, Ph.D., Patent Agent -",
+              primary: "Rameez Samnakay, Ph.D., Patent Agent",
               secondary: "Hindi, Kiswahili and Urdu",
             },
             {
-              primary: "Shervin Fatehi, Ph.D., Technical Advisor -",
+              primary: "Shervin Fatehi, Ph.D., Technical Advisor",
               secondary: "Farsi",
             },
           ],
@@ -868,21 +868,21 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       data: [
         {
           primary:
-            "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney -",
+            "Benjamin E. Nise, J.D., B.S.E.E., Partner & Patent Attorney",
           secondary:
             "15 years of design experience in analog, RF, and mixed signal integrated circuits for the telecommunications, semiconductor, and medical device industries.",
         },
         {
-          primary: "Peter J. Meza, J.D., M.S.E.E., Patent Attorney - ",
+          primary: "Peter J. Meza, J.D., M.S.E.E., Patent Attorney",
           secondary: "12 years of design experience in analog circuit design.",
         },
         {
-          primary: "Payam Rashidi, M.S.E.E., Patent Attorney -",
+          primary: "Payam Rashidi, M.S.E.E., Patent Attorney",
           secondary:
             "12 years of design experience in research and development in the field of RF systems for the defense industry.",
         },
         {
-          primary: 'Yumin "Jeff" Zhang, Ph.D., Patent Agent - ',
+          primary: 'Yumin "Jeff" Zhang, Ph.D., Patent Agent',
           secondary:
             "14 years of research and development in digital signal processing for the telecommunications, consumer electronics, semiconductor, and oil and gas industries.",
         },
@@ -1197,8 +1197,8 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     form_section: {
       heading1: "Send Us a",
       heading2: "Message",
-        description:
-          "Ready to protect your intellectual property? Fill out the form below, and our experts will be in touch to assist you.",
+      description:
+        "Ready to protect your intellectual property? Fill out the form below, and our experts will be in touch to assist you.",
     },
     contact_card_props: {
       heading: "Find Us Here",

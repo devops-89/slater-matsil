@@ -85,8 +85,8 @@ const InsightsDetailsHeroSection = () => {
                   <Box
                     sx={{
                       position: "relative",
-                      width: { xs: 280, md: 400 },
-                      height: { xs: 280, md: 400 },
+                      width: { xs: 500, md: 400 },
+                      height: { xs: 500, md: 400 },
                       flexShrink: 0,
                       borderRadius: "50%",
                       overflow: "hidden",
@@ -101,7 +101,6 @@ const InsightsDetailsHeroSection = () => {
                       style={{
                         objectFit: "contain",
                         objectPosition: "center",
-                        padding: "10px", // Add slight padding so the subject doesn't touch the edges
                       }}
                       priority
                     />
