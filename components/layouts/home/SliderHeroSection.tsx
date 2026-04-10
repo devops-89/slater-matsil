@@ -15,21 +15,21 @@ const SliderHeroSection = () => {
   const banners = [
     {
       img: slider1.src,
-      title: " LOREM IPSUM IS A DUMMY TEXT",
+      title: "FLUENT IN TECHNOLOGY. PROVEN IN LAW.",
       description:
-        " lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text",
+        "Partnering with the world's leading innovators to protect their most valuable intellectual property and secure their competitive advantage globally.",
     },
     {
       img: slider2.src,
-      title: " LOREM IPSUM IS A DUMMY TEXT",
+      title: "UNMATCHED PATENT PROTECTION",
       description:
-        " lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text",
+        "Securing patents for breakthrough innovations arising from billions of dollars in research and development investment across diverse technical fields.",
     },
     {
       img: slider3.src,
-      title: " LOREM IPSUM IS A DUMMY TEXT",
+      title: "GLOBAL REACH & PRECISION",
       description:
-        " lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text lorem ipsum text is a dummy text",
+        "Delivering strategic intellectual property solutions and successful patent prosecutions for top-tier clients in over 150 countries.",
     },
   ];
 
@@ -46,7 +46,7 @@ const SliderHeroSection = () => {
         }}
       >
         {banners.map((val, i) => (
-          <SwiperSlide key={i} data-aos="fade-up">
+          <SwiperSlide key={i}>
             <Box
               sx={{
                 backgroundImage: `url(${val.img})`,
