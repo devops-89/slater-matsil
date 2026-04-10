@@ -67,6 +67,7 @@ import {
   SERVICE_FRAMEWORK_CARD_DATA,
   STRENGTH_CARD_DATA,
 } from "./generic-array";
+import whyWork from "@/career/why-work.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -314,7 +315,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       heading1: "Redefining Patent Success with",
       heading2: "Precision and Global Reach.",
       description:
-        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations worth approximately $4.8 billion in research and development.",
+        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations arising from approximately $4.8 billion in research and development investment.",
       metrics_data: METRICS_DATA,
     },
     innovationInsights: {
@@ -424,7 +425,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       secondTitle: "With Us",
       shortDescription: "Where Your Talent Meets Purpose",
       work_list_data: CAREER_WORK_LIST_DATA,
-      section_img: caree_work_with_us_section_img,
+      section_img: whyWork,
     },
     career_open_roles: {
       title: "Open Roles / Opportunities",

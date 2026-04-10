@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
-import heroImage from "@/services/details/hero-image.jpg";
+import heroImage from "@/services/details/practice-details-hero.jpg";
 import { Container } from "@mui/material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
@@ -25,14 +25,15 @@ const ServicesDetailsHeroSection = () => {
         >
           <Box
             sx={{
-              background:
-                "linear-gradient(270deg, rgba(0, 0, 0, 0.00) 0.02%, #000 82.38%)",
+              // background:
+              //   "linear-gradient(270deg, rgba(0, 0, 0, 0.00) 0.02%, #000 82.38%)",
               height: "100%",
-              width: "55%",
+              width: "100%",
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-start",
               paddingLeft: "60px",
+              background: "rgba(0, 0, 0, 0.5)",
             }}
           >
             <Box sx={{ maxWidth: "500px" }}>

@@ -65,12 +65,14 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
               end={value}
               duration={2.5}
               prefix={prefix}
-              suffix={suffix}
               separator=","
             />
           ) : (
-            prefix + "0" + suffix
+            prefix + "0"
           )}
+          <Box component="sup" sx={{ fontSize: "0.6em", py: 1, px: 1 }}>
+            +
+          </Box>
         </Typography>
       </Stack>
     </Box>

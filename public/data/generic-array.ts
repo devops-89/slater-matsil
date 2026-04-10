@@ -361,19 +361,19 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
 export const METRICS_DATA: METRICSPROPS[] = [
   {
     title: "U.S. PATENTS ISSUED",
-    count: "25,000+",
+    count: "25,000",
   },
   {
     title: "COUNTRIES WE SERVE",
-    count: "150+",
+    count: "150",
   },
   {
     title: "PATENTS ISSUED TO FIRM PERSONNEL",
-    count: "200+",
+    count: "200",
   },
   {
-    title: "Patent Professionals with Advanced Technical Degrees",
-    count: "50%",
+    title: "Patent Professionals With Advanced Technical Degrees",
+    count: "50",
   },
 ];
 

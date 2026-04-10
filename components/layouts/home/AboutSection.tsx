@@ -61,8 +61,8 @@ const AboutSection = () => {
                   textAlign: "justify",
                 }}
               >
-                Your most valuable ideas deserve unmatched patent protection, and
-                that’s what Slater Matsil delivers.
+                Your most valuable ideas deserve unmatched patent protection,
+                and that’s what Slater Matsil delivers.
               </Typography>
               <Typography
                 sx={{
@@ -72,9 +72,8 @@ const AboutSection = () => {
                   fontFamily: adelle.style.fontFamily,
                 }}
               >
-                Our clients trust us with patent protection for breakthrough
-                innovations worth approximately $4.8 billion in research and
-                development.
+                Our clients trust us with protecting their innovations generated
+                from billions of dollars in research and development investment.
               </Typography>
               <Link
                 href={

@@ -35,6 +35,7 @@ const Award = () => {
                 if (globeRef.current) {
                   globeRef.current.controls().autoRotate = true;
                   globeRef.current.controls().autoRotateSpeed = 0.5;
+                  globeRef.current.pointOfView({ lat: 39, lng: -98, altitude: 2.5 });
                 }
               }}
               globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
