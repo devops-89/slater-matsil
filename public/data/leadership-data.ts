@@ -15,7 +15,7 @@ import yumin from "@/professionals/transparent/yumin.png";
 import neeta from "@/professionals/nita_thumb.png";
 import brian_mooney from "@/professionals/brian_thumb.png";
 import placeholder from "@/public/images/home/practice_areas/practice_areas1.svg";
-
+import julie from "@/public/images/professionals/rusell.png";
 export const LEADERSHIP_DATA = {
   founders: [
     {
@@ -32,6 +32,18 @@ export const LEADERSHIP_DATA = {
     },
   ],
   partners: [
+    {
+      img: steven_slater,
+      name: "Steven H. Slater",
+      designation: "ATTORNEY AT LAW",
+      // slug: "steven-slater",
+    },
+    {
+      img: ira,
+      name: "Ira S. Matsil",
+      designation: "ATTORNEY AT LAW",
+      // slug: "ira-matsil",
+    },
     {
       img: benjamin_nise,
       name: "Benjamin E. Nise",
@@ -115,7 +127,7 @@ export const LEADERSHIP_DATA = {
       email: "nstarnes@slatermatsil.com",
     },
     {
-      img: placeholder,
+      img: julie,
       name: "JULIE RUSSELL",
       designation: "Office Manager",
       email: "jrussell@slatermatsil.com",

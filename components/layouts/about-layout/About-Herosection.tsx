@@ -69,7 +69,7 @@ const AboutHerosection = () => {
               muted
               loop
               style={{ borderRadius: 10 }}
-              controls
+              // controls
             />
           </Grid>
         </Grid>

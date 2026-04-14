@@ -47,7 +47,7 @@ const FirmLeadership = () => {
 
       <Container maxWidth="lg">
         {/* Founders Section */}
-        <Box sx={{ mb: 8 }}>
+        {/* <Box sx={{ mb: 8 }}>
           <Typography
             align="center"
             sx={{
@@ -74,13 +74,13 @@ const FirmLeadership = () => {
               </Grid>
             ))}
           </Grid>
-        </Box>
+        </Box> */}
 
         {/* Firm Mission Intro */}
-        <Box sx={{ mb: 8, maxWidth: "800px", mx: "auto", textAlign: "left" }}>
+        <Box sx={{ mb: 8, textAlign: "left" }}>
           <Typography
             sx={{
-              fontSize: 16,
+              fontSize: 20,
               fontFamily: adelle.style.fontFamily,
               color: COLORS.TEXT_PRIMARY,
               lineHeight: 1.6,

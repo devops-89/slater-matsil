@@ -1,63 +1,148 @@
 import { NextResponse } from "next/server";
 
-// Mailchimp API credentials from environment variables
-const API_KEY = process.env.MAILCHIMP_API_KEY; // e.g. "xxx-us1"
-const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID;
-const SERVER_PREFIX = API_KEY?.split("-")[1]; // Extract server (e.g., us1)
+// ENV VARIABLES
+const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY!;
+const AUDIENCE_ID = process.env.MAILCHIMP_AUDIENCE_ID!;
+const MANDRILL_API_KEY = process.env.MAILCHIMP_MANDRILL_API!;
+
+const SERVER_PREFIX = MAILCHIMP_API_KEY?.split("-")[1];
 
 export async function POST(req: Request) {
+  console.log("🚀 API HIT");
+
   try {
     const body = await req.json();
+
     const { firstName, lastName, email, phoneNumber, company, message } = body;
 
-    if (!API_KEY || !AUDIENCE_ID) {
-      console.error("Mailchimp API key or Audience ID missing.");
+    if (!email || !firstName) {
       return NextResponse.json(
-        { error: "Configuration error" },
-        { status: 500 }
+        { error: "Missing required fields" },
+        { status: 400 },
       );
     }
 
-    // 1. Add User to Mailchimp Audience (Marketing)
-    // This can trigger an automated "Welcome" or "Thank You" email in Mailchimp
-    const mcResponse = await fetch(
-      `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `apikey ${API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email_address: email,
-          status: "subscribed",
-          merge_fields: {
-            FNAME: firstName,
-            LNAME: lastName,
-            PHONE: phoneNumber,
-            COMPANY: company,
-            MESSAGE: message, // Assuming you have a custom merge tag "MESSAGE" (text)
+    // =========================
+    // 1. MAILCHIMP (Audience Add)
+    // =========================
+    try {
+      const mcRes = await fetch(
+        `https://${SERVER_PREFIX}.api.mailchimp.com/3.0/lists/${AUDIENCE_ID}/members`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `apikey ${MAILCHIMP_API_KEY}`,
+            "Content-Type": "application/json",
           },
-        }),
-      }
-    );
+          body: JSON.stringify({
+            email_address: email,
+            status: "subscribed",
+            merge_fields: {
+              FNAME: firstName,
+              LNAME: lastName,
+              PHONE: phoneNumber,
+              COMPANY: company,
+            },
+          }),
+        },
+      );
 
-    const mcData = await mcResponse.json();
-
-    if (!mcResponse.ok && mcData.title !== "Member Exists") {
-      throw new Error(mcData.detail || "Failed to add member to Mailchimp");
+      const mcData = await mcRes.json();
+      console.log("📩 Mailchimp:", mcData);
+    } catch (err) {
+      console.error("❌ Mailchimp error:", err);
     }
 
-    // Note: To send a *custom* data-filled email to an admin, normally you'd use
-    // Mailchimp Transactional (Mandrill). If you don't have it, we recommend
-    // using the Audience's "New Subscriber Notification" in Mailchimp settings.
+    // =========================
+    // 2. MANDRILL EMAIL SEND
+    // =========================
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    if (!MANDRILL_API_KEY) {
+      console.error("❌ Missing Mandrill API key");
+      return NextResponse.json(
+        { error: "Email config missing" },
+        { status: 500 },
+      );
+    }
+
+    console.log("✅ Mandrill block executing");
+
+    const mandrillUrl = "https://mandrillapp.com/api/1.0/messages/send.json";
+
+    const fromEmail = process.env.FROM_EMAIL || "info@yourdomain.com";
+    const adminEmail = process.env.ADMIN_EMAIL || "your@email.com";
+
+    try {
+      // 👉 ADMIN EMAIL
+      const adminRes = await fetch(mandrillUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          key: MANDRILL_API_KEY,
+          message: {
+            from_email: fromEmail,
+            from_name: "Website Contact",
+            to: [{ email: adminEmail, type: "to" }],
+            subject: "New Contact Form Submission",
+            html: `
+              <h2>New Lead</h2>
+              <p><b>Name:</b> ${firstName} ${lastName}</p>
+              <p><b>Email:</b> ${email}</p>
+              <p><b>Phone:</b> ${phoneNumber || "N/A"}</p>
+              <p><b>Company:</b> ${company || "N/A"}</p>
+              <p><b>Message:</b></p>
+              <p>${message || "N/A"}</p>
+            `,
+          },
+        }),
+      });
+
+      const adminData = await adminRes.json();
+
+      // 👉 USER EMAIL
+      const userRes = await fetch(mandrillUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          key: MANDRILL_API_KEY,
+          message: {
+            from_email: fromEmail,
+            from_name: "Your Company",
+            to: [{ email: email, type: "to" }],
+            subject: "We received your message",
+            html: `
+              <h2>Hi ${firstName},</h2>
+              <p>Thanks for contacting us.</p>
+              <p>We will get back to you shortly.</p>
+              <br/>
+              <p>Best regards,<br/>Team</p>
+            `,
+          },
+        }),
+      });
+
+      const userData = await userRes.json();
+
+      console.log("📧 Admin:", adminData);
+      console.log("📧 User:", userData);
+
+      // 🔥 IMPORTANT CHECK
+      if (adminData[0]?.status !== "sent" || userData[0]?.status !== "sent") {
+        console.error("❌ Mail not delivered properly", {
+          admin: adminData,
+          user: userData,
+        });
+      }
+    } catch (err) {
+      console.error("❌ Mandrill error:", err);
+    }
+
+    return NextResponse.json({ success: true });
   } catch (error: any) {
-    console.error("Error in contact API:", error.message);
+    console.error("❌ API ERROR:", error);
     return NextResponse.json(
-      { error: "Failed to process contact request" },
-      { status: 500 }
+      { error: "Internal server error" },
+      { status: 500 },
     );
   }
 }

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import LoadingProvider from "@/components/providers/LoadingProvider";
+import { NotificationProvider } from "@/components/providers/NotificationProvider";
 import { useMediaQuery } from "@mui/material";
 import MobileNavbar from "@/components/widgets/Mobile-Navbar";
 import Modal from "@/components/widgets/Modal";
@@ -68,17 +69,19 @@ export default function RootLayout({
           </div>
         ) : (
           <LoadingProvider>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "100vh",
-              }}
-            >
-              {phone ? <MobileNavbar /> : <Navbar />}
-              <div style={{ flex: 1 }}>{children}</div>
-              <Footer />
-            </div>
+            <NotificationProvider>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  minHeight: "100vh",
+                }}
+              >
+                {phone ? <MobileNavbar /> : <Navbar />}
+                <div style={{ flex: 1 }}>{children}</div>
+                <Footer />
+              </div>
+            </NotificationProvider>
           </LoadingProvider>
         )}
       </body>

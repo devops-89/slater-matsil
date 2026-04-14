@@ -21,6 +21,7 @@ import {
   Typography,
   FormControl,
   FormHelperText,
+  CircularProgress,
 } from "@mui/material";
 import {
   DatePicker,
@@ -30,6 +31,7 @@ import {
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNotification } from "@/components/providers/NotificationProvider";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -44,6 +46,7 @@ const validationSchema = Yup.object({
 });
 
 const ContactForm = () => {
+  const { showNotification } = useNotification();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -64,14 +67,20 @@ const ContactForm = () => {
         });
 
         if (response.ok) {
-          // alert("Appointment requested successfully!");
+          showNotification("Appointment requested successfully!", "success");
           resetForm();
         } else {
-          // alert("Failed to request appointment. Please try again.");
+          showNotification(
+            "Failed to request appointment. Please try again.",
+            "error",
+          );
         }
       } catch (error) {
         console.error("Submission error:", error);
-        alert("Something went wrong. Please check your connection.");
+        showNotification(
+          "Something went wrong. Please check your connection.",
+          "error",
+        );
       } finally {
         setSubmitting(false);
       }
@@ -337,6 +346,7 @@ const ContactForm = () => {
         <Grid size={12}>
           <Button
             type="submit"
+            disabled={formik.isSubmitting}
             sx={{
               backgroundColor: COLORS.PRIMARY_BLUE,
               color: COLORS.WHITE,
@@ -347,10 +357,21 @@ const ContactForm = () => {
               lineHeight: "26px",
               width: "100%",
               padding: "15px",
+              "&.Mui-disabled": {
+                backgroundColor: COLORS.PRIMARY_BLUE,
+                opacity: 0.7,
+                color: COLORS.WHITE,
+              },
             }}
-            endIcon={<ArrowForward />}
+            endIcon={
+              formik.isSubmitting ? (
+                <CircularProgress size={20} color="inherit" />
+              ) : (
+                <ArrowForward />
+              )
+            }
           >
-            Make an Appointment
+            {formik.isSubmitting ? "Processing..." : "Make an Appointment"}
           </Button>
         </Grid>
       </Grid>

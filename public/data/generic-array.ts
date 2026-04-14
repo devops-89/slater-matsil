@@ -365,7 +365,7 @@ export const METRICS_DATA: METRICSPROPS[] = [
   },
   {
     title: "COUNTRIES WE SERVE",
-    count: "150",
+    count: "50",
   },
   {
     title: "PATENTS ISSUED TO FIRM PERSONNEL",
@@ -373,7 +373,7 @@ export const METRICS_DATA: METRICSPROPS[] = [
   },
   {
     title: "Patent Professionals With Advanced Technical Degrees",
-    count: "50",
+    count: "50%",
   },
 ];
 

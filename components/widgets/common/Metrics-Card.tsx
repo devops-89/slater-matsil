@@ -36,6 +36,7 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
           fontSize: { lg: 14, xs: 10 },
           fontWeight: 400,
           lineHeight: { lg: "154px 140px 155.875px 130px", xs: "18px" },
+          textTransform: "uppercase",
         }}
       >
         {title}

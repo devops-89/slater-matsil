@@ -9,11 +9,13 @@ import {
   InputLabel,
   TextField,
   FormHelperText,
+  CircularProgress,
 } from "@mui/material";
 import React from "react";
 import { MuiTelInput } from "mui-tel-input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useNotification } from "@/components/providers/NotificationProvider";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
@@ -27,6 +29,7 @@ const validationSchema = Yup.object({
 });
 
 const Form = () => {
+  const { showNotification } = useNotification();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -46,14 +49,17 @@ const Form = () => {
         });
 
         if (response.ok) {
-          alert("Message sent successfully!");
+          showNotification("Message sent successfully!", "success");
           resetForm();
         } else {
-          alert("Failed to send message. Please try again.");
+          showNotification("Failed to send message. Please try again.", "error");
         }
       } catch (error) {
         console.error("Submission error:", error);
-        alert("Something went wrong. Please check your connection.");
+        showNotification(
+          "Something went wrong. Please check your connection.",
+          "error",
+        );
       } finally {
         setSubmitting(false);
       }
@@ -205,6 +211,7 @@ const Form = () => {
           <Grid size={12}>
             <Button
               type="submit"
+              disabled={formik.isSubmitting}
               sx={{
                 backgroundColor: COLORS.PRIMARY_BLUE,
                 color: COLORS.WHITE,
@@ -214,10 +221,22 @@ const Form = () => {
                 fontFamily: adelle.style.fontFamily,
                 fontWeight: 500,
                 textTransform: "none",
+                "&.Mui-disabled": {
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  opacity: 0.7,
+                  color: COLORS.WHITE,
+                },
               }}
               fullWidth
             >
-              Send message
+              {formik.isSubmitting ? (
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <CircularProgress size={20} color="inherit" />
+                  Sending...
+                </Box>
+              ) : (
+                "Send message"
+              )}
             </Button>
           </Grid>
         </Grid>
