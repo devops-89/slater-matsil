@@ -7,6 +7,7 @@ import careerimage from "@/career/hero-image.png";
 import Image from "next/image";
 import { usePageData } from "@/store/usePageData";
 import StaticIndicators from "@/components/widgets/common/Indicators-static";
+import ImageCarousel from "./Image-Carousel";
 const HeroSection = () => {
   const { details } = usePageData();
   return (
@@ -89,13 +90,14 @@ const HeroSection = () => {
       </Container>
 
       <Box sx={{ py: 4 }}>
-        {details?.careerPage?.career_hero_section?.heroImage && (
+        {/* {details?.careerPage?.career_hero_section?.heroImage && (
           <Image
             src={details?.careerPage?.career_hero_section?.heroImage}
             alt=""
             style={{ width: "100%", height: "auto" }}
           />
-        )}
+        )} */}
+        <ImageCarousel />
       </Box>
       <Container maxWidth="lg">
         <Box>

@@ -126,12 +126,26 @@ export async function POST(req: Request) {
       console.log("📧 Admin:", adminData);
       console.log("📧 User:", userData);
 
-      // 🔥 IMPORTANT CHECK
-      if (adminData[0]?.status !== "sent" || userData[0]?.status !== "sent") {
-        console.error("❌ Mail not delivered properly", {
-          admin: adminData,
-          user: userData,
-        });
+      // Check admin email delivery (critical)
+      if (adminData[0]?.status !== "sent") {
+        console.error("❌ Admin email not delivered:", adminData);
+      } else {
+        console.log("✅ Admin email sent successfully");
+      }
+
+      // Check user email delivery (non-critical — may fail in Mandrill sandbox/test mode)
+      if (userData[0]?.status !== "sent") {
+        const reason = userData[0]?.reject_reason;
+        if (reason === "recipient-domain-mismatch") {
+          console.warn(
+            "⚠️ User email rejected: Mandrill is in sandbox/test mode and only delivers to your verified domain (@slatermatsil.com). ",
+            "To send to external addresses, activate your Mandrill account at: https://mandrillapp.com"
+          );
+        } else {
+          console.error("❌ User email not delivered:", userData);
+        }
+      } else {
+        console.log("✅ User confirmation email sent successfully");
       }
     } catch (err) {
       console.error("❌ Mandrill error:", err);
