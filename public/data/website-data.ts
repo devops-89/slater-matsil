@@ -45,7 +45,7 @@ import smallLogo from "@/public/images/home/slater-matsil-white.png";
 import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
 import serviceHeroSectionImage from "@/services/practice_Areas_banner.png";
-import unparalleledimage from "@/services/unparalled-legal-services.png";
+import unparalleledimage from "@/services/unparalled-legal-services-Recovered.png";
 import {
   CAREER_OPEN_ROLES_TAB_DATA,
   INSIGHTS_TAB_DATA,

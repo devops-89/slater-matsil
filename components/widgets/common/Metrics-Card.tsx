@@ -67,6 +67,7 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
               duration={2.5}
               prefix={prefix}
               separator=","
+              suffix={suffix}
             />
           ) : (
             prefix + "0"

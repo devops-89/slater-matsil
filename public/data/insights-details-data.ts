@@ -1,4 +1,3 @@
-
 import ira from "@/professionals/transparent/ira-matsil.png";
 import john from "@/professionals/transparent/john-koetter.png";
 import roger from "@/professionals/transparent/roger-knapp.png";

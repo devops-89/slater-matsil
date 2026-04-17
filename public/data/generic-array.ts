@@ -1652,7 +1652,7 @@ export const SERVICES_DETAILS = [
       },
       {
         description:
-          "There is a reason Slater Matsil has been supporting many of its clients for 15 years or more. There is a reason many of our new clients come through word-of-mouth referrals, oftentimes from current clients. That reason is the relationships we develop with our clients. Relationships that foster trust. Relationships that engender confidence in our services. Relationships that allow us to understand the broader context of our clients' needs and to appreciate the long-term consequences of today's decisions. Not just opinions, but trusted advice and counsel. ",
+          "There is a reason Slater Matsil has been supporting many of its clients for over 25 years. There is a reason many of our new clients come through word-of-mouth referrals, oftentimes from current clients. That reason is the relationships we develop with our clients. Relationships that foster trust. Relationships that engender confidence in our services. Relationships that allow us to understand the broader context of our clients' needs and to appreciate the long-term consequences of today's decisions. Not just opinions, but trusted advice and counsel. ",
       },
       {
         description:
