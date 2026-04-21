@@ -1,3 +1,4 @@
+import aboutCareer from "@/about/career-about.jpg";
 import {
   CONTACT_US_CARD_PROPS,
   DATA_LIST_PROPS,
@@ -8,9 +9,8 @@ import {
   STRENGTH_CARD_PROPS,
   WORK_LIST_PROPS,
 } from "@/utils/types";
-import aboutCareer from "@/about/career-about.jpg";
 
-import connectWithSlatermatsil from "@/about/contact-about.png";
+import connectWithSlatermatsil from "@/about/contact-about2.png";
 import practiceGroups from "@/about/practise-group.png";
 import {
   COLORS,
@@ -21,49 +21,49 @@ import {
 } from "@/utils/enum";
 import { Email, LocationOnOutlined, Phone } from "@mui/icons-material";
 
-import technicalExpertise from "@/icons/services/technical-expertise.svg";
+import clientFirstApproach from "@/icons/services/client-first-approach.svg";
 import globalReach from "@/icons/services/global-ip-reach.svg";
 import strategicInsight from "@/icons/services/strategic-insight.svg";
-import clientFirstApproach from "@/icons/services/client-first-approach.svg";
-import zachary from "@/professionals/transparent/zachary-williams.png";
-import ruojian from "@/professionals/transparent/ruojian-zhang.png";
-import yumin from "@/professionals/transparent/yumin.png";
-import brian from "@/professionals/transparent/brian-carlson.png";
-import srini from "@/professionals/transparent/srini.png";
-import steven from "@/professionals/transparent/steven-yates.png";
+import technicalExpertise from "@/icons/services/technical-expertise.svg";
 import amitava from "@/professionals/transparent/amitava-chatterjee.png";
 import ava from "@/professionals/transparent/ava-chung.png";
-import stephen from "@/professionals/transparent/stephen-cortiaus.png";
-import patrick from "@/professionals/transparent/patrick-darno.png";
-import vijay from "@/professionals/transparent/vijay-desai.png";
 import barry from "@/professionals/transparent/barry-dove.png";
-import shervin from "@/professionals/transparent/shervin-fatehi.png";
-import robert from "@/professionals/transparent/robert-graham.png";
-import jeffrey from "@/professionals/transparent/jeffrey-robert.png";
-import zhu from "@/professionals/transparent/zhu-he.png";
-import elizabeth from "@/professionals/transparent/elizabeth.png";
-import jonathan from "@/professionals/transparent/jonathan-insler.png";
-import paata from "@/professionals/transparent/patta-kakashvili.png";
-import james from "@/professionals/transparent/james-kesterson.png";
-import roger from "@/professionals/transparent/roger-knapp.png";
-import john from "@/professionals/transparent/john-koetter.png";
-import fantai from "@/professionals/transparent/fantai-kong.png";
-import michael from "@/professionals/transparent/michael-kucher.png";
-import soonshin from "@/professionals/transparent/soonshin.png";
-import brian_mair from "@/professionals/transparent/brian-mair.png";
-import ira from "@/professionals/transparent/ira-matsil.png";
-import joseph from "@/professionals/transparent/joseph-mcmanis.png";
-import marc from "@/professionals/transparent/marc-mcwilliams.png";
-import peter from "@/professionals/transparent/peter-meza.png";
 import benjamin_nise from "@/professionals/transparent/benjamin-nise.png";
-import payam from "@/professionals/transparent/payam-rashidi.png";
-import rameez from "@/professionals/transparent/rameez-samnakay.png";
-import steven_slater from "@/professionals/transparent/steven-slater.png";
+import brian from "@/professionals/transparent/brian-carlson.png";
+import brian_mair from "@/professionals/transparent/brian-mair.png";
 import chad from "@/professionals/transparent/chad-terrell.png";
-import lizabeth from "@/professionals/transparent/lizabeth-vice.png";
-import julian from "@/professionals/transparent/julian-wang.png";
-import jonathan_ward from "@/professionals/transparent/jonathan-ward.png";
 import chuanming from "@/professionals/transparent/chuanming-wei.png";
+import elizabeth from "@/professionals/transparent/elizabeth.png";
+import fantai from "@/professionals/transparent/fantai-kong.png";
+import ira from "@/professionals/transparent/ira-matsil.png";
+import james from "@/professionals/transparent/james-kesterson.png";
+import jeffrey from "@/professionals/transparent/jeffrey-robert.png";
+import john from "@/professionals/transparent/john-koetter.png";
+import jonathan from "@/professionals/transparent/jonathan-insler.png";
+import jonathan_ward from "@/professionals/transparent/jonathan-ward.png";
+import joseph from "@/professionals/transparent/joseph-mcmanis.png";
+import julian from "@/professionals/transparent/julian-wang.png";
+import lizabeth from "@/professionals/transparent/lizabeth-vice.png";
+import marc from "@/professionals/transparent/marc-mcwilliams.png";
+import michael from "@/professionals/transparent/michael-kucher.png";
+import patrick from "@/professionals/transparent/patrick-darno.png";
+import paata from "@/professionals/transparent/patta-kakashvili.png";
+import payam from "@/professionals/transparent/payam-rashidi.png";
+import peter from "@/professionals/transparent/peter-meza.png";
+import rameez from "@/professionals/transparent/rameez-samnakay.png";
+import robert from "@/professionals/transparent/robert-graham.png";
+import roger from "@/professionals/transparent/roger-knapp.png";
+import ruojian from "@/professionals/transparent/ruojian-zhang.png";
+import shervin from "@/professionals/transparent/shervin-fatehi.png";
+import soonshin from "@/professionals/transparent/soonshin.png";
+import srini from "@/professionals/transparent/srini.png";
+import stephen from "@/professionals/transparent/stephen-cortiaus.png";
+import steven_slater from "@/professionals/transparent/steven-slater.png";
+import steven from "@/professionals/transparent/steven-yates.png";
+import vijay from "@/professionals/transparent/vijay-desai.png";
+import yumin from "@/professionals/transparent/yumin.png";
+import zachary from "@/professionals/transparent/zachary-williams.png";
+import zhu from "@/professionals/transparent/zhu-he.png";
 
 export const SERVICES_AREAS_DATA = [
   {

@@ -1,18 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
-import Image from "next/image";
-import { Box, Grid, Typography, Button, Container } from "@mui/material";
-import AboutImage from "@/public/images/home/about-us.png";
-import Signature from "@/public/images/home/signature.png";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-import { adelle, tradeGothic, inter } from "@/utils/fonts";
-import FlowerImage from "@/public/images/home/Image.png";
-import { COLORS } from "@/utils/enum";
 import HeadingStar from "@/components/widgets/Heading-star";
+import AboutImage from "@/public/images/home/about-us2.jpg";
 import { usePageData } from "@/store/usePageData";
-import Link from "next/link";
-import AOS from "aos";
+import { COLORS } from "@/utils/enum";
+import { adelle, inter, tradeGothic } from "@/utils/fonts";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import "aos/dist/aos.css";
+import Image from "next/image";
+import Link from "next/link";
 //about section
 const AboutSection = () => {
   const { details } = usePageData();

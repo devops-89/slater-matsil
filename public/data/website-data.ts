@@ -9,7 +9,7 @@ import globe from "@/about/globe.png";
 import aboutHero from "@/about/heroImage.jpg";
 import careerHeroBackgroundImage from "@/career/CAREERS.png";
 import careerHeroImage from "@/career/hero-image.png";
-import caree_work_with_us_section_img from "@/career/work-with-us.jpg";
+import whyWork from "@/career/why-work.jpg";
 import contactHeroImage from "@/contact/hero-vector-image.png";
 import building from "@/icons/building.svg";
 import globeOutline from "@/icons/globe.svg";
@@ -17,9 +17,9 @@ import locationOutline from "@/icons/location.svg";
 import minicutBuilding from "@/icons/stream-line.svg";
 import insightsHeroImage from "@/insights/insights_hero_img.jpg";
 import footerLogo from "@/logo/big-logo.png";
-import practiceGroupPageHeroImage1 from "@/practice-group/hero1.jpg";
 import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
 import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
+import practiceGroupPageHeroImage1 from "@/practice-group/hero4.png";
 import professionalsHeroImage from "@/professionals/hero_section.png";
 import blog1 from "@/public/images/blog/blog1.jpg";
 import blog2 from "@/public/images/blog/blog2.jpg";
@@ -28,22 +28,22 @@ import blog4 from "@/public/images/blog/blog4.png";
 import blog5 from "@/public/images/blog/blog5.jpg";
 import blog6 from "@/public/images/blog/blog6.jpg";
 import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
+import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.png";
 import serviceAreas1 from "@/public/images/home/practice_areas/practice_areas1.svg";
 import serviceAreas2 from "@/public/images/home/practice_areas/practice_areas2.svg";
 import serviceAreas3 from "@/public/images/home/practice_areas/practice_areas3.svg";
 import serviceAreas4 from "@/public/images/home/practice_areas/practice_areas4.svg";
 import serviceAreas5 from "@/public/images/home/practice_areas/practice_areas5.svg";
 import serviceAreas6 from "@/public/images/home/practice_areas/practice_areas6.svg";
-import serviceAreas7 from "@/public/images/icons/services/ip-strategy.png";
-import serviceAreas8 from "@/public/images/icons/services/portfolio-management.png";
-import serviceAreas9 from "@/public/images/icons/services/trademarks.png";
 import {
   default as bigLogo,
   default as lightLogo,
 } from "@/public/images/home/slater-matsil-logo-light.png";
 import smallLogo from "@/public/images/home/slater-matsil-white.png";
-import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.png";
 import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
+import serviceAreas7 from "@/public/images/icons/services/ip-strategy.png";
+import serviceAreas8 from "@/public/images/icons/services/portfolio-management.png";
+import serviceAreas9 from "@/public/images/icons/services/trademarks.png";
 import serviceHeroSectionImage from "@/services/practice_Areas_banner.png";
 import unparalleledimage from "@/services/unparalled-legal-services-Recovered.png";
 import {
@@ -53,9 +53,8 @@ import {
   WHO_WE_SERVE_PAGE_TAB_DATA,
 } from "@/utils/enum";
 import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
-import whoweserveHero from "@/who-we-serve/hero-img.jpg";
-import { X } from "@mui/icons-material";
-import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import whoweserveHero from "@/who-we-serve/hero-img2.png";
+import { FaLinkedinIn } from "react-icons/fa";
 import {
   CAREER_WORK_LIST_DATA,
   CONTACT_US_CARD_DATA,
@@ -67,7 +66,6 @@ import {
   SERVICE_FRAMEWORK_CARD_DATA,
   STRENGTH_CARD_DATA,
 } from "./generic-array";
-import whyWork from "@/career/why-work.jpg";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {

@@ -1,7 +1,7 @@
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 const PracticeGroupsHeroSection = () => {
   const { details } = usePageData();
@@ -63,7 +63,23 @@ const PracticeGroupsHeroSection = () => {
             </Grid>
           </Grid>
 
-          <Grid container spacing={2} sx={{ mt: { lg: 0, xs: 3 } }}>
+            <Grid container sx={{ mt: { lg: 0, xs: 3 } }}>
+  <Grid size={{ lg: 12, xs: 12 }}>
+    {data?.firstHeroImage && (
+      <Image
+        src={data.firstHeroImage}
+        alt="hero"
+        style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "cover",
+          borderRadius: "20px",
+        }}
+      />
+    )}
+  </Grid>
+</Grid>
+          {/* <Grid container spacing={2} sx={{ mt: { lg: 0, xs: 3 } }}>
             <Grid size={{ lg: 7, xs: 12 }}>
               {data?.firstHeroImage && (
                 <Image
@@ -108,7 +124,7 @@ const PracticeGroupsHeroSection = () => {
                 )}
               </Stack>
             </Grid>
-          </Grid>
+          </Grid> */}
           <Typography
             sx={{
               fontSize: { lg: 25, xs: 16 },

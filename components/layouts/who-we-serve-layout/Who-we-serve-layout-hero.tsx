@@ -1,10 +1,8 @@
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
-import hero_img from "@/who-we-serve/hero-img.jpg";
-import { usePageData } from "@/store/usePageData";
 const WhoWeServeLayoutHero = () => {
   const { details } = usePageData();
   return (
