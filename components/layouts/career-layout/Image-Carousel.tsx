@@ -1,22 +1,26 @@
-import { Box, useTheme, useMediaQuery, IconButton } from "@mui/material";
-import React from "react";
 import slide1 from "@/career/slider/slide1.jpg";
+import slide10 from "@/career/slider/slide10.png";
 import slide2 from "@/career/slider/slide2.jpg";
 import slide3 from "@/career/slider/slide3.jpg";
 import slide4 from "@/career/slider/slide4.jpg";
 import slide5 from "@/career/slider/slide5.jpg";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import slide6 from "@/career/slider/slide6.jpg";
+import slide7 from "@/career/slider/slide7.png";
+import slide8 from "@/career/slider/slide8.png";
+import slide9 from "@/career/slider/slide9.png";
+import { COLORS } from "@/utils/enum";
+import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
-import { COLORS } from "@/utils/enum";
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide1, slide2];
+const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9,slide10];
 
 const ImageCarousel = () => {
   const theme = useTheme();

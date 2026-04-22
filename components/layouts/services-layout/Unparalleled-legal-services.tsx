@@ -1,10 +1,8 @@
-import React from "react";
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
-import unparalleledLegalServiceimage from "@/services/unparalled-legal-services.png";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import { usePageData } from "@/store/usePageData";
 const UnParalleledLegalService = () => {
   const { details } = usePageData();
 
@@ -41,11 +39,61 @@ const UnParalleledLegalService = () => {
             </Grid>
             <Grid size={{ lg: 4, xs: 12 }}>
               {unparalled?.img && (
-                <Image
-                  src={unparalled?.img}
-                  alt=""
-                  style={{ width: "100%", height: "auto" }}
-                />
+            <Box
+      sx={{
+        position: "relative",
+        display: "flex",
+        justifyContent: { lg: "flex-end", xs: "center" },
+      }}
+    >
+      <Image
+        src={unparalled?.img}
+        alt=""
+        style={{
+          width: "100%",
+          height: "auto",
+          borderRadius: "18px",
+          transform: "rotateX(4deg) rotateZ(6deg) rotateY(-44deg)",
+          boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
+        }}
+      />
+
+      <Box
+        sx={{
+          position: "absolute",
+          top: "10%",
+          left: "5%",
+          backgroundColor: "#22c55e",
+          color: "#fff",
+          px: 2,
+          py: "6px",
+          borderRadius: "16px",
+          fontSize: 13,
+          fontWeight: 600,
+          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+        }}
+      >
+        IP Portfolio Development
+      </Box>
+
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: "10%",
+          right: "5%",
+          backgroundColor: "#facc15",
+          color: "#000",
+          px: 2,
+          py: "6px",
+          borderRadius: "16px",
+          fontSize: 13,
+          fontWeight: 600,
+          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+        }}
+      >
+        Assertion of your IP
+      </Box>
+    </Box>
               )}
             </Grid>
           </Grid>

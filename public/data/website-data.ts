@@ -45,7 +45,7 @@ import serviceAreas7 from "@/public/images/icons/services/ip-strategy.png";
 import serviceAreas8 from "@/public/images/icons/services/portfolio-management.png";
 import serviceAreas9 from "@/public/images/icons/services/trademarks.png";
 import serviceHeroSectionImage from "@/services/practice_Areas_banner.png";
-import unparalleledimage from "@/services/unparalled-legal-services-Recovered.png";
+import unparalleledimage from "@/services/unparalled-legal-services2.jpg";
 import {
   CAREER_OPEN_ROLES_TAB_DATA,
   INSIGHTS_TAB_DATA,
@@ -53,7 +53,7 @@ import {
   WHO_WE_SERVE_PAGE_TAB_DATA,
 } from "@/utils/enum";
 import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
-import whoweserveHero from "@/who-we-serve/hero-img2.png";
+import whoweserveHero from "@/who-we-serve/hero2.jpg";
 import { FaLinkedinIn } from "react-icons/fa";
 import {
   CAREER_WORK_LIST_DATA,
@@ -819,7 +819,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             },
             {
               primary:
-                "\u5192\u63da Lizabeth Vice, J.D., B.S.E.E., Patent Attorney",
+                "\u5192\u63da Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney",
             },
             {
               primary: "\u4f55\u8457 Zhu He, J.D., M.S.C.S., Patent Attorney",

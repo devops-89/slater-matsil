@@ -1,32 +1,32 @@
 "use client";
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import slider1 from "@/home/slider/slider1.jpg";
-import slider2 from "@/home/slider/slider2.jpg";
-import slider3 from "@/home/slider/slider3.jpg";
-import "swiper/css/effect-fade";
-import { Autoplay, EffectFade } from "swiper/modules";
+import slider4 from "@/home/slider/slider4.jpg";
+import slider5 from "@/home/slider/slider5.jpg";
+import slider6 from "@/home/slider/slider6.jpg";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Aos from "aos";
+import { useEffect } from "react";
+import "swiper/css/effect-fade";
+import { Autoplay, EffectFade } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const SliderHeroSection = () => {
   const banners = [
     {
-      img: slider1.src,
+      img: slider4.src,
       title: "FLUENT IN TECHNOLOGY. PROVEN IN LAW.",
       description:
         "Partnering with the world's leading innovators to protect their most valuable intellectual property and secure their competitive advantage globally.",
     },
     {
-      img: slider2.src,
+      img: slider5.src,
       title: "UNMATCHED PATENT PROTECTION",
       description:
         "Securing patents for breakthrough innovations arising from billions of dollars in research and development investment across diverse technical fields.",
     },
     {
-      img: slider3.src,
+      img: slider6.src,
       title: "GLOBAL REACH & PRECISION",
       description:
         "Delivering strategic intellectual property solutions and successful patent prosecutions for top-tier clients in over 150 countries.",
@@ -42,7 +42,7 @@ const SliderHeroSection = () => {
         effect="fade"
         modules={[EffectFade, Autoplay]}
         autoplay={{
-          delay: 2000,
+          delay: 4000,
         }}
       >
         {banners.map((val, i) => (
@@ -59,7 +59,7 @@ const SliderHeroSection = () => {
             >
               <Box
                 sx={{
-                  backgroundColor: "rgba(0, 0, 0, 0.5)",
+                  backgroundColor: "rgba(0, 0, 0, 0.7)",
                   width: "100%",
                   height: "100%",
                   display: "flex",
@@ -74,6 +74,8 @@ const SliderHeroSection = () => {
                           fontSize: 40,
                           color: COLORS.WHITE,
                           fontFamily: tradeGothic.style.fontFamily,
+                          textShadow: "2px 2px 10px rgba(0,0,0,0.9)",
+                          lineHeight: "1.3",
                         }}
                       >
                         {val.title}
@@ -84,6 +86,7 @@ const SliderHeroSection = () => {
                           color: COLORS.WHITE,
                           fontFamily: adelle.style.fontFamily,
                           mt: 3,
+                          textShadow: "1px 1px 8px rgba(0,0,0,0.8)",
                         }}
                       >
                         {val.description}{" "}

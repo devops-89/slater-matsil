@@ -1,4 +1,4 @@
-import aboutCareer from "@/about/career-about.jpg";
+import aboutCareer from "@/about/career-about2.png";
 import {
   CONTACT_US_CARD_PROPS,
   DATA_LIST_PROPS,
@@ -59,7 +59,6 @@ import soonshin from "@/professionals/transparent/soonshin.png";
 import srini from "@/professionals/transparent/srini.png";
 import stephen from "@/professionals/transparent/stephen-cortiaus.png";
 import steven_slater from "@/professionals/transparent/steven-slater.png";
-import steven from "@/professionals/transparent/steven-yates.png";
 import vijay from "@/professionals/transparent/vijay-desai.png";
 import yumin from "@/professionals/transparent/yumin.png";
 import zachary from "@/professionals/transparent/zachary-williams.png";
@@ -494,11 +493,11 @@ export const PROFESSIONAL_DETAILS_TAB_DATA = [
 export const CAREER_WORK_LIST_DATA: WORK_LIST_PROPS[] = [
   {
     title:
-      "Work directly on cutting-edge technologies, including semiconductors, electronics, software, and telecommunications",
+      "Work directly on cutting-edge technologies, including analog and mixed signal circuits, semiconductor process technology including 3D transistors and complex fabrication equipment, 6G communication, cloud enterprise, CPU architecture, AI, and quantum computing.",
   },
   {
     title:
-      "Collaborate with attorneys and technical advisors who understand engineering at a granular level",
+      "Collaborate with attorneys, agents and technical advisors who understand engineering at a granular level",
   },
   {
     title:
@@ -511,7 +510,7 @@ export const CAREER_WORK_LIST_DATA: WORK_LIST_PROPS[] = [
 
   {
     title:
-      "Opportunities to grow into Patent Agent, Technical Advisor, or IP Attorney roles",
+      "Opportunities to grow into Patent Agent, or IP Attorney roles",
   },
 ];
 
@@ -1726,12 +1725,7 @@ export const professionalsListData = [
     designation: "Distinguished Patent Agent",
     slug: "yumin-jeff-zhang",
   },
-  {
-    img: steven,
-    name: "Steven Yates",
-    designation: "Attorney at Law",
-    slug: "steven-yates",
-  },
+
   {
     img: srini,
     name: "Srini Chakravarthi, Ph.D",

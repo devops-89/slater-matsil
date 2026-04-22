@@ -1,3 +1,4 @@
+import { useModal } from "@/store/useModal";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { field_label_styles, FLAT_TEXTFIELD_STYLES } from "@/utils/styles";
@@ -11,12 +12,19 @@ import {
   InputLabel,
   TextField,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { useModal } from "@/store/useModal";
+import React, { useEffect, useState } from "react";
 
 const CareerApplicationForm = () => {
   const { hideModal } = useModal();
   const [currentDate, setCurrentDate] = useState("");
+  const [resume, setResume] = useState<File | null>(null);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0];
+  if (file) {
+    setResume(file);
+  }
+};
 
   useEffect(() => {
     const today = new Date();
@@ -121,6 +129,38 @@ const CareerApplicationForm = () => {
               type="number"
             />
           </Grid>
+
+          <Grid size={{ lg: 6, xs: 12 }}>
+          <InputLabel
+          sx={{
+              ...field_label_styles,
+        }}>
+          Upload Resume
+          </InputLabel>
+
+        <Button
+        variant="outlined"
+        component="label"
+        sx={{
+              ...FLAT_TEXTFIELD_STYLES,
+              mt: 2,
+              textTransform: "none",
+              justifyContent: "flex-start",
+              height: "56px",
+              border: "1px solid #ccc",
+              }}
+              fullWidth
+              >
+              {resume ? resume.name : "Choose file (.pdf, .doc, .docx)"}
+
+              <input
+                type="file"
+                hidden
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}/>
+                </Button>
+                </Grid>
+
           <Grid size={12}>
             <Button
               sx={{
