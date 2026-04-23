@@ -195,7 +195,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       rightSection: {
         heading: "Who we serve",
         description:
-          "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world.",
+          "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world..",
         section_data: [
           {
             label: "Large Corporations",

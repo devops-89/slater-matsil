@@ -5,7 +5,6 @@ import slide10 from "@/career/slider/slider10.jpg";
 import slide4 from "@/career/slider/slider4.jpg";
 import slide5 from "@/career/slider/slider5.jpg";
 import slide6 from "@/career/slider/slider6.jpg";
-import slide7 from "@/career/slider/slider7.jpg";
 import slide8 from "@/career/slider/slider8.jpg";
 import slide9 from "@/career/slider/slider9.jpg";
 import { COLORS } from "@/utils/enum";
@@ -20,7 +19,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide7, slide8, slide9,slide10];
+const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide8, slide9,slide10];
 
 const ImageCarousel = () => {
   const theme = useTheme();
@@ -76,7 +75,7 @@ const ImageCarousel = () => {
         grabCursor={true}
         loop={true}
         centeredSlides={true}
-        slidesPerView={isMobile ? 1.5 : isTablet ? 2.5 : 3.5}
+        slidesPerView={isMobile ? 1.5 : isTablet ? 2.5 : 1.5}
         spaceBetween={isMobile ? 20 : 40}
         autoplay={{
           delay: 2000,
@@ -115,6 +114,7 @@ const ImageCarousel = () => {
                 priority={i < 4}
                 style={{
                   objectFit: "cover",
+                  objectPosition: i === 4 ? "top center" : "center", 
                 }}
               />
             </Box>

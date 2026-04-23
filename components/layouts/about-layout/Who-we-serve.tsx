@@ -1,4 +1,3 @@
-import React from "react";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
@@ -78,7 +77,7 @@ const WhoweServe = () => {
                   mt: 3,
                 }}
               >
-                {details?.aboutPage?.who_we_serve_props?.description}
+                {details?.aboutPage?.who_we_serve_props?.description}.
               </Typography>
             </Grid>
             <Grid size={{ lg: 8, xs: 12 }}>
