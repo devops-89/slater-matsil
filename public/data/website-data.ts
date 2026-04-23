@@ -19,7 +19,7 @@ import insightsHeroImage from "@/insights/insights_hero_img.jpg";
 import footerLogo from "@/logo/big-logo.png";
 import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
 import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
-import practiceGroupPageHeroImage1 from "@/practice-group/hero4.png";
+import practiceGroupPageHeroImage1 from "@/practice-group/hero4.jpg";
 import professionalsHeroImage from "@/professionals/hero_section.png";
 import blog1 from "@/public/images/blog/blog1.jpg";
 import blog2 from "@/public/images/blog/blog2.jpg";
@@ -53,7 +53,7 @@ import {
   WHO_WE_SERVE_PAGE_TAB_DATA,
 } from "@/utils/enum";
 import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
-import whoweserveHero from "@/who-we-serve/hero2.jpg";
+import whoweserveHero from "@/who-we-serve/hero-img2.jpg";
 import { FaLinkedinIn } from "react-icons/fa";
 import {
   CAREER_WORK_LIST_DATA,

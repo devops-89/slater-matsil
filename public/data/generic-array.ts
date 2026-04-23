@@ -1,4 +1,4 @@
-import aboutCareer from "@/about/career-about2.png";
+import aboutCareer from "@/about/career-about2.jpg";
 import {
   CONTACT_US_CARD_PROPS,
   DATA_LIST_PROPS,
@@ -10,7 +10,7 @@ import {
   WORK_LIST_PROPS,
 } from "@/utils/types";
 
-import connectWithSlatermatsil from "@/about/contact-about2.png";
+import connectWithSlatermatsil from "@/about/contact-about2.jpg";
 import practiceGroups from "@/about/practise-group.png";
 import {
   COLORS,
