@@ -42,7 +42,7 @@ const SliderHeroSection = () => {
         effect="fade"
         modules={[EffectFade, Autoplay]}
         autoplay={{
-          delay: 4000,
+          delay: 6000,
         }}
       >
         {banners.map((val, i) => (
@@ -50,7 +50,7 @@ const SliderHeroSection = () => {
             <Box
               sx={{
                 backgroundImage: `url(${val.img})`,
-                height: "100vh",
+                height: { lg: "100vh", xs: "60vh" },
                 width: "100%",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -68,10 +68,10 @@ const SliderHeroSection = () => {
               >
                 <Container maxWidth="lg">
                   <Grid container>
-                    <Grid size={6}>
+                    <Grid size={{ lg: 6, xs: 12 }}>
                       <Typography
                         sx={{
-                          fontSize: 40,
+                          fontSize: { lg: 40, xs: 25 },
                           color: COLORS.WHITE,
                           fontFamily: tradeGothic.style.fontFamily,
                           textShadow: "2px 2px 10px rgba(0,0,0,0.9)",
@@ -82,7 +82,7 @@ const SliderHeroSection = () => {
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: 20,
+                          fontSize: { lg: 20, xs: 14 },
                           color: COLORS.WHITE,
                           fontFamily: adelle.style.fontFamily,
                           mt: 3,
@@ -96,13 +96,13 @@ const SliderHeroSection = () => {
                           backgroundColor: COLORS.PRIMARY_BLUE,
                           color: COLORS.WHITE,
                           fontFamily: tradeGothic.style.fontFamily,
-                          fontSize: 16,
+                          fontSize: { lg: 16, xs: 14 },
                           fontWeight: 700,
                           lineHeight: "26px",
                           textTransform: "uppercase",
                           mt: 3,
                           borderRadius: 20,
-                          width: 250,
+                          width: { lg: 250, xs: 180 },
                           p: 1.5,
                         }}
                       >
