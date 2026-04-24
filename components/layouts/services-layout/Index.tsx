@@ -13,16 +13,16 @@ const ServicesLayout = () => {
 
   return (
     <div>
-      <div data-aos="fade-in">
+      <div data-aos="fade-in" suppressHydrationWarning>
         <HeroServicesSection />
       </div>
-      <div data-aos="fade-up">
+      <div data-aos="fade-up" suppressHydrationWarning>
         <WhyChooseUs />
       </div>
-      <div data-aos="fade-up">
+      <div data-aos="fade-up" suppressHydrationWarning>
         <UnParalleledLegalService />
       </div>
-      <div data-aos="fade-up">
+      <div data-aos="fade-up" suppressHydrationWarning>
         <OurserviceFramework />
       </div>
       <ServiceAreas data={details?.homepage?.service_area?.section_Data} />

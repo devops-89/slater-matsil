@@ -32,6 +32,8 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNotification } from "@/components/providers/NotificationProvider";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef } from "react";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -47,23 +49,31 @@ const validationSchema = Yup.object({
 
 const ContactForm = () => {
   const { showNotification } = useNotification();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
       service: null,
       date: null,
-      // time: null,
       message: "",
       terms: false,
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
+      const token = recaptchaRef.current?.getValue();
+
+      if (!token) {
+        showNotification("Please complete the reCAPTCHA", "error");
+        setSubmitting(false);
+        return;
+      }
+
       try {
         const response = await fetch("/api/appointment", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
+          body: JSON.stringify({ ...values, recaptchaToken: token }),
         });
 
         if (response.ok) {
@@ -344,6 +354,12 @@ const ContactForm = () => {
           </FormControl>
         </Grid>
         <Grid size={12}>
+          <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}>
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            />
+          </Box>
           <Button
             type="submit"
             disabled={formik.isSubmitting}

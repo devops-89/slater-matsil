@@ -87,8 +87,8 @@ const WhyWorkWithus = () => {
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
             {data?.work_list_data.map((val, i) => (
-              <Box sx={{ mb: 2, ml: i % 2 == 0 ? 0 : 3 }}>
-                <WorkList title={val.title} key={i} />
+              <Box key={i} sx={{ mb: 2, ml: i % 2 == 0 ? 0 : 3 }}>
+                <WorkList title={val.title} />
               </Box>
             ))}
           </Grid>

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { verifyReCaptcha } from "@/utils/recaptcha";
 
 // Mailchimp API credentials from environment variables
 const API_KEY = process.env.MAILCHIMP_API_KEY; // e.g. "xxx-us1"
@@ -8,7 +9,21 @@ const SERVER_PREFIX = API_KEY?.split("-")[1]; // Extract server (e.g., us1)
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, service, date, time, message } = body;
+    const { name, email, service, date, time, message, recaptchaToken } = body;
+
+    // Verify reCAPTCHA
+    if (recaptchaToken) {
+      const verification = await verifyReCaptcha(recaptchaToken);
+      if (!verification.success) {
+        return NextResponse.json(
+          { error: "reCAPTCHA verification failed", details: verification.message },
+          { status: 400 }
+        );
+      }
+    } else {
+       // If token is missing, we could reject it in production
+       // return NextResponse.json({ error: "Missing reCAPTCHA token" }, { status: 400 });
+    }
 
     if (!API_KEY || !AUDIENCE_ID) {
       console.error("Mailchimp API key or Audience ID missing.");

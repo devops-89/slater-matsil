@@ -16,6 +16,9 @@ const CareerTabSection = () => {
   const data = details?.careerPage?.career_open_roles?.tabSectionData;
 
   const [value, setValue] = useState(0);
+  const [roleData, setRoleData] = useState(
+    data?.tabContentData?.tab_attorney_content_Data,
+  );
 
   const handleChangeTab = (e: SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -25,10 +28,6 @@ const CareerTabSection = () => {
       setRoleData(data?.tabContentData?.tab_technical_advisor);
     }
   };
-
-  const [roleData, setRoleData] = useState(
-    data?.tabContentData?.tab_attorney_content_Data,
-  );
 
   return (
     <Box sx={{ mt: 5 }}>

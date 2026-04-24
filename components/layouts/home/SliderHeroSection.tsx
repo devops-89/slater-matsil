@@ -1,7 +1,7 @@
 "use client";
-import slider4 from "@/home/slider/slider4.jpg";
-import slider5 from "@/home/slider/slider5.jpg";
-import slider6 from "@/home/slider/slider6.jpg";
+import slider4 from "@/home/slider/slider7.jpg";
+import slider5 from "@/home/slider/slider8.jpg";
+import slider6 from "@/home/slider/slider9.jpg";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
@@ -15,21 +15,21 @@ const SliderHeroSection = () => {
   const banners = [
     {
       img: slider4.src,
-      title: "FLUENT IN TECHNOLOGY. PROVEN IN LAW.",
+      title: "Protecting the Ideas That Change the World.",
       description:
-        "Partnering with the world's leading innovators to protect their most valuable intellectual property and secure their competitive advantage globally.",
+        "Partnering with the world’s leading innovators to protect their most valuable intellectual property and secure their competitive advantage globally. ",
     },
     {
       img: slider5.src,
-      title: "UNMATCHED PATENT PROTECTION",
+      title: "Leadership for the Technologies of Tomorrow",
       description:
-        "Securing patents for breakthrough innovations arising from billions of dollars in research and development investment across diverse technical fields.",
+        "Strategic IP counsel for innovations born from the world's largest R&D investments.",
     },
     {
       img: slider6.src,
-      title: "GLOBAL REACH & PRECISION",
+      title: "IP Without Borders. Strategy Without Compromise.",
       description:
-        "Delivering strategic intellectual property solutions and successful patent prosecutions for top-tier clients in over 150 countries.",
+        "Delivering intellectual property solutions for clients across more than 50 countries.",
     },
   ];
 

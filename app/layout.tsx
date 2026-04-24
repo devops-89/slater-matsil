@@ -42,8 +42,8 @@ export default function RootLayout({
   const phone = useMediaQuery("(max-width:600px)");
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <Modal />
         {initialLoading ? (
           <div
@@ -70,17 +70,17 @@ export default function RootLayout({
         ) : (
           <LoadingProvider>
             <NotificationProvider>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  minHeight: "100vh",
-                }}
-              >
-                {phone ? <MobileNavbar /> : <Navbar />}
-                <div style={{ flex: 1 }}>{children}</div>
-                <Footer />
-              </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    minHeight: "100vh",
+                  }}
+                >
+                  {phone ? <MobileNavbar /> : <Navbar />}
+                  <div style={{ flex: 1 }}>{children}</div>
+                  <Footer />
+                </div>
             </NotificationProvider>
           </LoadingProvider>
         )}

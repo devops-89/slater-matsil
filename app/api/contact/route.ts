@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { verifyReCaptcha } from "@/utils/recaptcha";
 
 // ENV VARIABLES
 const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY!;
@@ -13,7 +14,18 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const { firstName, lastName, email, phoneNumber, company, message } = body;
+    const { firstName, lastName, email, phoneNumber, company, message, recaptchaToken } = body;
+
+    // Verify reCAPTCHA
+    if (recaptchaToken) {
+      const verification = await verifyReCaptcha(recaptchaToken);
+      if (!verification.success) {
+        return NextResponse.json(
+          { error: "reCAPTCHA verification failed", details: verification.message },
+          { status: 400 }
+        );
+      }
+    }
 
     if (!email || !firstName) {
       return NextResponse.json(

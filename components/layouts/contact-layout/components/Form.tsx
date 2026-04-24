@@ -16,6 +16,8 @@ import { MuiTelInput } from "mui-tel-input";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNotification } from "@/components/providers/NotificationProvider";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef } from "react";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
@@ -30,6 +32,7 @@ const validationSchema = Yup.object({
 
 const Form = () => {
   const { showNotification } = useNotification();
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -41,18 +44,29 @@ const Form = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
+      const token = recaptchaRef.current?.getValue();
+
+      if (!token) {
+        showNotification("Please complete the reCAPTCHA", "error");
+        setSubmitting(false);
+        return;
+      }
+
       try {
         const response = await fetch("/api/contact", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(values),
+          body: JSON.stringify({ ...values, recaptchaToken: token }),
         });
 
         if (response.ok) {
           showNotification("Message sent successfully!", "success");
           resetForm();
         } else {
-          showNotification("Failed to send message. Please try again.", "error");
+          showNotification(
+            "Failed to send message. Please try again.",
+            "error",
+          );
         }
       } catch (error) {
         console.error("Submission error:", error);
@@ -209,6 +223,12 @@ const Form = () => {
             />
           </Grid>
           <Grid size={12}>
+            <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}>
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+              />
+            </Box>
             <Button
               type="submit"
               disabled={formik.isSubmitting}
