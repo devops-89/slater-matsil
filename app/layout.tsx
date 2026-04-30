@@ -16,6 +16,7 @@ import Modal from "@/components/widgets/Modal";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { usePathname } from "next/navigation";
+import CookieConsent from "@/components/widgets/CookieConsent";
 
 export default function RootLayout({
   children,
@@ -80,6 +81,7 @@ export default function RootLayout({
                   {phone ? <MobileNavbar /> : <Navbar />}
                   <div style={{ flex: 1 }}>{children}</div>
                   <Footer />
+                  <CookieConsent />
                 </div>
             </NotificationProvider>
           </LoadingProvider>

@@ -9,13 +9,15 @@ import ServiceAreas from "../../widgets/Service-Areas";
 import Whoweserve from "./Who-We-Serve";
 import HeroSection2 from "./HeroSection2";
 import SliderHeroSection from "./SliderHeroSection";
+import HeroSection3 from "./HeroSection3";
 
 const HomeLayout = () => {
   return (
     <div>
       {/* <HeroSection /> */}
       {/* <HeroSection2 /> */}
-      <SliderHeroSection />
+      {/* <SliderHeroSection /> */}
+      <HeroSection3 />
       <AboutSection />
       <MetricsSection />
       <ServiceAreas limit={6} />
