@@ -84,23 +84,24 @@ const HeroSection3 = () => {
   return (
     <Box
       sx={{
-        height: "100vh",
+        height: "70vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        mt: 2,
       }}
     >
       <Container maxWidth="lg">
         <Swiper
           onSwiper={setSwiperInstance}
           modules={[Autoplay]}
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
           spaceBetween={20}
           loop={true}
         >
           {banners.map((val, i) => (
             <SwiperSlide key={i}>
-              <Grid container alignItems={"center"} spacing={5}>
+              <Grid container alignItems={"flex-start"} spacing={5}>
                 <Grid size={6}>
                   <Typography
                     sx={{
