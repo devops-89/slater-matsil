@@ -1,14 +1,14 @@
 "use client";
+import InsightsCard from "@/components/layouts/insights-layout/components/Insights-Card";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
+import { tradeGothic } from "@/utils/fonts";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import InsightsCard from "@/components/layouts/insights-layout/components/Insights-Card";
 
 const InsightsSection = () => {
   const { details } = usePageData();
@@ -18,6 +18,7 @@ const InsightsSection = () => {
     <Box sx={{ py: 10 }}>
       <Grid container>
         <Grid
+        suppressHydrationWarning
           size={{ lg: 5, xs: 12 }}
           sx={{ px: { lg: 10, xs: 2 } }}
           data-aos="fade-up"
@@ -70,7 +71,7 @@ const InsightsSection = () => {
             </IconButton>
           </Stack>
         </Grid>
-        <Grid size={{ lg: 7, xs: 12 }} data-aos="fade-down">
+        <Grid size={{ lg: 7, xs: 12 }} suppressHydrationWarning data-aos="fade-down">
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;

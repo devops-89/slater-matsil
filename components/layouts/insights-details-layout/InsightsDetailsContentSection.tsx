@@ -24,7 +24,8 @@ const SectionBlock = ({
           fontSize: { xs: 18, md: 22 },
           lineHeight: 1.6,
           color: COLORS.TEXT_PRIMARY_4,
-          textAlign: "justify",
+          textAlign: "left",
+          letterSpacing:1.5
         }}
       >
         {content}

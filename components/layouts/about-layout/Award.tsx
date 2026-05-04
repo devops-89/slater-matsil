@@ -1,20 +1,35 @@
 "use client";
 
-import { Box, Container, Grid, Typography } from "@mui/material";
-import React, { useRef } from "react";
-import Image from "next/image";
 import { usePageData } from "@/store/usePageData";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import Image from "next/image";
+import { useRef } from "react";
 
-import { tradeGothic } from "@/utils/fonts";
-import { COLORS } from "@/utils/enum";
 import { clientLocations } from "@/public/data/client-locations";
+import { COLORS } from "@/utils/enum";
+import { tradeGothic } from "@/utils/fonts";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 
 const Globe = dynamic(() => import("react-globe.gl"), { ssr: false });
 
 const Award = () => {
   const { details } = usePageData();
   const globeRef = useRef<any>(null);
+  const [canRenderGlobe, setCanRenderGlobe] = useState(false);
+
+useEffect(() => {
+  try {
+    const canvas = document.createElement("canvas");
+    const gl =
+      canvas.getContext("webgl") ||
+      canvas.getContext("experimental-webgl");
+
+    if (gl) setCanRenderGlobe(true);
+  } catch {
+    setCanRenderGlobe(false);
+  }
+}, []);
 
   return (
     <Box sx={{ pb: { lg: 10, xs: 5 } }}>
@@ -29,31 +44,34 @@ const Award = () => {
               minHeight: "550px",
             }}
           >
-            <Globe
-              ref={globeRef}
-              onGlobeReady={() => {
-                if (globeRef.current) {
-                  globeRef.current.controls().autoRotate = true;
-                  globeRef.current.controls().autoRotateSpeed = 0.5;
-                  globeRef.current.pointOfView({ lat: 39, lng: -98, altitude: 2.5 });
-                }
-              }}
-              globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-              bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-              pointsData={clientLocations}
-              pointLat={(d: any) => d.lat}
-              pointLng={(d: any) => d.lng}
-              pointColor={() => "#4facfe"}
-              pointAltitude={0.01}
-              pointRadius={0.5}
-              pointResolution={32}
-              pointsMerge={false}
-              pointLabel="name"
-              showAtmosphere={false}
-              width={550}
-              height={550}
-              backgroundColor="rgba(0,0,0,0)"
-            />
+            {canRenderGlobe && (
+  <Globe
+    rendererConfig={{ antialias: false }}
+    ref={globeRef}
+    onGlobeReady={() => {
+      if (globeRef.current) {
+        globeRef.current.controls().autoRotate = true;
+        globeRef.current.controls().autoRotateSpeed = 0.5;
+        globeRef.current.pointOfView({
+          lat: 39,
+          lng: -98,
+          altitude: 2.5,
+        });
+      }
+    }}
+    globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+    bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+    pointsData={clientLocations}
+    pointLat={(d: any) => d.lat}
+    pointLng={(d: any) => d.lng}
+    pointColor={() => "#4facfe"}
+    pointAltitude={0.01}
+    pointRadius={0.5}
+    width={550}
+    height={550}
+    backgroundColor="rgba(0,0,0,0)"
+  />
+)}
           </Grid>
 
           <Grid size={{ lg: 6, xs: 12 }}>

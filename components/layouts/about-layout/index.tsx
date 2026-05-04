@@ -1,19 +1,18 @@
 "use client";
-import boxImage from "@/about/img1.png";
 import InsightsSection from "@/components/widgets/Insights-section";
+import { CAREER_HOME_DATA } from "@/public/data/generic-array";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { ArrowForward } from "@mui/icons-material";
 import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
+import Link from "next/link";
+import RedefiningPatent from "../../widgets/Redefining-Patent";
 import AboutHerosection from "./About-Herosection";
 import Award from "./Award";
 import DrivingInnovation from "./Driving-innovation";
 import IndustriesWeServe from "./Industries-We-Serve";
 import InsightsInnovation from "./Insights-innovation";
-import RedefiningPatent from "../../widgets/Redefining-Patent";
-import { CAREER_HOME_DATA } from "@/public/data/generic-array";
 import WhoweServe from "./Who-we-serve";
-import Link from "next/link";
 const AboutLayout = () => {
   // const {}
 
@@ -30,6 +29,7 @@ const AboutLayout = () => {
         <Grid container spacing={4}>
           {CAREER_HOME_DATA.map((val, i) => (
             <Grid
+              suppressHydrationWarning
               size={{ lg: 4, xs: 12 }}
               key={i}
               data-aos="fade-up"

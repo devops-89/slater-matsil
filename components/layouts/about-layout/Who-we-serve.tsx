@@ -86,32 +86,28 @@ const WhoweServe = () => {
                   (val, i) => (
                     <Grid size={{ lg: 5, xs: 12 }} key={i}>
                       <List>
-                        {val.dataList.map((item, index) => (
+                      {val.dataList.map((item) => (
+                        <ListItem key={item.label} disablePadding>
                           <Link
-                            href={"/who-we-serve"}
-                            style={{ textDecoration: "none" }}
+                            href="/who-we-serve"
+                            style={{ textDecoration: "none", width: "100%" }}
                           >
-                            <ListItem
-                              key={index}
-                              disablePadding
-                              sx={{ cursor: "pointer" }}
-                            >
-                              <ListItemText
-                                primary={item.label}
-                                slotProps={{
-                                  primary: {
-                                    fontSize: { lg: 20, xs: 15 },
-                                    fontFamily: adelle.style.fontFamily,
-                                    color: COLORS.PRIMARY_BLUE,
-                                    fontWeight: 700,
-                                    lineHeight: { lg: "45px", xs: "25px" },
-                                  },
-                                }}
-                              />
-                            </ListItem>
+                            <ListItemText
+                              primary={item.label}
+                              slotProps={{
+                                primary: {
+                                  fontSize: { lg: 20, xs: 15 },
+                                  fontFamily: adelle.style.fontFamily,
+                                  color: COLORS.PRIMARY_BLUE,
+                                  fontWeight: 700,
+                                  lineHeight: { lg: "45px", xs: "25px" },
+                                },
+                              }}
+                            />
                           </Link>
-                        ))}
-                      </List>
+                        </ListItem>
+                      ))}
+                    </List>
                     </Grid>
                   ),
                 )}

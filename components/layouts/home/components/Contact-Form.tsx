@@ -1,3 +1,4 @@
+import { useNotification } from "@/components/providers/NotificationProvider";
 import { SERVICES_AREAS_DATA } from "@/public/data/generic-array";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
@@ -6,34 +7,31 @@ import {
   ArrowForward,
   CalendarMonth,
   EmailOutlined,
-  Person,
-  TimerOutlined,
+  Person
 } from "@mui/icons-material";
 import {
   Autocomplete,
   Box,
   Button,
   Checkbox,
+  CircularProgress,
+  FormControl,
   FormControlLabel,
+  FormHelperText,
   Grid,
   InputAdornment,
   TextField,
   Typography,
-  FormControl,
-  FormHelperText,
-  CircularProgress,
 } from "@mui/material";
 import {
   DatePicker,
-  LocalizationProvider,
-  TimePicker,
+  LocalizationProvider
 } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useNotification } from "@/components/providers/NotificationProvider";
-import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import * as Yup from "yup";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -355,10 +353,12 @@ const ContactForm = () => {
         </Grid>
         <Grid size={12}>
           <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}>
+            {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
             <ReCAPTCHA
-              ref={recaptchaRef}
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+            ref={recaptchaRef}
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
             />
+          )}
           </Box>
           <Button
             type="submit"

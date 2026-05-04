@@ -659,13 +659,6 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Ira Matsil ranked by Strategy 300 - IAM 2025 in IP management consultancy, licensing",
-    bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-strategy-300-iam-2025",
-  },
-  {
-    title:
       "Slater Matsil ranked as a firm and Steven Slater, Ira Matsil, Srini Chakravarthi and Michael Kucher were recognized individually by the 2025 IAM Patent 1000 Rankings.",
     bgColor: COLORS.PRIMARY_LIGHT_GREEN,
     category: INSIGHTS_TAB_DATA.NEWS,
@@ -713,13 +706,6 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     bgColor: COLORS.PRIMARY_LIGHT_GREEN,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "patexia-prosecution-rankings-2024",
-  },
-  {
-    title:
-      "John Koetter was appointed to be Co-Chair of the Publications Committee of the Dallas Bar Association for 2024.",
-    bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "john-koetter-publications-committee-2024",
   },
   {
     title:
@@ -924,13 +910,6 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Answering Un-asked Questions: Patent Disclosures for Analog, Mixed-Signal, and RF Circuit Design by Benjamin E. Nise",
-    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
-    category: INSIGHTS_TAB_DATA.ARTICLES,
-    slug: "benjamin-nise-patent-disclosures-article",
-  },
-  {
-    title:
       "U.S. News ranked Slater Matsil as a Best Law Firm in Tier 1 for Patent Litigation and as Tier 2 firm for Patent Law in 2022.",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
@@ -1059,13 +1038,7 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "ira-matsil-d-magazine-best-lawyers",
   },
-  {
-    title:
-      "Mandy Barsilai Fernandez has been named winner of the 2019 Don M. Smart Directed Research Award by the SMU Dedman School of Law.",
-    bgColor: COLORS.PRIMARY_BLUE,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "mandy-fernandez-research-award-2019",
-  },
+
   {
     title:
       "John Koetter has been selected to join the Honorable Barbara M.G. Lynn American Inn of Court",
@@ -1156,12 +1129,6 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     bgColor: COLORS.PRIMARY_LIGHT_GREEN,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "juristat-growth-rate-rankings-2016",
-  },
-  {
-    title: "Slater Matsil named Top Patent Law Firm",
-    bgColor: COLORS.LIGHT_GREY,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "slater-matsil-top-patent-law-firm",
   },
   {
     title:

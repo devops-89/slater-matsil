@@ -1,6 +1,8 @@
+import checkmark from "@/icons/checkmark.png";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { ArrowForward } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -13,15 +15,13 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import checkmark from "@/icons/checkmark.png";
-import { ArrowForward } from "@mui/icons-material";
 import Link from "next/link";
 const Whoweserve = () => {
   const { details } = usePageData();
   return (
     <Box>
       <Grid container>
-        <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up">
+        <Grid size={{ lg: 6, xs: 12 }} suppressHydrationWarning data-aos="fade-up">
           <Box
             sx={{
               backgroundImage: `url(${details?.homepage?.who_we_serve?.leftSection?.heroImage})`,
@@ -94,7 +94,7 @@ const Whoweserve = () => {
             </Box>
           )}
         </Grid>
-        <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down">
+        <Grid size={{ lg: 6, xs: 12 }} suppressHydrationWarning data-aos="fade-down">
           <Box
             sx={{
               backgroundColor: "#ECF2F3",
@@ -139,33 +139,32 @@ const Whoweserve = () => {
                 {details?.homepage?.who_we_serve?.rightSection?.description}
               </Typography>
 
-              <Grid container>
-                {details?.homepage?.who_we_serve?.rightSection?.section_data.map(
-                  (val, i) => (
-                    <Grid size={6} key={i}>
-                      <List>
-                        <ListItem>
-                          <ListItemAvatar sx={{ minWidth: 35 }}>
-                            <Image src={checkmark} alt="" width={30} />
-                          </ListItemAvatar>
-                          <ListItemText
-                            primary={val.label}
-                            slotProps={{
-                              primary: {
-                                color: COLORS.TEXT_SECONDARY,
-                                fontFamily: adelle.style.fontFamily,
-                                fontSize: { lg: 15, xs: 13 },
-                                fontWeight: 600,
-                                lineHeight: "28px",
-                              },
-                            }}
-                          />
-                        </ListItem>
-                      </List>
-                    </Grid>
-                  ),
-                )}
-              </Grid>
+                <Grid container>
+                    {details?.homepage?.who_we_serve?.rightSection?.section_data.map((val) => (
+                      <Grid size={6} key={val.label}>
+                        <List sx={{ width: "100%" }}>
+                          <ListItem>
+                            <ListItemAvatar sx={{ minWidth: 35 }}>
+                              <Image src={checkmark} alt="" width={30} />
+                            </ListItemAvatar>
+                  
+                            <ListItemText
+                              primary={val.label}
+                              slotProps={{
+                                primary: {
+                                  color: COLORS.TEXT_SECONDARY,
+                                  fontFamily: adelle.style.fontFamily,
+                                  fontSize: { lg: 15, xs: 13 },
+                                  fontWeight: 600,
+                                  lineHeight: "28px",
+                                },
+                              }}
+                            />
+                          </ListItem>
+                        </List>
+                      </Grid>
+                    ))}
+                  </Grid>
               <Link
                 href={
                   details?.homepage?.who_we_serve?.rightSection?.ctaButton

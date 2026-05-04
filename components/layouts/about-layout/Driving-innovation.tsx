@@ -1,11 +1,10 @@
 "use client";
+import drivingInnovation from "@/about/driving-vector.png";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
-import drivingInnovation from "@/about/driving-vector.png";
 const DrivingInnovation = () => {
   const { details } = usePageData();
   return (
@@ -28,6 +27,7 @@ const DrivingInnovation = () => {
             {details?.aboutPage?.drivingInnovationEverywhere?.description.map(
               (val, i) => (
                 <Typography
+                key={i}
                   sx={{
                     fontSize: { lg: 20, xs: 15 },
                     fontFamily: adelle.style.fontFamily,
