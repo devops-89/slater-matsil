@@ -89,19 +89,32 @@ const HeroSection3 = () => {
         alignItems: "center",
         justifyContent: "center",
         mt: 2,
+        mb: 4,
+        backgroundColor: COLORS.LIGHT_GREY,
+        borderTop: "1px solid #000 ",
+        borderBottom: "1px solid #000 ",
       }}
     >
-      <Container maxWidth="lg">
+      <Container
+        maxWidth="lg"
+        sx={
+          {
+            // borderRadius: 2,
+            // p: 2,
+          }
+        }
+      >
         <Swiper
           onSwiper={setSwiperInstance}
           modules={[Autoplay]}
-          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          autoplay={{ delay: 7000, disableOnInteraction: false }}
           spaceBetween={20}
           loop={true}
+          grabCursor
         >
           {banners.map((val, i) => (
             <SwiperSlide key={i}>
-              <Grid container alignItems={"flex-start"} spacing={5}>
+              <Grid container alignItems={"center"} spacing={5}>
                 <Grid size={6}>
                   <Typography
                     sx={{
@@ -139,7 +152,7 @@ const HeroSection3 = () => {
                         textTransform: "uppercase",
                         mt: 3,
                         borderRadius: 20,
-                        width: { lg: 250, xs: 180 },
+                        width: { lg: 200, xs: 180 },
                         p: 1.5,
                       }}
                     >
@@ -164,7 +177,7 @@ const HeroSection3 = () => {
           ))}
         </Swiper>
 
-        <SwiperNavButtons swiper={swiperInstance} />
+        {/* <SwiperNavButtons swiper={swiperInstance} /> */}
       </Container>
     </Box>
   );
