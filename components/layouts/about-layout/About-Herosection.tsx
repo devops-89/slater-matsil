@@ -4,9 +4,6 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography, useMediaQuery } from "@mui/material";
-import Image from "next/image";
-import React from "react";
-import banner from "@/about/heroImage.jpg";
 import ReactPlayer from "react-player";
 const AboutHerosection = () => {
   const { details } = usePageData();
@@ -59,7 +56,7 @@ const AboutHerosection = () => {
             }}
           />
         </Box> */}
-        <Grid container sx={{ mt: 10 }}>
+        <Grid container sx={{ mt: 14,mx:12 }}>
           <Grid size={12}>
             <ReactPlayer
               src="https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"

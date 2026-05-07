@@ -2,7 +2,7 @@
 
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
-import { Box, Container, Stack } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 const TABS = [
   { id: "about", label: "ABOUT" },
@@ -32,7 +32,8 @@ const InsightsDetailsTabBar = ({
             sx={{
               display: "flex",
               alignItems: "stretch",
-              borderRadius: "36px",
+              borderRadius: "40px",
+              mt:5,
               bgcolor: COLORS.PRIMARY_BLUE,
               p: 0.75,
               minWidth: { md: 587, xs: "auto" },

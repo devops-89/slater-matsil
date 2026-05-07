@@ -110,33 +110,14 @@ const InsightsDetailsContentSection = ({
           justifyContent="space-between"
           sx={{ mb: 8, position: "relative" }}
         >
-          <Box sx={{ maxWidth: { xs: "100%", md: "60%" } }}>
-            <Box sx={{ mb: 2 }}>
-              <HeadingStar title="About" />
-            </Box>
-            <Typography
-              sx={{
-                fontFamily: tradeGothic.style.fontFamily,
-                fontWeight: 700,
-                fontSize: { xs: 24, md: 36 },
-                lineHeight: 1.2,
-                color: COLORS.PRIMARY_BLUE,
-                textTransform: "capitalize",
-              }}
-            >
-              {sections.aboutProvidedBy && `${sections.aboutProvidedBy} `}
-              <Box component="span" sx={{ color: COLORS.PRIMARY_GREEN }}>
-                {sections.aboutProvidedByName}
-              </Box>
-            </Typography>
-          </Box>
 
           <Typography
             sx={{
               display: { xs: "none", md: "flex" },
+              mx:20,
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
-              fontSize: { md: 100 },
+              fontSize: { md: 140 },
               textTransform: "lowercase",
               pointerEvents: "none",
               userSelect: "none",

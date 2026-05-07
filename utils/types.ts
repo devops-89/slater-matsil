@@ -1,13 +1,11 @@
 import {
-  ButtonProps,
-  IconProps,
   SvgIconProps,
   SxProps,
-  Theme,
+  Theme
 } from "@mui/material";
 import { StaticImageData } from "next/image";
-import { PRACTICE_GROUP_TAB_DATA, WHO_WE_SERVE_PAGE_TAB_DATA } from "./enum";
 import React from "react";
+import { PRACTICE_GROUP_TAB_DATA, WHO_WE_SERVE_PAGE_TAB_DATA } from "./enum";
 
 export interface HOMEPAGE_DATA_PROPS {
   title: string;
