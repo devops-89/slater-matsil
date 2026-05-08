@@ -53,7 +53,7 @@ const InsightsDetailsContentSection = ({
       <Box sx={{ py: { xs: 4, md: 8 }, pb: 10 }}>
         <Container maxWidth="lg">
           <Box sx={{ mb: 3 }}>
-            <HeadingStar title="Lawyer Rankings" />
+            <HeadingStar title="Rankings" />
           </Box>
           <Box
             sx={{
@@ -149,6 +149,9 @@ const InsightsDetailsContentSection = ({
               pb: 0.5,
               mb: 1,
             }}
+            dangerouslySetInnerHTML={{
+    __html: data.content,
+  }}
           >
             {sections.region}
           </Typography>

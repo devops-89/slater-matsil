@@ -963,7 +963,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       professionalMemberships: {
         heading: "Client Engagement",
         content:
-          "Chambers research highlighted Ira's attentiveness, with one client stating: 'Ira is extremely attentive. He takes the time to explain all the details, discuss strategy and options.'",
+          `Chambers research highlighted Ira's attentiveness, with one client stating: "Ira is extremely attentive. He takes the time to explain all the details, discuss strategy and options."`,
       },
       career: {
         heading: "Technical Focus",
@@ -998,7 +998,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       professionalMemberships: {
         heading: "Market Presence",
         content:
-          "Partner Srini Chakravarthi noted: 'Being recognized for the third year in a row is an incredible honor. This ranking reflects the collaborative role of our team and the deep technical and legal knowledge we provide.'",
+          `Partner Srini Chakravarthi noted: "Being recognized for the third year in a row is an incredible honor. This ranking reflects the collaborative role of our team and the deep technical and legal knowledge we provide."`,
       },
       career: {
         heading: "Engineering Strength",
@@ -1217,7 +1217,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       professionalMemberships: {
         heading: "Market Reputation",
         content:
-          "Industry leaders have described Ira as 'very, very talented,' while clients praise him as a 'very creative thinker and very responsive.'",
+          `Industry leaders have described Ira as "very, very talented," while clients praise him as a "very creative thinker and very responsive."`,
       },
       career: {
         heading: "Strategic IP Advice",
@@ -1318,12 +1318,12 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       practiceAreas: {
         heading: "Presentation Highlights",
         content:
-          "Srini Chakravarthi delivered a presentation on Building and Monetizing the 'Perfect' Patent Portfolio at the 2020 ACP MetroCon, an annual conference held by the Association of Chinese Professionals Foundation.",
+          `Srini Chakravarthi delivered a presentation on Building and Monetizing the "Perfect" Patent Portfolio at the 2020 ACP MetroCon, an annual conference held by the Association of Chinese Professionals Foundation.`,
       },
       professionalMemberships: {
         heading: "Perfect Portfolio Strategy",
         content:
-          "In determining what makes a 'perfect' patent portfolio, Srini reviewed different business scenarios that most inventors and companies face, exploring how these scenarios impact strategic development and monetization.",
+          `In determining what makes a "perfect" patent portfolio, Srini reviewed different business scenarios that most inventors and companies face, exploring how these scenarios impact strategic development and monetization.`,
       },
       career: {
         heading: "Investment Outlook",
@@ -1503,7 +1503,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       career: {
         heading: "Strategic Advantage",
         content:
-          "Ranking 3rd in the nation highlights our ability to secure patents quickly and effectively, significantly reducing the cost and time-to-market for our clients' innovations.",
+          "Ranking third in the nation highlights our ability to secure patents quickly and effectively, significantly reducing the cost and time-to-market for our clients' innovations.",
       },
       personal: {
         heading: "Operational Excellence",
@@ -2943,7 +2943,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
   slug: "iam-patent-1000-rankings-2018",
   hero: {
     name: "Slater Matsil, LLP",
-    band: "IAM Patent 1000 Rankings",
+    band: "Individual and Firm Recognition",
     guide: "Intellectual Property – United States",
     yearsRanked: "2018 Edition (7th Annual)",
   },
@@ -2960,15 +2960,15 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
 
     professionalMemberships: {
-      heading: "About IAM Patent 1000",
+      heading: "Individual Recognition",
       content:
-        "The IAM Patent 1000 is a globally respected guide that identifies top patent professionals and firms through extensive research, client feedback, and peer evaluation.",
+        "In addition to the firmwide honor, Steven Slater was individually ranked for his outstanding expertise and high-level client service.",
     },
 
     career: {
-      heading: "Firm Strength",
+      heading: "Excellent Recognized",
       content:
-        "This recognition highlights Slater Matsil’s depth of expertise and its ability to deliver strategic and high-quality patent services across industries.",
+        "Being ranked as a firm demonstrates Slater Matsil’s strong reputation and depth of expertise.  Steven Slater’s individual ranking further underscores the exceptional talent of its practitioners.",
     },
 
     personal: {
@@ -2984,7 +2984,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     name: "Ira S. Matsil",
     band: "D Magazine",
     guide: "Best Lawyers in Dallas – Intellectual Property",
-    yearsRanked: "2015, 2017, 2018, 2019",
+    yearsRanked: "2015-2018, 2020, 2024, 2026",
     profileImage: ira,
   },
   contact: commonContact,
@@ -3389,7 +3389,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
   slug: "iam-patent-1000-rankings-2020",
   hero: {
     name: "Slater Matsil, LLP",
-    band: "IAM Patent 1000 Rankings",
+    band: "Individual and Firm Recognition",
     guide: "Intellectual Property – United States",
     yearsRanked: "2020 Edition",
   },
@@ -3406,15 +3406,15 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
 
     professionalMemberships: {
-      heading: "About IAM Patent 1000",
+      heading: "Individual Recognition",
       content:
-        "The IAM Patent 1000 is a globally respected guide that identifies top patent professionals and firms through extensive research, client feedback, and peer evaluation.",
+        "Ira Matsil, Steven Slater, and Srini Chakravarthi were each individually recognized for their technical insight, legal judgment, and trusted client service.",
     },
 
     career: {
-      heading: "Firm Strength",
+      heading: "Excellent Recognized",
       content:
-        "This recognition highlights Slater Matsil’s depth of expertise and its ability to deliver high-quality and strategic patent services across industries.",
+        "Together, these honors underscore the depth of talent that defines Slater Matsil and reinforce the firm’s reputation as a go to partner for sophisticated patent matters.",
     },
 
     personal: {
@@ -3430,7 +3430,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     name: "Ira S. Matsil",
     band: "Texas Super Lawyers",
     guide: "Intellectual Property",
-    yearsRanked: "2012–2025",
+    yearsRanked: "2012–2026",
     profileImage: ira,
   },
   contact: commonContact,
@@ -3442,7 +3442,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     practiceAreas: {
       heading: "Recognition",
       content:
-        "Ira S. Matsil has been honored as a Texas Super Lawyer from 2012 through 2025, recognizing his excellence and leadership in intellectual property law.",
+        "Ira S. Matsil has been honored as a Texas Super Lawyer from 2012 through 2026, recognizing his excellence and leadership in intellectual property law.",
     },
 
     professionalMemberships: {
@@ -3470,7 +3470,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     name: "Steven H. Slater",
     band: "Texas Super Lawyers",
     guide: "Intellectual Property",
-    yearsRanked: "2009–2021",
+    yearsRanked: "2009–2023, 2025-2026",
     profileImage: steven,
   },
   contact: commonContact,
@@ -3482,7 +3482,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     practiceAreas: {
       heading: "Recognition",
       content:
-        "Steven H. Slater has been honored as a Texas Super Lawyer from 2009 through 2021, recognizing his excellence in intellectual property law.",
+        "Steven H. Slater has been honored as a Texas Super Lawyer from 2009 through 2023 and again from 2025 to 2026, recognizing his excellence in intellectual property law.",
     },
 
     professionalMemberships: {
@@ -3564,15 +3564,15 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
 
     professionalMemberships: {
-      heading: "About IAM Patent 1000",
+      heading: "Individual Recognition",
       content:
-        "The IAM Patent 1000 is a globally respected guide that identifies top patent professionals and firms through extensive research, client feedback, and peer evaluation.",
+        "Ira Matsil, Steven Slater, Srini Chakravarthi, and Michael Kucher were each individually recognized for their leadership in patent prosecution and strategic IP counseling.",
     },
 
     career: {
-      heading: "Firm Strength",
+      heading: "Excellence Recognized",
       content:
-        "This recognition highlights Slater Matsil’s depth of expertise and its ability to deliver strategic and high-quality patent services across industries.",
+        "These recognitions collectively underscore the strength of Slater Matsil’s team and its trusted position in handling advanced patent challenges.",
     },
 
     personal: {

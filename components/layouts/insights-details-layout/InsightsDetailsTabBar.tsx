@@ -6,7 +6,7 @@ import { Box, Container } from "@mui/material";
 
 const TABS = [
   { id: "about", label: "ABOUT" },
-  { id: "rankings", label: "Lawyer Rankings" },
+  { id: "rankings", label: "Rankings" },
 ];
 
 interface InsightsDetailsTabBarProps {

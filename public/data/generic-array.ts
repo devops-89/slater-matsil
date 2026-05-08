@@ -978,7 +978,7 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "D Magazine named Steven H. Slater as “Best Lawyers in Dallas 2020, 2018, 2017, 2016, 2015” in the Intellectual Property Category",
+      "D Magazine named Steven H. Slater as “Best Lawyers in Dallas 2015-2018, 2020, 2024, 2026,” in the Intellectual Property Category",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "steven-slater-d-magazine-best-lawyers",
@@ -992,14 +992,14 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Steven H. Slater has been honored as a Texas Super Lawyer from 2009-2021",
+      "Steven H. Slater has been honored as a Texas Super Lawyer from 2009-2023, 2025-2026",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "steven-slater-super-lawyer-honors",
   },
   {
     title:
-      "Ira S. Matsil has been honored as a Texas Super Lawyer from 2012-2025",
+      "Ira S. Matsil has been honored as a Texas Super Lawyer from 2012-2026",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "ira-matsil-super-lawyer-honors",
@@ -1026,14 +1026,8 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     slug: "juristat-semiconductors-2019",
   },
   {
-    title: "Slater Matsil named Top Patent Law Firm",
-    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
-    category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "dallas-business-journal-top-firm-2019",
-  },
-  {
     title:
-      "D Magazine named Ira S. Matsil among “Best Lawyers in Dallas 2019, 2018, 2017, 2015” in the Intellectual Property Category.",
+      "D Magazine named Ira S. Matsil among “Best Lawyers in Dallas 2026, 2024, 2019, 2018, 2017, 2015” in the Intellectual Property Category.",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "ira-matsil-d-magazine-best-lawyers",
