@@ -149,9 +149,6 @@ const InsightsDetailsContentSection = ({
               pb: 0.5,
               mb: 1,
             }}
-            dangerouslySetInnerHTML={{
-    __html: data.content,
-  }}
           >
             {sections.region}
           </Typography>
