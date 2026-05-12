@@ -44,7 +44,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     slug: "zachary-williams",
     professionals_Details_HeroSection: {
       name: "Zachary Williams",
-      email: "",
+      email: "zwilliams@slatermatsil.com",
       phoneNumber: "972.732.1001",
       img: zachary,
       vCardData: {
@@ -442,7 +442,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
   {
     slug: "ruojian-zhang",
     professionals_Details_HeroSection: {
-      name: "RuoJian Zhang",
+      name: "Ruojian Zhang",
       email: "rzhang@slatermatsil.com",
       phoneNumber: "972.732.1001",
       img: ruojian,
@@ -3111,7 +3111,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     slug: "chuanming-wei",
     professionals_Details_HeroSection: {
       name: "Chuanming Wei, Ph.D.",
-      email: "cwei@slatermatsil.com",
+      email: "mwei@slatermatsil.com",
       phoneNumber: "972.732.1001",
       img: chuanming,
       vCardData: {

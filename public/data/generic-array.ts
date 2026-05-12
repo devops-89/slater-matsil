@@ -723,7 +723,7 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Srini Chakravarthi was Organizer / MC of moderated session on “Strategies for Drafting Claims and Ethics in Patent Prosecution,” North Dallas DBA IP Section CLE, Wednesday, April 12, 2023.",
+      "Srini Chakravarthi was Organizer / MC of moderated session on “Strategies for Drafting Claims and Ethics in Patent Prosecution,” North Dallas Bar Association IP Section CLE, Wednesday, April 12, 2023.",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-dba-cle-2023",
@@ -828,7 +828,7 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Srini Chakravarthi conducted a moderated session on “Strategies in Developing a Global Patent Portfolio and Ethical Considerations in Patent Prosecution” for the North Dallas DBA IP Section CLE on Thursday, May 19, 2022.",
+      "Srini Chakravarthi conducted a moderated session on “Strategies in Developing a Global Patent Portfolio and Ethical Considerations in Patent Prosecution” for the North Dallas Bar Association IP Section CLE on Thursday, May 19, 2022.",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "dba-cle-srini-2022",
@@ -1676,7 +1676,7 @@ export const professionalsListData = [
   },
   {
     img: ruojian,
-    name: "RuoJian Zhang",
+    name: "Ruojian Zhang",
     designation: "Distinguished Patent Agent",
     slug: "ruojian-zhang",
   },
@@ -1701,7 +1701,7 @@ export const professionalsListData = [
   },
   {
     img: ava,
-    name: "Ava Chung",
+    name: "Ava Chuang",
     designation: "Attorney at Law",
     slug: "ava-chung",
   },

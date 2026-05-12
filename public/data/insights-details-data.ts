@@ -351,7 +351,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     practiceAreas: {
       heading: "CLE Session",
       content:
-        "Srini Chakravarthi conducted a moderated session on “Strategies in Developing a Global Patent Portfolio and Ethical Considerations in Patent Prosecution” for the North Dallas Dallas Bar Association IP Section CLE on Thursday, May 19, 2022.",
+        "Srini Chakravarthi conducted a moderated session on “Strategies in Developing a Global Patent Portfolio and Ethical Considerations in Patent Prosecution” for the North Dallas Bar Association IP Section CLE on Thursday, May 19, 2022.",
     },
 
     professionalMemberships: {
@@ -441,13 +441,34 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     slug: "john-koetter-rising-star-2021",
     hero: {
       name: "John Koetter",
-      band: "Rising Star – Super Lawyers",
+      band: "Honorable Barbara M.G. Lynn American Inn of Court",
       guide: "Super Lawyers Rising Stars 2021",
-      yearsRanked: "Rising Star 2021",
+      yearsRanked: "Exclusive Selection 2019-2021",
       profileImage: john,
     },
     contact: commonContact,
-    contentSections: baseSections("John Koetter"),
+    contentSections: {
+      aboutProvidedBy: "Provided By",
+      aboutProvidedByName: "John Koetter",
+      region: "USA",
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "John Koetter has been selected to join the Honorable Barbara M.G. Lynn American Inn of Court.",
+      },
+      professionalMemberships: {
+        heading: "About the Honorable Barbara M.G. Lynn American Inn of Court",
+        content: "The American Inns of Court is a distinguished organization dedicated to promoting excellence in professionalism, ethics, civility, and legal skills within the legal community. Membership is selective and recognizes attorneys who demonstrate leadership and commitment to the profession.",
+      },
+      career: {
+        heading: "Distinction Earned",
+        content: "Being selected to join an invitation-only organization of judges and attorneys spotlights John as being a top intellectual property attorney in the Dallas legal community. ",
+      },
+      personal: {
+        heading: "Contact",
+        content: "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
   {
     slug: "srini-chakravarthi-chambers-usa-2025",
@@ -927,7 +948,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       professionalMemberships: {
         heading: "Leadership & Client Service",
         content:
-          "A recognized market leader noted: 'Srini is the key point of contact for managing the work entrusted by our team. He excels with the extraordinary service his leadership provides to our team.'",
+          `A recognized market leader noted: "Srini is the key point of contact for managing the work entrusted by our team. He excels with the extraordinary service his leadership provides to our team."`,
       },
       career: {
         heading: "Technical Expertise",
@@ -2355,7 +2376,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       professionalMemberships: {
         heading: "Consistent Excellence",
         content:
-          "This is the third year in a row Ira has been ranked. An industry leader was quoted as saying, 'I would rate Ira’s client service and general level of service, level of sophistication and commercial awareness and vision as all very strong.'",
+          `This is the third year in a row Ira has been ranked. An industry leader was quoted as saying, "I would rate Ira’s client service and general level of service, level of sophistication and commercial awareness and vision as all very strong."`,
       },
       career: {
         heading: "Strategic Advocacy",
@@ -2491,7 +2512,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     practiceAreas: {
       heading: "CLE Session",
       content:
-        "Srini Chakravarthi served as Organizer and Master of Ceremonies for a moderated session on “Strategies for Drafting Claims and Ethics in Patent Prosecution,” presented at the North Dallas Dallas Bar Association IP Section CLE on Wednesday, April 12, 2023.",
+        "Srini Chakravarthi served as Organizer and Master of Ceremonies for a moderated session on “Strategies for Drafting Claims and Ethics in Patent Prosecution,” presented at the North Dallas Bar Association IP Section CLE on Wednesday, April 12, 2023.",
     },
 
     professionalMemberships: {
@@ -2944,7 +2965,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
   hero: {
     name: "Slater Matsil, LLP",
     band: "Individual and Firm Recognition",
-    guide: "Intellectual Property – United States",
+    guide: "IAM Patent 1000 Rankings",
     yearsRanked: "2018 Edition (7th Annual)",
   },
   contact: commonContact,
@@ -2966,7 +2987,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
 
     career: {
-      heading: "Excellent Recognized",
+      heading: "Excellence Recognized",
       content:
         "Being ranked as a firm demonstrates Slater Matsil’s strong reputation and depth of expertise.  Steven Slater’s individual ranking further underscores the exceptional talent of its practitioners.",
     },
@@ -2996,7 +3017,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     practiceAreas: {
       heading: "Recognition",
       content:
-        "D Magazine named Ira S. Matsil among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2015, 2017, 2018, and 2019.",
+        "D Magazine named Ira S. Matsil among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2026, 2024, 2019, 2018, 2017 and 2015.",
     },
 
     professionalMemberships: {
@@ -3302,7 +3323,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     career: {
       heading: "Firm Strength",
       content:
-        "These rankings reflect Slater Matsil’s strong presence in high-tech patent litigation and the firm’s ability to consistently deliver successful outcomes for clients in complex intellectual property matters.",
+        "These rankings reflect Slater Matsil’s strong presence in high-tech patent prosecution and the firm’s ability to consistently deliver successful outcomes for clients in complex intellectual property matters.",
     },
 
     personal: {
@@ -3351,7 +3372,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     name: "Steven H. Slater",
     band: "D Magazine",
     guide: "Best Lawyers in Dallas – Intellectual Property",
-    yearsRanked: "2015, 2016, 2017, 2018, 2020",
+    yearsRanked: "2015 - 2018, 2020, 2024, 2026",
     profileImage: steven,
   },
   contact: commonContact,
@@ -3390,7 +3411,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
   hero: {
     name: "Slater Matsil, LLP",
     band: "Individual and Firm Recognition",
-    guide: "Intellectual Property – United States",
+    guide: "IAM Patent 1000 Rankings",
     yearsRanked: "2020 Edition",
   },
   contact: commonContact,
@@ -3412,9 +3433,9 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
 
     career: {
-      heading: "Excellent Recognized",
+      heading: "Excellence Recognized",
       content:
-        "Together, these honors underscore the depth of talent that defines Slater Matsil and reinforce the firm’s reputation as a go to partner for sophisticated patent matters.",
+        "Together, these honors underscore the depth of talent that defines Slater Matsil and reinforce the firm’s reputation as a go - to partner for sophisticated patent matters.",
     },
 
     personal: {
