@@ -1,6 +1,7 @@
+import benjamin from "@/professionals/Ben_Nise.jpg";
+import srini from "@/professionals/Srini.jpg";
 import ira from "@/professionals/transparent/ira-matsil.png";
 import john from "@/professionals/transparent/john-koetter.png";
-import srini from "@/professionals/transparent/srini.png";
 import steven from "@/professionals/transparent/steven-slater.png";
 import { INSIGHTS_DETAIL_PROPS } from "@/utils/types";
 const commonContact = {
@@ -193,7 +194,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       practiceAreas: {
         heading: "Firm Overview",
         content:
-          "Slater Matsil is best known as one of the top patent prosecution firms in the U.S., consistently ranking amongst the most productive practices in the country. Slater Matsil was ranked in Best Performing Law Firms Overall, Overall Best Performing Law Firms in High-Tech and Most Active Law Firms in High-Tech by Patexia in 2025. In addition, PatentBots named Slater Matsil in the top 10 for patent quality and the Harrity Analytics Team named the Firm as a Top Patent Firm based on the total number of U.S. utility patents that issued in 2024. The Firm has obtained over 25,000 U.S. patents for clients, including some of the most patent-prolific companies in the world. Slater Matsil's team includes patent and trademark attorneys, patent agents, and technical advisors. Many of the Firm's patent attorneys are also experienced trial lawyers who handle cases in the U.S. Federal Courts, before the Patent Trial and Appeal Board of the U.S. Patent and Trademark Office, and before the United States International Trade Commission, often in partnership with other firms. Slater Matsil's clients include some of the world's largest electronics and telecommunications companies and numeroU.S. up-and-coming start-up ventures.",
+          "Slater Matsil is best known as one of the top patent prosecution firms in the U.S., consistently ranking amongst the most productive practices in the country. Slater Matsil was ranked in Best Performing Law Firms Overall, Overall Best Performing Law Firms in High-Tech and Most Active Law Firms in High-Tech by Patexia in 2025. In addition, PatentBots named Slater Matsil in the top 10 for patent quality and the Harrity Analytics Team named the Firm as a Top Patent Firm based on the total number of U.S. utility patents that issued in 2024. The Firm has obtained over 25,000 U.S. patents for clients, including some of the most patent-prolific companies in the world. Slater Matsil's team includes patent and trademark attorneys, patent agents, and technical advisors. Many of the Firm's patent attorneys are also experienced trial lawyers who handle cases in the U.S. Federal Courts, before the Patent Trial and Appeal Board of the U.S. Patent and Trademark Office, and before the United States International Trade Commission, often in partnership with other firms. Slater Matsil's clients include some of the world's largest electronics and telecommunications companies and numerous U.S. up-and-coming start-up ventures.",
       },
       professionalMemberships: {
         heading: "Firm Details",
@@ -258,7 +259,176 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     contact: commonContact,
     contentSections: iraSections(),
   },
+  {
+  slug: "benjamin-nise-ai-patent-prosecution-dba-cle",
+  hero: {
+    name: "Benjamin Nise",
+    band: "Dallas Bar Association IP Section CLE",
+    guide:
+      "Using AI in Your Day-to-Day Practice from a Litigation and Prosecution Perspective",
+    yearsRanked: "2026",
+    profileImage: benjamin,
+  },
 
+  contact: commonContact,
+
+  contentSections: {
+    aboutProvidedBy: "Provided by",
+    aboutProvidedByName: "Benjamin Nise",
+    region: "USA",
+
+    practiceAreas: {
+      heading: "CLE Presentation",
+      content:
+        "Benjamin Nise recently presented at the Dallas Bar Association IP Section CLE held on March 26, 2026, speaking on the prosecution perspective of integrating artificial intelligence into day-to-day patent practice.",
+    },
+
+    professionalMemberships: {
+      heading: "AI Tools in Patent Practice",
+      content:
+        "The presentation examined the range of AI tools available to patent practitioners, including purpose-built patent platforms, direct use of frontier large language models, and internally developed AI solutions, along with the trade-offs associated with each approach.",
+    },
+
+    career: {
+      heading: "Ethics and Practical Risks",
+      content:
+        'A significant focus of the discussion addressed ethical obligations, confidentiality concerns, and the risks of over-reliance on AI-generated work product. Benjamin referred to this as the "GPS Effect," describing the potential loss of situational awareness when practitioners depend too heavily on automated systems.',
+    },
+
+    personal: {
+      heading: "Future of AI and Patent Examination",
+      content:
+        "Benjamin also discussed how continuing advancements in AI models and the USPTO’s increasing adoption of AI-assisted examination tools are expected to raise the quality standards for patent practitioners moving forward.",
+    },
+  },
+},
+{
+  slug: "srini-chakravarthi-headnotes-persuasive-writing",
+  hero: {
+    name: "Srini Chakravarthi",
+    band: "Dallas Bar Association Headnotes",
+    guide: "What Every Lawyer Should Know About Persuasive Writing",
+    yearsRanked: "2026",
+    profileImage: srini,
+  },
+
+  contact: commonContact,
+
+  contentSections: {
+    aboutProvidedBy: "Provided by",
+    aboutProvidedByName: "Srini Chakravarthi",
+    region: "USA",
+
+    practiceAreas: {
+      heading: "Headnotes Publication",
+      content:
+        "Slater Matsil Partner Srini Chakravarthi, Ph.D., was featured in the May 2026 edition of the Dallas Bar Association’s Headnotes publication.",
+    },
+
+    professionalMemberships: {
+      heading: "Persuasive Writing Article",
+      content:
+        'In his article titled "What Every Lawyer Should Know About Persuasive Writing," Srini shares practical and science-backed strategies for developing persuasive legal arguments based on his experience drafting patent appeal briefs.',
+    },
+
+    career: {
+      heading: "Practical Guidance for Lawyers",
+      content:
+        "The article discusses effective brief structure, techniques for maximizing persuasive impact, and methods for eliminating unnecessary clutter that can weaken even strong legal arguments.",
+    },
+
+    personal: {
+      heading: "Publication Details",
+      content:
+        "Dallas Bar Association Headnotes | May 2026 Edition | Persuasive Legal Writing and Advocacy",
+    },
+  },
+},
+{
+  slug: "srini-chakravarthi-american-inn-of-court-community-service",
+  hero: {
+    name: "Srini Chakravarthi",
+    band: "Honorable Barbara M.G. Lynn American Inn of Court",
+    guide:
+      "IP for Innovators and Entrepreneurs: Protecting Your Path to Independence",
+    yearsRanked: "2025 - 2026",
+    profileImage: srini,
+  },
+
+  contact: commonContact,
+
+  contentSections: {
+    aboutProvidedBy: "Provided by",
+    aboutProvidedByName: "Srini Chakravarthi",
+    region: "USA",
+
+    practiceAreas: {
+      heading: "Community Service Leadership",
+      content:
+        "Srini Chakravarthi recently led the 2025-2026 community service project for the Honorable Barbara M.G. Lynn American Inn of Court focused on helping innovators and entrepreneurs better understand intellectual property protection.",
+    },
+
+    professionalMemberships: {
+      heading: "Educational Events",
+      content:
+        'The initiative delivered two free educational programs across the DFW Metroplex, including "IP for App Developers" at the UTD Jindal School of Business in Richardson and "IP for Veteran Entrepreneurs" at the UTA Center for Entrepreneurship and Technology Development in Arlington in collaboration with the USPTO.',
+    },
+
+    career: {
+      heading: "Supporting Innovation",
+      content:
+        "Marking the 250th anniversary of the Declaration of Independence, the project emphasized empowering entrepreneurs through practical intellectual property guidance designed to support innovation and business independence.",
+    },
+
+    personal: {
+      heading: "Open Source Software Presentation",
+      content:
+        "Srini also co-presented at the Inn’s March dinner on the history of open source software, highlighting how legal frameworks supporting collaborative innovation represent a lasting form of community service.",
+    },
+  },
+},
+{
+  slug: "srini-chakravarthi-teaches-patent-law-texas-am",
+  hero: {
+    name: "Srini Chakravarthi",
+    band: "Texas A&M University School of Law",
+    guide: "Third Year Teaching Patent Law",
+    yearsRanked: "2026",
+    profileImage: srini,
+  },
+
+  contact: commonContact,
+
+  contentSections: {
+    aboutProvidedBy: "Provided by",
+    aboutProvidedByName: "Srini Chakravarthi",
+    region: "USA",
+
+    practiceAreas: {
+      heading: "Patent Law Teaching",
+      content:
+        "Srini Chakravarthi recently completed his third year teaching Patent Law at Texas A&M University School of Law, continuing his commitment to educating the next generation of legal professionals.",
+    },
+
+    professionalMemberships: {
+      heading: "Classroom Engagement",
+      content:
+        "Srini noted that working with students who are just beginning their legal careers keeps the material fresh and engaging each year, and he continues to value the weekly classroom discussions and thoughtful student participation.",
+    },
+
+    career: {
+      heading: "Successful Semester",
+      content:
+        "The firm congratulates Srini on another successful semester and thanks this year’s class for their engagement, insightful questions, and dedication throughout the course.",
+    },
+
+    personal: {
+      heading: "Academic Institution",
+      content:
+        "Texas A&M University School of Law | Patent Law Course | 2026 Academic Year",
+    },
+  },
+},
   {
     slug: "slater-matsil-iam-patent-1000-2022",
     hero: {
@@ -442,7 +612,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     hero: {
       name: "John Koetter",
       band: "Honorable Barbara M.G. Lynn American Inn of Court",
-      guide: "Super Lawyers Rising Stars 2021",
+      guide: "Honorable Barbara M.G.Lynn American Inn of Court",
       yearsRanked: "Exclusive Selection 2019-2021",
       profileImage: john,
     },
@@ -912,7 +1082,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       professionalMemberships: {
         heading: "Client Service Excellence",
         content:
-          "An industry leader highlighted Ira's exceptional performance, stating: 'I would rate Ira’s client service, level of sophistication, and commercial awareness as all very strong. He has extensive experience in all aspects of patent work and is highly professional.'",
+          `An industry leader highlighted Ira's exceptional performance, stating: "I would rate Ira’s client service, level of sophistication, and commercial awareness as all very strong. He has extensive experience in all aspects of patent work and is highly professional."`,
       },
       career: {
         heading: "Strategic IP Counsel",
@@ -3000,12 +3170,55 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
   },
 },
 {
+  slug: "ira-matsil-smu-ip-symposium",
+  hero: {
+    name: "Ira S. Matsil",
+    band: "SMU IP Symposium",
+    guide:
+      "Patent Law Politics and Computer-Related Inventions Panel",
+    yearsRanked: "2026",
+    profileImage: ira,
+  },
+
+  contact: commonContact,
+
+  contentSections: {
+    aboutProvidedBy: "Provided by",
+    aboutProvidedByName: "Ira S. Matsil",
+    region: "USA",
+
+    practiceAreas: {
+      heading: "Symposium Participation",
+      content:
+        "Ira Matsil participated in a panel discussion on the politics of patent law and computer-related inventions at the 22nd Annual Symposium on Emerging Issues in Intellectual Property hosted by Southern Methodist University’s Dedman School of Law.",
+    },
+
+    professionalMemberships: {
+      heading: "Discussion Topics",
+      content:
+        "During the panel, Ira traced the evolution of computer-related invention jurisprudence at the Federal Circuit and the U.S. Supreme Court, discussing how decades of conflicting decisions have left subject matter eligibility law unsettled and difficult for practitioners and innovators to navigate.",
+    },
+
+    career: {
+      heading: "Legislative Developments",
+      content:
+        "He also addressed pending legislative efforts aimed at bringing greater clarity and predictability to patent eligibility standards for computer-related inventions.",
+    },
+
+    personal: {
+      heading: "Event Information",
+      content:
+        "22nd Annual Symposium on Emerging Issues in Intellectual Property | Southern Methodist University Dedman School of Law ",
+    },
+  },
+},
+{
   slug: "ira-matsil-d-magazine-best-lawyers",
   hero: {
     name: "Ira S. Matsil",
     band: "D Magazine",
     guide: "Best Lawyers in Dallas – Intellectual Property",
-    yearsRanked: "2015-2018, 2020, 2024, 2026",
+    yearsRanked: "2015,2017 - 2019, 2024, 2026",
     profileImage: ira,
   },
   contact: commonContact,
@@ -3384,7 +3597,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     practiceAreas: {
       heading: "Recognition",
       content:
-        "D Magazine named Steven H. Slater among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2015, 2016, 2017, 2018, and 2020.",
+        "D Magazine named Steven H. Slater among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2015 - 2018, 2020, 2024 and 2026.",
     },
 
     professionalMemberships: {

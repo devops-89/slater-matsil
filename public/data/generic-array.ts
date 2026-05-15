@@ -35,6 +35,7 @@ import chad from "@/professionals/transparent/chad-terrell.png";
 import chuanming from "@/professionals/transparent/chuanming-wei.png";
 import elizabeth from "@/professionals/transparent/elizabeth.png";
 import fantai from "@/professionals/transparent/fantai-kong.png";
+import hsin from "@/professionals/transparent/Hsin.png";
 import ira from "@/professionals/transparent/ira-matsil.png";
 import james from "@/professionals/transparent/james-kesterson.png";
 import jeffrey from "@/professionals/transparent/jeffrey-robert.png";
@@ -1032,7 +1033,41 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "ira-matsil-d-magazine-best-lawyers",
   },
-
+  {
+    title:
+      "Ira Matsil Speaks on Patent Law Politics and Computer-Related Inventions at SMU IP Symposium",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "ira-matsil-smu-ip-symposium",
+  },
+  {
+    title:
+      "Benjamin Nise Discusses AI Use in Patent Prosecution at Dallas Bar Association IP Section CLE",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "benjamin-nise-ai-patent-prosecution-dba-cle",
+  },
+    {
+    title:
+      "Srini Chakravarthi Wraps Up Third Year Teaching Patent Law at Texas A&M University School of Law",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-teaches-patent-law-texas-am",
+  },
+    {
+    title:
+      "srini-chakravarthi-american-inn-of-court-community-serviceSrini Chakravarthi Leads Community Service Project for the Honorable Barbara M.G. Lynn American Inn of Court",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-american-inn-of-court-community-service",
+  },
+      {
+    title:
+      "Srini Chakravarthi’s Article was published in the Dallas Bar Association’s Headnotes.",
+    bgColor: COLORS.LIGHT_GREY,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "srini-chakravarthi-headnotes-persuasive-writing",
+  },
   {
     title:
       "John Koetter has been selected to join the Honorable Barbara M.G. Lynn American Inn of Court",
@@ -1693,6 +1728,13 @@ export const professionalsListData = [
     designation: "Attorney at Law",
     slug: "srini-chakravarthi",
   },
+    {
+    img: hsin,
+    name: "Hsin-Ya Kuo, Ph.D",
+    designation: "Patent Agent",
+    slug: "hsin-ya-kuo",
+  },
+
   {
     img: amitava,
     name: "Amitava Chatterjee",
@@ -1762,7 +1804,7 @@ export const professionalsListData = [
   {
     img: jonathan,
     name: "Jonathan Insler, Ph.D.",
-    designation: "Patent Agent",
+    designation: "Attorney at Law",
     slug: "jonathan-insler",
   },
   {

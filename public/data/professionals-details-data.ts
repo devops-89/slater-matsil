@@ -1,8 +1,12 @@
+import benjamin_nise from "@/professionals/Ben_Nise.jpg";
+import brian_mair from "@/professionals/Brian_Mair.jpg";
+import hsin from "@/professionals/hsin.jpeg";
+import robert from "@/professionals/Robert_Graham.jpg";
+import ruojian from "@/professionals/Ruojian Zhang.jpg";
+import srini from "@/professionals/Srini.jpg";
 import amitava from "@/professionals/transparent/amitava-chatterjee.png";
 import ava from "@/professionals/transparent/ava-chung.png";
 import barry from "@/professionals/transparent/barry-dove.png";
-import benjamin_nise from "@/professionals/transparent/benjamin-nise.png";
-import brian_mair from "@/professionals/transparent/brian-mair.png";
 import brian from "@/professionals/transparent/carlson.png";
 import chad from "@/professionals/transparent/chad-terrell.png";
 import chuanming from "@/professionals/transparent/chuanming-wei.png";
@@ -24,12 +28,9 @@ import paata from "@/professionals/transparent/patta-kakashvili.png";
 import payam from "@/professionals/transparent/payam-rashidi.png";
 import peter from "@/professionals/transparent/peter-meza.png";
 import rameez from "@/professionals/transparent/rameez-samnakay.png";
-import robert from "@/professionals/transparent/robert-graham.png";
 import roger from "@/professionals/transparent/roger-knapp.png";
-import ruojian from "@/professionals/transparent/ruojian-zhang.png";
 import shervin from "@/professionals/transparent/shervin-fatehi.png";
 import soonshin from "@/professionals/transparent/soonshin.png";
-import srini from "@/professionals/transparent/srini.png";
 import stephen from "@/professionals/transparent/stephen-cortiaus.png";
 import steven_slater from "@/professionals/transparent/steven-slater.png";
 import steven from "@/professionals/transparent/steven_yates.png";
@@ -43,7 +44,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
   {
     slug: "zachary-williams",
     professionals_Details_HeroSection: {
-      name: "Zachary Williams",
+      name: "Zachary Williams,Ph.D.",
       email: "zwilliams@slatermatsil.com",
       phoneNumber: "972.732.1001",
       img: zachary,
@@ -107,6 +108,90 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
   },
+   {
+    slug: "hsin-ya-kuo",
+    professionals_Details_HeroSection: {
+      name: "Hsin-Ya Kuo,Ph.D.",
+      email: "hkuo@slatermatsil.com",
+      phoneNumber: "972.732.1001",
+      img: hsin,
+      vCardData: {
+        name: "Hsin-Ya Kuo",
+        formattedName: "Hsin-Ya kuo",
+        electronicMail: "",
+        telephoneNumber: "972.732.1001",
+        organization: "Slater Matsil",
+        job_title: "Patent Agent",
+        address: {
+          street: "17950 Preston Road, Suite 1000",
+          city: "Dallas",
+          postalCode: "75252-57293",
+          countryRegion: "USA",
+          state: "TX",
+        },
+        url: "",
+        firstName: "Hsin-Ya",
+        lastName: "Kuo",
+      },
+    },
+    PROFESSIONAL_BIO_DATA: [
+      {
+        description:
+          "Hsin-Ya is a patent agent with a combined ten years of academic and industrial research experience in electrochemistry, analytical chemistry, and organometallics catalysis. She holds a Ph.D. in Chemistry from Princeton University, specializing in molecular catalysts for electrochemical CO₂ reduction and fostering collaborative research in materials science, ultrafast spectroscopy, and theoretical chemistry. Prior to joining the firm, Hsin-Ya worked as an R&D Associate at Reckitt, where she leveraged her chemistry background to drive innovations in hygiene and personal care products. Being native in Mandarin and fluent in English, she is committed to leveraging her scientific expertise and technical curiosity to safeguard clients' intellectual properties.",
+      },
+    ],
+    PROFESSIONAL_EDUCATION_DATA: [
+      {
+        description:
+          "Hsin-Ya received her Ph.D. in Chemistry from Princeton University, where she was awarded the Edward C. Taylor Fellowship and the Natural Sciences and Engineering Fellowship. Prior to Princeton, she completed both her M.S. and B.S. in Chemistry at National Taiwan University, where her catalysis research was awarded the Outstanding Poster Award from Catalysis and Fine Chemicals in Japan and the Dean's Award from the School of Science.",
+      },
+    ],
+    PROFESSIONAL_ADMISSIONS_DATA: [
+      {
+        list: [
+          {
+            label: "Edward C. Taylor Fellowship, Princeton University in 2017",
+          },
+          {
+            label:
+              "Natural Sciences and Engineering Fellowship, Princeton University in 2015",
+          },
+          {
+            label:
+              "Excellent Chemistry Teaching Award, National Taiwan University in 2013",
+          },
+          {
+            label:
+              "Dean's Award of School of Science, National Taiwan University in 2012",
+          },
+          {
+            label:
+              "Distinguished Research Poster Award, National Taiwan University in 2012",
+          },
+          {
+            label:
+              "Outstanding Poster Award, Catalysis and Fine Chemicals, Japan in 2011",
+          },
+          {
+            label:
+              "Dr. Bing Y. Yeh Scholarship, National Taiwan University in 2008",
+          },
+          {
+            label:
+              "Presidential Award, National Taiwan University in 2006 & 2007",
+          },
+        ],
+      },
+    ],
+    PROFESSIONAL_ARTICLES_DATA: [],
+    PROFESSIONAL_ASSOCIATIONS_DATA: [
+      {
+        description:
+          "Hsin-Ya is a co-author of eight peer-reviewed publications and has delivered presentations at ACS National Meetings and international symposia.",
+      },
+    ],
+  },
+
   {
     slug: "steven-yates",
     professionals_Details_HeroSection: {
@@ -262,7 +347,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
   {
     slug: "srini-chakravarthi",
     professionals_Details_HeroSection: {
-      name: "Srini Chakravarthi",
+      name: `Srini Chakravarthi,   Ph.D.`,
       email: "schakravarthi@slatermatsil.com",
       phoneNumber: "972.732.1001",
       img: srini,
@@ -559,7 +644,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     PROFESSIONAL_EDUCATION_DATA: [
       {
         description:
-          "Yumin is registered to practice before the United States Patent and Trademark Office. Yumin earned a Bachelor of Engineering from Xi'an Jiaotong University in 1994 and a Master of Science from the Chinese Academy of Sciences in 1997. He obtained a Ph.D. in electrical engineering from Lehigh University in 2000.",
+          "Yumin earned a Bachelor of Engineering from Xi'an Jiaotong University in 1994 and a Master of Science from the Chinese Academy of Sciences in 1997. He obtained a Ph.D. in electrical engineering from Lehigh University in 2000.",
       },
     ],
     PROFESSIONAL_ADMISSIONS_DATA: [
@@ -569,6 +654,9 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
           {
             label:
               "US6968494B2, Method and apparatus for adaptively coding a data signal",
+          },
+          {
+            label:"Yumin is registered to practice before the United States Patent and Trademark Office.",
           },
           {
             label:
@@ -1521,7 +1609,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     PROFESSIONAL_EDUCATION_DATA: [
       {
         description:
-          "Jonathan graduated from Cornell University with a Bachelor of Arts in 2003, majoring in physics and mathematics. Jonathan obtained a Master of Arts in physics from the University of Rochester in 2005, and he received his Ph.D. in experimental particle physics from the University of Rochester in 2011. Jonathan is currently attending the University of New Hampshire Franklin Pierce School of Law studying for his Juris Doctor degree with a focus on Intellectual Property, Technology, and Information Law.",
+          "Jonathan graduated with his J.D. from the University of New Hampshire Franklin Pierce School of Law with a focus on Intellectual Property, Technology, and Information Law in 2025. Jonathan received his Ph.D. in experimental particle physics from the University of Rochester in 2011 and obtained a Master of Arts in Physics from the University of Rochester in 2005. Jonathan graduated from Cornell University with a Bachelor of Arts in 2003, majoring in Physics and Mathematics.",
       },
     ],
     PROFESSIONAL_ADMISSIONS_DATA: [
@@ -1893,9 +1981,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     ],
     PROFESSIONAL_ADMISSIONS_DATA: [
       {
-        description: "Fantai holds five patents granted by the USPTO.",
-      },
-      {
+        description: "Fantai holds five patents granted by the USPTO:",
         list: [
           {
             label:
@@ -1921,9 +2007,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       {
         description:
           "Fantai has authored over 33 original research publications that have received more than 1700 citations. He has also presented his work at various meetings and conferences. Selected publications include:",
-      },
-      {
-        list: [
+          list: [
           {
             label:
               "F. Kong, C. Liang, L. Wang, K. Cho, et al., “Kinetic Stability of Bulk LiNiO2 and Surface Degradation by Oxygen Evolution in LiNiO2-Based Cathode Materials”, Advanced Energy Materials, 9 (2019) 1802586.",
@@ -2218,9 +2302,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       {
         description:
           "Ira is a member of the State Bar of Texas and is registered to practice before the United States Patent and Trademark Office. Ira’s honors include:",
-      },
-      {
-        list: [
+          list: [
           {
             label: "Chambers ranked 2021-2025",
           },
@@ -2502,6 +2584,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
   },
+  
   {
     slug: "benjamin-nise",
     professionals_Details_HeroSection: {
@@ -2553,42 +2636,40 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
     PROFESSIONAL_ADMISSIONS_DATA: [
+  {
+    description:
+      "Benjamin is a member of the State Bar of Texas and is registered to practice as a patent attorney before the United States Patent and Trademark Office.",
+  },
+  {
+    description: "Patents:",
+    list: [
       {
-        description:
-          "Benjamin is a member of the State Bar of Texas and is registered to practice as a patent attorney before the United States Patent and Trademark Office.",
+        label:
+          'N. Yousefi, K. McClellan, and B. Nise, "Analog PLL Clock Recovery Circuit and LAN Transceiver Employing the Same," U.S. Patent 5448598',
       },
       {
-        description: "Patents:",
+        label:
+          'B. Nise "Method and Apparatus for Autocalibrating the Center Frequency of a Voltage Controlled Oscillator of a Phase Locked Loop," U.S. Patent 5696468',
       },
       {
-        list: [
-          {
-            label:
-              'N. Yousefi, K. McClellan, and B. Nise, "Analog PLL Clock Recovery Circuit and LAN Transceiver Employing the Same," U.S. Patent 5448598',
-          },
-          {
-            label:
-              'B. Nise "Method and Apparatus for Autocalibrating the Center Frequency of a Voltage Controlled Oscillator of a Phase Locked Loop," U.S. Patent 5696468',
-          },
-          {
-            label:
-              'T. Blyth, B. Nise, D. Wayne, "Double-sided pulse width modulator," U.S. Patent 5963106',
-          },
-          {
-            label:
-              'B. Nise, C. Mead, X Fang, "Passive switched capacitor delta analog-to-digital converter with programmable gain control," U.S. Patent 5995036',
-          },
-          {
-            label:
-              'R. Green, B. Nise, "Apparatus and method for detecting a low-battery power condition and generating a user perceptible warning," U.S. Patent 6310556',
-          },
-          {
-            label:
-              'B. Nise, "Efficient Polyphase Filter Having a Compact Structure," U.S. Patent 7190942',
-          },
-        ],
+        label:
+          'T. Blyth, B. Nise, D. Wayne, "Double-sided pulse width modulator," U.S. Patent 5963106',
+      },
+      {
+        label:
+          'B. Nise, C. Mead, X Fang, "Passive switched capacitor delta analog-to-digital converter with programmable gain control," U.S. Patent 5995036',
+      },
+      {
+        label:
+          'R. Green, B. Nise, "Apparatus and method for detecting a low-battery power condition and generating a user perceptible warning," U.S. Patent 6310556',
+      },
+      {
+        label:
+          'B. Nise, "Efficient Polyphase Filter Having a Compact Structure," U.S. Patent 7190942',
       },
     ],
+  },
+],
     PROFESSIONAL_ASSOCIATIONS_DATA: [
       {
         description:
