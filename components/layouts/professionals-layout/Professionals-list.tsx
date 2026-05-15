@@ -1,3 +1,8 @@
+import { usePageData } from "@/store/usePageData";
+import { COLORS } from "@/utils/enum";
+import { tradeGothic } from "@/utils/fonts";
+import { TEXTFIELD_STYLES } from "@/utils/styles";
+import { Search } from "@mui/icons-material";
 import {
   Box,
   Container,
@@ -11,11 +16,6 @@ import {
 } from "@mui/material";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import ProfessionalsCard from "./components/Professionals-Card";
-import { usePageData } from "@/store/usePageData";
-import { TEXTFIELD_STYLES } from "@/utils/styles";
-import { COLORS } from "@/utils/enum";
-import { Search } from "@mui/icons-material";
-import { tradeGothic } from "@/utils/fonts";
 const ALPHABETS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 const ProfessionalList = () => {
@@ -27,10 +27,18 @@ const ProfessionalList = () => {
     setSearch(e.target.value);
   };
 
-  const sortedFullList = useMemo(() => {
-    const list = details?.firm_professionals?.PROFESSIONAL_LIST_PROPS || [];
-    return [...list].sort((a, b) => a.name.localeCompare(b.name));
-  }, [details]);
+const sortedFullList = useMemo(() => {
+  const list = details?.firm_professionals?.PROFESSIONAL_LIST_PROPS || [];
+
+  return [...list].sort((a, b) => {
+    const getLastName = (name: string) => {
+      const parts = name.trim().split(" ");
+      return parts[parts.length - 1].toLowerCase();
+    };
+
+    return getLastName(a.name).localeCompare(getLastName(b.name));
+  });
+}, [details]);
 
   const [data, setData] = useState(sortedFullList);
 
