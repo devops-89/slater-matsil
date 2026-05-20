@@ -21,12 +21,17 @@ import practiceGroupPageHeroImage2 from "@/practice-group/hero2.jpg";
 import practiceGroupPageHeroImage3 from "@/practice-group/hero3.jpg";
 import practiceGroupPageHeroImage1 from "@/practice-group/hero4.jpg";
 import professionalsHeroImage from "@/professionals/hero_section.png";
-import blog1 from "@/public/images/blog/blog1.jpg";
+import blog10 from "@/public/images/blog/Blog10.png";
+import blog11 from "@/public/images/blog/Blog11.png";
+import blog12 from "@/public/images/blog/Blog12.png";
+import blog13 from "@/public/images/blog/Blog13.png";
+import blog14 from "@/public/images/blog/Blog14.png";
+import blog15 from "@/public/images/blog/Blog15.png";
+import blog16 from "@/public/images/blog/Blog16.png";
 import blog2 from "@/public/images/blog/blog2.jpg";
-import blog3 from "@/public/images/blog/blog3.jpg";
-import blog4 from "@/public/images/blog/blog4.png";
-import blog5 from "@/public/images/blog/blog5.jpg";
-import blog6 from "@/public/images/blog/blog6.jpg";
+import blog7 from "@/public/images/blog/Blog7.png";
+import blog8 from "@/public/images/blog/Blog8.png";
+import blog9 from "@/public/images/blog/Blog9.png";
 import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
 import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.png";
 import serviceAreas1 from "@/public/images/home/practice_areas/practice_areas1.svg";
@@ -1091,7 +1096,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     insightsData: INSIGHTS_CARD_DATA,
     blogSection: {
       upcomingTitle: "Upcoming",
-      watchPastTitle: "Watch Past Webinars",
+      watchPastTitle: "Blogs",
       ctaTitle: "Ready to Safeguard Your Innovation?",
       ctaDescription:
         "At Slater Matsil, our patent professionals provide strategic guidance to protect your intellectual property and support your long-term growth.",
@@ -1123,66 +1128,175 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         },
       ],
       pastWebinars: [
+        // {
+        //   id: 1,
+        //   date: "22 July 2024",
+        //   readTime: "4 min",
+        //   title: "Our SaaS Product Just Launched!",
+        //   description:
+        //     "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
+        //   img: blog1,
+        //   slug: "saas-product-just-launched",
+        // },
+        // {
+        //   id: 2,
+        //   date: "15 June 2024",
+        //   readTime: "6 min",
+        //   title: "Mastering Intellectual Property",
+        //   description:
+        //     "Understanding the core principles of IP is essential for any modern business to maintain a competitive advantage.",
+        //   img: blog2,
+        //   slug: "mastering-intellectual-property",
+        // },
+        // {
+        //   id: 3,
+        //   date: "10 May 2024",
+        //   readTime: "5 min",
+        //   title: "The Role of Patents in Biotech",
+        //   description:
+        //     "Biotechnology innovation relies heavily on strong patent protection. Here's what you need to know about the current landscape.",
+        //   img: blog3,
+        //   slug: "patents-in-biotech",
+        // },
+        // {
+        //   id: 4,
+        //   date: "18 April 2024",
+        //   readTime: "8 min",
+        //   title: "Cybersecurity & Legal Compliance",
+        //   description:
+        //     "As digital threats evolve, so do the legal requirements for data protection and cybersecurity resilience.",
+        //   img: blog4,
+        //   slug: "cybersecurity-legal-compliance",
+        // },
+        // {
+        //   id: 5,
+        //   date: "05 March 2024",
+        //   readTime: "3 min",
+        //   title: "Sustainable Tech Innovations",
+        //   description:
+        //     "Green technology is more than just a trend; it's a critical sector for future patent development and global impact.",
+        //   img: blog5,
+        //   slug: "sustainable-tech-innovations",
+        // },
+        // {
+        //   id: 6,
+        //   date: "22 February 2024",
+        //   readTime: "5 min",
+        //   title: "Global IP Strategy for Startups",
+        //   description:
+        //     "How small companies can navigate international patent systems without breaking the bank.",
+        //   img: blog6,
+        //   slug: "global-ip-strategy-startups",
+        // },
         {
-          id: 1,
-          date: "22 July 2024",
-          readTime: "4 min",
-          title: "Our SaaS Product Just Launched!",
-          description:
-            "Remote work has drastically improved my design skills by giving me the freedom to experiment, focus, and learn at my own pace.",
-          img: blog1,
-          slug: "saas-product-just-launched",
-        },
-        {
-          id: 2,
-          date: "15 June 2024",
-          readTime: "6 min",
-          title: "Mastering Intellectual Property",
-          description:
-            "Understanding the core principles of IP is essential for any modern business to maintain a competitive advantage.",
-          img: blog2,
-          slug: "mastering-intellectual-property",
-        },
-        {
-          id: 3,
-          date: "10 May 2024",
-          readTime: "5 min",
-          title: "The Role of Patents in Biotech",
-          description:
-            "Biotechnology innovation relies heavily on strong patent protection. Here's what you need to know about the current landscape.",
-          img: blog3,
-          slug: "patents-in-biotech",
-        },
-        {
-          id: 4,
-          date: "18 April 2024",
-          readTime: "8 min",
-          title: "Cybersecurity & Legal Compliance",
-          description:
-            "As digital threats evolve, so do the legal requirements for data protection and cybersecurity resilience.",
-          img: blog4,
-          slug: "cybersecurity-legal-compliance",
-        },
-        {
-          id: 5,
-          date: "05 March 2024",
-          readTime: "3 min",
-          title: "Sustainable Tech Innovations",
-          description:
-            "Green technology is more than just a trend; it's a critical sector for future patent development and global impact.",
-          img: blog5,
-          slug: "sustainable-tech-innovations",
-        },
-        {
-          id: 6,
-          date: "22 February 2024",
-          readTime: "5 min",
-          title: "Global IP Strategy for Startups",
-          description:
-            "How small companies can navigate international patent systems without breaking the bank.",
-          img: blog6,
-          slug: "global-ip-strategy-startups",
-        },
+    id: 7,
+    date: "September 2025",
+    readTime: "8 min",
+    title:
+      "Navigating 371 Applications: What Every Applicant Should Know",
+    description:
+      "Learn the critical filing requirements, translation rules, and procedural pitfalls applicants face before the 30-month national stage deadline.",
+    img: blog7,
+    slug: "navigating-371-applications",
+  },
+  {
+    id: 8,
+    date: "2026",
+    readTime: "7 min",
+    title:
+      "AI in Patent Prosecution: Why Judgment Still Matters",
+    description:
+      "Discover how AI tools are transforming patent drafting and prosecution while attorney oversight remains essential for quality and defensibility.",
+    img: blog8,
+    slug: "ai-in-patent-prosecution",
+  },
+  {
+    id: 9,
+    date: "2026",
+    readTime: "7 min",
+    title:
+      "AI and Inventorship: What Every Innovator Should Know",
+    description:
+      "Understand how AI-assisted inventions fit into modern inventorship rules and why human contribution remains legally required.",
+    img: blog9,
+    slug: "ai-and-inventorship",
+  },
+  {
+    id: 10,
+    date: "2026",
+    readTime: "8 min",
+    title:
+      "Avoiding Ethical Pitfalls in Patent Prosecution",
+    description:
+      "Explore the ethical duties, disclosure obligations, and prosecution risks every patent practitioner and client should understand.",
+    img: blog10,
+    slug: "ethical-pitfalls-patent-prosecution",
+  },
+  {
+    id: 11,
+    date: "2026",
+    readTime: "9 min",
+    title:
+      "What Every Lawyer Should Know About Persuasive Writing",
+    description:
+      "Effective legal writing depends on clarity, structure, and persuasive communication that keeps readers engaged from start to finish.",
+    img: blog11,
+    slug: "persuasive-writing-lawyers",
+  },
+  {
+    id: 12,
+    date: "2026",
+    readTime: "10 min",
+    title:
+      "Patents With Licensing in Mind",
+    description:
+      "Practical guidance on building patent portfolios designed for licensing, litigation, and long-term commercial value.",
+    img: blog12,
+    slug: "patents-with-licensing-in-mind",
+  },
+  {
+    id: 13,
+    date: "2026",
+    readTime: "11 min",
+    title:
+      "Quantum Computing and Intellectual Property",
+    description:
+      "Quantum computing innovations are accelerating rapidly, creating new challenges and opportunities for patent protection.",
+    img: blog13,
+    slug: "quantum-computing-intellectual-property",
+  },
+  {
+    id: 14,
+    date: "May 2026",
+    readTime: "12 min",
+    title: "Should You Still File an IPR?",
+    description:
+      "A detailed guide comparing inter partes review, ex parte reexamination, and district court litigation in today’s evolving patent landscape.",
+    img: blog14,
+    slug: "should-you-still-file-ipr",
+  },
+  {
+    id: 15,
+    date: "2026",
+    readTime: "9 min",
+    title:
+      "USPTO Changes and Impact on Patent Prosecution",
+    description:
+      "Major USPTO policy and procedural changes are reshaping patent prosecution, eligibility analysis, and examination strategy.",
+    img: blog15,
+    slug: "uspto-changes-patent-prosecution",
+  },
+  {
+  id: 16,
+  date: "July 2025",
+  readTime: "14 min",
+  title:
+    "Federal Circuit Year in Review 2025",
+  description:
+    "Major Federal Circuit and Supreme Court decisions are reshaping patent litigation, AI patent eligibility, trademark law, copyright liability, and post-grant strategies.",
+  img: blog16,
+  slug: "federal-circuit-year-in-review-2025",
+},
       ],
     },
   },

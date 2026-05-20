@@ -1,17 +1,19 @@
 import benjamin_nise from "@/professionals/Ben_Nise.jpg";
 import brian_mair from "@/professionals/Brian_Mair.jpg";
+import chad from "@/professionals/chad2.png";
+import shervin from "@/professionals/fatehi2.png";
 import hsin from "@/professionals/hsin.jpeg";
+import fantai from "@/professionals/kong2.png";
 import robert from "@/professionals/Robert_Graham.jpg";
 import ruojian from "@/professionals/Ruojian Zhang.jpg";
+import soonshin from "@/professionals/shoonshin2.png";
 import srini from "@/professionals/Srini.jpg";
 import amitava from "@/professionals/transparent/amitava-chatterjee.png";
 import ava from "@/professionals/transparent/ava-chung.png";
 import barry from "@/professionals/transparent/barry-dove.png";
 import brian from "@/professionals/transparent/carlson.png";
-import chad from "@/professionals/transparent/chad-terrell.png";
 import chuanming from "@/professionals/transparent/chuanming-wei.png";
 import elizabeth from "@/professionals/transparent/elizabeth.png";
-import fantai from "@/professionals/transparent/fantai-kong.png";
 import ira from "@/professionals/transparent/ira-matsil.png";
 import james from "@/professionals/transparent/james-kesterson.png";
 import jeffrey from "@/professionals/transparent/jeffrey-robert.png";
@@ -29,15 +31,13 @@ import payam from "@/professionals/transparent/payam-rashidi.png";
 import peter from "@/professionals/transparent/peter-meza.png";
 import rameez from "@/professionals/transparent/rameez-samnakay.png";
 import roger from "@/professionals/transparent/roger-knapp.png";
-import shervin from "@/professionals/transparent/shervin-fatehi.png";
-import soonshin from "@/professionals/transparent/soonshin.png";
 import stephen from "@/professionals/transparent/stephen-cortiaus.png";
 import steven_slater from "@/professionals/transparent/steven-slater.png";
 import steven from "@/professionals/transparent/steven_yates.png";
-import vijay from "@/professionals/transparent/vijay-desai.png";
 import yumin from "@/professionals/transparent/yumin.png";
 import zachary from "@/professionals/transparent/zachary-williams.png";
 import zhu from "@/professionals/transparent/zhu-he.png";
+import vijay from "@/professionals/Vijay2.png";
 import { PROFESSIONAL_DETAILS_PROPS } from "@/utils/types";
 
 export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [

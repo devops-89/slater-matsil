@@ -1,3 +1,7 @@
+"use client";
+
+import { usePageData } from "@/store/usePageData";
+import { COLORS } from "@/utils/enum";
 import {
   Box,
   Card,
@@ -8,11 +12,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
-import { COLORS } from "@/utils/enum";
-import { usePageData } from "@/store/usePageData";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useState } from "react";
 
 const BlogSection = () => {
   const { details } = usePageData();
@@ -21,10 +23,26 @@ const BlogSection = () => {
   const upcomingWebinars = blogSection?.upcoming || [];
   const pastWebinars = blogSection?.pastWebinars || [];
 
+  // PAGINATION
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 6;
+
+  const totalPages = Math.ceil(
+    pastWebinars.length / cardsPerPage
+  );
+
+  const startIndex = (currentPage - 1) * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
+
+  const currentBlogs = pastWebinars.slice(
+    startIndex,
+    endIndex
+  );
+
   return (
     <Box sx={{ mb: { lg: 10, xs: 6 } }}>
       {/* Upcoming section */}
-      <Box sx={{ backgroundColor: "#ECF8F8", py: { lg: 8, xs: 4 } }}>
+      {/* <Box sx={{ backgroundColor: "#ECF8F8", py: { lg: 8, xs: 4 } }}>
         <Container maxWidth="lg">
           <Typography
             component={motion.h2}
@@ -86,7 +104,7 @@ const BlogSection = () => {
                           display: "flex",
                           flexDirection: { xs: "column", sm: "row" },
                           alignItems: "stretch",
-                          height: { sm: 240, xs: "auto" }, // Enforce fixed header height
+                          height: { sm: 240, xs: "auto" },
                         }}
                       >
                         <Box
@@ -137,7 +155,7 @@ const BlogSection = () => {
                           alt={webinar.title}
                           sx={{
                             width: { lg: 220, md: 200, xs: "100%" },
-                            height: "100%", // Fill the fixed height container
+                            height: "100%",
                             objectFit: "cover",
                           }}
                         />
@@ -166,7 +184,7 @@ const BlogSection = () => {
                             color: "rgba(0, 0, 0, 0.7)",
                             lineHeight: 1.6,
                             mb: 4,
-                            flex: 1, // Push the button to the bottom
+                            flex: 1,
                           }}
                         >
                           {webinar.description}
@@ -199,7 +217,7 @@ const BlogSection = () => {
             ))}
           </Grid>
         </Container>
-      </Box>
+      </Box> */}
 
       {/* Watch Past Webinars */}
       <Container maxWidth="lg" sx={{ mt: { lg: 12, xs: 8 } }}>
@@ -215,11 +233,11 @@ const BlogSection = () => {
             mb: { lg: 6, xs: 4 },
           }}
         >
-          {blogSection?.watchPastTitle || "Watch Past Webinars"}
+          {blogSection?.watchPastTitle || "Blogs"}
         </Typography>
 
         <Grid container spacing={4}>
-          {pastWebinars.map((webinar, index) => (
+          {currentBlogs.map((webinar, index) => (
             <Grid key={webinar.id} size={{ lg: 4, md: 6, xs: 12 }}>
               <Box
                 component={motion.div}
@@ -329,7 +347,7 @@ const BlogSection = () => {
                           WebkitLineClamp: 3,
                           WebkitBoxOrient: "vertical",
                           overflow: "hidden",
-                          flex: 1, // Push content to fill space
+                          flex: 1,
                         }}
                       >
                         {webinar.description}
@@ -351,60 +369,85 @@ const BlogSection = () => {
           sx={{ mt: { lg: 10, xs: 6 } }}
         >
           <Typography
+            onClick={() =>
+              currentPage > 1 &&
+              setCurrentPage(currentPage - 1)
+            }
             sx={{
-              cursor: "pointer",
+              cursor:
+                currentPage === 1
+                  ? "not-allowed"
+                  : "pointer",
               fontWeight: 700,
               fontSize: 14,
               color: COLORS.PRIMARY_BLUE,
-              opacity: 0.5,
-              "&:hover": { opacity: 1 },
+              opacity: currentPage === 1 ? 0.5 : 1,
+              "&:hover": {
+                opacity: currentPage === 1 ? 0.5 : 1,
+              },
             }}
           >
             PREVIOUS
           </Typography>
+
           <Stack direction="row" spacing={1} alignItems="center">
-            <Box
-              sx={{
-                width: 40,
-                height: 40,
-                borderRadius: 2,
-                backgroundColor: COLORS.PRIMARY_BLUE,
-                color: "white",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 700,
-                cursor: "pointer",
-                boxShadow: "0 4px 10px rgba(13, 95, 110, 0.2)",
-              }}
-            >
-              1
-            </Box>
-            <Box
-              sx={{
-                width: 40,
-                height: 40,
-                borderRadius: 2,
-                backgroundColor: "transparent",
-                color: COLORS.PRIMARY_BLUE,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 700,
-                cursor: "pointer",
-                "&:hover": { backgroundColor: "rgba(13, 95, 110, 0.05)" },
-              }}
-            >
-              2
-            </Box>
+            {Array.from({ length: totalPages }).map((_, index) => (
+              <Box
+                key={index}
+                onClick={() => setCurrentPage(index + 1)}
+                sx={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 2,
+                  backgroundColor:
+                    currentPage === index + 1
+                      ? COLORS.PRIMARY_BLUE
+                      : "transparent",
+                  color:
+                    currentPage === index + 1
+                      ? "white"
+                      : COLORS.PRIMARY_BLUE,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  boxShadow:
+                    currentPage === index + 1
+                      ? "0 4px 10px rgba(13, 95, 110, 0.2)"
+                      : "none",
+                  "&:hover": {
+                    backgroundColor:
+                      currentPage === index + 1
+                        ? COLORS.PRIMARY_BLUE
+                        : "rgba(13, 95, 110, 0.05)",
+                  },
+                }}
+              >
+                {index + 1}
+              </Box>
+            ))}
           </Stack>
+
           <Typography
+            onClick={() =>
+              currentPage < totalPages &&
+              setCurrentPage(currentPage + 1)
+            }
             sx={{
-              cursor: "pointer",
+              cursor:
+                currentPage === totalPages
+                  ? "not-allowed"
+                  : "pointer",
               fontWeight: 700,
               fontSize: 14,
               color: COLORS.PRIMARY_BLUE,
-              "&:hover": { color: COLORS.PRIMARY_GREEN },
+              "&:hover": {
+                color:
+                  currentPage === totalPages
+                    ? COLORS.PRIMARY_BLUE
+                    : COLORS.PRIMARY_GREEN,
+              },
             }}
           >
             NEXT
@@ -432,7 +475,6 @@ const BlogSection = () => {
             boxShadow: "0 20px 50px rgba(13, 95, 110, 0.2)",
           }}
         >
-          {/* Decorative effect for CTA */}
           <Box
             sx={{
               position: "absolute",
@@ -455,8 +497,10 @@ const BlogSection = () => {
               lineHeight: 1.2,
             }}
           >
-            {blogSection?.ctaTitle || "Ready to Safeguard Your Innovation?"}
+            {blogSection?.ctaTitle ||
+              "Ready to Safeguard Your Innovation?"}
           </Typography>
+
           <Typography
             sx={{
               fontSize: { lg: 22, md: 20, xs: 18 },
@@ -470,6 +514,7 @@ const BlogSection = () => {
             {blogSection?.ctaDescription ||
               "At Slater Matsil, our patent professionals provide strategic guidance to protect your intellectual property and support your long-term growth."}
           </Typography>
+
           <Box
             sx={{
               display: "inline-flex",
@@ -495,7 +540,8 @@ const BlogSection = () => {
               },
             }}
           >
-            {blogSection?.ctaButtonText || "SCHEDULE A CONSULTATION"}
+            {blogSection?.ctaButtonText ||
+              "SCHEDULE A CONSULTATION"}
           </Box>
         </Box>
       </Container>
