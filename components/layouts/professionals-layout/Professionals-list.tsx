@@ -5,6 +5,7 @@ import { TEXTFIELD_STYLES } from "@/utils/styles";
 import { Search } from "@mui/icons-material";
 import {
   Box,
+  Button,
   Container,
   Grid,
   IconButton,
@@ -27,17 +28,18 @@ const ProfessionalList = () => {
     setSearch(e.target.value);
   };
 
+  const getLastName = (fullName: string) => {
+  const cleanName = fullName.split(",")[0].trim();
+  const parts = cleanName.split(/\s+/);
+  return parts[parts.length - 1].toLowerCase();
+};
+
 const sortedFullList = useMemo(() => {
   const list = details?.firm_professionals?.PROFESSIONAL_LIST_PROPS || [];
 
-  return [...list].sort((a, b) => {
-    const getLastName = (name: string) => {
-      const parts = name.trim().split(" ");
-      return parts[parts.length - 1].toLowerCase();
-    };
-
-    return getLastName(a.name).localeCompare(getLastName(b.name));
-  });
+  return [...list].sort((a, b) =>
+    getLastName(a.name).localeCompare(getLastName(b.name)),
+  );
 }, [details]);
 
   const [data, setData] = useState(sortedFullList);
@@ -57,15 +59,14 @@ const sortedFullList = useMemo(() => {
     setPage(1);
   };
   const [alphabet, setAlphabet] = useState("");
-
   const searchByAlphabets = (letter: string) => {
-    setAlphabet(letter);
-    const filteredData = sortedFullList.filter((item: any) =>
-      item.name.toLowerCase().startsWith(letter),
-    );
-    setData(filteredData);
-    setPage(1);
-  };
+  setAlphabet(letter);
+  const filteredData = sortedFullList.filter((item: any) =>
+    getLastName(item.name).startsWith(letter.toLowerCase()),
+  );
+  setData(filteredData);
+  setPage(1);
+};
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -88,6 +89,7 @@ const sortedFullList = useMemo(() => {
               placeholder="Search by First/Last Name"
               sx={{
                 ...TEXTFIELD_STYLES,
+                mt:-6,
                 mb: 2,
               }}
               fullWidth
@@ -115,13 +117,46 @@ const sortedFullList = useMemo(() => {
                 },
               }}
             />
-
+            <Button
+                  onClick={() => {
+                    setAlphabet("");
+                    setData(sortedFullList);
+                    setPage(1);
+                  }}
+                  sx={{
+                    display: { xs: "flex", lg: "none" },
+                    mx: "auto",
+                    mb: 2,
+                    textTransform: "none",
+                    backgroundColor: COLORS.PRIMARY_BLUE,
+                    color: COLORS.WHITE,
+                    borderRadius: "10px",
+                    px: 3,
+                    "&:hover": {
+                      backgroundColor: COLORS.PRIMARY_BLUE,
+                    },
+                  }}
+                >
+                  View All
+                </Button>
             <Stack
               direction="row"
               alignItems={"center"}
               spacing={1}
-              justifyContent={"center"}
-              sx={{ mt: 1, flexWrap: "wrap" }}
+              justifyContent={{ lg: "center", xs: "flex-start" }}
+              sx={{
+                mt: 1,
+                flexWrap: { lg: "wrap", xs: "nowrap" },
+                overflowX: "auto",
+                width: "100%",
+                pb: 1,
+                px: 1,
+                scrollbarWidth: "none",
+                WebkitOverflowScrolling: "touch",
+                "&::-webkit-scrollbar": {
+                  display: "none",
+                },
+              }}
             >
               {ALPHABETS.map((letter) => (
                 <Typography
@@ -143,7 +178,11 @@ const sortedFullList = useMemo(() => {
                     width: 30,
                     height: 30,
                     borderRadius: 2,
-                    display: { lg: "block", xs: "none" },
+                    display: "flex",
+                    minWidth: 30,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexShrink: 0,
                   }}
                   onClick={() => searchByAlphabets(letter)}
                 >

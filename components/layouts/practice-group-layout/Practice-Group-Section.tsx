@@ -3,7 +3,7 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS, PRACTICE_GROUP_TAB_DATA } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MeetPractitioners from "./Meet-Practitioners";
 
 const PracticeGroupSection = () => {
@@ -45,13 +45,15 @@ const PracticeGroupSection = () => {
       <Container maxWidth={"lg"}>
         <Box>
           <Stack
-            direction={"row"}
-            alignItems={{ lg: "center", xs: "flex-start" }}
-            spacing={2}
-            flexWrap={"wrap"}
-            rowGap={2}
-            justifyContent={{ xs: "flex-start" }}
-          >
+                direction="row"
+                flexWrap="wrap"
+                justifyContent={{ lg: "center", xs: "flex-start" }}
+                alignItems="center"
+                useFlexGap
+                sx={{
+                  gap: { lg: 2.5, xs: 1.5 },
+                }}
+              >
             {details?.practiceGroupPage?.practiceGroup_section?.tabData.map(
               (val, i) => (
                 <Button
@@ -66,10 +68,21 @@ const PracticeGroupSection = () => {
                         : COLORS.PRIMARY_BLUE,
                     border: "2px solid" + COLORS.PRIMARY_BLUE,
                     borderRadius: "50px",
-                    fontSize: { lg: 16, xs: 12 },
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: 500,
-                    textTransform: "uppercase",
+                  fontSize: { lg: 16, xs: 12 },
+                  fontFamily: adelle.style.fontFamily,
+                  fontWeight: 500,
+                  textTransform: "uppercase",
+                  px: { lg: 3.5, xs: 2 },
+                  py: 1.2,
+                  minHeight: 52,
+                  whiteSpace: "nowrap",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    backgroundColor:
+                      active === val.title
+                        ? COLORS.TRANSPARENT
+                        : COLORS.PRIMARY_BLUE,
+                  },
                   }}
                 >
                   {val.title}

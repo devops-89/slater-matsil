@@ -1,4 +1,5 @@
 "use client";
+
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Typography } from "@mui/material";
@@ -6,7 +7,7 @@ import React from "react";
 
 const TermsOfUse = () => {
   return (
-    <Box sx={{ py: 10 }}>
+    <Box sx={{ py: { lg: 10, xs: 6 } }}>
       <Container maxWidth="lg">
         <Typography
           sx={{
@@ -20,12 +21,13 @@ const TermsOfUse = () => {
         >
           TERMS OF USE
         </Typography>
+
         <Typography
           sx={{
             fontFamily: adelle.style.fontFamily,
             fontSize: 16,
             fontWeight: 500,
-            mb: 4,
+            mb: 5,
             color: COLORS.BLACK,
           }}
         >
@@ -38,22 +40,63 @@ const TermsOfUse = () => {
         </Section>
 
         <Section title="2) Permitted use">
-          Use the site only for personal, noncommercial informational purposes.
-          You agree not to:
-          <ul style={{ paddingLeft: "20px", margin: "10px 0" }}>
-            <li>Use the site unlawfully or in violation of these Terms</li>
-            <li>
-              Copy, distribute, or create derivatives of site content without
-              written permission
-            </li>
-            <li>Use bots/scrapers or bypass security or access controls</li>
-            <li>Introduce malware or interfere with site operation</li>
-            <li>Misrepresent your identity or affiliation</li>
-            <li>
-              Remove proprietary notices or frame/mirror the site without
-              permission
-            </li>
-          </ul>
+          <>
+            <Typography
+              sx={{
+                fontFamily: adelle.style.fontFamily,
+                fontSize: 16,
+                fontWeight: 400,
+                color: COLORS.BLACK,
+                lineHeight: 1.8,
+                mb: 2,
+              }}
+            >
+              Use the site only for personal, noncommercial informational
+              purposes. You agree not to:
+            </Typography>
+
+            <Box
+              component="ul"
+              sx={{
+                pl: 3,
+                m: 0,
+                "& li": {
+                  mb: 1.5,
+                  fontFamily: adelle.style.fontFamily,
+                  fontSize: 16,
+                  fontWeight: 400,
+                  color: COLORS.BLACK,
+                  lineHeight: 1.8,
+                },
+              }}
+            >
+              <li>
+                Use the site unlawfully or in violation of these Terms
+              </li>
+
+              <li>
+                Copy, distribute, or create derivatives of site content without
+                written permission
+              </li>
+
+              <li>
+                Use bots/scrapers or bypass security or access controls
+              </li>
+
+              <li>
+                Introduce malware or interfere with site operation
+              </li>
+
+              <li>
+                Misrepresent your identity or affiliation
+              </li>
+
+              <li>
+                Remove proprietary notices or frame/mirror the site without
+                permission
+              </li>
+            </Box>
+          </>
         </Section>
 
         <Section title="3) Intellectual property">
@@ -115,25 +158,27 @@ const Section = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <Box sx={{ mb: 4 }}>
+  <Box sx={{ mb: 5 }}>
     <Typography
       sx={{
         fontFamily: tradeGothic.style.fontFamily,
-        fontSize: { lg: 20, xs: 18 },
+        fontSize: { lg: 24, xs: 20 },
         fontWeight: 700,
         color: COLORS.PRIMARY_BLUE,
-        mb: 1,
+        mb: 1.5,
+        lineHeight: 1.4,
       }}
     >
       {title}
     </Typography>
+
     <Box
       sx={{
         fontFamily: adelle.style.fontFamily,
         fontSize: 16,
         fontWeight: 400,
         color: COLORS.BLACK,
-        lineHeight: 1.6,
+        lineHeight: 1.8,
       }}
     >
       {children}

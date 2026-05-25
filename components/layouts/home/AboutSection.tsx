@@ -1,6 +1,6 @@
 "use client";
 import HeadingStar from "@/components/widgets/Heading-star";
-import AboutImage from "@/public/images/home/about-us2.jpg";
+import AboutImage from "@/public/images/home/aboutUs.jpg";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, inter, tradeGothic } from "@/utils/fonts";

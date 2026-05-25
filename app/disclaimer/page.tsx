@@ -1,4 +1,5 @@
 "use client";
+
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Typography } from "@mui/material";
@@ -20,6 +21,7 @@ const Disclaimer = () => {
         >
           DISCLAIMER
         </Typography>
+
         <Typography
           sx={{
             fontFamily: adelle.style.fontFamily,
@@ -62,7 +64,7 @@ const Disclaimer = () => {
 
         <Section title="5) Accuracy and third-party links">
           We aim to keep content accurate and current but make no warranties.
-          Content may change without notice. Third‑party links are for
+          Content may change without notice. Third-party links are for
           convenience; we do not control or endorse them.
         </Section>
 
@@ -73,15 +75,17 @@ const Disclaimer = () => {
         </Section>
 
         <Section title="7) Contact">
-          Slater Matsil, LLP
-          <br />
-          17304 Preston Rd, Suite 900
-          <br />
-          Dallas, TX 75252
-          <br />
-          info@slatermatsil.com
-          <br />
-          https://slatermatsil.com/
+          <>
+            Slater Matsil, LLP
+            <br />
+            17304 Preston Rd, Suite 900
+            <br />
+            Dallas, TX 75252
+            <br />
+            info@slatermatsil.com
+            <br />
+            https://slatermatsil.com/
+          </>
         </Section>
       </Container>
     </Box>
@@ -107,6 +111,7 @@ const Section = ({
     >
       {title}
     </Typography>
+
     <Box
       sx={{
         fontFamily: adelle.style.fontFamily,

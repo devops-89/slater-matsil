@@ -3218,7 +3218,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     name: "Ira S. Matsil",
     band: "D Magazine",
     guide: "Best Lawyers in Dallas – Intellectual Property",
-    yearsRanked: "2015,2017 - 2019, 2024, 2026",
+    yearsRanked: "2015, 2017 - 2019, 2024, 2026",
     profileImage: ira,
   },
   contact: commonContact,

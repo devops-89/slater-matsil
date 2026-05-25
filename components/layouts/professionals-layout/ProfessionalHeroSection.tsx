@@ -2,9 +2,6 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import Image from "next/image";
-import React from "react";
-import heroImage from "@/professionals/hero_section.png";
 
 const ProfessionalHeroSection = () => {
   const { details } = usePageData();
@@ -46,7 +43,7 @@ const ProfessionalHeroSection = () => {
           </Grid>
         </Grid>
 
-        <Grid container spacing={10} sx={{ mt: 4 }}>
+        {/* <Grid container spacing={10} sx={{ mt: 4 }}>
           <Grid size={{ lg: 6, xs: 12 }}>
             {details?.firm_professionals?.professionals_hero_section?.descriptions.map(
               (val, i) => (
@@ -77,7 +74,7 @@ const ProfessionalHeroSection = () => {
               style={{ width: "100%", height: "auto" }}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
       </Container>
     </Box>
   );

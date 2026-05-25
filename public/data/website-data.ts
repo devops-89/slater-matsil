@@ -49,7 +49,7 @@ import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shap
 import serviceAreas7 from "@/public/images/icons/services/ip-strategy.png";
 import serviceAreas8 from "@/public/images/icons/services/portfolio-management.png";
 import serviceAreas9 from "@/public/images/icons/services/trademarks.png";
-import serviceHeroSectionImage from "@/services/practice_Areas_banner.png";
+import serviceHeroSectionImage from "@/services/practice_Areas_banner.jpg.jpeg";
 import unparalleledimage from "@/services/unparalled-legal-services2.jpg";
 import {
   CAREER_OPEN_ROLES_TAB_DATA,
@@ -318,7 +318,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       heading1: "Redefining Patent Success with",
       heading2: "Precision and Global Reach.",
       description:
-        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 1,650 patents in 2024 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations arising from approximately $4.8 billion in research and development investment.",
+        "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 2,000 patents in 2025 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations arising from approximately $4.8 billion in research and development investment.",
       metrics_data: METRICS_DATA,
     },
     innovationInsights: {
@@ -704,7 +704,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             },
             {
               primary:
-                "Stephen A. Cortiaus, J.D., B.S.E.E.,Partner & Patent Attorney",
+                "Stephen A. Cortiaus, J.D., B.S.E.E., Partner & Patent Attorney",
               secondary:
                 "3 years of engineering experience in computer hardware, firmware, and software.",
             },
@@ -827,7 +827,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
                 "\u5192\u63da Lizabeth Vice, J.D., B.S.E.E., Partner & Patent Attorney",
             },
             {
-              primary: "\u4f55\u8457 Zhu He, J.D., M.S.C.S., Patent Attorney",
+              primary: "\u4f55\u8457 Zhu He, J.D., M.S.C.S., Partner & Patent Attorney",
             },
             {
               primary:

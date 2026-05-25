@@ -1056,7 +1056,7 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
     {
     title:
-      "srini-chakravarthi-american-inn-of-court-community-serviceSrini Chakravarthi Leads Community Service Project for the Honorable Barbara M.G. Lynn American Inn of Court",
+      "Srini Chakravarthi Leads Community Service Project for the Honorable Barbara M.G. Lynn American Inn of Court",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-american-inn-of-court-community-service",
@@ -1699,7 +1699,7 @@ export const SERVICES_DETAILS = [
 export const professionalsListData = [
   {
     img: zachary,
-    name: "Williams Zachary, Ph.D",
+    name: "Zachary Williams, Ph.D",
     designation: "Technical Advisor",
     slug: "zachary-williams",
   },

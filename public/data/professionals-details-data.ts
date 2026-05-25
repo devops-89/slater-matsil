@@ -656,9 +656,6 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
               "US6968494B2, Method and apparatus for adaptively coding a data signal",
           },
           {
-            label:"Yumin is registered to practice before the United States Patent and Trademark Office.",
-          },
-          {
             label:
               "US6754872B2, Method and apparatus for reducing channel distortion in a wireless communications network",
           },

@@ -1,19 +1,18 @@
 "use client";
 
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import slider4 from "@/home/slider/slider4.jpg";
 import slider5 from "@/home/slider/slider5.jpg";
 import slider6 from "@/home/slider/slider6.jpg";
 import { COLORS } from "@/utils/enum";
-import Image from "next/image";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import Link from "next/link";
-import { useSwiper } from "swiper/react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import { Autoplay } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
   return (
@@ -72,7 +71,7 @@ const HeroSection3 = () => {
       img: slider5,
       title: "Leadership for the Technologies of Tomorrow",
       description:
-        "Strategic IP counsel for innovations born from the world's largest R&D investments.",
+        "Strategic IP counsel for innovations derived from the world's largest R&D investments.",
     },
     {
       img: slider6,

@@ -35,6 +35,7 @@ const AboutLayout = () => {
               data-aos="fade-up"
               data-aos-delay={i * 150}
             >
+              <Link href={val.href} style={{ textDecoration: "none", display: "block" }}>
               <Box
                 sx={{
                   backgroundImage: `url(${val.img.src})`,
@@ -101,10 +102,6 @@ const AboutLayout = () => {
                   >
                     {val.title}
                   </Typography>
-                  <Link
-                    href={val.href}
-                    style={{ color: COLORS.WHITE, display: "block" }}
-                  >
                     <IconButton
                       className="arrow-icon"
                       sx={{
@@ -121,9 +118,9 @@ const AboutLayout = () => {
                     >
                       <ArrowForward />
                     </IconButton>
-                  </Link>
                 </Box>
               </Box>
+              </Link>
             </Grid>
           ))}
         </Grid>
