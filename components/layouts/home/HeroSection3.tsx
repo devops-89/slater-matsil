@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { usePageData } from "@/store/usePageData";
 
 const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
   return (
@@ -60,7 +61,10 @@ const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
 };
 const HeroSection3 = () => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
-  const banners = [
+  const { details } = usePageData();
+  const globalBanners = details?.homepage?.heroSection;
+  
+  const defaultBanners = [
     {
       img: slider4,
       title: "Protecting the Ideas That Change the World.",
@@ -80,6 +84,14 @@ const HeroSection3 = () => {
         "Delivering intellectual property solutions for clients across more than 50 countries.",
     },
   ];
+
+  const banners = Array.isArray(globalBanners) && globalBanners.length > 0
+    ? globalBanners.map((b: any, idx: number) => ({
+        ...b,
+        img: b.image || defaultBanners[idx]?.img || slider4,
+      }))
+    : defaultBanners;
+
   return (
     <Box
       sx={{
@@ -163,6 +175,8 @@ const HeroSection3 = () => {
                   <Image
                     src={val.img}
                     alt="slider image"
+                    width={800}
+                    height={450}
                     style={{
                       width: "100%",
                       height: "450px",

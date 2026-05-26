@@ -1328,7 +1328,7 @@ export const STRENGTH_CARD_DATA: STRENGTH_CARD_PROPS[] = [
   {
     img: strategicInsight,
     title: "Strategic Insight",
-    description: "Legal strategies allgned with your long-term businesses",
+    description: "Legal strategies alligned with your long-term businesses",
   },
   {
     img: clientFirstApproach,

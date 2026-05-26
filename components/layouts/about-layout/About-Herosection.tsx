@@ -13,7 +13,7 @@ const AboutHerosection = () => {
     <Box sx={{ py: { lg: 8, xs: 4 } }}>
       <Container maxWidth="lg">
         <HeadingStar
-          title={details?.aboutPage?.heroSection?.sectionTitle || ""}
+          title={details?.aboutPage?.heroSection?.sectionTitle || "About Slatermatsil"}
         />
 
         <Grid container sx={{ mt: 4 }} spacing={{ lg: 4, xs: 2 }}>
@@ -26,7 +26,7 @@ const AboutHerosection = () => {
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
-              {details?.aboutPage?.heroSection?.heading}
+              {details?.aboutPage?.heroSection?.heading || "The innovations that set you apart."}
             </Typography>
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -40,7 +40,7 @@ const AboutHerosection = () => {
                 textAlign: "justify",
               }}
             >
-              {details?.aboutPage?.heroSection?.description}
+              {details?.aboutPage?.heroSection?.description || "At Slater Matsil, we know what is required to invent something groundbreaking — and we know what it takes to guard and defend your company’s intellectual capital."}
             </Typography>
           </Grid>
         </Grid>
@@ -59,7 +59,7 @@ const AboutHerosection = () => {
         <Grid container sx={{ mt: 14,mx:12 }}>
           <Grid size={12}>
             <ReactPlayer
-              src="https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"
+              src={details?.aboutPage?.heroSection?.videoUrl || "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"}
               width={"100%"}
               height={"100%"}
               autoPlay

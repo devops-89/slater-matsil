@@ -1,0 +1,141 @@
+
+import Navbar from "@/components/widgets/navbar";
+import HeroSection3 from "@/components/layouts/home/HeroSection3";
+import AboutSection from "@/components/layouts/home/AboutSection";
+import MetricsSection from "@/components/layouts/home/MetricsSection";
+import ServiceAreas from "@/components/widgets/Service-Areas";
+import Whoweserve from "@/components/layouts/home/Who-We-Serve";
+import InsightsSection from "@/components/widgets/Insights-section";
+import ContactSection from "@/components/layouts/home/ContactSection";
+import Footer from "@/components/widgets/Footer";
+
+import { HeroCombined } from "./HeroCombined";
+import { AboutEditor } from "./AboutEditor";
+import { MetricsEditor } from "./MetricsEditor";
+import { ServiceAreasEditor } from "./ServiceAreasEditor";
+import { WhoWeServeEditor } from "./WhoWeServeEditor";
+
+import slider4 from "@/home/slider/slider4.jpg";
+import slider5 from "@/home/slider/slider5.jpg";
+import slider6 from "@/home/slider/slider6.jpg";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import { Save } from "@mui/icons-material";
+import { Box, Button, Card, Stack, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
+import React from 'react';
+
+
+
+
+
+
+export const renderDesktopPreview = (children: React.ReactNode) => (
+  <Box sx={{ width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", backgroundColor: "#FFFFFF" }}>
+    {children}
+  </Box>
+);
+
+export const HomePageForms = ({ activeSection, websiteData, updateHomepage }: any) => {
+  switch (activeSection) {
+    case 0:
+      return <HeroCombined banners={websiteData.homepage.heroSection} onChange={(newData: any) => updateHomepage('heroSection', newData)} />;
+    case 1:
+      return <AboutEditor data={websiteData.homepage.aboutSection} onChange={(newData: any) => updateHomepage('aboutSection', newData)} />;
+    case 2:
+      return <MetricsEditor data={websiteData.homepage.our_metrics} onChange={(newData: any) => updateHomepage('our_metrics', newData)} />;
+    case 3:
+      return <ServiceAreasEditor data={websiteData.homepage.service_area} onChange={(newData: any) => updateHomepage('service_area', newData)} />;
+    case 4:
+      return <WhoWeServeEditor data={websiteData.homepage.who_we_serve} onChange={(newData: any) => updateHomepage('who_we_serve', newData)} />;
+    default:
+      return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Select a section to edit.</Typography>;
+  }
+};
+
+
+
+export const HomePagePreviews = ({ activeSection, websiteData }: any) => {
+  const router = useRouter();
+
+  React.useEffect(() => {
+    if (activeSection !== false && activeSection >= 0) {
+      const element = document.getElementById(`preview-section-${activeSection}`);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }, [activeSection]);
+
+  // Intercept clicks on links in the preview and route to the corresponding admin page
+  const handlePreviewClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const anchor = target.closest('a');
+    if (anchor) {
+      e.preventDefault();
+      const href = anchor.getAttribute('href');
+      
+      if (href) {
+        if (href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) {
+          window.open(href, '_blank');
+          return;
+        }
+        
+        if (href.startsWith('#')) {
+            // Allow anchor scroll within the preview
+            return;
+        }
+
+        // Map frontend URL to admin page editor URL
+        if (href === '/') {
+          router.push('/pages/home');
+        } else {
+          // Remove leading slash
+          const path = href.startsWith('/') ? href.slice(1) : href;
+          router.push(`/pages/${path}`);
+        }
+      }
+    }
+  };
+
+  // Render the full page by stacking all real components
+  const content = (
+    <Box 
+      sx={{ display: 'flex', flexDirection: 'column' }} 
+      className="admin-preview-container"
+      onClickCapture={handlePreviewClick}
+    >
+      <style>{`
+        .admin-preview-container [data-aos] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      `}</style>
+      <Navbar />
+      <Box id="preview-section-0">
+        <HeroSection3 />
+      </Box>
+      <Box id="preview-section-1">
+        <AboutSection />
+      </Box>
+      <Box id="preview-section-2">
+        <MetricsSection />
+      </Box>
+      <Box id="preview-section-3">
+        <ServiceAreas limit={6} />
+      </Box>
+      <Box id="preview-section-4">
+        <Whoweserve />
+      </Box>
+      <Box id="preview-section-5">
+        <InsightsSection />
+      </Box>
+      <Box id="preview-section-6">
+        <ContactSection />
+      </Box>
+      <Footer />
+    </Box>
+  );
+
+  return renderDesktopPreview(content);
+};

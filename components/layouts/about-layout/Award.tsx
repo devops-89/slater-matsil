@@ -85,7 +85,7 @@ useEffect(() => {
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
-              {details?.aboutPage?.AWARDSPROPS?.heading1}
+              {details?.aboutPage?.AWARDSPROPS?.heading1 || "Distinction Defined By"}
             </Typography>
             <Typography
               sx={{
@@ -114,7 +114,7 @@ useEffect(() => {
                 },
               }}
             >
-              {details?.aboutPage?.AWARDSPROPS?.heading2}
+              {details?.aboutPage?.AWARDSPROPS?.heading2 || "Dedication And Results."}
             </Typography>
             <Grid container>
               {details?.aboutPage?.AWARDSPROPS?.awards_img?.map((val, i) => (

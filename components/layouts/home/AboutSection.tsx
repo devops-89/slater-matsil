@@ -18,7 +18,7 @@ const AboutSection = () => {
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
           <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-up">
-            <HeadingStar title="About Slatermatsil" />
+            <HeadingStar title={details?.homepage?.aboutSection?.sectionTitle || "About Slatermatsil"} />
 
             <Typography
               sx={{
@@ -29,17 +29,20 @@ const AboutSection = () => {
                 fontFamily: tradeGothic.style.fontFamily,
               }}
             >
-              Fluent in technology. Proven in law.
+              {details?.homepage?.aboutSection?.heading || "Fluent in technology. Proven in law."}
             </Typography>
             <Box>
               <Image
-                src={AboutImage}
+                src={details?.homepage?.aboutSection?.image || AboutImage}
                 alt="Team working together"
+                width={800}
+                height={600}
                 style={{
                   width: "100%",
                   height: "auto",
                   display: "block",
                   borderRadius: 20,
+                  objectFit: "cover",
                 }}
                 priority
               />
@@ -57,19 +60,7 @@ const AboutSection = () => {
                   textAlign: "justify",
                 }}
               >
-                Your most valuable ideas deserve unmatched patent protection,
-                and that’s what Slater Matsil delivers.
-              </Typography>
-              <Typography
-                sx={{
-                  color: COLORS.TEXT_PRIMARY,
-                  mb: 3,
-                  fontSize: 20,
-                  fontFamily: adelle.style.fontFamily,
-                }}
-              >
-                Our clients trust us with protecting their innovations generated
-                from billions of dollars in research and development investment.
+                {details?.homepage?.aboutSection?.description || "Your most valuable ideas deserve unmatched patent protection, and that’s what Slater Matsil delivers."}
               </Typography>
               <Link
                 href={
@@ -91,7 +82,7 @@ const AboutSection = () => {
                     fontSize: 16,
                   }}
                 >
-                  {details?.homepage?.aboutSection?.ctaButton?.text}
+                  {details?.homepage?.aboutSection?.ctaButton?.text || "More About"}
                   <ArrowRightAltIcon fontSize="small" sx={{ ml: 1 }} />
                 </Button>
               </Link>
@@ -123,7 +114,7 @@ const AboutSection = () => {
                  `,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.years}
+                      {details?.homepage?.aboutSection?.experience?.years || "25"}
                     </Typography>
                     <Box
                       sx={{
@@ -158,7 +149,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      years of
+                      {details?.homepage?.aboutSection?.experience?.title || "years of"}
                     </Typography>
                     <Typography
                       sx={{
@@ -166,7 +157,7 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      serving clients
+                      {details?.homepage?.aboutSection?.experience?.subTitle || "serving clients"}
                     </Typography>
                   </Box>
                 </Box>

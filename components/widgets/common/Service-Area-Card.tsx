@@ -38,8 +38,14 @@ const ServiceAreaCard = ({
         },
       }}
     >
-      <Box sx={{ textAlign: "center" }}>
-        <Image src={img} alt="" style={{ width: 100, height: 100 }} />
+      <Box sx={{ textAlign: "center", minHeight: 100 }}>
+        {img ? (
+          <Image src={img} alt="" style={{ width: 100, height: 100 }} />
+        ) : (
+          <Box sx={{ width: 100, height: 100, margin: "0 auto", backgroundColor: "#E5E7EB", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+             <Typography sx={{ color: "#9CA3AF", fontSize: 12 }}>[Icon]</Typography>
+          </Box>
+        )}
       </Box>
 
       <Typography

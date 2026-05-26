@@ -24,7 +24,7 @@ const InsightsSection = () => {
           data-aos="fade-up"
         >
           <HeadingStar
-            title={details?.homepage?.insights_section?.sectionTitle || ""}
+            title={details?.homepage?.insights_section?.sectionTitle || "Insights"}
           />
 
           <Typography
@@ -36,7 +36,7 @@ const InsightsSection = () => {
               mt: 2,
             }}
           >
-            {details?.homepage?.insights_section?.heading}
+            {details?.homepage?.insights_section?.heading || "Recently Published Insights."}
           </Typography>
 
           <Stack
@@ -86,13 +86,15 @@ const InsightsSection = () => {
               },
             }}
           >
-            {details?.insightsPage?.insightsData?.map((val, i) => (
+            {(details?.homepage?.insights_section?.insights_data || details?.insightsPage?.insightsData || [])
+              .slice(0, 3)
+              .map((val: any, i: number) => (
               <SwiperSlide key={i}>
                 <InsightsCard
-                  title={val.title}
-                  category={val.category}
-                  bgColor={val.bgColor}
-                  slug={val.slug}
+                  title={val.heading || val.title || ""}
+                  category={val.category?.text || val.category || "news"}
+                  bgColor={val.bgColor || (i % 2 === 0 ? COLORS.LIGHT_GREY : COLORS.PRIMARY_BLUE)}
+                  slug={val.slug || ""}
                 />
               </SwiperSlide>
             ))}

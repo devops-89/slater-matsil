@@ -21,7 +21,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
         <Grid container spacing={6} alignItems="center">
           <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up">
             <HeadingStar
-              title={details?.homepage?.our_metrics?.sectionTitle || ""}
+              title={details?.homepage?.our_metrics?.sectionTitle || "Our Metrics"}
             />
 
             <Typography
@@ -36,7 +36,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              {details?.homepage?.our_metrics?.heading?.title}
+              {details?.homepage?.our_metrics?.heading?.title || "Our firm is globally connected. Internationally"}
               <Typography
                 component={"span"}
                 sx={{
@@ -63,11 +63,11 @@ const MetricsSection: React.FC = (): JSX.Element => {
                   },
                 }}
               >
-                {details?.homepage?.our_metrics?.heading?.subTitle}
+                {details?.homepage?.our_metrics?.heading?.subTitle || "respected."}
               </Typography>
             </Typography>
 
-            {/* <Typography
+            <Typography
               sx={{
                 color: COLORS.TEXT_PRIMARY,
                 fontSize: { lg: 20, xs: 15 },
@@ -78,7 +78,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              {details?.homepage?.our_metrics?.description}
+              {details?.homepage?.our_metrics?.description || "At Slater Matsil, we know what is required to invent something groundbreaking."}
             </Typography>
             <Typography
               sx={{
@@ -91,8 +91,8 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 mt: 2,
               }}
             >
-              {details?.homepage?.our_metrics?.description2}
-            </Typography> */}
+              {details?.homepage?.our_metrics?.description2 || "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property."}
+            </Typography>
             <Link href="/contact-us">
               <Button
                 endIcon={<MailOutlineIcon />}
@@ -109,14 +109,19 @@ const MetricsSection: React.FC = (): JSX.Element => {
                   mt: 2,
                 }}
               >
-                {details?.homepage?.our_metrics?.ctaButton}
+                {details?.homepage?.our_metrics?.ctaButton || "Let's Talk Now"}
               </Button>
             </Link>
           </Grid>
 
           <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down">
             <Grid container spacing={8}>
-              {details?.homepage?.our_metrics?.metricsData.map((val, i) => (
+              {(details?.homepage?.our_metrics?.metricsData?.length ? details.homepage.our_metrics.metricsData : [
+                { title: "Patents", count: "1,650", description: "patents issued in 2024" },
+                { title: "R&D", count: "$36B", description: "in annual client R&D" },
+                { title: "Global", count: "50+", description: "countries served" },
+                { title: "Value", count: "$4.8B", description: "IP value protected" },
+              ]).map((val: any, i: number) => (
                 <Grid size={{ lg: 6, xs: 6 }} key={i}>
                   <MetricsCard title={val.title} count={val.count} />
                 </Grid>

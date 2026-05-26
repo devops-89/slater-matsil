@@ -9,29 +9,35 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React from "react";
 
 const ServiceFrameworkCard = ({
   heading,
   data,
 }: SERVICE_FRAMEWORK_CARD_PROPS) => {
   return (
-    <Box>
+    <Box sx={{ height: "100%", display: "flex" }}>
       <Box
         sx={{
           backgroundColor: COLORS.WHITE,
           border: "1px solid #EEE",
           borderRadius: "32px",
           p: 4,
+          flex: 1,
+          display: "flex",
+          flexDirection: "column"
         }}
       >
         <Typography
           sx={{
             color: COLORS.BLACK,
-            fontSize: { lg: 20, xs: 20 },
+            fontSize: { lg: 20, xs: 10 },
             fontFamily: adelle.style.fontFamily,
             fontWeight: 600,
             lineHeight: { lg: "43px", xs: "26px" },
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            width: "100%",
           }}
         >
           {heading}

@@ -1,11 +1,9 @@
 import { COLORS } from "@/utils/enum";
-import { Box, Typography } from "@mui/material";
-import React from "react";
-import settings from "@/icons/services/technical-expertise.svg";
-import Image from "next/image";
 import { adelle } from "@/utils/fonts";
 import { STRENGTH_CARD_PROPS } from "@/utils/types";
+import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
   return (
@@ -13,6 +11,7 @@ const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
       component={motion.div}
       whileHover={{ y: -10 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      sx={{ height: "100%" }}
     >
       <Box
         sx={{
@@ -23,7 +22,8 @@ const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
           alignItems: "center",
           justifyContent: "center",
           padding: "20px",
-          height: 220,
+          height: "100%", // Switch to 100% instead of 220 fixed
+          minHeight: 200, // Add minHeight instead of fixed height
           transition: "all 0.3s ease-in-out",
           cursor: "pointer",
           "&:hover": {

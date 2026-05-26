@@ -25,8 +25,13 @@ const RedefiningPatent = () => {
               <Grid container alignItems={"center"}>
                 <Grid size={{ lg: 6, xs: 12 }}>
                   <Grid container spacing={{ lg: 4, xs: 5 }}>
-                    {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.metrics_data.map(
-                      (val, i) => (
+                    {(details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.metrics_data?.length ? details.aboutPage.REDEFINING_PATENT_SUCCESS.metrics_data : [
+                      { title: "Patents", count: "1,650", description: "patents issued in 2024" },
+                      { title: "R&D", count: "$36B", description: "in annual client R&D" },
+                      { title: "Global", count: "50+", description: "countries served" },
+                      { title: "Value", count: "$4.8B", description: "IP value protected" },
+                    ]).map(
+                      (val: any, i: number) => (
                         <Grid size={{ lg: 6, xs: 12 }} key={i}>
                           <MetricsCard title={val.title} count={val.count} />
                         </Grid>
@@ -44,7 +49,7 @@ const RedefiningPatent = () => {
                       mt: { lg: 0, xs: 4 },
                     }}
                   >
-                    {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.heading1}
+                    {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.heading1 || "Redefining Patent Success with"}
                   </Typography>
                   <Typography
                     sx={{
@@ -73,7 +78,7 @@ const RedefiningPatent = () => {
                       },
                     }}
                   >
-                    {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.heading2}
+                    {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.heading2 || "Precision and Global Reach."}
                   </Typography>
                   <Typography
                     sx={{
@@ -85,7 +90,7 @@ const RedefiningPatent = () => {
                       lineHeight: { lg: "30px", xs: "25px" },
                     }}
                   >
-                    {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.description}
+                    {details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.description || "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property. Our firm successfully prosecuted over 2,000 patents in 2025 for our top clients alone, companies representing nearly $36 billion in annual R&D investment. These clients entrust us with securing patent protection for breakthrough innovations arising from approximately $4.8 billion in research and development investment."}
                   </Typography>
                 </Grid>
               </Grid>

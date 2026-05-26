@@ -34,7 +34,7 @@ const IndustriesWeServe = () => {
                   fontFamily: tradeGothic.style.fontFamily,
                 }}
               >
-                {details?.aboutPage?.industriesWeServe?.heading1}
+                {details?.aboutPage?.industriesWeServe?.heading1 || "Industries"}
               </Typography>
               <Typography
                 sx={{
@@ -63,7 +63,7 @@ const IndustriesWeServe = () => {
                   },
                 }}
               >
-                {details?.aboutPage?.industriesWeServe?.heading2}
+                {details?.aboutPage?.industriesWeServe?.heading2 || "We Serve"}
               </Typography>
             </Stack>
             <Typography
@@ -76,16 +76,19 @@ const IndustriesWeServe = () => {
                 mt: 3,
               }}
             >
-              {details?.aboutPage?.industriesWeServe?.description}
+              {details?.aboutPage?.industriesWeServe?.description || "We collaborate with a wide range of industries to deliver innovative, reliable solutions."}
             </Typography>
           </Grid>
           <Grid size={{ lg: 8, xs: 12 }}>
             <Grid container spacing={4}>
-              {details?.aboutPage?.industriesWeServe?.section_data.map(
-                (val, i) => (
+              {(details?.aboutPage?.industriesWeServe?.section_data?.length ? details.aboutPage.industriesWeServe.section_data : [
+                { dataList: [{ label: "Semiconductors" }, { label: "Software" }, { label: "Telecommunications" }, { label: "Aerospace" }, { label: "Automotive" }] },
+                { dataList: [{ label: "Financial Services" }, { label: "Energy" }, { label: "Medical Devices" }, { label: "Consumer Products" }] }
+              ]).map(
+                (val: any, i: number) => (
                   <Grid size={{ lg: 4, xs: 6 }} key={i}>
                     <List>
-                      {val.dataList.map((item, index) => (
+                      {val.dataList.map((item: any, index: number) => (
                         <ListItem key={index} disablePadding>
                           <ListItemText
                             primary={item.label}

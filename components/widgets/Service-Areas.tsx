@@ -29,7 +29,12 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
   const pathname = usePathname();
   const [showAll, setShowAll] = useState(false);
   
-  let displayData = data || details?.homepage?.service_area?.section_Data || [];
+  const defaultSectionData = [
+    { title: "PATENT PROSECUTION", description: "We are engineers. We are lawyers.", serialNumber: "01", slug: "patent-prosecution" },
+    { title: "POST GRANT CHALLENGES", description: "Our experience in litigation provides us with insight.", serialNumber: "02", slug: "post-grant" },
+    { title: "PATENT LITIGATION", description: "Global economics can complicate the patent journey.", serialNumber: "03", slug: "litigation" }
+  ];
+  let displayData = data || (details?.homepage?.service_area?.section_Data?.length ? details.homepage.service_area.section_Data : defaultSectionData);
 
   if (limit && !showAll) {
     displayData = displayData.slice(0, limit);
@@ -45,7 +50,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
         >
           <Box data-aos="fade-up">
             <HeadingStar
-              title={details?.homepage?.service_area?.sectionTitle || ""}
+              title={details?.homepage?.service_area?.sectionTitle || "Service Area"}
             />
             <Typography
               sx={{
@@ -56,7 +61,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
                 width: { lg: "70%", xs: "100%" },
               }}
             >
-              {details?.homepage?.service_area?.heading}
+              {details?.homepage?.service_area?.heading || "A Range Of Practice Areas"}
             </Typography>
           </Box>
           {details?.homepage?.service_area?.img && (

@@ -64,11 +64,12 @@ export interface PROFESSIONAL_DETAILS_PROPS {
   PROFESSIONAL_ASSOCIATIONS_DATA?: PROFESSIONAL_BIO_PROPS[];
 }
 
-interface ABOUT_US_HEROSECTION {
+export interface ABOUT_US_HEROSECTION {
   sectionTitle: string;
   heading: string;
   description: string;
-  img: StaticImageData;
+  img: StaticImageData | string;
+  videoUrl?: string;
 }
 
 interface HERO_SECTION_PROPS {
@@ -86,6 +87,7 @@ interface ABOUT_INNOVATION_INSIGHTS_PROPS {
 }
 
 interface aboutSectionProps {
+  image?: any;
   sectionTitle: string;
   heading: string;
   description: string;
@@ -176,7 +178,7 @@ interface FOOTER_CONTACT_DATA {
 }
 
 export interface SERVICES_AREAS_DATA {
-  img: StaticImageData | string;
+  img?: any;
   title: string;
   description: string;
   serialNumber: string;

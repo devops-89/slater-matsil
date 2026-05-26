@@ -63,7 +63,7 @@ const Whoweserve = () => {
                     fontWeight: 700,
                   }}
                 >
-                  {details?.homepage?.who_we_serve?.leftSection?.startingYear}
+                  {details?.homepage?.who_we_serve?.leftSection?.startingYear || "since 1999"}
                 </Typography>
                 <Typography
                   sx={{
@@ -78,7 +78,7 @@ const Whoweserve = () => {
                     fontFamily: tradeGothic.style.fontFamily,
                   }}
                 >
-                  {details?.homepage?.who_we_serve?.leftSection?.servicesLabel}
+                  {details?.homepage?.who_we_serve?.leftSection?.servicesLabel || "Global intellectual property services"}
                 </Typography>
               </Box>
             </Box>
@@ -117,7 +117,7 @@ const Whoweserve = () => {
                   color: COLORS.PRIMARY_BLUE,
                 }}
               >
-                {details?.homepage?.who_we_serve?.rightSection?.heading}
+                {details?.homepage?.who_we_serve?.rightSection?.heading || "Who we serve"}
               </Typography>
               <Divider
                 sx={{
@@ -136,12 +136,17 @@ const Whoweserve = () => {
                   textAlign: "justify",
                 }}
               >
-                {details?.homepage?.who_we_serve?.rightSection?.description}
+                {details?.homepage?.who_we_serve?.rightSection?.description || "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world."}
               </Typography>
 
               <Grid container>
-                {details?.homepage?.who_we_serve?.rightSection?.section_data.map(
-                  (val, i) => (
+                {(details?.homepage?.who_we_serve?.rightSection?.section_data?.length ? details.homepage.who_we_serve.rightSection.section_data : [
+                  { label: "Large Corporations" },
+                  { label: "Small Companies / Start-ups" },
+                  { label: "U.S Law Firm" },
+                  { label: "International Law Firm" }
+                ]).map(
+                  (val: any, i: number) => (
                     <Grid size={6} key={i}>
                       <List>
                         <ListItem>
@@ -189,7 +194,7 @@ const Whoweserve = () => {
                 >
                   {
                     details?.homepage?.who_we_serve?.rightSection?.ctaButton
-                      ?.text
+                      ?.text || "OUR CLIENTS"
                   }
                 </Button>
               </Link>
@@ -213,7 +218,7 @@ const Whoweserve = () => {
                 lineHeight: "31px",
               }}
             >
-              {details?.homepage?.who_we_serve?.rightSection?.endline}
+              {details?.homepage?.who_we_serve?.rightSection?.endline || "“Transforming your vision into reality.”"}
             </Typography>
           </Box>
         </Grid>

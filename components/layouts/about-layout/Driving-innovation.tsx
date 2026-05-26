@@ -21,11 +21,14 @@ const DrivingInnovation = () => {
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
-              {details?.aboutPage?.drivingInnovationEverywhere?.heading}
+              {details?.aboutPage?.drivingInnovationEverywhere?.heading || "Driving innovation everywhere"}
             </Typography>
 
-            {details?.aboutPage?.drivingInnovationEverywhere?.description.map(
-              (val, i) => (
+            {(details?.aboutPage?.drivingInnovationEverywhere?.description?.length ? details.aboutPage.drivingInnovationEverywhere.description : [
+              { label: "We’re engineers focused on making things work. We’re attorneys driven to defend innovation. Above all, we’re proven professionals who draw upon our firsthand experience spanning diverse industries to deliver quality, accuracy, and a meticulous level of detail in our work product." },
+              { label: "We maintain this client-centric perspective, whether we are discussing technology with inventors in the design room, developing IP strategies with management in the board room, or advocating for our clients' rights in the courtroom." }
+            ]).map(
+              (val: any, i: number) => (
                 <Typography
                 key={i}
                   sx={{

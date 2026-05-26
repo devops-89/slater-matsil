@@ -1,22 +1,22 @@
 "use client";
 
-import Navbar from "@/components/widgets/navbar";
-import "./globals.css";
-import "swiper/css";
-import Footer from "@/components/widgets/Footer";
-import { usePageData } from "@/store/usePageData";
-import { useEffect, useState } from "react";
-import { WEBSITE_DATA } from "@/public/data/website-data";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import LoadingProvider from "@/components/providers/LoadingProvider";
 import { NotificationProvider } from "@/components/providers/NotificationProvider";
-import { useMediaQuery } from "@mui/material";
+import CookieConsent from "@/components/widgets/CookieConsent";
+import Footer from "@/components/widgets/Footer";
 import MobileNavbar from "@/components/widgets/Mobile-Navbar";
 import Modal from "@/components/widgets/Modal";
+import Navbar from "@/components/widgets/navbar";
+import { WEBSITE_DATA } from "@/public/data/website-data";
+import { usePageData } from "@/store/usePageData";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { useMediaQuery } from "@mui/material";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { usePathname } from "next/navigation";
-import CookieConsent from "@/components/widgets/CookieConsent";
+import { useEffect, useState } from "react";
+import "swiper/css";
+import "./globals.css";
 
 export default function RootLayout({
   children,
@@ -78,10 +78,10 @@ export default function RootLayout({
                     minHeight: "100vh",
                   }}
                 >
-                  {phone ? <MobileNavbar /> : <Navbar />}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages')) && (phone ? <MobileNavbar /> : <Navbar />)}
                   <div style={{ flex: 1 }}>{children}</div>
-                  <Footer />
-                  <CookieConsent />
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages')) && <Footer />}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages')) && <CookieConsent />}
                 </div>
             </NotificationProvider>
           </LoadingProvider>

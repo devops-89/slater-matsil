@@ -1,5 +1,7 @@
 "use client";
 import { COLORS } from "@/utils/enum";
+import { FOOTER_DATA } from "@/public/data/generic-array";
+import { FaLinkedinIn } from "react-icons/fa";
 import {
   Box,
   Button,
@@ -25,15 +27,15 @@ const Footer = () => {
   const contactData = [
     {
       name: "Email",
-      value: details?.homepage?.footerData?.contactData?.email,
+      value: details?.homepage?.footerData?.contactData?.email || "info@slatermatsil.com",
     },
     {
       name: "Phone",
-      value: details?.homepage?.footerData?.contactData?.phoneNumber,
+      value: details?.homepage?.footerData?.contactData?.phoneNumber || "972.732.1001",
     },
     {
       name: "Address",
-      value: details?.homepage?.footerData?.contactData?.address,
+      value: details?.homepage?.footerData?.contactData?.address || "17304 Preston Rd, Suite 900, Dallas, TX 75252",
     },
   ];
   return (
@@ -50,7 +52,7 @@ const Footer = () => {
           spacing={{ xs: 4, md: 8 }}
           justifyContent="space-between"
         >
-          {details?.homepage?.footerData?.footer_links.map((val, i) => (
+          {(details?.homepage?.footerData?.footer_links?.length ? details.homepage.footerData.footer_links : FOOTER_DATA).map((val: any, i: number) => (
             <Grid size={{ md: 4.5, sm: 6, xs: 12 }} key={i}>
               <FooterList DATA={val.DATA} HEADING={val.HEADING} />
             </Grid>
@@ -172,7 +174,7 @@ const Footer = () => {
                 textAlign: { xs: "center", md: "left" },
               }}
             >
-              {details?.homepage?.footerData?.copyRightText}
+              {details?.homepage?.footerData?.copyRightText || "© 2016 - 2026 Slater Matsil, LLP | Dallas, TX | All Rights Reserved"}
             </Typography>
           </Grid>
 
@@ -184,7 +186,11 @@ const Footer = () => {
               spacing={{ xs: 2, sm: 4 }}
             >
               <Stack direction="row" spacing={3}>
-                {details?.homepage?.footerData?.privacy_pages?.map((val, i) => (
+                {(details?.homepage?.footerData?.privacy_pages?.length ? details.homepage.footerData.privacy_pages : [
+                  { title: "Terms", href: "/terms-of-use" },
+                  { title: "Privacy", href: "/privacy-policy" },
+                  { title: "Disclaimer", href: "/disclaimer" }
+                ]).map((val: any, i: number) => (
                   <Link
                     href={val.href || ""}
                     key={i}
@@ -208,7 +214,9 @@ const Footer = () => {
                 ))}
               </Stack>
               <Stack direction="row" spacing={2}>
-                {details?.homepage?.footerData?.social_links.map((val, i) => (
+                {(details?.homepage?.footerData?.social_links?.length ? details.homepage.footerData.social_links : [
+                  { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/slater-&-matsil-l-l-p-/" }
+                ]).map((val: any, i: number) => (
                   <a
                     key={i}
                     href={val.href || "#"}
