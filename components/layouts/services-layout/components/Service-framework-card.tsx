@@ -9,8 +9,8 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React from "react";
 
+//Service card
 const ServiceFrameworkCard = ({
   heading,
   data,
