@@ -1,28 +1,121 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import { HEADER_DATA } from "@/public/data/generic-array";
+import logo from "@/public/images/logo/logo.png";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import { Close, Menu } from "@mui/icons-material";
 import {
+  Autocomplete,
   Box,
-  Stack,
-  IconButton,
-  Button,
   Container,
-  Typography,
   Grid,
+  IconButton,
   List,
   ListItemButton,
   ListItemText,
+  Stack,
+  TextField,
+  Typography
 } from "@mui/material";
-import { Menu, ArrowDropDown, Close } from "@mui/icons-material";
-import { COLORS } from "@/utils/enum";
-import logo from "@/public/images/logo/logo.png";
+import Image from "next/image";
 import Link from "next/link";
-import { adelle, tradeGothic } from "@/utils/fonts";
-import { FOOTER_DATA, HEADER_DATA } from "@/public/data/generic-array";
+import { useEffect, useState } from "react";
+
+const LANGUAGES = [
+  { code: "en", label: "English", flagUrl: "https://flagcdn.com/w20/us.png" },
+  { code: "de", label: "Deutsch", flagUrl: "https://flagcdn.com/w20/de.png" },
+  { code: "ja", label: "日本語", flagUrl: "https://flagcdn.com/w20/jp.png" },
+  { code: "zh-TW", label: "繁體中文", flagUrl: "https://flagcdn.com/w20/tw.png" },
+  { code: "zh-CN", label: "简体中文", flagUrl: "https://flagcdn.com/w20/cn.png" },
+];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentLang, setCurrentLang] = useState("en");
+
+  const handleLangChange = (e: any) => {
+    const val = e.target.value;
+    setCurrentLang(val);
+
+    const applyTranslation = (retries = 5) => {
+      const googSelect = document.querySelector(".goog-te-combo") as HTMLSelectElement;
+      if (googSelect) {
+        if (val === "en") {
+          // Force an 'en' option into Google's native select so it knows how to revert without reloading
+          if (!googSelect.querySelector('option[value="en"]')) {
+            const opt = document.createElement("option");
+            opt.value = "en";
+            opt.text = "English";
+            googSelect.appendChild(opt);
+          }
+        }
+        
+        // Hide text briefly to prevent the "flash of English"
+        document.body.classList.add("translating-blink");
+        setTimeout(() => {
+          document.body.classList.remove("translating-blink");
+        }, 400);
+
+        googSelect.value = val;
+        googSelect.dispatchEvent(new Event("change", { bubbles: true }));
+      } else if (retries > 0) {
+        // If Google Translate hasn't finished loading yet, retry shortly
+        setTimeout(() => applyTranslation(retries - 1), 300);
+      }
+    };
+
+    applyTranslation();
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + window.location.hostname;
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + window.location.hostname;
+
+      if (!(window as any).__REACT_GOOGLE_TRANSLATE_PATCH__) {
+        (window as any).__REACT_GOOGLE_TRANSLATE_PATCH__ = true;
+        const originalRemoveChild = Node.prototype.removeChild;
+        Node.prototype.removeChild = function (this: Node, child: any) {
+          if (child.parentNode !== this) {
+            return child;
+          }
+          return originalRemoveChild.apply(this, arguments as any);
+        } as any;
+        const originalInsertBefore = Node.prototype.insertBefore;
+        Node.prototype.insertBefore = function (this: Node, newNode: any, referenceNode: any) {
+          if (referenceNode && referenceNode.parentNode !== this) {
+            return newNode;
+          }
+          return originalInsertBefore.apply(this, arguments as any);
+        } as any;
+      }
+
+      if (!(window as any).googleTranslateElementInit) {
+        (window as any).googleTranslateElementInit = () => {
+          new (window as any).google.translate.TranslateElement(
+            {
+              pageLanguage: "en",
+              includedLanguages: "zh-CN,zh-TW,ja,de,en",
+            },
+            "google_translate_element"
+          );
+        };
+      }
+    };
+    const addGoogleTranslateScript = () => {
+      if (!document.querySelector("#google-translate-script")) {
+        const script = document.createElement("script");
+        script.id = "google-translate-script";
+        script.src =
+          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.async = true;
+        document.body.appendChild(script);
+      }
+    };
+    addGoogleTranslateScript();
+  }, []);
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
@@ -30,6 +123,63 @@ const Navbar = () => {
 
   return (
     <>
+      <style>{`
+        /* Hide the top banner without breaking its internal DOM */
+        .goog-te-banner-frame,
+        iframe.goog-te-banner-frame,
+        .skiptranslate > iframe {
+          visibility: hidden !important;
+          position: absolute !important;
+          top: -9999px !important;
+          width: 0 !important;
+          height: 0 !important;
+        }
+        body {
+          top: 0px !important;
+          position: relative !important;
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        /* Hide the new Google Translate widget banner classes */
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+          display: none !important;
+        }
+        .VIpgJd-ZVi9od-aZ2wEe-wOHMyf {
+          display: none !important;
+        }
+        /* Hide the "Powered by Google Translate" and Google logo */
+        .goog-logo-link,
+        .goog-te-gadget span {
+          display: none !important;
+        }
+        .goog-te-gadget {
+          color: transparent !important;
+          font-size: 0px !important;
+        }
+        .goog-te-gadget img {
+          display: none !important;
+        }
+        .goog-te-gadget img {
+          display: none !important;
+        }
+        /* Hide the translation tooltip when hovering over text */
+        #goog-gt-tt, .goog-te-balloon-frame {
+          display: none !important;
+        }
+        .goog-text-highlight {
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
+        body.translating-blink *:not(#main-navbar):not(#main-navbar *) {
+          color: transparent !important;
+          text-shadow: none !important;
+        }
+      `}</style>
+      <div id="main-navbar">
       <Box
         sx={{
           backgroundColor: COLORS.HEADER_BG,
@@ -45,63 +195,114 @@ const Navbar = () => {
             direction="row"
             alignItems={"center"}
             justifyContent={"space-between"}
+            position="relative"
           >
-            <Link href="/">
-              <Image src={logo} alt="Slater Matsil logo" priority />
-            </Link>
-            <Stack
-              direction="row"
-              alignItems="center"
-              onClick={handleMenuToggle}
-              sx={{ cursor: "pointer" }}
-            >
-              <IconButton sx={{ p: 0.5 }}>
-                {menuOpen ? (
-                  <Close sx={{ color: COLORS.PRIMARY_BLUE }} />
-                ) : (
-                  <Menu sx={{ color: COLORS.PRIMARY_BLUE }} />
-                )}
-              </IconButton>
-              <Typography
-                sx={{
-                  mt: 0.6,
-                  color: COLORS.PRIMARY_GREEN,
-                  textTransform: "uppercase",
-                  fontFamily: adelle.style.fontFamily,
-                  fontSize: 18,
-                  fontWeight: 400,
-                  lineHeight: 1,
+            {/* Left: Language Selector */}
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-start' }}>
+              <div id="google_translate_element" style={{ display: 'none' }}></div>
+              <Autocomplete
+                className="notranslate"
+                options={LANGUAGES}
+                disableClearable
+                getOptionLabel={(option) => option.label}
+                value={LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES[0]}
+                onChange={(event, newValue) => {
+                  if (newValue) {
+                    handleLangChange({ target: { value: newValue.code } });
+                  }
                 }}
-              >
-                {menuOpen ? "CLOSE" : "MENU"}
-              </Typography>
-            </Stack>
-            {/* <Box
-              sx={{
-                textTransform: "none",
-                backgroundColor: COLORS.PRIMARY_BLUE,
-                color: COLORS.WHITE,
-                borderRadius: 1,
-                px: 2.5,
-                py: 0.75,
-                "&:hover": { backgroundColor: COLORS.PRIMARY_BLUE },
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontFamily: adelle.style.fontFamily,
-                  fontSize: 14,
-                  lineHeight: "32px",
-                  fontWeight: 400,
+                ListboxProps={{
+                  className: "notranslate",
                 }}
+                renderOption={(props, option) => {
+                  const { key, ...rest } = props as any;
+                  return (
+                    <Box key={key} component="li" sx={{ color: '#000', fontFamily: adelle.style.fontFamily }} {...rest}>
+                      <img src={option.flagUrl} alt="" width="20" style={{ marginRight: '8px' }} />
+                      {option.label}
+                    </Box>
+                  );
+                }}
+                renderInput={(params) => {
+                  const selected = LANGUAGES.find((l) => l.code === currentLang) || LANGUAGES[0];
+                  return (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      size="small"
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                          <>
+                            <img src={selected.flagUrl} alt="" width="20" style={{ marginLeft: '8px', marginRight: '4px' }} />
+                            {params.InputProps.startAdornment}
+                          </>
+                        ),
+                      }}
+                      inputProps={{
+                        ...params.inputProps,
+                        readOnly: true,
+                        style: { ...params.inputProps.style, cursor: 'pointer' }
+                      }}
+                      sx={{
+                        width: 170,
+                        backgroundColor: COLORS.WHITE,
+                        borderRadius: "8px",
+                        "& .MuiOutlinedInput-root": {
+                          color: COLORS.PRIMARY_GREEN,
+                          fontFamily: adelle.style.fontFamily,
+                          fontSize: "14px",
+                          border: `1px solid ${COLORS.PRIMARY_BLUE}`,
+                          borderRadius: "8px",
+                          paddingRight: "39px !important",
+                          paddingLeft: "0px",
+                          "& fieldset": { border: "none" },
+                        },
+                        "& .MuiSvgIcon-root": { color: COLORS.PRIMARY_BLUE },
+                      }}
+                    />
+                  );
+                }}
+              />
+            </Box>
+
+            {/* Center: Logo */}
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Link href="/">
+                <Image src={logo} alt="Slater Matsil logo" priority />
+              </Link>
+            </Box>
+
+            {/* Right: Menu */}
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
+              <Stack
+                direction="row"
+                alignItems="center"
+                onClick={handleMenuToggle}
+                sx={{ cursor: "pointer" }}
               >
-                English
-              </Typography>
-              <ArrowDropDown />
-            </Box> */}
+                <IconButton sx={{ p: 0.5 }}>
+                  {menuOpen ? (
+                    <Close sx={{ color: COLORS.PRIMARY_BLUE }} />
+                  ) : (
+                    <Menu sx={{ color: COLORS.PRIMARY_BLUE }} />
+                  )}
+                </IconButton>
+                <Typography
+                  sx={{
+                    mt: 0.6,
+                    color: COLORS.PRIMARY_GREEN,
+                    textTransform: "uppercase",
+                    fontFamily: adelle.style.fontFamily,
+                    fontSize: 18,
+                    fontWeight: 400,
+                    lineHeight: 1,
+                  }}
+                >
+                  {menuOpen ? "CLOSE" : "MENU"}
+                </Typography>
+              </Stack>
+            </Box>
           </Stack>
         </Container>
       </Box>
@@ -174,6 +375,7 @@ const Navbar = () => {
           </Grid>
         </Container>
       </Box>
+      </div>
     </>
   );
 };

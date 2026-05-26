@@ -17,7 +17,7 @@ const AboutSection = () => {
     <Box sx={{ pt: 1, pb: 8 }}>
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-up">
+          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-up" suppressHydrationWarning>
             <HeadingStar title="About Slatermatsil" />
 
             <Typography
@@ -46,7 +46,7 @@ const AboutSection = () => {
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-down">
+          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-down" suppressHydrationWarning>
             <Box>
               <Typography
                 sx={{
@@ -98,6 +98,7 @@ const AboutSection = () => {
 
               <Box
                 data-aos="fade-up"
+                suppressHydrationWarning
                 sx={{
                   display: "flex",
                   alignItems: "center",

@@ -18,10 +18,10 @@ const InsightsSection = () => {
     <Box sx={{ py: 10 }}>
       <Grid container>
         <Grid
-        suppressHydrationWarning
           size={{ lg: 5, xs: 12 }}
           sx={{ px: { lg: 10, xs: 2 } }}
           data-aos="fade-up"
+          suppressHydrationWarning
         >
           <HeadingStar
             title={details?.homepage?.insights_section?.sectionTitle || ""}

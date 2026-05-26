@@ -43,7 +43,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
           justifyContent={"space-between"}
           spacing={{ lg: 0, xs: 2 }}
         >
-          <Box data-aos="fade-up">
+          <Box data-aos="fade-up" suppressHydrationWarning>
             <HeadingStar
               title={details?.homepage?.service_area?.sectionTitle || ""}
             />
@@ -75,6 +75,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
               key={i}
               data-aos="fade-up"
               data-aos-delay={i * 150}
+              suppressHydrationWarning
             >
               <Link
                 href={`/services/${val.slug}`}

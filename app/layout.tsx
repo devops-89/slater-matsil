@@ -40,6 +40,20 @@ export default function RootLayout({
     setInitialLoading(false);
   }, [setDetails]);
 
+  // Live Preview listener for Admin Panel iframe
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      // Allow messages from localhost
+      if (event.origin.startsWith("http://localhost")) {
+        if (event.data && event.data.type === "UPDATE_PREVIEW") {
+          setDetails(event.data.payload);
+        }
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [setDetails]);
+
   const phone = useMediaQuery("(max-width:600px)");
 
   return (
