@@ -2,9 +2,10 @@ import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { INSIGHTS_DATA_PROPS } from "@/utils/types";
 import { ArrowForward, CallMade } from "@mui/icons-material";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const InsightsCard = ({
   bgColor,
@@ -12,6 +13,10 @@ const InsightsCard = ({
   title,
   slug,
 }: INSIGHTS_DATA_PROPS) => {
+  const pathname = usePathname();
+  const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
+  const linkHref = isPreview ? "/manage-insights" : `/insights/${slug}`;
+
   const cardContent = (
     <Box
       component={motion.div}
@@ -163,7 +168,7 @@ const InsightsCard = ({
 
   if (slug) {
     return (
-      <Link href={`/insights/${slug}`} style={{ textDecoration: "none" }}>
+      <Link href={linkHref} style={{ textDecoration: "none" }}>
         {cardContent}
       </Link>
     );

@@ -4,8 +4,15 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
+import { usePageData } from "@/store/usePageData";
+import { LEGAL_CONTENT_BLOCK } from "@/utils/types";
 
 const TermsOfUse = () => {
+  const { details } = usePageData();
+  const data = details?.termsOfUse;
+
+  if (!data) return null;
+
   return (
     <Box sx={{ py: { lg: 10, xs: 6 } }}>
       <Container maxWidth="lg">
@@ -19,7 +26,7 @@ const TermsOfUse = () => {
             textTransform: "uppercase",
           }}
         >
-          TERMS OF USE
+          {data.title}
         </Typography>
 
         <Typography
@@ -31,121 +38,26 @@ const TermsOfUse = () => {
             color: COLORS.BLACK,
           }}
         >
-          Effective date: February 6, 2026
+          Effective date: {data.effectiveDate}
         </Typography>
 
-        <Section title="1) Acceptance">
-          By using this website, you agree to these Terms. If you do not agree,
-          do not use the site.
-        </Section>
-
-        <Section title="2) Permitted use">
-          <>
-            <Typography
-              sx={{
-                fontFamily: adelle.style.fontFamily,
-                fontSize: 16,
-                fontWeight: 400,
-                color: COLORS.BLACK,
-                lineHeight: 1.8,
-                mb: 2,
-              }}
-            >
-              Use the site only for personal, noncommercial informational
-              purposes. You agree not to:
-            </Typography>
-
-            <Box
-              component="ul"
-              sx={{
-                pl: 3,
-                m: 0,
-                "& li": {
-                  mb: 1.5,
-                  fontFamily: adelle.style.fontFamily,
-                  fontSize: 16,
-                  fontWeight: 400,
-                  color: COLORS.BLACK,
-                  lineHeight: 1.8,
-                },
-              }}
-            >
-              <li>
-                Use the site unlawfully or in violation of these Terms
-              </li>
-
-              <li>
-                Copy, distribute, or create derivatives of site content without
-                written permission
-              </li>
-
-              <li>
-                Use bots/scrapers or bypass security or access controls
-              </li>
-
-              <li>
-                Introduce malware or interfere with site operation
-              </li>
-
-              <li>
-                Misrepresent your identity or affiliation
-              </li>
-
-              <li>
-                Remove proprietary notices or frame/mirror the site without
-                permission
-              </li>
-            </Box>
-          </>
-        </Section>
-
-        <Section title="3) Intellectual property">
-          All site content is owned by Slater Matsil, LLP or its licensors and
-          protected by intellectual property laws. Slater Matsil, LLP names and
-          logos are trademarks; do not use them without written permission.
-        </Section>
-
-        <Section title="4) Submissions">
-          If you submit information via forms or email, you grant us a limited
-          license to use it to review and respond to your inquiry, operate and
-          improve the site, and comply with law. Do not submit confidential
-          information unless and until we are engaged.
-        </Section>
-
-        <Section title="5) Disclaimer of warranties">
-          This site and its content are provided “as is” and “as available,”
-          without warranties of any kind.
-        </Section>
-
-        <Section title="6) Limitation of liability">
-          To the maximum extent permitted by law, Slater Matsil, LLP and its
-          attorneys, officers, employees, and agents are not liable for any
-          direct or indirect damages arising from or relating to your use of the
-          site.
-        </Section>
-
-        <Section title="7) Indemnification">
-          You agree to indemnify and hold harmless Slater Matsil, LLP from
-          claims arising from your use of the site or violation of these Terms.
-        </Section>
-
-        <Section title="8) Modifications; termination">
-          We may modify these Terms at any time and will update the effective
-          date. Continued use means you accept the changes. We may suspend or
-          terminate access at any time.
-        </Section>
-
-        <Section title="9) Governing law; venue">
-          These Terms are governed by Texas law, without regard to conflicts
-          rules. Exclusive venue lies in the state or federal courts in Collin
-          County, Texas.
-        </Section>
-
-        <Section title="10) Severability; entire agreement">
-          If any provision is unenforceable, the remainder remains in effect.
-          These Terms, the Disclaimer, and the Privacy Policy are the entire
-          agreement regarding site use.
-        </Section>
+        {data.sections?.map((section: any, index: number) => (
+          <Section key={index} title={section.title}>
+            {section.contentBlocks?.map((block: LEGAL_CONTENT_BLOCK, i: number) => {
+              if (block.type === 'list') {
+                return (
+                  <ul key={i}>
+                    {block.items?.map((item, j) => <li key={j}>{item}</li>)}
+                  </ul>
+                );
+              }
+              if (block.type === 'paragraph') {
+                return <p key={i}>{block.text?.split('\n').map((line, k) => <React.Fragment key={k}>{line}<br/></React.Fragment>)}</p>;
+              }
+              return null;
+            })}
+          </Section>
+        ))}
       </Container>
     </Box>
   );
@@ -179,6 +91,9 @@ const Section = ({
         fontWeight: 400,
         color: COLORS.BLACK,
         lineHeight: 1.8,
+        "& ul, & div": { paddingLeft: "20px", margin: "10px 0" },
+        "& li": { marginBottom: "12px" },
+        "& p": { margin: "0 0 16px 0" }
       }}
     >
       {children}

@@ -7,21 +7,24 @@ import { BLOG_DETAILS_DATA } from "@/public/data/blog-details-data";
 import BlogDetailsHeroSection from "./BlogDetailsHeroSection";
 import BlogDetailsContentSection from "./BlogDetailsContentSection";
 import { BLOG_DETAIL_PROPS } from "@/utils/types";
+import { usePageData } from "@/store/usePageData";
 
 import { motion } from "framer-motion";
 
 const BlogDetailsLayout = () => {
   const { slug } = useParams();
+  const { details } = usePageData();
   const [data, setData] = useState<BLOG_DETAIL_PROPS | null>(null);
 
   useEffect(() => {
-    const blog = BLOG_DETAILS_DATA.find((item) => item.slug === slug);
+    const storeBlogs = details?.insightsPage?.blogDetailsData || [];
+    const blog = storeBlogs.find((item: any) => item.slug === slug) || BLOG_DETAILS_DATA.find((item) => item.slug === slug);
     if (!blog) {
       // notFound(); // Should usually use notFound() but let's be careful with client components
       return;
     }
     setData(blog);
-  }, [slug]);
+  }, [slug, details]);
 
   if (!data)
     return (

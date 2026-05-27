@@ -6,16 +6,65 @@ import { EmailOutlined, LockOutlined, Visibility, VisibilityOff } from "@mui/ico
 import { Box, Button, Container, Grid, IconButton, InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { usePageData } from "@/store/usePageData";
+import * as yup from "yup";
+
+const loginSchema = yup.object().shape({
+  email: yup.string().email("Please enter a valid email address").required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
 
 export default function AdminLoginLayout() {
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("admin@slatermatsil.com");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [validationErrors, setValidationErrors] = useState<any>({});
   const router = useRouter();
+  const { details } = usePageData();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Dummy authentication - store token and redirect to dashboard
-    localStorage.setItem("adminAuth", "true");
-    router.push("/dashboard");
+    setError("");
+    setValidationErrors({});
+
+    try {
+      await loginSchema.validate({ email, password }, { abortEarly: false });
+    } catch (err: any) {
+      const vErrors: any = {};
+      err.inner.forEach((error: any) => {
+        vErrors[error.path] = error.message;
+      });
+      setValidationErrors(vErrors);
+      return;
+    }
+
+    if (email.toLowerCase() === "admin@slatermatsil.com") {
+      // For main admin, you might want to check password too, but for dummy auth we let it pass
+      // or require a specific password like 'admin' if you want.
+      if (password === "admin" || password === "") {
+        localStorage.setItem("adminAuth", "true");
+        router.push("/dashboard");
+        return;
+      }
+    }
+
+    // Check sub-admins
+    let subAdmins = details?.subAdmins || [];
+    if (subAdmins.length === 0) {
+      const stored = localStorage.getItem("subAdmins");
+      if (stored) {
+        subAdmins = JSON.parse(stored);
+      }
+    }
+
+    const found = subAdmins.find((a: any) => a.email.toLowerCase() === email.toLowerCase());
+    if (found && found.password === password) {
+      localStorage.setItem("adminAuth", found.email);
+      router.push("/dashboard");
+    } else {
+      setError("Invalid email or password. You do not have access.");
+    }
   };
 
   return (
@@ -118,11 +167,19 @@ export default function AdminLoginLayout() {
               </Typography>
 
               <Stack spacing={4}>
+                {error && (
+                  <Typography color="error" variant="body2" sx={{ fontFamily: adelle.style.fontFamily, textAlign: "center" }}>
+                    {error}
+                  </Typography>
+                )}
                 <TextField 
                   fullWidth 
                   label="Email Address" 
                   variant="outlined" 
-                  defaultValue="admin@slatermatsil.com"
+                  value={email}
+                  onChange={(e) => { setEmail(e.target.value); setValidationErrors({ ...validationErrors, email: undefined }); }}
+                  error={!!validationErrors.email}
+                  helperText={validationErrors.email}
                   slotProps={{
                     input: {
                       startAdornment: (
@@ -145,7 +202,10 @@ export default function AdminLoginLayout() {
                   label="Password" 
                   type={showPassword ? "text" : "password"}
                   variant="outlined"
-                  defaultValue="********"
+                  value={password}
+                  onChange={(e) => { setPassword(e.target.value); setValidationErrors({ ...validationErrors, password: undefined }); }}
+                  error={!!validationErrors.password}
+                  helperText={validationErrors.password}
                   slotProps={{
                     input: {
                       startAdornment: (

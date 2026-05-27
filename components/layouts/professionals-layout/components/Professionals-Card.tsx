@@ -6,15 +6,21 @@ import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { PROFESSIONALS_CARD_PROPS } from "@/utils/types";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 const ProfessionalsCard = ({
   img,
   name,
   designation,
   slug,
 }: PROFESSIONALS_CARD_PROPS) => {
+  const pathname = usePathname();
+  const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
+  const linkHref = isPreview ? "/manage-professionals" : `/firm-professionals/professionals/${slug}`;
+
   return (
     <Link
-      href={`/firm-professionals/professionals/${slug}`}
+      href={linkHref}
       style={{
         textDecoration: "none",
       }}

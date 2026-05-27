@@ -1,14 +1,25 @@
 import AboutImage from "@/public/images/home/aboutUs.jpg";
 import React from 'react';
-import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore, Delete, Save } from "@mui/icons-material";
+import { Box, Button, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Delete, Upload } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
+import { adelle } from "@/utils/fonts";
 
 
 export const AboutEditor = ({ data, onChange }: { data: any, onChange: (newData: any) => void }) => {
+  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      onChange({ ...data, image: reader.result as string });
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
-    <Stack spacing={4}>
+    <Stack spacing={3}>
       <Typography variant="h6" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
         About Section Settings
       </Typography>
@@ -32,28 +43,28 @@ export const AboutEditor = ({ data, onChange }: { data: any, onChange: (newData:
         fullWidth label="CTA Button Text" value={data.ctaButton?.text || ""}
         onChange={(e) => onChange({ ...data, ctaButton: { ...data.ctaButton, text: e.target.value } })}
       />
-      <Box sx={{ mt: 2 }}>
-        <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontSize: 14, mb: 1, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-          Upload About Image
-        </Typography>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => {
-            const file = e.target.files?.[0];
-            if (file) {
-              const reader = new FileReader();
-              reader.onloadend = () => {
-                onChange({ ...data, image: reader.result as string });
-              };
-              reader.readAsDataURL(file);
-            }
-          }}
-          style={{ display: "block", width: "100%", padding: "8px", border: "1px solid rgba(0,0,0,0.2)", borderRadius: "8px" }}
-        />
-        <Box sx={{ mt: 2, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
+
+      <Divider sx={{ my: 1 }} />
+
+      <Box>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Typography variant="subtitle2" color="text.secondary">About Image</Typography>
+          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }}>
+            Upload Image
+            <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
+          </Button>
+        </Box>
+        <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={data.image || AboutImage.src} alt="preview" style={{ width: "100%", maxHeight: "150px", objectFit: "cover" }} />
+          <img src={data.image || AboutImage.src} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          <IconButton
+            size="small"
+            color="error"
+            onClick={() => onChange({ ...data, image: "" })}
+            sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
+          >
+            <Delete fontSize="small" />
+          </IconButton>
         </Box>
       </Box>
     </Stack>

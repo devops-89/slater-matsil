@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore, Delete, Save } from "@mui/icons-material";
+import { Box, Button, Card, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 
@@ -93,15 +93,15 @@ export const WhoWeServeEditor = ({ data, onChange }: { data: any, onChange: (new
                 onChange({ ...data, rightSection: { ...data.rightSection, section_data: newSectionData } });
               }}
             />
-            <Button 
-              color="error" variant="outlined" 
+            <IconButton
+              color="error"
               onClick={() => {
                 const newSectionData = data.rightSection.section_data.filter((_: any, i: number) => i !== idx);
                 onChange({ ...data, rightSection: { ...data.rightSection, section_data: newSectionData } });
               }}
             >
-              Remove
-            </Button>
+              <Delete />
+            </IconButton>
           </Stack>
         </Card>
       ))}
@@ -119,6 +119,4 @@ export const WhoWeServeEditor = ({ data, onChange }: { data: any, onChange: (new
     </Stack>
   );
 };
-
-import AboutImage from "@/public/images/home/aboutUs.jpg";
 

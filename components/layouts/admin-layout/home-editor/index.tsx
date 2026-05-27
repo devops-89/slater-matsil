@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/widgets/navbar";
 import HeroSection3 from "@/components/layouts/home/HeroSection3";
 import AboutSection from "@/components/layouts/home/AboutSection";
@@ -12,7 +11,6 @@ import Footer from "@/components/widgets/Footer";
 import { HeroCombined } from "./HeroCombined";
 import { AboutEditor } from "./AboutEditor";
 import { MetricsEditor } from "./MetricsEditor";
-import { ServiceAreasEditor } from "./ServiceAreasEditor";
 import { WhoWeServeEditor } from "./WhoWeServeEditor";
 
 import slider4 from "@/home/slider/slider4.jpg";
@@ -31,7 +29,7 @@ import React from 'react';
 
 
 export const renderDesktopPreview = (children: React.ReactNode) => (
-  <Box sx={{ width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", backgroundColor: "#FFFFFF" }}>
+  <Box sx={{ position: "relative", transform: "translate(0, 0)", width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", backgroundColor: "#FFFFFF" }}>
     {children}
   </Box>
 );
@@ -45,8 +43,6 @@ export const HomePageForms = ({ activeSection, websiteData, updateHomepage }: an
     case 2:
       return <MetricsEditor data={websiteData.homepage.our_metrics} onChange={(newData: any) => updateHomepage('our_metrics', newData)} />;
     case 3:
-      return <ServiceAreasEditor data={websiteData.homepage.service_area} onChange={(newData: any) => updateHomepage('service_area', newData)} />;
-    case 4:
       return <WhoWeServeEditor data={websiteData.homepage.who_we_serve} onChange={(newData: any) => updateHomepage('who_we_serve', newData)} />;
     default:
       return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Select a section to edit.</Typography>;
@@ -86,13 +82,14 @@ export const HomePagePreviews = ({ activeSection, websiteData }: any) => {
             return;
         }
 
-        // Map frontend URL to admin page editor URL
-        if (href === '/') {
+        const path = href.startsWith('/') ? href.slice(1) : href;
+        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'firm-professionals', 'firm-leadership', 'insights'];
+        if (validEditors.includes(path)) {
+          router.push(`/pages/${path}`);
+        } else if (href === '/') {
           router.push('/pages/home');
         } else {
-          // Remove leading slash
-          const path = href.startsWith('/') ? href.slice(1) : href;
-          router.push(`/pages/${path}`);
+          router.push(href);
         }
       }
     }
@@ -121,16 +118,16 @@ export const HomePagePreviews = ({ activeSection, websiteData }: any) => {
       <Box id="preview-section-2">
         <MetricsSection />
       </Box>
-      <Box id="preview-section-3">
+      <Box>
         <ServiceAreas limit={6} />
       </Box>
-      <Box id="preview-section-4">
+      <Box id="preview-section-3">
         <Whoweserve />
       </Box>
-      <Box id="preview-section-5">
+      <Box>
         <InsightsSection />
       </Box>
-      <Box id="preview-section-6">
+      <Box>
         <ContactSection />
       </Box>
       <Footer />

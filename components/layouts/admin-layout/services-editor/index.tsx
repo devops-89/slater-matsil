@@ -16,19 +16,21 @@ import { ServicesHeroEditor } from "./ServicesHeroEditor";
 import { ServicesStrengthEditor } from "./ServicesStrengthEditor";
 import { ServicesUnparalleledEditor } from "./ServicesUnparalleledEditor";
 import { ServicesFrameworkEditor } from "./ServicesFrameworkEditor";
+import { ServiceAreasEditor } from "./ServiceAreasEditor";
 
 export const renderDesktopPreview = (children: React.ReactNode) => (
-  <Box sx={{ width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", backgroundColor: "#FFFFFF" }}>
+  <Box sx={{ position: "relative", transform: "translate(0, 0)", width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", backgroundColor: "#FFFFFF" }}>
     {children}
   </Box>
 );
 
-export const ServicesPageForms = ({ activeSection, websiteData, updateServicesPage }: any) => {
+export const ServicesPageForms = ({ activeSection, websiteData, updateServicesPage, updateServiceAreas }: any) => {
   switch (activeSection) {
     case 0: return <ServicesHeroEditor data={websiteData.servicesPage.heroSection} onChange={(newData: any) => updateServicesPage('heroSection', newData)} />;
     case 1: return <ServicesStrengthEditor data={websiteData.servicesPage.why_choose_strength_props} onChange={(newData: any) => updateServicesPage('why_choose_strength_props', newData)} />;
     case 2: return <ServicesUnparalleledEditor data={websiteData.servicesPage.unparalleled_props} onChange={(newData: any) => updateServicesPage('unparalleled_props', newData)} />;
     case 3: return <ServicesFrameworkEditor data={websiteData.servicesPage.service_framework_props} onChange={(newData: any) => updateServicesPage('service_framework_props', newData)} />;
+    case 4: return <ServiceAreasEditor data={websiteData.homepage.service_area} onChange={updateServiceAreas} />;
     default: return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Select a section to edit.</Typography>;
   }
 };
@@ -50,6 +52,7 @@ export const ServicesPagePreviews = ({ activeSection, websiteData }: any) => {
     const anchor = target.closest('a');
     if (anchor) {
       e.preventDefault();
+      e.stopPropagation();
       const href = anchor.getAttribute('href');
       if (href) {
         if (href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) {
@@ -57,11 +60,22 @@ export const ServicesPagePreviews = ({ activeSection, websiteData }: any) => {
           return;
         }
         if (href.startsWith('#')) return;
-        if (href === '/') {
-          router.push('/pages/home');
-        } else {
-          const path = href.startsWith('/') ? href.slice(1) : href;
+
+        if (href.startsWith('/services/')) {
+          router.push(href);
+          return;
+        }
+
+        const path = href.startsWith('/') ? href.slice(1) : href;
+        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'firm-professionals', 'firm-leadership', 'insights', 'blogs'];
+        if (validEditors.includes(path)) {
           router.push(`/pages/${path}`);
+        } else if (href === '/') {
+          router.push('/pages/home');
+        } else if (href.startsWith('pages/')) {
+          router.push(`/${href}`);
+        } else {
+          router.push(href.startsWith('/') ? href : `/${href}`);
         }
       }
     }

@@ -10,7 +10,7 @@ import ProfessionalLayoutSection from "@/components/layouts/professionals-layout
 import { FirmProfessionalsHeroEditor } from "./FirmProfessionalsHeroEditor";
 
 export const renderDesktopPreview = (children: React.ReactNode) => (
-  <Box sx={{ width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", backgroundColor: "#FFFFFF" }}>
+  <Box sx={{ position: "relative", transform: "translate(0, 0)", width: "100%", height: "100%", overflowY: "auto", overflowX: "hidden", backgroundColor: "#FFFFFF" }}>
     {children}
   </Box>
 );
@@ -46,11 +46,14 @@ export const FirmProfessionalsPagePreviews = ({ activeSection, websiteData }: an
           return;
         }
         if (href.startsWith('#')) return;
-        if (href === '/') {
+        const path = href.startsWith('/') ? href.slice(1) : href;
+        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'firm-professionals', 'firm-leadership', 'insights'];
+        if (validEditors.includes(path)) {
+          router.push(`/pages/${path}`);
+        } else if (href === '/') {
           router.push('/pages/home');
         } else {
-          const path = href.startsWith('/') ? href.slice(1) : href;
-          router.push(`/pages/${path}`);
+          router.push(href);
         }
       }
     }

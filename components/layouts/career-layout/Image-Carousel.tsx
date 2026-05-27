@@ -1,3 +1,4 @@
+import { usePageData } from "@/store/usePageData";
 import slide1 from "@/career/slider/slide1.jpg";
 import slide2 from "@/career/slider/slide2.jpg";
 import slide3 from "@/career/slider/slide3.jpg";
@@ -22,7 +23,10 @@ import "swiper/css/pagination";
 const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide8, slide9,slide10];
 
 const ImageCarousel = () => {
+  const { details } = usePageData();
   const theme = useTheme();
+  const dynamicImages = details?.careerPage?.career_hero_section?.carouselImages;
+  const displayImages = (dynamicImages && dynamicImages.length > 0) ? dynamicImages : sliderImages;
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.down("lg"));
 
@@ -91,7 +95,7 @@ const ImageCarousel = () => {
         }}
         className="multiSwiper"
       >
-        {sliderImages.map((img, i) => (
+        {displayImages.map((img: any, i: number) => (
           <SwiperSlide key={i}>
             <Box
               sx={{
@@ -108,7 +112,7 @@ const ImageCarousel = () => {
               }}
             >
               <Image
-                src={img}
+                src={typeof img === 'string' ? img : img}
                 alt={`Slide ${i + 1}`}
                 fill
                 priority={i < 4}

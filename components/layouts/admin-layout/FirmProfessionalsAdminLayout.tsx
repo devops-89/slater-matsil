@@ -26,6 +26,7 @@ import { Add, Close, Delete, AddCircle, RemoveCircle } from "@mui/icons-material
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
+import * as Yup from "yup";
 import { PROFESSIONAL_DETAILS_DATA } from "@/public/data/professionals-details-data";
 
 export default function FirmProfessionalsAdminLayout() {
@@ -33,6 +34,14 @@ export default function FirmProfessionalsAdminLayout() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState(0);
+  const [errors, setErrors] = useState<any>({});
+
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required("Full Name is required"),
+    designation: Yup.string().required("Designation is required"),
+    email: Yup.string().email("Invalid email address").required("Email is required"),
+    phoneNumber: Yup.string().required("Phone Number is required"),
+  });
 
   // Form states
   const [cardData, setCardData] = useState<any>({});
@@ -92,6 +101,7 @@ export default function FirmProfessionalsAdminLayout() {
       articles: { paragraphs: "", bullets: [] },
       associations: { paragraphs: "", bullets: [] }
     });
+    setErrors({});
     setDialogOpen(true);
   };
 
@@ -125,6 +135,7 @@ export default function FirmProfessionalsAdminLayout() {
       associations: parseBioProps(bio?.PROFESSIONAL_ASSOCIATIONS_DATA)
     });
 
+    setErrors({});
     setDialogOpen(true);
   };
 
@@ -157,7 +168,27 @@ export default function FirmProfessionalsAdminLayout() {
     return result;
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    try {
+      await validationSchema.validate({
+        name: cardData.name,
+        designation: cardData.designation,
+        email: bioData.email,
+        phoneNumber: bioData.phoneNumber
+      }, { abortEarly: false });
+      setErrors({});
+    } catch (err: any) {
+      const newErrors: any = {};
+      err.inner.forEach((e: any) => {
+        newErrors[e.path] = e.message;
+      });
+      setErrors(newErrors);
+      if (newErrors.name || newErrors.designation || newErrors.email || newErrors.phoneNumber) {
+        setActiveTab(0);
+      }
+      return;
+    }
+
     const slugToUse = cardData.slug || cardData.name.toLowerCase().replace(/\s+/g, '-');
     const finalCard = { ...cardData, slug: slugToUse };
 
@@ -359,8 +390,8 @@ export default function FirmProfessionalsAdminLayout() {
                   </Grid>
                   <Grid size={{ xs: 12, md: 8 }}>
                     <Stack spacing={2}>
-                      <TextField fullWidth label="Full Name" value={cardData.name || ""} onChange={(e) => setCardData({ ...cardData, name: e.target.value })} />
-                      <TextField fullWidth label="Designation (e.g., PARTNER, PATENT AGENT)" value={cardData.designation || ""} onChange={(e) => setCardData({ ...cardData, designation: e.target.value })} />
+                      <TextField fullWidth label="Full Name" value={cardData.name || ""} onChange={(e) => setCardData({ ...cardData, name: e.target.value })} error={!!errors.name} helperText={errors.name} />
+                      <TextField fullWidth label="Designation (e.g., PARTNER, PATENT AGENT)" value={cardData.designation || ""} onChange={(e) => setCardData({ ...cardData, designation: e.target.value })} error={!!errors.designation} helperText={errors.designation} />
                       <TextField fullWidth label="Slug (URL identifier, e.g., john-doe)" value={cardData.slug || ""} onChange={(e) => setCardData({ ...cardData, slug: e.target.value })} helperText="Leave blank to auto-generate" />
                     </Stack>
                   </Grid>
@@ -370,10 +401,10 @@ export default function FirmProfessionalsAdminLayout() {
                 <Typography variant="subtitle2" color="primary">Contact Details</Typography>
                 <Grid container spacing={2}>
                   <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField fullWidth label="Email Address" value={bioData.email || ""} onChange={(e) => setBioData({ ...bioData, email: e.target.value })} />
+                    <TextField fullWidth label="Email Address" value={bioData.email || ""} onChange={(e) => setBioData({ ...bioData, email: e.target.value })} error={!!errors.email} helperText={errors.email} />
                   </Grid>
                   <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField fullWidth label="Phone Number" value={bioData.phoneNumber || ""} onChange={(e) => setBioData({ ...bioData, phoneNumber: e.target.value })} />
+                    <TextField fullWidth label="Phone Number" value={bioData.phoneNumber || ""} onChange={(e) => setBioData({ ...bioData, phoneNumber: e.target.value })} error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
                   </Grid>
                 </Grid>
 

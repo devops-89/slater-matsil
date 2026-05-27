@@ -13,11 +13,13 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const BlogSection = () => {
   const { details } = usePageData();
+  const pathname = usePathname();
   const blogSection = details?.insightsPage?.blogSection;
 
   const upcomingWebinars = blogSection?.upcoming || [];
@@ -70,7 +72,7 @@ const BlogSection = () => {
                   sx={{ height: "100%" }}
                 >
                   <Link
-                    href={`/blogs/${webinar.slug}`}
+                    href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.slug}`}
                     style={{
                       textDecoration: "none",
                       color: "inherit",
@@ -248,7 +250,7 @@ const BlogSection = () => {
                 sx={{ height: "100%" }}
               >
                 <Link
-                  href={`/blogs/${webinar.slug}`}
+                  href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.slug}`}
                   style={{
                     textDecoration: "none",
                     color: "inherit",

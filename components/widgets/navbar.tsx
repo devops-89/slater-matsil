@@ -20,12 +20,43 @@ import logo from "@/public/images/logo/logo.png";
 import Link from "next/link";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { FOOTER_DATA, HEADER_DATA } from "@/public/data/generic-array";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
 
   const handleMenuToggle = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const getEditorHref = (href: string) => {
+    if (!isPreview) return href || "#";
+
+    if (!href || href === "#" || href === "/") return "/pages/home";
+    
+    const parts = href.split("/");
+    const baseRoute = parts[1]; // e.g. "services" from "/services/patent-prosecution"
+    
+    // If it's a detail page link like /services/patent-prosecution, do not rewrite to the editor page
+    if (parts.length > 2 && parts[2]) {
+      return href;
+    }
+
+    const hasEditorPage = [
+      "home", "about-us", "services", "practice-groups", "firm-professionals", 
+      "firm-leadership", "insights", "blogs", "careers", "contact-us", 
+      "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer"
+    ].includes(baseRoute);
+
+    if (hasEditorPage) {
+      // e.g. if the original url is /firm-professionals, the editor page is /pages/firm-professionals
+      // Note: for firm-professionals specifically, the user has /manage-professionals and /pages/firm-professionals.
+      // But the generic one is /pages/[slug]. Let's stick to /pages/baseRoute.
+      return `/pages/${baseRoute}`;
+    }
+    return href;
   };
 
   return (
@@ -46,7 +77,7 @@ const Navbar = () => {
             alignItems={"center"}
             justifyContent={"space-between"}
           >
-            <Link href="/">
+            <Link href={getEditorHref("/")}>
               <Image src={logo} alt="Slater Matsil logo" priority />
             </Link>
             <Stack
@@ -110,17 +141,17 @@ const Navbar = () => {
         sx={{
           position: "fixed",
           top: 0,
-          left: "50%",
-          transform: menuOpen
-            ? "translateX(-50%) scaleX(1)"
-            : "translateX(-50%) scaleX(0)",
-          width: "100vw",
-          height: "100vh",
+          left: isPreview ? 0 : "50%",
+          transform: isPreview
+            ? (menuOpen ? "scaleX(1)" : "scaleX(0)")
+            : (menuOpen ? "translateX(-50%) scaleX(1)" : "translateX(-50%) scaleX(0)"),
+          width: isPreview ? "100%" : "100vw",
+          height: isPreview ? "100%" : "100vh",
           backgroundColor: COLORS.WHITE,
           zIndex: menuOpen ? 9 : -1,
           transition:
             "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease",
-          transformOrigin: "center center",
+          transformOrigin: isPreview ? "center" : "center center",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -146,7 +177,7 @@ const Navbar = () => {
                   {val.DATA?.map((item, index) => (
                     <Link
                       key={index}
-                      href={item.href || "#"}
+                      href={getEditorHref(item.href || "#")}
                       style={{ textDecoration: "none", color: "inherit" }}
                       onClick={handleMenuToggle}
                     >

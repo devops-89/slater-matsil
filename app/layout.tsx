@@ -82,10 +82,10 @@ export default function RootLayout({
                     minHeight: "100vh",
                   }}
                 >
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-professionals')) && (phone ? <MobileNavbar /> : <Navbar />)}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && (phone ? <MobileNavbar /> : <Navbar />)}
                   <div style={{ flex: 1 }}>{children}</div>
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-professionals')) && <Footer />}
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-professionals')) && <CookieConsent />}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && <Footer />}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && <CookieConsent />}
                 </div>
             </NotificationProvider>
           </LoadingProvider>

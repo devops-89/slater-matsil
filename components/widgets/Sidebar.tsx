@@ -1,6 +1,7 @@
 "use client";
 
 import logo from "@/public/images/logo/logo.png";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import {
@@ -20,6 +21,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const DRAWER_WIDTH = 280;
 
@@ -30,6 +32,47 @@ interface SidebarProps {
 export default function Sidebar({ open = true }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const { details } = usePageData();
+  const [permissions, setPermissions] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("adminAuth");
+    if (auth && auth !== "true") {
+      let subAdmins = details?.subAdmins || [];
+      if (subAdmins.length === 0) {
+        const stored = localStorage.getItem("subAdmins");
+        if (stored) {
+          subAdmins = JSON.parse(stored);
+        }
+      }
+      const found = subAdmins.find((a: any) => a.email.toLowerCase() === auth.toLowerCase());
+      if (found) {
+        let roles = details?.roles || [];
+        if (roles.length === 0) {
+          const storedRoles = localStorage.getItem("roles");
+          if (storedRoles) roles = JSON.parse(storedRoles);
+        }
+        const userRole = roles.find((r: any) => r.id === found.roleId);
+        if (userRole) {
+          setPermissions(userRole.permissions);
+        } else {
+          setPermissions([]);
+        }
+      }
+    } else {
+      setPermissions(null);
+    }
+  }, [details]);
+
+  const hasAccess = (page: string) => {
+    if (permissions === null) return true;
+    return permissions.includes(page);
+  };
+
+  const canSeePages = () => {
+    if (permissions === null) return true;
+    return permissions.some(p => ["home", "services", "practice-groups", "firm-professionals", "firm-leadership", "insights"].includes(p));
+  };
 
   return (
     <Drawer
@@ -42,7 +85,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         [`& .MuiDrawer-paper`]: {
           width: DRAWER_WIDTH,
           boxSizing: "border-box",
-          backgroundColor: COLORS.PRIMARY_BLUE,
+          backgroundColor: COLORS.WHITE,
           color: COLORS.WHITE,
           borderRight: "none",
           transition: "transform 0.3s ease",
@@ -103,7 +146,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
                 color:
                   pathname === "/dashboard"
                     ? COLORS.PRIMARY_GREEN
-                    : COLORS.WHITE,
+                      : COLORS.PRIMARY_BLUE,
                 minWidth: 40,
               }}
             >
@@ -118,8 +161,8 @@ export default function Sidebar({ open = true }: SidebarProps) {
                     fontWeight: pathname === "/dashboard" ? 700 : 400,
                     color:
                       pathname === "/dashboard"
-                        ? COLORS.WHITE
-                        : "rgba(255,255,255,0.7)",
+                        ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
                   }}
                 >
                   Dashboard
@@ -129,7 +172,98 @@ export default function Sidebar({ open = true }: SidebarProps) {
           </ListItemButton>
         </ListItem>
 
+        {/* Role Management Link */}
+        {permissions === null && (
+        <ListItem disablePadding sx={{ mb: 1 }}>
+          <ListItemButton
+            onClick={() => router.push("/manage-roles")}
+            sx={{
+              borderRadius: 2,
+              backgroundColor: pathname.includes("/manage-roles")
+                ? "rgba(255,255,255,0.05)"
+                : "transparent",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: pathname.includes("/manage-roles")
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                minWidth: 40,
+              }}
+            >
+              <PeopleIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary={
+                <Typography
+                  sx={{
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: pathname.includes("/manage-roles") ? 700 : 400,
+                    color: pathname.includes("/manage-roles")
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                  }}
+                >
+                  Role Management
+                </Typography>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
+        )}
+
+        {/* Sub-Admin Management Link */}
+        {permissions === null && (
+        <ListItem disablePadding sx={{ mb: 1 }}>
+          <ListItemButton
+            onClick={() => router.push("/manage-sub-admins")}
+            sx={{
+              borderRadius: 2,
+              backgroundColor: pathname.includes("/manage-sub-admins")
+                ? "rgba(255,255,255,0.05)"
+                : "transparent",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: pathname.includes("/manage-sub-admins")
+                  ? COLORS.PRIMARY_GREEN
+                  : COLORS.PRIMARY_BLUE,
+                minWidth: 40,
+              }}
+            >
+              <PeopleIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary={
+                <Typography
+                  sx={{
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: pathname.includes("/manage-sub-admins") ? 700 : 400,
+                    color: pathname.includes("/manage-sub-admins")
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                  }}
+                >
+                  User Management
+                </Typography>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
+        )}
+
         {/* Pages Link */}
+        {canSeePages() && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => router.push("/pages")}
@@ -147,7 +281,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
               sx={{
                 color: pathname.includes("/pages")
                   ? COLORS.PRIMARY_GREEN
-                  : COLORS.WHITE,
+                  : COLORS.PRIMARY_BLUE,
                 minWidth: 40,
               }}
             >
@@ -161,8 +295,8 @@ export default function Sidebar({ open = true }: SidebarProps) {
                     fontFamily: adelle.style.fontFamily,
                     fontWeight: pathname.includes("/pages") ? 700 : 400,
                     color: pathname.includes("/pages")
-                      ? COLORS.WHITE
-                      : "rgba(255,255,255,0.7)",
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
                   }}
                 >
                   Pages
@@ -171,8 +305,10 @@ export default function Sidebar({ open = true }: SidebarProps) {
             />
           </ListItemButton>
         </ListItem>
+        )}
 
         {/* Firm Professionals Database Link */}
+        {hasAccess("firm-professionals") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => router.push("/manage-professionals")}
@@ -190,7 +326,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
               sx={{
                 color: pathname.includes("/manage-professionals")
                   ? COLORS.PRIMARY_GREEN
-                  : COLORS.WHITE,
+                      : COLORS.PRIMARY_BLUE,
                 minWidth: 40,
               }}
             >
@@ -206,8 +342,8 @@ export default function Sidebar({ open = true }: SidebarProps) {
                       ? 700
                       : 400,
                     color: pathname.includes("/manage-professionals")
-                      ? COLORS.WHITE
-                      : "rgba(255,255,255,0.7)",
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
                   }}
                 >
                   Firm Professionals
@@ -216,6 +352,101 @@ export default function Sidebar({ open = true }: SidebarProps) {
             />
           </ListItemButton>
         </ListItem>
+        )}
+
+        {/* Insights Database Link */}
+        {hasAccess("insights") && (
+        <ListItem disablePadding sx={{ mb: 1 }}>
+          <ListItemButton
+            onClick={() => router.push("/manage-insights")}
+            sx={{
+              borderRadius: 2,
+              backgroundColor: pathname.includes("/manage-insights")
+                ? "rgba(255,255,255,0.05)"
+                : "transparent",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: pathname.includes("/manage-insights")
+                  ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                minWidth: 40,
+              }}
+            >
+              <PagesIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary={
+                <Typography
+                  sx={{
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: pathname.includes("/manage-insights")
+                      ? 700
+                      : 400,
+                    color: pathname.includes("/manage-insights")
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                  }}
+                >
+                  Insights
+                </Typography>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
+        )}
+
+        {/* Blogs Database Link */}
+        {hasAccess("insights") && (
+        <ListItem disablePadding sx={{ mb: 1 }}>
+          <ListItemButton
+            onClick={() => router.push("/manage-blogs")}
+            sx={{
+              borderRadius: 2,
+              backgroundColor: pathname.includes("/manage-blogs")
+                ? "rgba(255,255,255,0.05)"
+                : "transparent",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: pathname.includes("/manage-blogs")
+                  ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                minWidth: 40,
+              }}
+            >
+              <PagesIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary={
+                <Typography
+                  sx={{
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: pathname.includes("/manage-blogs")
+                      ? 700
+                      : 400,
+                    color: pathname.includes("/manage-blogs")
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                  }}
+                >
+                  Blogs
+                </Typography>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
+        )}
       </List>
     </Drawer>
   );

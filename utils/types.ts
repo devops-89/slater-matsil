@@ -31,6 +31,17 @@ export interface HOMEPAGE_DATA_PROPS {
     professionals_hero_section: PROFESSIONALS_HEROSECTION_PROPS;
     PROFESSIONAL_LIST_PROPS: PROFESSIONALS_CARD_PROPS[];
   };
+  firm_leadership: {
+    heroTitle: string;
+    missionIntro: string;
+    missionQuote: {
+      line1: string;
+      line2: string;
+    };
+    partners: any[];
+    patentAgents: any[];
+    administration: any[];
+  };
   careerPage: {
     career_hero_section: CAREER_HERO_SECTION_PROPS;
     career_work_with_us: CAREER_WORK_WITH_US_PROPS;
@@ -50,8 +61,13 @@ export interface HOMEPAGE_DATA_PROPS {
     quote: QUOTE_CARD_DATA;
   };
   insightsPage: INSIGHTS_PAGE_DATA;
+  subAdmins: SUB_ADMIN_PROPS[];
   contactPage: CONTACT_US_PAGE_DATA;
   servicesPage: SERVICES_PAGE_DATA;
+  roles: ROLE_PROPS[];
+  privacyPolicy?: LEGAL_PAGE_DATA;
+  termsOfUse?: LEGAL_PAGE_DATA;
+  disclaimer?: LEGAL_PAGE_DATA;
 }
 
 export interface PROFESSIONAL_DETAILS_PROPS {
@@ -183,6 +199,10 @@ export interface SERVICES_AREAS_DATA {
   description: string;
   serialNumber: string;
   slug?: string;
+  detailsData?: {
+    description: string;
+    dataList?: { label: string }[];
+  }[];
 }
 
 interface SERVICES_AREA_PROPS {
@@ -287,6 +307,7 @@ interface CAREER_HERO_SECTION_PROPS {
   description: string;
   bgImage: string;
   heroImage: StaticImageData;
+  carouselImages?: any[];
   shortDescription: string;
   ctaButton1: CTA_BUTTON_PROPS;
   ctaButton2: CTA_BUTTON_PROPS;
@@ -445,6 +466,7 @@ export interface INSIGHTS_PAGE_DATA {
     data: QUICK_LINKS_CARD_PROPS[];
   };
   insightsData: INSIGHTS_DATA_PROPS[];
+  insightsDetailsData?: INSIGHTS_DETAIL_PROPS[];
   blogSection?: {
     upcomingTitle: string;
     watchPastTitle: string;
@@ -454,6 +476,7 @@ export interface INSIGHTS_PAGE_DATA {
     upcoming: BLOG_UPCOMING_ITEM[];
     pastWebinars: BLOG_PAST_WEBINAR_ITEM[];
   };
+  blogDetailsData?: BLOG_DETAIL_PROPS[];
 }
 
 export interface QUICK_LINKS_CARD_PROPS {
@@ -549,6 +572,21 @@ export interface CONTACT_US_CARD_PROPS {
   value: string;
 }
 
+export interface LEGAL_CONTENT_BLOCK {
+  type: "paragraph" | "list";
+  text?: string;
+  items?: string[];
+}
+
+export interface LEGAL_PAGE_DATA {
+  title: string;
+  effectiveDate: string;
+  sections: {
+    title: string;
+    contentBlocks: LEGAL_CONTENT_BLOCK[];
+  }[];
+}
+
 export interface SERVICES_PAGE_DATA {
   pageTitle: string;
   heroSection: {
@@ -598,6 +636,35 @@ export interface SERVICES_DETAILS_DATA_PROPS {
   data: {
     description: string;
     dataList?: { label: string }[];
+  }[];
+}
+
+export interface ROLE_PROPS {
+  id: string;
+  name: string;
+  permissions: string[];
+}
+
+export interface SUB_ADMIN_PROPS {
+  id: string;
+  name: string;
+  email: string;
+  password?: string;
+  roleId: string;
+}
+
+export interface LEGAL_CONTENT_BLOCK {
+  type: "paragraph" | "list";
+  text?: string;
+  items?: string[];
+}
+
+export interface LEGAL_PAGE_DATA {
+  title: string;
+  effectiveDate: string;
+  sections: {
+    title: string;
+    contentBlocks: LEGAL_CONTENT_BLOCK[];
   }[];
 }
 

@@ -1,9 +1,9 @@
 import slider4 from "@/public/images/home/slider/slider4.jpg";
 import slider5 from "@/public/images/home/slider/slider5.jpg";
 import slider6 from "@/public/images/home/slider/slider6.jpg";
-import React from 'react';
-import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore, Delete, Save } from "@mui/icons-material";
+import React from "react";
+import { Box, Button, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Delete, Upload } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 
@@ -28,6 +28,19 @@ export const HeroCombined = ({ banners, onChange }: { banners: any; onChange: (n
   ];
   
   const safeBanners = Array.isArray(banners) && banners.length > 0 ? banners : defaultBanners;
+
+  const handleImageUpload = (idx: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const newBanners = [...safeBanners];
+      newBanners[idx] = { ...newBanners[idx], image: reader.result as string };
+      onChange(newBanners);
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <Stack spacing={6}>
@@ -55,45 +68,36 @@ export const HeroCombined = ({ banners, onChange }: { banners: any; onChange: (n
                 }}
               />
               
-              <Box sx={{ mt: 2 }}>
-                <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontSize: 14, mb: 1, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-                  Upload Image
-                </Typography>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      const reader = new FileReader();
-                      reader.onloadend = () => {
-                        const newBanners = [...safeBanners];
-                        newBanners[idx] = { ...newBanners[idx], image: reader.result as string };
-                        onChange(newBanners);
-                      };
-                      reader.readAsDataURL(file);
-                    }
-                  }}
-                  style={{ display: "block", width: "100%", padding: "8px", border: "1px solid rgba(0,0,0,0.2)", borderRadius: "8px" }}
-                />
-                <Box sx={{ mt: 2, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
+              <Divider sx={{ my: 1 }} />
+
+              <Box>
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <Typography variant="subtitle2" color="text.secondary">Slide Image</Typography>
+                  <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }}>
+                    Upload Image
+                    <input type="file" hidden accept="image/*" onChange={(e) => handleImageUpload(idx, e)} />
+                  </Button>
+                </Box>
+
+                <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={banner.image || defaultBanners[idx]?.image} alt="preview" style={{ width: "100%", maxHeight: "150px", objectFit: "cover" }} />
+                  <img src={banner.image || defaultBanners[idx]?.image} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <IconButton
+                    size="small"
+                    color="error"
+                    onClick={() => {
+                      const newBanners = [...safeBanners];
+                      newBanners[idx] = { ...newBanners[idx], image: "" };
+                      onChange(newBanners);
+                    }}
+                    sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
+                  >
+                    <Delete fontSize="small" />
+                  </IconButton>
                 </Box>
               </Box>
 
             </Stack>
-
-            {/* SAVE BUTTON FOR THIS SLIDE */}
-            <Box sx={{ mt: 4, display: "flex", justifyContent: "flex-end" }}>
-              <Button 
-                variant="contained" 
-                startIcon={<Save />}
-                sx={{ backgroundColor: COLORS.PRIMARY_GREEN, color: COLORS.WHITE, fontFamily: tradeGothic.style.fontFamily, fontWeight: 700, borderRadius: "50px", px: 4, py: 1.5, "&:hover": { backgroundColor: COLORS.PRIMARY_BLUE } }}
-              >
-                Save Slide {idx + 1}
-              </Button>
-            </Box>
           </Box>
         </Box>
       ))}

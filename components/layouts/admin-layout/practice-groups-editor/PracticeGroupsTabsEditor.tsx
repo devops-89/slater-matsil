@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Box, Button, Stack, TextField, Typography, Card, IconButton, MenuItem, Select, FormControl, InputLabel, Checkbox, FormControlLabel } from "@mui/material";
-import { Close, Add } from "@mui/icons-material";
+import React, { useState } from "react";
+import { Box, Button, Card, Divider, FormControl, IconButton, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
+import { Add, Delete } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 
@@ -81,7 +81,7 @@ export const PracticeGroupsTabsEditor = ({ data, onChange }: { data: any, onChan
                         <TextField fullWidth multiline rows={3} label="Title (Secondary)" value={practitioner.secondary || ""} onChange={(e) => handleUpdatePractitioner(pIdx, { secondary: e.target.value })} />
                       </Stack>
                       <IconButton color="error" onClick={() => handleDeletePractitioner(pIdx)}>
-                        <Close />
+                        <Delete />
                       </IconButton>
                     </Stack>
                   </Box>
@@ -99,4 +99,3 @@ export const PracticeGroupsTabsEditor = ({ data, onChange }: { data: any, onChan
     </Stack>
   );
 };
-import { Divider } from '@mui/material';

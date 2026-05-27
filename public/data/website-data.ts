@@ -70,7 +70,10 @@ import {
   professionalsListData,
   SERVICE_FRAMEWORK_CARD_DATA,
   STRENGTH_CARD_DATA,
+  SERVICES_DETAILS,
 } from "./generic-array";
+import { INSIGHTS_DETAILS_DATA } from "./insights-details-data";
+import { LEADERSHIP_DATA } from "./leadership-data";
 export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
   title: "Slater Matsil",
   homepage: {
@@ -119,17 +122,19 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           img: serviceAreas1,
           title: "PATENT PROSECUTION",
           description:
-            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals. ",
+            "We are engineers. We are lawyers. We are also licensing professionals and IP litigators. Because we see the world from many perspectives, we are able to craft patents that contribute to IP portfolios that achieve your goals. ",
           serialNumber: "01",
           slug: "patent-prosecution",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "patent-prosecution")?.data || [],
         },
         {
           img: serviceAreas2,
           title: "POST GRANT CHALLENGES",
           description:
-            "Our experience in litigation and prosecution provides us with the insight necessary to successfully defend and attack patents in any one of the available post grant procedures. ",
+            "Our experience in litigation and prosecution provides us with the insight necessary to successfully defend and attack patents in any one of the available post grant procedures. ",
           serialNumber: "02",
           slug: "post-grant-challenges",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "post-grant-challenges")?.data || [],
         },
         {
           img: serviceAreas3,
@@ -138,6 +143,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "Global economics can complicate the patent journey, but we make the process clear and manageable for our clients.",
           serialNumber: "03",
           slug: "patent-litigation",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "patent-litigation")?.data || [],
         },
         {
           img: serviceAreas4,
@@ -146,6 +152,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "We partner with technology leaders to design and implement licensing strategies tailored to their goals. Let us unlock new value from your existing innovations to create long‑term revenue and support future inventions.",
           serialNumber: "04",
           slug: "patent-licensing",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "patent-licensing")?.data || [],
         },
         {
           img: serviceAreas5,
@@ -154,6 +161,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "Adverse patent assertions have become an inevitable occurrence in today’s business environment. Some of our clients receive multiple adverse assertions in any given week.",
           serialNumber: "05",
           slug: "adverse-patent-analysis",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "adverse-patent-analysis")?.data || [],
         },
         {
           img: serviceAreas6,
@@ -162,6 +170,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             'Slater Matsil is proud to be known as a "strategic partner," helping our clients reach their intellectual property goals all around the world.',
           serialNumber: "06",
           slug: "trusted-advice-counsel",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "trusted-advice-counsel")?.data || [],
         },
         {
           img: serviceAreas7,
@@ -170,6 +179,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "We help clients develop and implement IP strategies that align with their business goals, protect their innovations, and create long-term value.",
           serialNumber: "07",
           slug: "ip-strategy",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "ip-strategy")?.data || [],
         },
         {
           img: serviceAreas8,
@@ -178,6 +188,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "We help clients manage their IP portfolios efficiently and effectively, ensuring that their intellectual property assets are protected and leveraged to achieve their business goals.",
           serialNumber: "08",
           slug: "portfolio-management",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "portfolio-management")?.data || [],
         },
         {
           img: serviceAreas9,
@@ -186,6 +197,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
             "At every stage of creation, registration, and renewal, the trademark professionals of Slater Matsil deliver exceptional counsel to preserve the integrity of your brand.",
           serialNumber: "09",
           slug: "trademarks",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "trademarks")?.data || [],
         },
       ],
     },
@@ -406,6 +418,18 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       ],
     },
     PROFESSIONAL_LIST_PROPS: professionalsListData,
+  },
+  firm_leadership: {
+    heroTitle: "firm leadership",
+    missionIntro:
+      "Effective leadership has contributed to the firm's substantial growth since Steven Slater and Ira Matsil founded the firm in 1999. The firm's mission statement defines Slater Matsil's core competencies and values.",
+    missionQuote: {
+      line1: "Work with Excellence,",
+      line2: "in a Collegial Atmosphere.",
+    },
+    partners: LEADERSHIP_DATA.partners,
+    patentAgents: LEADERSHIP_DATA.patentAgents,
+    administration: LEADERSHIP_DATA.administration,
   },
   careerPage: {
     career_hero_section: {
@@ -1094,6 +1118,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       ],
     },
     insightsData: INSIGHTS_CARD_DATA,
+    insightsDetailsData: INSIGHTS_DETAILS_DATA,
     blogSection: {
       upcomingTitle: "Upcoming",
       watchPastTitle: "Blogs",
@@ -1368,4 +1393,315 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       data: SERVICE_FRAMEWORK_CARD_DATA,
     },
   },
+  subAdmins: [],
+  roles: [],
+
+  privacyPolicy: {
+    "title": "PRIVACY POLICY",
+    "effectiveDate": "February 6, 2026",
+    "sections": [
+        {
+            "title": "1) Who we are; scope",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Slater Matsil, LLP (“we,” “us”) is the controller of personal information collected through www.slatermatsil.com. This policy explains what we collect, how we use it, how we share it, and your rights. It applies to our website and related communications."
+                }
+            ]
+        },
+        {
+            "title": "2) Information we collect",
+            "contentBlocks": [
+                {
+                    "type": "list",
+                    "items": [
+                        "You provide: name, email, phone, company/title (if provided), inquiry/matter details, and scheduling information if any. Please do not include confidential or sensitive information in web forms or email.",
+                        "Automatically: IP address, device/browser type, pages viewed, timestamps, referring pages, and general location derived from IP.",
+                        "Cookies/trackers: essential cookies for security and operation; optional analytics; optional functional and marketing cookies (see “Cookies and tracking”). Specific services we use:",
+                        "Google Analytics (analytics)",
+                        "[Contact forms – e.g., Gravity Forms / WPForms] (form submissions)",
+                        "[Email service – e.g., Mailchimp / Constant Contact] (newsletters)",
+                        "[CRM/Matter management – e.g., Clio / MyCase] (client intake/matter management)",
+                        "[Scheduling – e.g., Calendly / Acuity] (consultation scheduling)",
+                        "[Chat widget – vendor name, if used] (chat) We may update this list. Our service providers are contractually obligated to protect personal information and use it only to provide services to us."
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "3) How we use information",
+            "contentBlocks": [
+                {
+                    "type": "list",
+                    "items": [
+                        "Provide, secure, and improve the site and our services",
+                        "Respond to inquiries; schedule consultations; perform conflicts checks",
+                        "Send newsletters or updates if you subscribe or consent",
+                        "Comply with legal obligations and enforce our Terms Legal bases for EEA/UK users: consent; contract performance or pre-contract steps; legal obligations; and our legitimate interests (site operation, improvement, and security), balanced against your rights."
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "4) How we share information",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "We do not sell personal information. We do not share personal information for cross-context behavioral advertising or targeted advertising. If this changes, we will update this policy, provide required opt-outs, and honor Global Privacy Control (GPC). We share with:\n• Service providers (hosting, email, CRM, analytics, security, scheduling) under contract\n• Authorities or others as required by law or to protect rights and safety\n• Successors in a business reorganization, subject to this policy We may share de-identified or aggregated information."
+                }
+            ]
+        },
+        {
+            "title": "5) Cookies and tracking",
+            "contentBlocks": [
+                {
+                    "type": "list",
+                    "items": [
+                        "Essential cookies: enable core site functions; always on.",
+                        "Analytics cookies: help measure traffic and performance (e.g., Google Analytics).",
+                        "Functional/marketing cookies: only if implemented. Controls:",
+                        "Manage cookies in your browser. In the EEA/UK, we obtain consent for non-essential cookies and provide granular choices via a Cookie Settings link. In California and other U.S. states, we honor GPC as an opt-out signal if “sale/share/targeted advertising” ever applies. If using Google Analytics, we enable IP anonymization and/or comparable privacy controls."
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "6) Security",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "We use reasonable administrative, technical, and physical safeguards (e.g., TLS encryption, access controls, updates, training). No system is 100% secure. Email and web forms are not suitable for confidential information."
+                }
+            ]
+        },
+        {
+            "title": "7) Retention",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "We keep personal information only as long as needed for the purposes described or as required by law and professional obligations.\n• Web inquiries (non-clients): 2 years from last contact\n• Client matter files: 5 years after matter closure, unless a longer period is required by law, engagement terms, or a litigation hold\n• Limited matter metadata for conflicts checks: retained indefinitely\n• Trust account records: at least 5 years\n• Marketing lists: until you unsubscribe or we prune inactive contacts\n• Analytics data: 26 months (Google Analytics default, unless configured otherwise)"
+                }
+            ]
+        },
+        {
+            "title": "8) Your rights",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Depending on your location, you may have rights to access, correct, delete, object to or restrict processing, withdraw consent, and receive your data in portable format. You may opt out of marketing at any time and manage cookies via your browser or our Cookie Settings (where provided). To exercise rights, contact: info@slatermatsil.com, 17304 Preston Rd, Suite 900 Dallas, TX 75252, 972.732.1001. We may verify your identity and will respond within the time required by law."
+                }
+            ]
+        },
+        {
+            "title": "9) International transfers",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "If you access the site from outside the U.S., your data may be processed in the U.S. and other countries with different laws. For EEA/UK data, we use lawful transfer mechanisms (e.g., Standard Contractual Clauses and related assessments, and/or the EU-U.S. Data Privacy Framework where a vendor participates)."
+                }
+            ]
+        },
+        {
+            "title": "10) Children",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Our site is not directed to children under 16, and we do not knowingly collect their personal information. We do not knowingly sell or share personal information of consumers under 16."
+                }
+            ]
+        },
+        {
+            "title": "11) Do Not Track; Global Privacy Control",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Browsers may send Do Not Track signals, but no standard exists. Where required by law (e.g., California), we honor the Global Privacy Control (GPC) as an opt-out signal if “sale/share/targeted advertising” applies."
+                }
+            ]
+        },
+        {
+            "title": "12) Changes",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "We may update this policy and will post the new date. Material changes will be highlighted or notified where required."
+                }
+            ]
+        },
+        {
+            "title": "13) Contact",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Slater Matsil, LLP\nAttn: Privacy\n17304 Preston Rd, Suite 900\nDallas, TX 75252\n972.732.1001\ninfo@slatermatsil.com\nwww.slatermatsil.com"
+                }
+            ]
+        }
+    ]
+},
+  termsOfUse: {
+    "title": "TERMS OF USE",
+    "effectiveDate": "February 6, 2026",
+    "sections": [
+        {
+            "title": "1) Acceptance",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "By using this website, you agree to these Terms. If you do not agree, do not use the site."
+                }
+            ]
+        },
+        {
+            "title": "2) Permitted use",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Use the site only for personal, noncommercial informational purposes. You agree not to:\n• Use the site unlawfully or in violation of these Terms\n• Copy, distribute, or create derivatives of site content without written permission\n• Use bots/scrapers or bypass security or access controls\n• Introduce malware or interfere with site operation\n• Misrepresent your identity or affiliation\n• Remove proprietary notices or frame/mirror the site without permission"
+                }
+            ]
+        },
+        {
+            "title": "3) Intellectual property",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "All site content is owned by Slater Matsil, LLP or its licensors and protected by intellectual property laws. Slater Matsil, LLP names and logos are trademarks; do not use them without written permission."
+                }
+            ]
+        },
+        {
+            "title": "4) Submissions",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "If you submit information via forms or email, you grant us a limited license to use it to review and respond to your inquiry, operate and improve the site, and comply with law. Do not submit confidential information unless and until we are engaged."
+                }
+            ]
+        },
+        {
+            "title": "5) Disclaimer of warranties",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "This site and its content are provided “as is” and “as available,” without warranties of any kind."
+                }
+            ]
+        },
+        {
+            "title": "6) Limitation of liability",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "To the maximum extent permitted by law, Slater Matsil, LLP and its attorneys, officers, employees, and agents are not liable for any direct or indirect damages arising from or relating to your use of the site."
+                }
+            ]
+        },
+        {
+            "title": "7) Indemnification",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "You agree to indemnify and hold harmless Slater Matsil, LLP from claims arising from your use of the site or violation of these Terms."
+                }
+            ]
+        },
+        {
+            "title": "8) Modifications; termination",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "We may modify these Terms at any time and will update the effective date. Continued use means you accept the changes. We may suspend or terminate access at any time."
+                }
+            ]
+        },
+        {
+            "title": "9) Governing law; venue",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "These Terms are governed by Texas law, without regard to conflicts rules. Exclusive venue lies in the state or federal courts in Collin County, Texas."
+                }
+            ]
+        },
+        {
+            "title": "10) Severability; entire agreement",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "If any provision is unenforceable, the remainder remains in effect. These Terms, the Disclaimer, and the Privacy Policy are the entire agreement regarding site use."
+                }
+            ]
+        }
+    ]
+},
+  disclaimer: {
+    "title": "DISCLAIMER",
+    "effectiveDate": "February 6, 2026",
+    "sections": [
+        {
+            "title": "1) No legal advice; no attorney-client relationship",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "This website provides general information and is not legal advice. Contacting us through the site, email, or forms does not create an attorney-client relationship. A relationship forms only after conflicts are cleared and a written engagement is signed."
+                }
+            ]
+        },
+        {
+            "title": "2) Do not send confidential information",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Do not send confidential, privileged, or time-sensitive information through this site or by email. Until we are formally engaged, information you send may be reviewed for conflicts and may not be treated as confidential or privileged."
+                }
+            ]
+        },
+        {
+            "title": "3) No guarantee of results",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "The materials on this Web site may not reflect the most current legal developments and should not be considered an indication of future results. Past results and testimonials do not predict or guarantee outcomes. Each matter is different."
+                }
+            ]
+        },
+        {
+            "title": "4) Attorney advertising; licensing",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "This site may be attorney advertising. Unless stated in attorney bios, our lawyers are not certified by the Texas Board of Legal Specialization. Our attorneys practice only in the jurisdictions listed in their bios."
+                }
+            ]
+        },
+        {
+            "title": "5) Accuracy and third-party links",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "We aim to keep content accurate and current but make no warranties. Content may change without notice. Third-party links are for convenience; we do not control or endorse them."
+                }
+            ]
+        },
+        {
+            "title": "6) Limitation of liability",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "To the fullest extent permitted by law, Slater Matsil, LLP and its attorneys and staff are not liable for damages arising from your use of this site."
+                }
+            ]
+        },
+        {
+            "title": "7) Contact",
+            "contentBlocks": [
+                {
+                    "type": "paragraph",
+                    "text": "Slater Matsil, LLP\n17304 Preston Rd, Suite 900\nDallas, TX 75252\ninfo@slatermatsil.com\nhttps://slatermatsil.com/"
+                }
+            ]
+        }
+    ]
+}
 };

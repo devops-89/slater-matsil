@@ -9,8 +9,35 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
+  const pathname = usePathname();
+
+  const getEditorHref = (href: string) => {
+    const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
+    if (!isPreview) return href || "#";
+    if (!href || href === "#" || href === "/") return "/pages/home";
+    
+    const parts = href.split("/");
+    const baseRoute = parts[1];
+    
+    // If it's a detail page link like /services/patent-prosecution, do not rewrite to the editor page
+    if (parts.length > 2 && parts[2]) {
+      return href;
+    }
+
+    const hasEditorPage = [
+      "home", "about-us", "services", "practice-groups", "firm-professionals", 
+      "firm-leadership", "insights", "blogs", "careers", "contact-us", 
+      "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer"
+    ].includes(baseRoute);
+
+    if (hasEditorPage) {
+      return `/pages/${baseRoute}`;
+    }
+    return href;
+  };
   return (
     <Box>
       <Typography
@@ -27,7 +54,7 @@ const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
       <List>
         {DATA?.map((item, i) => (
           <ListItemButton sx={{ px: 1, width: "fit-content", py: 0 }} key={i}>
-            <Link href={item.href || ""} style={{ textDecoration: "none" }}>
+            <Link href={getEditorHref(item.href || "")} style={{ textDecoration: "none" }}>
               <ListItemText
                 primary={item.text}
                 slotProps={{

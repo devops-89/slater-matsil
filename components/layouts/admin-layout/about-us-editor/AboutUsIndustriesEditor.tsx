@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore, Delete, Save } from "@mui/icons-material";
+import { Box, Button, Grid, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
+import { adelle } from "@/utils/fonts";
 
 
 export const AboutUsIndustriesEditor = ({ data, onChange }: any) => {
@@ -61,15 +61,16 @@ export const AboutUsIndustriesEditor = ({ data, onChange }: any) => {
                   saveFlatList(newList);
                 }}
               />
-              <Button 
-                color="error" variant="text" size="small" sx={{ minWidth: "auto" }}
+              <IconButton
+                color="error"
+                size="small"
                 onClick={() => {
                   const newList = flatList.filter((_: any, i: number) => i !== idx);
                   saveFlatList(newList);
                 }}
               >
-                X
-              </Button>
+                <Delete fontSize="small" />
+              </IconButton>
             </Stack>
           </Grid>
         ))}

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore, Delete, Save } from "@mui/icons-material";
+import { Button, Card, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Delete } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
+import { adelle } from "@/utils/fonts";
 
 
 export const AboutUsPatentSuccessEditor = ({ data, onChange }: any) => (
@@ -34,15 +34,15 @@ export const AboutUsPatentSuccessEditor = ({ data, onChange }: any) => (
               onChange({ ...data, metrics_data: newMetrics });
             }}
           />
-          <Button 
-            color="error" variant="outlined" 
+          <IconButton
+            color="error"
             onClick={() => {
               const newMetrics = data.metrics_data.filter((_: any, i: number) => i !== idx);
               onChange({ ...data, metrics_data: newMetrics });
             }}
           >
-            Remove
-          </Button>
+            <Delete />
+          </IconButton>
         </Stack>
       </Card>
     ))}
