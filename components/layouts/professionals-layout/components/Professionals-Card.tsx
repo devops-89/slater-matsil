@@ -16,7 +16,7 @@ const ProfessionalsCard = ({
 }: PROFESSIONALS_CARD_PROPS) => {
   const pathname = usePathname();
   const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
-  const linkHref = isPreview ? "/manage-professionals" : `/firm-professionals/professionals/${slug}`;
+  const linkHref = isPreview ? "/manage-professionals" : `/firm-professionals/${slug}`;
 
   return (
     <Link

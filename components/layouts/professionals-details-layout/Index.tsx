@@ -3,7 +3,7 @@ import { Box, Container, IconButton, Stack, Tooltip, Typography } from "@mui/mat
 import React, { useEffect } from "react";
 import ProfessionalsDetailsHeroSection from "./Professionals-details-Herosection";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, notFound } from "next/navigation";
 import { PROFESSIONAL_DETAILS_DATA } from "@/public/data/professionals-details-data";
 import TabSection from "./Tab-Section";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
@@ -12,7 +12,7 @@ import { tradeGothic } from "@/utils/fonts";
 import Link from "next/link";
 //
 const ProfessionalDetailsLayout = () => {
-  const { setProfessionalDetailsData, clearProfessionalDetailsData } =
+  const { data, setProfessionalDetailsData, clearProfessionalDetailsData } =
     useProfessionalDetailsData();
   const { slug } = useParams();
   const router = useRouter();
@@ -25,8 +25,26 @@ const ProfessionalDetailsLayout = () => {
     );
   }, []);
 
+  const decodedSlug = React.useMemo(() => {
+    return typeof slug === "string" ? decodeURIComponent(slug).toLowerCase().trim() : "";
+  }, [slug]);
+
+  const professional = React.useMemo(() => {
+    if (!decodedSlug) return null;
+    return (
+      PROFESSIONAL_DETAILS_DATA.find(
+        (item) => item.slug.toLowerCase().trim() === decodedSlug
+      ) || null
+    );
+  }, [decodedSlug]);
+
+  // If a slug is specified but no professional is found, return 404
+  if (slug && !professional) {
+    notFound();
+  }
+
   const currentIndex = sortedProfessionals.findIndex(
-    (item) => item.slug === slug,
+    (item) => item.slug.toLowerCase().trim() === decodedSlug,
   );
   const prevProfessional =
     currentIndex > 0 ? sortedProfessionals[currentIndex - 1] : null;
@@ -36,17 +54,27 @@ const ProfessionalDetailsLayout = () => {
       : null;
 
   useEffect(() => {
-    const filteredProfessionalData = PROFESSIONAL_DETAILS_DATA.find(
-      (item) => item.slug === slug,
-    );
-
-    if (filteredProfessionalData) {
-      setProfessionalDetailsData(filteredProfessionalData);
+    if (professional) {
+      setProfessionalDetailsData(professional);
     }
     return () => {
       clearProfessionalDetailsData();
     };
-  }, [slug, setProfessionalDetailsData]);
+  }, [professional, setProfessionalDetailsData, clearProfessionalDetailsData]);
+
+  // Prevent rendering details hero and tabs until data is properly loaded in store
+  if (!data || data.slug.toLowerCase().trim() !== decodedSlug) {
+    return (
+      <Box
+        sx={{
+          minHeight: "85vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      />
+    );
+  }
 
   return (
     <Box>
@@ -65,7 +93,7 @@ const ProfessionalDetailsLayout = () => {
             {/* Previous */}
             {prevProfessional ? (
               <Link
-                href={`/firm-professionals/professionals/${prevProfessional.slug}`}
+                href={`/firm-professionals/${prevProfessional.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="row" alignItems="center" spacing={1.5} sx={{
@@ -105,7 +133,7 @@ const ProfessionalDetailsLayout = () => {
             {/* Next */}
             {nextProfessional ? (
               <Link
-                href={`/firm-professionals/professionals/${nextProfessional.slug}`}
+                href={`/firm-professionals/${nextProfessional.slug}`}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="row" alignItems="center" spacing={1.5} sx={{
