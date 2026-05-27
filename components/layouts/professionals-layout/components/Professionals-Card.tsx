@@ -24,11 +24,8 @@ const ProfessionalsCard = ({
             height: "100%",
             cursor: "pointer",
             "&:hover": {
-              "& .profile-image": {
-                transform: "scale(1.05)",
-              },
               "& .info-box": {
-                transform: "translateX(-50%) translateY(-10px)",
+                transform: "translateX(-50%)",
                 borderTop: `5px solid ${COLORS.PRIMARY_BLUE}`,
                 boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
               },
@@ -37,22 +34,32 @@ const ProfessionalsCard = ({
         >
           <Box
             sx={{
-              height: "100%",
+              height: { lg: "380px", md: "340px", sm: "300px", xs: "280px" },
               width: "100%",
               overflow: "hidden",
               borderRadius: "16px",
+              position: "relative",
+              "& .profile-image": {
+                transform: "none",
+                transformOrigin: "bottom center",
+                transition: "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              },
+              "&:hover": {
+                "& .profile-image": {
+                  transform: "scale(1.05)",
+                },
+              },
             }}
           >
             <Image
               className="profile-image"
               src={img}
-              alt=""
+              alt={name || ""}
+              fill
+              unoptimized
+              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{
-                width: "100%",
-                height: "100%",
                 objectFit: "cover",
-                transition:
-                  "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               }}
             />
           </Box>
@@ -62,14 +69,14 @@ const ProfessionalsCard = ({
               backgroundColor: COLORS.WHITE,
               borderRadius: "16px",
               position: "absolute",
-              bottom: { lg: -100, xs: -120 },
+              bottom: { lg: -80, md: -70, sm: -60, xs: -50 },
               width: "80%",
               zIndex: 999,
-              p: 1,
+              p: 1.5,
               borderTop: `5px solid ${COLORS.PRIMARY_GREEN}`,
               left: "50%",
               transform: "translateX(-50%)",
-              height: "134px",
+              height: { lg: "134px", md: "120px", sm: "110px", xs: "100px" },
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -80,7 +87,7 @@ const ProfessionalsCard = ({
             <Box sx={{}}>
               <Typography
                 sx={{
-                  fontSize: { lg: 20, xs: 15 },
+                  fontSize: { lg: 18, md: 16, sm: 15, xs: 14 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
                   color: COLORS.PRIMARY_BLUE,
@@ -96,12 +103,13 @@ const ProfessionalsCard = ({
 
               <Typography
                 sx={{
-                  fontSize: { lg: 18, xs: 14 },
+                  fontSize: { lg: 15, md: 14, sm: 13, xs: 12 },
                   fontFamily: tradeGothic.style.fontFamily,
                   fontWeight: 700,
                   color: COLORS.PRIMARY_BLUE,
                   textAlign: "center",
                   opacity: 0.8,
+                  mt: 0.5,
                 }}
               >
                 {designation}

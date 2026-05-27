@@ -1,3 +1,4 @@
+
 import aboutCareer from "@/about/career-about2.jpg";
 import {
   CONTACT_US_CARD_PROPS,
@@ -27,15 +28,15 @@ import strategicInsight from "@/icons/services/strategic-insight.svg";
 import technicalExpertise from "@/icons/services/technical-expertise.svg";
 import amitava from "@/professionals/transparent/amitava-chatterjee.png";
 import ava from "@/professionals/transparent/ava-chung.png";
-import barry from "@/professionals/transparent/barryDove.png";
-import benjamin_nise from "@/professionals/transparent/ben.png";
-import brian from "@/professionals/transparent/brian-carlson.png";
-import brian_mair from "@/professionals/transparent/briann.png";
-import chad from "@/professionals/transparent/chadd.png";
+import barry from "@/professionals/transparent/barry-dove.png";
+import benjamin_nise from "@/professionals/transparent/benjamin-nise.png";
+import brian_mair from "@/professionals/transparent/brian-mair.png";
+import brian from "@/professionals/transparent/carlson.png";
+import chad from "@/professionals/transparent/chad-terrell.png";
 import chuanming from "@/professionals/transparent/chuanming-wei.png";
 import elizabeth from "@/professionals/transparent/elizabeth.png";
-import shervin from "@/professionals/transparent/fatehii.png";
-import hsin from "@/professionals/transparent/hsinn.png";
+import fantai from "@/professionals/transparent/fantai-kong.png";
+import hsin from "@/professionals/transparent/Hsin.png";
 import ira from "@/professionals/transparent/ira-matsil.png";
 import james from "@/professionals/transparent/james-kesterson.png";
 import jeffrey from "@/professionals/transparent/jeffrey-robert.png";
@@ -44,7 +45,6 @@ import jonathan from "@/professionals/transparent/jonathan-insler.png";
 import jonathan_ward from "@/professionals/transparent/jonathan-ward.png";
 import joseph from "@/professionals/transparent/joseph-mcmanis.png";
 import julian from "@/professionals/transparent/julian-wang.png";
-import fantai from "@/professionals/transparent/konggg.png";
 import lizabeth from "@/professionals/transparent/lizabeth-vice.png";
 import marc from "@/professionals/transparent/marc-mcwilliams.png";
 import michael from "@/professionals/transparent/michael-kucher.png";
@@ -53,16 +53,17 @@ import paata from "@/professionals/transparent/patta-kakashvili.png";
 import payam from "@/professionals/transparent/payam-rashidi.png";
 import peter from "@/professionals/transparent/peter-meza.png";
 import rameez from "@/professionals/transparent/rameez-samnakay.png";
-import robert from "@/professionals/transparent/robertt.png";
+import robert from "@/professionals/transparent/robert-graham.png";
 import roger from "@/professionals/transparent/roger-knapp.png";
-import soonshin from "@/professionals/transparent/shoonshinn.png";
-import srini from "@/professionals/transparent/sriniii.png";
+import ruojian from "@/professionals/transparent/ruojian-zhang.png";
+import shervin from "@/professionals/transparent/shervin-fatehi.png";
+import soonshin from "@/professionals/transparent/soonshin.png";
+import srini from "@/professionals/transparent/srini-hd.png";
 import stephen from "@/professionals/transparent/stephen-cortiaus.png";
 import steven_slater from "@/professionals/transparent/steven-slater.png";
-import vijay from "@/professionals/transparent/vijayy.png";
+import vijay from "@/professionals/transparent/vijay-desai.png";
 import yumin from "@/professionals/transparent/yumin.png";
 import zachary from "@/professionals/transparent/zachary-williams.png";
-import ruojian from "@/professionals/transparent/zhang.png";
 import zhu from "@/professionals/transparent/zhu-he.png";
 
 export const SERVICES_AREAS_DATA = [
@@ -1047,21 +1048,21 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "benjamin-nise-ai-patent-prosecution-dba-cle",
   },
-    {
+  {
     title:
       "Srini Chakravarthi Wraps Up Third Year Teaching Patent Law at Texas A&M University School of Law",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-teaches-patent-law-texas-am",
   },
-    {
+  {
     title:
       "Srini Chakravarthi Leads Community Service Project for the Honorable Barbara M.G. Lynn American Inn of Court",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-american-inn-of-court-community-service",
   },
-      {
+  {
     title:
       "Srini Chakravarthi’s Article was published in the Dallas Bar Association’s Headnotes.",
     bgColor: COLORS.LIGHT_GREY,
@@ -1728,7 +1729,7 @@ export const professionalsListData = [
     designation: "Attorney at Law",
     slug: "srini-chakravarthi",
   },
-    {
+  {
     img: hsin,
     name: "Hsin-Ya Kuo, Ph.D",
     designation: "Patent Agent",
