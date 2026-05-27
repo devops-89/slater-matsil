@@ -32,12 +32,16 @@ export default function RootLayout({
   }, [pathname]);
 
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-    });
+    const timer = setTimeout(() => {
+      AOS.init({
+        duration: 800,
+        once: true,
+      });
+      AOS.refresh();
+    }, 100);
     setDetails(WEBSITE_DATA);
     setInitialLoading(false);
+    return () => clearTimeout(timer);
   }, [setDetails]);
 
   const phone = useMediaQuery("(max-width:600px)");
@@ -78,10 +82,10 @@ export default function RootLayout({
                     minHeight: "100vh",
                   }}
                 >
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages')) && (phone ? <MobileNavbar /> : <Navbar />)}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-professionals')) && (phone ? <MobileNavbar /> : <Navbar />)}
                   <div style={{ flex: 1 }}>{children}</div>
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages')) && <Footer />}
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages')) && <CookieConsent />}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-professionals')) && <Footer />}
+                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-professionals')) && <CookieConsent />}
                 </div>
             </NotificationProvider>
           </LoadingProvider>

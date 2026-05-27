@@ -24,7 +24,9 @@ const Whoweserve = () => {
         <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up">
           <Box
             sx={{
-              backgroundImage: `url(${details?.homepage?.who_we_serve?.leftSection?.heroImage})`,
+              ...(details?.homepage?.who_we_serve?.leftSection?.heroImage && {
+                backgroundImage: `url(${details.homepage.who_we_serve.leftSection.heroImage})`,
+              }),
               height: { lg: "80vh", xs: "50vh" },
               backgroundPosition: "center",
               backgroundSize: "cover",
@@ -99,7 +101,9 @@ const Whoweserve = () => {
             sx={{
               backgroundColor: "#ECF2F3",
               height: { lg: "80vh", xs: "70vh" },
-              backgroundImage: `url(${details?.homepage?.who_we_serve?.rightSection?.bgImage})`,
+              ...(details?.homepage?.who_we_serve?.rightSection?.bgImage && {
+                backgroundImage: `url(${details.homepage.who_we_serve.rightSection.bgImage})`,
+              }),
               backgroundPosition: "top right",
               backgroundSize: "40%",
               backgroundRepeat: "no-repeat",

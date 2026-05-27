@@ -172,18 +172,19 @@ const HeroSection3 = () => {
                   </Link>
                 </Grid>
                 <Grid size={6}>
-                  <Image
-                    src={val.img}
-                    alt="slider image"
-                    width={800}
-                    height={450}
-                    style={{
-                      width: "100%",
-                      height: "450px",
-                      borderRadius: 20,
-                      objectFit: "cover",
-                    }}
-                  />
+                  <Box sx={{ width: "100%", height: "450px", position: "relative" }}>
+                    <Image
+                      src={val.img}
+                      alt="slider image"
+                      fill
+                      priority={i === 0}
+                      sizes="(max-width: 1200px) 100vw, 50vw"
+                      style={{
+                        borderRadius: 20,
+                        objectFit: "cover",
+                      }}
+                    />
+                  </Box>
                 </Grid>
               </Grid>
             </SwiperSlide>

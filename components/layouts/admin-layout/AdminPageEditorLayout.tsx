@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 
 import { AboutUsForms, AboutUsPreviews } from "@/components/layouts/admin-layout/about-us-editor";
 import { HomePageForms, HomePagePreviews } from "@/components/layouts/admin-layout/home-editor";
+import { PracticeGroupsPageForms, PracticeGroupsPagePreviews } from "@/components/layouts/admin-layout/practice-groups-editor";
+import { FirmProfessionalsPageForms, FirmProfessionalsPagePreviews } from "@/components/layouts/admin-layout/firm-professionals-editor";
 import { ServicesPageForms, ServicesPagePreviews } from "@/components/layouts/admin-layout/services-editor";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
@@ -62,6 +64,31 @@ export default function AdminPageEditorLayout() {
     setDetails(updated as any);
   };
 
+  
+  const updateFirmProfessionalsPage = (key: string, newData: any) => {
+    const updated = {
+      ...websiteData,
+      firm_professionals: {
+        ...websiteData.firm_professionals,
+        [key]: newData
+      }
+    };
+    setWebsiteData(updated);
+    setDetails(updated as any);
+  };
+
+  const updatePracticeGroupsPage = (key: string, newData: any) => {
+    const updated = {
+      ...websiteData,
+      practiceGroupPage: {
+        ...websiteData.practiceGroupPage,
+        [key]: newData
+      }
+    };
+    setWebsiteData(updated);
+    setDetails(updated as any);
+  };
+
   let sections = ["General Settings"];
   if (slug === "home") {
     sections = ["Hero Section", "About Section", "Metrics List", "Service Areas", "Who We Serve"];
@@ -69,6 +96,10 @@ export default function AdminPageEditorLayout() {
     sections = ["Hero Section", "Driving Innovation", "Patent Success", "Insights & Awards", "Who We Serve", "Industries"];
   } else if (slug === "services") {
     sections = ["Hero Section", "Why Choose Us", "Unparalleled Legal Services", "Service Framework"];
+  } else if (slug === "practice-groups") {
+    sections = ["Hero Section", "Practice Group Tabs"];
+  } else if (slug === "firm-professionals") {
+    sections = ["Hero Section"];
   }
 
   const handleAccordionChange = (panelIndex: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -82,6 +113,10 @@ export default function AdminPageEditorLayout() {
       return <AboutUsForms activeSection={index} websiteData={websiteData} updateAboutPage={updateAboutPage} />;
     } else if (slug === "services") {
       return <ServicesPageForms activeSection={index} websiteData={websiteData} updateServicesPage={updateServicesPage} />;
+    } else if (slug === "practice-groups") {
+      return <PracticeGroupsPageForms activeSection={index} websiteData={websiteData} updatePracticeGroupsPage={updatePracticeGroupsPage} />;
+    } else if (slug === "firm-professionals") {
+      return <FirmProfessionalsPageForms activeSection={index} websiteData={websiteData} updateFirmProfessionalsPage={updateFirmProfessionalsPage} />;
     }
     return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Forms for {slug} are coming soon.</Typography>;
   };
@@ -91,7 +126,7 @@ export default function AdminPageEditorLayout() {
       
       {/* Left Sidebar (Forms Area) */}
       <Box sx={{ 
-        width: 350, 
+        width: 400, 
         flexShrink: 0, 
         borderRight: "1px solid rgba(0,0,0,0.1)", 
         backgroundColor: "#FFFFFF", 
@@ -192,6 +227,10 @@ export default function AdminPageEditorLayout() {
              <AboutUsPreviews activeSection={activeSection === false ? -1 : activeSection} websiteData={websiteData} />
            ) : slug === "services" ? (
              <ServicesPagePreviews activeSection={activeSection === false ? -1 : activeSection} websiteData={websiteData} />
+           ) : slug === "practice-groups" ? (
+             <PracticeGroupsPagePreviews activeSection={activeSection === false ? -1 : activeSection} websiteData={websiteData} />
+           ) : slug === "firm-professionals" ? (
+             <FirmProfessionalsPagePreviews activeSection={activeSection === false ? -1 : activeSection} websiteData={websiteData} />
            ) : (
              <Box sx={{ display: 'flex', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
                 <Typography sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY }}>Preview not built for {slug}.</Typography>
