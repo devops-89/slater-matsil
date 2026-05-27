@@ -1,10 +1,8 @@
-import { Box, Typography } from "@mui/material";
-import Image from "next/image";
-import React from "react";
-import professional1 from "@/professionals/professional1.jpg";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { PROFESSIONALS_CARD_PROPS } from "@/utils/types";
+import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 import Link from "next/link";
 const ProfessionalsCard = ({
   img,
