@@ -18,13 +18,13 @@ const InsightsSection = () => {
     <Box sx={{ py: 10 }}>
       <Grid container>
         <Grid
-        suppressHydrationWarning
           size={{ lg: 5, xs: 12 }}
           sx={{ px: { lg: 10, xs: 2 } }}
           data-aos="fade-up"
+          suppressHydrationWarning
         >
           <HeadingStar
-            title={details?.homepage?.insights_section?.sectionTitle || "Insights"}
+            title={details?.homepage?.insights_section?.sectionTitle || ""}
           />
 
           <Typography
@@ -36,7 +36,7 @@ const InsightsSection = () => {
               mt: 2,
             }}
           >
-            {details?.homepage?.insights_section?.heading || "Recently Published Insights."}
+            {details?.homepage?.insights_section?.heading}
           </Typography>
 
           <Stack
@@ -86,15 +86,13 @@ const InsightsSection = () => {
               },
             }}
           >
-            {(details?.insightsPage?.insightsData || [])
-              .slice(0, 3)
-              .map((val: any, i: number) => (
+            {details?.insightsPage?.insightsData?.map((val, i) => (
               <SwiperSlide key={i}>
                 <InsightsCard
-                  title={val.title || ""}
-                  category={val.category || "news"}
-                  bgColor={val.bgColor || (i % 2 === 0 ? COLORS.LIGHT_GREY : COLORS.PRIMARY_BLUE)}
-                  slug={val.slug || ""}
+                  title={val.title}
+                  category={val.category}
+                  bgColor={val.bgColor}
+                  slug={val.slug}
                 />
               </SwiperSlide>
             ))}

@@ -273,7 +273,7 @@ export default function InsightsAdminLayout() {
         PaperProps={{ sx: { borderRadius: 4, m: 2 } }}
       >
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
-          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          <Typography variant="h5" component="div" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
             {activeSlug ? "Edit Insight" : "Add Insight"}
           </Typography>
           <IconButton onClick={() => setDialogOpen(false)}>
