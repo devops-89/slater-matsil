@@ -5,7 +5,7 @@ import { ArrowForward, CallMade } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const InsightsCard = ({
   bgColor,
@@ -14,14 +14,21 @@ const InsightsCard = ({
   slug,
 }: INSIGHTS_DATA_PROPS) => {
   const pathname = usePathname();
+  const router = useRouter();
   const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
-  const linkHref = isPreview ? "/manage-insights" : `/insights/${slug}`;
+  const linkHref = isPreview ? "/pages/insights" : `/insights/${slug}`;
 
   const cardContent = (
     <Box
       component={motion.div}
       whileHover={{ y: -10 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      onClick={(e) => {
+        if (slug) {
+          e.preventDefault();
+          router.push(linkHref);
+        }
+      }}
       sx={{
         position: "relative",
         cursor: "pointer",

@@ -216,12 +216,13 @@ export interface INSIGHTS_CARD_DATA {
   heading: string;
   category: CTA_BUTTON_PROPS;
   ctaButton: CTA_BUTTON_PROPS;
+  slug?: string;
 }
 interface INSIGHTS_SECTION_PROPS {
   sectionTitle: string;
   heading: string;
   // description: string;
-  insights_data: INSIGHTS_CARD_DATA[];
+  insights_data?: INSIGHTS_CARD_DATA[];
 }
 
 export interface FOOTER_LIST_DATA {

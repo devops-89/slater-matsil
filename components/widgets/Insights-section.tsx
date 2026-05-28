@@ -86,13 +86,13 @@ const InsightsSection = () => {
               },
             }}
           >
-            {(details?.homepage?.insights_section?.insights_data || details?.insightsPage?.insightsData || [])
+            {(details?.insightsPage?.insightsData || [])
               .slice(0, 3)
               .map((val: any, i: number) => (
               <SwiperSlide key={i}>
                 <InsightsCard
-                  title={val.heading || val.title || ""}
-                  category={val.category?.text || val.category || "news"}
+                  title={val.title || ""}
+                  category={val.category || "news"}
                   bgColor={val.bgColor || (i % 2 === 0 ? COLORS.LIGHT_GREY : COLORS.PRIMARY_BLUE)}
                   slug={val.slug || ""}
                 />

@@ -71,7 +71,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
 
   const canSeePages = () => {
     if (permissions === null) return true;
-    return permissions.some(p => ["home", "services", "practice-groups", "firm-professionals", "firm-leadership", "insights"].includes(p));
+    return permissions.some(p => ["home", "about-us", "services", "practice-groups", "firm-professionals", "firm-leadership", "insights", "blogs", "careers", "contact-us", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer"].includes(p));
   };
 
   return (
@@ -402,7 +402,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         )}
 
         {/* Blogs Database Link */}
-        {hasAccess("insights") && (
+        {hasAccess("blogs") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => router.push("/manage-blogs")}

@@ -1,11 +1,13 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
 import { Home, Info, Build, Group, Article, Person, Star, Work, ContactPhone, Public, Policy, Gavel, Warning, LibraryBooks } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
+import { usePageData } from "@/store/usePageData";
 
 const PAGE_ITEMS = [
   { text: "Home Page", icon: <Home fontSize="large" />, path: "/pages/home", desc: "Manage Hero, About, Metrics, and Services sections." },
@@ -26,6 +28,43 @@ const PAGE_ITEMS = [
 
 export default function AdminPagesLayout() {
   const router = useRouter();
+  const { details } = usePageData();
+  const [permissions, setPermissions] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    const auth = localStorage.getItem("adminAuth");
+    if (auth && auth !== "true") {
+      let subAdmins = details?.subAdmins || [];
+      if (subAdmins.length === 0) {
+        const stored = localStorage.getItem("subAdmins");
+        if (stored) {
+          subAdmins = JSON.parse(stored);
+        }
+      }
+      const found = subAdmins.find((a: any) => a.email.toLowerCase() === auth.toLowerCase());
+      if (found) {
+        let roles = details?.roles || [];
+        if (roles.length === 0) {
+          const storedRoles = localStorage.getItem("roles");
+          if (storedRoles) roles = JSON.parse(storedRoles);
+        }
+        const userRole = roles.find((r: any) => r.id === found.roleId);
+        if (userRole) {
+          setPermissions(userRole.permissions);
+        } else {
+          setPermissions([]);
+        }
+      }
+    } else {
+      setPermissions(null);
+    }
+  }, [details]);
+
+  const filteredPageItems = PAGE_ITEMS.filter(item => {
+    if (permissions === null) return true;
+    const pageId = item.path.split("/pages/")[1];
+    return permissions.includes(pageId);
+  });
 
   return (
     <AdminLayout title="Manage Pages">
@@ -52,7 +91,7 @@ export default function AdminPagesLayout() {
         </Typography>
 
         <Grid container spacing={4}>
-          {PAGE_ITEMS.map((item, i) => (
+          {filteredPageItems.map((item, i) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}>
               <Card 
                 sx={{ 

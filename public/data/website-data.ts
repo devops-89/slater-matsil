@@ -238,38 +238,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     insights_section: {
       sectionTitle: "Insights",
       heading: "Recently Published Insights.",
-      insights_data: [
-        {
-          heading:
-            "Ira Matsil recognized by Chambers USA 2021-2025 as a Top Intellectual Property Attorney",
-          category: {
-            text: "news",
-          },
-          ctaButton: {
-            text: "Learn More",
-          },
-        },
-        {
-          heading:
-            "Steven Slater recognized by Chambers USA 2024-2025 as a Top Intellectual Property Attorney",
-          category: {
-            text: "news",
-          },
-          ctaButton: {
-            text: "Learn More",
-          },
-        },
-        {
-          heading:
-            "Srini Chakravarthi recognized by Chambers USA 2023-2025 as a Top Intellectual Property Attorney",
-          category: {
-            text: "news",
-          },
-          ctaButton: {
-            text: "Learn More",
-          },
-        },
-      ],
+
     },
     footerData: {
       footer_links: FOOTER_DATA,

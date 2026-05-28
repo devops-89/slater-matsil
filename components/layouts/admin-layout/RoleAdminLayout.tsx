@@ -36,11 +36,19 @@ import * as yup from "yup";
 
 const ALL_PERMISSIONS = [
   { id: "home", label: "Home Page" },
+  { id: "about-us", label: "About Us" },
   { id: "services", label: "Services Page" },
   { id: "practice-groups", label: "Practice Groups" },
   { id: "firm-professionals", label: "Firm Professionals" },
   { id: "firm-leadership", label: "Firm Leadership" },
   { id: "insights", label: "Insights" },
+  { id: "blogs", label: "Blogs" },
+  { id: "careers", label: "Careers" },
+  { id: "contact-us", label: "Contact Us" },
+  { id: "who-we-serve", label: "Who We Serve" },
+  { id: "privacy-policy", label: "Privacy Policy" },
+  { id: "terms-of-use", label: "Terms of Use" },
+  { id: "disclaimer", label: "Disclaimer" },
 ];
 
 const roleSchema = yup.object().shape({
