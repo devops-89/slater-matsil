@@ -49,6 +49,9 @@ const ALL_PERMISSIONS = [
   { id: "privacy-policy", label: "Privacy Policy" },
   { id: "terms-of-use", label: "Terms of Use" },
   { id: "disclaimer", label: "Disclaimer" },
+  { id: "manage-professionals", label: "Firm Professionals Database" },
+  { id: "manage-insights", label: "Insights Database" },
+  { id: "manage-blogs", label: "Blogs Database" },
 ];
 
 const roleSchema = yup.object().shape({

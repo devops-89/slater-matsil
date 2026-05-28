@@ -308,7 +308,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         )}
 
         {/* Firm Professionals Database Link */}
-        {hasAccess("firm-professionals") && (
+        {hasAccess("manage-professionals") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => router.push("/manage-professionals")}
@@ -346,7 +346,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
                       : COLORS.PRIMARY_BLUE,
                   }}
                 >
-                  Firm Professionals
+                  Firm Professionals Database
                 </Typography>
               }
             />
@@ -355,7 +355,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         )}
 
         {/* Insights Database Link */}
-        {hasAccess("insights") && (
+        {hasAccess("manage-insights") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => router.push("/manage-insights")}
@@ -393,7 +393,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
                       : COLORS.PRIMARY_BLUE,
                   }}
                 >
-                  Insights
+                  Insights Database
                 </Typography>
               }
             />
@@ -402,7 +402,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         )}
 
         {/* Blogs Database Link */}
-        {hasAccess("blogs") && (
+        {hasAccess("manage-blogs") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => router.push("/manage-blogs")}
@@ -440,7 +440,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
                       : COLORS.PRIMARY_BLUE,
                   }}
                 >
-                  Blogs
+                  Blogs Database
                 </Typography>
               }
             />
