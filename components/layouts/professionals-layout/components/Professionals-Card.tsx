@@ -9,6 +9,7 @@ const ProfessionalsCard = ({
   name,
   designation,
   slug,
+  onLoad
 }: PROFESSIONALS_CARD_PROPS) => {
   return (
     <Link
@@ -61,6 +62,7 @@ const ProfessionalsCard = ({
               style={{
                 objectFit: "cover",
               }}
+              onLoad={onLoad}
             />
           </Box>
           <Box

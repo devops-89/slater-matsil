@@ -2,7 +2,17 @@
 
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, createContext, useContext } from "react";
+
+interface LoadingContextType {
+  setLoading: (loading: boolean) => void;
+}
+
+const LoadingContext = createContext<LoadingContextType>({
+  setLoading: () => {},
+});
+
+export const useLoading = () => useContext(LoadingContext);
 
 function LoadingProviderContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -19,7 +29,7 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
   }, [pathname, searchParams]);
 
   return (
-    <>
+    <LoadingContext.Provider value={{ setLoading }}>
       {loading && (
         <div
           style={{
@@ -44,7 +54,7 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
         </div>
       )}
       {children}
-    </>
+    </LoadingContext.Provider>
   );
 }
 

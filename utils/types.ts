@@ -236,6 +236,7 @@ export interface PROFESSIONALS_CARD_PROPS {
   name: string;
   designation: string;
   slug: string;
+  onLoad?: () => void;
 }
 
 export interface PROFESSIONAL_DETAILS_HERO_PROPS {
