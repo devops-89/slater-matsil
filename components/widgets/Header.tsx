@@ -3,7 +3,7 @@
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { Logout, Menu, AdminPanelSettings, ManageAccounts } from "@mui/icons-material";
-import { Box, Button, Typography, IconButton, Avatar, Menu as MuiMenu, MenuItem, ListItemIcon } from "@mui/material";
+import { Box, Typography, IconButton, Avatar, Menu as MuiMenu, MenuItem, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -41,13 +41,14 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
         display: "flex", 
         alignItems: "center", 
         justifyContent: "space-between",
-        height: 80,
-        px: 6,
+        minHeight: { xs: 64, md: 80 },
+        px: { xs: 2, sm: 3, md: 6 },
+        gap: 2,
         backgroundColor: COLORS.WHITE,
         borderBottom: `1px solid rgba(0,0,0,0.05)`,
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 2 }, minWidth: 0 }}>
         {onToggleSidebar && (
           <IconButton onClick={onToggleSidebar} edge="start" sx={{ color: COLORS.PRIMARY_BLUE }}>
             <Menu />
@@ -58,7 +59,11 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
           sx={{ 
             fontFamily: adelle.style.fontFamily,
             fontWeight: 700,
-            color: COLORS.PRIMARY_BLUE
+            color: COLORS.PRIMARY_BLUE,
+            fontSize: { xs: 18, sm: 22, md: 24 },
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis"
           }}
         >
           {title}

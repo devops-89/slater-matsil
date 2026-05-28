@@ -235,13 +235,13 @@ export default function InsightsAdminLayout() {
 
   return (
     <AdminLayout title="Insights Management">
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: { xs: 'stretch', sm: 'flex-end' }, alignItems: 'center' }}>
+        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px", width: { xs: '100%', sm: 'auto' } }}>
           Add Insight
         </Button>
       </Box>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 2, md: 4 }}>
         {insightsCards.map((insight: any, i: number) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={i} sx={{ display: 'flex' }}>
             <Card sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: 4, cursor: "pointer", transition: "all 0.2s", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" } }}>
@@ -270,7 +270,7 @@ export default function InsightsAdminLayout() {
         onClose={() => setDialogOpen(false)} 
         maxWidth="md" 
         fullWidth
-        PaperProps={{ sx: { borderRadius: 4, m: 2 } }}
+        PaperProps={{ sx: { borderRadius: 4, m: { xs: 1, sm: 2 }, width: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' }, maxHeight: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' } } }}
       >
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
           <Typography variant="h5" component="div" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>

@@ -27,9 +27,11 @@ const DRAWER_WIDTH = 280;
 
 interface SidebarProps {
   open?: boolean;
+  temporary?: boolean;
+  onClose?: () => void;
 }
 
-export default function Sidebar({ open = true }: SidebarProps) {
+export default function Sidebar({ open = true, temporary = false, onClose }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { details } = usePageData();
@@ -74,16 +76,25 @@ export default function Sidebar({ open = true }: SidebarProps) {
     return permissions.some(p => ["home", "about-us", "services", "practice-groups", "firm-professionals", "firm-leadership", "insights", "blogs", "careers", "contact-us", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer"].includes(p));
   };
 
+  const navigateTo = (path: string) => {
+    router.push(path);
+    if (temporary) {
+      onClose?.();
+    }
+  };
+
   return (
     <Drawer
-      variant="persistent"
+      variant={temporary ? "temporary" : "persistent"}
       open={open}
+      onClose={onClose}
+      ModalProps={{ keepMounted: true }}
       sx={{
-        width: open ? DRAWER_WIDTH : 0,
+        width: temporary ? 0 : open ? DRAWER_WIDTH : 0,
         flexShrink: 0,
         transition: "width 0.3s ease",
         [`& .MuiDrawer-paper`]: {
-          width: DRAWER_WIDTH,
+          width: { xs: "min(82vw, 280px)", sm: DRAWER_WIDTH },
           boxSizing: "border-box",
           backgroundColor: COLORS.WHITE,
           color: COLORS.WHITE,
@@ -129,7 +140,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         {/* Dashboard Link */}
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
-            onClick={() => router.push("/dashboard")}
+            onClick={() => navigateTo("/dashboard")}
             sx={{
               borderRadius: 2,
               backgroundColor:
@@ -176,7 +187,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         {permissions === null && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
-            onClick={() => router.push("/manage-roles")}
+            onClick={() => navigateTo("/manage-roles")}
             sx={{
               borderRadius: 2,
               backgroundColor: pathname.includes("/manage-roles")
@@ -221,7 +232,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         {permissions === null && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
-            onClick={() => router.push("/manage-sub-admins")}
+            onClick={() => navigateTo("/manage-sub-admins")}
             sx={{
               borderRadius: 2,
               backgroundColor: pathname.includes("/manage-sub-admins")
@@ -266,7 +277,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         {canSeePages() && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
-            onClick={() => router.push("/pages")}
+            onClick={() => navigateTo("/pages")}
             sx={{
               borderRadius: 2,
               backgroundColor: pathname.includes("/pages")
@@ -311,7 +322,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         {hasAccess("manage-professionals") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
-            onClick={() => router.push("/manage-professionals")}
+            onClick={() => navigateTo("/manage-professionals")}
             sx={{
               borderRadius: 2,
               backgroundColor: pathname.includes("/manage-professionals")
@@ -358,7 +369,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         {hasAccess("manage-insights") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
-            onClick={() => router.push("/manage-insights")}
+            onClick={() => navigateTo("/manage-insights")}
             sx={{
               borderRadius: 2,
               backgroundColor: pathname.includes("/manage-insights")
@@ -405,7 +416,7 @@ export default function Sidebar({ open = true }: SidebarProps) {
         {hasAccess("manage-blogs") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
-            onClick={() => router.push("/manage-blogs")}
+            onClick={() => navigateTo("/manage-blogs")}
             sx={{
               borderRadius: 2,
               backgroundColor: pathname.includes("/manage-blogs")

@@ -127,8 +127,8 @@ export default function SubAdminLayout() {
 
   return (
     <AdminLayout title="User Management">
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: { xs: 'stretch', sm: 'flex-end' }, alignItems: 'center' }}>
+        <Button fullWidth={false} variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px", width: { xs: '100%', sm: 'auto' } }}>
           Add User
         </Button>
       </Box>
@@ -145,8 +145,8 @@ export default function SubAdminLayout() {
               </Typography>
             </Box>
           ) : (
-            <TableContainer component={Paper} sx={{ borderRadius: 4, border: `1px solid rgba(0,0,0,0.1)`, boxShadow: "none" }}>
-              <Table>
+            <TableContainer component={Paper} sx={{ borderRadius: 4, border: `1px solid rgba(0,0,0,0.1)`, boxShadow: "none", overflowX: "auto" }}>
+              <Table sx={{ minWidth: 620 }}>
                 <TableHead sx={{ backgroundColor: COLORS.OFF_WHITE }}>
                   <TableRow>
                     <TableCell sx={{ fontFamily: tradeGothic.style.fontFamily, fontWeight: 700, color: COLORS.PRIMARY_BLUE }}>Name</TableCell>

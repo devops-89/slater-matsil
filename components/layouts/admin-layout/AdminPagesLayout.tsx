@@ -68,7 +68,7 @@ export default function AdminPagesLayout() {
 
   return (
     <AdminLayout title="Manage Pages">
-      <Container maxWidth="xl" sx={{ mt: 4 }}>
+      <Container maxWidth="xl" sx={{ mt: { xs: 1, md: 4 }, px: { xs: 0, sm: 2 } }}>
         <Typography 
           variant="h4" 
           sx={{ 
@@ -84,13 +84,13 @@ export default function AdminPagesLayout() {
           sx={{ 
             fontFamily: adelle.style.fontFamily, 
             color: COLORS.TEXT_PRIMARY,
-            mb: 6
+            mb: { xs: 3, md: 6 }
           }}
         >
           Select a page below to edit its content and view live section previews.
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 2, md: 4 }}>
           {filteredPageItems.map((item, i) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}>
               <Card 
@@ -104,7 +104,7 @@ export default function AdminPagesLayout() {
                   }
                 }}
               >
-                <CardActionArea onClick={() => router.push(item.path)} sx={{ p: 4, height: 220, display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
+                <CardActionArea onClick={() => router.push(item.path)} sx={{ p: { xs: 2.5, md: 4 }, minHeight: { xs: 180, md: 220 }, display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
                   <Box sx={{ color: COLORS.PRIMARY_GREEN, mb: 2 }}>
                     {item.icon}
                   </Box>

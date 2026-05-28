@@ -77,7 +77,8 @@ export default function AdminLoginLayout() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "flex-start",
-            p: { xs: 4, lg: 8 },
+            minHeight: { xs: 280, lg: "100vh" },
+            p: { xs: 3, sm: 4, lg: 8 },
             position: "relative",
             overflow: "hidden"
           }}
@@ -102,6 +103,7 @@ export default function AdminLoginLayout() {
               color: COLORS.WHITE, 
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
+              fontSize: { xs: 38, sm: 48, lg: 60 },
               mb: 2,
               zIndex: 1
             }}
@@ -114,6 +116,7 @@ export default function AdminLoginLayout() {
               color: COLORS.PRIMARY_GREEN, 
               fontFamily: adelle.style.fontFamily,
               fontWeight: 400,
+              fontSize: { xs: 22, sm: 26 },
               mb: 4,
               zIndex: 1
             }}
@@ -139,7 +142,7 @@ export default function AdminLoginLayout() {
             display: "flex", 
             justifyContent: "center", 
             alignItems: "center",
-            p: 4,
+            p: { xs: 3, sm: 4 },
             backgroundColor: COLORS.WHITE
           }}
         >

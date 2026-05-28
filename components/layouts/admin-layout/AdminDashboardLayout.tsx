@@ -25,7 +25,7 @@ export default function AdminDashboardLayout() {
                 border: "none"
               }}
             >
-              <CardContent sx={{ p: 4 }}>
+              <CardContent sx={{ p: { xs: 2.5, sm: 4 } }}>
                 <Typography 
                   sx={{ 
                     fontFamily: adelle.style.fontFamily,
@@ -52,7 +52,7 @@ export default function AdminDashboardLayout() {
         ))}
       </Grid>
       
-      <Box sx={{ mt: 6, p: 6, backgroundColor: COLORS.WHITE, borderRadius: 4, boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)" }}>
+      <Box sx={{ mt: { xs: 3, md: 6 }, p: { xs: 3, md: 6 }, backgroundColor: COLORS.WHITE, borderRadius: 4, boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)" }}>
         <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, mb: 2 }}>
           Welcome to the Admin Panel
         </Typography>

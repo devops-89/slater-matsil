@@ -255,13 +255,22 @@ export default function AdminPageEditorLayout() {
   };
 
   return (
-    <Box sx={{ display: 'flex', height: '100vh', width: '100vw', overflow: 'hidden', backgroundColor: COLORS.OFF_WHITE }}>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: { xs: 'column', lg: 'row' },
+      minHeight: '100vh',
+      width: '100%',
+      overflow: { xs: 'auto', lg: 'hidden' },
+      backgroundColor: COLORS.OFF_WHITE
+    }}>
       
       {/* Left Sidebar (Forms Area) */}
       <Box sx={{ 
-        width: 400, 
+        width: { xs: '100%', lg: 400 },
+        maxHeight: { xs: 'none', lg: '100vh' },
         flexShrink: 0, 
-        borderRight: "1px solid rgba(0,0,0,0.1)", 
+        borderRight: { xs: 'none', lg: "1px solid rgba(0,0,0,0.1)" },
+        borderBottom: { xs: "1px solid rgba(0,0,0,0.1)", lg: 'none' },
         backgroundColor: "#FFFFFF", 
         display: 'flex', 
         flexDirection: 'column',
@@ -269,20 +278,20 @@ export default function AdminPageEditorLayout() {
         zIndex: 10
       }}>
         {/* Header / Back Button */}
-        <Box sx={{ p: 3, borderBottom: "1px solid rgba(0,0,0,0.1)", display: 'flex', alignItems: 'center', gap: 2, backgroundColor: "#FFFFFF" }}>
+        <Box sx={{ p: { xs: 2, sm: 3 }, borderBottom: "1px solid rgba(0,0,0,0.1)", display: 'flex', alignItems: 'center', gap: 2, backgroundColor: "#FFFFFF", minWidth: 0 }}>
           <Button 
             onClick={() => router.push('/pages')}
             sx={{ minWidth: 'auto', p: 1, color: COLORS.PRIMARY_BLUE, '&:hover': { backgroundColor: 'rgba(0,0,0,0.05)' } }}
           >
             <ArrowBack />
           </Button>
-          <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700, fontSize: { xs: 18, sm: 20 }, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             {slug ? slug.charAt(0).toUpperCase() + slug.slice(1) : ''} Editor
           </Typography>
         </Box>
 
         {/* Sections Accordions */}
-        <Box sx={{ flexGrow: 1, overflowY: 'auto', p: 2, backgroundColor: "#FAFAFA" }}>
+        <Box sx={{ flexGrow: 1, overflowY: 'auto', p: { xs: 1.5, sm: 2 }, backgroundColor: "#FAFAFA" }}>
           {sections.map((title, index) => (
             <Accordion 
               key={index} 
@@ -311,7 +320,7 @@ export default function AdminPageEditorLayout() {
                   {title}
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails sx={{ backgroundColor: "#FFFFFF", p: 3 }}>
+              <AccordionDetails sx={{ backgroundColor: "#FFFFFF", p: { xs: 2, sm: 3 } }}>
                 {renderFormForSection(index)}
               </AccordionDetails>
             </Accordion>
@@ -319,7 +328,7 @@ export default function AdminPageEditorLayout() {
         </Box>
 
         {/* Footer / Save Button */}
-        <Box sx={{ p: 3, borderTop: "1px solid rgba(0,0,0,0.1)", backgroundColor: "#FFFFFF" }}>
+        <Box sx={{ p: { xs: 2, sm: 3 }, borderTop: "1px solid rgba(0,0,0,0.1)", backgroundColor: "#FFFFFF", position: { xs: 'sticky', lg: 'static' }, bottom: 0 }}>
           <Button 
             fullWidth
             variant="contained" 
@@ -341,9 +350,9 @@ export default function AdminPageEditorLayout() {
       </Box>
 
       {/* Main Area (Preview Area) */}
-      <Box sx={{ flexGrow: 1, backgroundColor: "#E5E7EB", overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ flexGrow: 1, minWidth: 0, minHeight: { xs: 520, lg: 'auto' }, backgroundColor: "#E5E7EB", overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
         {/* Top Bar for Preview */}
-        <Box sx={{ px: 4, py: 2, display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: "#FFFFFF", borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
+        <Box sx={{ px: { xs: 2, sm: 4 }, py: 2, display: "flex", alignItems: "center", justifyContent: "space-between", backgroundColor: "#FFFFFF", borderBottom: "1px solid rgba(0,0,0,0.1)" }}>
           <Typography sx={{ fontFamily: adelle.style.fontFamily, fontSize: 14, fontWeight: 700, color: COLORS.TEXT_PRIMARY }}>
             Live Preview
           </Typography>
@@ -353,7 +362,7 @@ export default function AdminPageEditorLayout() {
             <Box sx={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#10B981' }} />
           </Box>
         </Box>
-        <Box sx={{ flexGrow: 1, overflowY: 'auto' }}>
+        <Box sx={{ flexGrow: 1, overflowY: 'auto', minWidth: 0 }}>
           {renderPreviewForSection()}
         </Box>
       </Box>

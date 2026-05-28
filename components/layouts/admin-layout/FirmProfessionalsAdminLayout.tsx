@@ -303,7 +303,7 @@ export default function FirmProfessionalsAdminLayout() {
 
   return (
     <AdminLayout title="Firm Professionals Management">
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'stretch', sm: 'center' }, gap: 2 }}>
         <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE }}>
           Professional Database
         </Typography>
@@ -312,7 +312,7 @@ export default function FirmProfessionalsAdminLayout() {
         </Button>
       </Box>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={{ xs: 2, md: 4 }}>
         {professionalCards.map((prof, i) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={i} sx={{ display: 'flex' }}>
             <Card sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: 4, cursor: "pointer", transition: "all 0.2s", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" } }}>
@@ -338,7 +338,7 @@ export default function FirmProfessionalsAdminLayout() {
       </Grid>
 
       {/* MUI Dialog Modal for editing/adding professionals */}
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md" fullWidth>
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md" fullWidth PaperProps={{ sx: { m: { xs: 1, sm: 2 }, width: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' }, maxHeight: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' } } }}>
         <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
           <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
             {activeSlug ? "Edit Professional Profile" : "Add Professional Profile"}
@@ -473,7 +473,7 @@ export default function FirmProfessionalsAdminLayout() {
           </Box>
           <Stack spacing={2}>
             {data.bullets.map((bullet: any, idx: number) => (
-              <Stack direction="row" spacing={2} key={idx} alignItems="center">
+              <Stack direction={{ xs: "column", sm: "row" }} spacing={2} key={idx} alignItems={{ xs: "stretch", sm: "center" }}>
                 <TextField
                   fullWidth
                   size="small"
