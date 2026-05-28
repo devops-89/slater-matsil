@@ -49,7 +49,7 @@ const Disclaimer = () => {
         </Section>
 
         <Section title="3) No guarantee of results">
-          The materials on this Web site may not reflect the most current legal
+          The materials on this Website may not reflect the most current legal
           developments and should not be considered an indication of future
           results. Past results and testimonials do not predict or guarantee
           outcomes. Each matter is different.

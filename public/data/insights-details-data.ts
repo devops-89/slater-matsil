@@ -2455,6 +2455,41 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
+  slug: "iam-patent-1000-recognition-2026",
+  hero: {
+    name: "Slater Matsil, LLP",
+    band: "IAM Patent 1000 Rankings",
+    guide: "Firm and Individual Recognition",
+    yearsRanked: "2020-2026",
+  },
+  contact: commonContact,
+  contentSections: {
+    aboutProvidedBy: "Provided by",
+    aboutProvidedByName: "Slater Matsil, LLP",
+    region: "USA",
+    practiceAreas: {
+      heading: "Firm Recognition",
+      content:
+        "IAM Patent 1000 ranked Slater Matsil as a leading firm from 2020 through 2026, recognizing the firm's excellence in patent law and intellectual property services.",
+    },
+    professionalMemberships: {
+      heading: "Individual Recognitions",
+      content:
+        "Partners Steven Slater, Ira Matsil, and Srini Chakravarthi were individually recognized from 2020 through 2026. Michael Kucher was individually recognized from 2021 through 2026 for outstanding contributions to intellectual property law.",
+    },
+    career: {
+      heading: "Industry Reputation",
+      content:
+        "The continued recognition by IAM Patent 1000 reflects Slater Matsil's strong reputation for technical expertise, strategic IP counseling, and client-focused legal services.",
+    },
+    personal: {
+      heading: "Commitment to Clients",
+      content:
+        "Slater Matsil remains dedicated to helping innovators, businesses, and technology leaders protect and maximize the value of their intellectual property assets.",
+    },
+  },
+},
+  {
     slug: "iam-patent-1000-rankings-2025",
     hero: {
       name: "Slater Matsil, LLP",

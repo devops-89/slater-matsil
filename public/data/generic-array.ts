@@ -533,6 +533,13 @@ export const WHO_WE_SERVE_TAB_DATA = [
 
 export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   {
+  title:
+    "IAM Patent 1000 ranked Slater Matsil as a Firm (2020-2026), and individually recognized Partners Steven Slater (2020-2026), Ira Matsil (2020-2026), Srini Chakravarthi (2020-2026), and Michael Kucher (2021-2026).",
+  bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+  category: INSIGHTS_TAB_DATA.NEWS,
+  slug: "iam-patent-1000-recognition-2026",
+},
+  {
     title: "Steven Slater Recognized by Chambers USA as Top Attorney",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,

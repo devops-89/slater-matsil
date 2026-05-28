@@ -50,6 +50,7 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
       >
         <ArrowUpward sx={{ color: COLORS.PRIMARY_GREEN }} />
         <Typography
+          className="notranslate"
           sx={{
             color: COLORS.PRIMARY_BLUE,
             fontFamily: tradeGothic.style.fontFamily,
@@ -70,7 +71,7 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
               suffix={suffix}
             />
           ) : (
-            prefix + "0"
+            <span>{prefix + "0"}</span>
           )}
           <Box component="sup" sx={{ fontSize: "0.6em", py: 1, px: 1 }}>
             +

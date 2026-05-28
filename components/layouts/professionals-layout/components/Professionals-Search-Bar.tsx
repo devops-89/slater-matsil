@@ -68,11 +68,7 @@ const ProfessionalSearchBar = ({
                   placeholder="Search by First/Last Name"
                   sx={{
                     ...TEXTFIELD_STYLES,
-                    mt: -6,
                     mb: 2,
-                    "& .MuiOutlinedInput-root": {
-                      paddingRight: "8px !important",
-                    },
                   }}
                   slotProps={{
                     input: {

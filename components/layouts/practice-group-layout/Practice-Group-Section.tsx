@@ -119,7 +119,8 @@ const PracticeGroupSection = () => {
                   color: COLORS.PRIMARY_BLUE,
                   fontWeight: 700,
                   lineHeight: { lg: "38px", xs: "28px" },
-                  textAlign: "justify",
+                  textAlign: "left",
+                  mt:6
                 }}
               >
                 {data?.description1}

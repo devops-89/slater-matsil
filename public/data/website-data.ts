@@ -546,7 +546,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
                 "12 years of design experience in research and development in the field of RF systems for the defense industry.",
             },
             {
-              primary: 'Yumin "Jeff" Zhang, Ph.D., Patent Agent ',
+              primary: 'Yumin "Jeff" Zhang, Ph.D., Distinguished Patent Agent ',
               secondary:
                 "14 years of research and development in digital signal processing for the telecommunications, consumer electronics, semiconductor, and oil and gas industries.",
             },
@@ -579,7 +579,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
                 "27 years of experience in process integration, device design, and electrostatic discharge protection. IEEE Fellow.",
             },
             {
-              primary: "Jonathan Insler, Ph.D., Patent Agent",
+              primary: "Jonathan Insler, Ph.D., Patent Attorney",
               secondary:
                 "12 years of research and academic experience in particle physics.",
             },
@@ -672,7 +672,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
                 "10 years as a senior software engineer at a Fortune 500 company with expertise in telecommunications, data networking, VoIP, and network management.",
             },
             {
-              primary: "Chuanming Wei, Ph.D., J.D., Patent Attorney",
+              primary: "Chuanming Wei, J.D., Ph.D., Patent Attorney",
               secondary:
                 "9 years of prior research and industry experience in telecommunications, wireless sensor networks, and smart grids.",
             },

@@ -122,11 +122,6 @@ const sortedFullList = useMemo(() => {
               options={sortedFullList.map((option: any) => option.name)}
               onSelect={(newValue) => {
                 setSearch(newValue);
-                const filteredData = sortedFullList.filter((item: any) =>
-                  item.name.toLowerCase().includes(newValue.toLowerCase()),
-                );
-                setData(filteredData);
-                setPage(1);
               }}
               clearFilters={() => {
                 setAlphabet("");
