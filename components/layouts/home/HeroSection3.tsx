@@ -116,6 +116,7 @@ const HeroSection3 = () => {
         }
       >
         <Swiper
+          key={banners.map(b => typeof b.img === 'string' ? b.img : b.img?.src).join(',')}
           onSwiper={setSwiperInstance}
           modules={[Autoplay]}
           autoplay={{ delay: 7000, disableOnInteraction: false }}
@@ -178,6 +179,7 @@ const HeroSection3 = () => {
                       alt="slider image"
                       fill
                       priority={i === 0}
+                      unoptimized={true}
                       sizes="(max-width: 1200px) 100vw, 50vw"
                       style={{
                         borderRadius: 20,

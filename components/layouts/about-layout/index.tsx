@@ -13,8 +13,46 @@ import DrivingInnovation from "./Driving-innovation";
 import IndustriesWeServe from "./Industries-We-Serve";
 import InsightsInnovation from "./Insights-innovation";
 import WhoweServe from "./Who-we-serve";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { PageControllers } from "@/api/pageControllers";
+import { mapBackendToAboutPageState } from "@/utils/pageDataMapper";
+import { WEBSITE_DATA } from "@/public/data/website-data";
+import { usePageData } from "@/store/usePageData";
+
 const AboutLayout = () => {
-  // const {}
+  const { setDetails } = usePageData();
+
+  const pathname = usePathname();
+  const hasFetched = useRef(false);
+
+  useEffect(() => {
+    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
+    if (isAdminRoute) return;
+    if (hasFetched.current) return;
+    hasFetched.current = true;
+
+    let isMounted = true;
+    const fetchAboutData = async () => {
+      try {
+        const res = await PageControllers.getPageById(2);
+        const pageData = res.data?.data?.data || res.data?.data;
+        if (pageData && isMounted) {
+          const updatedAboutPage = mapBackendToAboutPageState(pageData, WEBSITE_DATA.aboutPage);
+          const mergedWebsiteData = {
+            ...WEBSITE_DATA,
+            aboutPage: updatedAboutPage
+          };
+          setDetails(mergedWebsiteData as any);
+        }
+      } catch (error) {
+        console.error("Error fetching about us page data", error);
+      }
+    };
+    
+    fetchAboutData();
+    return () => { isMounted = false; };
+  }, [setDetails]);
 
   return (
     <div>

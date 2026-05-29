@@ -34,10 +34,10 @@ export const renderDesktopPreview = (children: React.ReactNode) => (
   </Box>
 );
 
-export const HomePageForms = ({ activeSection, websiteData, updateHomepage }: any) => {
+export const HomePageForms = ({ activeSection, websiteData, updateHomepage, onDeleteMedia }: any) => {
   switch (activeSection) {
     case 0:
-      return <HeroCombined banners={websiteData.homepage.heroSection} onChange={(newData: any) => updateHomepage('heroSection', newData)} />;
+      return <HeroCombined banners={websiteData.homepage.heroSection} onChange={(newData: any) => updateHomepage('heroSection', newData)} onDeleteMedia={onDeleteMedia} />;
     case 1:
       return <AboutEditor data={websiteData.homepage.aboutSection} onChange={(newData: any) => updateHomepage('aboutSection', newData)} />;
     case 2:

@@ -37,6 +37,7 @@ const AboutSection = () => {
                 alt="Team working together"
                 width={800}
                 height={600}
+                unoptimized={true}
                 style={{
                   width: "100%",
                   height: "auto",

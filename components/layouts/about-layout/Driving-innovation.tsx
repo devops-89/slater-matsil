@@ -53,6 +53,7 @@ const DrivingInnovation = () => {
                 drivingInnovation
               }
               alt=""
+              unoptimized={true}
               style={{ width: "100%", height: "auto" }}
             />
           </Grid>

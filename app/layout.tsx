@@ -8,8 +8,8 @@ import MobileNavbar from "@/components/widgets/Mobile-Navbar";
 import Modal from "@/components/widgets/Modal";
 import Navbar from "@/components/widgets/navbar";
 import { WEBSITE_DATA } from "@/public/data/website-data";
+import loadingData from "@/public/images/loading2.json";
 import { usePageData } from "@/store/usePageData";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { useMediaQuery } from "@mui/material";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -17,7 +17,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import "swiper/css";
 import "./globals.css";
-import loadingData from "@/public/images/loading2.json";
 
 export default function RootLayout({
   children,
@@ -33,16 +32,43 @@ export default function RootLayout({
   }, [pathname]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      AOS.init({
-        duration: 800,
-        once: true,
-      });
-      AOS.refresh();
-    }, 100);
-    setDetails(WEBSITE_DATA);
-    setInitialLoading(false);
-    return () => clearTimeout(timer);
+    let isMounted = true;
+    
+    const initializeData = async () => {
+      try {
+        setInitialLoading(true);
+        // Add artificial delay for AOS + loader as originally implemented
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        AOS.init({
+          duration: 800,
+          once: true,
+        });
+        AOS.refresh();
+
+        // Skip fetching homepage data if we are on an admin/dashboard route
+        const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
+
+        if (!isAdminRoute) {
+          if (isMounted) setDetails(WEBSITE_DATA as any);
+        } else {
+          setDetails(WEBSITE_DATA as any);
+        }
+      } catch (error) {
+        console.error("Failed to initialize layout", error);
+        setDetails(WEBSITE_DATA as any);
+      } finally {
+        if (isMounted) {
+          setInitialLoading(false);
+        }
+      }
+    };
+
+    initializeData();
+
+    return () => {
+      isMounted = false;
+    };
   }, [setDetails]);
 
   const phone = useMediaQuery("(max-width:600px)");
@@ -51,46 +77,22 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body suppressHydrationWarning>
         <Modal />
-        {initialLoading ? (
-          <div
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100vw",
-              height: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#fff",
-              zIndex: 9999,
-            }}
-          >
-            <DotLottieReact
-              data={loadingData}
-              loop
-              autoplay
-              style={{ width: 250, height: 250 }}
-            />
-          </div>
-        ) : (
-          <LoadingProvider>
-            <NotificationProvider>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    minHeight: "100vh",
-                  }}
-                >
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && (phone ? <MobileNavbar /> : <Navbar />)}
-                  <div style={{ flex: 1 }}>{children}</div>
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && <Footer />}
-                  {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && <CookieConsent />}
-                </div>
-            </NotificationProvider>
-          </LoadingProvider>
-        )}
+        <LoadingProvider>
+          <NotificationProvider>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh",
+              }}
+            >
+              {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && (phone ? <MobileNavbar /> : <Navbar />)}
+              <div style={{ flex: 1 }}>{children}</div>
+              {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && <Footer />}
+              {!(pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-')) && <CookieConsent />}
+            </div>
+          </NotificationProvider>
+        </LoadingProvider>
       </body>
     </html>
   );

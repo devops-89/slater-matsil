@@ -3,9 +3,13 @@ import { Box, Button, Card, IconButton, Stack, TextField, Typography } from "@mu
 import { Delete } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-
+import { MediaControllers } from "@/api/mediaControllers";
+import { useState } from "react";
+import { useNotification } from "@/components/providers/NotificationProvider";
 
 export const WhoWeServeEditor = ({ data, onChange }: { data: any, onChange: (newData: any) => void }) => {
+  const [isUploading, setIsUploading] = useState(false);
+  const { showNotification } = useNotification();
   return (
     <Stack spacing={4}>
       <Typography variant="h6" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
@@ -27,19 +31,32 @@ export const WhoWeServeEditor = ({ data, onChange }: { data: any, onChange: (new
           />
           <Box sx={{ mt: 2 }}>
             <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontSize: 14, mb: 1, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-              Upload Hero Background Image
+              {isUploading ? "Uploading..." : "Upload Hero Background Image"}
             </Typography>
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => {
+              onChange={async (e) => {
                 const file = e.target.files?.[0];
                 if (file) {
-                  const reader = new FileReader();
-                  reader.onloadend = () => {
-                    onChange({ ...data, leftSection: { ...data.leftSection, heroImage: reader.result as string } });
-                  };
-                  reader.readAsDataURL(file);
+                  try {
+                    setIsUploading(true);
+                    const formData = new FormData();
+                    formData.append("image", file);
+                    
+                    const res = await MediaControllers.uploadMedia(formData);
+                    const responseData = res.data?.data?.data || res.data?.data;
+                    const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+                    if (uploadedUrl) {
+                      onChange({ ...data, leftSection: { ...data.leftSection, heroImage: uploadedUrl } });
+                      showNotification("Image uploaded successfully", "success");
+                    }
+                  } catch (error) {
+                    console.error("Failed to upload who we serve image", error);
+                    showNotification("Failed to upload image", "error");
+                  } finally {
+                    setIsUploading(false);
+                  }
                 }
               }}
               style={{ display: "block", width: "100%", padding: "8px", border: "1px solid rgba(0,0,0,0.2)", borderRadius: "8px" }}

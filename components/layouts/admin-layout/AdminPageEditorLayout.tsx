@@ -1,24 +1,57 @@
 "use client";
 
+import { PageControllers } from "@/api/pageControllers";
+import { MediaControllers } from "@/api/mediaControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { mapAboutPageStateToBackend, mapBackendToAboutPageState, mapBackendToHomepageState, mapHomepageStateToBackend } from "@/utils/pageDataMapper";
 import { ArrowBack, ExpandMore, Save } from "@mui/icons-material";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
+import * as yup from "yup";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import loadingData from "@/public/images/loading2.json";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
-import { AboutUsForms, AboutUsPreviews } from "@/components/layouts/admin-layout/about-us-editor";
-import { BlogsPageForms, BlogsPagePreviews } from "@/components/layouts/admin-layout/blogs-editor";
-import { CareersPageForms, CareersPagePreviews } from "@/components/layouts/admin-layout/careers-editor";
-import { ContactPageForms, ContactPagePreviews } from "@/components/layouts/admin-layout/contact-us-editor";
-import { FirmLeadershipPageForms, FirmLeadershipPagePreviews } from "@/components/layouts/admin-layout/firm-leadership-editor";
-import { FirmProfessionalsPageForms, FirmProfessionalsPagePreviews } from "@/components/layouts/admin-layout/firm-professionals-editor";
-import { HomePageForms, HomePagePreviews } from "@/components/layouts/admin-layout/home-editor";
-import { InsightsPageForms, InsightsPagePreviews } from "@/components/layouts/admin-layout/insights-editor";
-import { PracticeGroupsPageForms, PracticeGroupsPagePreviews } from "@/components/layouts/admin-layout/practice-groups-editor";
-import { ServicesPageForms, ServicesPagePreviews } from "@/components/layouts/admin-layout/services-editor";
-import { WhoWeServePageForms, WhoWeServePagePreviews } from "@/components/layouts/admin-layout/who-we-serve-editor";
+import dynamic from 'next/dynamic';
 import { WEBSITE_DATA } from "@/public/data/website-data";
+
+const LoadingFallback = () => <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>;
+
+const AboutUsForms = dynamic(() => import('@/components/layouts/admin-layout/about-us-editor').then(mod => mod.AboutUsForms), { loading: LoadingFallback });
+const AboutUsPreviews = dynamic(() => import('@/components/layouts/admin-layout/about-us-editor').then(mod => mod.AboutUsPreviews), { loading: LoadingFallback });
+
+const BlogsPageForms = dynamic(() => import('@/components/layouts/admin-layout/blogs-editor').then(mod => mod.BlogsPageForms), { loading: LoadingFallback });
+const BlogsPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/blogs-editor').then(mod => mod.BlogsPagePreviews), { loading: LoadingFallback });
+
+const CareersPageForms = dynamic(() => import('@/components/layouts/admin-layout/careers-editor').then(mod => mod.CareersPageForms), { loading: LoadingFallback });
+const CareersPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/careers-editor').then(mod => mod.CareersPagePreviews), { loading: LoadingFallback });
+
+const ContactPageForms = dynamic(() => import('@/components/layouts/admin-layout/contact-us-editor').then(mod => mod.ContactPageForms), { loading: LoadingFallback });
+const ContactPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/contact-us-editor').then(mod => mod.ContactPagePreviews), { loading: LoadingFallback });
+
+const FirmLeadershipPageForms = dynamic(() => import('@/components/layouts/admin-layout/firm-leadership-editor').then(mod => mod.FirmLeadershipPageForms), { loading: LoadingFallback });
+const FirmLeadershipPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/firm-leadership-editor').then(mod => mod.FirmLeadershipPagePreviews), { loading: LoadingFallback });
+
+const FirmProfessionalsPageForms = dynamic(() => import('@/components/layouts/admin-layout/firm-professionals-editor').then(mod => mod.FirmProfessionalsPageForms), { loading: LoadingFallback });
+const FirmProfessionalsPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/firm-professionals-editor').then(mod => mod.FirmProfessionalsPagePreviews), { loading: LoadingFallback });
+
+const HomePageForms = dynamic(() => import('@/components/layouts/admin-layout/home-editor').then(mod => mod.HomePageForms), { loading: LoadingFallback });
+const HomePagePreviews = dynamic(() => import('@/components/layouts/admin-layout/home-editor').then(mod => mod.HomePagePreviews), { loading: LoadingFallback });
+
+const InsightsPageForms = dynamic(() => import('@/components/layouts/admin-layout/insights-editor').then(mod => mod.InsightsPageForms), { loading: LoadingFallback });
+const InsightsPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/insights-editor').then(mod => mod.InsightsPagePreviews), { loading: LoadingFallback });
+
+const PracticeGroupsPageForms = dynamic(() => import('@/components/layouts/admin-layout/practice-groups-editor').then(mod => mod.PracticeGroupsPageForms), { loading: LoadingFallback });
+const PracticeGroupsPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/practice-groups-editor').then(mod => mod.PracticeGroupsPagePreviews), { loading: LoadingFallback });
+
+const ServicesPageForms = dynamic(() => import('@/components/layouts/admin-layout/services-editor').then(mod => mod.ServicesPageForms), { loading: LoadingFallback });
+const ServicesPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/services-editor').then(mod => mod.ServicesPagePreviews), { loading: LoadingFallback });
+
+const WhoWeServePageForms = dynamic(() => import('@/components/layouts/admin-layout/who-we-serve-editor').then(mod => mod.WhoWeServePageForms), { loading: LoadingFallback });
+const WhoWeServePagePreviews = dynamic(() => import('@/components/layouts/admin-layout/who-we-serve-editor').then(mod => mod.WhoWeServePagePreviews), { loading: LoadingFallback });
 import { usePageData } from "@/store/usePageData";
 
 export default function AdminPageEditorLayout() {
@@ -26,13 +59,148 @@ export default function AdminPageEditorLayout() {
   const router = useRouter();
   const slug = params?.slug as string;
   const [activeSection, setActiveSection] = useState<number | false>(0);
+  const [pageId, setPageId] = useState<number | null>(null);
+  const [deletedMediaKeys, setDeletedMediaKeys] = useState<string[]>([]);
+  const { startLoading, stopLoading } = useLoading();
 
   const { setDetails } = usePageData();
   const [websiteData, setWebsiteData] = useState<any>(WEBSITE_DATA);
+  const [debouncedWebsiteData, setDebouncedWebsiteData] = useState<any>(WEBSITE_DATA);
+  const { showNotification } = useNotification();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    setDetails(WEBSITE_DATA as any);
-  }, []);
+    const timer = setTimeout(() => {
+      setDebouncedWebsiteData(websiteData);
+      setDetails(websiteData as any);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [websiteData, setDetails]);
+
+  const homePageSchema = yup.object().shape({
+    homepage: yup.object().shape({
+      aboutSection: yup.object().shape({
+        heading: yup.string().required("About section heading is required"),
+        description: yup.string().required("About section description is required"),
+      }),
+    })
+  });
+
+  const handleSave = async () => {
+    try {
+      setIsSubmitting(true);
+      
+      // Validate with Yup
+        let payload: any = null;
+
+        if (slug === "home") {
+          await homePageSchema.validate(websiteData, { abortEarly: false });
+          payload = {
+            title: "Home",
+            slug: "home",
+            pageType: "static",
+            status: "published",
+            sections: mapHomepageStateToBackend(websiteData.homepage)
+          };
+        } else if (slug === "about-us") {
+          payload = {
+            title: "About Us",
+            slug: "about-us",
+            pageType: "static",
+            status: "published",
+            sections: mapAboutPageStateToBackend(websiteData.aboutPage)
+          };
+        }
+
+        if (payload) {
+          if (pageId) {
+            await PageControllers.updatePage(pageId, payload);
+            showNotification(`${payload.title} page updated successfully`, "success");
+          } else {
+            const createRes = await PageControllers.createPage(payload);
+            const newPageData = createRes.data?.data?.data || createRes.data?.data;
+            if (newPageData?.id) {
+               setPageId(newPageData.id);
+            }
+            showNotification(`${payload.title} page created successfully`, "success");
+          }
+
+          // Permanently delete any tracked media from S3 now that save is successful
+          if (deletedMediaKeys.length > 0) {
+            await Promise.all(
+              deletedMediaKeys.map(async (key) => {
+                try {
+                  await MediaControllers.removeMedia({ key });
+                } catch (e) {
+                  console.error("Failed to delete media key:", key);
+                }
+              })
+            );
+            setDeletedMediaKeys([]); // Clear out after deletion
+          }
+        } else {
+          showNotification(`${slug} save not implemented yet`, "info");
+        }
+      } catch (error: any) {
+      if (error.name === "ValidationError") {
+        showNotification(error.inner[0]?.message || "Validation failed", "error");
+      } else {
+        showNotification("Failed to save page", "error");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  useEffect(() => {
+
+    let isMounted = true;
+    const fetchPageData = async () => {
+      try {
+        startLoading();
+        if (slug === "home") {
+          const res = await PageControllers.getPageById(1);
+          const pageData = res.data?.data?.data || res.data?.data;
+          if (pageData && isMounted) {
+            setPageId(pageData.id);
+            const updatedHomepage = mapBackendToHomepageState(pageData, WEBSITE_DATA.homepage);
+            const mergedWebsiteData = {
+              ...WEBSITE_DATA,
+              homepage: updatedHomepage
+            };
+            setWebsiteData(mergedWebsiteData);
+            setDetails(mergedWebsiteData as any);
+          }
+        } else if (slug === "about-us") {
+          const res = await PageControllers.getPageById(2);
+          const pageData = res.data?.data?.data || res.data?.data;
+          if (pageData && isMounted) {
+            setPageId(pageData.id);
+            const updatedAboutPage = mapBackendToAboutPageState(pageData, WEBSITE_DATA.aboutPage);
+            const mergedWebsiteData = {
+              ...WEBSITE_DATA,
+              aboutPage: updatedAboutPage
+            };
+            setWebsiteData(mergedWebsiteData);
+            setDetails(mergedWebsiteData as any);
+          }
+        } else {
+          setDetails(WEBSITE_DATA as any);
+        }
+      } catch (error) {
+        console.error("Error fetching page data", error);
+        setDetails(WEBSITE_DATA as any);
+      } finally {
+        stopLoading();
+      }
+    };
+    
+    fetchPageData();
+    
+    return () => {
+      isMounted = false;
+    };
+  }, [slug, setDetails]);
 
   const updateHomepage = (key: string, newData: any) => {
     const updated = {
@@ -43,7 +211,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateAboutPage = (key: string, newData: any) => {
@@ -55,7 +222,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateServicesPage = (key: string, newData: any) => {
@@ -67,7 +233,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateServiceAreas = (newData: any) => {
@@ -79,7 +244,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   
@@ -92,7 +256,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateFirmLeadershipPage = (key: string, newData: any) => {
@@ -104,7 +267,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updatePracticeGroupsPage = (key: string, newData: any) => {
@@ -116,7 +278,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateInsightsPage = (key: string, newData: any) => {
@@ -128,7 +289,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateCareerPage = (key: string, newData: any) => {
@@ -140,7 +300,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateContactPage = (key: string, newData: any) => {
@@ -152,7 +311,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   const updateWhoWeServePage = (key: string, newData: any) => {
@@ -164,7 +322,6 @@ export default function AdminPageEditorLayout() {
       }
     };
     setWebsiteData(updated);
-    setDetails(updated as any);
   };
 
   let sections = ["General Settings"];
@@ -197,8 +354,10 @@ export default function AdminPageEditorLayout() {
   };
 
   const renderFormForSection = (index: number) => {
+    const handleMediaDelete = (key: string) => setDeletedMediaKeys(prev => [...prev, key]);
+
     if (slug === "home") {
-      return <HomePageForms activeSection={index} websiteData={websiteData} updateHomepage={updateHomepage} />;
+      return <HomePageForms activeSection={index} websiteData={websiteData} updateHomepage={updateHomepage} onDeleteMedia={handleMediaDelete} />;
     } else if (slug === "about-us") {
       return <AboutUsForms activeSection={index} websiteData={websiteData} updateAboutPage={updateAboutPage} />;
     } else if (slug === "services") {
@@ -223,42 +382,43 @@ export default function AdminPageEditorLayout() {
     return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Forms for {slug} are coming soon.</Typography>;
   };
 
-  const renderPreviewForSection = () => {
+  const previewContainer = useMemo(() => {
     if (slug === "home") {
-      return <HomePagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <HomePagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "about-us") {
-      return <AboutUsPreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <AboutUsPreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "services") {
-      return <ServicesPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <ServicesPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "practice-groups") {
-      return <PracticeGroupsPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <PracticeGroupsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "firm-professionals") {
-      return <FirmProfessionalsPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <FirmProfessionalsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "firm-leadership") {
-      return <FirmLeadershipPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <FirmLeadershipPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "insights") {
-      return <InsightsPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <InsightsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "blogs") {
-      return <BlogsPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <BlogsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "careers") {
-      return <CareersPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <CareersPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "contact-us") {
-      return <ContactPagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <ContactPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "who-we-serve") {
-      return <WhoWeServePagePreviews activeSection={activeSection} websiteData={websiteData} />;
+      return <WhoWeServePagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     }
     return (
       <Box sx={{ border: "2px dashed #ccc", p: 4, borderRadius: 2, textAlign: "center" }}>
         <Typography>Preview for {slug} will appear here.</Typography>
       </Box>
     );
-  };
+  }, [slug, activeSection, debouncedWebsiteData]);
 
   return (
-    <Box sx={{
-      display: 'flex',
-      flexDirection: { xs: 'column', lg: 'row' },
-      minHeight: '100vh',
+    <>
+      <Box sx={{
+        display: 'flex',
+        flexDirection: { xs: 'column', lg: 'row' },
+      height: '100vh', // Force 100vh so window doesn't scroll
       width: '100%',
       overflow: { xs: 'auto', lg: 'hidden' },
       backgroundColor: COLORS.OFF_WHITE
@@ -301,19 +461,30 @@ export default function AdminPageEditorLayout() {
               sx={{
                 mb: 2,
                 border: '1px solid rgba(0,0,0,0.08)',
-                boxShadow: activeSection === index ? '0 8px 24px rgba(0,0,0,0.06)' : 'none',
+                boxShadow: activeSection === index ? '0 4px 16px rgba(0,0,0,0.05)' : 'none',
                 '&:before': { display: 'none' },
                 borderRadius: '12px !important',
-                overflow: 'hidden',
-                transition: 'all 0.3s ease'
+                transition: 'all 0.2s ease',
+                '&.Mui-expanded': {
+                  margin: '0 0 16px 0 !important',
+                }
               }}
             >
               <AccordionSummary
                 expandIcon={<ExpandMore sx={{ color: activeSection === index ? COLORS.PRIMARY_GREEN : COLORS.TEXT_PRIMARY }} />}
                 sx={{
-                  backgroundColor: activeSection === index ? "#FFFFFF" : "#FFFFFF",
+                  backgroundColor: "#FFFFFF",
                   borderBottom: activeSection === index ? '1px solid rgba(0,0,0,0.05)' : 'none',
-                  '& .MuiAccordionSummary-content': { my: 2 }
+                  minHeight: "56px !important",
+                  '& .MuiAccordionSummary-content': { 
+                    my: 0,
+                  },
+                  '& .MuiAccordionSummary-content.Mui-expanded': { 
+                    my: 0,
+                  },
+                  '&.Mui-expanded': { 
+                    minHeight: "56px !important",
+                  }
                 }}
               >
                 <Typography sx={{ fontFamily: adelle.style.fontFamily, fontWeight: activeSection === index ? 700 : 400, color: activeSection === index ? COLORS.PRIMARY_BLUE : COLORS.TEXT_PRIMARY }}>
@@ -333,6 +504,8 @@ export default function AdminPageEditorLayout() {
             fullWidth
             variant="contained" 
             startIcon={<Save />}
+            onClick={handleSave}
+            disabled={isSubmitting}
             sx={{ 
               backgroundColor: COLORS.PRIMARY_GREEN, 
               color: COLORS.WHITE, 
@@ -344,7 +517,7 @@ export default function AdminPageEditorLayout() {
               boxShadow: "0 4px 14px rgba(0,0,0,0.15)"
             }}
           >
-            Save Changes
+            {isSubmitting ? "Saving..." : "Save Changes"}
           </Button>
         </Box>
       </Box>
@@ -363,10 +536,11 @@ export default function AdminPageEditorLayout() {
           </Box>
         </Box>
         <Box sx={{ flexGrow: 1, overflowY: 'auto', minWidth: 0 }}>
-          {renderPreviewForSection()}
+          {previewContainer}
         </Box>
       </Box>
 
     </Box>
+    </>
   );
 }
