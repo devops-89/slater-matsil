@@ -2454,38 +2454,61 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       },
     },
   },
-  {
+{
   slug: "iam-patent-1000-recognition-2026",
   hero: {
     name: "Slater Matsil, LLP",
-    band: "IAM Patent 1000 Rankings",
-    guide: "Firm and Individual Recognition",
-    yearsRanked: "2020-2026",
+    band: "IAM Patent 1000",
+    guide: "Highly Recommended Recognition",
+    yearsRanked: "2026",
   },
   contact: commonContact,
   contentSections: {
     aboutProvidedBy: "Provided by",
     aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+    region: "Texas, USA",
+
     practiceAreas: {
-      heading: "Firm Recognition",
+      heading: "Recognition",
       content:
-        "IAM Patent 1000 ranked Slater Matsil as a leading firm from 2020 through 2026, recognizing the firm's excellence in patent law and intellectual property services.",
+        "We're honored to share that Slater Matsil has once again been recognized as a Highly Recommended firm in the 2026 edition of the IAM Patent 1000 – The World's Leading Patent Professionals. This prestigious recognition reflects the firm's continued excellence in patent prosecution, intellectual property strategy, and commitment to serving innovators across a wide range of industries.",
     },
+
     professionalMemberships: {
-      heading: "Individual Recognitions",
+      heading: "Strategic Excellence",
       content:
-        "Partners Steven Slater, Ira Matsil, and Srini Chakravarthi were individually recognized from 2020 through 2026. Michael Kucher was individually recognized from 2021 through 2026 for outstanding contributions to intellectual property law.",
+        "IAM highlighted Slater Matsil's unique strengths, noting that the firm 'combines technical depth with exceptional output, consistently ranking among the most active filers in the United States.' The Dallas-based team was specifically recognized for its capabilities in semiconductors, telecommunications, and complex electronics, where it supports some of the world's most prolific innovators. IAM also emphasized the firm's long-standing client relationships and focus on strategic portfolio development, which underpin its reputation for delivering both scale and quality.",
     },
+
     career: {
-      heading: "Industry Reputation",
+      heading: "Highly Distinguished",
       content:
-        "The continued recognition by IAM Patent 1000 reflects Slater Matsil's strong reputation for technical expertise, strategic IP counseling, and client-focused legal services.",
+        "This recognition is especially meaningful as only six law firms in Texas achieved the Highly Recommended distinction in the patent prosecution category. The achievement highlights Slater Matsil's standing among the leading intellectual property law firms in the state and reinforces its reputation for technical excellence, strategic counsel, and high-quality patent services.",
     },
+
     personal: {
-      heading: "Commitment to Clients",
+      heading: "Individual Recognition",
       content:
-        "Slater Matsil remains dedicated to helping innovators, businesses, and technology leaders protect and maximize the value of their intellectual property assets.",
+        "In addition to the firm's recognition, IAM Patent 1000 acknowledged four Slater Matsil attorneys as leaders in the field: Steven Slater, Ira Matsil, Srini Chakravarthi, and Michael Kucher. Their recognition reflects years of dedication to helping clients protect, manage, and maximize the value of their intellectual property assets through innovative and strategic legal solutions.",
+    },
+
+    additionalInformation: {
+      heading: "About the IAM Patent 1000",
+      content:
+        "The IAM Patent 1000 is a respected industry resource that identifies the world's leading patent law firms and professionals through extensive research, client and peer feedback, market analysis, and evaluation of technical capabilities. Widely regarded as one of the most authoritative rankings in the intellectual property industry, the guide recognizes firms and practitioners that demonstrate exceptional expertise, market presence, and client service.",
+    },
+
+    closingStatement: {
+      heading: "Gratitude and Commitment",
+      content:
+        "Slater Matsil is proud of its team and grateful to its clients and peers for their continued trust and support. The firm remains committed to delivering innovative, strategic, and client-focused intellectual property solutions that help businesses, entrepreneurs, and technology leaders succeed in an increasingly competitive global marketplace.",
+    },
+
+    resource: {
+      heading: "Learn More",
+      content:
+        "Read the full IAM Patent 1000 profile for Slater Matsil and learn more about the firm's recognition and achievements in the 2026 rankings.",
+      link: "https://www.iam-media.com/rankings/patent-1000/profile/firm/slater-matsil-llp",
     },
   },
 },

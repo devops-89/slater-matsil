@@ -509,6 +509,14 @@ export interface INSIGHTS_DETAIL_PROPS {
     personal: INSIGHT_CONTENT_SECTION_PROPS;
     chambersReview?: INSIGHT_CONTENT_SECTION_PROPS;
     strengths?: INSIGHT_CONTENT_SECTION_PROPS;
+    additionalInformation?: INSIGHT_CONTENT_SECTION_PROPS;
+    closingStatement?: INSIGHT_CONTENT_SECTION_PROPS;
+    resource?: {
+    heading: string;
+    content: string;
+    link: string;
+  };
+
   };
 }
 
