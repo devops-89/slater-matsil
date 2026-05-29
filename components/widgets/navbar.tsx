@@ -20,6 +20,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const LANGUAGES = [
@@ -39,6 +40,8 @@ const LANGUAGES = [
 ];
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState("en");
 
