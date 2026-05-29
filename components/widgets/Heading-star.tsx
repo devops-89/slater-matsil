@@ -1,9 +1,8 @@
-import { COLORS } from "@/utils/enum";
-import { Box, Stack, Typography } from "@mui/material";
-import React from "react";
 import whiteStar from "@/public/images/common/heading-star.png";
-import Image from "next/image";
+import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
+import { Box, Stack, Typography } from "@mui/material";
+import Image from "next/image";
 const HeadingStar = ({ title }: { title: string }) => {
   return (
     <div>

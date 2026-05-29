@@ -63,7 +63,7 @@ const HeroSection3 = () => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
   const { details } = usePageData();
   const globalBanners = details?.homepage?.heroSection;
-  
+
   const defaultBanners = [
     {
       img: slider4,
@@ -85,38 +85,35 @@ const HeroSection3 = () => {
     },
   ];
 
-  const banners = Array.isArray(globalBanners) && globalBanners.length > 0
-    ? globalBanners.map((b: any, idx: number) => ({
-        ...b,
-        img: b.image || defaultBanners[idx]?.img || slider4,
-      }))
-    : defaultBanners;
+  const banners =
+    Array.isArray(globalBanners) && globalBanners.length > 0
+      ? globalBanners.map((b: any, idx: number) => ({
+          ...b,
+          img: b.image || defaultBanners[idx]?.img || slider4,
+        }))
+      : defaultBanners;
 
   return (
     <Box
       sx={{
-        height: "70vh",
+        height: { lg: "70vh", xs: "auto" },
+        minHeight: { xs: "85vh", lg: "auto" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         mt: 2,
         mb: 4,
+        py: { xs: 5, lg: 0 },
         backgroundColor: COLORS.LIGHT_GREY,
         borderTop: "1px solid #000 ",
         borderBottom: "1px solid #000 ",
       }}
     >
-      <Container
-        maxWidth="lg"
-        sx={
-          {
-            // borderRadius: 2,
-            // p: 2,
-          }
-        }
-      >
+      <Container maxWidth="lg">
         <Swiper
-          key={banners.map(b => typeof b.img === 'string' ? b.img : b.img?.src).join(',')}
+          key={banners
+            .map((b) => (typeof b.img === "string" ? b.img : b.img?.src))
+            .join(",")}
           onSwiper={setSwiperInstance}
           modules={[Autoplay]}
           autoplay={{ delay: 7000, disableOnInteraction: false }}
@@ -126,54 +123,76 @@ const HeroSection3 = () => {
         >
           {banners.map((val, i) => (
             <SwiperSlide key={i}>
-              <Grid container alignItems={"center"} spacing={5}>
-                <Grid size={6}>
+              <Grid
+                container
+                alignItems={"center"}
+                spacing={{ lg: 5, xs: 4 }}
+                direction={{ xs: "column-reverse", lg: "row" }}
+              >
+                <Grid size={{ lg: 6, xs: 12 }}>
                   <Typography
                     sx={{
-                      fontSize: { lg: 50, xs: 24 },
+                      fontSize: { lg: 50, xs: 28 },
                       color: COLORS.PRIMARY_BLUE,
                       lineHeight: 1.2,
                       fontWeight: 700,
                       fontFamily: tradeGothic.style.fontFamily,
+                      textAlign: { xs: "center", lg: "left" },
                     }}
                   >
                     {val.title}
                   </Typography>
                   <Typography
                     sx={{
-                      fontSize: { lg: 20, xs: 14 },
+                      fontSize: { lg: 20, xs: 16 },
                       color: COLORS.BLACK,
                       fontWeight: 500,
                       lineHeight: 1.5,
                       mt: 3,
-                      width: "80%",
-                      textAlign: "justify",
+                      width: { lg: "80%", xs: "100%" },
+                      textAlign: { xs: "center", lg: "justify" },
                     }}
                   >
                     {val.description}
                   </Typography>
-                  <Link href="/about-us">
-                    <Button
-                      sx={{
-                        backgroundColor: COLORS.PRIMARY_BLUE,
-                        color: COLORS.WHITE,
-                        fontFamily: adelle.style.fontFamily,
-                        fontSize: { lg: 16, xs: 14 },
-                        fontWeight: 700,
-                        lineHeight: "26px",
-                        textTransform: "uppercase",
-                        mt: 3,
-                        borderRadius: 20,
-                        width: { lg: 200, xs: 180 },
-                        p: 1.5,
-                      }}
-                    >
-                      Learn More
-                    </Button>
-                  </Link>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: { xs: "center", lg: "flex-start" },
+                    }}
+                  >
+                    <Link href="/about-us">
+                      <Button
+                        sx={{
+                          backgroundColor: COLORS.PRIMARY_BLUE,
+                          color: COLORS.WHITE,
+                          fontFamily: adelle.style.fontFamily,
+                          fontSize: { lg: 16, xs: 14 },
+                          fontWeight: 700,
+                          lineHeight: "26px",
+                          textTransform: "uppercase",
+                          mt: { lg: 3, xs: 4 },
+                          borderRadius: 20,
+                          width: { lg: 200, xs: 180 },
+                          p: 1.5,
+                          "&:hover": {
+                            backgroundColor: COLORS.PRIMARY_BLUE,
+                          },
+                        }}
+                      >
+                        Learn More
+                      </Button>
+                    </Link>
+                  </Box>
                 </Grid>
                 <Grid size={6}>
-                  <Box sx={{ width: "100%", height: "450px", position: "relative" }}>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "450px",
+                      position: "relative",
+                    }}
+                  >
                     <Image
                       src={val.img}
                       alt="slider image"
@@ -192,8 +211,6 @@ const HeroSection3 = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-
-        {/* <SwiperNavButtons swiper={swiperInstance} /> */}
       </Container>
     </Box>
   );

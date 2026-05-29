@@ -43,19 +43,32 @@ const Disclaimer = () => {
 
         {data.sections?.map((section: any, index: number) => (
           <Section key={index} title={section.title}>
-            {section.contentBlocks?.map((block: LEGAL_CONTENT_BLOCK, i: number) => {
-              if (block.type === 'list') {
-                return (
-                  <ul key={i}>
-                    {block.items?.map((item, j) => <li key={j}>{item}</li>)}
-                  </ul>
-                );
-              }
-              if (block.type === 'paragraph') {
-                return <p key={i}>{block.text?.split('\n').map((line, k) => <React.Fragment key={k}>{line}<br/></React.Fragment>)}</p>;
-              }
-              return null;
-            })}
+            {section.contentBlocks?.map(
+              (block: LEGAL_CONTENT_BLOCK, i: number) => {
+                if (block.type === "list") {
+                  return (
+                    <ul key={i}>
+                      {block.items?.map((item, j) => (
+                        <li key={j}>{item}</li>
+                      ))}
+                    </ul>
+                  );
+                }
+                if (block.type === "paragraph") {
+                  return (
+                    <p key={i}>
+                      {block.text?.split("\n").map((line, k) => (
+                        <React.Fragment key={k}>
+                          {line}
+                          <br />
+                        </React.Fragment>
+                      ))}
+                    </p>
+                  );
+                }
+                return null;
+              },
+            )}
           </Section>
         ))}
       </Container>
@@ -90,7 +103,7 @@ const Section = ({
         fontWeight: 400,
         color: COLORS.BLACK,
         lineHeight: 1.6,
-        "& p": { margin: "0 0 10px 0" }
+        "& p": { margin: "0 0 10px 0" },
       }}
     >
       {children}

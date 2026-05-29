@@ -17,8 +17,17 @@ const AboutSection = () => {
     <Box sx={{ pt: 1, pb: 8 }}>
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-up">
-            <HeadingStar title={details?.homepage?.aboutSection?.sectionTitle || "About Slatermatsil"} />
+          <Grid
+            size={{ xs: 12, lg: 6 }}
+            data-aos="fade-up"
+            suppressHydrationWarning
+          >
+            <HeadingStar
+              title={
+                details?.homepage?.aboutSection?.sectionTitle ||
+                "About Slatermatsil"
+              }
+            />
 
             <Typography
               sx={{
@@ -29,7 +38,8 @@ const AboutSection = () => {
                 fontFamily: tradeGothic.style.fontFamily,
               }}
             >
-              {details?.homepage?.aboutSection?.heading || "Fluent in technology. Proven in law."}
+              {details?.homepage?.aboutSection?.heading ||
+                "Fluent in technology. Proven in law."}
             </Typography>
             <Box>
               <Image
@@ -50,7 +60,11 @@ const AboutSection = () => {
             </Box>
           </Grid>
 
-          <Grid size={{ xs: 12, lg: 6 }} data-aos="fade-down">
+          <Grid
+            size={{ xs: 12, lg: 6 }}
+            data-aos="fade-down"
+            suppressHydrationWarning
+          >
             <Box>
               <Typography
                 sx={{
@@ -61,7 +75,8 @@ const AboutSection = () => {
                   textAlign: "justify",
                 }}
               >
-                {details?.homepage?.aboutSection?.description || "Your most valuable ideas deserve unmatched patent protection, and that’s what Slater Matsil delivers."}
+                {details?.homepage?.aboutSection?.description ||
+                  "Your most valuable ideas deserve unmatched patent protection, and that’s what Slater Matsil delivers."}
               </Typography>
               <Link
                 href={
@@ -83,13 +98,15 @@ const AboutSection = () => {
                     fontSize: 16,
                   }}
                 >
-                  {details?.homepage?.aboutSection?.ctaButton?.text || "More About"}
+                  {details?.homepage?.aboutSection?.ctaButton?.text ||
+                    "More About"}
                   <ArrowRightAltIcon fontSize="small" sx={{ ml: 1 }} />
                 </Button>
               </Link>
 
               <Box
                 data-aos="fade-up"
+                suppressHydrationWarning
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -115,7 +132,8 @@ const AboutSection = () => {
                  `,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.years || "25"}
+                      {details?.homepage?.aboutSection?.experience?.years ||
+                        "25"}
                     </Typography>
                     <Box
                       sx={{
@@ -150,7 +168,8 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.title || "years of"}
+                      {details?.homepage?.aboutSection?.experience?.title ||
+                        "years of"}
                     </Typography>
                     <Typography
                       sx={{
@@ -158,7 +177,8 @@ const AboutSection = () => {
                         fontFamily: tradeGothic.style.fontFamily,
                       }}
                     >
-                      {details?.homepage?.aboutSection?.experience?.subTitle || "serving clients"}
+                      {details?.homepage?.aboutSection?.experience?.subTitle ||
+                        "serving clients"}
                     </Typography>
                   </Box>
                 </Box>

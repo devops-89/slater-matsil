@@ -19,7 +19,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
     <Box>
       <Container maxWidth="lg">
         <Grid container spacing={6} alignItems="center">
-          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up">
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up" suppressHydrationWarning>
             <HeadingStar
               title={details?.homepage?.our_metrics?.sectionTitle || "Our Metrics"}
             />
@@ -114,7 +114,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
             </Link>
           </Grid>
 
-          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down">
+          <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down" suppressHydrationWarning>
             <Grid container spacing={8}>
               {(details?.homepage?.our_metrics?.metricsData?.length ? details.homepage.our_metrics.metricsData : [
                 { title: "Patents", count: "1,650", description: "patents issued in 2024" },

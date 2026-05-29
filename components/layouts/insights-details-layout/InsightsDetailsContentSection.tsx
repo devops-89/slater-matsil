@@ -14,6 +14,7 @@ const SectionBlock = ({
   content: string;
 }) => {
   if (!content || !heading) return null;
+
   return (
     <Stack spacing={3} sx={{ mb: 8 }}>
       <HeadingStar title={heading} />
@@ -25,6 +26,7 @@ const SectionBlock = ({
           lineHeight: 1.6,
           color: COLORS.TEXT_PRIMARY_4,
           textAlign: "left",
+          letterSpacing: 1.5,
           letterSpacing: 1.5,
         }}
       >
@@ -47,7 +49,7 @@ const InsightsDetailsContentSection = ({
 
   if (!sections) return null;
 
-  // Lawyer Rankings tab (index 1)
+  // Rankings Tab
   if (activeTab === 1) {
     return (
       <Box sx={{ py: { xs: 4, md: 8 }, pb: 10 }}>
@@ -55,6 +57,7 @@ const InsightsDetailsContentSection = ({
           <Box sx={{ mb: 3 }}>
             <HeadingStar title="Rankings" />
           </Box>
+
           <Box
             sx={{
               p: 3,
@@ -74,6 +77,7 @@ const InsightsDetailsContentSection = ({
             >
               {hero?.name} — {hero?.band}
             </Typography>
+
             <Typography
               sx={{
                 fontFamily: adelle.style.fontFamily,
@@ -84,6 +88,7 @@ const InsightsDetailsContentSection = ({
             >
               {hero?.guide}
             </Typography>
+
             <Typography
               sx={{
                 fontFamily: adelle.style.fontFamily,
@@ -99,11 +104,11 @@ const InsightsDetailsContentSection = ({
     );
   }
 
-  // About tab (index 0)
+  // About Tab
   return (
     <Box sx={{ py: { xs: 4, md: 8 }, pb: 10 }}>
       <Container maxWidth="lg">
-        {/* About and Watermark row */}
+        {/* About Section */}
         <Stack
           direction="row"
           alignItems="center"
@@ -202,26 +207,27 @@ const InsightsDetailsContentSection = ({
           </Typography>
         </Box>
 
-        {/* Two-column content */}
+        {/* Main Two Columns */}
         <Grid container spacing={{ xs: 6, md: 12 }} sx={{ mb: 10 }}>
           <Grid size={{ xs: 12, md: 6 }}>
             <SectionBlock
-              heading={sections.practiceAreas.heading}
-              content={sections.practiceAreas.content}
+              heading={sections.practiceAreas?.heading}
+              content={sections.practiceAreas?.content}
             />
+
             <SectionBlock
-              heading={sections.professionalMemberships.heading}
-              content={sections.professionalMemberships.content}
+              heading={sections.professionalMemberships?.heading}
+              content={sections.professionalMemberships?.content}
             />
           </Grid>
           <Grid size={{ xs: 12, md: 6 }}>
             <SectionBlock
-              heading={sections.career.heading}
-              content={sections.career.content}
+              heading={sections.career?.heading}
+              content={sections.career?.content}
             />
             <SectionBlock
-              heading={sections.personal.heading}
-              content={sections.personal.content}
+              heading={sections.personal?.heading}
+              content={sections.personal?.content}
             />
           </Grid>
         </Grid>
@@ -238,6 +244,43 @@ const InsightsDetailsContentSection = ({
             heading={sections.strengths.heading}
             content={sections.strengths.content}
           />
+        )}
+
+        {sections.additionalInformation && (
+          <SectionBlock
+            heading={sections.additionalInformation.heading}
+            content={sections.additionalInformation.content}
+          />
+        )}
+        {sections.closingStatement && (
+          <SectionBlock
+            heading={sections.closingStatement.heading}
+            content={sections.closingStatement.content}
+          />
+        )}
+        {sections.resource && (
+          <Box sx={{ mb: 8 }}>
+            <SectionBlock
+              heading={sections.resource.heading}
+              content={sections.resource.content}
+            />
+            <Typography
+              component="a"
+              href={sections.resource.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              sx={{
+                fontFamily: adelle.style.fontFamily,
+                fontSize: 18,
+                fontWeight: 600,
+                color: COLORS.PRIMARY_GREEN,
+                textDecoration: "underline",
+                wordBreak: "break-word",
+              }}
+            >
+              View IAM Patent 1000 Profile
+            </Typography>
+          </Box>
         )}
       </Container>
     </Box>

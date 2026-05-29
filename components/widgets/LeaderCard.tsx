@@ -1,9 +1,8 @@
+import { COLORS } from "@/utils/enum";
+import { tradeGothic } from "@/utils/fonts";
 import { Box, Button, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
 
 interface LeaderCardProps {
   img: any;
@@ -53,6 +52,7 @@ const LeaderCard = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           style={{
             objectFit: "cover",
+            objectPosition: "top center",
           }}
         />
       </Box>

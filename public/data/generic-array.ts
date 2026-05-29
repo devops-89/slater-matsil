@@ -28,13 +28,13 @@ import technicalExpertise from "@/icons/services/technical-expertise.svg";
 import amitava from "@/professionals/transparent/amitava-chatterjee.png";
 import ava from "@/professionals/transparent/ava-chung.png";
 import barry from "@/professionals/transparent/barry-dove.png";
-import benjamin_nise from "@/professionals/transparent/Ben_nise.png";
-import brian from "@/professionals/transparent/brian-carlson.png";
-import brian_mair from "@/professionals/transparent/Brian_m.png";
-import chad from "@/professionals/transparent/chad1.png";
+import benjamin_nise from "@/professionals/transparent/benjamin-nise.png";
+import brian_mair from "@/professionals/transparent/brian-mair.png";
+import brian from "@/professionals/transparent/carlson.png";
+import chad from "@/professionals/transparent/chad-terrell.png";
 import chuanming from "@/professionals/transparent/chuanming-wei.png";
 import elizabeth from "@/professionals/transparent/elizabeth.png";
-import shervin from "@/professionals/transparent/fatehi1.png";
+import fantai from "@/professionals/transparent/fantai-kong.png";
 import hsin from "@/professionals/transparent/Hsin.png";
 import ira from "@/professionals/transparent/ira-matsil.png";
 import james from "@/professionals/transparent/james-kesterson.png";
@@ -44,7 +44,6 @@ import jonathan from "@/professionals/transparent/jonathan-insler.png";
 import jonathan_ward from "@/professionals/transparent/jonathan-ward.png";
 import joseph from "@/professionals/transparent/joseph-mcmanis.png";
 import julian from "@/professionals/transparent/julian-wang.png";
-import fantai from "@/professionals/transparent/kong1.png";
 import lizabeth from "@/professionals/transparent/lizabeth-vice.png";
 import marc from "@/professionals/transparent/marc-mcwilliams.png";
 import michael from "@/professionals/transparent/michael-kucher.png";
@@ -53,14 +52,15 @@ import paata from "@/professionals/transparent/patta-kakashvili.png";
 import payam from "@/professionals/transparent/payam-rashidi.png";
 import peter from "@/professionals/transparent/peter-meza.png";
 import rameez from "@/professionals/transparent/rameez-samnakay.png";
-import robert from "@/professionals/transparent/Robert.png";
+import robert from "@/professionals/transparent/robert-graham.png";
 import roger from "@/professionals/transparent/roger-knapp.png";
-import ruojian from "@/professionals/transparent/rou.png";
-import soonshin from "@/professionals/transparent/shoonshin1.png";
-import srini from "@/professionals/transparent/srinii.png";
+import ruojian from "@/professionals/transparent/ruojian-zhang.png";
+import shervin from "@/professionals/transparent/shervin-fatehi.png";
+import soonshin from "@/professionals/transparent/soonshin.png";
+import srini from "@/professionals/transparent/srini-hd.png";
 import stephen from "@/professionals/transparent/stephen-cortiaus.png";
 import steven_slater from "@/professionals/transparent/steven-slater.png";
-import vijay from "@/professionals/transparent/vijay1.png";
+import vijay from "@/professionals/transparent/vijay-desai.png";
 import yumin from "@/professionals/transparent/yumin.png";
 import zachary from "@/professionals/transparent/zachary-williams.png";
 import zhu from "@/professionals/transparent/zhu-he.png";
@@ -530,6 +530,20 @@ export const WHO_WE_SERVE_TAB_DATA = [
 ];
 
 export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
+  {
+    title:
+      "IAM Patent 1000 ranked Slater Matsil as a Firm (2020-2026), and individually recognized Partners Steven Slater (2020-2026), Ira Matsil (2020-2026), Srini Chakravarthi (2020-2026), and Michael Kucher (2021-2026).",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "iam-patent-1000-recognition-2026",
+  },
+  {
+    title:
+      "IAM Patent 1000 ranked Slater Matsil as a Firm (2020-2026), and individually recognized Partners Steven Slater (2020-2026), Ira Matsil (2020-2026), Srini Chakravarthi (2020-2026), and Michael Kucher (2021-2026).",
+    bgColor: COLORS.PRIMARY_LIGHT_GREEN,
+    category: INSIGHTS_TAB_DATA.NEWS,
+    slug: "iam-patent-1000-recognition-2026",
+  },
   {
     title: "Steven Slater Recognized by Chamberss USA as Top Attorney",
     bgColor: COLORS.PRIMARY_BLUE,

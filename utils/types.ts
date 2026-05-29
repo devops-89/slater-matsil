@@ -255,6 +255,7 @@ export interface PROFESSIONALS_CARD_PROPS {
   name: string;
   designation: string;
   slug: string;
+  onLoad?: () => void;
 }
 
 export interface PROFESSIONAL_DETAILS_HERO_PROPS {
@@ -530,6 +531,14 @@ export interface INSIGHTS_DETAIL_PROPS {
     personal: INSIGHT_CONTENT_SECTION_PROPS;
     ChamberssReview?: INSIGHT_CONTENT_SECTION_PROPS;
     strengths?: INSIGHT_CONTENT_SECTION_PROPS;
+    additionalInformation?: INSIGHT_CONTENT_SECTION_PROPS;
+    closingStatement?: INSIGHT_CONTENT_SECTION_PROPS;
+    resource?: {
+    heading: string;
+    content: string;
+    link: string;
+  };
+
   };
 }
 

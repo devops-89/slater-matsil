@@ -649,7 +649,10 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     ],
     PROFESSIONAL_ADMISSIONS_DATA: [
       {
-        description: "Patents:",
+        description: `Yumin is registered to practice before the United States Patent and Trademark Office.
+        <br/>
+        <br/>
+        Patents:`,
         list: [
           {
             label:
@@ -1606,7 +1609,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     PROFESSIONAL_EDUCATION_DATA: [
       {
         description:
-          "Jonathan graduated with his J.D. from the University of New Hampshire Franklin Pierce School of Law with a focus on Intellectual Property, Technology, and Information Law in 2025. Jonathan received his Ph.D. in experimental particle physics from the University of Rochester in 2011 and obtained a Master of Arts in Physics from the University of Rochester in 2005. Jonathan graduated from Cornell University with a Bachelor of Arts in 2003, majoring in Physics and Mathematics.",
+          "Jonathan graduated summa cum laude with his J.D. from the University of New Hampshire Franklin Pierce School of Law with a focus on Intellectual Property, Technology and Information Law in 2025. Jonathan received his Ph.D. in experimental particle physics from the University of Rochester in 2011 and obtained a Master of Arts in Physics from the University of Rochester in 2005. Jonathan graduated from Cornell University with a Bachelor of Arts in 2003, majoring in Physics and Mathematics.",
       },
     ],
     PROFESSIONAL_ADMISSIONS_DATA: [

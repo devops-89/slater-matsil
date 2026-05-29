@@ -1,14 +1,14 @@
 "use client";
-import { Drawer, List, ListItemButton, ListItemText, Box, Stack, Typography, IconButton, Collapse } from "@mui/material";
+import { HEADER_DATA } from "@/public/data/generic-array";
+import logo from "@/public/images/logo/logo.png";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { Box, Button, Collapse, Drawer, List, ListItemButton, ListItemText, Stack, Typography } from "@mui/material";
 import Hamburger from "hamburger-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import logo from "@/public/images/logo/logo.png";
-import { COLORS } from "@/utils/enum";
-import { HEADER_DATA } from "@/public/data/generic-array";
-import { adelle, tradeGothic } from "@/utils/fonts";
 
 const MobileNavbar = () => {
   const [isOpen, setOpen] = useState(false);
@@ -137,22 +137,30 @@ const MobileNavbar = () => {
           ))}
         </List>
 
-        <Box sx={{ mt: "auto", pt: 4 }}>
-          <Link href="/contact-us" onClick={() => setOpen(false)} style={{ textDecoration: "none" }}>
-            <Box
+        <Box sx={{ mt: "auto", pt: 4, width: "100%", display: "flex", justifyContent: "center" }}>
+          <Link href="/contact-us" onClick={() => setOpen(false)} style={{ textDecoration: "none", width: "100%" }}>
+            <Button
+              fullWidth
               sx={{
                 backgroundColor: COLORS.PRIMARY_BLUE,
                 color: COLORS.WHITE,
                 textAlign: "center",
-                py: 2,
-                borderRadius: "4px",
-                fontFamily: tradeGothic.style.fontFamily,
+                py: 1.5,
+                borderRadius: 20,
+                fontFamily: adelle.style.fontFamily,
                 fontWeight: 700,
+                fontSize: 16,
+                mb:4,
                 letterSpacing: "1px",
+                textTransform: "uppercase",
+                "&:hover": {
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  opacity: 0.9,
+                },
               }}
             >
-              CONTACT US
-            </Box>
+              Contact Us
+            </Button>
           </Link>
         </Box>
       </Drawer>

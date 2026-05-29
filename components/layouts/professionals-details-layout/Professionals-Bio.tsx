@@ -1,9 +1,8 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
-import React from "react";
 import star from "@/common/heading-star.png";
-import Image from "next/image";
 import { COLORS } from "@/utils/enum";
 import { PROFESSIONAL_BIO_PROPS } from "@/utils/types";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import Image from "next/image";
 
 interface ProfessionalBioComponentProps {
   data: PROFESSIONAL_BIO_PROPS[] | undefined;
@@ -38,8 +37,9 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                   fontWeight: 600,
                   textAlign: "justify",
                 }}
+                dangerouslySetInnerHTML={{__html: val.description || "" }}
               >
-                {val.description && val.description}
+                
               </Typography>
               {val.list && (
                 <Box

@@ -4,8 +4,10 @@ import { tradeGothic } from "@/utils/fonts";
 import { TEXTFIELD_STYLES } from "@/utils/styles";
 import { Search } from "@mui/icons-material";
 import {
+  Autocomplete,
   Box,
   Button,
+  CircularProgress,
   Container,
   Grid,
   IconButton,
@@ -17,6 +19,8 @@ import {
 } from "@mui/material";
 import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import ProfessionalsCard from "./components/Professionals-Card";
+import ProfessionalSearchBar from "./components/Professionals-Search-Bar";
+import { useLoading } from "@/components/providers/LoadingProvider";
 const ALPHABETS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 const ProfessionalList = () => {
@@ -50,6 +54,36 @@ const sortedFullList = useMemo(() => {
 
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
+  const { setLoading } = useLoading();
+  const [loadedCount, setLoadedCount] = useState(0);
+
+  const paginatedData = data?.slice(
+    (page - 1) * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE,
+  );
+
+  const currentKey = `${page}-${data.length}`;
+
+  useEffect(() => {
+    if (paginatedData?.length > 0) {
+      setLoading(true);
+      setLoadedCount(0);
+    } else {
+      setLoading(false);
+    }
+  }, [currentKey]); // Trigger when page or data length changes
+
+  useEffect(() => {
+    if (paginatedData?.length > 0 && loadedCount >= paginatedData.length) {
+      setLoading(false);
+    }
+  }, [loadedCount, paginatedData?.length, setLoading]);
+
+  const handleImageLoad = () => {
+    // We don't call setLoading here, only update local state.
+    // The useEffect above will handle setLoading(false) safely.
+    setLoadedCount((prev) => prev + 1);
+  };
 
   const handleSearch = () => {
     const filteredData = sortedFullList.filter((item: any) =>
@@ -75,136 +109,47 @@ const sortedFullList = useMemo(() => {
     setPage(value);
   };
 
-  const paginatedData = data?.slice(
-    (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE,
-  );
-
   return (
     <Box sx={{ mt: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={{ lg: 7, xs: 12 }} margin="auto">
-            <TextField
-              placeholder="Search by First/Last Name"
-              sx={{
-                ...TEXTFIELD_STYLES,
-                mt:-6,
-                mb: 2,
+            <ProfessionalSearchBar
+              search={search}
+              setSearch={setSearch}
+              handleSearch={handleSearch}
+              alphabet={alphabet}
+              searchByAlphabets={searchByAlphabets}
+              options={sortedFullList.map((option: any) => option.name)}
+              onSelect={(newValue) => {
+                setSearch(newValue);
               }}
-              fullWidth
-              value={search}
-              onChange={handleSearchInput}
-              slotProps={{
-                input: {
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        sx={{
-                          backgroundColor: COLORS.PRIMARY_BLUE,
-                          borderRadius: "15px",
-                          ":hover": {
-                            backgroundColor: COLORS.PRIMARY_BLUE,
-                          },
-                          color: COLORS.WHITE,
-                        }}
-                        onClick={handleSearch}
-                      >
-                        <Search />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                },
+              clearFilters={() => {
+                setAlphabet("");
+                setData(sortedFullList);
+                setPage(1);
               }}
             />
-            <Button
-                  onClick={() => {
-                    setAlphabet("");
-                    setData(sortedFullList);
-                    setPage(1);
-                  }}
-                  sx={{
-                    display: { xs: "flex", lg: "none" },
-                    mx: "auto",
-                    mb: 2,
-                    textTransform: "none",
-                    backgroundColor: COLORS.PRIMARY_BLUE,
-                    color: COLORS.WHITE,
-                    borderRadius: "10px",
-                    px: 3,
-                    "&:hover": {
-                      backgroundColor: COLORS.PRIMARY_BLUE,
-                    },
-                  }}
-                >
-                  View All
-                </Button>
-            <Stack
-              direction="row"
-              alignItems={"center"}
-              spacing={1}
-              justifyContent={{ lg: "center", xs: "flex-start" }}
-              sx={{
-                mt: 1,
-                flexWrap: { lg: "wrap", xs: "nowrap" },
-                overflowX: "auto",
-                width: "100%",
-                pb: 1,
-                px: 1,
-                scrollbarWidth: "none",
-                WebkitOverflowScrolling: "touch",
-                "&::-webkit-scrollbar": {
-                  display: "none",
-                },
-              }}
-            >
-              {ALPHABETS.map((letter) => (
-                <Typography
-                  key={letter}
-                  sx={{
-                    cursor: "pointer",
-                    fontSize: { lg: 18, xs: 20 },
-                    fontWeight: 500,
-                    color:
-                      alphabet === letter ? COLORS.WHITE : COLORS.TEXT_TERTIARY,
-                    textTransform: "lowercase",
-                    "&:hover": {
-                      color: COLORS.PRIMARY_BLUE,
-                      fontWeight: 700,
-                    },
-                    textAlign: "center",
-                    backgroundColor:
-                      alphabet === letter ? COLORS.PRIMARY_BLUE : "",
-                    width: 30,
-                    height: 30,
-                    borderRadius: 2,
-                    display: "flex",
-                    minWidth: 30,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexShrink: 0,
-                  }}
-                  onClick={() => searchByAlphabets(letter)}
-                >
-                  {letter}
-                </Typography>
-              ))}
-            </Stack>
-          </Grid>
         </Grid>
-        <Grid container spacing={5} rowSpacing={20} sx={{ mt: 5 }}>
-          {paginatedData?.length ? (
-            paginatedData?.map((val, i) => (
-              <Grid size={{ lg: 4, xs: 12 }} key={i}>
-                <ProfessionalsCard
-                  img={val.img}
-                  name={val.name}
-                  designation={val.designation}
-                  slug={val.slug}
-                />
-              </Grid>
-            ))
-          ) : (
+        <Box sx={{ position: "relative", mt: 5, minHeight: 400 }}>
+          <Grid
+            container
+            spacing={5}
+            rowSpacing={20}
+            key={currentKey}
+          >
+            {paginatedData?.length ? (
+              paginatedData?.map((val, i) => (
+                <Grid size={{ lg: 4, xs: 12 }} key={i}>
+                  <ProfessionalsCard
+                    img={val.img}
+                    name={val.name}
+                    designation={val.designation}
+                    slug={val.slug}
+                    onLoad={handleImageLoad}
+                  />
+                </Grid>
+              ))
+            ) : (
             <Typography
               sx={{
                 fontSize: 20,
@@ -218,7 +163,8 @@ const sortedFullList = useMemo(() => {
               No Data Found
             </Typography>
           )}
-        </Grid>
+          </Grid>
+        </Box>
         {data && data?.length > ITEMS_PER_PAGE && (
           <Stack direction="row" justifyContent="center" sx={{ mt: 20 }}>
             <Pagination
