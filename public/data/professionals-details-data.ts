@@ -70,7 +70,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     PROFESSIONAL_BIO_DATA: [
       {
         description:
-          "Zachary has research experience in particle physics working with liquid argon time projection chambers (LArTPCs) to study neutrino interactions. Zachary led the installation and commissioning, as the working group leader, of the Drift High Voltage (HV) subsystem of the ICARUS experiment at Fermilab. Zachary has worked with many types of photodetectors during his graduate studies, and also published a paper looking at the solubility of a common wavelength shifting coating used on PMTs in LArTPC detectors. In his advisor’s lab at the University of Texas at Arlington, Zachary helped build a liquid argon purification system.",
+          "Zachary has research experience in particle physics working with liquid argon time projection Chamberss (LArTPCs) to study neutrino interactions. Zachary led the installation and commissioning, as the working group leader, of the Drift High Voltage (HV) subsystem of the ICARUS experiment at Fermilab. Zachary has worked with many types of photodetectors during his graduate studies, and also published a paper looking at the solubility of a common wavelength shifting coating used on PMTs in LArTPC detectors. In his advisor’s lab at the University of Texas at Arlington, Zachary helped build a liquid argon purification system.",
       },
       {
         description:
@@ -108,7 +108,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
   },
-   {
+  {
     slug: "hsin-ya-kuo",
     professionals_Details_HeroSection: {
       name: "Hsin-Ya Kuo,Ph.D.",
@@ -381,7 +381,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
       {
         description:
-          "Srini is also very active in the legal community and involved in various committees at the Dallas Bar and IP section of the Dallas Bar as well as being part of The Honorable Barbara M.G. Lynn American Inn of Court. Clients and peers have repeatedly recognized Srini for his exceptional services such as his recognition in Chambers USA (2023-2025) and IAM 1000 (2021-2025). Srini Chakravarthi has also been appointed as Adjunct Professor of Law at Texas A&M Law School (Spring 2024, Spring 2025).",
+          "Srini is also very active in the legal community and involved in various committees at the Dallas Bar and IP section of the Dallas Bar as well as being part of The Honorable Barbara M.G. Lynn American Inn of Court. Clients and peers have repeatedly recognized Srini for his exceptional services such as his recognition in Chamberss USA (2023-2025) and IAM 1000 (2021-2025). Srini Chakravarthi has also been appointed as Adjunct Professor of Law at Texas A&M Law School (Spring 2024, Spring 2025).",
       },
     ],
     PROFESSIONAL_EDUCATION_DATA: [
@@ -396,7 +396,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
           "Srini is admitted to practice in Texas and is a registered practitioner with the United States Patent and Trademark Office. He is a member of the State Bar of Texas.",
         list: [
           {
-            label: "Named in Chambers USA 2023,2024,2025",
+            label: "Named in Chamberss USA 2023,2024,2025",
           },
           {
             label:
@@ -1618,7 +1618,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
     PROFESSIONAL_ARTICLES_DATA: [
       {
         description:
-          "D.L. Adams et al. (DUNE Collaboration), “Design and performance of a 35-ton liquid argon time projection chamber as a prototype for future very large detectors.” arXiv:1912.08739 [physics.ins-det]. JINST 15 (2020) no. 03, P03035.",
+          "D.L. Adams et al. (DUNE Collaboration), “Design and performance of a 35-ton liquid argon time projection Chambers as a prototype for future very large detectors.” arXiv:1912.08739 [physics.ins-det]. JINST 15 (2020) no. 03, P03035.",
       },
       {
         description:
@@ -1630,7 +1630,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
       {
         description:
-          "D.L. Adams et al. (DUNE Collaboration), “Photon detector system timing performance in the DUNE 35-ton prototype liquid argon time projection chamber.” arXiv:1803.06379 [physics.ins-det]. JINST 13 (2018) no.06, P06022.",
+          "D.L. Adams et al. (DUNE Collaboration), “Photon detector system timing performance in the DUNE 35-ton prototype liquid argon time projection Chambers.” arXiv:1803.06379 [physics.ins-det]. JINST 13 (2018) no.06, P06022.",
       },
       {
         description:
@@ -2004,7 +2004,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       {
         description:
           "Fantai has authored over 33 original research publications that have received more than 1700 citations. He has also presented his work at various meetings and conferences. Selected publications include:",
-          list: [
+        list: [
           {
             label:
               "F. Kong, C. Liang, L. Wang, K. Cho, et al., “Kinetic Stability of Bulk LiNiO2 and Surface Degradation by Oxygen Evolution in LiNiO2-Based Cathode Materials”, Advanced Energy Materials, 9 (2019) 1802586.",
@@ -2299,9 +2299,9 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       {
         description:
           "Ira is a member of the State Bar of Texas and is registered to practice before the United States Patent and Trademark Office. Ira’s honors include:",
-          list: [
+        list: [
           {
-            label: "Chambers ranked 2021-2025",
+            label: "Chamberss ranked 2021-2025",
           },
           {
             label: "Texas Super Lawyer from 2012-2025",
@@ -2581,7 +2581,7 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
   },
-  
+
   {
     slug: "benjamin-nise",
     professionals_Details_HeroSection: {
@@ -2633,40 +2633,40 @@ export const PROFESSIONAL_DETAILS_DATA: PROFESSIONAL_DETAILS_PROPS[] = [
       },
     ],
     PROFESSIONAL_ADMISSIONS_DATA: [
-  {
-    description:
-      "Benjamin is a member of the State Bar of Texas and is registered to practice as a patent attorney before the United States Patent and Trademark Office.",
-  },
-  {
-    description: "Patents:",
-    list: [
       {
-        label:
-          'N. Yousefi, K. McClellan, and B. Nise, "Analog PLL Clock Recovery Circuit and LAN Transceiver Employing the Same," U.S. Patent 5448598',
+        description:
+          "Benjamin is a member of the State Bar of Texas and is registered to practice as a patent attorney before the United States Patent and Trademark Office.",
       },
       {
-        label:
-          'B. Nise "Method and Apparatus for Autocalibrating the Center Frequency of a Voltage Controlled Oscillator of a Phase Locked Loop," U.S. Patent 5696468',
-      },
-      {
-        label:
-          'T. Blyth, B. Nise, D. Wayne, "Double-sided pulse width modulator," U.S. Patent 5963106',
-      },
-      {
-        label:
-          'B. Nise, C. Mead, X Fang, "Passive switched capacitor delta analog-to-digital converter with programmable gain control," U.S. Patent 5995036',
-      },
-      {
-        label:
-          'R. Green, B. Nise, "Apparatus and method for detecting a low-battery power condition and generating a user perceptible warning," U.S. Patent 6310556',
-      },
-      {
-        label:
-          'B. Nise, "Efficient Polyphase Filter Having a Compact Structure," U.S. Patent 7190942',
+        description: "Patents:",
+        list: [
+          {
+            label:
+              'N. Yousefi, K. McClellan, and B. Nise, "Analog PLL Clock Recovery Circuit and LAN Transceiver Employing the Same," U.S. Patent 5448598',
+          },
+          {
+            label:
+              'B. Nise "Method and Apparatus for Autocalibrating the Center Frequency of a Voltage Controlled Oscillator of a Phase Locked Loop," U.S. Patent 5696468',
+          },
+          {
+            label:
+              'T. Blyth, B. Nise, D. Wayne, "Double-sided pulse width modulator," U.S. Patent 5963106',
+          },
+          {
+            label:
+              'B. Nise, C. Mead, X Fang, "Passive switched capacitor delta analog-to-digital converter with programmable gain control," U.S. Patent 5995036',
+          },
+          {
+            label:
+              'R. Green, B. Nise, "Apparatus and method for detecting a low-battery power condition and generating a user perceptible warning," U.S. Patent 6310556',
+          },
+          {
+            label:
+              'B. Nise, "Efficient Polyphase Filter Having a Compact Structure," U.S. Patent 7190942',
+          },
+        ],
       },
     ],
-  },
-],
     PROFESSIONAL_ASSOCIATIONS_DATA: [
       {
         description:

@@ -1,8 +1,4 @@
-import {
-  SvgIconProps,
-  SxProps,
-  Theme
-} from "@mui/material";
+import { SvgIconProps, SxProps, Theme } from "@mui/material";
 import { StaticImageData } from "next/image";
 import React from "react";
 import { PRACTICE_GROUP_TAB_DATA, WHO_WE_SERVE_PAGE_TAB_DATA } from "./enum";
@@ -532,7 +528,7 @@ export interface INSIGHTS_DETAIL_PROPS {
     professionalMemberships: INSIGHT_CONTENT_SECTION_PROPS;
     career: INSIGHT_CONTENT_SECTION_PROPS;
     personal: INSIGHT_CONTENT_SECTION_PROPS;
-    chambersReview?: INSIGHT_CONTENT_SECTION_PROPS;
+    ChamberssReview?: INSIGHT_CONTENT_SECTION_PROPS;
     strengths?: INSIGHT_CONTENT_SECTION_PROPS;
   };
 }

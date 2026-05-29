@@ -61,8 +61,8 @@ const stevenSections = (): INSIGHTS_DETAIL_PROPS["contentSections"] => ({
     content:
       "Steve graduated with a degree in electrical engineering from the University of South Florida in 1985 and received his Juris Doctor cum laude from Southern Methodist University's Dedman School of Law in 1992. Steve was an Associate Managing Editor of the SMU Law Review, an Order of the Coif law school graduate, and a member of the American Inns of Court. In addition, Steve has been a frequent guest speaker for the Dallas Bar Association, the Texas State Bar, the Licensing Executive Society, the Center for American and International Law, and other organizations.",
   },
-  chambersReview: {
-    heading: "Chambers Review",
+  ChamberssReview: {
+    heading: "Chamberss Review",
     content:
       "Steve Slater is a highly regarded practitioner who is known for his deep expertise in patent prosecution and portfolio management. One source notes: 'Steven has a deep understanding of our business and their business, and he is extremely responsive and helpful.'",
   },
@@ -96,8 +96,8 @@ const iraSections = (): INSIGHTS_DETAIL_PROPS["contentSections"] => ({
     content:
       "B.S., electrical engineering, the University of Texas at Austin; M.S., electrical engineering from The University of Texas at Arlington; J.D., Southern Methodist University's Dedman School of Law, magna cum laude.",
   },
-  chambersReview: {
-    heading: "Chambers Review",
+  ChamberssReview: {
+    heading: "Chamberss Review",
     content:
       "Ira Matsil is widely recognised for his patent prosecution and portfolio management work.",
   },
@@ -132,15 +132,15 @@ const sriniSections = (): INSIGHTS_DETAIL_PROPS["contentSections"] => ({
     content:
       "B.S., Indian Institute of Technology; Ph.D., Boston University; J.D., Southern Methodist University. Srini is a named inventor on 25 issued U.S. patents and has authored numerous highly cited research articles.",
   },
-  chambersReview: {
-    heading: "Chambers Review",
+  ChamberssReview: {
+    heading: "Chamberss Review",
     content:
       "Srini Chakravarthi focuses on patent portfolio management, portfolio strategy and procurement. He represents clients in the semiconductor, automotive and biotechnology industries.",
   },
   strengths: {
     heading: "Strengths",
     content:
-      '"Srini is a very experienced, knowledgeable lawyer, who is excellent both in legal and technical expertise." — Intellectual Property respondent, Chambers Guide to the USA',
+      '"Srini is a very experienced, knowledgeable lawyer, who is excellent both in legal and technical expertise." — Intellectual Property respondent, Chamberss Guide to the USA',
   },
 });
 
@@ -179,7 +179,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "slater-matsil-chambers-usa-2025",
+    slug: "slater-matsil-Chamberss-usa-2025",
     hero: {
       name: "Slater Matsil, LLP",
       band: "Ranked Firm : Intellectual Property – Texas",
@@ -211,20 +211,20 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
         content:
           'The Firm offers a wide spectrum of expertise in IP litigation, often as a team member of a multi-firm effort. In post grant challenges, Slater Matsil represents both patent owners and petitioners, with dozens of post-grant challenges being successfully concluded on behalf of our clients. By combining extensive familiarity with Patent Office proceedings with strong litigation skill-sets, the Firm continues to rack up an impressive record of victories for its clients. The Firm\'s IP litigation team is nationally recognized — U.S. News ranked Slater Matsil in 2023–2025 as a "Best Law Firm in Tier 1 for Patent Litigation." Key Clients: Taiwan Semiconductor Manufacturing Co., Ltd. (TSMC), SMA Solar Technology AG.',
       },
-      chambersReview: {
+      ChamberssReview: {
         heading: "Asia Pacific Practice Group",
         content:
           "Slater Matsil's Asia Pacific Practice Group recognizes the importance of a comprehensive IP strategy for companies seeking to enter or grow in the U.S. market. In addition to traditional IP services, the Firm also provides practical, culturally-sensitive advice to companies seeking to navigate the complex landscape of business practices and intellectual property law in the United States. This practice group offers fluency in Mandarin, Bangla, Farsi, Gujarati, Hindi, Tamil, and Urdu. Slater Matsil was named the 2024 U.S. Patent Prosecution Adviser of the Year for China – USA by IE 100 Awards. Key Clients: Huawei Technologies, Hyundai Motor Group, Tokyo Electron Limited.",
       },
       strengths: {
-        heading: "Chambers USA Rankings",
+        heading: "Chamberss USA Rankings",
         content:
           'USA Guide 2025 | Texas | Intellectual Property | 1 Department · 3 Ranked Lawyers. Slater Matsil recognizes that technical expertise is as important as legal prowess when it comes to effective patent drafting and prosecution. The Firm practices its motto, "Fluent in Technology, Proven in Law" every day — with thirteen of the Firms\' practitioners having an advanced technical degree. In fact, many Firm practitioners are inventors in their own rights, with over 125 patents issued to members of the Firm.',
       },
     },
   },
   {
-    slug: "steven-slater-chambers-usa-2025",
+    slug: "steven-slater-Chamberss-usa-2025",
     hero: {
       name: "Steven Slater",
       band: "Band 5 : Intellectual Property",
@@ -236,7 +236,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     contentSections: stevenSections(),
   },
   {
-    slug: "ira-matsil-chambers-usa-2025",
+    slug: "ira-matsil-Chamberss-usa-2025",
     hero: {
       name: "Ira Matsil",
       band: "Band 4 : Intellectual Property",
@@ -248,7 +248,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     contentSections: iraSections(),
   },
   {
-    slug: "ira-matsil-chambers-usa-2025-2",
+    slug: "ira-matsil-Chamberss-usa-2025-2",
     hero: {
       name: "Ira Matsil",
       band: "Band 4 : Intellectual Property",
@@ -260,175 +260,175 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     contentSections: iraSections(),
   },
   {
-  slug: "benjamin-nise-ai-patent-prosecution-dba-cle",
-  hero: {
-    name: "Benjamin Nise",
-    band: "Dallas Bar Association IP Section CLE",
-    guide:
-      "Using AI in Your Day-to-Day Practice from a Litigation and Prosecution Perspective",
-    yearsRanked: "2026",
-    profileImage: benjamin,
-  },
-
-  contact: commonContact,
-
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Benjamin Nise",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "CLE Presentation",
-      content:
-        "Benjamin Nise recently presented at the Dallas Bar Association IP Section CLE held on March 26, 2026, speaking on the prosecution perspective of integrating artificial intelligence into day-to-day patent practice.",
+    slug: "benjamin-nise-ai-patent-prosecution-dba-cle",
+    hero: {
+      name: "Benjamin Nise",
+      band: "Dallas Bar Association IP Section CLE",
+      guide:
+        "Using AI in Your Day-to-Day Practice from a Litigation and Prosecution Perspective",
+      yearsRanked: "2026",
+      profileImage: benjamin,
     },
 
-    professionalMemberships: {
-      heading: "AI Tools in Patent Practice",
-      content:
-        "The presentation examined the range of AI tools available to patent practitioners, including purpose-built patent platforms, direct use of frontier large language models, and internally developed AI solutions, along with the trade-offs associated with each approach.",
-    },
+    contact: commonContact,
 
-    career: {
-      heading: "Ethics and Practical Risks",
-      content:
-        'A significant focus of the discussion addressed ethical obligations, confidentiality concerns, and the risks of over-reliance on AI-generated work product. Benjamin referred to this as the "GPS Effect," describing the potential loss of situational awareness when practitioners depend too heavily on automated systems.',
-    },
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Benjamin Nise",
+      region: "USA",
 
-    personal: {
-      heading: "Future of AI and Patent Examination",
-      content:
-        "Benjamin also discussed how continuing advancements in AI models and the USPTO’s increasing adoption of AI-assisted examination tools are expected to raise the quality standards for patent practitioners moving forward.",
-    },
-  },
-},
-{
-  slug: "srini-chakravarthi-headnotes-persuasive-writing",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "Dallas Bar Association Headnotes",
-    guide: "What Every Lawyer Should Know About Persuasive Writing",
-    yearsRanked: "2026",
-    profileImage: srini,
-  },
+      practiceAreas: {
+        heading: "CLE Presentation",
+        content:
+          "Benjamin Nise recently presented at the Dallas Bar Association IP Section CLE held on March 26, 2026, speaking on the prosecution perspective of integrating artificial intelligence into day-to-day patent practice.",
+      },
 
-  contact: commonContact,
+      professionalMemberships: {
+        heading: "AI Tools in Patent Practice",
+        content:
+          "The presentation examined the range of AI tools available to patent practitioners, including purpose-built patent platforms, direct use of frontier large language models, and internally developed AI solutions, along with the trade-offs associated with each approach.",
+      },
 
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Srini Chakravarthi",
-    region: "USA",
+      career: {
+        heading: "Ethics and Practical Risks",
+        content:
+          'A significant focus of the discussion addressed ethical obligations, confidentiality concerns, and the risks of over-reliance on AI-generated work product. Benjamin referred to this as the "GPS Effect," describing the potential loss of situational awareness when practitioners depend too heavily on automated systems.',
+      },
 
-    practiceAreas: {
-      heading: "Headnotes Publication",
-      content:
-        "Slater Matsil Partner Srini Chakravarthi, Ph.D., was featured in the May 2026 edition of the Dallas Bar Association’s Headnotes publication.",
-    },
-
-    professionalMemberships: {
-      heading: "Persuasive Writing Article",
-      content:
-        'In his article titled "What Every Lawyer Should Know About Persuasive Writing," Srini shares practical and science-backed strategies for developing persuasive legal arguments based on his experience drafting patent appeal briefs.',
-    },
-
-    career: {
-      heading: "Practical Guidance for Lawyers",
-      content:
-        "The article discusses effective brief structure, techniques for maximizing persuasive impact, and methods for eliminating unnecessary clutter that can weaken even strong legal arguments.",
-    },
-
-    personal: {
-      heading: "Publication Details",
-      content:
-        "Dallas Bar Association Headnotes | May 2026 Edition | Persuasive Legal Writing and Advocacy",
+      personal: {
+        heading: "Future of AI and Patent Examination",
+        content:
+          "Benjamin also discussed how continuing advancements in AI models and the USPTO’s increasing adoption of AI-assisted examination tools are expected to raise the quality standards for patent practitioners moving forward.",
+      },
     },
   },
-},
-{
-  slug: "srini-chakravarthi-american-inn-of-court-community-service",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "Honorable Barbara M.G. Lynn American Inn of Court",
-    guide:
-      "IP for Innovators and Entrepreneurs: Protecting Your Path to Independence",
-    yearsRanked: "2025 - 2026",
-    profileImage: srini,
-  },
-
-  contact: commonContact,
-
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Srini Chakravarthi",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Community Service Leadership",
-      content:
-        "Srini Chakravarthi recently led the 2025-2026 community service project for the Honorable Barbara M.G. Lynn American Inn of Court focused on helping innovators and entrepreneurs better understand intellectual property protection.",
+  {
+    slug: "srini-chakravarthi-headnotes-persuasive-writing",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "Dallas Bar Association Headnotes",
+      guide: "What Every Lawyer Should Know About Persuasive Writing",
+      yearsRanked: "2026",
+      profileImage: srini,
     },
 
-    professionalMemberships: {
-      heading: "Educational Events",
-      content:
-        'The initiative delivered two free educational programs across the DFW Metroplex, including "IP for App Developers" at the UTD Jindal School of Business in Richardson and "IP for Veteran Entrepreneurs" at the UTA Center for Entrepreneurship and Technology Development in Arlington in collaboration with the USPTO.',
-    },
+    contact: commonContact,
 
-    career: {
-      heading: "Supporting Innovation",
-      content:
-        "Marking the 250th anniversary of the Declaration of Independence, the project emphasized empowering entrepreneurs through practical intellectual property guidance designed to support innovation and business independence.",
-    },
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Srini Chakravarthi",
+      region: "USA",
 
-    personal: {
-      heading: "Open Source Software Presentation",
-      content:
-        "Srini also co-presented at the Inn’s March dinner on the history of open source software, highlighting how legal frameworks supporting collaborative innovation represent a lasting form of community service.",
-    },
-  },
-},
-{
-  slug: "srini-chakravarthi-teaches-patent-law-texas-am",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "Texas A&M University School of Law",
-    guide: "Third Year Teaching Patent Law",
-    yearsRanked: "2026",
-    profileImage: srini,
-  },
+      practiceAreas: {
+        heading: "Headnotes Publication",
+        content:
+          "Slater Matsil Partner Srini Chakravarthi, Ph.D., was featured in the May 2026 edition of the Dallas Bar Association’s Headnotes publication.",
+      },
 
-  contact: commonContact,
+      professionalMemberships: {
+        heading: "Persuasive Writing Article",
+        content:
+          'In his article titled "What Every Lawyer Should Know About Persuasive Writing," Srini shares practical and science-backed strategies for developing persuasive legal arguments based on his experience drafting patent appeal briefs.',
+      },
 
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Srini Chakravarthi",
-    region: "USA",
+      career: {
+        heading: "Practical Guidance for Lawyers",
+        content:
+          "The article discusses effective brief structure, techniques for maximizing persuasive impact, and methods for eliminating unnecessary clutter that can weaken even strong legal arguments.",
+      },
 
-    practiceAreas: {
-      heading: "Patent Law Teaching",
-      content:
-        "Srini Chakravarthi recently completed his third year teaching Patent Law at Texas A&M University School of Law, continuing his commitment to educating the next generation of legal professionals.",
-    },
-
-    professionalMemberships: {
-      heading: "Classroom Engagement",
-      content:
-        "Srini noted that working with students who are just beginning their legal careers keeps the material fresh and engaging each year, and he continues to value the weekly classroom discussions and thoughtful student participation.",
-    },
-
-    career: {
-      heading: "Successful Semester",
-      content:
-        "The firm congratulates Srini on another successful semester and thanks this year’s class for their engagement, insightful questions, and dedication throughout the course.",
-    },
-
-    personal: {
-      heading: "Academic Institution",
-      content:
-        "Texas A&M University School of Law | Patent Law Course | 2026 Academic Year",
+      personal: {
+        heading: "Publication Details",
+        content:
+          "Dallas Bar Association Headnotes | May 2026 Edition | Persuasive Legal Writing and Advocacy",
+      },
     },
   },
-},
+  {
+    slug: "srini-chakravarthi-american-inn-of-court-community-service",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "Honorable Barbara M.G. Lynn American Inn of Court",
+      guide:
+        "IP for Innovators and Entrepreneurs: Protecting Your Path to Independence",
+      yearsRanked: "2025 - 2026",
+      profileImage: srini,
+    },
+
+    contact: commonContact,
+
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Srini Chakravarthi",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Community Service Leadership",
+        content:
+          "Srini Chakravarthi recently led the 2025-2026 community service project for the Honorable Barbara M.G. Lynn American Inn of Court focused on helping innovators and entrepreneurs better understand intellectual property protection.",
+      },
+
+      professionalMemberships: {
+        heading: "Educational Events",
+        content:
+          'The initiative delivered two free educational programs across the DFW Metroplex, including "IP for App Developers" at the UTD Jindal School of Business in Richardson and "IP for Veteran Entrepreneurs" at the UTA Center for Entrepreneurship and Technology Development in Arlington in collaboration with the USPTO.',
+      },
+
+      career: {
+        heading: "Supporting Innovation",
+        content:
+          "Marking the 250th anniversary of the Declaration of Independence, the project emphasized empowering entrepreneurs through practical intellectual property guidance designed to support innovation and business independence.",
+      },
+
+      personal: {
+        heading: "Open Source Software Presentation",
+        content:
+          "Srini also co-presented at the Inn’s March dinner on the history of open source software, highlighting how legal frameworks supporting collaborative innovation represent a lasting form of community service.",
+      },
+    },
+  },
+  {
+    slug: "srini-chakravarthi-teaches-patent-law-texas-am",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "Texas A&M University School of Law",
+      guide: "Third Year Teaching Patent Law",
+      yearsRanked: "2026",
+      profileImage: srini,
+    },
+
+    contact: commonContact,
+
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Srini Chakravarthi",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Patent Law Teaching",
+        content:
+          "Srini Chakravarthi recently completed his third year teaching Patent Law at Texas A&M University School of Law, continuing his commitment to educating the next generation of legal professionals.",
+      },
+
+      professionalMemberships: {
+        heading: "Classroom Engagement",
+        content:
+          "Srini noted that working with students who are just beginning their legal careers keeps the material fresh and engaging each year, and he continues to value the weekly classroom discussions and thoughtful student participation.",
+      },
+
+      career: {
+        heading: "Successful Semester",
+        content:
+          "The firm congratulates Srini on another successful semester and thanks this year’s class for their engagement, insightful questions, and dedication throughout the course.",
+      },
+
+      personal: {
+        heading: "Academic Institution",
+        content:
+          "Texas A&M University School of Law | Patent Law Course | 2026 Academic Year",
+      },
+    },
+  },
   {
     slug: "slater-matsil-iam-patent-1000-2022",
     hero: {
@@ -462,127 +462,127 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
         content:
           "Our attorneys are committed to providing the highest level of service and strategic insight to help our clients manage and monetize their IP assets.",
       },
-    }
+    },
   },
   {
-  slug: "dba-cle-iglesias-nise-2022",
-  hero: {
-    name: "Elizabeth Iglesias & Ben Nise",
-    band: "CLE Presentation",
-    guide: "Dallas Bar Association – IP Section",
-    yearsRanked: "May 26, 2022",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Presented by",
-    aboutProvidedByName: "Elizabeth Iglesias & Ben Nise",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "CLE Session",
-      content:
-        "Elizabeth Iglesias and Ben Nise gave a presentation for the Dallas Bar Association IP Section CLE on “Patent Prosecution Practice Tips for Emerging Technologies” on Thursday, May 26, 2022.",
+    slug: "dba-cle-iglesias-nise-2022",
+    hero: {
+      name: "Elizabeth Iglesias & Ben Nise",
+      band: "CLE Presentation",
+      guide: "Dallas Bar Association – IP Section",
+      yearsRanked: "May 26, 2022",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Presented by",
+      aboutProvidedByName: "Elizabeth Iglesias & Ben Nise",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "Thought Leadership",
-      content:
-        "The session provided practical insights into patent prosecution strategies and considerations for emerging technologies, supporting practitioners navigating evolving innovation landscapes.",
-    },
+      practiceAreas: {
+        heading: "CLE Session",
+        content:
+          "Elizabeth Iglesias and Ben Nise gave a presentation for the Dallas Bar Association IP Section CLE on “Patent Prosecution Practice Tips for Emerging Technologies” on Thursday, May 26, 2022.",
+      },
 
-    career: {
-      heading: "Community Engagement",
-      content:
-        "Their participation highlights Slater Matsil’s ongoing involvement in professional education and contribution to the intellectual property community.",
-    },
+      professionalMemberships: {
+        heading: "Thought Leadership",
+        content:
+          "The session provided practical insights into patent prosecution strategies and considerations for emerging technologies, supporting practitioners navigating evolving innovation landscapes.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "dba-cle-srini-2022",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "CLE Presentation",
-    guide: "Dallas Bar Association – IP Section",
-    yearsRanked: "May 19, 2022",
-    profileImage: srini,
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Presented by",
-    aboutProvidedByName: "Srini Chakravarthi",
-    region: "USA",
+      career: {
+        heading: "Community Engagement",
+        content:
+          "Their participation highlights Slater Matsil’s ongoing involvement in professional education and contribution to the intellectual property community.",
+      },
 
-    practiceAreas: {
-      heading: "CLE Session",
-      content:
-        "Srini Chakravarthi conducted a moderated session on “Strategies in Developing a Global Patent Portfolio and Ethical Considerations in Patent Prosecution” for the North Dallas Bar Association IP Section CLE on Thursday, May 19, 2022.",
-    },
-
-    professionalMemberships: {
-      heading: "Thought Leadership",
-      content:
-        "The session addressed global patent strategy and ethical considerations, offering valuable insights for intellectual property practitioners.",
-    },
-
-    career: {
-      heading: "Professional Engagement",
-      content:
-        "Srini’s role reflects his continued leadership in the intellectual property community and commitment to advancing legal education.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "utd-colloquium-srini-2022",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "Academic Presentation",
-    guide: "UTD Colloquium Lecture Series",
-    yearsRanked: "December 9, 2022",
-    profileImage: srini,
+  {
+    slug: "dba-cle-srini-2022",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "CLE Presentation",
+      guide: "Dallas Bar Association – IP Section",
+      yearsRanked: "May 19, 2022",
+      profileImage: srini,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Presented by",
+      aboutProvidedByName: "Srini Chakravarthi",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "CLE Session",
+        content:
+          "Srini Chakravarthi conducted a moderated session on “Strategies in Developing a Global Patent Portfolio and Ethical Considerations in Patent Prosecution” for the North Dallas Bar Association IP Section CLE on Thursday, May 19, 2022.",
+      },
+
+      professionalMemberships: {
+        heading: "Thought Leadership",
+        content:
+          "The session addressed global patent strategy and ethical considerations, offering valuable insights for intellectual property practitioners.",
+      },
+
+      career: {
+        heading: "Professional Engagement",
+        content:
+          "Srini’s role reflects his continued leadership in the intellectual property community and commitment to advancing legal education.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Presented by",
-    aboutProvidedByName: "Srini Chakravarthi",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Presentation",
-      content:
-        "Srini Chakravarthi delivered a presentation on “Engineering a Patent Portfolio – Augmenting R&D Value with Patent Protection” on December 9, 2022 at the UTD Colloquium Lecture Series, Department of Materials Science & Engineering.",
+  {
+    slug: "utd-colloquium-srini-2022",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "Academic Presentation",
+      guide: "UTD Colloquium Lecture Series",
+      yearsRanked: "December 9, 2022",
+      profileImage: srini,
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Presented by",
+      aboutProvidedByName: "Srini Chakravarthi",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "Academic Contribution",
-      content:
-        "The presentation focused on aligning patent strategy with research and development efforts to maximize innovation value.",
-    },
+      practiceAreas: {
+        heading: "Presentation",
+        content:
+          "Srini Chakravarthi delivered a presentation on “Engineering a Patent Portfolio – Augmenting R&D Value with Patent Protection” on December 9, 2022 at the UTD Colloquium Lecture Series, Department of Materials Science & Engineering.",
+      },
 
-    career: {
-      heading: "Industry Expertise",
-      content:
-        "This engagement highlights Srini’s expertise in patent strategy and his contribution to bridging industry practice with academic research.",
-    },
+      professionalMemberships: {
+        heading: "Academic Contribution",
+        content:
+          "The presentation focused on aligning patent strategy with research and development efforts to maximize innovation value.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      career: {
+        heading: "Industry Expertise",
+        content:
+          "This engagement highlights Srini’s expertise in patent strategy and his contribution to bridging industry practice with academic research.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
   {
     slug: "ira-matsil-iam-global-leaders-2022",
     hero: {
@@ -595,7 +595,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     contact: commonContact,
     contentSections: baseSections("Ira Matsil"),
   },
-    {
+  {
     slug: "steven-slater-iam-global-leaders-2022",
     hero: {
       name: "Steven Slater",
@@ -628,20 +628,23 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       },
       professionalMemberships: {
         heading: "About the Honorable Barbara M.G. Lynn American Inn of Court",
-        content: "The American Inns of Court is a distinguished organization dedicated to promoting excellence in professionalism, ethics, civility, and legal skills within the legal community. Membership is selective and recognizes attorneys who demonstrate leadership and commitment to the profession.",
+        content:
+          "The American Inns of Court is a distinguished organization dedicated to promoting excellence in professionalism, ethics, civility, and legal skills within the legal community. Membership is selective and recognizes attorneys who demonstrate leadership and commitment to the profession.",
       },
       career: {
         heading: "Distinction Earned",
-        content: "Being selected to join an invitation-only organization of judges and attorneys spotlights John as being a top intellectual property attorney in the Dallas legal community. ",
+        content:
+          "Being selected to join an invitation-only organization of judges and attorneys spotlights John as being a top intellectual property attorney in the Dallas legal community. ",
       },
       personal: {
         heading: "Contact",
-        content: "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
       },
     },
   },
   {
-    slug: "srini-chakravarthi-chambers-usa-2025",
+    slug: "srini-chakravarthi-Chamberss-usa-2025",
     hero: {
       name: "Srini Chakravarthi",
       band: "Band 4 : Intellectual Property",
@@ -725,163 +728,163 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "steven-slater-best-lawyers-2020-2024",
-  hero: {
-    name: "Steven Slater",
-    band: "U.S. News – Best Lawyers in America®",
-    guide: "Litigation – Patent & Patent Law",
-    yearsRanked: "Recognized in 2020–2024",
-    profileImage: steven,
+    slug: "steven-slater-best-lawyers-2020-2024",
+    hero: {
+      name: "Steven Slater",
+      band: "U.S. News – Best Lawyers in America®",
+      guide: "Litigation – Patent & Patent Law",
+      yearsRanked: "Recognized in 2020–2024",
+      profileImage: steven,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Steven Slater",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Steven H. Slater was included in the 2020 through 2024 editions of U.S. News – Best Lawyers in America® for Litigation – Patent and Patent Law in Dallas, Texas.",
+      },
+
+      professionalMemberships: {
+        heading: "About Best Lawyers",
+        content:
+          "Best Lawyers is a leading peer-review publication in the legal profession, recognizing top attorneys based on feedback from fellow legal professionals.",
+      },
+
+      career: {
+        heading: "Consistent Excellence",
+        content:
+          "This multi-year recognition reflects Steven Slater’s sustained excellence and leadership in intellectual property law.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Steven Slater",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Steven H. Slater was included in the 2020 through 2024 editions of U.S. News – Best Lawyers in America® for Litigation – Patent and Patent Law in Dallas, Texas.",
-    },
-
-    professionalMemberships: {
-      heading: "About Best Lawyers",
-      content:
-        "Best Lawyers is a leading peer-review publication in the legal profession, recognizing top attorneys based on feedback from fellow legal professionals.",
-    },
-
-    career: {
-      heading: "Consistent Excellence",
-      content:
-        "This multi-year recognition reflects Steven Slater’s sustained excellence and leadership in intellectual property law.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
-  slug: "steven-slater-lawyer-of-the-year-2023",
-  hero: {
-    name: "Steven Slater",
-    band: "U.S. News – Best Lawyers®",
-    guide: "Litigation – Patent",
-    yearsRanked: "Lawyer of the Year – 2023 (Dallas/Fort Worth)",
-    profileImage: steven,
+    slug: "steven-slater-lawyer-of-the-year-2023",
+    hero: {
+      name: "Steven Slater",
+      band: "U.S. News – Best Lawyers®",
+      guide: "Litigation – Patent",
+      yearsRanked: "Lawyer of the Year – 2023 (Dallas/Fort Worth)",
+      profileImage: steven,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Steven Slater",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Steven H. Slater was named the U.S. News – Best Lawyers® 2023 “Lawyer of the Year” in Litigation – Patent in the Dallas/Fort Worth area, recognizing his outstanding professional excellence and leadership in intellectual property law.",
+      },
+
+      professionalMemberships: {
+        heading: "About Best Lawyers",
+        content:
+          "Best Lawyers is one of the most respected peer-review publications in the legal profession. The “Lawyer of the Year” distinction is awarded to a single lawyer in each practice area and geographic region, making it a highly prestigious honor.",
+      },
+
+      career: {
+        heading: "Professional Excellence",
+        content:
+          "This recognition highlights Steven Slater’s extensive experience in patent litigation and his continued success in delivering exceptional results for clients.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Steven Slater",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Steven H. Slater was named the U.S. News – Best Lawyers® 2023 “Lawyer of the Year” in Litigation – Patent in the Dallas/Fort Worth area, recognizing his outstanding professional excellence and leadership in intellectual property law.",
-    },
-
-    professionalMemberships: {
-      heading: "About Best Lawyers",
-      content:
-        "Best Lawyers is one of the most respected peer-review publications in the legal profession. The “Lawyer of the Year” distinction is awarded to a single lawyer in each practice area and geographic region, making it a highly prestigious honor.",
-    },
-
-    career: {
-      heading: "Professional Excellence",
-      content:
-        "This recognition highlights Steven Slater’s extensive experience in patent litigation and his continued success in delivering exceptional results for clients.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
-  slug: "best-lawyers-best-law-firm-2023-2025",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "U.S. News – Best Lawyers® Best Law Firms",
-    guide: "Intellectual Property – Dallas/Fort Worth",
-    yearsRanked: "Ranked in 2023, 2024, and 2025",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Slater Matsil, LLP has been recognized by U.S. News – Best Lawyers® “Best Law Firms” as a Tier 1 firm in Litigation – Patent and a Tier 2 firm in Patent Law in the Dallas/Fort Worth region for 2023, 2024, and 2025. These rankings reflect the firm’s consistent excellence in intellectual property law and its strong reputation among clients and peers.",
+    slug: "best-lawyers-best-law-firm-2023-2025",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "U.S. News – Best Lawyers® Best Law Firms",
+      guide: "Intellectual Property – Dallas/Fort Worth",
+      yearsRanked: "Ranked in 2023, 2024, and 2025",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Best Law Firms",
-      content:
-        "U.S. News – Best Lawyers® “Best Law Firms” rankings are based on a rigorous evaluation process that includes client feedback, peer reviews, and analysis of firm performance. Achieving a Tier 1 or Tier 2 ranking demonstrates a high level of respect within the legal community and a proven track record of success.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Slater Matsil, LLP has been recognized by U.S. News – Best Lawyers® “Best Law Firms” as a Tier 1 firm in Litigation – Patent and a Tier 2 firm in Patent Law in the Dallas/Fort Worth region for 2023, 2024, and 2025. These rankings reflect the firm’s consistent excellence in intellectual property law and its strong reputation among clients and peers.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "Slater Matsil’s rankings highlight its deep technical expertise, strategic approach to intellectual property matters, and commitment to delivering high-quality legal services. The firm continues to support clients across industries with patent prosecution, litigation, and portfolio management.",
-    },
+      professionalMemberships: {
+        heading: "About Best Law Firms",
+        content:
+          "U.S. News – Best Lawyers® “Best Law Firms” rankings are based on a rigorous evaluation process that includes client feedback, peer reviews, and analysis of firm performance. Achieving a Tier 1 or Tier 2 ranking demonstrates a high level of respect within the legal community and a proven track record of success.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "ie-100-awards-2023",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "IE 100 Awards",
-    guide: "Patent Prosecution Adviser of the Year",
-    yearsRanked: "2023 Winner",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "Slater Matsil’s rankings highlight its deep technical expertise, strategic approach to intellectual property matters, and commitment to delivering high-quality legal services. The firm continues to support clients across industries with patent prosecution, litigation, and portfolio management.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Slater Matsil was named by the IE 100 Awards as the 2023 winner of the U.S. Patent Prosecution Adviser of the Year for China – USA, recognizing the firm’s excellence in cross-border intellectual property services.",
-    },
-
-    professionalMemberships: {
-      heading: "About IE 100 Awards",
-      content:
-        "The IE 100 Awards recognize leading firms and professionals across the intellectual property industry, highlighting excellence, innovation, and impact in patent prosecution and global IP strategy.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This award underscores Slater Matsil’s strong international practice and its ability to support global clients with high-quality patent prosecution services across multiple jurisdictions.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
+  {
+    slug: "ie-100-awards-2023",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "IE 100 Awards",
+      guide: "Patent Prosecution Adviser of the Year",
+      yearsRanked: "2023 Winner",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Slater Matsil was named by the IE 100 Awards as the 2023 winner of the U.S. Patent Prosecution Adviser of the Year for China – USA, recognizing the firm’s excellence in cross-border intellectual property services.",
+      },
+
+      professionalMemberships: {
+        heading: "About IE 100 Awards",
+        content:
+          "The IE 100 Awards recognize leading firms and professionals across the intellectual property industry, highlighting excellence, innovation, and impact in patent prosecution and global IP strategy.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This award underscores Slater Matsil’s strong international practice and its ability to support global clients with high-quality patent prosecution services across multiple jurisdictions.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
   {
     slug: "ira-matsil-strategy-300-global-leader",
     hero: {
@@ -985,45 +988,45 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "srini-chakravarthi-inn-of-court-barrister",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "Honorable Barbara M.G. Lynn American Inn of Court",
-    guide: "Barrister Selection",
-    yearsRanked: "2024",
-    profileImage: srini,
+    slug: "srini-chakravarthi-inn-of-court-barrister",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "Honorable Barbara M.G. Lynn American Inn of Court",
+      guide: "Barrister Selection",
+      yearsRanked: "2024",
+      profileImage: srini,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Announced by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Srini Chakravarthi was selected to join The Honorable Barbara M.G. Lynn American Inn of Court as a Barrister, recognizing his professional excellence and contributions to the legal community.",
+      },
+
+      professionalMemberships: {
+        heading: "About the American Inn of Court",
+        content:
+          "The American Inns of Court is a distinguished organization dedicated to promoting excellence in professionalism, ethics, civility, and legal skills within the legal community. Membership is selective and recognizes attorneys who demonstrate leadership and commitment to the profession.",
+      },
+
+      career: {
+        heading: "Professional Achievement",
+        content:
+          "This selection highlights Srini Chakravarthi’s standing in the legal community and his ongoing commitment to professional development, mentorship, and excellence in intellectual property law.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Announced by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Srini Chakravarthi was selected to join The Honorable Barbara M.G. Lynn American Inn of Court as a Barrister, recognizing his professional excellence and contributions to the legal community.",
-    },
-
-    professionalMemberships: {
-      heading: "About the American Inn of Court",
-      content:
-        "The American Inns of Court is a distinguished organization dedicated to promoting excellence in professionalism, ethics, civility, and legal skills within the legal community. Membership is selective and recognizes attorneys who demonstrate leadership and commitment to the profession.",
-    },
-
-    career: {
-      heading: "Professional Achievement",
-      content:
-        "This selection highlights Srini Chakravarthi’s standing in the legal community and his ongoing commitment to professional development, mentorship, and excellence in intellectual property law.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
     slug: "srini-chakravarthi-community-project-outreach",
     hero: {
@@ -1061,11 +1064,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "ira-matsil-chambers-usa-2021-2023",
+    slug: "ira-matsil-Chamberss-usa-2021-2023",
     hero: {
       name: "Ira Matsil",
       band: "Slater Matsil Partner",
-      guide: "Chambers USA Guide",
+      guide: "Chamberss USA Guide",
       yearsRanked: "2021 - 2023 Ranked Attorney",
       profileImage: ira,
     },
@@ -1075,14 +1078,13 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       aboutProvidedByName: "Ira Matsil",
       region: "USA",
       practiceAreas: {
-        heading: "Chambers Recognition",
+        heading: "Chamberss Recognition",
         content:
-          "Ira Matsil was ranked as a top Intellectual Property attorney by Chambers USA for three consecutive years (2021 - 2023). Chambers ranks lawyers based on extensive third-party research, evaluating qualities like technical legal ability, professional conduct, and commercial astuteness.",
+          "Ira Matsil was ranked as a top Intellectual Property attorney by Chamberss USA for three consecutive years (2021 - 2023). Chamberss ranks lawyers based on extensive third-party research, evaluating qualities like technical legal ability, professional conduct, and commercial astuteness.",
       },
       professionalMemberships: {
         heading: "Client Service Excellence",
-        content:
-          `An industry leader highlighted Ira's exceptional performance, stating: "I would rate Ira’s client service, level of sophistication, and commercial awareness as all very strong. He has extensive experience in all aspects of patent work and is highly professional."`,
+        content: `An industry leader highlighted Ira's exceptional performance, stating: "I would rate Ira’s client service, level of sophistication, and commercial awareness as all very strong. He has extensive experience in all aspects of patent work and is highly professional."`,
       },
       career: {
         heading: "Strategic IP Counsel",
@@ -1097,11 +1099,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "srini-chakravarthi-chambers-usa-2023",
+    slug: "srini-chakravarthi-Chamberss-usa-2023",
     hero: {
       name: "Srini Chakravarthi",
       band: "Slater Matsil Partner",
-      guide: "Chambers USA Guide",
+      guide: "Chamberss USA Guide",
       yearsRanked: "2023 Ranked Attorney",
       profileImage: srini,
     },
@@ -1111,14 +1113,13 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       aboutProvidedByName: "Srini Chakravarthi",
       region: "USA",
       practiceAreas: {
-        heading: "Chambers Recognition",
+        heading: "Chamberss Recognition",
         content:
-          "Srini Chakravarthi was ranked in Intellectual Property by Chambers USA 2023. Chambers ranks lawyers based on extensive third-party research with clients, peers, and industry leaders, evaluating technical legal ability, professional conduct, client service, and commercial astuteness.",
+          "Srini Chakravarthi was ranked in Intellectual Property by Chamberss USA 2023. Chamberss ranks lawyers based on extensive third-party research with clients, peers, and industry leaders, evaluating technical legal ability, professional conduct, client service, and commercial astuteness.",
       },
       professionalMemberships: {
         heading: "Leadership & Client Service",
-        content:
-          `A recognized market leader noted: "Srini is the key point of contact for managing the work entrusted by our team. He excels with the extraordinary service his leadership provides to our team."`,
+        content: `A recognized market leader noted: "Srini is the key point of contact for managing the work entrusted by our team. He excels with the extraordinary service his leadership provides to our team."`,
       },
       career: {
         heading: "Technical Expertise",
@@ -1133,11 +1134,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "ira-matsil-chambers-usa-2022",
+    slug: "ira-matsil-Chamberss-usa-2022",
     hero: {
       name: "Ira Matsil",
       band: "Slater Matsil Partner",
-      guide: "Chambers USA Guide",
+      guide: "Chamberss USA Guide",
       yearsRanked: "2022 Ranked Attorney",
       profileImage: ira,
     },
@@ -1147,14 +1148,13 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       aboutProvidedByName: "Ira Matsil",
       region: "USA",
       practiceAreas: {
-        heading: "Chambers Recognition",
+        heading: "Chamberss Recognition",
         content:
-          "Ira Matsil was ranked as a top Intellectual Property attorney by Chambers USA 2022. This marks the second consecutive year Ira has been honored by Chambers for his excellence in patent law.",
+          "Ira Matsil was ranked as a top Intellectual Property attorney by Chamberss USA 2022. This marks the second consecutive year Ira has been honored by Chamberss for his excellence in patent law.",
       },
       professionalMemberships: {
         heading: "Client Engagement",
-        content:
-          `Chambers research highlighted Ira's attentiveness, with one client stating: "Ira is extremely attentive. He takes the time to explain all the details, discuss strategy and options."`,
+        content: `Chamberss research highlighted Ira's attentiveness, with one client stating: "Ira is extremely attentive. He takes the time to explain all the details, discuss strategy and options."`,
       },
       career: {
         heading: "Technical Focus",
@@ -1169,11 +1169,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "slater-matsil-chambers-usa-2022",
+    slug: "slater-matsil-Chamberss-usa-2022",
     hero: {
       name: "Slater Matsil, LLP",
       band: "Leading IP Law Firm",
-      guide: "Chambers USA Guide 2022",
+      guide: "Chamberss USA Guide 2022",
       yearsRanked: "Multiple Years Ranked",
     },
     contact: commonContact,
@@ -1184,22 +1184,21 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       practiceAreas: {
         heading: "Firm Recognition",
         content:
-          "Slater Matsil was once again ranked as one of the top intellectual property law firms by Chambers USA 2022. This ranking reflects the market opinion of the top law firms based on thousands of client and attorney interviews.",
+          "Slater Matsil was once again ranked as one of the top intellectual property law firms by Chamberss USA 2022. This ranking reflects the market opinion of the top law firms based on thousands of client and attorney interviews.",
       },
       professionalMemberships: {
         heading: "Market Presence",
-        content:
-          `Partner Srini Chakravarthi noted: "Being recognized for the third year in a row is an incredible honor. This ranking reflects the collaborative role of our team and the deep technical and legal knowledge we provide."`,
+        content: `Partner Srini Chakravarthi noted: "Being recognized for the third year in a row is an incredible honor. This ranking reflects the collaborative role of our team and the deep technical and legal knowledge we provide."`,
       },
       career: {
         heading: "Engineering Strength",
         content:
-          "Chambers highlighted the firm's unique ability to understand the engineering side of inventions and combine that with high-quality legal service, with clients praising the firm's diligent long-term protection strategies.",
+          "Chamberss highlighted the firm's unique ability to understand the engineering side of inventions and combine that with high-quality legal service, with clients praising the firm's diligent long-term protection strategies.",
       },
       personal: {
         heading: "Industry Standing",
         content:
-          "In addition to Chambers, Slater Matsil received top rankings in the Patexia 2022 report for Best Performing Patent Law Firms Overall and in High Tech.",
+          "In addition to Chamberss, Slater Matsil received top rankings in the Patexia 2022 report for Best Performing Patent Law Firms Overall and in High Tech.",
       },
     },
   },
@@ -1274,83 +1273,83 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "patexia-law-firm-rankings-2024",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Patexia Rankings",
-    guide: "Best Performing Law Firms",
-    yearsRanked: "2024 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Slater Matsil number 2 in Best Performing Law Firms Overall, number 8 in the Overall High-Tech Sector, and number 11 in Most Active Law Firms in High-Tech in 2024.",
+    slug: "patexia-law-firm-rankings-2024",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Patexia Rankings",
+      guide: "Best Performing Law Firms",
+      yearsRanked: "2024 Rankings",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on comprehensive data analysis of patent activity, performance, and success across thousands of law firms. These rankings evaluate firms on their effectiveness, efficiency, and impact within the intellectual property landscape.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Slater Matsil number 2 in Best Performing Law Firms Overall, number 8 in the Overall High-Tech Sector, and number 11 in Most Active Law Firms in High-Tech in 2024.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "Slater Matsil’s strong rankings highlight its leadership in high-tech patent work and its ability to consistently deliver successful outcomes for clients in complex intellectual property matters.",
-    },
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on comprehensive data analysis of patent activity, performance, and success across thousands of law firms. These rankings evaluate firms on their effectiveness, efficiency, and impact within the intellectual property landscape.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "patexia-firm-rankings-2023",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Patexia Rankings",
-    guide: "Best Performing Law Firms",
-    yearsRanked: "2019–2023 Period",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "Slater Matsil’s strong rankings highlight its leadership in high-tech patent work and its ability to consistently deliver successful outcomes for clients in complex intellectual property matters.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Slater Matsil number 2 in Best Performing Law Firms Overall, number 8 in the Overall High-Tech Sector, and number 11 in Most Active Law Firms in High-Tech for the period from January 1, 2019 to December 31, 2023.",
-    },
-
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on comprehensive data analysis of patent activity, performance, and success across thousands of law firms. These rankings evaluate firms on their effectiveness, efficiency, and impact within the intellectual property landscape over a defined multi-year period.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These rankings highlight Slater Matsil’s sustained performance and leadership in high-tech patent work, demonstrating consistent excellence across multiple years.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
+  {
+    slug: "patexia-firm-rankings-2023",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Patexia Rankings",
+      guide: "Best Performing Law Firms",
+      yearsRanked: "2019–2023 Period",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Slater Matsil number 2 in Best Performing Law Firms Overall, number 8 in the Overall High-Tech Sector, and number 11 in Most Active Law Firms in High-Tech for the period from January 1, 2019 to December 31, 2023.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on comprehensive data analysis of patent activity, performance, and success across thousands of law firms. These rankings evaluate firms on their effectiveness, efficiency, and impact within the intellectual property landscape over a defined multi-year period.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These rankings highlight Slater Matsil’s sustained performance and leadership in high-tech patent work, demonstrating consistent excellence across multiple years.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
   {
     slug: "slater-matsil-patexia-rankings-2021",
     hero: {
@@ -1387,11 +1386,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "ira-matsil-chambers-usa-2021",
+    slug: "ira-matsil-Chamberss-usa-2021",
     hero: {
       name: "Ira Matsil",
       band: "Slater Matsil Partner",
-      guide: "Chambers USA Guide 2021",
+      guide: "Chamberss USA Guide 2021",
       yearsRanked: "Ranked Attorney",
       profileImage: ira,
     },
@@ -1403,12 +1402,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       practiceAreas: {
         heading: "Professional Recognition",
         content:
-          "Slater Matsil is pleased to announce that Ira Matsil was ranked in Intellectual Property by Chambers USA 2021. This prestigious ranking reflects his exceptional legal knowledge and experience.",
+          "Slater Matsil is pleased to announce that Ira Matsil was ranked in Intellectual Property by Chamberss USA 2021. This prestigious ranking reflects his exceptional legal knowledge and experience.",
       },
       professionalMemberships: {
         heading: "Market Reputation",
-        content:
-          `Industry leaders have described Ira as "very, very talented," while clients praise him as a "very creative thinker and very responsive."`,
+        content: `Industry leaders have described Ira as "very, very talented," while clients praise him as a "very creative thinker and very responsive."`,
       },
       career: {
         heading: "Strategic IP Advice",
@@ -1418,7 +1416,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       personal: {
         heading: "Ranking Value",
         content:
-          "Chambers ranks lawyers based on effectiveness, commercial astuteness, and client service—qualities Ira consistently demonstrates.",
+          "Chamberss ranks lawyers based on effectiveness, commercial astuteness, and client service—qualities Ira consistently demonstrates.",
       },
     },
   },
@@ -1508,13 +1506,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       region: "USA",
       practiceAreas: {
         heading: "Presentation Highlights",
-        content:
-          `Srini Chakravarthi delivered a presentation on Building and Monetizing the "Perfect" Patent Portfolio at the 2020 ACP MetroCon, an annual conference held by the Association of Chinese Professionals Foundation.`,
+        content: `Srini Chakravarthi delivered a presentation on Building and Monetizing the "Perfect" Patent Portfolio at the 2020 ACP MetroCon, an annual conference held by the Association of Chinese Professionals Foundation.`,
       },
       professionalMemberships: {
         heading: "Perfect Portfolio Strategy",
-        content:
-          `In determining what makes a "perfect" patent portfolio, Srini reviewed different business scenarios that most inventors and companies face, exploring how these scenarios impact strategic development and monetization.`,
+        content: `In determining what makes a "perfect" patent portfolio, Srini reviewed different business scenarios that most inventors and companies face, exploring how these scenarios impact strategic development and monetization.`,
       },
       career: {
         heading: "Investment Outlook",
@@ -2525,10 +2521,10 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "ira-matsil-chambers-usa-2021-2023",
+    slug: "ira-matsil-Chamberss-usa-2021-2023",
     hero: {
       name: "Ira Matsil",
-      band: "Chambers USA Ranked Attorney",
+      band: "Chamberss USA Ranked Attorney",
       guide: "Intellectual Property – Texas",
       yearsRanked: "2021 – 2023",
       profileImage: ira,
@@ -2541,12 +2537,11 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       practiceAreas: {
         heading: "Recognition",
         content:
-          "Ira Matsil was ranked in Intellectual Property by Chambers USA from 2021 to 2023. Chambers ranks lawyers based on extensive third-party research with clients, peers, and industry leaders.",
+          "Ira Matsil was ranked in Intellectual Property by Chamberss USA from 2021 to 2023. Chamberss ranks lawyers based on extensive third-party research with clients, peers, and industry leaders.",
       },
       professionalMemberships: {
         heading: "Consistent Excellence",
-        content:
-          `This is the third year in a row Ira has been ranked. An industry leader was quoted as saying, "I would rate Ira’s client service and general level of service, level of sophistication and commercial awareness and vision as all very strong."`,
+        content: `This is the third year in a row Ira has been ranked. An industry leader was quoted as saying, "I would rate Ira’s client service and general level of service, level of sophistication and commercial awareness and vision as all very strong."`,
       },
       career: {
         heading: "Strategic Advocacy",
@@ -2561,10 +2556,10 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-    slug: "srini-chakravarthi-chambers-usa-2023",
+    slug: "srini-chakravarthi-Chamberss-usa-2023",
     hero: {
       name: "Srini Chakravarthi",
-      band: "Chambers USA Ranked Attorney",
+      band: "Chamberss USA Ranked Attorney",
       guide: "Intellectual Property – Texas",
       yearsRanked: "2023 Edition",
       profileImage: srini,
@@ -2577,7 +2572,7 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
       practiceAreas: {
         heading: "Ranking",
         content:
-          "Srini Chakravarthi was ranked in Intellectual Property by Chambers USA 2023, reflecting his reputation among clients and peers alike.",
+          "Srini Chakravarthi was ranked in Intellectual Property by Chamberss USA 2023, reflecting his reputation among clients and peers alike.",
       },
       professionalMemberships: {
         heading: "Market Leadership",
@@ -2665,45 +2660,45 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "srini-chakravarthi-dba-cle-2023",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "CLE Presentation",
-    guide: "Dallas Bar Association – IP Section",
-    yearsRanked: "April 12, 2023",
-    profileImage: srini,
+    slug: "srini-chakravarthi-dba-cle-2023",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "CLE Presentation",
+      guide: "Dallas Bar Association – IP Section",
+      yearsRanked: "April 12, 2023",
+      profileImage: srini,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Presented by",
+      aboutProvidedByName: "Srini Chakravarthi",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "CLE Session",
+        content:
+          "Srini Chakravarthi served as Organizer and Master of Ceremonies for a moderated session on “Strategies for Drafting Claims and Ethics in Patent Prosecution,” presented at the North Dallas Bar Association IP Section CLE on Wednesday, April 12, 2023.",
+      },
+
+      professionalMemberships: {
+        heading: "Thought Leadership",
+        content:
+          "The session focused on best practices in patent claim drafting and ethical considerations in prosecution, providing valuable insights for intellectual property practitioners navigating complex legal and strategic challenges.",
+      },
+
+      career: {
+        heading: "Community Engagement",
+        content:
+          "Srini’s role as organizer and moderator reflects his active involvement in the intellectual property community and his commitment to advancing professional education within the legal field.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Presented by",
-    aboutProvidedByName: "Srini Chakravarthi",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "CLE Session",
-      content:
-        "Srini Chakravarthi served as Organizer and Master of Ceremonies for a moderated session on “Strategies for Drafting Claims and Ethics in Patent Prosecution,” presented at the North Dallas Bar Association IP Section CLE on Wednesday, April 12, 2023.",
-    },
-
-    professionalMemberships: {
-      heading: "Thought Leadership",
-      content:
-        "The session focused on best practices in patent claim drafting and ethical considerations in prosecution, providing valuable insights for intellectual property practitioners navigating complex legal and strategic challenges.",
-    },
-
-    career: {
-      heading: "Community Engagement",
-      content:
-        "Srini’s role as organizer and moderator reflects his active involvement in the intellectual property community and his commitment to advancing professional education within the legal field.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
     slug: "srini-chakravarthi-organizes-cle-session",
     hero: {
@@ -2739,558 +2734,557 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "srini-chakravarthi-adjunct-professor-tamu",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "Academic Appointment",
-    guide: "Texas A&M University School of Law",
-    yearsRanked: "Spring 2024",
-    profileImage: srini,
+    slug: "srini-chakravarthi-adjunct-professor-tamu",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "Academic Appointment",
+      guide: "Texas A&M University School of Law",
+      yearsRanked: "Spring 2024",
+      profileImage: srini,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Announced by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Appointment",
+        content:
+          "Srini Chakravarthi has been appointed as an Adjunct Professor of Law at Texas A&M University School of Law, where he taught a course on Patent Law during the Spring 2024 semester.",
+      },
+
+      professionalMemberships: {
+        heading: "Academic Contribution",
+        content:
+          "Through his role as an adjunct professor, Srini Chakravarthi contributes to legal education by sharing practical insights and real-world experience in intellectual property law with future legal professionals.",
+      },
+
+      career: {
+        heading: "Industry Expertise",
+        content:
+          "Srini’s teaching reflects his deep expertise in patent law and his commitment to advancing knowledge in the intellectual property field through both practice and education.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Announced by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Appointment",
-      content:
-        "Srini Chakravarthi has been appointed as an Adjunct Professor of Law at Texas A&M University School of Law, where he taught a course on Patent Law during the Spring 2024 semester.",
-    },
-
-    professionalMemberships: {
-      heading: "Academic Contribution",
-      content:
-        "Through his role as an adjunct professor, Srini Chakravarthi contributes to legal education by sharing practical insights and real-world experience in intellectual property law with future legal professionals.",
-    },
-
-    career: {
-      heading: "Industry Expertise",
-      content:
-        "Srini’s teaching reflects his deep expertise in patent law and his commitment to advancing knowledge in the intellectual property field through both practice and education.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
-  slug: "srini-chakravarthi-dba-ip-council-2024",
-  hero: {
-    name: "Srini Chakravarthi",
-    band: "Leadership Appointment",
-    guide: "Dallas Bar Association – IP Section",
-    yearsRanked: "2024",
-    profileImage: srini,
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Announced by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Appointment",
-      content:
-        "Srini Chakravarthi was appointed to the Council of the Dallas Bar Association, Intellectual Property Section. In addition, he will serve as Co-Chair of the CLE Committee for the IP Section.",
+    slug: "srini-chakravarthi-dba-ip-council-2024",
+    hero: {
+      name: "Srini Chakravarthi",
+      band: "Leadership Appointment",
+      guide: "Dallas Bar Association – IP Section",
+      yearsRanked: "2024",
+      profileImage: srini,
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Announced by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "Professional Leadership",
-      content:
-        "This appointment reflects Srini Chakravarthi’s leadership within the intellectual property community and his continued commitment to advancing legal education and professional development in the field.",
-    },
+      practiceAreas: {
+        heading: "Appointment",
+        content:
+          "Srini Chakravarthi was appointed to the Council of the Dallas Bar Association, Intellectual Property Section. In addition, he will serve as Co-Chair of the CLE Committee for the IP Section.",
+      },
 
-    career: {
-      heading: "Community Involvement",
-      content:
-        "Through his involvement with the Dallas Bar Association, Srini contributes to shaping discussions on intellectual property law while supporting initiatives that benefit both practitioners and the broader legal community.",
-    },
+      professionalMemberships: {
+        heading: "Professional Leadership",
+        content:
+          "This appointment reflects Srini Chakravarthi’s leadership within the intellectual property community and his continued commitment to advancing legal education and professional development in the field.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "patentbuddy-top-prosecutors-2011",
-  hero: {
-    name: "Slater Matsil Attorneys",
-    band: "PatentBuddy Rankings",
-    guide: "Top Patent Prosecutors",
-    yearsRanked: "",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "PatentBuddy",
-    region: "USA",
+      career: {
+        heading: "Community Involvement",
+        content:
+          "Through his involvement with the Dallas Bar Association, Srini contributes to shaping discussions on intellectual property law while supporting initiatives that benefit both practitioners and the broader legal community.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "PatentBuddy recognized Slater Matsil attorneys among the Top Patent Prosecutors, highlighting their strong performance in patent application filings and prosecution.",
-    },
-
-    professionalMemberships: {
-      heading: "About PatentBuddy",
-      content:
-        "PatentBuddy rankings are based on patent filing activity and provide insights into the most active and productive patent practitioners.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition reflects the strength of Slater Matsil’s attorneys and their ability to deliver high-quality patent prosecution services.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "patentbuddy-top-100-ip-firm",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "PatentBuddy",
-    guide: "Top 100 IP Firms",
-    yearsRanked: "",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "PatentBuddy",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "PatentBuddy named Slater Matsil as a Top 100 IP Firm, recognizing its strong performance and consistency in patent prosecution.",
+  {
+    slug: "patentbuddy-top-prosecutors-2011",
+    hero: {
+      name: "Slater Matsil Attorneys",
+      band: "PatentBuddy Rankings",
+      guide: "Top Patent Prosecutors",
+      yearsRanked: "",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "PatentBuddy",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About PatentBuddy",
-      content:
-        "PatentBuddy provides data-driven rankings of intellectual property law firms based on patent activity, filings, and overall performance.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "PatentBuddy recognized Slater Matsil attorneys among the Top Patent Prosecutors, highlighting their strong performance in patent application filings and prosecution.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition reflects Slater Matsil’s continued leadership in intellectual property services and its ability to deliver strong results for clients.",
-    },
+      professionalMemberships: {
+        heading: "About PatentBuddy",
+        content:
+          "PatentBuddy rankings are based on patent filing activity and provide insights into the most active and productive patent practitioners.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "ip-today-top-100-firms",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "IP Today",
-    guide: "Top 100 Patent Law Firms",
-    yearsRanked: "2009–2014",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "IP Today",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition reflects the strength of Slater Matsil’s attorneys and their ability to deliver high-quality patent prosecution services.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Slater Matsil was ranked among the Top 100 Patent Law Firms by IP Today from 2009 through 2014, recognizing its consistent performance in patent prosecution.",
-    },
-
-    professionalMemberships: {
-      heading: "About IP Today",
-      content:
-        "IP Today publishes annual rankings of leading patent law firms based on the number of U.S. patents issued, providing insight into firm productivity and performance.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This multi-year recognition highlights Slater Matsil’s sustained excellence and strong track record in securing patents for clients.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "juristat-fewest-claims-lost-2015",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Juristat Rankings",
-    guide: "Top 10 Patent Law Firms",
-    yearsRanked: "2015",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Juristat",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Juristat recognized Slater Matsil as one of the Top 10 Patent Law Firms in 2015 that lost the fewest independent claims, highlighting the firm’s effectiveness in securing strong patent protection.",
+  {
+    slug: "patentbuddy-top-100-ip-firm",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "PatentBuddy",
+      guide: "Top 100 IP Firms",
+      yearsRanked: "",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "PatentBuddy",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Juristat",
-      content:
-        "Juristat is a data-driven platform that analyzes patent prosecution performance, providing insights into law firm efficiency, allowance rates, and claim outcomes.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "PatentBuddy named Slater Matsil as a Top 100 IP Firm, recognizing its strong performance and consistency in patent prosecution.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition reflects Slater Matsil’s precision in patent prosecution and its ability to achieve favorable outcomes for clients.",
-    },
+      professionalMemberships: {
+        heading: "About PatentBuddy",
+        content:
+          "PatentBuddy provides data-driven rankings of intellectual property law firms based on patent activity, filings, and overall performance.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "corporate-vision-tech-focused-firm-2016",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Corporate Vision Awards",
-    guide: "Tech-Focused IP Law Firm",
-    yearsRanked: "2016",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Corporate Vision",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition reflects Slater Matsil’s continued leadership in intellectual property services and its ability to deliver strong results for clients.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Corporate Vision named Slater Matsil, LLP as the Best Tech-Focused IP Law Firm – Southern USA and Best in Patent Procurement – Southern USA in 2016.",
-    },
-
-    professionalMemberships: {
-      heading: "About Corporate Vision Awards",
-      content:
-        "Corporate Vision Awards recognize outstanding organizations that demonstrate excellence, innovation, and leadership across industries.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These awards highlight Slater Matsil’s leadership in technology-focused intellectual property services and its strong capabilities in patent procurement.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "ipwatchdog-top-patent-firm-2016",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "IPWatchdog",
-    guide: "Top Patent Firms",
-    yearsRanked: "2016",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "IPWatchdog",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "IPWatchdog named Slater Matsil as a Top Patent Firm for 2016 based on the total number of U.S. utility patents issued during the year.",
+  {
+    slug: "ip-today-top-100-firms",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "IP Today",
+      guide: "Top 100 Patent Law Firms",
+      yearsRanked: "2009–2014",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "IP Today",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About IPWatchdog",
-      content:
-        "IPWatchdog is a leading intellectual property publication that provides insights, rankings, and analysis on patent law and innovation trends.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Slater Matsil was ranked among the Top 100 Patent Law Firms by IP Today from 2009 through 2014, recognizing its consistent performance in patent prosecution.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition reflects Slater Matsil’s continued excellence in patent prosecution and its ability to deliver strong results for clients.",
-    },
+      professionalMemberships: {
+        heading: "About IP Today",
+        content:
+          "IP Today publishes annual rankings of leading patent law firms based on the number of U.S. patents issued, providing insight into firm productivity and performance.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "ipwatchdog-top-patent-firm-2017",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "IPWatchdog",
-    guide: "Top Patent Firms",
-    yearsRanked: "2017",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "IPWatchdog",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This multi-year recognition highlights Slater Matsil’s sustained excellence and strong track record in securing patents for clients.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "IPWatchdog named Slater Matsil as a Top Patent Firm for 2017 based on the total number of U.S. utility patents issued during the year.",
-    },
-
-    professionalMemberships: {
-      heading: "About IPWatchdog",
-      content:
-        "IPWatchdog is a leading intellectual property publication that provides insights, rankings, and analysis on patent law and innovation trends.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition highlights Slater Matsil’s strong patent prosecution capabilities and its ability to consistently secure patents for innovative clients.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "koetter-slater-dba-presentation-2018",
-  hero: {
-    name: "John Koetter & Steven H. Slater",
-    band: "CLE Presentation",
-    guide: "Dallas Bar Association – IP Section",
-    yearsRanked: "May 25, 2018",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Presented by",
-    aboutProvidedByName: "John Koetter & Steven H. Slater",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "CLE Session",
-      content:
-        "John Koetter and Steven H. Slater presented “Practice Tips for Raising or Surviving Section 102 and 103 Challenges” to the Intellectual Property Section of the Dallas Bar Association on May 25, 2018.",
+  {
+    slug: "juristat-fewest-claims-lost-2015",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Juristat Rankings",
+      guide: "Top 10 Patent Law Firms",
+      yearsRanked: "2015",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Juristat",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "Key Insights",
-      content:
-        "The session focused on strategies for addressing novelty and obviousness challenges under Sections 102 and 103, providing practical guidance for patent practitioners.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Juristat recognized Slater Matsil as one of the Top 10 Patent Law Firms in 2015 that lost the fewest independent claims, highlighting the firm’s effectiveness in securing strong patent protection.",
+      },
 
-    career: {
-      heading: "Professional Engagement",
-      content:
-        "This presentation highlights Slater Matsil’s active involvement in legal education and contribution to the intellectual property community.",
-    },
+      professionalMemberships: {
+        heading: "About Juristat",
+        content:
+          "Juristat is a data-driven platform that analyzes patent prosecution performance, providing insights into law firm efficiency, allowance rates, and claim outcomes.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "iam-patent-1000-rankings-2018",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Individual and Firm Recognition",
-    guide: "IAM Patent 1000 Rankings",
-    yearsRanked: "2018 Edition (7th Annual)",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition reflects Slater Matsil’s precision in patent prosecution and its ability to achieve favorable outcomes for clients.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Slater Matsil was recognized in the IAM Patent 1000 Rankings 2018 (7th annual edition) for its excellence in intellectual property law and consistent performance in patent-related services.",
-    },
-
-    professionalMemberships: {
-      heading: "Individual Recognition",
-      content:
-        "In addition to the firmwide honor, Steven Slater was individually ranked for his outstanding expertise and high-level client service.",
-    },
-
-    career: {
-      heading: "Excellence Recognized",
-      content:
-        "Being ranked as a firm demonstrates Slater Matsil’s strong reputation and depth of expertise.  Steven Slater’s individual ranking further underscores the exceptional talent of its practitioners.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "ira-matsil-smu-ip-symposium",
-  hero: {
-    name: "Ira S. Matsil",
-    band: "SMU IP Symposium",
-    guide:
-      "Patent Law Politics and Computer-Related Inventions Panel",
-    yearsRanked: "2026",
-    profileImage: ira,
-  },
-
-  contact: commonContact,
-
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Ira S. Matsil",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Symposium Participation",
-      content:
-        "Ira Matsil participated in a panel discussion on the politics of patent law and computer-related inventions at the 22nd Annual Symposium on Emerging Issues in Intellectual Property hosted by Southern Methodist University’s Dedman School of Law.",
+  {
+    slug: "corporate-vision-tech-focused-firm-2016",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Corporate Vision Awards",
+      guide: "Tech-Focused IP Law Firm",
+      yearsRanked: "2016",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Corporate Vision",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "Discussion Topics",
-      content:
-        "During the panel, Ira traced the evolution of computer-related invention jurisprudence at the Federal Circuit and the U.S. Supreme Court, discussing how decades of conflicting decisions have left subject matter eligibility law unsettled and difficult for practitioners and innovators to navigate.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Corporate Vision named Slater Matsil, LLP as the Best Tech-Focused IP Law Firm – Southern USA and Best in Patent Procurement – Southern USA in 2016.",
+      },
 
-    career: {
-      heading: "Legislative Developments",
-      content:
-        "He also addressed pending legislative efforts aimed at bringing greater clarity and predictability to patent eligibility standards for computer-related inventions.",
-    },
+      professionalMemberships: {
+        heading: "About Corporate Vision Awards",
+        content:
+          "Corporate Vision Awards recognize outstanding organizations that demonstrate excellence, innovation, and leadership across industries.",
+      },
 
-    personal: {
-      heading: "Event Information",
-      content:
-        "22nd Annual Symposium on Emerging Issues in Intellectual Property | Southern Methodist University Dedman School of Law ",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These awards highlight Slater Matsil’s leadership in technology-focused intellectual property services and its strong capabilities in patent procurement.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "ira-matsil-d-magazine-best-lawyers",
-  hero: {
-    name: "Ira S. Matsil",
-    band: "D Magazine",
-    guide: "Best Lawyers in Dallas – Intellectual Property",
-    yearsRanked: "2015, 2017 - 2019, 2024, 2026",
-    profileImage: ira,
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Ira S. Matsil",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "D Magazine named Ira S. Matsil among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2026, 2024, 2019, 2018, 2017 and 2015.",
+  {
+    slug: "ipwatchdog-top-patent-firm-2016",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "IPWatchdog",
+      guide: "Top Patent Firms",
+      yearsRanked: "2016",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "IPWatchdog",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About D Magazine",
-      content:
-        "D Magazine’s Best Lawyers in Dallas list recognizes top attorneys based on peer nominations and evaluation within the Dallas legal community.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "IPWatchdog named Slater Matsil as a Top Patent Firm for 2016 based on the total number of U.S. utility patents issued during the year.",
+      },
 
-    career: {
-      heading: "Consistent Excellence",
-      content:
-        "This recognition highlights Ira Matsil’s continued excellence and strong reputation in intellectual property law.",
-    },
+      professionalMemberships: {
+        heading: "About IPWatchdog",
+        content:
+          "IPWatchdog is a leading intellectual property publication that provides insights, rankings, and analysis on patent law and innovation trends.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "dallas-business-journal-top-firm-2019",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Firm Recognition",
-    guide: "Top Patent Law Firm",
-    yearsRanked: "",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition reflects Slater Matsil’s continued excellence in patent prosecution and its ability to deliver strong results for clients.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Slater Matsil has been recognized as a top patent law firm, reflecting its strong expertise and consistent performance in intellectual property law.",
-    },
-
-    professionalMemberships: {
-      heading: "Industry Recognition",
-      content:
-        "This recognition highlights the firm’s reputation for delivering high-quality patent services and supporting innovation across industries.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "Slater Matsil continues to demonstrate leadership in patent law through its technical expertise, strategic approach, and commitment to client success.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
+  {
+    slug: "ipwatchdog-top-patent-firm-2017",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "IPWatchdog",
+      guide: "Top Patent Firms",
+      yearsRanked: "2017",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "IPWatchdog",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "IPWatchdog named Slater Matsil as a Top Patent Firm for 2017 based on the total number of U.S. utility patents issued during the year.",
+      },
+
+      professionalMemberships: {
+        heading: "About IPWatchdog",
+        content:
+          "IPWatchdog is a leading intellectual property publication that provides insights, rankings, and analysis on patent law and innovation trends.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition highlights Slater Matsil’s strong patent prosecution capabilities and its ability to consistently secure patents for innovative clients.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "koetter-slater-dba-presentation-2018",
+    hero: {
+      name: "John Koetter & Steven H. Slater",
+      band: "CLE Presentation",
+      guide: "Dallas Bar Association – IP Section",
+      yearsRanked: "May 25, 2018",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Presented by",
+      aboutProvidedByName: "John Koetter & Steven H. Slater",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "CLE Session",
+        content:
+          "John Koetter and Steven H. Slater presented “Practice Tips for Raising or Surviving Section 102 and 103 Challenges” to the Intellectual Property Section of the Dallas Bar Association on May 25, 2018.",
+      },
+
+      professionalMemberships: {
+        heading: "Key Insights",
+        content:
+          "The session focused on strategies for addressing novelty and obviousness challenges under Sections 102 and 103, providing practical guidance for patent practitioners.",
+      },
+
+      career: {
+        heading: "Professional Engagement",
+        content:
+          "This presentation highlights Slater Matsil’s active involvement in legal education and contribution to the intellectual property community.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "iam-patent-1000-rankings-2018",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Individual and Firm Recognition",
+      guide: "IAM Patent 1000 Rankings",
+      yearsRanked: "2018 Edition (7th Annual)",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Slater Matsil was recognized in the IAM Patent 1000 Rankings 2018 (7th annual edition) for its excellence in intellectual property law and consistent performance in patent-related services.",
+      },
+
+      professionalMemberships: {
+        heading: "Individual Recognition",
+        content:
+          "In addition to the firmwide honor, Steven Slater was individually ranked for his outstanding expertise and high-level client service.",
+      },
+
+      career: {
+        heading: "Excellence Recognized",
+        content:
+          "Being ranked as a firm demonstrates Slater Matsil’s strong reputation and depth of expertise.  Steven Slater’s individual ranking further underscores the exceptional talent of its practitioners.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "ira-matsil-smu-ip-symposium",
+    hero: {
+      name: "Ira S. Matsil",
+      band: "SMU IP Symposium",
+      guide: "Patent Law Politics and Computer-Related Inventions Panel",
+      yearsRanked: "2026",
+      profileImage: ira,
+    },
+
+    contact: commonContact,
+
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Ira S. Matsil",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Symposium Participation",
+        content:
+          "Ira Matsil participated in a panel discussion on the politics of patent law and computer-related inventions at the 22nd Annual Symposium on Emerging Issues in Intellectual Property hosted by Southern Methodist University’s Dedman School of Law.",
+      },
+
+      professionalMemberships: {
+        heading: "Discussion Topics",
+        content:
+          "During the panel, Ira traced the evolution of computer-related invention jurisprudence at the Federal Circuit and the U.S. Supreme Court, discussing how decades of conflicting decisions have left subject matter eligibility law unsettled and difficult for practitioners and innovators to navigate.",
+      },
+
+      career: {
+        heading: "Legislative Developments",
+        content:
+          "He also addressed pending legislative efforts aimed at bringing greater clarity and predictability to patent eligibility standards for computer-related inventions.",
+      },
+
+      personal: {
+        heading: "Event Information",
+        content:
+          "22nd Annual Symposium on Emerging Issues in Intellectual Property | Southern Methodist University Dedman School of Law ",
+      },
+    },
+  },
+  {
+    slug: "ira-matsil-d-magazine-best-lawyers",
+    hero: {
+      name: "Ira S. Matsil",
+      band: "D Magazine",
+      guide: "Best Lawyers in Dallas – Intellectual Property",
+      yearsRanked: "2015, 2017 - 2019, 2024, 2026",
+      profileImage: ira,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Ira S. Matsil",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "D Magazine named Ira S. Matsil among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2026, 2024, 2019, 2018, 2017 and 2015.",
+      },
+
+      professionalMemberships: {
+        heading: "About D Magazine",
+        content:
+          "D Magazine’s Best Lawyers in Dallas list recognizes top attorneys based on peer nominations and evaluation within the Dallas legal community.",
+      },
+
+      career: {
+        heading: "Consistent Excellence",
+        content:
+          "This recognition highlights Ira Matsil’s continued excellence and strong reputation in intellectual property law.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "dallas-business-journal-top-firm-2019",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Firm Recognition",
+      guide: "Top Patent Law Firm",
+      yearsRanked: "",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Slater Matsil has been recognized as a top patent law firm, reflecting its strong expertise and consistent performance in intellectual property law.",
+      },
+
+      professionalMemberships: {
+        heading: "Industry Recognition",
+        content:
+          "This recognition highlights the firm’s reputation for delivering high-quality patent services and supporting innovation across industries.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "Slater Matsil continues to demonstrate leadership in patent law through its technical expertise, strategic approach, and commitment to client success.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
   {
     slug: "slater-matsil-ranked-15th-for-most-us-utility-patents-issues-in-2025",
     hero: {
@@ -3325,83 +3319,83 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "harrity-analytics-ranking-2023",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Harrity Analytics Rankings",
-    guide: "U.S. Utility Patents",
-    yearsRanked: "2023",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "The Harrity Analytics Team ranked Slater Matsil, LLP 17th for the most U.S. utility patents issued in 2023, reflecting the firm’s strong performance in patent prosecution.",
+    slug: "harrity-analytics-ranking-2023",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Harrity Analytics Rankings",
+      guide: "U.S. Utility Patents",
+      yearsRanked: "2023",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Harrity Analytics",
-      content:
-        "Harrity Analytics publishes annual rankings of top patent law firms based on the number of U.S. utility patents issued. These rankings provide a data-driven perspective on firm productivity and performance in patent prosecution.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "The Harrity Analytics Team ranked Slater Matsil, LLP 17th for the most U.S. utility patents issued in 2023, reflecting the firm’s strong performance in patent prosecution.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition highlights Slater Matsil’s consistent ability to deliver high-quality patent services and its efficiency in securing patents for leading technology clients.",
-    },
+      professionalMemberships: {
+        heading: "About Harrity Analytics",
+        content:
+          "Harrity Analytics publishes annual rankings of top patent law firms based on the number of U.S. utility patents issued. These rankings provide a data-driven perspective on firm productivity and performance in patent prosecution.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "harrity-analytics-ranking-2022",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Harrity Analytics Rankings",
-    guide: "U.S. Utility Patents",
-    yearsRanked: "2022",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition highlights Slater Matsil’s consistent ability to deliver high-quality patent services and its efficiency in securing patents for leading technology clients.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "The Harrity Analytics Team ranked Slater Matsil, LLP 18th for the most U.S. utility patents issued in 2022, reflecting the firm’s strong performance in patent prosecution.",
-    },
-
-    professionalMemberships: {
-      heading: "About Harrity Analytics",
-      content:
-        "Harrity Analytics publishes annual rankings of top patent law firms based on the number of U.S. utility patents issued. These rankings provide a data-driven perspective on firm productivity and performance in patent prosecution.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition highlights Slater Matsil’s consistent ability to deliver high-quality patent services and its efficiency in securing patents for leading technology clients.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
+  {
+    slug: "harrity-analytics-ranking-2022",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Harrity Analytics Rankings",
+      guide: "U.S. Utility Patents",
+      yearsRanked: "2022",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "The Harrity Analytics Team ranked Slater Matsil, LLP 18th for the most U.S. utility patents issued in 2022, reflecting the firm’s strong performance in patent prosecution.",
+      },
+
+      professionalMemberships: {
+        heading: "About Harrity Analytics",
+        content:
+          "Harrity Analytics publishes annual rankings of top patent law firms based on the number of U.S. utility patents issued. These rankings provide a data-driven perspective on firm productivity and performance in patent prosecution.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition highlights Slater Matsil’s consistent ability to deliver high-quality patent services and its efficiency in securing patents for leading technology clients.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
   {
     slug: "slater-matsil-attorneys-ranked-by-patexia",
     hero: {
@@ -3436,44 +3430,44 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "patexia-attorney-rankings-2023",
-  hero: {
-    name: "Roger Knapp & Ruojian Zhang",
-    band: "Patexia Rankings",
-    guide: "Best Performing Attorneys – High-Tech & Overall",
-    yearsRanked: "2023 Rankings",
+    slug: "patexia-attorney-rankings-2023",
+    hero: {
+      name: "Roger Knapp & Ruojian Zhang",
+      band: "Patexia Rankings",
+      guide: "Best Performing Attorneys – High-Tech & Overall",
+      yearsRanked: "2023 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Roger Knapp number 1 and Ruojian Zhang number 2 as Top 100 Best Performing Attorneys in High-Tech in 2023. In addition, Ruojian Zhang was ranked number 1 and Roger Knapp number 3 as Top 100 Best Performing Attorneys Overall in 2023.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on data-driven analysis of patent litigation performance, evaluating attorneys on activity, success rates, and overall impact across technology sectors.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These rankings highlight Slater Matsil’s leadership in high-tech patent litigation and the exceptional performance of its attorneys in delivering successful outcomes for clients.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Roger Knapp number 1 and Ruojian Zhang number 2 as Top 100 Best Performing Attorneys in High-Tech in 2023. In addition, Ruojian Zhang was ranked number 1 and Roger Knapp number 3 as Top 100 Best Performing Attorneys Overall in 2023.",
-    },
-
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on data-driven analysis of patent litigation performance, evaluating attorneys on activity, success rates, and overall impact across technology sectors.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These rankings highlight Slater Matsil’s leadership in high-tech patent litigation and the exceptional performance of its attorneys in delivering successful outcomes for clients.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
     slug: "patexia-ranked-roger-knapp-2025-rankings",
     hero: {
@@ -3508,44 +3502,44 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "patexia-attorney-rankings-2024",
-  hero: {
-    name: "Ruojian Zhang & Roger Knapp",
-    band: "Patexia Rankings",
-    guide: "High-Tech Performance",
-    yearsRanked: "2024 Rankings",
+    slug: "patexia-attorney-rankings-2024",
+    hero: {
+      name: "Ruojian Zhang & Roger Knapp",
+      band: "Patexia Rankings",
+      guide: "High-Tech Performance",
+      yearsRanked: "2024 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia has ranked Ruojian Zhang number 1 in Overall High-Tech Performance and number 3 in Overall Best Performance in 2024. Roger Knapp was ranked number 2 in Overall High-Tech Performance and number 4 in Overall Best Performance during the same period.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings evaluate attorney performance based on data-driven analysis of patent litigation activity, success rates, and overall impact in the intellectual property field. These rankings highlight top-performing attorneys across various technology sectors.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These rankings reflect Slater Matsil’s strong presence in high-tech patent prosecution and the firm’s ability to consistently deliver successful outcomes for clients in complex intellectual property matters.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia has ranked Ruojian Zhang number 1 in Overall High-Tech Performance and number 3 in Overall Best Performance in 2024. Roger Knapp was ranked number 2 in Overall High-Tech Performance and number 4 in Overall Best Performance during the same period.",
-    },
-
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings evaluate attorney performance based on data-driven analysis of patent litigation activity, success rates, and overall impact in the intellectual property field. These rankings highlight top-performing attorneys across various technology sectors.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These rankings reflect Slater Matsil’s strong presence in high-tech patent prosecution and the firm’s ability to consistently deliver successful outcomes for clients in complex intellectual property matters.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
     slug: "patexia-ranked-matsil-mair-cortiaus-2025",
     hero: {
@@ -3580,594 +3574,594 @@ export const INSIGHTS_DETAILS_DATA: INSIGHTS_DETAIL_PROPS[] = [
     },
   },
   {
-  slug: "steven-slater-d-magazine-best-lawyers",
-  hero: {
-    name: "Steven H. Slater",
-    band: "D Magazine",
-    guide: "Best Lawyers in Dallas – Intellectual Property",
-    yearsRanked: "2015 - 2018, 2020, 2024, 2026",
-    profileImage: steven,
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Steven H. Slater",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "D Magazine named Steven H. Slater among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2015 - 2018, 2020, 2024 and 2026.",
+    slug: "steven-slater-d-magazine-best-lawyers",
+    hero: {
+      name: "Steven H. Slater",
+      band: "D Magazine",
+      guide: "Best Lawyers in Dallas – Intellectual Property",
+      yearsRanked: "2015 - 2018, 2020, 2024, 2026",
+      profileImage: steven,
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Steven H. Slater",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About D Magazine",
-      content:
-        "D Magazine’s Best Lawyers in Dallas list recognizes top attorneys based on peer nominations and evaluation within the Dallas legal community.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "D Magazine named Steven H. Slater among the “Best Lawyers in Dallas” in the Intellectual Property category for multiple years, including 2015 - 2018, 2020, 2024 and 2026.",
+      },
 
-    career: {
-      heading: "Consistent Excellence",
-      content:
-        "This multi-year recognition highlights Steven Slater’s sustained excellence and leadership in intellectual property law.",
-    },
+      professionalMemberships: {
+        heading: "About D Magazine",
+        content:
+          "D Magazine’s Best Lawyers in Dallas list recognizes top attorneys based on peer nominations and evaluation within the Dallas legal community.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "iam-patent-1000-rankings-2020",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Individual and Firm Recognition",
-    guide: "IAM Patent 1000 Rankings",
-    yearsRanked: "2020 Edition",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Consistent Excellence",
+        content:
+          "This multi-year recognition highlights Steven Slater’s sustained excellence and leadership in intellectual property law.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Slater Matsil was recognized in the IAM Patent 1000 Rankings 2020 for its excellence in intellectual property law and consistent performance in patent-related services.",
-    },
-
-    professionalMemberships: {
-      heading: "Individual Recognition",
-      content:
-        "Ira Matsil, Steven Slater, and Srini Chakravarthi were each individually recognized for their technical insight, legal judgment, and trusted client service.",
-    },
-
-    career: {
-      heading: "Excellence Recognized",
-      content:
-        "Together, these honors underscore the depth of talent that defines Slater Matsil and reinforce the firm’s reputation as a go - to partner for sophisticated patent matters.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "ira-matsil-super-lawyer-honors",
-  hero: {
-    name: "Ira S. Matsil",
-    band: "Texas Super Lawyers",
-    guide: "Intellectual Property",
-    yearsRanked: "2012–2026",
-    profileImage: ira,
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Ira S. Matsil",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Ira S. Matsil has been honored as a Texas Super Lawyer from 2012 through 2026, recognizing his excellence and leadership in intellectual property law.",
-    },
-
-    professionalMemberships: {
-      heading: "About Super Lawyers",
-      content:
-        "Super Lawyers is a respected rating service that identifies top attorneys through peer recognition, professional achievement, and independent evaluation.",
-    },
-
-    career: {
-      heading: "Professional Excellence",
-      content:
-        "This multi-year recognition highlights Ira Matsil’s continued success and strong reputation within the intellectual property legal community.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "steven-slater-super-lawyer-honors",
-  hero: {
-    name: "Steven H. Slater",
-    band: "Texas Super Lawyers",
-    guide: "Intellectual Property",
-    yearsRanked: "2009–2023, 2025-2026",
-    profileImage: steven,
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Steven H. Slater",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Steven H. Slater has been honored as a Texas Super Lawyer from 2009 through 2023 and again from 2025 to 2026, recognizing his excellence in intellectual property law.",
-    },
-
-    professionalMemberships: {
-      heading: "About Super Lawyers",
-      content:
-        "Super Lawyers is a rating service that recognizes outstanding lawyers based on peer nominations, independent research, and professional achievement.",
-    },
-
-    career: {
-      heading: "Consistent Excellence",
-      content:
-        "This long-standing recognition reflects Steven Slater’s sustained leadership and impact in the field of intellectual property law.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
-  slug: "slater-matsil-chambers-usa-2020",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Chambers USA",
-    guide: "Intellectual Property & Patent Law",
-    yearsRanked: "2020 Rankings",
+    slug: "iam-patent-1000-rankings-2020",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Individual and Firm Recognition",
+      guide: "IAM Patent 1000 Rankings",
+      yearsRanked: "2020 Edition",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Slater Matsil was recognized in the IAM Patent 1000 Rankings 2020 for its excellence in intellectual property law and consistent performance in patent-related services.",
+      },
+
+      professionalMemberships: {
+        heading: "Individual Recognition",
+        content:
+          "Ira Matsil, Steven Slater, and Srini Chakravarthi were each individually recognized for their technical insight, legal judgment, and trusted client service.",
+      },
+
+      career: {
+        heading: "Excellence Recognized",
+        content:
+          "Together, these honors underscore the depth of talent that defines Slater Matsil and reinforce the firm’s reputation as a go - to partner for sophisticated patent matters.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Chambers USA 2020 ranked Slater Matsil, LLP as one of the nation’s leading intellectual property and patent law firms, recognizing its strength in delivering high-quality legal services.",
-    },
-
-    professionalMemberships: {
-      heading: "About Chambers USA",
-      content:
-        "Chambers USA is a leading legal directory that ranks top law firms and attorneys based on in-depth research, client feedback, and peer review across practice areas.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition reflects Slater Matsil’s strong reputation in intellectual property law and its continued commitment to excellence and client success.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
-  slug: "slater-matsil-iam-patent-1000-2021",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "IAM Patent 1000 Rankings",
-    guide: "Intellectual Property – United States",
-    yearsRanked: "2021 Edition",
+    slug: "ira-matsil-super-lawyer-honors",
+    hero: {
+      name: "Ira S. Matsil",
+      band: "Texas Super Lawyers",
+      guide: "Intellectual Property",
+      yearsRanked: "2012–2026",
+      profileImage: ira,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Ira S. Matsil",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Ira S. Matsil has been honored as a Texas Super Lawyer from 2012 through 2026, recognizing his excellence and leadership in intellectual property law.",
+      },
+
+      professionalMemberships: {
+        heading: "About Super Lawyers",
+        content:
+          "Super Lawyers is a respected rating service that identifies top attorneys through peer recognition, professional achievement, and independent evaluation.",
+      },
+
+      career: {
+        heading: "Professional Excellence",
+        content:
+          "This multi-year recognition highlights Ira Matsil’s continued success and strong reputation within the intellectual property legal community.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Slater Matsil was recognized in the IAM Patent 1000 Rankings 2021 for its excellence in intellectual property law and consistent performance in patent-related services.",
-    },
-
-    professionalMemberships: {
-      heading: "Individual Recognition",
-      content:
-        "Ira Matsil, Steven Slater, Srini Chakravarthi, and Michael Kucher were each individually recognized for their leadership in patent prosecution and strategic IP counseling.",
-    },
-
-    career: {
-      heading: "Excellence Recognized",
-      content:
-        "These recognitions collectively underscore the strength of Slater Matsil’s team and its trusted position in handling advanced patent challenges.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
-  slug: "slater-matsil-chambers-usa-2021",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Chambers USA",
-    guide: "Intellectual Property & Patent Law",
-    yearsRanked: "2021 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Chambers USA 2021 ranked Slater Matsil, LLP as one of the nation’s leading intellectual property and patent law firms, recognizing its strength in delivering high-quality legal services.",
+    slug: "steven-slater-super-lawyer-honors",
+    hero: {
+      name: "Steven H. Slater",
+      band: "Texas Super Lawyers",
+      guide: "Intellectual Property",
+      yearsRanked: "2009–2023, 2025-2026",
+      profileImage: steven,
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Steven H. Slater",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Chambers USA",
-      content:
-        "Chambers USA is a leading legal directory that ranks top law firms and attorneys based on in-depth research, client feedback, and peer review across practice areas.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Steven H. Slater has been honored as a Texas Super Lawyer from 2009 through 2023 and again from 2025 to 2026, recognizing his excellence in intellectual property law.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition reflects Slater Matsil’s strong reputation in intellectual property law and its consistent commitment to client success.",
-    },
+      professionalMemberships: {
+        heading: "About Super Lawyers",
+        content:
+          "Super Lawyers is a rating service that recognizes outstanding lawyers based on peer nominations, independent research, and professional achievement.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "slater-matsil-best-law-firm-2022",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "U.S. News – Best Law Firms",
-    guide: "Patent Litigation & Patent Law",
-    yearsRanked: "2022 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Consistent Excellence",
+        content:
+          "This long-standing recognition reflects Steven Slater’s sustained leadership and impact in the field of intellectual property law.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "U.S. News ranked Slater Matsil as a Tier 1 Best Law Firm for Patent Litigation and as a Tier 2 firm for Patent Law in 2022.",
-    },
-
-    professionalMemberships: {
-      heading: "About Best Law Firms",
-      content:
-        "U.S. News – Best Law Firms rankings are based on a rigorous evaluation process including client feedback, peer reviews, and firm performance, recognizing top firms across practice areas and regions.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These rankings reflect Slater Matsil’s strong reputation in intellectual property law and its consistent delivery of high-quality legal services.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
   {
-  slug: "slater-matsil-patexia-rankings-2022",
-  hero: {
-    name: "Slater Matsil, LLP",
-    band: "Patexia Rankings",
-    guide: "Best Performing Patent Firms",
-    yearsRanked: "2022 Rankings",
+    slug: "slater-matsil-Chamberss-usa-2020",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Chamberss USA",
+      guide: "Intellectual Property & Patent Law",
+      yearsRanked: "2020 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Chamberss USA 2020 ranked Slater Matsil, LLP as one of the nation’s leading intellectual property and patent law firms, recognizing its strength in delivering high-quality legal services.",
+      },
+
+      professionalMemberships: {
+        heading: "About Chamberss USA",
+        content:
+          "Chamberss USA is a leading legal directory that ranks top law firms and attorneys based on in-depth research, client feedback, and peer review across practice areas.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition reflects Slater Matsil’s strong reputation in intellectual property law and its continued commitment to excellence and client success.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
   },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Slater Matsil number 2 in Best Performing Patent Firms Overall and number 7 in Best Performing Patent Law Firms in High-Tech in 2022.",
-    },
-
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings evaluate law firms based on performance, activity, and success across patent prosecution and litigation.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These rankings highlight Slater Matsil’s consistent performance and strong presence in high-tech patent work.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
   {
-  slug: "patexia-high-tech-attorneys-2022",
-  hero: {
-    name: "Roger Knapp & Ruojian Zhang",
-    band: "Patexia Rankings",
-    guide: "Top 100 Best Performing Attorneys – High-Tech",
-    yearsRanked: "2022 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Roger Knapp number 1 and Ruojian Zhang number 2 as Top 100 Best Performing Attorneys in High-Tech in 2022.",
+    slug: "slater-matsil-iam-patent-1000-2021",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "IAM Patent 1000 Rankings",
+      guide: "Intellectual Property – United States",
+      yearsRanked: "2021 Edition",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on data-driven analysis of patent litigation performance, evaluating attorneys on activity, success rates, and impact within high-tech sectors.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Slater Matsil was recognized in the IAM Patent 1000 Rankings 2021 for its excellence in intellectual property law and consistent performance in patent-related services.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These rankings highlight Slater Matsil’s leadership in high-tech intellectual property matters and the strong performance of its attorneys.",
-    },
+      professionalMemberships: {
+        heading: "Individual Recognition",
+        content:
+          "Ira Matsil, Steven Slater, Srini Chakravarthi, and Michael Kucher were each individually recognized for their leadership in patent prosecution and strategic IP counseling.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "ira-matsil-dba-director-2013",
-  hero: {
-    name: "Ira S. Matsil",
-    band: "Leadership Role",
-    guide: "Dallas Bar Association – IP Section",
-    yearsRanked: "",
-    profileImage: ira,
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Ira S. Matsil",
-    region: "USA",
+      career: {
+        heading: "Excellence Recognized",
+        content:
+          "These recognitions collectively underscore the strength of Slater Matsil’s team and its trusted position in handling advanced patent challenges.",
+      },
 
-    practiceAreas: {
-      heading: "Leadership",
-      content:
-        "Ira S. Matsil served as Director of the Intellectual Property Section of the Dallas Bar Association, contributing to the advancement of the local intellectual property legal community.",
-    },
-
-    professionalMemberships: {
-      heading: "About the Dallas Bar Association",
-      content:
-        "The Dallas Bar Association is a leading professional organization that supports legal education, networking, and community engagement among attorneys in the Dallas area.",
-    },
-
-    career: {
-      heading: "Professional Contribution",
-      content:
-        "This leadership role reflects Ira Matsil’s commitment to professional service and his influence within the intellectual property law community.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
   {
-  slug: "patexia-prosecution-rankings-2024",
-  hero: {
-    name: "Ira Matsil, Brian Mair & Stephen Cortiaus",
-    band: "Patexia Rankings",
-    guide: "Patent Prosecution & High-Tech",
-    yearsRanked: "2024 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Slater Matsil attorneys Ira Matsil as Top 20 and Brian Mair as Top 50 Best Performing Attorneys Overall in Patent Prosecution. Stephen Cortiaus and Brian Mair were also ranked as Top 50 in Overall High-Tech Performance in 2024.",
+    slug: "slater-matsil-Chamberss-usa-2021",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Chamberss USA",
+      guide: "Intellectual Property & Patent Law",
+      yearsRanked: "2021 Rankings",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on data-driven analysis of patent prosecution and litigation performance, evaluating attorneys on their activity, success, and impact across various technology sectors.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Chamberss USA 2021 ranked Slater Matsil, LLP as one of the nation’s leading intellectual property and patent law firms, recognizing its strength in delivering high-quality legal services.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These recognitions highlight Slater Matsil’s strong bench of attorneys and its continued excellence in patent prosecution and high-tech intellectual property matters.",
-    },
+      professionalMemberships: {
+        heading: "About Chamberss USA",
+        content:
+          "Chamberss USA is a leading legal directory that ranks top law firms and attorneys based on in-depth research, client feedback, and peer review across practice areas.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "patexia-high-tech-top-50-2023",
-  hero: {
-    name: "Brian A. Mair",
-    band: "Patexia Rankings",
-    guide: "High-Tech – Top 50",
-    yearsRanked: "2023 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition reflects Slater Matsil’s strong reputation in intellectual property law and its consistent commitment to client success.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Slater Matsil attorney Brian A. Mair as a Top 50 Best Performing Attorney in High-Tech in 2023.",
-    },
-
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on data-driven analysis of patent performance, evaluating attorneys on activity, success, and impact within high-tech sectors.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "This recognition highlights Slater Matsil’s continued strength in high-tech intellectual property matters and the firm’s ability to deliver strong results for its clients.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
-{
-  slug: "patexia-top-100-attorneys-2023",
-  hero: {
-    name: "Stephen Cortiaus, John Koetter & Yumin Zhang",
-    band: "Patexia Rankings",
-    guide: "Patent Prosecution – Top 100",
-    yearsRanked: "2023 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Slater Matsil attorneys Stephen Cortiaus, John Koetter, and Yumin Zhang among the Top 100 Best Performing Attorneys Overall in Patent Prosecution in 2023.",
+  {
+    slug: "slater-matsil-best-law-firm-2022",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "U.S. News – Best Law Firms",
+      guide: "Patent Litigation & Patent Law",
+      yearsRanked: "2022 Rankings",
     },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
 
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on data-driven analysis of patent prosecution performance, evaluating attorneys on their activity, efficiency, and overall impact across the intellectual property landscape.",
-    },
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "U.S. News ranked Slater Matsil as a Tier 1 Best Law Firm for Patent Litigation and as a Tier 2 firm for Patent Law in 2022.",
+      },
 
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These recognitions highlight Slater Matsil’s depth of talent in patent prosecution and the firm’s continued ability to deliver strong results across complex intellectual property matters.",
-    },
+      professionalMemberships: {
+        heading: "About Best Law Firms",
+        content:
+          "U.S. News – Best Law Firms rankings are based on a rigorous evaluation process including client feedback, peer reviews, and firm performance, recognizing top firms across practice areas and regions.",
+      },
 
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
-    },
-  },
-},
-{
-  slug: "patexia-top-50-attorneys-2023",
-  hero: {
-    name: "Ira Matsil & Brian A. Mair",
-    band: "Patexia Rankings",
-    guide: "Patent Prosecution – Top 50",
-    yearsRanked: "2023 Rankings",
-  },
-  contact: commonContact,
-  contentSections: {
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These rankings reflect Slater Matsil’s strong reputation in intellectual property law and its consistent delivery of high-quality legal services.",
+      },
 
-    practiceAreas: {
-      heading: "Recognition",
-      content:
-        "Patexia ranked Slater Matsil attorneys Brian A. Mair and Ira Matsil among the Top 50 Best Performing Attorneys Overall in Patent Prosecution in 2023.",
-    },
-
-    professionalMemberships: {
-      heading: "About Patexia Rankings",
-      content:
-        "Patexia rankings are based on data-driven analysis of patent prosecution performance, evaluating attorneys on their activity, efficiency, and overall impact across the intellectual property landscape.",
-    },
-
-    career: {
-      heading: "Firm Strength",
-      content:
-        "These recognitions highlight Slater Matsil’s continued excellence in patent prosecution and the strong performance of its attorneys in delivering high-quality results for clients.",
-    },
-
-    personal: {
-      heading: "Contact",
-      content:
-        "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
     },
   },
-},
+  {
+    slug: "slater-matsil-patexia-rankings-2022",
+    hero: {
+      name: "Slater Matsil, LLP",
+      band: "Patexia Rankings",
+      guide: "Best Performing Patent Firms",
+      yearsRanked: "2022 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Slater Matsil number 2 in Best Performing Patent Firms Overall and number 7 in Best Performing Patent Law Firms in High-Tech in 2022.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings evaluate law firms based on performance, activity, and success across patent prosecution and litigation.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These rankings highlight Slater Matsil’s consistent performance and strong presence in high-tech patent work.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "patexia-high-tech-attorneys-2022",
+    hero: {
+      name: "Roger Knapp & Ruojian Zhang",
+      band: "Patexia Rankings",
+      guide: "Top 100 Best Performing Attorneys – High-Tech",
+      yearsRanked: "2022 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Roger Knapp number 1 and Ruojian Zhang number 2 as Top 100 Best Performing Attorneys in High-Tech in 2022.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on data-driven analysis of patent litigation performance, evaluating attorneys on activity, success rates, and impact within high-tech sectors.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These rankings highlight Slater Matsil’s leadership in high-tech intellectual property matters and the strong performance of its attorneys.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "ira-matsil-dba-director-2013",
+    hero: {
+      name: "Ira S. Matsil",
+      band: "Leadership Role",
+      guide: "Dallas Bar Association – IP Section",
+      yearsRanked: "",
+      profileImage: ira,
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Ira S. Matsil",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Leadership",
+        content:
+          "Ira S. Matsil served as Director of the Intellectual Property Section of the Dallas Bar Association, contributing to the advancement of the local intellectual property legal community.",
+      },
+
+      professionalMemberships: {
+        heading: "About the Dallas Bar Association",
+        content:
+          "The Dallas Bar Association is a leading professional organization that supports legal education, networking, and community engagement among attorneys in the Dallas area.",
+      },
+
+      career: {
+        heading: "Professional Contribution",
+        content:
+          "This leadership role reflects Ira Matsil’s commitment to professional service and his influence within the intellectual property law community.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "patexia-prosecution-rankings-2024",
+    hero: {
+      name: "Ira Matsil, Brian Mair & Stephen Cortiaus",
+      band: "Patexia Rankings",
+      guide: "Patent Prosecution & High-Tech",
+      yearsRanked: "2024 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Slater Matsil attorneys Ira Matsil as Top 20 and Brian Mair as Top 50 Best Performing Attorneys Overall in Patent Prosecution. Stephen Cortiaus and Brian Mair were also ranked as Top 50 in Overall High-Tech Performance in 2024.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on data-driven analysis of patent prosecution and litigation performance, evaluating attorneys on their activity, success, and impact across various technology sectors.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These recognitions highlight Slater Matsil’s strong bench of attorneys and its continued excellence in patent prosecution and high-tech intellectual property matters.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "patexia-high-tech-top-50-2023",
+    hero: {
+      name: "Brian A. Mair",
+      band: "Patexia Rankings",
+      guide: "High-Tech – Top 50",
+      yearsRanked: "2023 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Slater Matsil attorney Brian A. Mair as a Top 50 Best Performing Attorney in High-Tech in 2023.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on data-driven analysis of patent performance, evaluating attorneys on activity, success, and impact within high-tech sectors.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "This recognition highlights Slater Matsil’s continued strength in high-tech intellectual property matters and the firm’s ability to deliver strong results for its clients.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "patexia-top-100-attorneys-2023",
+    hero: {
+      name: "Stephen Cortiaus, John Koetter & Yumin Zhang",
+      band: "Patexia Rankings",
+      guide: "Patent Prosecution – Top 100",
+      yearsRanked: "2023 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Slater Matsil attorneys Stephen Cortiaus, John Koetter, and Yumin Zhang among the Top 100 Best Performing Attorneys Overall in Patent Prosecution in 2023.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on data-driven analysis of patent prosecution performance, evaluating attorneys on their activity, efficiency, and overall impact across the intellectual property landscape.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These recognitions highlight Slater Matsil’s depth of talent in patent prosecution and the firm’s continued ability to deliver strong results across complex intellectual property matters.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
+  {
+    slug: "patexia-top-50-attorneys-2023",
+    hero: {
+      name: "Ira Matsil & Brian A. Mair",
+      band: "Patexia Rankings",
+      guide: "Patent Prosecution – Top 50",
+      yearsRanked: "2023 Rankings",
+    },
+    contact: commonContact,
+    contentSections: {
+      aboutProvidedBy: "Provided by",
+      aboutProvidedByName: "Slater Matsil, LLP",
+      region: "USA",
+
+      practiceAreas: {
+        heading: "Recognition",
+        content:
+          "Patexia ranked Slater Matsil attorneys Brian A. Mair and Ira Matsil among the Top 50 Best Performing Attorneys Overall in Patent Prosecution in 2023.",
+      },
+
+      professionalMemberships: {
+        heading: "About Patexia Rankings",
+        content:
+          "Patexia rankings are based on data-driven analysis of patent prosecution performance, evaluating attorneys on their activity, efficiency, and overall impact across the intellectual property landscape.",
+      },
+
+      career: {
+        heading: "Firm Strength",
+        content:
+          "These recognitions highlight Slater Matsil’s continued excellence in patent prosecution and the strong performance of its attorneys in delivering high-quality results for clients.",
+      },
+
+      personal: {
+        heading: "Contact",
+        content:
+          "Slater Matsil, LLP | 17304 Preston Rd, Suite 900, Dallas, TX 75252 | Tel: 972.732.1001 | Email: info@slatermatsil.com",
+      },
+    },
+  },
   {
     slug: "patexia-ranked-slater-matsil-2025-rankings",
     hero: {

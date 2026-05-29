@@ -25,7 +25,7 @@ const SectionBlock = ({
           lineHeight: 1.6,
           color: COLORS.TEXT_PRIMARY_4,
           textAlign: "left",
-          letterSpacing:1.5
+          letterSpacing: 1.5,
         }}
       >
         {content}
@@ -105,83 +105,83 @@ const InsightsDetailsContentSection = ({
       <Container maxWidth="lg">
         {/* About and Watermark row */}
         <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-        sx={{
-          mb: 8,
-          position: "relative",
-          overflow: "hidden",
-          minHeight: { md: 220 },
-        }}
-      >
-        <Box
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
           sx={{
-            maxWidth: { xs: "100%", md: "45%" },
-            zIndex: 2,
+            mb: 8,
             position: "relative",
+            overflow: "hidden",
+            minHeight: { md: 220 },
           }}
         >
-          <Box sx={{ mb: 2 }}>
-            <HeadingStar title="About" />
+          <Box
+            sx={{
+              maxWidth: { xs: "100%", md: "45%" },
+              zIndex: 2,
+              position: "relative",
+            }}
+          >
+            <Box sx={{ mb: 2 }}>
+              <HeadingStar title="About" />
+            </Box>
+            <Typography
+              sx={{
+                fontFamily: tradeGothic.style.fontFamily,
+                fontWeight: 700,
+                fontSize: { xs: 24, md: 36 },
+                lineHeight: 1.05,
+                color: COLORS.PRIMARY_BLUE,
+                textTransform: "capitalize",
+              }}
+            >
+              Provided By{" "}
+              <Box
+                component="span"
+                sx={{
+                  color: COLORS.PRIMARY_GREEN,
+                }}
+              >
+                Slater
+              </Box>
+              <br />
+              <Box
+                component="span"
+                sx={{
+                  color: COLORS.PRIMARY_GREEN,
+                }}
+              >
+                Matsil, LLP
+              </Box>
+            </Typography>
           </Box>
           <Typography
             sx={{
+              display: { xs: "none", md: "block" },
+              position: "absolute",
+              right: "5%",
+              top: "20%",
+              transform: "translateY(-50%)",
               fontFamily: tradeGothic.style.fontFamily,
               fontWeight: 700,
-              fontSize: { xs: 24, md: 36 },
-              lineHeight: 1.05,
-              color: COLORS.PRIMARY_BLUE,
-              textTransform: "capitalize",
+              fontSize: "140px",
+              textTransform: "lowercase",
+              pointerEvents: "none",
+              userSelect: "none",
+              opacity: 0.08,
+              lineHeight: 0.9,
+              whiteSpace: "nowrap",
+              zIndex: 1,
             }}
           >
-            Provided By{" "}
-            <Box
-              component="span"
-              sx={{
-                color: COLORS.PRIMARY_GREEN,
-              }}
-            >
-              Slater
+            <Box component="span" sx={{ color: COLORS.PRIMARY_BLUE }}>
+              slater
             </Box>
-            <br />
-            <Box
-              component="span"
-              sx={{
-                color: COLORS.PRIMARY_GREEN,
-              }}
-            >
-              Matsil, LLP
+            <Box component="span" sx={{ color: COLORS.PRIMARY_GREEN }}>
+              matsil
             </Box>
           </Typography>
-        </Box>
-          <Typography
-          sx={{
-            display: { xs: "none", md: "block" },
-            position: "absolute",
-            right: "5%",
-            top: "20%",
-            transform: "translateY(-50%)",
-            fontFamily: tradeGothic.style.fontFamily,
-            fontWeight: 700,
-            fontSize: "140px",
-            textTransform: "lowercase",
-            pointerEvents: "none",
-            userSelect: "none",
-            opacity: 0.08,
-            lineHeight: 0.9,
-            whiteSpace: "nowrap",
-            zIndex: 1,
-          }}
-        >
-          <Box component="span" sx={{ color: COLORS.PRIMARY_BLUE }}>
-            slater
-          </Box>
-          <Box component="span" sx={{ color: COLORS.PRIMARY_GREEN }}>
-            matsil
-          </Box>
-        </Typography>
-      </Stack>
+        </Stack>
         {/* Region (USA) section */}
         <Box sx={{ mb: 10 }}>
           <Typography
@@ -227,10 +227,10 @@ const InsightsDetailsContentSection = ({
         </Grid>
 
         {/* New full-width sections */}
-        {sections.chambersReview && (
+        {sections.ChamberssReview && (
           <SectionBlock
-            heading={sections.chambersReview.heading}
-            content={sections.chambersReview.content}
+            heading={sections.ChamberssReview.heading}
+            content={sections.ChamberssReview.content}
           />
         )}
         {sections.strengths && (

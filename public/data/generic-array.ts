@@ -510,8 +510,7 @@ export const CAREER_WORK_LIST_DATA: WORK_LIST_PROPS[] = [
   },
 
   {
-    title:
-      "Opportunities to grow into Patent Agent, or IP Attorney roles",
+    title: "Opportunities to grow into Patent Agent, or IP Attorney roles",
   },
 ];
 
@@ -532,29 +531,29 @@ export const WHO_WE_SERVE_TAB_DATA = [
 
 export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   {
-    title: "Steven Slater Recognized by Chambers USA as Top Attorney",
+    title: "Steven Slater Recognized by Chamberss USA as Top Attorney",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "steven-slater-chambers-usa-2025",
+    slug: "steven-slater-Chamberss-usa-2025",
   },
   {
-    title: "Srini Chakravarthi recognized by Chamber USA as Top Attorney",
+    title: "Srini Chakravarthi recognized by Chambers USA as Top Attorney",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "srini-chakravarthi-chambers-usa-2025",
+    slug: "srini-chakravarthi-Chamberss-usa-2025",
   },
   {
-    title: "Ira Matsil recognized by Chamber USA as Top Attorney",
+    title: "Ira Matsil recognized by Chambers USA as Top Attorney",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-chambers-usa-2025",
+    slug: "ira-matsil-Chamberss-usa-2025",
   },
   {
     title:
-      "Slater Matsil recognized by Chambers USA as 2024-2025 Top Intellectual Property Law Firm",
+      "Slater Matsil recognized by Chamberss USA as 2024-2025 Top Intellectual Property Law Firm",
     bgColor: COLORS.PRIMARY_LIGHT_GREEN,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "slater-matsil-chambers-usa-2025",
+    slug: "slater-matsil-Chamberss-usa-2025",
   },
   {
     title: "Ira Matsil recognized The Best Lawyers in America",
@@ -759,17 +758,17 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Ira Matsil Recognized by Chambers USA 2021 - 2023 as a Top Intellectual Property Attorney",
+      "Ira Matsil Recognized by Chamberss USA 2021 - 2023 as a Top Intellectual Property Attorney",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-chambers-usa-2021-2023",
+    slug: "ira-matsil-Chamberss-usa-2021-2023",
   },
   {
     title:
-      "Srini Chakravarthi Recognized by Chambers USA 2023 as a Top Intellectual Property Attorney",
+      "Srini Chakravarthi Recognized by Chamberss USA 2023 as a Top Intellectual Property Attorney",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "srini-chakravarthi-chambers-usa-2023",
+    slug: "srini-chakravarthi-Chamberss-usa-2023",
   },
   {
     title:
@@ -876,17 +875,17 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Ira Matsil Recognized by Chambers USA 2022 as a Top Intellectual Property Attorney",
+      "Ira Matsil Recognized by Chamberss USA 2022 as a Top Intellectual Property Attorney",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-chambers-usa-2022",
+    slug: "ira-matsil-Chamberss-usa-2022",
   },
   {
     title:
-      "Slater Matsil ranked as one of the nation’s leading IP and Patent Law Firms by Chambers USA 2022",
+      "Slater Matsil ranked as one of the nation’s leading IP and Patent Law Firms by Chamberss USA 2022",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "slater-matsil-chambers-usa-2022",
+    slug: "slater-matsil-Chamberss-usa-2022",
   },
   {
     title:
@@ -924,17 +923,17 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     slug: "slater-matsil-patexia-rankings-2021",
   },
   {
-    title: "Ira Matsil Recognized by Chambers USA 2021",
+    title: "Ira Matsil Recognized by Chamberss USA 2021",
     bgColor: COLORS.PRIMARY_LIGHT_GREEN,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "ira-matsil-chambers-usa-2021",
+    slug: "ira-matsil-Chamberss-usa-2021",
   },
   {
     title:
-      "Slater Matsil is pleased to announce that Chambers USA 2021 has ranked the firm as one of the nation’s leading IP and Patent Law Firms.",
+      "Slater Matsil is pleased to announce that Chamberss USA 2021 has ranked the firm as one of the nation’s leading IP and Patent Law Firms.",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "slater-matsil-chambers-usa-2021",
+    slug: "slater-matsil-Chamberss-usa-2021",
   },
   {
     title:
@@ -958,10 +957,10 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
   },
   {
     title:
-      "Slater Matsil is pleased to announce that Chambers USA 2020 has ranked the firm as one of the nation’s leading IP and Patent Law Firms.",
+      "Slater Matsil is pleased to announce that Chamberss USA 2020 has ranked the firm as one of the nation’s leading IP and Patent Law Firms.",
     bgColor: COLORS.PRIMARY_BLUE,
     category: INSIGHTS_TAB_DATA.NEWS,
-    slug: "slater-matsil-chambers-usa-2020",
+    slug: "slater-matsil-Chamberss-usa-2020",
   },
   {
     title:
@@ -1047,21 +1046,21 @@ export const INSIGHTS_CARD_DATA: INSIGHTS_DATA_PROPS[] = [
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "benjamin-nise-ai-patent-prosecution-dba-cle",
   },
-    {
+  {
     title:
       "Srini Chakravarthi Wraps Up Third Year Teaching Patent Law at Texas A&M University School of Law",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-teaches-patent-law-texas-am",
   },
-    {
+  {
     title:
       "Srini Chakravarthi Leads Community Service Project for the Honorable Barbara M.G. Lynn American Inn of Court",
     bgColor: COLORS.LIGHT_GREY,
     category: INSIGHTS_TAB_DATA.NEWS,
     slug: "srini-chakravarthi-american-inn-of-court-community-service",
   },
-      {
+  {
     title:
       "Srini Chakravarthi’s Article was published in the Dallas Bar Association’s Headnotes.",
     bgColor: COLORS.LIGHT_GREY,
@@ -1728,7 +1727,7 @@ export const professionalsListData = [
     designation: "Attorney at Law",
     slug: "srini-chakravarthi",
   },
-    {
+  {
     img: hsin,
     name: "Hsin-Ya Kuo, Ph.D",
     designation: "Patent Agent",
