@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { Box } from "@mui/material";
 import { COLORS } from "@/utils/enum";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import loadingData from "@/public/images/loading2.json";
 
 export default function DashboardProtectedLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -39,7 +40,7 @@ export default function DashboardProtectedLayout({ children }: { children: React
         }}
       >
         <DotLottieReact
-          src="/images/loading2.json"
+          data={loadingData}
           loop
           autoplay
           style={{ width: 250, height: 250 }}

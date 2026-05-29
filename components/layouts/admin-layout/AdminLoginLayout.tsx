@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { usePageData } from "@/store/usePageData";
 import * as yup from "yup";
+import { AuthControllers } from "@/api/authControllers";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Please enter a valid email address").required("Email is required"),
@@ -16,7 +17,7 @@ const loginSchema = yup.object().shape({
 
 export default function AdminLoginLayout() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("admin@slatermatsil.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [validationErrors, setValidationErrors] = useState<any>({});
@@ -39,31 +40,18 @@ export default function AdminLoginLayout() {
       return;
     }
 
-    if (email.toLowerCase() === "admin@slatermatsil.com") {
-      // For main admin, you might want to check password too, but for dummy auth we let it pass
-      // or require a specific password like 'admin' if you want.
-      if (password === "admin" || password === "") {
-        localStorage.setItem("adminAuth", "true");
+    try {
+      const response = await AuthControllers.login({ email, password });
+      if (response.data.success) {
+        localStorage.setItem("adminAuth", response.data.data.user.email);
+        localStorage.setItem("accessToken", response.data.data.accessToken);
+        localStorage.setItem("refreshToken", response.data.data.refreshToken);
         router.push("/dashboard");
-        return;
+      } else {
+        setError(response.data.message || "Invalid email or password.");
       }
-    }
-
-    // Check sub-admins
-    let subAdmins = details?.subAdmins || [];
-    if (subAdmins.length === 0) {
-      const stored = localStorage.getItem("subAdmins");
-      if (stored) {
-        subAdmins = JSON.parse(stored);
-      }
-    }
-
-    const found = subAdmins.find((a: any) => a.email.toLowerCase() === email.toLowerCase());
-    if (found && found.password === password) {
-      localStorage.setItem("adminAuth", found.email);
-      router.push("/dashboard");
-    } else {
-      setError("Invalid email or password. You do not have access.");
+    } catch (error: any) {
+      setError(error.response?.data?.message || "Invalid email or password. You do not have access.");
     }
   };
 

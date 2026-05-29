@@ -17,6 +17,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import "swiper/css";
 import "./globals.css";
+import loadingData from "@/public/images/loading2.json";
 
 export default function RootLayout({
   children,
@@ -66,7 +67,7 @@ export default function RootLayout({
             }}
           >
             <DotLottieReact
-              src="/images/loading2.json"
+              data={loadingData}
               loop
               autoplay
               style={{ width: 250, height: 250 }}

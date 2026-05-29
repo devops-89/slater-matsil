@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/backend-api/:path*",
+        destination: "http://3.92.74.11/api/:path*", // Proxy to backend to fix CORS
+      },
+    ];
+  },
 };
 
 export default nextConfig;

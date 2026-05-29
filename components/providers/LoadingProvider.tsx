@@ -3,6 +3,7 @@
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
+import loadingData from "@/public/images/loading2.json";
 
 function LoadingProviderContent({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -36,7 +37,7 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
           }}
         >
           <DotLottieReact
-            src="/images/loading2.json"
+            data={loadingData}
             loop
             autoplay
             style={{ width: 250, height: 250 }}
