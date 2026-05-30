@@ -85,11 +85,33 @@ const HeroSection3 = () => {
     },
   ];
 
+  const getValidImageUrl = (imageField: any) => {
+    if (!imageField || imageField === "deleted") return null;
+    
+    let url = "";
+    if (typeof imageField === "string") {
+      url = imageField;
+    } else if (typeof imageField === "object" && imageField.url) {
+      url = imageField.url;
+    } else {
+      return null;
+    }
+
+    if (url.trim() === "") return null;
+    let finalUrl = url.trim();
+    // Fix missing protocol for S3 or other external domains
+    if (!finalUrl.startsWith("http") && !finalUrl.startsWith("/") && finalUrl.includes("s3")) {
+      finalUrl = "https://" + finalUrl;
+    }
+    // Handle spaces in S3 filenames
+    return finalUrl.replace(/ /g, "%20");
+  };
+
   const banners =
     Array.isArray(globalBanners) && globalBanners.length > 0
       ? globalBanners.map((b: any, idx: number) => ({
           ...b,
-          img: b.image || defaultBanners[idx]?.img || slider4,
+          img: getValidImageUrl(b.image) || defaultBanners[idx]?.img || slider4,
         }))
       : defaultBanners;
 
@@ -119,6 +141,7 @@ const HeroSection3 = () => {
           autoplay={{ delay: 7000, disableOnInteraction: false }}
           spaceBetween={20}
           loop={true}
+          autoHeight={true}
           grabCursor
         >
           {banners.map((val, i) => (

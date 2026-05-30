@@ -13,9 +13,11 @@ import { PageControllers } from "@/api/pageControllers";
 import { mapBackendToHomepageState } from "@/utils/pageDataMapper";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
 const HomeLayout = () => {
   const { setDetails } = usePageData();
+  const { startLoading, stopLoading } = useLoading();
 
   const pathname = usePathname();
   const hasFetched = useRef(false);
@@ -29,7 +31,8 @@ const HomeLayout = () => {
     let isMounted = true;
     const fetchHomeData = async () => {
       try {
-        const res = await PageControllers.getPageById(1);
+        startLoading();
+        const res = await PageControllers.getPublicPageById(1);
         const pageData = res.data?.data?.data || res.data?.data;
         if (pageData && isMounted) {
           const updatedHomepage = mapBackendToHomepageState(pageData, WEBSITE_DATA.homepage);
@@ -38,12 +41,21 @@ const HomeLayout = () => {
         }
       } catch (error) {
         console.error("Error fetching home page data", error);
+      } finally {
+        if (isMounted) stopLoading();
       }
     };
     
     fetchHomeData();
-    return () => { isMounted = false; };
-  }, [setDetails]);
+
+    return () => {
+      if (isMounted) {
+        // If unmounted before fetch finishes, we didn't stop loading
+        stopLoading();
+      }
+      isMounted = false; 
+    };
+  }, [setDetails, startLoading, stopLoading, pathname]);
 
   return (
     <div>

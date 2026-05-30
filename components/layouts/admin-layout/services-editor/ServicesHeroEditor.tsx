@@ -4,16 +4,36 @@ import { Delete, Upload } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 
+import { MediaControllers } from "@/api/mediaControllers";
+import { useState } from "react";
+import { useNotification } from "@/components/providers/NotificationProvider";
+
 export const ServicesHeroEditor = ({ data, onChange }: { data: any, onChange: (newData: any) => void }) => {
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [isUploading, setIsUploading] = useState(false);
+  const { showNotification } = useNotification();
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      onChange({ ...data, img: reader.result as string });
-    };
-    reader.readAsDataURL(file);
+    try {
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append("image", file);
+      
+      const res = await MediaControllers.uploadMedia(formData);
+      const responseData = res.data?.data?.data || res.data?.data;
+      const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      if (uploadedUrl) {
+        onChange({ ...data, img: uploadedUrl });
+        showNotification("Image uploaded successfully", "success");
+      }
+    } catch (error) {
+      console.error("Failed to upload image", error);
+      showNotification("Failed to upload image", "error");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   return (
@@ -32,8 +52,8 @@ export const ServicesHeroEditor = ({ data, onChange }: { data: any, onChange: (n
           <Typography variant="subtitle2" color="text.secondary">
             Background Image
           </Typography>
-          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }}>
-            Upload Image
+          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
+            {isUploading ? "Uploading..." : "Upload Image"}
             <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
           </Button>
         </Box>

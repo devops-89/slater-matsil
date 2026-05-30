@@ -1,14 +1,15 @@
 "use client";
 
+import { AuthControllers } from "@/api/authControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { EmailOutlined, LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, Container, Grid, IconButton, InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { usePageData } from "@/store/usePageData";
 import * as yup from "yup";
-import { AuthControllers } from "@/api/authControllers";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Please enter a valid email address").required("Email is required"),
@@ -23,6 +24,7 @@ export default function AdminLoginLayout() {
   const [validationErrors, setValidationErrors] = useState<any>({});
   const router = useRouter();
   const { details } = usePageData();
+  const { showNotification } = useNotification();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +48,7 @@ export default function AdminLoginLayout() {
         localStorage.setItem("adminAuth", response.data.data.user.email);
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
+        showNotification("Login successful!", "success");
         router.push("/dashboard");
       } else {
         setError(response.data.message || "Invalid email or password.");

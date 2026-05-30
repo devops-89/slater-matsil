@@ -37,6 +37,8 @@ const LANGUAGES = [
     label: "简体中文",
     flagUrl: "https://flagcdn.com/w20/cn.png",
   },
+  { code: "fr", label: "Français", flagUrl: "https://flagcdn.com/w20/fr.png" },
+  { code: "it", label: "Italiano", flagUrl: "https://flagcdn.com/w20/it.png" },
 ];
 
 const Navbar = () => {
@@ -45,40 +47,36 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [currentLang, setCurrentLang] = useState("en");
 
+  const applyTranslation = (val: string, retries = 5) => {
+    const googSelect = document.querySelector(
+      ".goog-te-combo",
+    ) as HTMLSelectElement;
+    if (googSelect) {
+      if (val === "en") {
+        if (!googSelect.querySelector('option[value="en"]')) {
+          const opt = document.createElement("option");
+          opt.value = "en";
+          opt.text = "English";
+          googSelect.appendChild(opt);
+        }
+      }
+
+      document.body.classList.add("translating-blink");
+      setTimeout(() => {
+        document.body.classList.remove("translating-blink");
+      }, 400);
+
+      googSelect.value = val;
+      googSelect.dispatchEvent(new Event("change", { bubbles: true }));
+    } else if (retries > 0) {
+      setTimeout(() => applyTranslation(val, retries - 1), 300);
+    }
+  };
+
   const handleLangChange = (e: any) => {
     const val = e.target.value;
     setCurrentLang(val);
-
-    const applyTranslation = (retries = 5) => {
-      const googSelect = document.querySelector(
-        ".goog-te-combo",
-      ) as HTMLSelectElement;
-      if (googSelect) {
-        if (val === "en") {
-          // Force an 'en' option into Google's native select so it knows how to revert without reloading
-          if (!googSelect.querySelector('option[value="en"]')) {
-            const opt = document.createElement("option");
-            opt.value = "en";
-            opt.text = "English";
-            googSelect.appendChild(opt);
-          }
-        }
-
-        // Hide text briefly to prevent the "flash of English"
-        document.body.classList.add("translating-blink");
-        setTimeout(() => {
-          document.body.classList.remove("translating-blink");
-        }, 400);
-
-        googSelect.value = val;
-        googSelect.dispatchEvent(new Event("change", { bubbles: true }));
-      } else if (retries > 0) {
-        // If Google Translate hasn't finished loading yet, retry shortly
-        setTimeout(() => applyTranslation(retries - 1), 300);
-      }
-    };
-
-    applyTranslation();
+    applyTranslation(val);
   };
 
   useEffect(() => {
@@ -119,7 +117,7 @@ const Navbar = () => {
           new (window as any).google.translate.TranslateElement(
             {
               pageLanguage: "en",
-              includedLanguages: "zh-CN,zh-TW,ja,de,en",
+              autoDisplay: false,
             },
             "google_translate_element",
           );
@@ -137,6 +135,30 @@ const Navbar = () => {
       }
     };
     addGoogleTranslateScript();
+
+    // Auto-localization logic
+    let targetLang = "en";
+    if (navigator.language) {
+      let browserLang = navigator.language;
+      if (browserLang.toLowerCase().startsWith("zh-tw") || browserLang.toLowerCase().startsWith("zh-hk")) {
+        browserLang = "zh-TW";
+      } else if (browserLang.toLowerCase().startsWith("zh")) {
+        browserLang = "zh-CN";
+      } else {
+        browserLang = browserLang.split("-")[0];
+      }
+      
+      // We allow ANY language now
+      targetLang = browserLang;
+    }
+    
+    if (targetLang !== "en") {
+      setCurrentLang(targetLang);
+      // Wait for script to initialize and apply translation
+      setTimeout(() => {
+        applyTranslation(targetLang, 10);
+      }, 1000);
+    }
   }, []);
 
   const handleMenuToggle = () => {
@@ -268,12 +290,28 @@ const Navbar = () => {
                 ></div>
                 <Autocomplete
                   className="notranslate"
-                  options={LANGUAGES}
+                  options={
+                    LANGUAGES.find((l) => l.code === currentLang)
+                      ? LANGUAGES
+                      : [
+                          ...LANGUAGES,
+                          {
+                            code: currentLang,
+                            label: `Auto (${currentLang.toUpperCase()})`,
+                            flagUrl:
+                              "https://upload.wikimedia.org/wikipedia/commons/e/ef/International_Flag_of_Planet_Earth.svg",
+                          },
+                        ]
+                  }
                   disableClearable
                   getOptionLabel={(option) => option.label}
                   value={
-                    LANGUAGES.find((l) => l.code === currentLang) ||
-                    LANGUAGES[0]
+                    LANGUAGES.find((l) => l.code === currentLang) || {
+                      code: currentLang,
+                      label: `Auto (${currentLang.toUpperCase()})`,
+                      flagUrl:
+                        "https://upload.wikimedia.org/wikipedia/commons/e/ef/International_Flag_of_Planet_Earth.svg",
+                    }
                   }
                   onChange={(event, newValue) => {
                     if (newValue) {
@@ -307,8 +345,12 @@ const Navbar = () => {
                   }}
                   renderInput={(params) => {
                     const selected =
-                      LANGUAGES.find((l) => l.code === currentLang) ||
-                      LANGUAGES[0];
+                      LANGUAGES.find((l) => l.code === currentLang) || {
+                        code: currentLang,
+                        label: `Auto (${currentLang.toUpperCase()})`,
+                        flagUrl:
+                          "https://upload.wikimedia.org/wikipedia/commons/e/ef/International_Flag_of_Planet_Earth.svg",
+                      };
                     return (
                       <TextField
                         {...params}

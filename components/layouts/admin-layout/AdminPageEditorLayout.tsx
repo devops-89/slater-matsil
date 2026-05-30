@@ -52,6 +52,9 @@ const ServicesPagePreviews = dynamic(() => import('@/components/layouts/admin-la
 
 const WhoWeServePageForms = dynamic(() => import('@/components/layouts/admin-layout/who-we-serve-editor').then(mod => mod.WhoWeServePageForms), { loading: LoadingFallback });
 const WhoWeServePagePreviews = dynamic(() => import('@/components/layouts/admin-layout/who-we-serve-editor').then(mod => mod.WhoWeServePagePreviews), { loading: LoadingFallback });
+
+const LegalPagesForms = dynamic(() => import('@/components/layouts/admin-layout/legal-pages-editor').then(mod => mod.LegalPagesForms), { loading: LoadingFallback });
+const LegalPagesPreviews = dynamic(() => import('@/components/layouts/admin-layout/legal-pages-editor').then(mod => mod.LegalPagesPreviews), { loading: LoadingFallback });
 import { usePageData } from "@/store/usePageData";
 
 export default function AdminPageEditorLayout() {
@@ -324,6 +327,14 @@ export default function AdminPageEditorLayout() {
     setWebsiteData(updated);
   };
 
+  const updateLegalPage = (pageKey: string, newData: any) => {
+    const updated = {
+      ...websiteData,
+      [pageKey]: newData
+    };
+    setWebsiteData(updated);
+  };
+
   let sections = ["General Settings"];
   if (slug === "home") {
     sections = ["Hero Section", "About Section", "Metrics List", "Who We Serve"];
@@ -338,7 +349,7 @@ export default function AdminPageEditorLayout() {
   } else if (slug === "firm-leadership") {
     sections = ["Hero Section", "Firm Mission", "Partners", "Patent Agents", "Administration"];
   } else if (slug === "insights") {
-    sections = ["Hero Section"];
+    sections = ["Hero Section", "Quick Links"];
   } else if (slug === "blogs") {
     sections = ["Hero Section"];
   } else if (slug === "careers") {
@@ -347,6 +358,8 @@ export default function AdminPageEditorLayout() {
     sections = ["Hero Section", "Contact Form", "Contact Cards", "Social Follow"];
   } else if (slug === "who-we-serve") {
     sections = ["Hero Section", "About Section", "Serve Tabs"];
+  } else if (slug === "privacy-policy" || slug === "terms-of-use" || slug === "disclaimer") {
+    sections = ["Page Header", "Content Sections"];
   }
 
   const handleAccordionChange = (panelIndex: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -378,6 +391,12 @@ export default function AdminPageEditorLayout() {
       return <ContactPageForms activeSection={index} websiteData={websiteData} updateContactPage={updateContactPage} />;
     } else if (slug === "who-we-serve") {
       return <WhoWeServePageForms activeSection={index} websiteData={websiteData} updateWhoWeServePage={updateWhoWeServePage} />;
+    } else if (slug === "privacy-policy") {
+      return <LegalPagesForms activeSection={index} data={websiteData.privacyPolicy} onChange={(newData: any) => updateLegalPage("privacyPolicy", newData)} />;
+    } else if (slug === "terms-of-use") {
+      return <LegalPagesForms activeSection={index} data={websiteData.termsOfUse} onChange={(newData: any) => updateLegalPage("termsOfUse", newData)} />;
+    } else if (slug === "disclaimer") {
+      return <LegalPagesForms activeSection={index} data={websiteData.disclaimer} onChange={(newData: any) => updateLegalPage("disclaimer", newData)} />;
     }
     return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Forms for {slug} are coming soon.</Typography>;
   };
@@ -405,6 +424,8 @@ export default function AdminPageEditorLayout() {
       return <ContactPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "who-we-serve") {
       return <WhoWeServePagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
+    } else if (slug === "privacy-policy" || slug === "terms-of-use" || slug === "disclaimer") {
+      return <LegalPagesPreviews />;
     }
     return (
       <Box sx={{ border: "2px dashed #ccc", p: 4, borderRadius: 2, textAlign: "center" }}>

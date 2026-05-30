@@ -36,4 +36,13 @@ export const PageControllers = {
       throw error;
     }
   },
+
+  getPublicPageById: async (id: number | string) => {
+    try {
+      let result = await pagePublicApi.get(`${id}`);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

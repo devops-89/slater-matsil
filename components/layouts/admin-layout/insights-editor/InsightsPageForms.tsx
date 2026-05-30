@@ -1,7 +1,12 @@
 import React from "react";
 import { Stack, TextField } from "@mui/material";
+import { InsightsQuickLinksEditor } from "./InsightsQuickLinksEditor";
 
 export function InsightsPageForms({ activeSection, websiteData, updateInsightsPage }: any) {
+  if (activeSection === 1) {
+    return <InsightsQuickLinksEditor data={websiteData?.insightsPage?.quickLinks} onChange={(newData) => updateInsightsPage("quickLinks", newData)} />;
+  }
+
   if (activeSection !== 0) {
     return null;
   }

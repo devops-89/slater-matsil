@@ -19,9 +19,11 @@ import { PageControllers } from "@/api/pageControllers";
 import { mapBackendToAboutPageState } from "@/utils/pageDataMapper";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
 const AboutLayout = () => {
   const { setDetails } = usePageData();
+  const { startLoading, stopLoading } = useLoading();
 
   const pathname = usePathname();
   const hasFetched = useRef(false);
@@ -35,7 +37,8 @@ const AboutLayout = () => {
     let isMounted = true;
     const fetchAboutData = async () => {
       try {
-        const res = await PageControllers.getPageById(2);
+        startLoading();
+        const res = await PageControllers.getPublicPageById(2);
         const pageData = res.data?.data?.data || res.data?.data;
         if (pageData && isMounted) {
           const updatedAboutPage = mapBackendToAboutPageState(pageData, WEBSITE_DATA.aboutPage);
@@ -47,12 +50,20 @@ const AboutLayout = () => {
         }
       } catch (error) {
         console.error("Error fetching about us page data", error);
+      } finally {
+        if (isMounted) stopLoading();
       }
     };
     
     fetchAboutData();
-    return () => { isMounted = false; };
-  }, [setDetails]);
+
+    return () => {
+      if (isMounted) {
+        stopLoading();
+      }
+      isMounted = false; 
+    };
+  }, [setDetails, startLoading, stopLoading, pathname]);
 
   return (
     <div>

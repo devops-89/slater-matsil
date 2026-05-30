@@ -62,8 +62,8 @@ const WhoServeTabSection = () => {
           </Grid>
         </Grid>
       </Container>
-      {details?.whoWeServePage?.whoWeServeTabsSection.map((val, i) => (
-        <CustomTabPanel index={i} value={value}>
+      {details?.whoWeServePage?.whoWeServeTabsSection.map((val: any, i: number) => (
+        <CustomTabPanel key={i} index={i} value={value}>
           <TabCard
             bigDescription={serveData?.bigDescription || ""}
             quote={serveData?.quote || ""}

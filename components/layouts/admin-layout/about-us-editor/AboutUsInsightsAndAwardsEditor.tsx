@@ -12,30 +12,7 @@ import { useNotification } from "@/components/providers/NotificationProvider";
 export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updateAboutPage }: any) => {
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const [isAddingLogo, setIsAddingLogo] = useState(false);
-  const [isUploadingMainImg, setIsUploadingMainImg] = useState(false);
   const { showNotification } = useNotification();
-
-  const handleMainImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    try {
-      setIsUploadingMainImg(true);
-      const formData = new FormData();
-      formData.append("image", file);
-      const response = await MediaControllers.uploadMedia(formData);
-      const responseData = response.data?.data?.data || response.data?.data;
-      const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
-      if (response.data?.success && uploadedUrl) {
-        updateAboutPage('AWARDSPROPS', { ...awardsData, img: uploadedUrl });
-        showNotification("Main image updated successfully", "success");
-      }
-    } catch (error) {
-      showNotification("Failed to update main image", "error");
-    } finally {
-      setIsUploadingMainImg(false);
-    }
-  };
 
   const handleAddLogo = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -99,19 +76,6 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
       <Box>
         <Typography variant="h6" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700, mb: 3 }}>Awards Settings</Typography>
         <Stack spacing={4}>
-          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Typography variant="subtitle2" color="text.secondary">Main Section Image</Typography>
-            <Button component="label" variant="outlined" size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploadingMainImg}>
-              {isUploadingMainImg ? "Uploading..." : "Upload Image"}
-              <input type="file" hidden accept="image/*" onChange={handleMainImageUpload} />
-            </Button>
-          </Box>
-          {awardsData.img && (
-            <Box sx={{ width: 100, height: 100, borderRadius: '50%', overflow: 'hidden', border: '1px solid #ccc', margin: 'auto' }}>
-              <img src={typeof awardsData.img === 'string' ? awardsData.img : awardsData.img?.src} alt="Main image" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-            </Box>
-          )}
-
           <TextField fullWidth label="Heading 1" value={awardsData.heading1 || ""} onChange={(e) => updateAboutPage('AWARDSPROPS', { ...awardsData, heading1: e.target.value })} />
           <TextField fullWidth label="Heading 2" value={awardsData.heading2 || ""} onChange={(e) => updateAboutPage('AWARDSPROPS', { ...awardsData, heading2: e.target.value })} />
         </Stack>

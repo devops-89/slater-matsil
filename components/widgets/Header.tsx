@@ -6,6 +6,7 @@ import { Logout, Menu, AdminPanelSettings, ManageAccounts } from "@mui/icons-mat
 import { Box, Typography, IconButton, Avatar, Menu as MuiMenu, MenuItem, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useNotification } from "@/components/providers/NotificationProvider";
 
 interface HeaderProps {
   title?: string;
@@ -15,6 +16,7 @@ interface HeaderProps {
 export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderProps) {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { showNotification } = useNotification();
   
   const authEmail = typeof window !== "undefined" ? localStorage.getItem("adminAuth") : "admin@slatermatsil.com";
   const displayEmail = authEmail && authEmail !== "true" ? authEmail : "admin@slatermatsil.com";
@@ -22,6 +24,7 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
   const handleLogout = () => {
     localStorage.removeItem("adminAuth");
     setAnchorEl(null);
+    showNotification("Logged out successfully", "error");
     router.push("/admin");
   };
 
