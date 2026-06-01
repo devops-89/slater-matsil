@@ -49,6 +49,7 @@ const DrivingInnovation = () => {
           <Grid size={{ lg: 6, xs: 12 }}>
             <Image
               src={
+                details?.aboutPage?.drivingInnovationEverywhere?.imageDownloadUrl ||
                 details?.aboutPage?.drivingInnovationEverywhere?.img ||
                 drivingInnovation
               }

@@ -3,6 +3,7 @@
 import slider4 from "@/home/slider/slider4.jpg";
 import slider5 from "@/home/slider/slider5.jpg";
 import slider6 from "@/home/slider/slider6.jpg";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -13,7 +14,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { usePageData } from "@/store/usePageData";
 
 const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
   return (
@@ -107,13 +107,15 @@ const HeroSection3 = () => {
     return finalUrl.replace(/ /g, "%20");
   };
 
-  const banners =
-    Array.isArray(globalBanners) && globalBanners.length > 0
-      ? globalBanners.map((b: any, idx: number) => ({
-          ...b,
-          img: getValidImageUrl(b.image) || defaultBanners[idx]?.img || slider4,
-        }))
-      : defaultBanners;
+  const banners = defaultBanners.map((def: any, idx: number) => {
+    const apiSlide = (Array.isArray(globalBanners) ? globalBanners[idx] : null) || {};
+    return {
+      ...def,
+      title: apiSlide.title || def.title,
+      description: apiSlide.description || def.description,
+      img: getValidImageUrl(apiSlide.imageDownloadUrl || apiSlide.imageUrl || apiSlide.image) || def.img,
+    };
+  });
 
   return (
     <Box

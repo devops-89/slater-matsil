@@ -9,7 +9,7 @@ import { mapAboutPageStateToBackend, mapBackendToAboutPageState, mapBackendToHom
 import { ArrowBack, ExpandMore, Save } from "@mui/icons-material";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState, useMemo } from "react";
+  import { useEffect, useState, useMemo, useRef } from "react";
 import * as yup from "yup";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import loadingData from "@/public/images/loading2.json";
@@ -155,7 +155,11 @@ export default function AdminPageEditorLayout() {
     }
   };
 
+  const fetchedSlugRef = useRef<string | null>(null);
+
   useEffect(() => {
+    if (fetchedSlugRef.current === slug) return;
+    fetchedSlugRef.current = slug;
 
     let isMounted = true;
     const fetchPageData = async () => {

@@ -43,7 +43,7 @@ const AboutSection = () => {
             </Typography>
             <Box>
               <Image
-                src={details?.homepage?.aboutSection?.image || AboutImage}
+                src={details?.homepage?.aboutSection?.imageDownloadUrl || details?.homepage?.aboutSection?.image || AboutImage}
                 alt="Team working together"
                 width={800}
                 height={600}

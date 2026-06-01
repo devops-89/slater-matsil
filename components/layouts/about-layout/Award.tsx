@@ -78,13 +78,15 @@ const Award = () => {
               {details?.aboutPage?.AWARDSPROPS?.heading2 || "Dedication And Results."}
             </Typography>
             <Grid container>
-              {details?.aboutPage?.AWARDSPROPS?.awards_img?.map((val, i) => (
+              {details?.aboutPage?.AWARDSPROPS?.awards_img?.map((val: any, i: number) => (
                 <Grid size={{ lg: 4, xs: 6 }} key={i}>
                   <Image
-                    src={val.img}
+                    src={val.imageDownloadUrl || val.img}
                     alt=""
+                    width={300}
+                    height={300}
                     unoptimized={true}
-                    style={{ width: "100%", height: "auto" }}
+                    style={{ width: "200px", height: "auto" }}
                   />
                 </Grid>
               ))}

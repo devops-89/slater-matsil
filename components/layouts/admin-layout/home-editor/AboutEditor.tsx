@@ -1,6 +1,6 @@
 import AboutImage from "@/public/images/home/aboutUs.jpg";
 import React from 'react';
-import { Box, Button, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Divider, IconButton, Stack, TextField, Typography, CircularProgress } from "@mui/material";
 import { Delete, Upload } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
@@ -23,8 +23,9 @@ export const AboutEditor = ({ data, onChange }: { data: any, onChange: (newData:
       const res = await MediaControllers.uploadMedia(formData);
       const responseData = res.data?.data?.data || res.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
       if (uploadedUrl) {
-        onChange({ ...data, image: uploadedUrl });
+        onChange({ ...data, image: uploadedUrl, imageDownloadUrl: uploadedUrl, imageUrl: uploadedKey });
         showNotification("Image uploaded successfully", "success");
       }
     } catch (error) {
@@ -66,18 +67,20 @@ export const AboutEditor = ({ data, onChange }: { data: any, onChange: (newData:
       <Box>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Typography variant="subtitle2" color="text.secondary">About Image</Typography>
-          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
+          <Button component="label" variant="outlined" startIcon={isUploading ? <CircularProgress size={16} /> : <Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE, borderColor: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
             {isUploading ? "Uploading..." : "Upload Image"}
             <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
           </Button>
         </Box>
-        <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={data.image || AboutImage.src} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        <Box sx={{ mt: 2, position: "relative", width: "100%", borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
+          {(data.imageDownloadUrl || data.image) ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={data.imageDownloadUrl || data.image} alt="preview" style={{ width: "100%", height: "auto", objectFit: "cover" }} />
+          ) : null}
           <IconButton
             size="small"
             color="error"
-            onClick={() => onChange({ ...data, image: "" })}
+            onClick={() => onChange({ ...data, image: "", imageDownloadUrl: "", imageUrl: "" })}
             sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
           >
             <Delete fontSize="small" />

@@ -25,10 +25,12 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
       const response = await MediaControllers.uploadMedia(formData);
       const responseData = response.data?.data?.data || response.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
+      
       if (response.data?.success && uploadedUrl) {
         const currentLogos = awardsData.awards_img || [];
-        updateAboutPage('AWARDSPROPS', { ...awardsData, awards_img: [...currentLogos, { img: uploadedUrl }] });
-        showNotification("Logo added successfully", "success");
+        updateAboutPage('AWARDSPROPS', { ...awardsData, awards_img: [...currentLogos, { img: uploadedUrl, imageDownloadUrl: uploadedUrl, key: uploadedKey }] });
+        showNotification("Image uploaded successfully", "success");
       }
     } catch (error) {
       showNotification("Failed to add logo", "error");
@@ -48,11 +50,13 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
       const response = await MediaControllers.uploadMedia(formData);
       const responseData = response.data?.data?.data || response.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
+
       if (response.data?.success && uploadedUrl) {
         const newLogos = [...(awardsData.awards_img || [])];
-        newLogos[index] = { img: uploadedUrl };
+        newLogos[index] = { img: uploadedUrl, imageDownloadUrl: uploadedUrl, key: uploadedKey };
         updateAboutPage('AWARDSPROPS', { ...awardsData, awards_img: newLogos });
-        showNotification("Logo updated successfully", "success");
+        showNotification("Image updated successfully", "success");
       }
     } catch (error) {
       showNotification("Failed to update logo", "error");

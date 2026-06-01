@@ -82,6 +82,7 @@ export interface ABOUT_US_HEROSECTION {
   description: string;
   img: StaticImageData | string;
   videoUrl?: string;
+  videoDownloadUrl?: string;
 }
 
 interface HERO_SECTION_PROPS {
@@ -100,6 +101,8 @@ interface ABOUT_INNOVATION_INSIGHTS_PROPS {
 
 interface aboutSectionProps {
   image?: any;
+  imageDownloadUrl?: string;
+  imageUrl?: string;
   sectionTitle: string;
   heading: string;
   description: string;
@@ -119,7 +122,8 @@ interface ABOUT_US_SLATER {
   description: {
     label: string;
   }[];
-  img: StaticImageData;
+  img: StaticImageData | string;
+  imageDownloadUrl?: string;
 }
 
 interface REDEFINING_PATENT_SUCCESS_PROPS {
@@ -154,6 +158,8 @@ interface CTA_BUTTON_PROPS {
 interface WHO_WE_SERVE_SECTION_PROPS {
   leftSection: {
     heroImage: string;
+    imageDownloadUrl?: string;
+    key?: string;
     small_logo: StaticImageData;
     startingYear: string;
     servicesLabel: string;
@@ -230,7 +236,7 @@ interface AWARDS_ABOUT_PROPS {
   img: StaticImageData;
   heading1: string;
   heading2: string;
-  awards_img: { img: StaticImageData }[];
+  awards_img: { img: StaticImageData | string; imageDownloadUrl?: string; }[];
 }
 
 export interface DATA_LIST_PROPS {

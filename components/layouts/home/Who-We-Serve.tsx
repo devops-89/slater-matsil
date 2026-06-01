@@ -1,6 +1,8 @@
+import checkmark from "@/icons/checkmark.png";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { ArrowForward } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -13,9 +15,9 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-import checkmark from "@/icons/checkmark.png";
-import { ArrowForward } from "@mui/icons-material";
 import Link from "next/link";
+import contactUs from "@/public/images/home/contact-us.png";
+
 const Whoweserve = () => {
   const { details } = usePageData();
   return (
@@ -24,9 +26,7 @@ const Whoweserve = () => {
         <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-up" suppressHydrationWarning>
           <Box
             sx={{
-              ...(details?.homepage?.who_we_serve?.leftSection?.heroImage && {
-                backgroundImage: `url(${details.homepage.who_we_serve.leftSection.heroImage})`,
-              }),
+              backgroundImage: `url(${details?.homepage?.who_we_serve?.leftSection?.imageDownloadUrl || details?.homepage?.who_we_serve?.leftSection?.heroImage || contactUs.src})`,
               height: { lg: "80vh", xs: "50vh" },
               backgroundPosition: "center",
               backgroundSize: "cover",

@@ -23,8 +23,10 @@ export const AboutUsHeroEditor = ({ data, onChange }: any) => {
       const response = await MediaControllers.uploadMedia(formData);
       const responseData = response.data?.data?.data || response.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
+      
       if (response.data?.success && uploadedUrl) {
-        onChange({ ...data, videoUrl: uploadedUrl });
+        onChange({ ...data, videoUrl: uploadedUrl, videoDownloadUrl: uploadedUrl, key: uploadedKey });
         showNotification("Video uploaded successfully", "success");
       }
     } catch (error) {

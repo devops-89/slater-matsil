@@ -1,13 +1,14 @@
 import { MediaControllers } from "@/api/mediaControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
 import slider4 from "@/public/images/home/slider/slider4.jpg";
 import slider5 from "@/public/images/home/slider/slider5.jpg";
 import slider6 from "@/public/images/home/slider/slider6.jpg";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Delete, Upload } from "@mui/icons-material";
-import { Box, Button, Divider, IconButton, Stack, TextField, Typography, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
+import Image from "next/image";
 import React, { useState } from "react";
-import { useNotification } from "@/components/providers/NotificationProvider";
 
 export const HeroCombined = ({ banners, onChange, onDeleteMedia }: { banners: any; onChange: (newData: any) => void; onDeleteMedia?: (key: string) => void }) => {
   const [uploadingIdx, setUploadingIdx] = useState<number | null>(null);
@@ -31,7 +32,17 @@ export const HeroCombined = ({ banners, onChange, onDeleteMedia }: { banners: an
     },
   ];
   
-  const safeBanners = Array.isArray(banners) && banners.length > 0 ? banners : defaultBanners;
+  const safeBanners = defaultBanners.map((def: any, idx: number) => {
+    const apiSlide = Array.isArray(banners) ? banners[idx] : null;
+    return apiSlide ? { ...def, ...apiSlide } : def;
+  });
+
+  React.useEffect(() => {
+    if (!banners || !Array.isArray(banners) || banners.length < 3) {
+      onChange(defaultBanners);
+    }
+  }, [banners, onChange]);
+
 
   const handleImageUpload = async (idx: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -45,9 +56,11 @@ export const HeroCombined = ({ banners, onChange, onDeleteMedia }: { banners: an
       const res = await MediaControllers.uploadMedia(formData);
       const responseData = res.data?.data?.data || res.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
       if (uploadedUrl) {
         const newBanners = [...safeBanners];
-        newBanners[idx] = { ...newBanners[idx], image: uploadedUrl };
+        newBanners[idx] = { ...newBanners[idx], image: uploadedUrl, imageUrl: uploadedKey, imageDownloadUrl: uploadedUrl };
+        delete newBanners[idx].key;
         onChange(newBanners);
         showNotification("Image uploaded successfully", "success");
       }
@@ -97,10 +110,15 @@ export const HeroCombined = ({ banners, onChange, onDeleteMedia }: { banners: an
                 </Box>
 
                 <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
-                  {banner.image || defaultBanners[idx]?.image ? (
+                  {(banner.image && banner.image !== "deleted") || (banner.imageDownloadUrl && banner.imageDownloadUrl !== "deleted") ? (
                     <>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={banner.image || defaultBanners[idx]?.image} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                      <Image 
+                        src={banner.imageDownloadUrl || banner.image} 
+                        alt="preview" 
+                        fill 
+                        unoptimized 
+                        style={{ objectFit: "cover" }} 
+                      />
                       
                       <IconButton
                         size="small"
@@ -124,13 +142,15 @@ export const HeroCombined = ({ banners, onChange, onDeleteMedia }: { banners: an
                             }
                             
                             const newBanners = [...safeBanners];
-                            newBanners[idx] = { ...newBanners[idx], image: "deleted" };
+                            newBanners[idx] = { ...newBanners[idx], imageUrl: "deleted", image: "deleted", imageDownloadUrl: "" };
+                            delete newBanners[idx].key;
                             onChange(newBanners);
                             showNotification("Image removed from preview (Save to apply)", "info");
                           } catch (err) {
                             console.error("Failed to process image removal", err);
                             const newBanners = [...safeBanners];
-                            newBanners[idx] = { ...newBanners[idx], image: "deleted" };
+                            newBanners[idx] = { ...newBanners[idx], imageUrl: "deleted", image: "deleted", imageDownloadUrl: "" };
+                            delete newBanners[idx].key;
                             onChange(newBanners);
                           } finally {
                             setDeletingIdx(null);
