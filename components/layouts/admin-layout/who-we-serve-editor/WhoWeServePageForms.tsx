@@ -15,8 +15,60 @@ const handleFileUpload = (field: string, data: any, onChange: any, event: React.
   }
 };
 
-const WhoWeServeHeroEditor = ({ data, onChange }: any) => {
+const WhoWeServeHeroEditor = ({ data, onChange, onDeleteMedia }: any) => {
+  const { showNotification } = require("@/components/providers/NotificationProvider").useNotification();
+  const [isUploading, setIsUploading] = React.useState(false);
+
   const handleChange = (field: string, value: string) => onChange({ ...data, [field]: value });
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setIsUploading(true);
+      try {
+        const { MediaControllers } = require("@/api/mediaControllers");
+        const formData = new FormData();
+        formData.append("image", file);
+        const res = await MediaControllers.uploadMedia(formData);
+        const responseData = res.data?.data?.data || res.data?.data;
+        const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+        const uploadedKey = responseData?.key || uploadedUrl;
+        
+        if (uploadedUrl) {
+          onChange({ 
+            ...data, 
+            img: uploadedUrl,
+            imageUrl: uploadedKey,
+            imageDownloadUrl: uploadedUrl,
+            key: uploadedKey
+          });
+          showNotification("Image uploaded successfully", "success");
+        }
+      } catch (error) {
+        showNotification("Failed to upload image", "error");
+      } finally {
+        setIsUploading(false);
+      }
+    }
+  };
+
+  const removeHeroImage = () => {
+    if (data?.key && onDeleteMedia) {
+      onDeleteMedia(data.key);
+    }
+    
+    onChange({ 
+      ...data, 
+      img: "",
+      imageUrl: "",
+      imageDownloadUrl: "",
+      key: "" 
+    });
+    showNotification("Image removed from preview. Click Save Changes to delete it.", "info");
+  };
+
+  const srcUrl = data?.imageDownloadUrl || data?.imgUrl || data?.img || (typeof data?.img === 'string' ? data.img : data?.img?.src);
+
   return (
     <Stack spacing={3}>
       <TextField fullWidth label="Title (Tagline)" value={data?.title || ""} onChange={(e) => handleChange("title", e.target.value)} />
@@ -27,14 +79,23 @@ const WhoWeServeHeroEditor = ({ data, onChange }: any) => {
       <Box>
         <Typography variant="caption" display="block" gutterBottom>Hero Image</Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'flex-start' }}>
-          {(data?.img) && (
+          {srcUrl && (
             <Box sx={{ width: 120, height: 80, borderRadius: 1, overflow: 'hidden', border: '1px solid #ddd', position: 'relative' }}>
-              <img src={typeof data.img === 'string' ? data.img : data.img.src} alt="Hero" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={srcUrl} alt="Hero" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <IconButton 
+                size="small" 
+                color="error" 
+                onClick={removeHeroImage}
+                sx={{ position: 'absolute', top: 2, right: 2, backgroundColor: 'rgba(255,255,255,0.8)', padding: '2px', '&:hover': { backgroundColor: 'white' } }}
+              >
+                <Edit fontSize="small" sx={{ display: 'none' }} />
+                <Typography variant="caption" color="error" sx={{ fontWeight: 'bold', px: 1 }}>X</Typography>
+              </IconButton>
             </Box>
           )}
-          <Button component="label" variant="outlined" startIcon={<Upload />} size="small">
-            Upload New
-            <input type="file" hidden accept="image/*" onChange={(e) => handleFileUpload("img", data, onChange, e)} />
+          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" disabled={isUploading}>
+            {isUploading ? "Uploading..." : "Upload New"}
+            <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
           </Button>
         </Box>
       </Box>
@@ -65,20 +126,6 @@ const WhoWeServeAboutEditor = ({ data, onChange }: any) => {
       <TextField fullWidth multiline rows={3} label="Quote Text" value={data?.quoteCardData?.quote || ""} onChange={(e) => handleQuoteChange("quote", e.target.value)} />
       <TextField fullWidth label="Quote Author" value={data?.quoteCardData?.author || ""} onChange={(e) => handleQuoteChange("author", e.target.value)} />
 
-      <Box>
-        <Typography variant="caption" display="block" gutterBottom>Logo Image</Typography>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'flex-start' }}>
-          {(data?.img) && (
-            <Box sx={{ width: 120, height: 80, borderRadius: 1, overflow: 'hidden', border: '1px solid #ddd', position: 'relative', backgroundColor: '#f0f0f0' }}>
-              <img src={typeof data.img === 'string' ? data.img : data.img.src} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-            </Box>
-          )}
-          <Button component="label" variant="outlined" startIcon={<Upload />} size="small">
-            Upload New
-            <input type="file" hidden accept="image/*" onChange={(e) => handleFileUpload("img", data, onChange, e)} />
-          </Button>
-        </Box>
-      </Box>
     </Stack>
   );
 };
@@ -169,12 +216,12 @@ const WhoWeServeTabsEditor = ({ data, onChange }: any) => {
   );
 };
 
-export const WhoWeServePageForms = ({ activeSection, websiteData, updateWhoWeServePage }: any) => {
+export const WhoWeServePageForms = ({ activeSection, websiteData, updateWhoWeServePage, onDeleteMedia }: any) => {
   switch (activeSection) {
     case 0:
-      return <WhoWeServeHeroEditor data={websiteData?.whoWeServePage?.whoWeServepageHeroSection} onChange={(newData: any) => updateWhoWeServePage('whoWeServepageHeroSection', newData)} />;
+      return <WhoWeServeHeroEditor data={websiteData?.whoWeServePage?.whoWeServepageHeroSection} onChange={(newData: any) => updateWhoWeServePage('whoWeServepageHeroSection', newData)} onDeleteMedia={onDeleteMedia} />;
     case 1:
-      return <WhoWeServeAboutEditor data={websiteData?.whoWeServePage?.whoWeServeAboutSection} onChange={(newData: any) => updateWhoWeServePage('whoWeServeAboutSection', newData)} />;
+      return <WhoWeServeAboutEditor data={websiteData?.whoWeServePage?.whoWeServeAboutSection} onChange={(newData: any) => updateWhoWeServePage('whoWeServeAboutSection', newData)} onDeleteMedia={onDeleteMedia} />;
     case 2:
       return <WhoWeServeTabsEditor data={websiteData?.whoWeServePage?.whoWeServeTabsSection} onChange={(newData: any) => updateWhoWeServePage('whoWeServeTabsSection', newData)} />;
     default:

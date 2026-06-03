@@ -7,7 +7,7 @@ import { adelle } from "@/utils/fonts";
 import { MediaControllers } from "@/api/mediaControllers";
 import { useNotification } from "@/components/providers/NotificationProvider";
 
-export const InsightsQuickLinksEditor = ({ data, onChange }: { data: any, onChange: (newData: any) => void }) => {
+export const InsightsQuickLinksEditor = ({ data, onChange, onDeleteMedia }: { data: any, onChange: (newData: any) => void, onDeleteMedia?: any }) => {
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const { showNotification } = useNotification();
 
@@ -23,8 +23,15 @@ export const InsightsQuickLinksEditor = ({ data, onChange }: { data: any, onChan
       const res = await MediaControllers.uploadMedia(formData);
       const responseData = res.data?.data?.data || res.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
+      
       if (uploadedUrl) {
-        handleItemChange(index, "img", uploadedUrl);
+        handleMultiChange(index, {
+          img: uploadedUrl,
+          imageUrl: uploadedKey,
+          imageDownloadUrl: uploadedUrl,
+          key: uploadedKey
+        });
         showNotification("Image uploaded successfully", "success");
       }
     } catch (error) {
@@ -43,6 +50,12 @@ export const InsightsQuickLinksEditor = ({ data, onChange }: { data: any, onChan
     onChange({ ...data, data: newLinks });
   };
 
+  const handleMultiChange = (index: number, updates: any) => {
+    const newLinks = [...links];
+    newLinks[index] = { ...newLinks[index], ...updates };
+    onChange({ ...data, data: newLinks });
+  };
+
   const handleAddItem = () => {
     onChange({
       ...data,
@@ -54,6 +67,15 @@ export const InsightsQuickLinksEditor = ({ data, onChange }: { data: any, onChan
     const newLinks = [...links];
     newLinks.splice(index, 1);
     onChange({ ...data, data: newLinks });
+  };
+
+  const handleDeleteImage = (index: number) => {
+    const link = links[index];
+    if (onDeleteMedia && (link.key || link.imageUrl)) {
+      onDeleteMedia(link.key || link.imageUrl);
+    }
+    handleMultiChange(index, { img: "", imageUrl: "", imageDownloadUrl: "", key: "" });
+    showNotification("Image removed from preview. Don't forget to save changes.", "info");
   };
 
   return (
@@ -109,7 +131,7 @@ export const InsightsQuickLinksEditor = ({ data, onChange }: { data: any, onChan
                   <IconButton
                     size="small"
                     color="error"
-                    onClick={() => handleItemChange(index, "img", "")}
+                    onClick={() => handleDeleteImage(index)}
                     sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
                   >
                     <Delete fontSize="small" />

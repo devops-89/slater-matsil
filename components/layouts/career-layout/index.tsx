@@ -6,12 +6,12 @@ import WhyWorkWithus from "./Why-work-with-us";
 import OpenRoles from "./Open-Roles";
 import InsightsSection from "@/components/widgets/Insights-section";
 
-const CareerLayout = () => {
+const CareerLayout = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   return (
     <div>
       <Box>
         <div data-aos="fade-in" suppressHydrationWarning>
-          <HeroSection />
+          <HeroSection onImageLoad={onImageLoad} />
         </div>
         <div data-aos="fade-up" suppressHydrationWarning>
           <WhyWorkWithus />

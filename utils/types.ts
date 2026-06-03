@@ -66,8 +66,55 @@ export interface HOMEPAGE_DATA_PROPS {
   disclaimer?: LEGAL_PAGE_DATA;
 }
 
+export interface API_PROFESSIONAL_BULLET {
+  id?: number;
+  sectionId?: number;
+  bulletText: string;
+  sortOrder: number;
+}
+
+export interface API_PROFESSIONAL_SECTION {
+  id?: number;
+  profileId?: number;
+  sectionType: "BIOGRAPHY" | "EDUCATION" | "ADMISSIONS" | "ARTICLES_PUBLICATIONS" | "ASSOCIATIONS";
+  description?: string;
+  sortOrder: number;
+  bullets: API_PROFESSIONAL_BULLET[];
+}
+
+export interface API_PROFESSIONAL_PROFILE {
+  id?: number;
+  jobTitle: string;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  userId?: number;
+  sections: API_PROFESSIONAL_SECTION[];
+}
+
+export interface API_USER_PROFESSIONAL {
+  id?: number;
+  email: string;
+  fullName: string;
+  firstName: string;
+  lastName: string;
+  designation: string;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  profileImageUrl?: string;
+  profileImageDownloadUrl?: string;
+  phoneNumber: string;
+  role: "PROFESSIONAL";
+  status?: "ACTIVE" | "INACTIVE";
+  professionalProfiles: API_PROFESSIONAL_PROFILE[];
+}
+
 export interface PROFESSIONAL_DETAILS_PROPS {
-  slug: string;
+  id?: number | string;
+  slug?: string;
   professionals_Details_HeroSection: PROFESSIONAL_DETAILS_HERO_PROPS;
   PROFESSIONAL_BIO_DATA: PROFESSIONAL_BIO_PROPS[];
   PROFESSIONAL_EDUCATION_DATA: PROFESSIONAL_BIO_PROPS[];
@@ -124,6 +171,7 @@ interface ABOUT_US_SLATER {
   }[];
   img: StaticImageData | string;
   imageDownloadUrl?: string;
+  imageUrl?: string;
 }
 
 interface REDEFINING_PATENT_SUCCESS_PROPS {
@@ -236,7 +284,7 @@ interface AWARDS_ABOUT_PROPS {
   img: StaticImageData;
   heading1: string;
   heading2: string;
-  awards_img: { img: StaticImageData | string; imageDownloadUrl?: string; }[];
+  awards_img: { img: StaticImageData | string; imageDownloadUrl?: string; imageUrl?: string; }[];
 }
 
 export interface DATA_LIST_PROPS {
@@ -257,10 +305,10 @@ interface PROFESSIONALS_HEROSECTION_PROPS {
 }
 
 export interface PROFESSIONALS_CARD_PROPS {
-  img: StaticImageData;
+  id?: number;
+  img: StaticImageData | string;
   name: string;
   designation: string;
-  slug: string;
   onLoad?: () => void;
 }
 
@@ -370,10 +418,12 @@ interface PRACTICE_GROUPS_HEROSECTION_PROPS {
   title: string;
   heading: string;
   description1: string;
-  firstHeroImage: StaticImageData;
-  secondHeroImage: StaticImageData;
-  thirdHeroImage: StaticImageData;
+  firstHeroImage: StaticImageData | string;
+  secondHeroImage: StaticImageData | string;
+  thirdHeroImage: StaticImageData | string;
   description2: string;
+  imageDownloadUrl?: string;
+  imageUrl?: string;
 }
 
 interface PRACTICE_GROUPS_SECTION_PROPS {
@@ -540,10 +590,10 @@ export interface INSIGHTS_DETAIL_PROPS {
     additionalInformation?: INSIGHT_CONTENT_SECTION_PROPS;
     closingStatement?: INSIGHT_CONTENT_SECTION_PROPS;
     resource?: {
-    heading: string;
-    content: string;
-    link: string;
-  };
+      heading: string;
+      content: string;
+      link: string;
+    };
 
   };
 }

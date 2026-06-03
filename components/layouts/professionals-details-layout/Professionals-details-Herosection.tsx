@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 
-const ProfessionalsDetailsHeroSection = () => {
+const ProfessionalsDetailsHeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const phone = useMediaQuery("(max-width:600px)");
   const { data } = useProfessionalDetailsData();
   const heroImg = data?.professionals_Details_HeroSection?.img;
@@ -55,8 +55,8 @@ const ProfessionalsDetailsHeroSection = () => {
     <Box
       sx={{
         position: "relative",
-        minHeight: { xs: "auto", lg: "85vh" },
-        height: { xs: "auto", lg: "85vh" },
+        minHeight: { xs: "auto", md: "85vh", lg: "85vh" },
+        height: { xs: "auto", md: "85vh", lg: "85vh" },
         overflow: "hidden",
         pt: { xs: 5, lg: 0 },
         pb: { xs: 0, lg: 0 },
@@ -65,8 +65,8 @@ const ProfessionalsDetailsHeroSection = () => {
       <Box
         sx={{
           backgroundColor: COLORS.PRIMARY_BLUE,
-          width: { xs: "100%", lg: "35%" },
-          height: { xs: "300px", lg: "100%" },
+          width: { xs: "100%", md: "35%", lg: "35%" },
+          height: { xs: "300px", md: "100%", lg: "100%" },
           position: "absolute",
           right: 0,
           top: 0,
@@ -91,7 +91,7 @@ const ProfessionalsDetailsHeroSection = () => {
           sx={{ height: "100%", alignItems: "center" }}
         >
           <Grid
-            size={{ lg: 6, xs: 12 }}
+            size={{ xs: 12, md: 6, lg: 6 }}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -178,23 +178,23 @@ const ProfessionalsDetailsHeroSection = () => {
             </Box>
           </Grid>
           <Grid
-            size={{ lg: 6, xs: 12 }}
+            size={{ xs: 12, md: 6, lg: 6 }}
             sx={{
               height: "100%",
-              display: { xs: "none", lg: "flex" },
-              alignItems: { xs: "center", lg: "flex-end" },
+              display: { xs: "none", md: "flex", lg: "flex" },
+              alignItems: { xs: "center", md: "flex-end", lg: "flex-end" },
               justifyContent: "center",
               position: "relative",
-              minHeight: { xs: 300, lg: "auto" },
+              minHeight: { xs: 300, md: "auto", lg: "auto" },
             }}
           >
             {heroImg && (
               <Box
                 sx={{
                   position: "relative",
-                  width: { lg: "140%", xs: "100%" },
-                  height: { lg: 650, xs: 400 },
-                  right: { lg: "-10%", xs: "0" },
+                  width: { xs: "100%", md: "140%", lg: "140%" },
+                  height: { xs: 400, md: 650, lg: 650 },
+                  right: { xs: "0", md: "-10%", lg: "-10%" },
                 }}
               >
                 <Image
@@ -206,6 +206,8 @@ const ProfessionalsDetailsHeroSection = () => {
                     objectPosition: usingMobileImageStyles(phone),
                   }}
                   priority
+                  onLoad={onImageLoad}
+                  onError={onImageLoad}
                 />
               </Box>
             )}

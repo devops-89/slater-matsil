@@ -24,13 +24,13 @@ export const renderDesktopPreview = (children: React.ReactNode) => (
   </Box>
 );
 
-export const ServicesPageForms = ({ activeSection, websiteData, updateServicesPage, updateServiceAreas }: any) => {
+export const ServicesPageForms = ({ activeSection, websiteData, updateServicesPage, updateServiceAreas, onDeleteMedia }: any) => {
   switch (activeSection) {
-    case 0: return <ServicesHeroEditor data={websiteData.servicesPage.heroSection} onChange={(newData: any) => updateServicesPage('heroSection', newData)} />;
-    case 1: return <ServicesStrengthEditor data={websiteData.servicesPage.why_choose_strength_props} onChange={(newData: any) => updateServicesPage('why_choose_strength_props', newData)} />;
-    case 2: return <ServicesUnparalleledEditor data={websiteData.servicesPage.unparalleled_props} onChange={(newData: any) => updateServicesPage('unparalleled_props', newData)} />;
+    case 0: return <ServicesHeroEditor data={websiteData.servicesPage.heroSection} onChange={(newData: any) => updateServicesPage('heroSection', newData)} onDeleteMedia={onDeleteMedia} />;
+    case 1: return <ServicesStrengthEditor data={websiteData.servicesPage.why_choose_strength_props} onChange={(newData: any) => updateServicesPage('why_choose_strength_props', newData)} onDeleteMedia={onDeleteMedia} />;
+    case 2: return <ServicesUnparalleledEditor data={websiteData.servicesPage.unparalleled_props} onChange={(newData: any) => updateServicesPage('unparalleled_props', newData)} onDeleteMedia={onDeleteMedia} />;
     case 3: return <ServicesFrameworkEditor data={websiteData.servicesPage.service_framework_props} onChange={(newData: any) => updateServicesPage('service_framework_props', newData)} />;
-    case 4: return <ServiceAreasEditor data={websiteData.homepage.service_area} onChange={updateServiceAreas} />;
+    case 4: return <ServiceAreasEditor data={websiteData.homepage.service_area} onChange={updateServiceAreas} onDeleteMedia={onDeleteMedia} />;
     default: return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Select a section to edit.</Typography>;
   }
 };

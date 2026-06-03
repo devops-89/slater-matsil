@@ -3,7 +3,7 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-const PracticeGroupsHeroSection = () => {
+const PracticeGroupsHeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const { details } = usePageData();
 
   const data = details?.practiceGroupPage?.practiceGroup_hero_section;
@@ -65,16 +65,22 @@ const PracticeGroupsHeroSection = () => {
 
             <Grid container sx={{ mt: { lg: 0, xs: 3 } }}>
   <Grid size={{ lg: 12, xs: 12 }}>
-    {data?.firstHeroImage && (
+    {(data?.imageDownloadUrl || data?.imageUrl) && (
       <Image
-        src={data.firstHeroImage}
+        src={data?.imageDownloadUrl || data?.imageUrl || ""}
         alt="hero"
+        width={1200}
+        height={600}
+        unoptimized={(typeof data?.imageDownloadUrl === "string" && data.imageDownloadUrl.startsWith("data:")) || (typeof data?.imageUrl === "string" && data.imageUrl.startsWith("data:"))}
         style={{
           width: "100%",
           height: "auto",
           objectFit: "cover",
           borderRadius: "20px",
         }}
+        priority
+        onLoad={onImageLoad}
+        onError={onImageLoad}
       />
     )}
   </Grid>

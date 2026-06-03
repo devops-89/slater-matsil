@@ -8,7 +8,7 @@ import Image from "next/image";
 import { usePageData } from "@/store/usePageData";
 import StaticIndicators from "@/components/widgets/common/Indicators-static";
 import ImageCarousel from "./Image-Carousel";
-const HeroSection = () => {
+const HeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const { details } = usePageData();
   return (
     <Box sx={{ py: { lg: 10, xs: 5 } }}>
@@ -97,7 +97,7 @@ const HeroSection = () => {
             style={{ width: "100%", height: "auto" }}
           />
         )} */}
-        <ImageCarousel />
+        <ImageCarousel onImageLoad={onImageLoad} />
       </Box>
       <Container maxWidth="lg">
         <Box>

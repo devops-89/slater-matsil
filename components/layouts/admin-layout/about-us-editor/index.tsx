@@ -36,12 +36,12 @@ export const renderDesktopPreview = (children: React.ReactNode) => (
   </Box>
 );
 
-export const AboutUsForms = ({ activeSection, websiteData, updateAboutPage }: any) => {
+export const AboutUsForms = ({ activeSection, websiteData, updateAboutPage, onDeleteMedia }: any) => {
   switch (activeSection) {
-    case 0: return <AboutUsHeroEditor data={websiteData.aboutPage.heroSection} onChange={(newData: any) => updateAboutPage('heroSection', newData)} />;
-    case 1: return <AboutUsInnovationEditor data={websiteData.aboutPage.drivingInnovationEverywhere} onChange={(newData: any) => updateAboutPage('drivingInnovationEverywhere', newData)} />;
+    case 0: return <AboutUsHeroEditor data={websiteData.aboutPage.heroSection} onChange={(newData: any) => updateAboutPage('heroSection', newData)} onDeleteMedia={onDeleteMedia} />;
+    case 1: return <AboutUsInnovationEditor data={websiteData.aboutPage.drivingInnovationEverywhere} onChange={(newData: any) => updateAboutPage('drivingInnovationEverywhere', newData)} onDeleteMedia={onDeleteMedia} />;
     case 2: return <AboutUsPatentSuccessEditor data={websiteData.aboutPage.REDEFINING_PATENT_SUCCESS} onChange={(newData: any) => updateAboutPage('REDEFINING_PATENT_SUCCESS', newData)} />;
-    case 3: return <AboutUsInsightsAndAwardsEditor insightsData={websiteData.aboutPage.innovationInsights} awardsData={websiteData.aboutPage.AWARDSPROPS} updateAboutPage={updateAboutPage} />;
+    case 3: return <AboutUsInsightsAndAwardsEditor insightsData={websiteData.aboutPage.innovationInsights} awardsData={websiteData.aboutPage.AWARDSPROPS} updateAboutPage={updateAboutPage} onDeleteMedia={onDeleteMedia} />;
     case 4: return <AboutUsWhoWeServeEditor data={websiteData.aboutPage.who_we_serve_props} onChange={(newData: any) => updateAboutPage('who_we_serve_props', newData)} />;
     case 5: return <AboutUsIndustriesEditor data={websiteData.aboutPage.industriesWeServe} onChange={(newData: any) => updateAboutPage('industriesWeServe', newData)} />;
     default: return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Select a section to edit.</Typography>;

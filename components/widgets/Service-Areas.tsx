@@ -68,6 +68,8 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
             <Image
               src={details?.homepage?.service_area?.img}
               alt=""
+              width={600}
+              height={100}
               style={{ width: "100%", height: "auto" }}
             />
           )}
@@ -76,7 +78,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
         <Grid container spacing={4} sx={{ mt: 7 }}>
           {displayData.map((val: SERVICES_AREAS_DATA, i: number) => (
             <Grid
-              size={{ lg: 4, xs: 12 }}
+              size={{ lg: 4, md: 6, sm: 6, xs: 12 }}
               key={i}
               data-aos="fade-up"
               data-aos-delay={i * 150}

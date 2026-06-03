@@ -1,13 +1,15 @@
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-    experimental: {
-    proxyClientMaxBodySize: 20 * 1024 * 1024,
+  reactStrictMode: false,
+  experimental: {
+    proxyClientMaxBodySize: 50 * 1024 * 1024,
   },
 
   /* config options here */
   transpilePackages: ["mui-tel-input"],
-   allowedDevOrigins: ["192.168.1.41"],
+  allowedDevOrigins: ["192.168.220.1"],
   images: {
     remotePatterns: [
       {

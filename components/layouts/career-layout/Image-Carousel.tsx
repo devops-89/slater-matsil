@@ -22,11 +22,24 @@ import "swiper/css/pagination";
 
 const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide8, slide9,slide10];
 
-const ImageCarousel = () => {
+const ImageCarousel = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const { details } = usePageData();
   const theme = useTheme();
   const dynamicImages = details?.careerPage?.career_hero_section?.carouselImages;
+  
+  const getValidSrc = (img: any) => {
+    if (!img) return null;
+    const src = img?.imageDownloadUrl || img?.imgUrl || img?.img || img?.src || (typeof img === 'string' ? img : null);
+    if (!src || src === "undefined") return null;
+    return src;
+  };
+
   const displayImages = (dynamicImages && dynamicImages.length > 0) ? dynamicImages : sliderImages;
+  const validImages = displayImages.map((img: any) => ({
+    original: img,
+    src: getValidSrc(img)
+  })).filter((item: any) => item.src !== null);
+
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.down("lg"));
 
@@ -95,7 +108,7 @@ const ImageCarousel = () => {
         }}
         className="multiSwiper"
       >
-        {displayImages.map((img: any, i: number) => (
+        {validImages.map((item: any, i: number) => (
           <SwiperSlide key={i}>
             <Box
               sx={{
@@ -112,14 +125,18 @@ const ImageCarousel = () => {
               }}
             >
               <Image
-                src={typeof img === 'string' ? img : img}
+                src={item.src}
                 alt={`Slide ${i + 1}`}
                 fill
                 priority={i < 4}
+                unoptimized={true}
+                sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw"
                 style={{
                   objectFit: "cover",
                   objectPosition: i === 4 ? "top center" : "center", 
                 }}
+                onLoad={i === 0 ? onImageLoad : undefined}
+                onError={i === 0 ? onImageLoad : undefined}
               />
             </Box>
           </SwiperSlide>

@@ -6,7 +6,7 @@ import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
 
-const HeroServicesSection = () => {
+const HeroServicesSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const { details } = usePageData();
 
   const service_heroSection_data = details?.servicesPage?.heroSection;
@@ -62,6 +62,11 @@ const HeroServicesSection = () => {
               <Image
                 src={service_heroSection_data?.img}
                 alt=""
+                width={800}
+                height={600}
+                priority
+                onLoad={onImageLoad}
+                onError={onImageLoad}
                 style={{ width: "100%", height: "auto", margin: "auto" }}
               />
             )}

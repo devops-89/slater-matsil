@@ -7,7 +7,7 @@ import { MediaControllers } from "@/api/mediaControllers";
 import { useState } from "react";
 import { useNotification } from "@/components/providers/NotificationProvider";
 
-export const ServicesUnparalleledEditor = ({ data, onChange }: { data: any, onChange: (newData: any) => void }) => {
+export const ServicesUnparalleledEditor = ({ data, onChange, onDeleteMedia }: { data: any, onChange: (newData: any) => void, onDeleteMedia?: any }) => {
   const [isUploading, setIsUploading] = useState(false);
   const { showNotification } = useNotification();
 
@@ -23,8 +23,9 @@ export const ServicesUnparalleledEditor = ({ data, onChange }: { data: any, onCh
       const res = await MediaControllers.uploadMedia(formData);
       const responseData = res.data?.data?.data || res.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
       if (uploadedUrl) {
-        onChange({ ...data, img: uploadedUrl });
+        onChange({ ...data, imageUrl: uploadedKey, imageDownloadUrl: uploadedUrl, img: uploadedKey });
         showNotification("Image uploaded successfully", "success");
       }
     } catch (error) {
@@ -50,14 +51,14 @@ export const ServicesUnparalleledEditor = ({ data, onChange }: { data: any, onCh
             <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
           </Button>
         </Box>
-        {data?.img && (
+        {(data?.imageDownloadUrl || data?.img || data?.imageUrl) && (
           <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={typeof data.img === 'string' ? data.img : data.img.src} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            <img src={data?.imageDownloadUrl || (typeof data.img === 'string' ? data.img : data.img?.src) || (typeof data.imageUrl === 'string' ? data.imageUrl : data.imageUrl?.src)} alt="preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
             <IconButton
               size="small"
               color="error"
-              onClick={() => onChange({ ...data, img: "" })}
+              onClick={() => onChange({ ...data, img: "", imageUrl: "", imageDownloadUrl: "" })}
               sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
             >
               <Delete fontSize="small" />

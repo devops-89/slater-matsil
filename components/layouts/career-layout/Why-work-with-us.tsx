@@ -79,9 +79,11 @@ const WhyWorkWithus = () => {
           <Grid size={{ lg: 6, xs: 12 }}>
             {data?.section_img && (
               <Image
-                src={data?.section_img}
+                src={typeof data.section_img === 'string' ? data.section_img : data.section_img}
                 alt=""
-                style={{ width: "100%", height: "auto", borderRadius: "20px" }}
+                width={800}
+                height={600}
+                style={{ width: "100%", height: "auto", borderRadius: "20px", objectFit: "cover" }}
               />
             )}
           </Grid>

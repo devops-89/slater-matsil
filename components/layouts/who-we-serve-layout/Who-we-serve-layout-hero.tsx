@@ -3,7 +3,7 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-const WhoWeServeLayoutHero = () => {
+const WhoWeServeLayoutHero = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const { details } = usePageData();
   return (
     <div>
@@ -78,7 +78,11 @@ const WhoWeServeLayoutHero = () => {
                 <Image
                   src={details?.whoWeServePage?.whoWeServepageHeroSection?.img}
                   alt=""
+                  width={500}
+                  height={500}
                   style={{ width: "100%", height: "auto", borderRadius: 20 }}
+                  onLoad={onImageLoad}
+                  onError={onImageLoad}
                 />
               )}
             </Grid>

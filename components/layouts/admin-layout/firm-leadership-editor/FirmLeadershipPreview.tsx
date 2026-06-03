@@ -106,11 +106,14 @@ export default function FirmLeadershipPreview({ activeSection, websiteData }: an
             PARTNERS
           </Typography>
           <Grid container spacing={4}>
-            {data?.partners?.map((leader: any, index: number) => (
-              <Grid size={{xs:12,sm:6,md:4}} key={index}>
-                <LeaderCard {...leader} />
-              </Grid>
-            ))}
+            {data?.partners?.map((leader: any, index: number) => {
+              const { key: _key, ...leaderProps } = leader;
+              return (
+                <Grid size={{xs:12,sm:6,md:4}} key={index}>
+                  <LeaderCard {...leaderProps} img={leaderProps.imageDownloadUrl || leaderProps.img || leaderProps.imageUrl} />
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
 
@@ -136,11 +139,14 @@ export default function FirmLeadershipPreview({ activeSection, websiteData }: an
             justifyContent="center"
             sx={{ px: { lg: 10, xs: 0 } }}
           >
-            {data?.patentAgents?.map((leader: any, index: number) => (
-              <Grid size={{xs:12,sm:6,md:6}} key={index}>
-                <LeaderCard {...leader} />
-              </Grid>
-            ))}
+            {data?.patentAgents?.map((leader: any, index: number) => {
+              const { key: _key, ...leaderProps } = leader;
+              return (
+                <Grid size={{xs:12,sm:6,md:6}} key={index}>
+                  <LeaderCard {...leaderProps} img={leaderProps.imageDownloadUrl || leaderProps.img || leaderProps.imageUrl} />
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
 
@@ -161,11 +167,14 @@ export default function FirmLeadershipPreview({ activeSection, websiteData }: an
             ADMINISTRATION
           </Typography>
           <Grid container spacing={4}>
-            {data?.administration?.map((staff: any, index: number) => (
-              <Grid size={{xs:12,sm:6,md:4}} key={index}>
-                <LeaderCard {...staff} isAdmin={true} />
-              </Grid>
-            ))}
+            {data?.administration?.map((staff: any, index: number) => {
+              const { key: _key, ...staffProps } = staff;
+              return (
+                <Grid size={{xs:12,sm:6,md:4}} key={index}>
+                  <LeaderCard {...staffProps} isAdmin={true} img={staffProps.imageDownloadUrl || staffProps.img || staffProps.imageUrl} />
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
       </Container>

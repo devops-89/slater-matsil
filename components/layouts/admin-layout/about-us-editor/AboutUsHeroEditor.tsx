@@ -1,14 +1,14 @@
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
-import { Upload } from "@mui/icons-material";
-import { Box, Button, Divider, Stack, TextField, Typography } from "@mui/material";
+import { Upload, Delete } from "@mui/icons-material";
+import { Box, Button, Divider, Stack, TextField, Typography, CircularProgress, IconButton } from "@mui/material";
 import React from "react";
 
 import { MediaControllers } from "@/api/mediaControllers";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { useState } from "react";
 
-export const AboutUsHeroEditor = ({ data, onChange }: any) => {
+export const AboutUsHeroEditor = ({ data, onChange, onDeleteMedia }: any) => {
   const [isUploading, setIsUploading] = useState(false);
   const { showNotification } = useNotification();
 
@@ -26,7 +26,7 @@ export const AboutUsHeroEditor = ({ data, onChange }: any) => {
       const uploadedKey = responseData?.key || uploadedUrl;
       
       if (response.data?.success && uploadedUrl) {
-        onChange({ ...data, videoUrl: uploadedUrl, videoDownloadUrl: uploadedUrl, key: uploadedKey });
+        onChange({ ...data, videoUrl: uploadedKey, videoDownloadUrl: uploadedUrl });
         showNotification("Video uploaded successfully", "success");
       }
     } catch (error) {
@@ -50,17 +50,30 @@ export const AboutUsHeroEditor = ({ data, onChange }: any) => {
       <Box>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Typography variant="subtitle2" color="text.secondary">Background Video</Typography>
-          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
+          <Button component="label" variant="outlined" startIcon={isUploading ? <CircularProgress size={16} /> : <Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE, borderColor: COLORS.PRIMARY_BLUE, whiteSpace: "nowrap" }} disabled={isUploading}>
             {isUploading ? "Uploading..." : "Upload Video"}
             <input type="file" hidden accept="video/*" onChange={handleVideoUpload} />
           </Button>
         </Box>
-        <Typography sx={{ fontSize: 12, color: "text.secondary", mt: 1 }}>
-          For large videos, upload externally and paste the URL below.
-        </Typography>
-      </Box>
 
-      <TextField fullWidth label="Video URL" value={data.videoUrl || ""} onChange={(e) => onChange({ ...data, videoUrl: e.target.value })} />
+
+        {(data.videoDownloadUrl || data.videoUrl) ? (
+          <Box sx={{ mt: 2, position: "relative", width: "100%", borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
+            <video src={data.videoDownloadUrl || data.videoUrl} controls style={{ width: "100%", maxHeight: "250px", objectFit: "cover", display: "block" }} />
+            <IconButton
+              size="small"
+              color="error"
+              onClick={() => {
+                if (data.videoUrl || data.key) onDeleteMedia?.(data.videoUrl || data.key);
+                onChange({ ...data, videoUrl: "", videoDownloadUrl: "", key: "" });
+              }}
+              sx={{ position: "absolute", top: 8, right: 8, backgroundColor: "rgba(255,255,255,0.8)", padding: "4px", "&:hover": { backgroundColor: "white" }, zIndex: 10 }}
+            >
+              <Delete fontSize="small" />
+            </IconButton>
+          </Box>
+        ) : null}
+      </Box>
     </Stack>
   );
 };

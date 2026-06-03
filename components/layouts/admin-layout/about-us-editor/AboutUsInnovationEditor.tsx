@@ -1,15 +1,16 @@
 import React from 'react';
-import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore, Delete, Save } from "@mui/icons-material";
+import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails, IconButton } from "@mui/material";
+import { ExpandMore, Delete, Save, Upload } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { CircularProgress } from "@mui/material";
 
 
 import { MediaControllers } from "@/api/mediaControllers";
 import { useState } from "react";
 import { useNotification } from "@/components/providers/NotificationProvider";
 
-export const AboutUsInnovationEditor = ({ data, onChange }: any) => {
+export const AboutUsInnovationEditor = ({ data, onChange, onDeleteMedia }: any) => {
   const [isUploading, setIsUploading] = useState(false);
   const { showNotification } = useNotification();
 
@@ -27,7 +28,7 @@ export const AboutUsInnovationEditor = ({ data, onChange }: any) => {
       const uploadedKey = responseData?.key || uploadedUrl;
 
       if (response.data?.success && uploadedUrl) {
-        onChange({ ...data, img: uploadedUrl, imageDownloadUrl: uploadedUrl, key: uploadedKey });
+        onChange({ ...data, img: uploadedUrl, imageDownloadUrl: uploadedUrl, imageUrl: uploadedKey });
         showNotification("Image uploaded successfully", "success");
       }
     } catch (error) {
@@ -51,14 +52,25 @@ export const AboutUsInnovationEditor = ({ data, onChange }: any) => {
       <Box>
         <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
           <Typography variant="subtitle2" color="text.secondary">Section Image</Typography>
-          <Button component="label" variant="outlined" size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
+          <Button component="label" variant="outlined" startIcon={isUploading ? <CircularProgress size={16} /> : <Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE, borderColor: COLORS.PRIMARY_BLUE, whiteSpace: "nowrap" }} disabled={isUploading}>
             {isUploading ? "Uploading..." : "Upload Image"}
             <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
           </Button>
         </Box>
-        {data.img && (
-          <Box sx={{ width: "100%", height: 200, position: "relative", borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
-            <img src={data.img.src || data.img} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+        {(data.imageDownloadUrl || data.img) && (
+          <Box sx={{ mt: 2, position: "relative", width: "100%", borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
+            <img src={data.imageDownloadUrl || data.img?.src || data.img} alt="Preview" style={{ width: "100%", maxHeight: "150px", objectFit: "cover" }} />
+            <IconButton
+              size="small"
+              color="error"
+              onClick={() => {
+                if (data.imageUrl || data.key) onDeleteMedia?.(data.imageUrl || data.key);
+                onChange({ ...data, img: "", imageDownloadUrl: "", imageUrl: "" });
+              }}
+              sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
+            >
+              <Delete fontSize="small" />
+            </IconButton>
           </Box>
         )}
       </Box>

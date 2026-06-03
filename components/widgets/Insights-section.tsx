@@ -71,16 +71,36 @@ const InsightsSection = () => {
             </IconButton>
           </Stack>
         </Grid>
-        <Grid size={{ lg: 7, xs: 12 }} suppressHydrationWarning data-aos="fade-down">
+        <Grid 
+          size={{ lg: 7, xs: 12 }} 
+          suppressHydrationWarning 
+          data-aos="fade-down"
+          sx={{ 
+            pl: { lg: 0, xs: 2 },
+            pr: { lg: 0, xs: 2 },
+            mt: { xs: 4, lg: 0 },
+            pb: { xs: 2, lg: 0 }
+          }}
+        >
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
+            spaceBetween={20}
             breakpoints={{
-              640: {
+              320: {
                 slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
               },
               1024: {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+              },
+              1200: {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },

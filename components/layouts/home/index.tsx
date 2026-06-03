@@ -1,19 +1,20 @@
 "use client";
 
+import { PageControllers } from "@/api/pageControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
+import { WEBSITE_DATA } from "@/public/data/website-data";
+import { usePageData } from "@/store/usePageData";
+import { mapBackendToHomepageState } from "@/utils/pageDataMapper";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
 import InsightsSection from "../../widgets/Insights-section";
 import ServiceAreas from "../../widgets/Service-Areas";
 import AboutSection from "./AboutSection";
+import { Box } from "@mui/material";
 import ContactSection from "./ContactSection";
 import HeroSection3 from "./HeroSection3";
 import MetricsSection from "./MetricsSection";
 import Whoweserve from "./Who-We-Serve";
-import { useEffect, useRef } from "react";
-import { usePathname } from "next/navigation";
-import { PageControllers } from "@/api/pageControllers";
-import { mapBackendToHomepageState } from "@/utils/pageDataMapper";
-import { WEBSITE_DATA } from "@/public/data/website-data";
-import { usePageData } from "@/store/usePageData";
-import { useLoading } from "@/components/providers/LoadingProvider";
 
 const HomeLayout = () => {
   const { setDetails } = usePageData();
@@ -25,25 +26,37 @@ const HomeLayout = () => {
   useEffect(() => {
     const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
     if (isAdminRoute) return;
-    if (hasFetched.current) return;
-    hasFetched.current = true;
 
     let isMounted = true;
     const fetchHomeData = async () => {
       try {
         startLoading();
-        const res = await PageControllers.getPublicPageById(1);
-        const pageData = res.data?.data?.data || res.data?.data;
-        if (pageData && isMounted) {
-          const updatedHomepage = mapBackendToHomepageState(pageData, WEBSITE_DATA.homepage);
+
+        const [res1, res3] = await Promise.all([
+          PageControllers.getPublicPageById(1).catch(e => ({ data: { data: null } })),
+          PageControllers.getPublicPageById(3).catch(e => ({ data: { data: null } }))
+        ]);
+
+        const pageData1 = res1.data?.data?.data || res1.data?.data;
+        const pageData3 = res3.data?.data?.data || res3.data?.data;
+
+        if (isMounted) {
+          let updatedHomepage = WEBSITE_DATA.homepage;
+          if (pageData1) {
+            updatedHomepage = mapBackendToHomepageState(pageData1, updatedHomepage);
+          }
+          if (pageData3) {
+            const { newServiceArea } = require("@/utils/pageDataMapper").mapBackendToServicesPageState(pageData3, WEBSITE_DATA.servicesPage, updatedHomepage.service_area);
+            updatedHomepage.service_area = newServiceArea;
+          }
           const mergedWebsiteData = { ...WEBSITE_DATA, homepage: updatedHomepage };
           setDetails(mergedWebsiteData as any);
         }
       } catch (error) {
         console.error("Error fetching home page data", error);
-      } finally {
         if (isMounted) stopLoading();
       }
+      // Removed stopLoading() from finally to wait for hero image load
     };
     
     fetchHomeData();
@@ -58,18 +71,18 @@ const HomeLayout = () => {
   }, [setDetails, startLoading, stopLoading, pathname]);
 
   return (
-    <div>
+    <Box sx={{ overflowX: "hidden", width: "100%" }}>
       {/* <HeroSection /> */}
       {/* <HeroSection2 /> */}
       {/* <SliderHeroSection /> */}
-      <HeroSection3 />
+      <HeroSection3 onImageLoad={stopLoading} />
       <AboutSection />
       <MetricsSection />
       <ServiceAreas limit={6} />
       <Whoweserve />
       <InsightsSection />
       <ContactSection />
-    </div>
+    </Box>
   );
 };
 

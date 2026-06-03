@@ -1,18 +1,9 @@
-import { pageSecuredApi, pagePublicApi } from "./config";
+import { pagePublicApi, pageSecuredApi } from "./config";
 
 export const PageControllers = {
   getAllPages: async () => {
     try {
       let result = await pageSecuredApi.get("all");
-      return result;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  createPage: async (data: any) => {
-    try {
-      let result = await pageSecuredApi.post("create", data);
       return result;
     } catch (error) {
       throw error;
@@ -31,6 +22,15 @@ export const PageControllers = {
   getPageById: async (id: number | string) => {
     try {
       let result = await pageSecuredApi.get(`${id}`);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getAllPublicPages: async () => {
+    try {
+      let result = await pagePublicApi.get("all");
       return result;
     } catch (error) {
       throw error;

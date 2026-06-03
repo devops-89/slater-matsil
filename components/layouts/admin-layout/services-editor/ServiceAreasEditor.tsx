@@ -9,10 +9,10 @@ import { tradeGothic } from "@/utils/fonts";
 import { MediaControllers } from "@/api/mediaControllers";
 import { useNotification } from "@/components/providers/NotificationProvider";
 
-export const ServiceAreasEditor = ({ data, onChange }: { data: any, onChange: (newData: any) => void }) => {
+export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: any, onChange: (newData: any) => void, onDeleteMedia?: any }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
-  const [formData, setFormData] = useState({ title: "", description: "", slug: "", img: "", detailsData: [] as any[] });
+  const [formData, setFormData] = useState({ title: "", description: "", slug: "", img: "", detailsData: [] as any[], imageUrl: "", imageDownloadUrl: "" });
   
   const [isUploading, setIsUploading] = useState(false);
   const { showNotification } = useNotification();
@@ -29,8 +29,9 @@ export const ServiceAreasEditor = ({ data, onChange }: { data: any, onChange: (n
       const res = await MediaControllers.uploadMedia(formDataUpload);
       const responseData = res.data?.data?.data || res.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
       if (uploadedUrl) {
-        setFormData((prev) => ({ ...prev, img: uploadedUrl }));
+        setFormData((prev) => ({ ...prev, imageUrl: uploadedKey, imageDownloadUrl: uploadedUrl, img: uploadedKey }));
         showNotification("Image uploaded successfully", "success");
       }
     } catch (error) {
@@ -42,7 +43,7 @@ export const ServiceAreasEditor = ({ data, onChange }: { data: any, onChange: (n
   };
 
   const handleOpenNew = () => {
-    setFormData({ title: "", description: "", slug: "", img: "", detailsData: [] });
+    setFormData({ title: "", description: "", slug: "", img: "", detailsData: [], imageUrl: "", imageDownloadUrl: "" });
     setEditingIdx(null);
     setDialogOpen(true);
   };
@@ -53,6 +54,8 @@ export const ServiceAreasEditor = ({ data, onChange }: { data: any, onChange: (n
       description: item.description || "",
       slug: item.slug || "",
       img: item.img || "",
+      imageUrl: item.imageUrl || item.key || "",
+      imageDownloadUrl: item.imageDownloadUrl || "",
       detailsData: item.detailsData ? JSON.parse(JSON.stringify(item.detailsData)) : []
     });
     setEditingIdx(idx);
@@ -204,12 +207,7 @@ export const ServiceAreasEditor = ({ data, onChange }: { data: any, onChange: (n
               value={formData.title} 
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             />
-            <TextField 
-              fullWidth 
-              label="Slug (Auto-generated or custom)" 
-              value={formData.slug} 
-              onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-            />
+
             <TextField 
               fullWidth 
               label="Short Description (Card preview)" 
@@ -229,18 +227,24 @@ export const ServiceAreasEditor = ({ data, onChange }: { data: any, onChange: (n
                   <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
                 </Button>
               </Box>
-              {formData.img && (
+              {(formData.imageDownloadUrl || (formData as any).imageUrl || formData.img) && (
                 <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={typeof formData.img === "string" ? formData.img : (formData.img as any).src}
+                    src={(formData as any).imageDownloadUrl || (typeof formData.img === "string" ? formData.img : (formData.img as any)?.src) || (typeof (formData as any).imageUrl === 'string' ? (formData as any).imageUrl : (formData as any).imageUrl?.src)}
                     alt="Service icon"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                   <IconButton
                     size="small"
                     color="error"
-                    onClick={() => setFormData({ ...formData, img: "" })}
+                    onClick={() => {
+                      if (onDeleteMedia && (formData.imageUrl || (formData as any).key)) {
+                        onDeleteMedia(formData.imageUrl || (formData as any).key);
+                      }
+                      setFormData({ ...formData, img: "", imageUrl: "", imageDownloadUrl: "" } as any);
+                      showNotification("Image removed from preview. Don't forget to save changes.", "info");
+                    }}
                     sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
                   >
                     <Delete fontSize="small" />

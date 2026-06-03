@@ -46,7 +46,7 @@ const Award = () => {
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
-              {details?.aboutPage?.AWARDSPROPS?.heading1 || "Distinction Defined By"}
+              {details?.aboutPage?.AWARDSPROPS?.heading1}
             </Typography>
             <Typography
               sx={{
@@ -70,24 +70,37 @@ const Award = () => {
                   opacity: 0.4,
                   zIndex: -1,
                   transform: "rotate(-2deg)",
-                  width: { lg: 420, xs: 100 },
+                  width: { lg: 350, xs: 200 },
                   borderRadius: "20px",
                 },
               }}
             >
-              {details?.aboutPage?.AWARDSPROPS?.heading2 || "Dedication And Results."}
+              {details?.aboutPage?.AWARDSPROPS?.heading2}
             </Typography>
-            <Grid container>
-              {details?.aboutPage?.AWARDSPROPS?.awards_img?.map((val: any, i: number) => (
+            <Grid container spacing={3} sx={{ mt: 5 }}>
+              {(details?.aboutPage?.AWARDSPROPS?.awards_img || []).map((val: any, i: number) => (
                 <Grid size={{ lg: 4, xs: 6 }} key={i}>
-                  <Image
-                    src={val.imageDownloadUrl || val.img}
-                    alt=""
-                    width={300}
-                    height={300}
-                    unoptimized={true}
-                    style={{ width: "200px", height: "auto" }}
-                  />
+                  <Box sx={{
+                    height: '100px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}>
+                    {(val?.imageDownloadUrl || val?.img?.src || val?.img) ? (
+                      <Image
+                        src={val?.imageDownloadUrl || val?.img?.src || val?.img}
+                        alt=""
+                        width={100}
+                        height={100}
+                        unoptimized={true}
+                        style={{ 
+                          objectFit: "contain",
+                          maxWidth: '100%',
+                          maxHeight: '100%'
+                        }}
+                      />
+                    ) : null}
+                  </Box>
                 </Grid>
               ))}
             </Grid>

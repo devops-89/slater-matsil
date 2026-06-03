@@ -17,10 +17,10 @@ export const renderDesktopPreview = (children: React.ReactNode) => (
   </Box>
 );
 
-export const PracticeGroupsPageForms = ({ activeSection, websiteData, updatePracticeGroupsPage }: any) => {
+export const PracticeGroupsPageForms = ({ activeSection, websiteData, updatePracticeGroupsPage, onDeleteMedia }: any) => {
   switch (activeSection) {
-    case 0: return <PracticeGroupsHeroEditor data={websiteData.practiceGroupPage.practiceGroup_hero_section} onChange={(newData: any) => updatePracticeGroupsPage('practiceGroup_hero_section', newData)} />;
-    case 1: return <PracticeGroupsTabsEditor data={websiteData.practiceGroupPage.practiceGroup_section} onChange={(newData: any) => updatePracticeGroupsPage('practiceGroup_section', newData)} />;
+    case 0: return <PracticeGroupsHeroEditor data={websiteData.practiceGroupPage.practiceGroup_hero_section} onChange={(newData: any) => updatePracticeGroupsPage('practiceGroup_hero_section', newData)} onDeleteMedia={onDeleteMedia} />;
+    case 1: return <PracticeGroupsTabsEditor data={websiteData.practiceGroupPage.practiceGroup_section} onChange={(newData: any) => updatePracticeGroupsPage('practiceGroup_section', newData)} onDeleteMedia={onDeleteMedia} />;
     default: return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Select a section to edit.</Typography>;
   }
 };

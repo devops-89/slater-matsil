@@ -153,7 +153,7 @@ const Whoweserve = () => {
                   { label: "International Law Firm" }
                 ]).map(
                   (val: any, i: number) => (
-                    <Grid size={6} key={i}>
+                    <Grid size={{ xs: 12, sm: 6 }} key={i}>
                       <List>
                         <ListItem>
                           <ListItemAvatar sx={{ minWidth: 35 }}>

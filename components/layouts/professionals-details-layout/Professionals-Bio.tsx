@@ -15,7 +15,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           {data?.map((val, i) => (
-            <Grid size={{ lg: 6, xs: 12 }} key={i}>
+            <Grid size={{ xs: 12, md: 6, lg: 6 }} key={i}>
               <Box
                 sx={{
                   backgroundColor: COLORS.PRIMARY_GREEN,

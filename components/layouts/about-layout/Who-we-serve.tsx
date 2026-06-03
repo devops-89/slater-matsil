@@ -35,7 +35,7 @@ const WhoweServe = () => {
                     fontFamily: tradeGothic.style.fontFamily,
                   }}
                 >
-                  {details?.aboutPage?.who_we_serve_props?.heading1 || "Who"}
+                  {details?.aboutPage?.who_we_serve_props?.heading1}
                 </Typography>
                 <Typography
                   sx={{
@@ -64,7 +64,7 @@ const WhoweServe = () => {
                     },
                   }}
                 >
-                  {details?.aboutPage?.who_we_serve_props?.heading2 || "We Serve"}
+                  {details?.aboutPage?.who_we_serve_props?.heading2}
                 </Typography>
               </Stack>
               <Typography
@@ -77,21 +77,12 @@ const WhoweServe = () => {
                   mt: 3,
                 }}
               >
-                {details?.aboutPage?.who_we_serve_props?.description || "From Fortune 100 firms to high-tech start-ups, Slater Matsil represents clients whose ideas are shaping our world"}
+                {details?.aboutPage?.who_we_serve_props?.description}
               </Typography>
             </Grid>
             <Grid size={{ lg: 8, xs: 12 }}>
               <Grid container spacing={4}>
-                {(details?.aboutPage?.who_we_serve_props?.section_data?.length ? details.aboutPage.who_we_serve_props.section_data : [
-                  {
-                    dataList: [
-                      { label: "Large Corporations" },
-                      { label: "Small Companies / Start ups" },
-                      { label: "U.S. Law Firms" },
-                      { label: "International Law Firms" },
-                    ]
-                  }
-                ]).map(
+                {(details?.aboutPage?.who_we_serve_props?.section_data || []).map(
                   (val: any, i: number) => (
                     <Grid size={{ lg: 5, xs: 12 }} key={i}>
                       <List>

@@ -9,7 +9,7 @@ const ProfessionalHeroSection = () => {
     <Box>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid size={{ lg: 9, xs: 12 }} margin="auto">
+          <Grid size={{ xs: 12, md: 9, lg: 9 }} margin="auto">
             <Typography
               sx={{
                 fontSize: { lg: 50, xs: 25 },

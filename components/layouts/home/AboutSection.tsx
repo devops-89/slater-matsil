@@ -33,7 +33,7 @@ const AboutSection = () => {
               sx={{
                 color: COLORS.PRIMARY_BLUE,
                 fontWeight: 700,
-                fontSize: 35,
+                fontSize: { lg: 35, xs: 26 },
                 my: 2,
                 fontFamily: tradeGothic.style.fontFamily,
               }}
@@ -119,11 +119,11 @@ const AboutSection = () => {
                   <Box sx={{ position: "relative", display: "inline-block" }}>
                     <Typography
                       sx={{
-                        fontSize: 80,
+                        fontSize: { lg: 80, xs: 60 },
                         fontWeight: 700,
                         fontFamily: inter.style.fontFamily,
                         color: "#FFF",
-                        lineHeight: "80px",
+                        lineHeight: { lg: "80px", xs: "60px" },
                         textShadow: `
                   -2px -2px 0 #063232,
                   2px -2px 0 #063232,
@@ -157,7 +157,7 @@ const AboutSection = () => {
                   </Box>
                   <Box
                     sx={{
-                      fontSize: 24,
+                      fontSize: { lg: 24, xs: 18 },
 
                       color: "#063232",
                     }}

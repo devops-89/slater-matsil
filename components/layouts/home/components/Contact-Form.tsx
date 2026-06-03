@@ -109,7 +109,7 @@ const ContactForm = () => {
       </Typography>
 
       <Grid container sx={{ mt: 2 }} spacing={3}>
-        <Grid size={6}>
+        <Grid size={{ sm: 6, xs: 12 }}>
           <TextField
             sx={{ ...TEXTFIELD_STYLES }}
             fullWidth
@@ -132,7 +132,7 @@ const ContactForm = () => {
             }}
           />
         </Grid>
-        <Grid size={6}>
+        <Grid size={{ sm: 6, xs: 12 }}>
           <TextField
             sx={{ ...TEXTFIELD_STYLES }}
             fullWidth

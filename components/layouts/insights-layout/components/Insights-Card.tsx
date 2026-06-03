@@ -55,7 +55,7 @@ const InsightsCard = ({
           backgroundColor: bgColor,
           height: "347px",
           borderRadius: "20px",
-          p: 4,
+          p: { xs: 3, sm: 4 },
           transition: "box-shadow 0.3s ease",
           position: "relative",
           display: "flex",
@@ -63,9 +63,9 @@ const InsightsCard = ({
           justifyContent: "space-between",
           // Circular notch at top-right
           maskImage:
-            "radial-gradient(circle at 100% 0%, transparent 55px, black 56px)",
+            "radial-gradient(circle at 100% 0%, transparent 45px, black 46.5px)",
           WebkitMaskImage:
-            "radial-gradient(circle at 100% 0%, transparent 55px, black 56px)",
+            "radial-gradient(circle at 100% 0%, transparent 45px, black 46.5px)",
         }}
       >
         <Box
@@ -92,12 +92,16 @@ const InsightsCard = ({
         <Box>
           <Typography
             sx={{
-              fontSize: title.length > 150 ? 18 : 24,
+              fontSize: { xs: 16, sm: title.length > 150 ? 18 : 24 },
               fontFamily: adelle.style.fontFamily,
               fontWeight: 600,
               lineHeight: 1.3,
-              mb: 3,
+              mb: 2,
               color: bgColor === COLORS.PRIMARY_BLUE ? COLORS.WHITE : "#14363F",
+              display: "-webkit-box",
+              WebkitLineClamp: 5,
+              WebkitBoxOrient: "vertical",
+              overflow: "hidden",
             }}
           >
             {title}
@@ -135,10 +139,10 @@ const InsightsCard = ({
       <Box
         sx={{
           position: "absolute",
-          top: -10,
-          right: -10,
-          width: 80,
-          height: 80,
+          top: -8,
+          right: -8,
+          width: 65,
+          height: 65,
           backgroundColor: COLORS.WHITE,
           borderRadius: "50%",
           display: "flex",
@@ -150,8 +154,8 @@ const InsightsCard = ({
         <Box
           className="top-icon-box"
           sx={{
-            width: 44,
-            height: 44,
+            width: 40,
+            height: 40,
             borderRadius: "50%",
             backgroundColor: COLORS.BLACK,
             display: "flex",

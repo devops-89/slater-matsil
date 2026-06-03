@@ -40,6 +40,20 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
     };
   }, [pathname, searchParams, startLoading, stopLoading]);
 
+  // Listen to global events from Axios interceptors or other non-React code
+  useEffect(() => {
+    const handleShowLoader = () => startLoading();
+    const handleHideLoader = () => stopLoading();
+
+    window.addEventListener("showLoader", handleShowLoader);
+    window.addEventListener("hideLoader", handleHideLoader);
+
+    return () => {
+      window.removeEventListener("showLoader", handleShowLoader);
+      window.removeEventListener("hideLoader", handleHideLoader);
+    };
+  }, [startLoading, stopLoading]);
+
   const isLoading = loadingCount > 0;
 
   return (

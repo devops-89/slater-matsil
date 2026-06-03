@@ -34,7 +34,7 @@ const IndustriesWeServe = () => {
                   fontFamily: tradeGothic.style.fontFamily,
                 }}
               >
-                {details?.aboutPage?.industriesWeServe?.heading1 || "Industries"}
+                {details?.aboutPage?.industriesWeServe?.heading1}
               </Typography>
               <Typography
                 sx={{
@@ -63,7 +63,7 @@ const IndustriesWeServe = () => {
                   },
                 }}
               >
-                {details?.aboutPage?.industriesWeServe?.heading2 || "We Serve"}
+                {details?.aboutPage?.industriesWeServe?.heading2}
               </Typography>
             </Stack>
             <Typography
@@ -76,15 +76,12 @@ const IndustriesWeServe = () => {
                 mt: 3,
               }}
             >
-              {details?.aboutPage?.industriesWeServe?.description || "We collaborate with a wide range of industries to deliver innovative, reliable solutions."}
+              {details?.aboutPage?.industriesWeServe?.description}
             </Typography>
           </Grid>
           <Grid size={{ lg: 8, xs: 12 }}>
             <Grid container spacing={4}>
-              {(details?.aboutPage?.industriesWeServe?.section_data?.length ? details.aboutPage.industriesWeServe.section_data : [
-                { dataList: [{ label: "Semiconductors" }, { label: "Software" }, { label: "Telecommunications" }, { label: "Aerospace" }, { label: "Automotive" }] },
-                { dataList: [{ label: "Financial Services" }, { label: "Energy" }, { label: "Medical Devices" }, { label: "Consumer Products" }] }
-              ]).map(
+              {(details?.aboutPage?.industriesWeServe?.section_data || []).map(
                 (val: any, i: number) => (
                   <Grid size={{ lg: 4, xs: 6 }} key={i}>
                     <List>

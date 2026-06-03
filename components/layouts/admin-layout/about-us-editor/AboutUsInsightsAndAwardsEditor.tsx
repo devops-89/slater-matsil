@@ -1,15 +1,15 @@
-import React from 'react';
-import { Box, Button, Card, Stack, TextField, Typography, Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-import { ExpandMore, Delete, Save } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
+import { adelle } from "@/utils/fonts";
+import { Delete, Upload } from "@mui/icons-material";
+import { Box, Button, Card, CircularProgress, Stack, TextField, Typography } from "@mui/material";
+import React from 'react';
 
 
 import { MediaControllers } from "@/api/mediaControllers";
-import { useState } from "react";
 import { useNotification } from "@/components/providers/NotificationProvider";
+import { useState } from "react";
 
-export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updateAboutPage }: any) => {
+export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updateAboutPage, onDeleteMedia }: any) => {
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const [isAddingLogo, setIsAddingLogo] = useState(false);
   const { showNotification } = useNotification();
@@ -29,7 +29,7 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
       
       if (response.data?.success && uploadedUrl) {
         const currentLogos = awardsData.awards_img || [];
-        updateAboutPage('AWARDSPROPS', { ...awardsData, awards_img: [...currentLogos, { img: uploadedUrl, imageDownloadUrl: uploadedUrl, key: uploadedKey }] });
+        updateAboutPage('AWARDSPROPS', { ...awardsData, awards_img: [...currentLogos, { img: uploadedUrl, imageDownloadUrl: uploadedUrl, imageUrl: uploadedKey }] });
         showNotification("Image uploaded successfully", "success");
       }
     } catch (error) {
@@ -54,7 +54,9 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
 
       if (response.data?.success && uploadedUrl) {
         const newLogos = [...(awardsData.awards_img || [])];
-        newLogos[index] = { img: uploadedUrl, imageDownloadUrl: uploadedUrl, key: uploadedKey };
+        const oldLogo = newLogos[index];
+        if (oldLogo?.imageUrl || oldLogo?.key) onDeleteMedia?.(oldLogo.imageUrl || oldLogo.key);
+        newLogos[index] = { img: uploadedUrl, imageDownloadUrl: uploadedUrl, imageUrl: uploadedKey };
         updateAboutPage('AWARDSPROPS', { ...awardsData, awards_img: newLogos });
         showNotification("Image updated successfully", "success");
       }
@@ -67,6 +69,8 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
 
   const handleDeleteLogo = (index: number) => {
     const newLogos = [...(awardsData.awards_img || [])];
+    const oldLogo = newLogos[index];
+    if (oldLogo?.imageUrl || oldLogo?.key) onDeleteMedia?.(oldLogo.imageUrl || oldLogo.key);
     newLogos.splice(index, 1);
     updateAboutPage('AWARDSPROPS', { ...awardsData, awards_img: newLogos });
   };
@@ -89,9 +93,9 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
 
           {(awardsData.awards_img || []).map((award: any, i: number) => (
             <Card key={i} sx={{ p: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 2, width: 200 }}>
-              <img src={typeof award.img === 'string' ? award.img : award.img?.src} alt={`Logo ${i+1}`} style={{ height: "60px", objectFit: "contain" }} />
+              <img src={award.imageDownloadUrl} alt={`Logo ${i+1}`} style={{ height: "60px", objectFit: "contain" }} />
               <Stack direction="row" spacing={1}>
-                <Button component="label" variant="outlined" size="small" disabled={uploadingIndex === i}>
+                <Button component="label" variant="outlined" size="small" startIcon={uploadingIndex === i ? <CircularProgress size={16} /> : undefined} sx={{ whiteSpace: "nowrap" }} disabled={uploadingIndex === i}>
                   {uploadingIndex === i ? "..." : "Edit"}
                   <input type="file" hidden accept="image/*" onChange={(e) => handleEditLogo(i, e)} />
                 </Button>
@@ -103,7 +107,7 @@ export const AboutUsInsightsAndAwardsEditor = ({ insightsData, awardsData, updat
           ))}
         </Box>
         <Box sx={{ mt: 2 }}>
-          <Button component="label" variant="contained" disabled={isAddingLogo} sx={{ backgroundColor: COLORS.PRIMARY_BLUE, color: COLORS.WHITE, "&:hover": { backgroundColor: COLORS.PRIMARY_BLUE, opacity: 0.9 } }}>
+          <Button component="label" variant="contained" startIcon={isAddingLogo ? <CircularProgress size={16} color="inherit" /> : <Upload />} disabled={isAddingLogo} sx={{ backgroundColor: COLORS.PRIMARY_BLUE, color: COLORS.WHITE, whiteSpace: "nowrap", "&:hover": { backgroundColor: COLORS.PRIMARY_BLUE, opacity: 0.9 } }}>
             {isAddingLogo ? "Adding..." : "Add Logo"}
             <input type="file" hidden accept="image/*" onChange={handleAddLogo} />
           </Button>
