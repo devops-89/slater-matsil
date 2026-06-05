@@ -1,15 +1,15 @@
 "use client";
-import { Box, Container, IconButton, Stack, Tooltip, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import ProfessionalsDetailsHeroSection from "./Professionals-details-Herosection";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
-import { useParams, useRouter, notFound } from "next/navigation";
-import TabSection from "./Tab-Section";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
-import { useLoading } from "@/components/providers/LoadingProvider";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import ProfessionalsDetailsHeroSection from "./Professionals-details-Herosection";
+import TabSection from "./Tab-Section";
 //
 const ProfessionalDetailsLayout = () => {
   const { data, setProfessionalDetailsData, clearProfessionalDetailsData } =
@@ -243,4 +243,3 @@ const ProfessionalDetailsLayout = () => {
 };
 
 export default ProfessionalDetailsLayout;
-

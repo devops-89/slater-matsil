@@ -1,38 +1,28 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import { SERVER_ENDPOINTS } from "./serverConstant";
 
-// Helper function to dispatch loader events (only in browser)
-const dispatchLoader = (type: "show" | "hide") => {
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new Event(type === "show" ? "showLoader" : "hideLoader"));
-  }
-};
 
 const setupInterceptors = (apiInstance: any, secured: boolean) => {
   apiInstance.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) => {
-      dispatchLoader("show");
       if (secured && typeof window !== "undefined") {
         let token = localStorage.getItem("accessToken");
-        if (token && config.method?.toLowerCase() !== 'get') {
+        if (token) {
           config.headers.set("Authorization", `Bearer ${token}`);
         }
       }
       return config;
     },
     (error: any) => {
-      dispatchLoader("hide");
       return Promise.reject(error);
     }
   );
 
   apiInstance.interceptors.response.use(
     (response: any) => {
-      dispatchLoader("hide");
       return response;
     },
     (error: any) => {
-      dispatchLoader("hide");
       return Promise.reject(error);
     }
   );
@@ -80,4 +70,22 @@ const mediaSecuredApi = axios.create({
 });
 setupInterceptors(mediaSecuredApi, true);
 
-export { authPublicApi, authSecuredApi, mediaSecuredApi, pagePublicApi, pageSecuredApi, userPublicApi, userSecuredApi };
+const insightsSecuredApi = axios.create({
+  baseURL: SERVER_ENDPOINTS.INSIGHTS_BASEURL,
+  headers: { "Content-Type": "application/json", Accept: "application/json, text/plain, */*" },
+});
+setupInterceptors(insightsSecuredApi, true);
+
+const insightsPublicApi = axios.create({
+  baseURL: SERVER_ENDPOINTS.INSIGHTS_BASEURL,
+  headers: { "Content-Type": "application/json", Accept: "application/json, text/plain, */*" },
+});
+setupInterceptors(insightsPublicApi, false);
+
+const roleSecuredApi = axios.create({
+  baseURL: SERVER_ENDPOINTS.ROLE_BASEURL,
+  headers: { "Content-Type": "application/json", Accept: "application/json, text/plain, */*" },
+});
+setupInterceptors(roleSecuredApi, true);
+
+export { authPublicApi, authSecuredApi, mediaSecuredApi, pagePublicApi, pageSecuredApi, userPublicApi, userSecuredApi, insightsPublicApi, insightsSecuredApi, roleSecuredApi };

@@ -53,7 +53,8 @@ const AboutLayout = () => {
           stopLoading();
         }
       } catch (error) {
-        console.error("Error fetching about us page data", error);
+        console.error("Error fetching about page data", error);
+      } finally {
         if (isMounted) stopLoading();
       }
     };
@@ -70,7 +71,7 @@ const AboutLayout = () => {
 
   return (
     <div>
-      <AboutHerosection onImageLoad={stopLoading} />
+      <AboutHerosection />
       <DrivingInnovation />
       <RedefiningPatent />
       <InsightsInnovation />

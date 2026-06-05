@@ -33,10 +33,7 @@ const Career = () => {
           const updatedCareersPage = require("@/utils/pageDataMapper").mapBackendToCareersState(pageData, WEBSITE_DATA.careerPage);
           const currentDetails = usePageData.getState().details || WEBSITE_DATA;
           setDetails({ ...currentDetails, careerPage: updatedCareersPage } as any);
-
-          if (!updatedCareersPage?.heroSection?.img) {
-            stopLoading();
-          }
+          if (isMounted) stopLoading();
         } else if (isMounted) {
           stopLoading();
         }
@@ -56,7 +53,7 @@ const Career = () => {
 
   return (
     <div>
-      <CareerLayout onImageLoad={stopLoading} />
+      <CareerLayout />
     </div>
   );
 };

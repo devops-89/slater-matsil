@@ -1,23 +1,22 @@
+import HeadingStar from "@/components/widgets/Heading-star";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import { BLOG_DETAIL_PROPS } from "@/utils/types";
+import { ArrowForward } from "@mui/icons-material";
 import {
   Box,
   Container,
-  Typography,
-  Stack,
-  Grid,
   Divider,
+  Grid,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
+  Stack,
+  Typography,
 } from "@mui/material";
-import { BLOG_DETAIL_PROPS } from "@/utils/types";
-import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
-import HeadingStar from "@/components/widgets/Heading-star";
-import Link from "next/link";
-import React from "react";
-import { ArrowForward } from "@mui/icons-material";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
   const { content, relatedPosts } = data;

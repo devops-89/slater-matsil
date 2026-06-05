@@ -1,10 +1,10 @@
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { INSIGHTS_DATA_PROPS } from "@/utils/types";
-import { ArrowForward, CallMade } from "@mui/icons-material";
+import { ArrowForward, CallMade, Delete } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
-import Link from "next/link";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 const InsightsCard = ({
@@ -12,7 +12,9 @@ const InsightsCard = ({
   category,
   title,
   slug,
-}: INSIGHTS_DATA_PROPS) => {
+  onDelete,
+  onEdit,
+}: INSIGHTS_DATA_PROPS & { onDelete?: (e?: any) => void; onEdit?: () => void }) => {
   const pathname = usePathname();
   const router = useRouter();
   const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
@@ -24,9 +26,15 @@ const InsightsCard = ({
       whileHover={{ y: -10 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={(e) => {
+        if (onEdit) {
+          e.preventDefault();
+          onEdit();
+          return;
+        }
         if (slug) {
           e.preventDefault();
           router.push(linkHref);
+          window.scrollTo(0, 0);
         }
       }}
       sx={{
@@ -98,10 +106,10 @@ const InsightsCard = ({
               lineHeight: 1.3,
               mb: 2,
               color: bgColor === COLORS.PRIMARY_BLUE ? COLORS.WHITE : "#14363F",
-              display: "-webkit-box",
-              WebkitLineClamp: 5,
+              display: { xs: "-webkit-box", md: "block" },
+              WebkitLineClamp: { xs: 5, md: "unset" },
               WebkitBoxOrient: "vertical",
-              overflow: "hidden",
+              overflow: { xs: "hidden", md: "visible" },
             }}
           >
             {title}
@@ -153,31 +161,50 @@ const InsightsCard = ({
       >
         <Box
           className="top-icon-box"
+          onClick={(e) => {
+            if (onDelete) {
+              e.preventDefault();
+              e.stopPropagation();
+              onDelete(e);
+            }
+          }}
           sx={{
             width: 40,
             height: 40,
             borderRadius: "50%",
-            backgroundColor: COLORS.BLACK,
+            backgroundColor: onDelete ? "red" : COLORS.BLACK,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             transition: "all 0.3s ease",
+            cursor: onDelete ? "pointer" : "inherit",
           }}
         >
-          <CallMade
-            className="top-icon"
-            sx={{
-              color: COLORS.WHITE,
-              fontSize: 20,
-              transition: "color 0.3s ease",
-            }}
-          />
+          {onDelete ? (
+            <Delete
+              className="top-icon"
+              sx={{
+                color: COLORS.WHITE,
+                fontSize: 20,
+                transition: "color 0.3s ease",
+              }}
+            />
+          ) : (
+            <CallMade
+              className="top-icon"
+              sx={{
+                color: COLORS.WHITE,
+                fontSize: 20,
+                transition: "color 0.3s ease",
+              }}
+            />
+          )}
         </Box>
       </Box>
     </Box>
   );
 
-  if (slug) {
+  if (slug && !onEdit) {
     return (
       <Link href={linkHref} style={{ textDecoration: "none" }}>
         {cardContent}

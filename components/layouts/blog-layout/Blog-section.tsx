@@ -13,17 +13,47 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { BlogControllers } from "@/api/blogControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
 const BlogSection = () => {
   const { details } = usePageData();
   const pathname = usePathname();
+  const { startLoading, stopLoading } = useLoading();
   const blogSection = details?.insightsPage?.blogSection;
 
-  const upcomingWebinars = blogSection?.upcoming || [];
-  const pastWebinars = blogSection?.pastWebinars || [];
+  const [pastWebinars, setPastWebinars] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        startLoading();
+        const res = await BlogControllers.getAllBlogs({ limit: 100 });
+        let allBlogs = res.data?.data?.data || res.data?.data || [];
+        const totalPages = res.data?.data?.meta?.totalPages || res.data?.meta?.totalPages || 1;
+        
+        if (totalPages > 1) {
+          const promises = [];
+          for (let i = 2; i <= totalPages; i++) {
+            promises.push(BlogControllers.getAllBlogs({ page: i, limit: 100 }));
+          }
+          const results = await Promise.all(promises);
+          results.forEach(r => {
+            allBlogs = [...allBlogs, ...(r.data?.data?.data || r.data?.data || [])];
+          });
+        }
+        setPastWebinars(allBlogs);
+      } catch (err) {
+        console.error("Failed to fetch blogs", err);
+      } finally {
+        stopLoading();
+      }
+    };
+    fetchBlogs();
+  }, [startLoading, stopLoading]);
 
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,183 +73,7 @@ const BlogSection = () => {
 
   return (
     <Box sx={{ mb: { lg: 10, xs: 6 } }}>
-      {/* Upcoming section */}
-      {/* <Box sx={{ backgroundColor: "#ECF8F8", py: { lg: 8, xs: 4 } }}>
-        <Container maxWidth="lg">
-          <Typography
-            component={motion.h2}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            sx={{
-              fontSize: { lg: 36, md: 30, xs: 24 },
-              fontWeight: 700,
-              color: COLORS.PRIMARY_BLUE,
-              mb: { lg: 4, xs: 3 },
-            }}
-          >
-            {blogSection?.upcomingTitle || "Upcoming"}
-          </Typography>
-          <Grid container spacing={4}>
-            {upcomingWebinars.map((webinar, index) => (
-              <Grid key={webinar.id} size={{ lg: 6, xs: 12 }}>
-                <Box
-                  component={motion.div}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  sx={{ height: "100%" }}
-                >
-                  <Link
-                    href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.slug}`}
-                    style={{
-                      textDecoration: "none",
-                      color: "inherit",
-                      display: "flex",
-                      height: "100%",
-                    }}
-                  >
-                    <Card
-                      sx={{
-                        borderRadius: 4,
-                        boxShadow: "0 10px 30px rgba(13, 95, 110, 0.05)",
-                        overflow: "hidden",
-                        height: "100%",
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        cursor: "pointer",
-                        transition: "all 0.3s ease",
-                        "&:hover": {
-                          transform: "translateY(-8px)",
-                          boxShadow: "0 20px 40px rgba(13, 95, 110, 0.1)",
-                          "& .view-more": {
-                            backgroundColor: COLORS.PRIMARY_GREEN,
-                          },
-                        },
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          backgroundColor: webinar.bg,
-                          display: "flex",
-                          flexDirection: { xs: "column", sm: "row" },
-                          alignItems: "stretch",
-                          height: { sm: 240, xs: "auto" },
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            flex: 1,
-                            p: { lg: 4, xs: 3 },
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              fontSize: 14,
-                              fontWeight: 700,
-                              color: COLORS.PRIMARY_BLUE,
-                              textTransform: "uppercase",
-                              mb: 1,
-                              opacity: 0.7,
-                            }}
-                          >
-                            {webinar.tag}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: { lg: 24, xs: 20 },
-                              fontWeight: 700,
-                              color: COLORS.PRIMARY_BLUE,
-                              lineHeight: 1.2,
-                              mb: 2,
-                            }}
-                          >
-                            {webinar.title}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: 16,
-                              color: "rgba(13, 95, 110, 0.6)",
-                              fontWeight: 500,
-                            }}
-                          >
-                            {webinar.date}
-                          </Typography>
-                        </Box>
-                        <CardMedia
-                          component="img"
-                          image={webinar.img?.src || ""}
-                          alt={webinar.title}
-                          sx={{
-                            width: { lg: 220, md: 200, xs: "100%" },
-                            height: "100%",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </Box>
-                      <CardContent
-                        sx={{
-                          flex: 1,
-                          p: 4,
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontSize: 20,
-                            fontWeight: 600,
-                            color: COLORS.PRIMARY_BLUE,
-                            mb: 1.5,
-                          }}
-                        >
-                          {webinar.subtitle}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: 16,
-                            color: "rgba(0, 0, 0, 0.7)",
-                            lineHeight: 1.6,
-                            mb: 4,
-                            flex: 1,
-                          }}
-                        >
-                          {webinar.description}
-                        </Typography>
-                        <Box sx={{ mt: "auto" }}>
-                          <Typography
-                            className="view-more"
-                            sx={{
-                              display: "inline-flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              px: 4,
-                              py: 1.5,
-                              borderRadius: "999px",
-                              backgroundColor: COLORS.PRIMARY_BLUE,
-                              color: COLORS.WHITE,
-                              fontSize: 15,
-                              fontWeight: 700,
-                              transition: "all 0.3s ease",
-                            }}
-                          >
-                            VIEW DETAILS
-                          </Typography>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box> */}
+
 
       {/* Watch Past Webinars */}
       <Container maxWidth="lg" sx={{ mt: { lg: 12, xs: 8 } }}>
@@ -250,7 +104,7 @@ const BlogSection = () => {
                 sx={{ height: "100%" }}
               >
                 <Link
-                  href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.slug}`}
+                  href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.id}`}
                   style={{
                     textDecoration: "none",
                     color: "inherit",
@@ -277,18 +131,24 @@ const BlogSection = () => {
                       },
                     }}
                   >
-                    <Box sx={{ overflow: "hidden", height: 240 }}>
-                      <CardMedia
-                        component="img"
-                        image={webinar.img?.src || ""}
-                        alt={webinar.title}
-                        sx={{
-                          height: "100%",
-                          objectFit: "cover",
-                          transition: "transform 0.5s ease",
-                          "&hover": { transform: "scale(1.1)" },
-                        }}
-                      />
+                    <Box sx={{ overflow: "hidden", height: 240, backgroundColor: "#0D5F6E" }}>
+                      {webinar.cardImageDownloadUrl || webinar.cardImageUrl ? (
+                        <CardMedia
+                          component="img"
+                          image={webinar.cardImageDownloadUrl || webinar.cardImageUrl}
+                          alt={webinar.title}
+                          sx={{
+                            height: "100%",
+                            objectFit: "cover",
+                            transition: "transform 0.5s ease",
+                            "&:hover": { transform: "scale(1.1)" },
+                          }}
+                        />
+                      ) : (
+                        <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Typography color="white" fontWeight={700} fontSize={32}>{webinar.title?.charAt(0) || "B"}</Typography>
+                        </Box>
+                      )}
                     </Box>
                     <CardContent
                       sx={{
@@ -307,12 +167,13 @@ const BlogSection = () => {
                           color: "rgba(13, 95, 110, 0.6)",
                           fontSize: 13,
                           fontWeight: 700,
+                          textTransform: 'uppercase'
                         }}
                       >
                         <Typography
                           sx={{ fontSize: "inherit", fontWeight: "inherit" }}
                         >
-                          {webinar.date}
+                          {webinar.datePublished}
                         </Typography>
                         <Box
                           component="span"
@@ -326,7 +187,7 @@ const BlogSection = () => {
                         <Typography
                           sx={{ fontSize: "inherit", fontWeight: "inherit" }}
                         >
-                          {webinar.readTime} READ
+                          {webinar.readTime}
                         </Typography>
                       </Stack>
                       <Typography
@@ -352,7 +213,7 @@ const BlogSection = () => {
                           flex: 1,
                         }}
                       >
-                        {webinar.description}
+                        {webinar.listingDescription}
                       </Typography>
                     </CardContent>
                   </Card>

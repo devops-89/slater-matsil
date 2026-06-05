@@ -6,10 +6,10 @@ import FindUsHere from "./Find-Us-Here";
 import Followus from "./Follow-us";
 import Map from "./Map";
 
-const ContactLayout = ({ onImageLoad }: { onImageLoad?: () => void }) => {
+const ContactLayout = () => {
   return (
     <div>
-      <ContactHerosection onImageLoad={onImageLoad} />
+      <ContactHerosection />
       <ContactForm />
       <FindUsHere />
       <Followus />

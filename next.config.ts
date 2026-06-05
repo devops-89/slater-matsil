@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ["mui-tel-input"],
   allowedDevOrigins: ["192.168.220.1"],
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -24,6 +25,10 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return [
+      {
+        source: "/backend-api/users-create",
+        destination: "http://3.92.74.11/api/users/",
+      },
       {
         source: "/backend-api/:path*",
         destination: "http://3.92.74.11/api/:path*", // Proxy to backend to fix CORS

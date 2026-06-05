@@ -50,6 +50,7 @@ const ServicesLayout = () => {
         }
       } catch (error) {
         console.error("Error fetching services page data", error);
+      } finally {
         if (isMounted) stopLoading();
       }
     };
@@ -67,7 +68,7 @@ const ServicesLayout = () => {
   return (
     <div>
       <div data-aos="fade-in" suppressHydrationWarning>
-        <HeroServicesSection onImageLoad={stopLoading} />
+        <HeroServicesSection />
       </div>
       <div data-aos="fade-up" suppressHydrationWarning>
         <WhyChooseUs />

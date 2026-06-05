@@ -59,7 +59,7 @@ const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
     </Stack>
   );
 };
-const HeroSection3 = ({ onImageLoad }: { onImageLoad?: () => void }) => {
+const HeroSection3 = () => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
   const { details } = usePageData();
   const globalBanners = details?.homepage?.heroSection;
@@ -222,15 +222,14 @@ const HeroSection3 = ({ onImageLoad }: { onImageLoad?: () => void }) => {
                       src={val.img}
                       alt="slider image"
                       fill
-                      priority={i === 0}
+
                       unoptimized={true}
                       sizes="(max-width: 1200px) 100vw, 50vw"
                       style={{
                         borderRadius: 20,
                         objectFit: "cover",
                       }}
-                      onLoad={i === 0 ? onImageLoad : undefined}
-                      onError={i === 0 ? onImageLoad : undefined}
+                      loading="lazy"
                     />
                   </Box>
                 </Grid>

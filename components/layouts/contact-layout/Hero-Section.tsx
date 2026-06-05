@@ -4,7 +4,7 @@ import { adelle, tradeGothic } from "@/utils/fonts";
 import { Circle } from "@mui/icons-material";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-const HeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
+const HeroSection = () => {
   const { details } = usePageData();
   return (
     <Box>
@@ -61,9 +61,7 @@ const HeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
                   alt="Contact Hero Image"
                   width={500}
                   height={500}
-                  priority
-                  onLoad={onImageLoad}
-                  onError={onImageLoad}
+                  loading="lazy"
                   style={{ width: "100%", height: "auto" }}
                 />
               )}

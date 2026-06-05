@@ -54,9 +54,9 @@ const HomeLayout = () => {
         }
       } catch (error) {
         console.error("Error fetching home page data", error);
+      } finally {
         if (isMounted) stopLoading();
       }
-      // Removed stopLoading() from finally to wait for hero image load
     };
     
     fetchHomeData();
@@ -75,7 +75,7 @@ const HomeLayout = () => {
       {/* <HeroSection /> */}
       {/* <HeroSection2 /> */}
       {/* <SliderHeroSection /> */}
-      <HeroSection3 onImageLoad={stopLoading} />
+      <HeroSection3 />
       <AboutSection />
       <MetricsSection />
       <ServiceAreas limit={6} />

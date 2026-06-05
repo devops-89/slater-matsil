@@ -22,7 +22,7 @@ import "swiper/css/pagination";
 
 const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide8, slide9,slide10];
 
-const ImageCarousel = ({ onImageLoad }: { onImageLoad?: () => void }) => {
+const ImageCarousel = () => {
   const { details } = usePageData();
   const theme = useTheme();
   const dynamicImages = details?.careerPage?.career_hero_section?.carouselImages;
@@ -135,8 +135,6 @@ const ImageCarousel = ({ onImageLoad }: { onImageLoad?: () => void }) => {
                   objectFit: "cover",
                   objectPosition: i === 4 ? "top center" : "center", 
                 }}
-                onLoad={i === 0 ? onImageLoad : undefined}
-                onError={i === 0 ? onImageLoad : undefined}
               />
             </Box>
           </SwiperSlide>

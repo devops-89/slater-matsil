@@ -1,5 +1,4 @@
 "use client";
-import vCardsJs from "vcards-js";
 import contact from "@/icons/contact-card.svg";
 import print from "@/icons/print.svg";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";

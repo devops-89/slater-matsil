@@ -45,9 +45,9 @@ const WhoWeServelayout = () => {
           stopLoading();
         }
       } catch (error) {
-        console.error("Error fetching who-we-serve data", error);
-        if (isMounted) stopLoading();
+        console.error("Error fetching who we serve page data", error);
       } finally {
+        if (isMounted) stopLoading();
         if (isMounted) setIsDataLoaded(true);
       }
     };
@@ -67,7 +67,7 @@ const WhoWeServelayout = () => {
   return (
     <Box>
       <div data-aos="fade-in">
-        <WhoWeServeLayoutHero onImageLoad={handleHeroImageLoad} />
+        <WhoWeServeLayoutHero />
       </div>
       <div data-aos="fade-up">
         <WhoWeServeAbout />

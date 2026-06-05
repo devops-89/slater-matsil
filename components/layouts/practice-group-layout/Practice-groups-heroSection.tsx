@@ -3,7 +3,7 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-const PracticeGroupsHeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
+const PracticeGroupsHeroSection = () => {
   const { details } = usePageData();
 
   const data = details?.practiceGroupPage?.practiceGroup_hero_section;
@@ -78,9 +78,7 @@ const PracticeGroupsHeroSection = ({ onImageLoad }: { onImageLoad?: () => void }
           objectFit: "cover",
           borderRadius: "20px",
         }}
-        priority
-        onLoad={onImageLoad}
-        onError={onImageLoad}
+        loading="lazy"
       />
     )}
   </Grid>

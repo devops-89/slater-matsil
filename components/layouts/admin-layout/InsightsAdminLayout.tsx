@@ -1,31 +1,39 @@
 "use client";
-import React, { useState } from "react";
-import AdminLayout from "./AdminLayout";
+import { COLORS } from "@/utils/enum";
+import { tradeGothic, adelle } from "@/utils/fonts";
+import { Add, Close, Delete } from "@mui/icons-material";
 import {
   Box,
-  Typography,
   Button,
-  Grid,
   Card,
   CardContent,
   Dialog,
-  DialogTitle,
-  DialogContent,
   DialogActions,
-  TextField,
-  Stack,
-  IconButton,
+  DialogContent,
+  DialogTitle,
   Divider,
-  Tabs,
-  Tab,
+  Grid,
+  IconButton,
   MenuItem,
   Select,
+  Stack,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  CircularProgress,
 } from "@mui/material";
-import { Add, Close, Delete } from "@mui/icons-material";
-import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
-import { usePageData } from "@/store/usePageData";
+import InsightsCard from "@/components/layouts/insights-layout/components/Insights-Card";
+import { useState, useEffect } from "react";
 import * as yup from "yup";
+import AdminLayout from "./AdminLayout";
+import { InsightControllers } from "@/api/insightControllers";
+import { MediaControllers } from "@/api/mediaControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
+import { useLoading } from "@/components/providers/LoadingProvider";
+import { usePageData } from "@/store/usePageData";
+import { INSIGHTS_TAB_DATA } from "@/utils/enum";
+import InsightFormModal from "./components/InsightFormModal";
 
 const insightSchema = yup.object().shape({
   cardData: yup.object().shape({
@@ -36,24 +44,55 @@ const insightSchema = yup.object().shape({
     name: yup.string().required("Name is required"),
     band: yup.string().required("Band / Role is required"),
     guide: yup.string().required("Guide is required"),
-    yearsRanked: yup.string().required("Years Ranked is required"),
+    yearsRanked: yup.string().optional(),
     profileImage: yup.mixed().optional(),
   }),
 });
 
 export default function InsightsAdminLayout() {
   const { details, setDetails } = usePageData();
+  const { showNotification } = useNotification();
+  const { isLoading, startLoading, stopLoading } = useLoading();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
   const [errors, setErrors] = useState<any>({});
+  const [insightsCards, setInsightsCards] = useState<any[]>([]);
+  const [keysToDeleteOnSave, setKeysToDeleteOnSave] = useState<string[]>([]);
+  const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [initialState, setInitialState] = useState<string>("");
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [insightToDelete, setInsightToDelete] = useState<{id?: number} | null>(null);
+  
+  const allCards = [...insightsCards].sort((a, b) => b.id - a.id);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  
+  const totalPages = Math.ceil((allCards?.length || 0) / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = allCards?.slice(indexOfFirstItem, indexOfLastItem);
+  
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const defaultContact = {
+    firm: "",
+    firmUrl: "",
+    email: "",
+    phone: "",
+    shareLabel: "",
+  };
 
   // Form states
+  const [contactData, setContactData] = useState<any>(defaultContact);
   const [cardData, setCardData] = useState<any>({
     title: "",
-    category: "News",
+    category: "",
     bgColor: COLORS.PRIMARY_BLUE,
-    slug: "",
   });
   const [heroData, setHeroData] = useState<any>({
     name: "",
@@ -61,41 +100,49 @@ export default function InsightsAdminLayout() {
     guide: "",
     yearsRanked: "",
     profileImage: "",
-  });
-  const [contactData, setContactData] = useState<any>({
-    firm: "SlaterMatsil, LLP",
-    firmUrl: "www.slatermatsil.com",
-    email: "info@slatermatsil.com",
-    phone: "972 732 1001",
-    shareLabel: "Share",
+    rawImageUrl: "",
   });
   const [contentSections, setContentSections] = useState<any>({
-    aboutProvidedBy: "Provided by",
-    aboutProvidedByName: "Slater Matsil, LLP",
-    region: "USA",
-    practiceAreas: { heading: "Practice Areas", content: "" },
-    professionalMemberships: {
-      heading: "Professional Memberships",
-      content: "",
-    },
-    career: { heading: "Career", content: "" },
-    personal: { heading: "Personal", content: "" },
-    ChamberssReview: { heading: "Chamberss Review", content: "" },
-    strengths: { heading: "Strengths", content: "" },
+    aboutProvidedBy: "",
+    aboutProvidedByName: "",
+    region: "",
+    practiceAreas: { heading: "", content: "" },
+    professionalMemberships: { heading: "", content: "" },
+    career: { heading: "", content: "" },
+    personal: { heading: "", content: "" },
+    ChamberssReview: { heading: "", content: "" },
+    strengths: { heading: "", content: "" },
+    additionalInformation: { heading: "", content: "" },
+    closingStatement: { heading: "", content: "" },
+    resource: { heading: "", content: "", link: "" },
   });
 
-  const insightsCards = details?.insightsPage?.insightsData || [];
-  const insightsDetails = details?.insightsPage?.insightsDetailsData || [];
+  const fetchInsights = async () => {
+    try {
+      startLoading();
+      const res = await InsightControllers.getAllInsights({ limit: 1000 });
+      const data = res.data?.data?.data?.insights || res.data?.data?.insights || [];
+      setInsightsCards(data);
+    } catch (err) {
+      showNotification("Failed to fetch insights", "error");
+    } finally {
+      stopLoading();
+    }
+  };
+
+  useEffect(() => {
+    fetchInsights();
+  }, []);
 
   const handleOpenNew = () => {
-    setActiveSlug(null);
+    setActiveId(null);
     setActiveTab(0);
     setErrors({});
+    setKeysToDeleteOnSave([]);
     setCardData({
       title: "",
-      category: "News",
+      category: "",
       bgColor: COLORS.PRIMARY_BLUE,
-      slug: "",
     });
     setHeroData({
       name: "",
@@ -103,105 +150,95 @@ export default function InsightsAdminLayout() {
       guide: "",
       yearsRanked: "",
       profileImage: "",
+      rawImageUrl: "",
     });
+    setContactData(defaultContact);
     setContentSections({
-      aboutProvidedBy: "Provided by",
-      aboutProvidedByName: "Slater Matsil, LLP",
-      region: "USA",
-      practiceAreas: { heading: "Practice Areas", content: "" },
-      professionalMemberships: {
-        heading: "Professional Memberships",
-        content: "",
-      },
-      career: { heading: "Career", content: "" },
-      personal: { heading: "Personal", content: "" },
-      ChamberssReview: { heading: "Chamberss Review", content: "" },
-      strengths: { heading: "Strengths", content: "" },
+      aboutProvidedBy: "",
+      aboutProvidedByName: "",
+      region: "",
+      practiceAreas: { heading: "", content: "" },
+      professionalMemberships: { heading: "", content: "" },
+      career: { heading: "", content: "" },
+      personal: { heading: "", content: "" },
+      ChamberssReview: { heading: "", content: "" },
+      strengths: { heading: "", content: "" },
+      additionalInformation: { heading: "", content: "" },
+      closingStatement: { heading: "", content: "" },
+      resource: { heading: "", content: "", link: "" },
     });
     setDialogOpen(true);
   };
 
-  const handleEdit = (slug: string) => {
-    setActiveSlug(slug);
-    setActiveTab(0);
+  const handleEdit = (id?: number) => {
+    setActiveId(id || null);
     setErrors({});
-    const card = insightsCards.find((c) => c.slug === slug);
-    const detailsObj = insightsDetails.find((d) => d.slug === slug);
+    setKeysToDeleteOnSave([]);
+    setActiveTab(0);
 
-    setCardData(
-      card
-        ? JSON.parse(JSON.stringify(card))
-        : {
-            title: "",
-            category: "News",
-            bgColor: COLORS.PRIMARY_BLUE,
-            slug: "",
-          },
-    );
+    const insight = insightsCards.find((c) => c.id === id);
 
-    if (detailsObj) {
-      setHeroData(
-        detailsObj.hero || {
-          name: "",
-          band: "",
-          guide: "",
-          yearsRanked: "",
-          profileImage: "",
-        },
-      );
-      setContactData(
-        detailsObj.contact || {
-          firm: "SlaterMatsil, LLP",
-          firmUrl: "www.slatermatsil.com",
-          email: "info@slatermatsil.com",
-          phone: "972 732 1001",
-          shareLabel: "Share",
-        },
-      );
-      setContentSections(
-        detailsObj.contentSections || {
-          aboutProvidedBy: "Provided by",
-          aboutProvidedByName: "Slater Matsil, LLP",
-          region: "USA",
-          practiceAreas: { heading: "Practice Areas", content: "" },
-          professionalMemberships: {
-            heading: "Professional Memberships",
-            content: "",
-          },
-          career: { heading: "Career", content: "" },
-          personal: { heading: "Personal", content: "" },
-          ChamberssReview: { heading: "Chamberss Review", content: "" },
-          strengths: { heading: "Strengths", content: "" },
-        },
-      );
-    } else {
-      setHeroData({
-        name: "",
-        band: "",
-        guide: "",
-        yearsRanked: "",
-        profileImage: "",
+    if (insight) {
+      const newCardData = {
+        title: insight.insightTitle || insight.title || "",
+        category: insight.category || "",
+        bgColor: insight.cardTheme || COLORS.PRIMARY_BLUE,
+      };
+
+      const newHeroData = {
+        name: insight.personName || "",
+        band: insight.bandRole || "",
+        guide: insight.guideOrganization || "",
+        yearsRanked: insight.yearsRankedDate || "",
+        profileImage: insight.imageDownloadUrl || insight.imageUrl || "",
+        rawImageUrl: insight.imageUrl || "",
+      };
+
+      const newContactData = insight.contact || defaultContact;
+
+      const secMap: any = {
+        aboutProvidedBy: insight.aboutProvidedBy || "",
+        aboutProvidedByName: insight.aboutProvidedByName || "",
+        region: insight.region || "",
+        practiceAreas: { heading: "", content: "" },
+        professionalMemberships: { heading: "", content: "" },
+        career: { heading: "", content: "" },
+        personal: { heading: "", content: "" },
+        ChamberssReview: { heading: "", content: "" },
+        strengths: { heading: "", content: "" },
+        additionalInformation: { heading: "", content: "" },
+        closingStatement: { heading: "", content: "" },
+        resource: { heading: "", content: "", link: "" },
+      };
+
+      insight.sections?.forEach((sec: any) => {
+        if (sec.sectionType === "PRACTICE_AREAS") secMap.practiceAreas = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "PROFESSIONAL_MEMBERSHIPS") secMap.professionalMemberships = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "CAREER") secMap.career = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "PERSONAL") secMap.personal = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "CHAMBERS_REVIEW") secMap.ChamberssReview = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "STRENGTHS") secMap.strengths = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "ADDITIONAL_CONTENT" || sec.sectionType === "ADDITIONAL_INFORMATION") secMap.additionalInformation = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "MAIN_CONTENT" || sec.sectionType === "CLOSING_STATEMENT") secMap.closingStatement = { heading: sec.heading, content: sec.content, id: sec.id };
+        if (sec.sectionType === "MISC_AND_RESOURCES" || sec.sectionType === "RESOURCE") secMap.resource = { heading: sec.heading, content: sec.content, link: sec.link || "", id: sec.id };
       });
-      setContentSections({
-        aboutProvidedBy: "Provided by",
-        aboutProvidedByName: "Slater Matsil, LLP",
-        region: "USA",
-        practiceAreas: { heading: "Practice Areas", content: "" },
-        professionalMemberships: {
-          heading: "Professional Memberships",
-          content: "",
-        },
-        career: { heading: "Career", content: "" },
-        personal: { heading: "Personal", content: "" },
-        ChamberssReview: { heading: "Chamberss Review", content: "" },
-        strengths: { heading: "Strengths", content: "" },
-      });
+
+      setCardData(newCardData);
+      setHeroData(newHeroData);
+      setContactData(newContactData);
+      setContentSections(secMap);
+      setInitialState(JSON.stringify({ cardData: newCardData, heroData: newHeroData, contactData: newContactData, contentSections: secMap }));
     }
 
     setDialogOpen(true);
   };
 
   const handleSave = async () => {
+    if (activeId && JSON.stringify({ cardData, heroData, contactData, contentSections }) === initialState) {
+      showNotification("No changes detected. Please make changes before saving.", "info");
+      return;
+    }
+
     try {
       await insightSchema.validate(
         { cardData, heroData },
@@ -229,71 +266,107 @@ export default function InsightsAdminLayout() {
       return;
     }
 
-    const slugToUse =
-      activeSlug ||
-      cardData.slug ||
-      cardData.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)/g, "");
-    const finalCard = { ...cardData, slug: slugToUse };
-    const finalDetails = {
-      slug: slugToUse,
-      hero: heroData,
-      contact: contactData,
-      contentSections: contentSections,
+    const payload = {
+      ...(activeId ? { insightId: activeId } : {}),
+      insightTitle: cardData.title,
+      category: cardData.category ? cardData.category.charAt(0).toUpperCase() + cardData.category.slice(1).toLowerCase() : "",
+      ...((heroData.rawImageUrl || heroData.profileImage) && { imageUrl: heroData.rawImageUrl || heroData.profileImage }),
+      personName: heroData.name,
+      bandRole: heroData.band,
+      guideOrganization: heroData.guide,
+      yearsRankedDate: heroData.yearsRanked,
+      sections: [
+        { sectionType: "PRACTICE_AREAS", heading: contentSections.practiceAreas?.heading, content: contentSections.practiceAreas?.content, sortOrder: 1 },
+        { sectionType: "CAREER", heading: contentSections.career?.heading, content: contentSections.career?.content, sortOrder: 2 },
+        { sectionType: "PROFESSIONAL_MEMBERSHIPS", heading: contentSections.professionalMemberships?.heading, content: contentSections.professionalMemberships?.content, sortOrder: 3 },
+        { sectionType: "PERSONAL", heading: contentSections.personal?.heading, content: contentSections.personal?.content, sortOrder: 4 },
+        { sectionType: "CHAMBERS_REVIEW", heading: contentSections.ChamberssReview?.heading, content: contentSections.ChamberssReview?.content, sortOrder: 5 },
+        { sectionType: "STRENGTHS", heading: contentSections.strengths?.heading, content: contentSections.strengths?.content, sortOrder: 6 },
+        { sectionType: "ADDITIONAL_CONTENT", heading: contentSections.additionalInformation?.heading, content: contentSections.additionalInformation?.content, sortOrder: 7 },
+        { sectionType: "MAIN_CONTENT", heading: contentSections.closingStatement?.heading, content: contentSections.closingStatement?.content, sortOrder: 8 },
+        { 
+          sectionType: "MISC_AND_RESOURCES", 
+          heading: contentSections.resource?.heading, 
+          content: contentSections.resource?.link ? `${contentSections.resource?.content || ""}\n\nLink: ${contentSections.resource?.link}` : contentSections.resource?.content, 
+          sortOrder: 9 
+        },
+      ].filter(s => s.heading?.trim() || s.content?.trim())
     };
 
-    let newCards = [...insightsCards];
-    let newDetails = [...insightsDetails];
+    try {
+      await InsightControllers.upsertInsight(payload);
+      showNotification(activeId ? "Insight updated successfully" : "Insight created successfully", "success");
+      
+      setDialogOpen(false);
+      await fetchInsights();
 
-    if (activeSlug) {
-      newCards = newCards.map((c) => (c.slug === activeSlug ? finalCard : c));
-      const detailsIdx = newDetails.findIndex((d) => d.slug === activeSlug);
-      if (detailsIdx !== -1) {
-        newDetails[detailsIdx] = finalDetails;
-      } else {
-        newDetails.push(finalDetails);
+      // Delete old or replaced images after successful save
+      for (const key of keysToDeleteOnSave) {
+        if (!key || typeof key !== "string" || key.startsWith("/") || key.startsWith("http")) continue; // Skip local static files and full URLs
+        try {
+          await MediaControllers.removeMedia({ key: String(key) });
+        } catch (e) {
+          console.error("Failed to delete media", key, e);
+        }
       }
-    } else {
-      newCards.push(finalCard);
-      newDetails.push(finalDetails);
+      setKeysToDeleteOnSave([]);
+
+      fetchInsights();
+      setDialogOpen(false);
+    } catch (err: any) {
+      console.error("Save error:", err);
+      showNotification(err?.message || "Failed to save insight", "error");
     }
-
-    setDetails({
-      ...details!,
-      insightsPage: {
-        ...details!.insightsPage,
-        insightsData: newCards,
-        insightsDetailsData: newDetails,
-      },
-    });
-
-    setDialogOpen(false);
   };
 
-  const handleDelete = (slug: string) => {
-    const newCards = insightsCards.filter((c) => c.slug !== slug);
-    const newDetails = insightsDetails.filter((c) => c.slug !== slug);
-
-    setDetails({
-      ...details!,
-      insightsPage: {
-        ...details!.insightsPage,
-        insightsData: newCards,
-        insightsDetailsData: newDetails,
-      },
-    });
+  const openDeleteConfirm = (id?: number) => {
+    setInsightToDelete({ id });
+    setDeleteConfirmOpen(true);
   };
 
-  const handleImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const res = reader.result as string;
-      setHeroData({ ...heroData, profileImage: res });
-      setErrors({ ...errors, "heroData.profileImage": undefined });
-    };
-    reader.readAsDataURL(file);
+  const handleDelete = async () => {
+    if (!insightToDelete) return;
+    const { id } = insightToDelete;
+    
+    setDeleteConfirmOpen(false);
+    
+    if (id) {
+      try {
+        startLoading();
+        await InsightControllers.deleteInsight(id);
+        showNotification("Insight deleted successfully", "success");
+        fetchInsights();
+      } catch (err) {
+        showNotification("Failed to delete insight", "error");
+      } finally {
+        stopLoading();
+      }
+    }
+  };
+
+  const handleImageUpload = async (file: File) => {
+    try {
+      setIsUploadingImage(true);
+      const formData = new FormData();
+      formData.append("image", file);
+      const response = await MediaControllers.uploadMedia(formData);
+      const responseData = response.data?.data?.data || response.data?.data;
+      const uploadedUrl = responseData?.imgUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
+      
+      if (response.data?.success && uploadedUrl) {
+        if (heroData.rawImageUrl && !keysToDeleteOnSave.includes(heroData.rawImageUrl)) {
+          setKeysToDeleteOnSave(prev => [...prev, heroData.rawImageUrl]);
+        }
+        setHeroData({ ...heroData, profileImage: uploadedUrl, rawImageUrl: uploadedKey });
+        setErrors({ ...errors, "heroData.profileImage": undefined });
+        showNotification("Image uploaded successfully", "success");
+      }
+    } catch (err) {
+      showNotification("Failed to save insight", "error");
+    } finally {
+      setIsUploadingImage(false);
+    }
   };
 
   const handleContentSectionChange = (
@@ -335,559 +408,217 @@ export default function InsightsAdminLayout() {
       </Box>
 
       <Grid container spacing={{ xs: 2, md: 4 }}>
-        {insightsCards.map((insight: any, i: number) => (
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4, lg: 3 }}
-            key={i}
-            sx={{ display: "flex" }}
-          >
-            <Card
-              sx={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                borderRadius: 4,
-                cursor: "pointer",
-                transition: "all 0.2s",
-                "&:hover": {
-                  transform: "translateY(-4px)",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-                },
-              }}
+        {currentItems.map((insight: any, i: number) => (
+            <Grid
+              size={{ xs: 12, sm: 12, md: 6, lg: 4 }}
+              key={i}
+              sx={{ display: "flex" }}
             >
-              <CardContent
-                onClick={() => handleEdit(insight.slug)}
-                sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}
-              >
-                <Box
-                  sx={{
-                    height: 120,
-                    mb: 2,
-                    borderRadius: 2,
-                    p: 2,
-                    backgroundColor: insight.bgColor || COLORS.PRIMARY_BLUE,
-                    color: "#fff",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontFamily: tradeGothic.style.fontFamily,
-                      fontWeight: 700,
-                      fontSize: 16,
-                      textAlign: "center",
-                    }}
-                  >
-                    {insight.category || "News"}
-                  </Typography>
-                </Box>
-                <Typography
-                  sx={{
-                    fontFamily: tradeGothic.style.fontFamily,
-                    fontWeight: 700,
-                    fontSize: 16,
-                    color: COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  {insight.title}
-                </Typography>
-              </CardContent>
-              <Box sx={{ px: 2, pb: 2, textAlign: "right" }}>
-                <IconButton
-                  color="error"
-                  size="small"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDelete(insight.slug);
-                  }}
-                >
-                  <Delete fontSize="small" />
-                </IconButton>
-              </Box>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+              <InsightsCard
+                bgColor={insight.cardTheme || COLORS.PRIMARY_BLUE}
+                category={insight.category || "News"}
+                title={insight.insightTitle || insight.title || ""}
+                slug={insight.id?.toString()}
+                onDelete={() => openDeleteConfirm(insight.id)}
+                onEdit={() => handleEdit(insight.id)}
+              />
+            </Grid>
+          ))}
+        </Grid>
 
-      <Dialog
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-        maxWidth="md"
-        fullWidth
-        PaperProps={{
-          sx: {
-            borderRadius: 4,
-            m: { xs: 1, sm: 2 },
-            width: { xs: "calc(100% - 16px)", sm: "calc(100% - 64px)" },
-            maxHeight: { xs: "calc(100% - 16px)", sm: "calc(100% - 64px)" },
-          },
-        }}
-      >
-        <DialogTitle
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            pb: 1,
-          }}
+      {totalPages > 1 && (
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
+          spacing={3}
+          sx={{ mt: 8, mb: 4 }}
         >
           <Typography
-            variant="h5"
-            component="div"
+            onClick={() =>
+              currentPage > 1 && handlePageChange(currentPage - 1)
+            }
             sx={{
-              fontFamily: tradeGothic.style.fontFamily,
-              color: COLORS.PRIMARY_BLUE,
+              cursor: currentPage > 1 ? "pointer" : "default",
               fontWeight: 700,
+              fontSize: 14,
+              color: COLORS.PRIMARY_BLUE,
+              opacity: currentPage > 1 ? 1 : 0.4,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                color: currentPage > 1 ? COLORS.PRIMARY_GREEN : "",
+              },
             }}
           >
-            {activeSlug ? "Edit Insight" : "Add Insight"}
+            PREVIOUS
           </Typography>
-          <IconButton onClick={() => setDialogOpen(false)}>
-            <Close />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent dividers>
-          <Tabs
-            value={activeTab}
-            onChange={(e, val) => setActiveTab(val)}
-            sx={{ mb: 3, borderBottom: 1, borderColor: "divider" }}
-            variant="scrollable"
-            scrollButtons="auto"
+          <Stack direction="row" spacing={1.5} alignItems="center">
+            {(() => {
+              const pageNumbers: (number | string)[] = [];
+              if (totalPages <= 7) {
+                for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+              } else {
+                if (currentPage <= 4) {
+                  pageNumbers.push(1, 2, 3, 4, 5, "...", totalPages);
+                } else if (currentPage >= totalPages - 3) {
+                  pageNumbers.push(
+                    1,
+                    "...",
+                    totalPages - 4,
+                    totalPages - 3,
+                    totalPages - 2,
+                    totalPages - 1,
+                    totalPages,
+                  );
+                } else {
+                  pageNumbers.push(
+                    1,
+                    "...",
+                    currentPage - 1,
+                    currentPage,
+                    currentPage + 1,
+                    "...",
+                    totalPages,
+                  );
+                }
+              }
+
+              return pageNumbers.map((page, index) =>
+                page === "..." ? (
+                  <Typography
+                    key={`dots-${index}`}
+                    sx={{
+                      fontWeight: 700,
+                      color: COLORS.PRIMARY_BLUE,
+                      mx: 0.5,
+                    }}
+                  >
+                    ...
+                  </Typography>
+                ) : (
+                  <Box
+                    key={page}
+                    onClick={() => handlePageChange(page as number)}
+                    sx={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: "12px",
+                      backgroundColor:
+                        currentPage === page
+                          ? COLORS.PRIMARY_BLUE
+                          : "transparent",
+                      color:
+                        currentPage === page ? "white" : COLORS.BLACK,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      fontWeight: 700,
+                      fontSize: 16,
+                      cursor: "pointer",
+                      transition: "all 0.3s ease",
+                      border:
+                        currentPage === page
+                          ? "none"
+                          : "1px solid #EAEAEA",
+                      boxShadow:
+                        currentPage === page
+                          ? "0 8px 16px rgba(13, 95, 110, 0.2)"
+                          : "none",
+                      "&:hover": {
+                        backgroundColor:
+                          currentPage === page
+                            ? COLORS.PRIMARY_BLUE
+                            : "rgba(13, 95, 110, 0.05)",
+                        borderColor: COLORS.PRIMARY_BLUE,
+                      },
+                    }}
+                  >
+                    {page}
+                  </Box>
+                ),
+              );
+            })()}
+          </Stack>
+          <Typography
+            onClick={() =>
+              currentPage < totalPages &&
+              handlePageChange(currentPage + 1)
+            }
+            sx={{
+              cursor: currentPage < totalPages ? "pointer" : "default",
+              fontWeight: 700,
+              fontSize: 14,
+              color: COLORS.PRIMARY_BLUE,
+              opacity: currentPage < totalPages ? 1 : 0.4,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                color:
+                  currentPage < totalPages ? COLORS.PRIMARY_GREEN : "",
+              },
+            }}
           >
-            <Tab label="Card Details" />
-            <Tab label="Hero Banner" />
-            <Tab label="Main Content" />
-            <Tab label="Additional Content" />
-            <Tab label="Reviews & Strengths" />
-          </Tabs>
+            NEXT
+          </Typography>
+        </Stack>
+      )}
 
-          <Box sx={{ minHeight: 400 }}>
-            {/* Tab 0: Card Details */}
-            {activeTab === 0 && (
-              <Stack spacing={3}>
-                <Typography variant="subtitle2" color="primary">
-                  Preview Card Configuration
-                </Typography>
-                <TextField
-                  fullWidth
-                  label="Insight Title"
-                  value={cardData.title || ""}
-                  onChange={(e) => {
-                    setCardData({ ...cardData, title: e.target.value });
-                    setErrors({ ...errors, "cardData.title": undefined });
-                  }}
-                  error={!!errors["cardData.title"]}
-                  helperText={errors["cardData.title"]}
-                />
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField
-                      fullWidth
-                      label="Category"
-                      value={cardData.category || ""}
-                      onChange={(e) => {
-                        setCardData({ ...cardData, category: e.target.value });
-                        setErrors({
-                          ...errors,
-                          "cardData.category": undefined,
-                        });
-                      }}
-                      helperText={
-                        errors["cardData.category"] ||
-                        "e.g., News, Articles, Announcements"
-                      }
-                      error={!!errors["cardData.category"]}
-                    />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <Select
-                      fullWidth
-                      value={cardData.bgColor || COLORS.PRIMARY_BLUE}
-                      onChange={(e) =>
-                        setCardData({ ...cardData, bgColor: e.target.value })
-                      }
-                    >
-                      <MenuItem value={COLORS.PRIMARY_BLUE}>
-                        Primary Blue
-                      </MenuItem>
-                      <MenuItem value={COLORS.PRIMARY_LIGHT_GREEN}>
-                        Primary Light Green
-                      </MenuItem>
-                      <MenuItem value={COLORS.LIGHT_GREY}>Light Grey</MenuItem>
-                    </Select>
-                  </Grid>
-                </Grid>
-              </Stack>
-            )}
+      <InsightFormModal
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        activeId={activeId}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        cardData={cardData}
+        setCardData={setCardData}
+        heroData={heroData}
+        setHeroData={setHeroData}
+        contentSections={contentSections}
+        setContentSections={setContentSections}
+        errors={errors}
+        setErrors={setErrors}
+        isUploadingImage={isUploadingImage}
+        handleImageUpload={handleImageUpload}
+        handleDeleteImage={() => {
+          if (heroData.rawImageUrl && !keysToDeleteOnSave.includes(heroData.rawImageUrl)) {
+            setKeysToDeleteOnSave(prev => [...prev, heroData.rawImageUrl]);
+          }
+          setHeroData({ ...heroData, profileImage: "", rawImageUrl: "" });
+        }}
+        handleSave={handleSave}
+        handleContentSectionChange={handleContentSectionChange}
+      />
 
-            {/* Tab 1: Hero Banner */}
-            {activeTab === 1 && (
-              <Stack spacing={3}>
-                <Typography variant="subtitle2" color="primary">
-                  Hero Section Details
-                </Typography>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Box
-                      sx={{
-                        border: "1px dashed #ccc",
-                        p: 2,
-                        borderRadius: 2,
-                        textAlign: "center",
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      {heroData.profileImage ? (
-                        <Box
-                          sx={{
-                            mb: 2,
-                            height: 120,
-                            width: 120,
-                            borderRadius: "50%",
-                            overflow: "hidden",
-                          }}
-                        >
-                          <img
-                            src={
-                              typeof heroData.profileImage === "string"
-                                ? heroData.profileImage
-                                : heroData.profileImage.src
-                            }
-                            alt="Preview"
-                            style={{
-                              width: "100%",
-                              height: "100%",
-                              objectFit: "cover",
-                            }}
-                          />
-                        </Box>
-                      ) : (
-                        <Box
-                          sx={{
-                            mb: 2,
-                            height: 120,
-                            width: 120,
-                            borderRadius: "50%",
-                            backgroundColor: "#eaeaea",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Typography variant="caption">No Image</Typography>
-                        </Box>
-                      )}
-                      <input
-                        type="file"
-                        accept="image/*"
-                        style={{ display: "none" }}
-                        id="photo-upload-input"
-                        onChange={(e) =>
-                          e.target.files?.[0] &&
-                          handleImageUpload(e.target.files[0])
-                        }
-                      />
-                      <label htmlFor="photo-upload-input">
-                        <Button
-                          variant="outlined"
-                          component="span"
-                          size="small"
-                          color={
-                            errors["heroData.profileImage"]
-                              ? "error"
-                              : "primary"
-                          }
-                        >
-                          Upload Photo
-                        </Button>
-                      </label>
-                      {errors["heroData.profileImage"] && (
-                        <Typography
-                          variant="caption"
-                          color="error"
-                          sx={{ mt: 1 }}
-                        >
-                          {errors["heroData.profileImage"]}
-                        </Typography>
-                      )}
-                    </Box>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 8 }}>
-                    <Stack spacing={2}>
-                      <TextField
-                        fullWidth
-                        label="Person / Entity Name"
-                        value={heroData.name || ""}
-                        onChange={(e) => {
-                          setHeroData({ ...heroData, name: e.target.value });
-                          setErrors({ ...errors, "heroData.name": undefined });
-                        }}
-                        error={!!errors["heroData.name"]}
-                        helperText={errors["heroData.name"]}
-                      />
-                      <TextField
-                        fullWidth
-                        label="Band / Role"
-                        value={heroData.band || ""}
-                        onChange={(e) => {
-                          setHeroData({ ...heroData, band: e.target.value });
-                          setErrors({ ...errors, "heroData.band": undefined });
-                        }}
-                        error={!!errors["heroData.band"]}
-                        helperText={errors["heroData.band"]}
-                      />
-                      <TextField
-                        fullWidth
-                        label="Guide / Organization"
-                        value={heroData.guide || ""}
-                        onChange={(e) => {
-                          setHeroData({ ...heroData, guide: e.target.value });
-                          setErrors({ ...errors, "heroData.guide": undefined });
-                        }}
-                        error={!!errors["heroData.guide"]}
-                        helperText={errors["heroData.guide"]}
-                      />
-                      <TextField
-                        fullWidth
-                        label="Years Ranked / Date"
-                        value={heroData.yearsRanked || ""}
-                        onChange={(e) => {
-                          setHeroData({
-                            ...heroData,
-                            yearsRanked: e.target.value,
-                          });
-                          setErrors({
-                            ...errors,
-                            "heroData.yearsRanked": undefined,
-                          });
-                        }}
-                        error={!!errors["heroData.yearsRanked"]}
-                        helperText={errors["heroData.yearsRanked"]}
-                      />
-                    </Stack>
-                  </Grid>
-                </Grid>
-              </Stack>
-            )}
-
-            {/* Tab 2: Main Content */}
-            {activeTab === 2 && (
-              <Stack spacing={4}>
-                <Box>
-                  <TextField
-                    fullWidth
-                    label="Section 1 Heading"
-                    value={contentSections.practiceAreas?.heading || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "practiceAreas",
-                        "heading",
-                        e.target.value,
-                      )
-                    }
-                    sx={{ mb: 2 }}
-                  />
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Section 1 Content"
-                    value={contentSections.practiceAreas?.content || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "practiceAreas",
-                        "content",
-                        e.target.value,
-                      )
-                    }
-                  />
-                </Box>
-                <Divider />
-                <Box>
-                  <TextField
-                    fullWidth
-                    label="Section 2 Heading"
-                    value={contentSections.career?.heading || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "career",
-                        "heading",
-                        e.target.value,
-                      )
-                    }
-                    sx={{ mb: 2 }}
-                  />
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Section 2 Content"
-                    value={contentSections.career?.content || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "career",
-                        "content",
-                        e.target.value,
-                      )
-                    }
-                  />
-                </Box>
-              </Stack>
-            )}
-
-            {/* Tab 3: Additional Content */}
-            {activeTab === 3 && (
-              <Stack spacing={4}>
-                <Box>
-                  <TextField
-                    fullWidth
-                    label="Section 3 Heading"
-                    value={
-                      contentSections.professionalMemberships?.heading || ""
-                    }
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "professionalMemberships",
-                        "heading",
-                        e.target.value,
-                      )
-                    }
-                    sx={{ mb: 2 }}
-                  />
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Section 3 Content"
-                    value={
-                      contentSections.professionalMemberships?.content || ""
-                    }
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "professionalMemberships",
-                        "content",
-                        e.target.value,
-                      )
-                    }
-                  />
-                </Box>
-                <Divider />
-                <Box>
-                  <TextField
-                    fullWidth
-                    label="Section 4 Heading"
-                    value={contentSections.personal?.heading || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "personal",
-                        "heading",
-                        e.target.value,
-                      )
-                    }
-                    sx={{ mb: 2 }}
-                  />
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Section 4 Content"
-                    value={contentSections.personal?.content || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "personal",
-                        "content",
-                        e.target.value,
-                      )
-                    }
-                  />
-                </Box>
-              </Stack>
-            )}
-
-            {/* Tab 4: Reviews & Strengths */}
-            {activeTab === 4 && (
-              <Stack spacing={4}>
-                <Box>
-                  <TextField
-                    fullWidth
-                    label="Chamberss Review Heading"
-                    value={contentSections.ChamberssReview?.heading || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "ChamberssReview",
-                        "heading",
-                        e.target.value,
-                      )
-                    }
-                    sx={{ mb: 2 }}
-                  />
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Chamberss Review Content"
-                    value={contentSections.ChamberssReview?.content || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "ChamberssReview",
-                        "content",
-                        e.target.value,
-                      )
-                    }
-                  />
-                </Box>
-                <Divider />
-                <Box>
-                  <TextField
-                    fullWidth
-                    label="Strengths Heading"
-                    value={contentSections.strengths?.heading || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "strengths",
-                        "heading",
-                        e.target.value,
-                      )
-                    }
-                    sx={{ mb: 2 }}
-                  />
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    label="Strengths Content"
-                    value={contentSections.strengths?.content || ""}
-                    onChange={(e) =>
-                      handleContentSectionChange(
-                        "strengths",
-                        "content",
-                        e.target.value,
-                      )
-                    }
-                  />
-                </Box>
-              </Stack>
-            )}
-          </Box>
+      {/* Delete Confirmation Modal */}
+      <Dialog
+        open={deleteConfirmOpen}
+        onClose={() => setDeleteConfirmOpen(false)}
+        maxWidth="xs"
+        fullWidth
+        slotProps={{
+          paper: {
+            sx: { borderRadius: 3, p: 1 },
+          }
+        }}
+      >
+        <DialogTitle sx={{ fontWeight: 700, color: COLORS.PRIMARY_BLUE }}>
+          Confirm Deletion
+        </DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to delete this insight? This action cannot be undone.
+          </Typography>
         </DialogContent>
         <DialogActions sx={{ p: 2 }}>
-          <Button onClick={() => setDialogOpen(false)} color="inherit">
-            Cancel
+          <Button onClick={() => setDeleteConfirmOpen(false)} color="inherit">
+            No
           </Button>
           <Button
-            onClick={handleSave}
+            onClick={handleDelete}
             variant="contained"
-            sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}
+            color="error"
+            disabled={isLoading}
           >
-            Save Insight
+            Yes, Delete
           </Button>
         </DialogActions>
       </Dialog>

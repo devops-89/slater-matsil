@@ -738,9 +738,9 @@ export interface BLOG_DETAIL_PROPS {
     date: string;
     readTime: string;
     author: string;
-    authorImage?: StaticImageData;
+    authorImage?: StaticImageData | string;
     authorTitle?: string;
-    bgImage?: StaticImageData;
+    bgImage?: StaticImageData | string;
     badge?: string;
   };
   content: {

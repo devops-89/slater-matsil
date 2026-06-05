@@ -5,7 +5,7 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import ReactPlayer from "react-player";
-const AboutHerosection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
+const AboutHerosection = () => {
   const { details } = usePageData();
 
   const phone = useMediaQuery("(max-width:600px)");
@@ -58,24 +58,16 @@ const AboutHerosection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
         </Box> */}
         <Grid container sx={{ mt: 14,mx:12 }}>
           <Grid size={12}>
-            {(details?.aboutPage?.heroSection?.videoDownloadUrl || details?.aboutPage?.heroSection?.videoUrl) ? (
-              <ReactPlayer
-                src={details?.aboutPage?.heroSection?.videoDownloadUrl || details?.aboutPage?.heroSection?.videoUrl}
-                width={"100%"}
-                height={"100%"}
-                autoPlay
-                muted
-                loop
-                style={{ borderRadius: 10 }}
-                onReady={onImageLoad}
-                onError={onImageLoad}
-                // controls
-              />
-            ) : (
-              <Box sx={{ width: "100%", height: "400px", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#f5f5f5", borderRadius: "10px" }}>
-                <Typography variant="body1" color="text.secondary">No background video available.</Typography>
-              </Box>
-            )}
+            <ReactPlayer
+              src={details?.aboutPage?.heroSection?.videoDownloadUrl || details?.aboutPage?.heroSection?.videoUrl || "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"}
+              width={"100%"}
+              height={"100%"}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{ borderRadius: 10 }}
+            />
           </Grid>
         </Grid>
       </Container>

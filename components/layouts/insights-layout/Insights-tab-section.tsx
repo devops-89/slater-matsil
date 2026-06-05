@@ -1,22 +1,48 @@
 import TabSwitching from "@/components/widgets/Tab-Switching";
 import { usePageData } from "@/store/usePageData";
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import { Box, Container, Grid, Stack, Typography, CircularProgress } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import CustomTabPanel from "@/components/widgets/Tab-panel";
 import InsightsCard from "./components/Insights-Card";
 import { COLORS, INSIGHTS_TAB_DATA } from "@/utils/enum";
 import QuickLinks from "./Quick-Links";
+import { InsightControllers } from "@/api/insightControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
 const InsightsTabSection = () => {
   const { details, insightsTab, setInsightsTab, insightsPage, setInsightsPage } = usePageData();
+  const [apiInsights, setApiInsights] = useState<any[]>([]);
+  const { startLoading, stopLoading } = useLoading();
   
   const value = insightsTab;
   const currentPage = insightsPage;
   const itemsPerPage = 6;
 
+  useEffect(() => {
+    const fetchApiInsights = async () => {
+      try {
+        startLoading();
+        const res = await InsightControllers.getAllInsights({ limit: 1000 });
+        const data = res.data?.data?.data?.insights || res.data?.data?.insights || [];
+        setApiInsights(data);
+      } catch (err: any) {
+        console.error("Failed to fetch insights from API:", err?.message || "Unknown error");
+      } finally {
+        stopLoading();
+      }
+    };
+    fetchApiInsights();
+  }, []);
+
   const insightsData = (() => {
-    const allData = details?.insightsPage?.insightsData;
-    if (!allData) return [];
+    // Ensure API insights are sorted newest first
+    const allData = [...apiInsights].sort((a, b) => b.id - a.id).map((insight: any) => ({
+      title: insight.insightTitle || insight.title,
+      category: insight.category,
+      bgColor: insight.cardTheme || COLORS.PRIMARY_BLUE,
+      slug: insight.id.toString(), // Use ID as slug for routing
+    }));
+    if (!allData || allData.length === 0) return [];
     
     const currentTabTitle = details?.insightsPage?.tab_data?.[value]?.title;
     if (!currentTabTitle || currentTabTitle === INSIGHTS_TAB_DATA.ALL) {
@@ -62,18 +88,36 @@ const InsightsTabSection = () => {
       {details?.insightsPage?.tab_data.map((_, i) => (
         <CustomTabPanel value={value} index={i} key={i}>
           <Container maxWidth="lg" sx={{ my: 5 }}>
-            <Grid container spacing={4}>
-              {currentItems?.map((val, index) => (
-                <Grid size={{ lg: 4, md: 6, xs: 12 }} key={index}>
-                  <InsightsCard
-                    title={val.title}
-                    category={val.category}
-                    bgColor={val.bgColor}
-                    slug={val.slug}
-                  />
+            {insightsData?.length === 0 ? (
+              <Box sx={{ width: "100%", mt: 6, mb: 10, textAlign: "center" }}>
+                <Typography
+                  sx={{
+                    color: COLORS.PRIMARY_BLUE,
+                    fontSize: { xs: 20, md: 24 },
+                  }}
+                >
+                  No Insights Found
+                </Typography>
+              </Box>
+            ) : (
+              <>
+                <Grid container spacing={4}>
+                  {currentItems?.map((val, index) => {
+                    const colorsArray = [COLORS.PRIMARY_BLUE, COLORS.PRIMARY_LIGHT_GREEN, COLORS.LIGHT_GREY];
+                    const alternatingColor = colorsArray[index % colorsArray.length];
+                    
+                    return (
+                      <Grid size={{ lg: 4, md: 6, xs: 12 }} key={index}>
+                        <InsightsCard
+                          title={val.title}
+                          category={val.category}
+                          bgColor={alternatingColor}
+                          slug={val.slug}
+                        />
+                      </Grid>
+                    );
+                  })}
                 </Grid>
-              ))}
-            </Grid>
 
             {totalPages > 1 && (
               <Stack
@@ -209,6 +253,8 @@ const InsightsTabSection = () => {
                   NEXT
                 </Typography>
               </Stack>
+            )}
+              </>
             )}
           </Container>
         </CustomTabPanel>

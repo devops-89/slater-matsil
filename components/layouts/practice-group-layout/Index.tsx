@@ -24,20 +24,12 @@ const PracticeGroupsLayout = () => {
       try {
         startLoading();
 
-        let practiceGroupsPageId: number | null = null;
-        try {
-          const allPagesRes = await PageControllers.getAllPublicPages();
-          const allPages = allPagesRes.data?.data?.data || allPagesRes.data?.data || [];
-          const practiceGroupsPage = allPages.find((p: any) => p.slug === "practice-groups");
-          if (practiceGroupsPage) practiceGroupsPageId = practiceGroupsPage.id;
-        } catch (e) {
-          console.error("Failed to fetch public pages for ID lookup", e);
-        }
-
         let pageData = null;
-        if (practiceGroupsPageId) {
-          const res = await PageControllers.getPublicPageById(practiceGroupsPageId).catch(e => ({ data: { data: null } }));
+        try {
+          const res = await PageControllers.getPublicPageById(4);
           pageData = res.data?.data?.data || res.data?.data;
+        } catch (e) {
+          console.error("Failed to fetch practice groups page by ID", e);
         }
         
         if (pageData && isMounted) {
@@ -53,6 +45,7 @@ const PracticeGroupsLayout = () => {
         }
       } catch (error) {
         console.error("Error fetching practice groups data", error);
+      } finally {
         if (isMounted) stopLoading();
       }
     };
@@ -70,7 +63,7 @@ const PracticeGroupsLayout = () => {
   return (
     <Box>
       <div data-aos="fade-in">
-        <PracticeGroupsHeroSection onImageLoad={stopLoading} />
+        <PracticeGroupsHeroSection />
       </div>
       <div data-aos="fade-up">
         <PracticeGroupSection />

@@ -5,8 +5,9 @@ import { adelle } from "@/utils/fonts";
 import { Logout, Menu, AdminPanelSettings, ManageAccounts } from "@mui/icons-material";
 import { Box, Typography, IconButton, Avatar, Menu as MuiMenu, MenuItem, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNotification } from "@/components/providers/NotificationProvider";
+import { usePermissions } from "@/hooks/usePermissions";
 
 interface HeaderProps {
   title?: string;
@@ -17,15 +18,41 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { showNotification } = useNotification();
-  
-  const authEmail = typeof window !== "undefined" ? localStorage.getItem("adminAuth") : "admin@slatermatsil.com";
-  const displayEmail = authEmail && authEmail !== "true" ? authEmail : "admin@slatermatsil.com";
+  const { isSuperAdmin } = usePermissions();
+  const [storedName, setStoredName] = useState("");
+
+  useEffect(() => {
+    const updateName = () => {
+      const name = localStorage.getItem("userName");
+      if (name) {
+        setStoredName(name);
+      }
+    };
+    
+    // Initial check
+    updateName();
+    
+    // Listen for hydration updates
+    window.addEventListener("userNameUpdated", updateName);
+    return () => window.removeEventListener("userNameUpdated", updateName);
+  }, []);
+
+  const displayName = isSuperAdmin ? "Admin" : (storedName || "User");
+  const displayInitial = displayName.charAt(0).toUpperCase();
 
   const handleLogout = () => {
     localStorage.removeItem("adminAuth");
-    setAnchorEl(null);
-    showNotification("Logged out successfully", "error");
-    router.push("/admin");
+    localStorage.removeItem("isSuperAdmin");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("adminUserId");
+    localStorage.removeItem("userName");
+    
+    // Clear the role cookie
+    document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    
+    showNotification("Logged out successfully", "success");
+    router.replace("/admin");
   };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -83,7 +110,7 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
           sx={{ p: 0 }}
         >
           <Avatar sx={{ bgcolor: COLORS.PRIMARY_BLUE }}>
-            A
+            {displayInitial}
           </Avatar>
         </IconButton>
         
@@ -118,7 +145,7 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
               <AdminPanelSettings fontSize="small" sx={{ color: COLORS.PRIMARY_BLUE }} />
             </ListItemIcon>
             <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, fontWeight: 700 }}>
-              Admin
+              {displayName}
             </Typography>
           </MenuItem>
           <MenuItem onClick={handleLogout}>

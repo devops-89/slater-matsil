@@ -41,7 +41,8 @@ const ContactUs = () => {
           stopLoading();
         }
       } catch (error) {
-        console.error("Error fetching contact data", error);
+        console.error("Error fetching contact page data", error);
+      } finally {
         if (isMounted) stopLoading();
       }
     };
@@ -56,7 +57,7 @@ const ContactUs = () => {
 
   return (
     <div>
-      <ContactLayout onImageLoad={stopLoading} />
+      <ContactLayout />
     </div>
   );
 };

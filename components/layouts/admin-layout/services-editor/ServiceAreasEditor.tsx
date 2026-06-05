@@ -189,7 +189,7 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
         onClose={() => setDialogOpen(false)} 
         maxWidth="md" 
         fullWidth
-        PaperProps={{ sx: { borderRadius: 4, m: 2 } }}
+        slotProps={{ paper: { sx: { borderRadius: 4, m: 2 } } }}
       >
         <DialogTitle component="div" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
           <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>

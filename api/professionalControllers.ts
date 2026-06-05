@@ -10,15 +10,6 @@ export const ProfessionalControllers = {
     }
   },
 
-  updateProfessionalProfile: async (id: number, data: any) => {
-    try {
-      const result = await userSecuredApi.patch("professional-profile", data);
-      return result;
-    } catch (error) {
-      throw error;
-    }
-  },
-
   deleteProfessionalProfile: async (id: number) => {
     try {
       const result = await userSecuredApi.delete(`${id}`);

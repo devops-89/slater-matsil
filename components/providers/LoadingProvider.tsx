@@ -1,10 +1,9 @@
 "use client";
 
+import loadingData from "@/public/images/loading2.json";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
-import loadingData from "@/public/images/loading2.json";
-import { createContext, useContext, useCallback } from "react";
+import { createContext, Suspense, useCallback, useContext, useEffect, useState } from "react";
 
 export const LoadingContext = createContext({
   isLoading: false,

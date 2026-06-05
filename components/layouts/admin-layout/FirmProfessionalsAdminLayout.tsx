@@ -1,38 +1,30 @@
 "use client";
-import React, { useState, useEffect, useMemo } from "react";
-import AdminLayout from "./AdminLayout";
-import {
-  Box,
-  Typography,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Stack,
-  IconButton,
-  Divider,
-  Tabs,
-  Tab,
-  CircularProgress,
-  Pagination,
-  Alert
-} from "@mui/material";
-import { Add, Close, Delete, AddCircle, RemoveCircle } from "@mui/icons-material";
-import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
-import * as Yup from "yup";
-import { ProfessionalControllers } from "@/api/professionalControllers";
 import { MediaControllers } from "@/api/mediaControllers";
-import { usePageData } from "@/store/usePageData";
+import { ProfessionalControllers } from "@/api/professionalControllers";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { useNotification } from "@/components/providers/NotificationProvider";
-import Image from "next/image";
-
+import { usePageData } from "@/store/usePageData";
+import { COLORS } from "@/utils/enum";
+import { tradeGothic } from "@/utils/fonts";
+import { Add } from "@mui/icons-material";
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    Pagination,
+    Stack,
+    Typography
+} from "@mui/material";
+import React, { useEffect, useMemo, useState } from "react";
+import * as Yup from "yup";
+import AdminLayout from "./AdminLayout";
+import ProfessionalCardItem from "./components/ProfessionalCardItem";
+import ProfessionalFormModal from "./components/ProfessionalFormModal";
 export default function FirmProfessionalsAdminLayout() {
   const { details } = usePageData();
   const { startLoading, stopLoading } = useLoading();
@@ -152,6 +144,7 @@ export default function FirmProfessionalsAdminLayout() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [initialState, setInitialState] = useState<string>("");
 
   const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -189,14 +182,15 @@ export default function FirmProfessionalsAdminLayout() {
     const prof = hybridProfessionals.find(p => p.id === id);
     if (!prof) return;
 
-    setCardData({
+    const newCardData = {
       name: prof.fullName || prof.name || "",
       designation: prof.designation || "",
       imageUrl: prof.profileImageUrl || prof.imageUrl || prof.img || "",
       imageDownloadUrl: prof.profileImageDownloadUrl || prof.imageDownloadUrl || prof.img || "",
       detailsImageUrl: prof.professionalProfiles?.[0]?.imageUrl || prof.detailsImg || "",
       detailsImageDownloadUrl: prof.professionalProfiles?.[0]?.imageDownloadUrl || prof.detailsImg || ""
-    });
+    };
+    setCardData(newCardData);
 
     const profile = prof.professionalProfiles?.[0] || {};
     const sections = profile.sections || [];
@@ -206,27 +200,29 @@ export default function FirmProfessionalsAdminLayout() {
       paragraphs: s.description || "",
       bullets: (s.bullets || []).map((b: any) => ({ id: b.id, label: b.bulletText, href: "" }))
     });
-      setBioData({
-        profileId: profile.id,
-        email: prof.email || "",
-        phoneNumber: prof.phoneNumber || "",
-        vCard: {
-          job_title: profile.jobTitle || "",
-          street: profile.streetAddress || "",
-          city: profile.city || "",
-          state: profile.state || "",
-          postalCode: profile.postalCode || "",
-          countryRegion: "USA"
-        },
-        bio: parseSection(getSection("BIOGRAPHY")),
-        education: parseSection(getSection("EDUCATION")),
-        admissions: parseSection(getSection("ADMISSIONS")),
-        articles: parseSection(getSection("ARTICLES_PUBLICATIONS")),
-        associations: parseSection(getSection("ASSOCIATIONS"))
-      });
+    const newBioData = {
+      profileId: profile.id,
+      email: prof.email || "",
+      phoneNumber: prof.phoneNumber || "",
+      vCard: {
+        job_title: profile.jobTitle || "",
+        street: profile.streetAddress || "",
+        city: profile.city || "",
+        state: profile.state || "",
+        postalCode: profile.postalCode || "",
+        countryRegion: "USA"
+      },
+      bio: parseSection(getSection("BIOGRAPHY")),
+      education: parseSection(getSection("EDUCATION")),
+      admissions: parseSection(getSection("ADMISSIONS")),
+      articles: parseSection(getSection("ARTICLES_PUBLICATIONS")),
+      associations: parseSection(getSection("ASSOCIATIONS"))
+    };
+    setBioData(newBioData);
 
     setErrors({});
     setPendingDeletes([]);
+    setInitialState(JSON.stringify({ cardData: newCardData, bioData: newBioData }));
     setDialogOpen(true);
   };
 
@@ -269,6 +265,11 @@ export default function FirmProfessionalsAdminLayout() {
   };
 
   const handleSave = async () => {
+    if (activeId && JSON.stringify({ cardData, bioData }) === initialState) {
+      showNotification("No changes detected. Please make changes before saving.", "info");
+      return;
+    }
+
     try {
       await validationSchema.validate({
         name: cardData.name,
@@ -460,43 +461,13 @@ export default function FirmProfessionalsAdminLayout() {
 
       <Grid container spacing={{ xs: 2, md: 4 }}>
         {paginatedData.map((prof, i) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={i} sx={{ display: 'flex' }}>
-            <Card sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: 4, cursor: "pointer", transition: "all 0.2s", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }, position: 'relative' }}>
-              <IconButton 
-                size="small" 
-                color="error" 
-                onClick={(e) => { e.stopPropagation(); handleDeleteProfessional(prof.id); }} 
-                sx={{ position: 'absolute', top: 8, right: 8, zIndex: 10, bgcolor: 'rgba(255,255,255,0.8)', '&:hover': { bgcolor: 'white' } }}
-              >
-                <Delete fontSize="small" />
-              </IconButton>
-              <CardContent onClick={() => handleEdit(prof.id)} sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                <Box sx={{ height: 180, mb: 2, borderRadius: 2, overflow: 'hidden', backgroundColor: '#f0f0f0', position: 'relative' }}>
-                  {prof.img ? (
-                    <Image 
-                      onLoad={handleImageLoad} 
-                      onError={handleImageLoad} 
-                      src={typeof prof.img === 'string' ? prof.img : prof.img?.src} 
-                      alt={prof.name} 
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  ) : (
-                    <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Typography variant="caption" color="textSecondary">No Image</Typography>
-                    </Box>
-                  )}
-                </Box>
-                <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontWeight: 700, fontSize: 18, color: COLORS.PRIMARY_BLUE }}>
-                  {prof.name}
-                </Typography>
-                <Typography sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY_4, fontSize: 14, mt: 'auto' }}>
-                  {prof.designation}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          <ProfessionalCardItem
+            key={i}
+            prof={prof}
+            onEdit={handleEdit}
+            onDelete={handleDeleteProfessional}
+            onImageLoad={handleImageLoad}
+          />
         ))}
       </Grid>
 
@@ -523,121 +494,28 @@ export default function FirmProfessionalsAdminLayout() {
         </Stack>
       )}
 
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md" fullWidth PaperProps={{ sx: { m: { xs: 1, sm: 2 }, width: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' }, maxHeight: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' } } }}>
-        <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
-          <Typography component="div" variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-            {activeId ? "Edit Professional Profile" : "Add Professional Profile"}
-          </Typography>
-          <IconButton onClick={() => setDialogOpen(false)} disabled={isSaving}>
-            <Close />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent dividers>
-          <Tabs
-            value={activeTab}
-            onChange={(e, val) => setActiveTab(val)}
-            sx={{ mb: 3, borderBottom: 1, borderColor: 'divider' }}
-            variant="scrollable"
-            scrollButtons="auto"
-          >
-            <Tab label="General & vCard" />
-            <Tab label="Biography" />
-            <Tab label="Education" />
-            <Tab label="Admissions" />
-            <Tab label="Articles & Publications" />
-            <Tab label="Associations" />
-          </Tabs>
-
-          <Box sx={{ minHeight: 350 }}>
-            {activeTab === 0 && (
-              <Stack spacing={4}>
-                <Typography variant="subtitle1" color="primary" sx={{ fontWeight: 'bold' }}>Images & Identification</Typography>
-                <Grid container spacing={3}>
-                  <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-                    <Box sx={{ border: "1px dashed #ccc", p: 2, borderRadius: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-                      <Typography variant="caption" sx={{ mb: 1, fontWeight: 'bold' }}>Card Image (profileImageUrl)</Typography>
-                      {cardData.imageDownloadUrl || cardData.imageUrl ? (
-                        <Box sx={{ position: 'relative', mb: 2, height: 120, width: 120 }}>
-                          <Box sx={{ position: 'absolute', top: 0, right: 0, zIndex: 10, transform: 'translate(25%, -25%)' }}>
-                            <IconButton size="small" color="error" onClick={() => handleDeleteImage("card")} sx={{ bgcolor: 'white', boxShadow: 1, '&:hover': { bgcolor: '#f5f5f5' } }}>
-                              <Close fontSize="small" />
-                            </IconButton>
-                          </Box>
-                          <Box sx={{ height: "100%", width: "100%", borderRadius: "50%", overflow: "hidden" }}>
-                            <img src={cardData.imageDownloadUrl || (typeof cardData.imageUrl === 'string' ? cardData.imageUrl : cardData.imageUrl?.src)} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                          </Box>
-                        </Box>
-                      ) : (
-                        <Box sx={{ mb: 2, height: 120, width: 120, borderRadius: "50%", backgroundColor: '#eaeaea', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Typography variant="caption">No Image</Typography>
-                        </Box>
-                      )}
-                      <input type="file" accept="image/*" style={{ display: 'none' }} id="photo-upload-input-card" onChange={(e) => e.target.files?.[0] && handleUploadImage(e.target.files[0], "card")} />
-                      <label htmlFor="photo-upload-input-card">
-                        <Button variant="outlined" component="span" size="small" disabled={isUploadingCardImg}>
-                          {isUploadingCardImg ? <CircularProgress size={20} /> : "Upload Photo"}
-                        </Button>
-                      </label>
-                    </Box>
-                  </Grid>
-
-                  {/* Details Page Image Grid removed as per user request */}
-
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Stack spacing={2} sx={{ height: '100%', justifyContent: 'center' }}>
-                      <TextField fullWidth label="Full Name" value={cardData.name || ""} onChange={(e) => setCardData({ ...cardData, name: e.target.value })} error={!!errors.name} helperText={errors.name} />
-                      <TextField fullWidth label="Designation (e.g., PARTNER)" value={cardData.designation || ""} onChange={(e) => setCardData({ ...cardData, designation: e.target.value })} error={!!errors.designation} helperText={errors.designation} />
-                    </Stack>
-                  </Grid>
-                </Grid>
-
-                <Divider />
-                <Typography variant="subtitle1" color="primary" sx={{ fontWeight: 'bold' }}>Contact Details</Typography>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField fullWidth label="Email Address" value={bioData.email || ""} onChange={(e) => setBioData({ ...bioData, email: e.target.value })} error={!!errors.email} helperText={errors.email} />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField fullWidth label="Phone Number" value={bioData.phoneNumber || ""} onChange={(e) => setBioData({ ...bioData, phoneNumber: e.target.value })} error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
-                  </Grid>
-                </Grid>
-
-                <Divider />
-                <Typography variant="subtitle1" color="primary" sx={{ fontWeight: 'bold' }}>vCard Additional Details</Typography>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField fullWidth label="vCard Job Title" value={bioData.vCard?.job_title || ""} onChange={(e) => setBioData({ ...bioData, vCard: { ...bioData.vCard, job_title: e.target.value } })} />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField fullWidth label="Street Address" value={bioData.vCard?.street || ""} onChange={(e) => setBioData({ ...bioData, vCard: { ...bioData.vCard, street: e.target.value } })} />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 4 }}>
-                    <TextField fullWidth label="City" value={bioData.vCard?.city || ""} onChange={(e) => setBioData({ ...bioData, vCard: { ...bioData.vCard, city: e.target.value } })} />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 4 }}>
-                    <TextField fullWidth label="State" value={bioData.vCard?.state || ""} onChange={(e) => setBioData({ ...bioData, vCard: { ...bioData.vCard, state: e.target.value } })} />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 4 }}>
-                    <TextField fullWidth label="Postal Code" value={bioData.vCard?.postalCode || ""} onChange={(e) => setBioData({ ...bioData, vCard: { ...bioData.vCard, postalCode: e.target.value } })} />
-                  </Grid>
-                </Grid>
-              </Stack>
-            )}
-
-            {activeTab === 1 && renderSectionEditor("bio", "Biography")}
-            {activeTab === 2 && renderSectionEditor("education", "Education & Credentials")}
-            {activeTab === 3 && renderSectionEditor("admissions", "Admissions & Honors")}
-            {activeTab === 4 && renderSectionEditor("articles", "Articles & Presentations")}
-            {activeTab === 5 && renderSectionEditor("associations", "Professional Associations")}
-          </Box>
-        </DialogContent>
-        <DialogActions sx={{ p: 2 }}>
-          <Button onClick={() => setDialogOpen(false)} color="inherit" disabled={isSaving}>Cancel</Button>
-          <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
-            {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : "Save Changes"}
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <ProfessionalFormModal
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        activeId={activeId}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        cardData={cardData}
+        setCardData={setCardData}
+        bioData={bioData}
+        setBioData={setBioData}
+        errors={errors}
+        setErrors={setErrors}
+        isSaving={isSaving}
+        isUploadingCardImg={isUploadingCardImg}
+        handleUploadImage={handleUploadImage}
+        handleDeleteImage={handleDeleteImage}
+        handleSave={handleSave}
+        handleParagraphChange={handleParagraphChange}
+        handleAddBullet={handleAddBullet}
+        handleRemoveBullet={handleRemoveBullet}
+        handleBulletChange={handleBulletChange}
+      />
 
       {/* Delete Confirmation Modal */}
       <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
@@ -659,59 +537,5 @@ export default function FirmProfessionalsAdminLayout() {
     </AdminLayout>
   );
 
-  function renderSectionEditor(key: string, label: string) {
-    const data = bioData[key] || { paragraphs: "", bullets: [] };
-    return (
-      <Stack spacing={3}>
-        <Box>
-          <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 700 }}>Description Paragraphs</Typography>
-          <TextField
-            fullWidth
-            multiline
-            rows={6}
-            placeholder="Enter biography description paragraphs here. Use a blank line (double enter) to separate paragraphs."
-            value={data.paragraphs || ""}
-            onChange={(e) => handleParagraphChange(key, e.target.value)}
-          />
-        </Box>
-        <Divider />
-        <Box>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-            <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>Bullet List Items</Typography>
-            <Button size="small" startIcon={<AddCircle />} onClick={() => handleAddBullet(key)}>
-              Add Bullet
-            </Button>
-          </Box>
-          <Stack spacing={2}>
-            {data.bullets.map((bullet: any, idx: number) => (
-              <Stack direction={{ xs: "column", sm: "row" }} spacing={2} key={idx} alignItems={{ xs: "stretch", sm: "center" }}>
-                <TextField
-                  fullWidth
-                  size="small"
-                  label="Label / Text"
-                  value={bullet.label || ""}
-                  onChange={(e) => handleBulletChange(key, idx, "label", e.target.value)}
-                />
-                <TextField
-                  fullWidth
-                  size="small"
-                  label="Optional Link URL (href)"
-                  value={bullet.href || ""}
-                  onChange={(e) => handleBulletChange(key, idx, "href", e.target.value)}
-                />
-                <IconButton color="error" onClick={() => handleRemoveBullet(key, idx)}>
-                  <RemoveCircle />
-                </IconButton>
-              </Stack>
-            ))}
-            {data.bullets.length === 0 && (
-              <Typography variant="body2" color="textSecondary" sx={{ fontStyle: 'italic' }}>
-                No bullet items added to this section yet.
-              </Typography>
-            )}
-          </Stack>
-        </Box>
-      </Stack>
-    );
-  }
+
 }

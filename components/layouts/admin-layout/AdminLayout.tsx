@@ -22,6 +22,10 @@ export default function AdminLayout({ children, title }: AdminLayoutProps) {
     setSidebarOpen(!isMobile);
   }, [isMobile]);
 
+  useEffect(() => {
+    document.title = `${title} | Slater Matsil Admin`;
+  }, [title]);
+
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
   };
