@@ -37,7 +37,7 @@ const BlogDetailsLayout = () => {
             readTime: blog.readTime,
             author: blog.authorName,
             authorTitle: blog.authorTitle,
-            authorImage: blog.downloadAuthorImageUrl || blog.authorImageDownloadUrl || blog.authorImageUrl,
+            authorImage: blog.authorImageDownloadUrl || blog.authorImageUrl,
             badge: blog.badge,
           },
           content: {

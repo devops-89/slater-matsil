@@ -73,7 +73,183 @@ const BlogSection = () => {
 
   return (
     <Box sx={{ mb: { lg: 10, xs: 6 } }}>
-
+      {/* Upcoming section */}
+      {/* <Box sx={{ backgroundColor: "#ECF8F8", py: { lg: 8, xs: 4 } }}>
+        <Container maxWidth="lg">
+          <Typography
+            component={motion.h2}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            sx={{
+              fontSize: { lg: 36, md: 30, xs: 24 },
+              fontWeight: 700,
+              color: COLORS.PRIMARY_BLUE,
+              mb: { lg: 4, xs: 3 },
+            }}
+          >
+            {blogSection?.upcomingTitle || "Upcoming"}
+          </Typography>
+          <Grid container spacing={4}>
+            {upcomingWebinars.map((webinar, index) => (
+              <Grid key={webinar.id} size={{ lg: 6, xs: 12 }}>
+                <Box
+                  component={motion.div}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  sx={{ height: "100%" }}
+                >
+                  <Link
+                    href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.id}`}
+                    style={{
+                      textDecoration: "none",
+                      color: "inherit",
+                      display: "flex",
+                      height: "100%",
+                    }}
+                  >
+                    <Card
+                      sx={{
+                        borderRadius: 4,
+                        boxShadow: "0 10px 30px rgba(13, 95, 110, 0.05)",
+                        overflow: "hidden",
+                        height: "100%",
+                        width: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                        cursor: "pointer",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          transform: "translateY(-8px)",
+                          boxShadow: "0 20px 40px rgba(13, 95, 110, 0.1)",
+                          "& .view-more": {
+                            backgroundColor: COLORS.PRIMARY_GREEN,
+                          },
+                        },
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          backgroundColor: webinar.bg,
+                          display: "flex",
+                          flexDirection: { xs: "column", sm: "row" },
+                          alignItems: "stretch",
+                          height: { sm: 240, xs: "auto" },
+                        }}
+                      >
+                        <Box
+                          sx={{
+                            flex: 1,
+                            p: { lg: 4, xs: 3 },
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: 14,
+                              fontWeight: 700,
+                              color: COLORS.PRIMARY_BLUE,
+                              textTransform: "uppercase",
+                              mb: 1,
+                              opacity: 0.7,
+                            }}
+                          >
+                            {webinar.tag}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: { lg: 24, xs: 20 },
+                              fontWeight: 700,
+                              color: COLORS.PRIMARY_BLUE,
+                              lineHeight: 1.2,
+                              mb: 2,
+                            }}
+                          >
+                            {webinar.title}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: 16,
+                              color: "rgba(13, 95, 110, 0.6)",
+                              fontWeight: 500,
+                            }}
+                          >
+                            {webinar.date}
+                          </Typography>
+                        </Box>
+                        <CardMedia
+                          component="img"
+                          image={webinar.img?.src || ""}
+                          alt={webinar.title}
+                          sx={{
+                            width: { lg: 220, md: 200, xs: "100%" },
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      </Box>
+                      <CardContent
+                        sx={{
+                          flex: 1,
+                          p: 4,
+                          display: "flex",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: 20,
+                            fontWeight: 600,
+                            color: COLORS.PRIMARY_BLUE,
+                            mb: 1.5,
+                          }}
+                        >
+                          {webinar.subtitle}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: 16,
+                            color: "rgba(0, 0, 0, 0.7)",
+                            lineHeight: 1.6,
+                            mb: 4,
+                            flex: 1,
+                          }}
+                        >
+                          {webinar.description}
+                        </Typography>
+                        <Box sx={{ mt: "auto" }}>
+                          <Typography
+                            className="view-more"
+                            sx={{
+                              display: "inline-flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              px: 4,
+                              py: 1.5,
+                              borderRadius: "999px",
+                              backgroundColor: COLORS.PRIMARY_BLUE,
+                              color: COLORS.WHITE,
+                              fontSize: 15,
+                              fontWeight: 700,
+                              transition: "all 0.3s ease",
+                            }}
+                          >
+                            VIEW DETAILS
+                          </Typography>
+                        </Box>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box> */}
 
       {/* Watch Past Webinars */}
       <Container maxWidth="lg" sx={{ mt: { lg: 12, xs: 8 } }}>
