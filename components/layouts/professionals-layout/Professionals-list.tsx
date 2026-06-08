@@ -81,36 +81,30 @@ const ProfessionalList = () => {
 
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
-  const [loadedCount, setLoadedCount] = useState(0);
+  const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
+  const [isPaginating, setIsPaginating] = useState(false);
 
   const paginatedData = data?.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE,
   );
 
-  const currentKey = `${page}-${data.length}`;
+  const handleImageLoad = () => {
+    if (isPaginating) {
+      setImagesLoadedCount((prev: number) => prev + 1);
+    }
+  };
 
   useEffect(() => {
-    if (paginatedData?.length > 0) {
-      if (loadedCount >= paginatedData.length) {
+    if (isPaginating) {
+      const imagesToLoad = paginatedData.filter((p: any) => p.img).length;
+      if (imagesLoadedCount >= imagesToLoad) {
         stopLoading();
+        setIsPaginating(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
-  }, [loadedCount, paginatedData, stopLoading]);
-
-  // Separate effect to handle page change start
-  useEffect(() => {
-    if (paginatedData?.length > 0) {
-      startLoading();
-      const validImagesCount = paginatedData.filter(p => p.img).length;
-      setLoadedCount(paginatedData.length - validImagesCount);
-    }
-  }, [currentKey]);
-
-  const handleImageLoad = () => {
-    // We don't call setLoading here, only update local state.
-    setLoadedCount((prev: number) => prev + 1);
-  };
+  }, [imagesLoadedCount, isPaginating, paginatedData, stopLoading]);
 
   const handleSearch = () => {
     const filteredData = sortedFullList.filter((item: any) =>
@@ -133,7 +127,19 @@ const ProfessionalList = () => {
     event: React.ChangeEvent<unknown>,
     value: number,
   ) => {
+    if (value === page) return;
     setPage(value);
+    
+    const newPageData = data?.slice((value - 1) * ITEMS_PER_PAGE, value * ITEMS_PER_PAGE);
+    const imagesToLoad = newPageData.filter((p: any) => p.img).length;
+    
+    if (imagesToLoad > 0) {
+      startLoading();
+      setIsPaginating(true);
+      setImagesLoadedCount(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -162,7 +168,6 @@ const ProfessionalList = () => {
             container
             spacing={5}
             rowSpacing={20}
-            key={currentKey}
           >
             {paginatedData?.length ? (
               paginatedData?.map((val, i) => (

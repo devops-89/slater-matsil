@@ -1,7 +1,8 @@
+import { AxiosResponse } from "axios";
 import { userPublicApi, userSecuredApi } from "./config";
 
 export const ProfessionalControllers = {
-  createProfessionalProfile: async (data: any) => {
+  createProfessionalProfile: async (data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       const result = await userSecuredApi.post("professional-profile", data);
       return result;
@@ -10,7 +11,7 @@ export const ProfessionalControllers = {
     }
   },
 
-  deleteProfessionalProfile: async (id: number) => {
+  deleteProfessionalProfile: async (id: number): Promise<AxiosResponse> => {
     try {
       const result = await userSecuredApi.delete(`${id}`);
       return result;
@@ -19,7 +20,7 @@ export const ProfessionalControllers = {
     }
   },
 
-  getAllProfessionalProfiles: async (limit: number = 100) => {
+  getAllProfessionalProfiles: async (limit: number = 100): Promise<AxiosResponse> => {
     try {
       const result = await userPublicApi.get(`all?role=PROFESSIONAL&limit=${limit}`);
       return result;
@@ -28,9 +29,18 @@ export const ProfessionalControllers = {
     }
   },
 
-  getProfessionalById: async (id: number) => {
+  getProfessionalById: async (id: number): Promise<AxiosResponse> => {
     try {
       const result = await userPublicApi.get(`${id}`);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  downloadProfessionalPdf: async (id: number | string): Promise<AxiosResponse> => {
+    try {
+      const result = await userPublicApi.get(`${id}/download-pdf`, { responseType: 'blob' });
       return result;
     } catch (error) {
       throw error;

@@ -1,38 +1,33 @@
 "use client";
+import { InsightControllers } from "@/api/insightControllers";
+import { MediaControllers } from "@/api/mediaControllers";
+import InsightsCard from "@/components/layouts/insights-layout/components/Insights-Card";
+import { useLoading } from "@/components/providers/LoadingProvider";
+import { useNotification } from "@/components/providers/NotificationProvider";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic, adelle } from "@/utils/fonts";
-import { Add, Close, Delete } from "@mui/icons-material";
+import {
+  INSIGHT_API_ITEM,
+  INSIGHT_FORM_CARD_DATA,
+  INSIGHT_FORM_CONTACT,
+  INSIGHT_FORM_CONTENT_DATA,
+  INSIGHT_FORM_HERO_DATA
+} from "@/utils/types";
+import { Add } from "@mui/icons-material";
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  Divider,
   Grid,
-  IconButton,
-  MenuItem,
-  Select,
   Stack,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-  CircularProgress,
+  Typography
 } from "@mui/material";
-import InsightsCard from "@/components/layouts/insights-layout/components/Insights-Card";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import * as yup from "yup";
 import AdminLayout from "./AdminLayout";
-import { InsightControllers } from "@/api/insightControllers";
-import { MediaControllers } from "@/api/mediaControllers";
-import { useNotification } from "@/components/providers/NotificationProvider";
-import { useLoading } from "@/components/providers/LoadingProvider";
-import { usePageData } from "@/store/usePageData";
-import { INSIGHTS_TAB_DATA } from "@/utils/enum";
 import InsightFormModal from "./components/InsightFormModal";
 
 const insightSchema = yup.object().shape({
@@ -56,10 +51,11 @@ export default function InsightsAdminLayout() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
-  const [errors, setErrors] = useState<any>({});
-  const [insightsCards, setInsightsCards] = useState<any[]>([]);
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [insightsCards, setInsightsCards] = useState<INSIGHT_API_ITEM[]>([]);
   const [keysToDeleteOnSave, setKeysToDeleteOnSave] = useState<string[]>([]);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [initialState, setInitialState] = useState<string>("");
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [insightToDelete, setInsightToDelete] = useState<{id?: number} | null>(null);
@@ -88,21 +84,21 @@ export default function InsightsAdminLayout() {
   };
 
   // Form states
-  const [contactData, setContactData] = useState<any>(defaultContact);
-  const [cardData, setCardData] = useState<any>({
+  const [contactData, setContactData] = useState<INSIGHT_FORM_CONTACT>(defaultContact);
+  const [cardData, setCardData] = useState<INSIGHT_FORM_CARD_DATA>({
     title: "",
     category: "",
     bgColor: COLORS.PRIMARY_BLUE,
   });
-  const [heroData, setHeroData] = useState<any>({
+  const [heroData, setHeroData] = useState<INSIGHT_FORM_HERO_DATA>({
     name: "",
     band: "",
     guide: "",
     yearsRanked: "",
     profileImage: "",
-    rawImageUrl: "",
+    rawProfileImage: "",
   });
-  const [contentSections, setContentSections] = useState<any>({
+  const [contentSections, setContentSections] = useState<INSIGHT_FORM_CONTENT_DATA>({
     aboutProvidedBy: "",
     aboutProvidedByName: "",
     region: "",
@@ -150,13 +146,14 @@ export default function InsightsAdminLayout() {
       guide: "",
       yearsRanked: "",
       profileImage: "",
-      rawImageUrl: "",
+      rawProfileImage: "",
     });
     setContactData(defaultContact);
     setContentSections({
       aboutProvidedBy: "",
       aboutProvidedByName: "",
       region: "",
+
       practiceAreas: { heading: "", content: "" },
       professionalMemberships: { heading: "", content: "" },
       career: { heading: "", content: "" },
@@ -180,26 +177,28 @@ export default function InsightsAdminLayout() {
 
     if (insight) {
       const newCardData = {
-        title: insight.insightTitle || insight.title || "",
-        category: insight.category || "",
-        bgColor: insight.cardTheme || COLORS.PRIMARY_BLUE,
+        title: (insight.listingTitle as string) || (insight.insightTitle as string) || (insight.title as string) || "",
+        category: (insight.category as string) || "",
+        bgColor: (insight.bgColor as string) || (insight.cardTheme as string) || COLORS.PRIMARY_BLUE,
+        imageUrl: (insight.profileImageUrl as string) || (insight.imageUrl as string) || "",
+        imageDownloadUrl: (insight.profileImageDownloadUrl as string) || (insight.imageUrl as string) || "",
       };
 
       const newHeroData = {
-        name: insight.personName || "",
-        band: insight.bandRole || "",
-        guide: insight.guideOrganization || "",
-        yearsRanked: insight.yearsRankedDate || "",
-        profileImage: insight.imageDownloadUrl || insight.imageUrl || "",
-        rawImageUrl: insight.imageUrl || "",
+        name: (insight.personName as string) || (insight.name as string) || "",
+        band: (insight.bandRole as string) || "",
+        guide: (insight.guideOrganization as string) || (insight.guide as string) || "",
+        yearsRanked: (insight.yearsRankedDate as string) || (insight.yearsRanked as string) || "",
+        profileImage: (insight.imageDownloadUrl as string) || (insight.imageUrl as string) || "",
+        rawProfileImage: (insight.imageUrl as string) || "",
       };
 
       const newContactData = insight.contact || defaultContact;
 
-      const secMap: any = {
-        aboutProvidedBy: insight.aboutProvidedBy || "",
-        aboutProvidedByName: insight.aboutProvidedByName || "",
-        region: insight.region || "",
+      const secMap: INSIGHT_FORM_CONTENT_DATA = {
+        aboutProvidedBy: (insight.aboutProvidedBy as string) || "",
+        aboutProvidedByName: (insight.aboutProvidedByName as string) || "",
+        region: (insight.region as string) || "",
         practiceAreas: { heading: "", content: "" },
         professionalMemberships: { heading: "", content: "" },
         career: { heading: "", content: "" },
@@ -211,7 +210,7 @@ export default function InsightsAdminLayout() {
         resource: { heading: "", content: "", link: "" },
       };
 
-      insight.sections?.forEach((sec: any) => {
+      insight.sections?.forEach((sec: Record<string, any>) => {
         if (sec.sectionType === "PRACTICE_AREAS") secMap.practiceAreas = { heading: sec.heading, content: sec.content, id: sec.id };
         if (sec.sectionType === "PROFESSIONAL_MEMBERSHIPS") secMap.professionalMemberships = { heading: sec.heading, content: sec.content, id: sec.id };
         if (sec.sectionType === "CAREER") secMap.career = { heading: sec.heading, content: sec.content, id: sec.id };
@@ -245,23 +244,27 @@ export default function InsightsAdminLayout() {
         { abortEarly: false },
       );
       setErrors({});
-    } catch (err: any) {
-      const validationErrors: any = {};
-      err.inner.forEach((error: any) => {
-        validationErrors[error.path] = error.message;
-      });
-      setErrors(validationErrors);
+    } catch (err: unknown) {
+      if (err instanceof yup.ValidationError) {
+        const validationErrors: Record<string, string | undefined> = {};
+        err.inner.forEach((error) => {
+          if (error.path) {
+            validationErrors[error.path] = error.message;
+          }
+        });
+        setErrors(validationErrors);
 
-      // Switch to the tab containing the first error
-      if (
-        validationErrors["cardData.title"] ||
-        validationErrors["cardData.category"]
-      ) {
-        setActiveTab(0);
-      } else if (
-        Object.keys(validationErrors).some((k) => k.startsWith("heroData."))
-      ) {
-        setActiveTab(1);
+        // Switch to the tab containing the first error
+        if (
+          validationErrors["cardData.title"] ||
+          validationErrors["cardData.category"]
+        ) {
+          setActiveTab(0);
+        } else if (
+          Object.keys(validationErrors).some((k) => k.startsWith("heroData."))
+        ) {
+          setActiveTab(1);
+        }
       }
       return;
     }
@@ -270,7 +273,7 @@ export default function InsightsAdminLayout() {
       ...(activeId ? { insightId: activeId } : {}),
       insightTitle: cardData.title,
       category: cardData.category ? cardData.category.charAt(0).toUpperCase() + cardData.category.slice(1).toLowerCase() : "",
-      ...((heroData.rawImageUrl || heroData.profileImage) && { imageUrl: heroData.rawImageUrl || heroData.profileImage }),
+      ...((heroData.rawProfileImage || heroData.profileImage) && { imageUrl: heroData.rawProfileImage || heroData.profileImage }),
       personName: heroData.name,
       bandRole: heroData.band,
       guideOrganization: heroData.guide,
@@ -294,6 +297,7 @@ export default function InsightsAdminLayout() {
     };
 
     try {
+      setIsSaving(true);
       await InsightControllers.upsertInsight(payload);
       showNotification(activeId ? "Insight updated successfully" : "Insight created successfully", "success");
       
@@ -313,9 +317,12 @@ export default function InsightsAdminLayout() {
 
       fetchInsights();
       setDialogOpen(false);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Save error:", err);
-      showNotification(err?.message || "Failed to save insight", "error");
+      const errorMessage = err instanceof Error ? err.message : "Failed to save insight";
+      showNotification(errorMessage, "error");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -355,10 +362,10 @@ export default function InsightsAdminLayout() {
       const uploadedKey = responseData?.key || uploadedUrl;
       
       if (response.data?.success && uploadedUrl) {
-        if (heroData.rawImageUrl && !keysToDeleteOnSave.includes(heroData.rawImageUrl)) {
-          setKeysToDeleteOnSave(prev => [...prev, heroData.rawImageUrl]);
+        if (heroData.rawProfileImage && !keysToDeleteOnSave.includes(heroData.rawProfileImage)) {
+          setKeysToDeleteOnSave(prev => [...prev, heroData.rawProfileImage as string]);
         }
-        setHeroData({ ...heroData, profileImage: uploadedUrl, rawImageUrl: uploadedKey });
+        setHeroData({ ...heroData, profileImage: uploadedUrl, rawProfileImage: uploadedKey });
         setErrors({ ...errors, "heroData.profileImage": undefined });
         showNotification("Image uploaded successfully", "success");
       }
@@ -374,12 +381,15 @@ export default function InsightsAdminLayout() {
     field: "heading" | "content",
     value: string,
   ) => {
-    setContentSections({
-      ...contentSections,
-      [sectionKey]: {
-        ...contentSections[sectionKey],
-        [field]: value,
-      },
+    setContentSections(prev => {
+      const updated = { ...prev };
+      const key = sectionKey as keyof INSIGHT_FORM_CONTENT_DATA;
+      if (typeof updated[key] === "object" && updated[key] !== null) {
+        (updated[key] as any)[field] = value;
+      } else {
+        (updated as any)[key] = value;
+      }
+      return updated;
     });
   };
 
@@ -408,16 +418,16 @@ export default function InsightsAdminLayout() {
       </Box>
 
       <Grid container spacing={{ xs: 2, md: 4 }}>
-        {currentItems.map((insight: any, i: number) => (
+        {currentItems.map((insight, i: number) => (
             <Grid
               size={{ xs: 12, sm: 12, md: 6, lg: 4 }}
               key={i}
               sx={{ display: "flex" }}
             >
               <InsightsCard
-                bgColor={insight.cardTheme || COLORS.PRIMARY_BLUE}
-                category={insight.category || "News"}
-                title={insight.insightTitle || insight.title || ""}
+                bgColor={(insight.cardTheme as string) || COLORS.PRIMARY_BLUE}
+                category={(insight.category as string) || "News"}
+                title={(insight.insightTitle as string) || (insight.title as string) || ""}
                 slug={insight.id?.toString()}
                 onDelete={() => openDeleteConfirm(insight.id)}
                 onEdit={() => handleEdit(insight.id)}
@@ -579,13 +589,14 @@ export default function InsightsAdminLayout() {
         isUploadingImage={isUploadingImage}
         handleImageUpload={handleImageUpload}
         handleDeleteImage={() => {
-          if (heroData.rawImageUrl && !keysToDeleteOnSave.includes(heroData.rawImageUrl)) {
-            setKeysToDeleteOnSave(prev => [...prev, heroData.rawImageUrl]);
+          if (heroData.rawProfileImage && !keysToDeleteOnSave.includes(heroData.rawProfileImage)) {
+            setKeysToDeleteOnSave(prev => [...prev, heroData.rawProfileImage as string]);
           }
-          setHeroData({ ...heroData, profileImage: "", rawImageUrl: "" });
+          setHeroData({ ...heroData, profileImage: "", rawProfileImage: "" });
         }}
         handleSave={handleSave}
         handleContentSectionChange={handleContentSectionChange}
+        isSaving={isSaving}
       />
 
       {/* Delete Confirmation Modal */}

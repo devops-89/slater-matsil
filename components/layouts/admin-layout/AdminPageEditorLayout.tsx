@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic';
 import { useAdminPageData } from "./hooks/useAdminPageData";
 import { useAdminPageSave } from "./hooks/useAdminPageSave";
 import { AdminPageFormContent } from "./components/AdminPageFormContent";
+import { LEGAL_PAGE_DATA } from "@/utils/types";
 
 const LoadingFallback = () => <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}><CircularProgress /></Box>;
 
@@ -150,11 +151,11 @@ export default function AdminPageEditorLayout() {
     } else if (slug === "who-we-serve") {
       return <WhoWeServePageForms activeSection={index} websiteData={websiteData} updateWhoWeServePage={updateWhoWeServePage} />;
     } else if (slug === "privacy-policy") {
-      return <LegalPagesForms activeSection={index} data={websiteData.privacyPolicy} onChange={(newData: any) => updateLegalPage("privacyPolicy", newData)} />;
+      return <LegalPagesForms activeSection={index} data={websiteData.privacyPolicy} onChange={(newData: LEGAL_PAGE_DATA) => updateLegalPage("privacyPolicy", newData)} />;
     } else if (slug === "terms-of-use") {
-      return <LegalPagesForms activeSection={index} data={websiteData.termsOfUse} onChange={(newData: any) => updateLegalPage("termsOfUse", newData)} />;
+      return <LegalPagesForms activeSection={index} data={websiteData.termsOfUse} onChange={(newData: LEGAL_PAGE_DATA) => updateLegalPage("termsOfUse", newData)} />;
     } else if (slug === "disclaimer") {
-      return <LegalPagesForms activeSection={index} data={websiteData.disclaimer} onChange={(newData: any) => updateLegalPage("disclaimer", newData)} />;
+      return <LegalPagesForms activeSection={index} data={websiteData.disclaimer} onChange={(newData: LEGAL_PAGE_DATA) => updateLegalPage("disclaimer", newData)} />;
     }
     return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Forms for {slug} are coming soon.</Typography>;
   };

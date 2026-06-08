@@ -1,7 +1,8 @@
+import { AxiosResponse } from "axios";
 import { roleSecuredApi } from "./config";
 
 export const RoleControllers = {
-  createRole: async (data: any) => {
+  createRole: async (data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       let result = await roleSecuredApi.post("", data);
       return result;
@@ -10,7 +11,7 @@ export const RoleControllers = {
     }
   },
 
-  updateRole: async (id: number | string, data: any) => {
+  updateRole: async (id: number | string, data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       let result = await roleSecuredApi.patch(`${id}`, data);
       return result;
@@ -19,7 +20,7 @@ export const RoleControllers = {
     }
   },
 
-  getAllRoles: async (params?: any) => {
+  getAllRoles: async (params?: Record<string, string | number | boolean>): Promise<AxiosResponse> => {
     try {
       let result = await roleSecuredApi.get("", { params });
       return result;
@@ -28,7 +29,7 @@ export const RoleControllers = {
     }
   },
 
-  getRoleById: async (id: number | string) => {
+  getRoleById: async (id: number | string): Promise<AxiosResponse> => {
     try {
       let result = await roleSecuredApi.get(`${id}`);
       return result;
@@ -37,7 +38,7 @@ export const RoleControllers = {
     }
   },
 
-  deleteRole: async (id: number | string) => {
+  deleteRole: async (id: number | string): Promise<AxiosResponse> => {
     try {
       let result = await roleSecuredApi.delete(`${id}`);
       return result;

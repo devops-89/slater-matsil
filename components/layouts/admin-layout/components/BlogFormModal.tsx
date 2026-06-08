@@ -19,6 +19,7 @@ import {
 import { Close, Add, Delete } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
+import { BLOG_FORM_CARD_DATA, BLOG_FORM_HERO_DATA, BLOG_FORM_CONTENT_DATA } from "@/utils/types";
 
 interface BlogFormModalProps {
   open: boolean;
@@ -26,14 +27,14 @@ interface BlogFormModalProps {
   activeId: number | null;
   activeTab: number;
   setActiveTab: (val: number) => void;
-  cardData: any;
-  setCardData: (data: any) => void;
-  heroData: any;
-  setHeroData: (data: any) => void;
-  content: any;
-  setContent: (data: any) => void;
-  errors: any;
-  setErrors: (errors: any) => void;
+  cardData: BLOG_FORM_CARD_DATA;
+  setCardData: (data: BLOG_FORM_CARD_DATA) => void;
+  heroData: BLOG_FORM_HERO_DATA;
+  setHeroData: (data: BLOG_FORM_HERO_DATA) => void;
+  content: BLOG_FORM_CONTENT_DATA;
+  setContent: (data: BLOG_FORM_CONTENT_DATA) => void;
+  errors: Record<string, string | undefined>;
+  setErrors: (errors: Record<string, string | undefined>) => void;
   isUploadingCard: boolean;
   isUploadingAuthor: boolean;
   handleCardImageUpload: (file: File) => void;
@@ -44,6 +45,7 @@ interface BlogFormModalProps {
   handleRemoveSection: (idx: number) => void;
   handleSectionChange: (idx: number, field: "heading" | "content", val: string) => void;
   getSectionContentString: (val: string | string[]) => string;
+  isSaving?: boolean;
 }
 
 export default function BlogFormModal({
@@ -70,6 +72,7 @@ export default function BlogFormModal({
   handleRemoveSection,
   handleSectionChange,
   getSectionContentString,
+  isSaving = false,
 }: BlogFormModalProps) {
   return (
     <Dialog
@@ -92,7 +95,7 @@ export default function BlogFormModal({
         <Typography component="span" variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
           {activeId ? "Edit Blog Entry" : "Add Blog Entry"}
         </Typography>
-        <IconButton onClick={onClose}>
+        <IconButton onClick={onClose} disabled={isSaving}>
           <Close />
         </IconButton>
       </DialogTitle>
@@ -136,18 +139,17 @@ export default function BlogFormModal({
                       <Box sx={{ mb: 2, py: 4, display: "flex", justifyContent: "center", alignItems: "center", width: "100%" }}>
                         <CircularProgress size={30} />
                       </Box>
-                    ) : cardData.img ? (
-                      <Box sx={{ mb: 2, height: 150, overflow: "hidden", borderRadius: 2, position: "relative", display: "flex", justifyContent: "center" }}>
+                    ) : cardData.cardImage ? (
+                      <Box sx={{ position: "relative", display: "inline-block", height: 120 }}>
                         <IconButton
                           size="small"
-                          color="error"
+                          sx={{ position: "absolute", top: -10, right: -10, bgcolor: "white", boxShadow: 1 }}
                           onClick={() => handleDeleteImage("card")}
-                          sx={{ position: "absolute", top: 4, right: 4, bgcolor: "white", boxShadow: 1, "&:hover": { bgcolor: "#f5f5f5" } }}
                         >
-                          <Close fontSize="small" />
+                          <Close fontSize="small" color="error" />
                         </IconButton>
                         <img
-                          src={typeof cardData.img === "string" ? cardData.img : cardData.img.src}
+                          src={cardData.cardImage}
                           alt="Preview"
                           style={{ height: "100%", width: "auto", objectFit: "contain" }}
                         />
@@ -293,8 +295,8 @@ export default function BlogFormModal({
                         </Box>
                         <Box sx={{ borderRadius: "50%", overflow: "hidden", height: "100%", width: "100%" }}>
                           <img
-                            src={typeof heroData.authorImage === "string" ? heroData.authorImage : heroData.authorImage.src}
-                            alt="Author Preview"
+                            src={heroData.rawAuthorImage}
+                            alt="Author Thumbnail"
                             style={{ width: "100%", height: "100%", objectFit: "cover" }}
                           />
                         </Box>
@@ -364,61 +366,57 @@ export default function BlogFormModal({
                 onChange={(e) => setContent({ ...content, intro: e.target.value })}
               />
 
-              <Divider sx={{ my: 2 }} />
-
-              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
-                <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE }}>
-                  Detailed Content Sections
-                </Typography>
-                <Button variant="outlined" startIcon={<Add />} onClick={handleAddSection} size="small">
+              <Divider sx={{ my: 3 }} />
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
+                <Typography variant="subtitle2" color="primary">Content Sections</Typography>
+                <Button startIcon={<Add />} onClick={handleAddSection} size="small" variant="outlined">
                   Add Section
                 </Button>
-              </Box>
-
-              <Stack spacing={3}>
-                {content.sections.map((sec: any, idx: number) => (
-                  <Box key={idx} sx={{ border: "1px solid #eee", p: 2, borderRadius: 2, position: "relative" }}>
-                    <IconButton color="error" size="small" onClick={() => handleRemoveSection(idx)} sx={{ position: "absolute", top: 8, right: 8 }}>
-                      <Delete fontSize="small" />
-                    </IconButton>
-                    <Typography variant="subtitle2" sx={{ mb: 2 }}>
-                      Section {idx + 1}
-                    </Typography>
-                    <Stack spacing={2}>
-                      <TextField
-                        fullWidth
-                        label="Heading (Optional)"
-                        value={sec.heading || ""}
-                        onChange={(e) => handleSectionChange(idx, "heading", e.target.value)}
-                      />
-                      <TextField
-                        fullWidth
-                        multiline
-                        rows={6}
-                        label="Body Text"
-                        value={getSectionContentString(sec.content)}
-                        onChange={(e) => handleSectionChange(idx, "content", e.target.value)}
-                        placeholder="Type section paragraphs here. Double enter to separate paragraphs."
-                      />
-                    </Stack>
-                  </Box>
-                ))}
-                {content.sections.length === 0 && (
+              </Stack>
+              {content.sections.map((sec, idx) => (
+                <Box key={idx} sx={{ p: 2, border: "1px solid #ccc", borderRadius: 2, position: "relative", mb: 2 }}>
+                  <IconButton
+                    size="small"
+                    color="error"
+                    sx={{ position: "absolute", top: 8, right: 8 }}
+                    onClick={() => handleRemoveSection(idx)}
+                  >
+                    <Delete />
+                  </IconButton>
+                  <Stack spacing={2} sx={{ pr: 4 }}>
+                    <TextField
+                      fullWidth
+                      label="Section Heading"
+                      value={sec.heading || ""}
+                      onChange={(e) => handleSectionChange(idx, "heading", e.target.value)}
+                    />
+                    <TextField
+                      fullWidth
+                      multiline
+                      rows={4}
+                      label="Section Content"
+                      value={getSectionContentString(sec.content)}
+                      onChange={(e) => handleSectionChange(idx, "content", e.target.value)}
+                      helperText="Use newlines for separate paragraphs"
+                    />
+                  </Stack>
+                </Box>
+              ))}
+              {content.sections.length === 0 && (
                   <Typography variant="body2" color="textSecondary" sx={{ fontStyle: "italic", textAlign: "center", py: 2 }}>
                     No detailed sections added yet. Click 'Add Section' above.
                   </Typography>
                 )}
-              </Stack>
             </Stack>
           )}
         </Box>
       </DialogContent>
       <DialogActions sx={{ p: 2 }}>
-        <Button onClick={onClose} color="inherit">
+        <Button onClick={onClose} color="inherit" disabled={isSaving}>
           Cancel
         </Button>
-        <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
-          {activeId ? "Update Blog" : "Save Blog"}
+        <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
+          {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Blog" : "Save Blog")}
         </Button>
       </DialogActions>
     </Dialog>

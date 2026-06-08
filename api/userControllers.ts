@@ -1,7 +1,8 @@
+import { AxiosResponse } from "axios";
 import { userSecuredApi } from "./config";
 
 export const UserControllers = {
-  createUser: async (data: any) => {
+  createUser: async (data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       let result = await userSecuredApi.post("users-create", data, { baseURL: "/backend-api/" });
       return result;
@@ -10,7 +11,7 @@ export const UserControllers = {
     }
   },
 
-  updateUser: async (id: number | string, data: any) => {
+  updateUser: async (id: number | string, data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       let result = await userSecuredApi.patch(`users/${id}`, data, { baseURL: "/backend-api/" });
       return result;
@@ -20,7 +21,7 @@ export const UserControllers = {
   },
 
 
-  getAllUsers: async (params?: any) => {
+  getAllUsers: async (params?: Record<string, string | number | boolean>): Promise<AxiosResponse> => {
     try {
       let result = await userSecuredApi.get("users/all-with-roles", { baseURL: "/backend-api/", params });
       return result;
@@ -29,7 +30,7 @@ export const UserControllers = {
     }
   },
 
-  getUserById: async (id: number | string) => {
+  getUserById: async (id: number | string): Promise<AxiosResponse> => {
     try {
       let result = await userSecuredApi.get(`users/${id}`, { baseURL: "/backend-api/" });
       return result;
@@ -38,7 +39,7 @@ export const UserControllers = {
     }
   },
 
-  deleteUser: async (id: number | string) => {
+  deleteUser: async (id: number | string): Promise<AxiosResponse> => {
     try {
       let result = await userSecuredApi.delete(`users/${id}`, { baseURL: "/backend-api/" });
       return result;
@@ -47,7 +48,7 @@ export const UserControllers = {
     }
   },
 
-  getDashboardCounts: async () => {
+  getDashboardCounts: async (): Promise<AxiosResponse> => {
     try {
       let result = await userSecuredApi.get("users/dashboard/counts", { baseURL: "/backend-api/" });
       return result;

@@ -51,13 +51,13 @@ const subAdminSchema = yup.object().shape({
 export default function SubAdminLayout() {
   const { startLoading, stopLoading } = useLoading();
   const { showNotification } = useNotification();
-  const [subAdmins, setSubAdmins] = useState<any[]>([]);
-  const [roles, setRoles] = useState<any[]>([]);
+  const [subAdmins, setSubAdmins] = useState<Record<string, any>[]>([]);
+  const [roles, setRoles] = useState<Record<string, any>[]>([]);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<string | number | null>(null);
-  const [errors, setErrors] = useState<any>({});
-  const [formData, setFormData] = useState<any>({
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [formData, setFormData] = useState<{ id: string | number; name: string; email: string; password?: string; roleId: string | number }>({
     id: "",
     name: "",
     email: "",
@@ -71,9 +71,10 @@ export default function SubAdminLayout() {
       const res = await UserControllers.getAllUsers();
       const fetched = res.data?.data?.data?.users || res.data?.data?.users || [];
       setSubAdmins(fetched);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      showNotification(e?.message || "Failed to fetch users", "error");
+      const apiErr = e as { message?: string };
+      showNotification(apiErr.message || "Failed to fetch users", "error");
     } finally {
       if (showLoader) stopLoading();
     }
@@ -84,8 +85,8 @@ export default function SubAdminLayout() {
       const res = await RoleControllers.getAllRoles();
       const fetched = res.data?.data?.data || res.data?.data || [];
       // Filter out soft-deleted roles
-      setRoles(fetched.filter((r: any) => r.isActive !== false));
-    } catch (e: any) {
+      setRoles(fetched.filter((r: Record<string, any>) => r.isActive !== false));
+    } catch (e: unknown) {
       console.error(e);
     }
   };
@@ -101,7 +102,7 @@ export default function SubAdminLayout() {
     setDialogOpen(true);
   };
 
-  const handleEdit = (admin: any) => {
+  const handleEdit = (admin: Record<string, any>) => {
     setFormData({
       id: admin.id,
       name: admin.fullName || admin.firstName || "",
@@ -124,7 +125,7 @@ export default function SubAdminLayout() {
       await UserControllers.deleteUser(userToDelete);
       showNotification("User deleted successfully", "success");
       fetchUsers(false);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
       showNotification("Failed to delete user", "error");
     } finally {
@@ -137,18 +138,20 @@ export default function SubAdminLayout() {
     try {
       await subAdminSchema.validate(formData, { abortEarly: false });
       setErrors({});
-    } catch (err: any) {
-      const validationErrors: any = {};
-      err.inner.forEach((error: any) => {
-        validationErrors[error.path] = error.message;
-      });
-      setErrors(validationErrors);
+    } catch (err: unknown) {
+      if (err instanceof yup.ValidationError) {
+        const validationErrors: Record<string, string | undefined> = {};
+        err.inner.forEach((error) => {
+          if (error.path) validationErrors[error.path] = error.message;
+        });
+        setErrors(validationErrors);
+      }
       return;
     }
 
     try {
       // Base payload for both CREATE and EDIT
-      const payload: any = {
+      const payload: Record<string, any> = {
         fullName: formData.name,
         email: formData.email,
         roleId: formData.roleId
@@ -171,7 +174,7 @@ export default function SubAdminLayout() {
       
       setDialogOpen(false);
       fetchUsers(false);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
       showNotification("Failed to save user", "error");
     }
@@ -209,7 +212,7 @@ export default function SubAdminLayout() {
                 </TableHead>
                 <TableBody>
                   {subAdmins.map((admin) => {
-                    const roleName = admin.permissionRole?.name || roles.find((r: any) => r.id === admin.permissionRole?.id)?.name || "Unknown";
+                    const roleName = admin.permissionRole?.name || roles.find((r: Record<string, any>) => r.id === admin.permissionRole?.id)?.name || "Unknown";
                     return (
                       <TableRow key={admin.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell>
@@ -295,7 +298,7 @@ export default function SubAdminLayout() {
                     <em>No roles found. Please create a role first.</em>
                   </MenuItem>
                 )}
-                {roles.map((role: any) => (
+                {roles.map((role: Record<string, any>) => (
                   <MenuItem key={role.id} value={role.id}>{role.name}</MenuItem>
                 ))}
               </Select>

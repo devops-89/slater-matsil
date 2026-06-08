@@ -64,12 +64,12 @@ export default function RoleAdminLayout() {
   const { startLoading, stopLoading } = useLoading();
   const { showNotification } = useNotification();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [errors, setErrors] = useState<any>({});
-  const [roles, setRoles] = useState<any[]>([]);
-  const [allFetchedRoles, setAllFetchedRoles] = useState<any[]>([]);
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [roles, setRoles] = useState<Record<string, any>[]>([]);
+  const [allFetchedRoles, setAllFetchedRoles] = useState<Record<string, any>[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [roleToDelete, setRoleToDelete] = useState<string | number | null>(null);
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<{ id: string | number; name: string; permissions: string[] }>({
     id: "",
     name: "",
     permissions: [],
@@ -83,10 +83,11 @@ export default function RoleAdminLayout() {
       
       setAllFetchedRoles(fetchedRoles);
       // Filter out soft-deleted roles for UI display
-      setRoles(fetchedRoles.filter((r: any) => r.isActive !== false));
-    } catch (e: any) {
+      setRoles(fetchedRoles.filter((r: Record<string, any>) => r.isActive !== false));
+    } catch (e: unknown) {
       console.error(e);
-      showNotification(e?.message || "Failed to fetch roles", "error");
+      const apiErr = e as { message?: string };
+      showNotification(apiErr.message || "Failed to fetch roles", "error");
     } finally {
       if (showLoader) stopLoading();
     }
@@ -102,8 +103,8 @@ export default function RoleAdminLayout() {
     setDialogOpen(true);
   };
 
-  const handleEdit = (role: any) => {
-    const permIds = role.permissions?.map((p: any) => p.module) || [];
+  const handleEdit = (role: Record<string, any>) => {
+    const permIds = role.permissions?.map((p: { module: string }) => p.module) || [];
     setFormData({
       id: role.id,
       name: role.name || "",
@@ -124,7 +125,7 @@ export default function RoleAdminLayout() {
       await RoleControllers.deleteRole(roleToDelete);
       showNotification("Role deleted successfully", "success");
       fetchRoles(false);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
       showNotification("Failed to delete role", "error");
     } finally {
@@ -146,12 +147,14 @@ export default function RoleAdminLayout() {
     try {
       await roleSchema.validate(formData, { abortEarly: false });
       setErrors({});
-    } catch (err: any) {
-      const validationErrors: any = {};
-      err.inner.forEach((error: any) => {
-        validationErrors[error.path] = error.message;
-      });
-      setErrors(validationErrors);
+    } catch (err: unknown) {
+      if (err instanceof yup.ValidationError) {
+        const validationErrors: Record<string, string | undefined> = {};
+        err.inner.forEach((error) => {
+          if (error.path) validationErrors[error.path] = error.message;
+        });
+        setErrors(validationErrors);
+      }
       return;
     }
     const payload = {
@@ -174,10 +177,11 @@ export default function RoleAdminLayout() {
       }
       setDialogOpen(false);
       fetchRoles(false);
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      if (e?.response?.status === 409) {
-        showNotification(e?.response?.data?.message || "A role with this name already exists.", "error");
+      const apiErr = e as { response?: { status?: number; data?: { message?: string } } };
+      if (apiErr.response?.status === 409) {
+        showNotification(apiErr.response.data?.message || "A role with this name already exists.", "error");
       } else {
         showNotification("Failed to save role", "error");
       }
@@ -221,7 +225,7 @@ export default function RoleAdminLayout() {
                   </TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                      {role.permissions?.map((permObj: any) => {
+                      {role.permissions?.map((permObj: { module: string }) => {
                         const permId = permObj.module;
                         const label = ALL_PERMISSIONS.find(p => p.id === permId)?.label || permId;
                         return (

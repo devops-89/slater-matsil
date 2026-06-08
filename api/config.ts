@@ -1,10 +1,10 @@
-import axios, { InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from "axios";
 import { SERVER_ENDPOINTS } from "./serverConstant";
 
 
-const setupInterceptors = (apiInstance: any, secured: boolean) => {
+const setupInterceptors = (apiInstance: AxiosInstance, secured: boolean) => {
   apiInstance.interceptors.request.use(
-    (config: InternalAxiosRequestConfig<any>) => {
+    (config: InternalAxiosRequestConfig) => {
       if (secured && typeof window !== "undefined") {
         let token = localStorage.getItem("accessToken");
         if (token) {
@@ -13,16 +13,16 @@ const setupInterceptors = (apiInstance: any, secured: boolean) => {
       }
       return config;
     },
-    (error: any) => {
+    (error: AxiosError | Error) => {
       return Promise.reject(error);
     }
   );
 
   apiInstance.interceptors.response.use(
-    (response: any) => {
+    (response: AxiosResponse) => {
       return response;
     },
-    (error: any) => {
+    (error: AxiosError | Error) => {
       return Promise.reject(error);
     }
   );

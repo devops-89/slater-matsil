@@ -35,6 +35,7 @@ import { useLoading } from "@/components/providers/LoadingProvider";
 import * as yup from "yup";
 import BlogCardItem from "./components/BlogCardItem";
 import BlogFormModal from "./components/BlogFormModal";
+import { BLOG_FORM_CARD_DATA, BLOG_FORM_HERO_DATA, BLOG_FORM_CONTENT_SECTION, BLOG_FORM_CONTENT_DATA, BLOG_API_ITEM } from "@/utils/types";
 
 const blogSchema = yup.object().shape({
   cardData: yup.object().shape({
@@ -60,12 +61,13 @@ export default function BlogsAdminLayout() {
   const [blogToDelete, setBlogToDelete] = useState<number | null>(null);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const [keysToDeleteOnSave, setKeysToDeleteOnSave] = useState<string[]>([]);
   const [isUploadingCard, setIsUploadingCard] = useState(false);
   const [initialState, setInitialState] = useState<string>("");
   const [isUploadingAuthor, setIsUploadingAuthor] = useState(false);
-  const [blogCards, setBlogCards] = useState<any[]>([]);
+  const [blogCards, setBlogCards] = useState<BLOG_API_ITEM[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
 
   const fetchBlogs = async () => {
     try {
@@ -119,38 +121,34 @@ export default function BlogsAdminLayout() {
   };
 
   // Form States
-  const [cardData, setCardData] = useState<any>({
+  const [cardData, setCardData] = useState<BLOG_FORM_CARD_DATA>({
     title: "",
     date: "",
     readTime: "",
     description: "",
     slug: "",
-    img: ""
+    cardImage: "",
+    rawCardImage: ""
   });
 
-  const [heroData, setHeroData] = useState<any>({
+  const [heroData, setHeroData] = useState<BLOG_FORM_HERO_DATA>({
     title: "",
     category: "Patent Law",
-    date: "",
-    readTime: "",
     author: "",
     authorTitle: "",
     authorImage: "",
-    badge: ""
+    rawAuthorImage: ""
   });
 
-  const [content, setContent] = useState<any>({
-    intro: "",
-    sections: []
-  });
+  const [content, setContent] = useState<BLOG_FORM_CONTENT_DATA>({ intro: "", sections: [] });
 
   const handleOpenNew = () => {
     setActiveId(null);
     setActiveTab(0);
     setErrors({});
     setKeysToDeleteOnSave([]);
-    setCardData({ title: "", date: "", readTime: "", description: "", img: "", cardImageKey: "" });
-    setHeroData({ title: "", category: "Patent Law", date: "", readTime: "", author: "", authorTitle: "", authorImage: "", authorImageKey: "", badge: "" });
+    setCardData({ title: "", date: "", readTime: "", description: "", slug: "", cardImage: "", rawCardImage: "" });
+    setHeroData({ title: "", category: "Patent Law", author: "", authorTitle: "", authorImage: "", rawAuthorImage: "" });
     setContent({ intro: "", sections: [] });
     setDialogOpen(true);
   };
@@ -164,33 +162,31 @@ export default function BlogsAdminLayout() {
     // 1. Instantly load available summary data for a fast UI
     const blog = blogCards.find((c) => c.id === id);
     if (blog) {
-      const newCardData = {
+      const newCardData: BLOG_FORM_CARD_DATA = {
         title: blog.title || "",
         date: blog.datePublished || "",
         readTime: blog.readTime || "",
         description: blog.listingDescription || "",
-        img: blog.cardImageDownloadUrl || blog.cardImageUrl || "",
-        cardImageKey: blog.cardImageUrl || ""
+        cardImage: blog.cardImageDownloadUrl || blog.cardImageUrl || "",
+        rawCardImage: blog.cardImageUrl || "",
+        slug: blog.slug || ""
       };
 
-      const newHeroData = {
+      const newHeroData: BLOG_FORM_HERO_DATA = {
         title: blog.heroTitle || blog.title || "",
         category: blog.category || "Patent Law",
-        date: blog.datePublished || "",
-        readTime: blog.readTime || "",
         author: blog.authorName || "",
         authorTitle: blog.authorTitle || "",
         authorImage: blog.authorImageDownloadUrl || blog.authorImageUrl || "",
-        authorImageKey: blog.authorImageUrl || "",
-        badge: blog.badge || ""
+        rawAuthorImage: blog.authorImageUrl || "",
       };
 
-      const newContent = {
+      const newContent: BLOG_FORM_CONTENT_DATA = {
         intro: blog.introduction || "",
-        sections: blog.sections ? blog.sections.map((s: any) => ({
-          ...(s.id ? { id: s.id } : {}),
-          heading: s.heading || "",
-          content: s.content || ""
+        sections: blog.sections ? blog.sections.map((s: Record<string, unknown>) => ({
+          ...(s.id ? { id: s.id as number } : {}),
+          heading: (s.heading as string) || "",
+          content: (s.content as string) || ""
         })) : []
       };
 
@@ -208,9 +204,9 @@ export default function BlogsAdminLayout() {
         const res = await BlogControllers.getBlogById(id);
         const fullBlog = res.data?.data?.data || res.data?.data;
         if (fullBlog) {
-          setContent((prev: any) => ({
+          setContent((prev) => ({
             intro: prev.intro || fullBlog.introduction || "",
-            sections: fullBlog.sections && prev.sections.length === 0 ? fullBlog.sections.map((s: any) => ({
+            sections: fullBlog.sections && prev.sections.length === 0 ? fullBlog.sections.map((s: Record<string, unknown>) => ({
               ...(s.id ? { id: s.id } : {}),
               heading: s.heading || "",
               content: s.content || ""
@@ -240,15 +236,15 @@ export default function BlogsAdminLayout() {
 
   const handleDeleteImage = (type: "card" | "author") => {
     if (type === "card") {
-      if (cardData.cardImageKey && !keysToDeleteOnSave.includes(cardData.cardImageKey)) {
-        setKeysToDeleteOnSave(prev => [...prev, cardData.cardImageKey]);
+      if (cardData.rawCardImage && !keysToDeleteOnSave.includes(cardData.rawCardImage)) {
+        setKeysToDeleteOnSave(prev => [...prev, cardData.rawCardImage as string]);
       }
-      setCardData({ ...cardData, img: "", cardImageKey: "" });
+      setCardData({ ...cardData, cardImage: "", rawCardImage: "" });
     } else {
-      if (heroData.authorImageKey && !keysToDeleteOnSave.includes(heroData.authorImageKey)) {
-        setKeysToDeleteOnSave(prev => [...prev, heroData.authorImageKey]);
+      if (heroData.rawAuthorImage && !keysToDeleteOnSave.includes(heroData.rawAuthorImage)) {
+        setKeysToDeleteOnSave(prev => [...prev, heroData.rawAuthorImage as string]);
       }
-      setHeroData({ ...heroData, authorImage: "", authorImageKey: "" });
+      setHeroData({ ...heroData, authorImage: "", rawAuthorImage: "" });
     }
   };
 
@@ -263,10 +259,10 @@ export default function BlogsAdminLayout() {
       const uploadedKey = responseData?.key || uploadedUrl;
       
       if (uploadedUrl) {
-        if (heroData.authorImageKey && !keysToDeleteOnSave.includes(heroData.authorImageKey)) {
-          setKeysToDeleteOnSave(prev => [...prev, heroData.authorImageKey]);
+        if (heroData.rawAuthorImage && !keysToDeleteOnSave.includes(heroData.rawAuthorImage)) {
+          setKeysToDeleteOnSave(prev => [...prev, heroData.rawAuthorImage as string]);
         }
-        setHeroData({ ...heroData, authorImage: uploadedUrl, authorImageKey: uploadedKey });
+        setHeroData({ ...heroData, authorImage: uploadedUrl, rawAuthorImage: uploadedKey });
         setErrors({ ...errors, 'heroData.authorImage': undefined });
         showNotification("Author image uploaded successfully", "success");
       }
@@ -288,10 +284,10 @@ export default function BlogsAdminLayout() {
       const uploadedKey = responseData?.key || uploadedUrl;
       
       if (uploadedUrl) {
-        if (cardData.cardImageKey && !keysToDeleteOnSave.includes(cardData.cardImageKey)) {
-          setKeysToDeleteOnSave(prev => [...prev, cardData.cardImageKey]);
+        if (cardData.rawCardImage && !keysToDeleteOnSave.includes(cardData.rawCardImage)) {
+          setKeysToDeleteOnSave(prev => [...prev, cardData.rawCardImage as string]);
         }
-        setCardData({ ...cardData, img: uploadedUrl, cardImageKey: uploadedKey });
+        setCardData({ ...cardData, cardImage: uploadedUrl, rawCardImage: uploadedKey });
         showNotification("Card image uploaded successfully", "success");
       }
     } catch (error) {
@@ -310,17 +306,21 @@ export default function BlogsAdminLayout() {
     try {
       await blogSchema.validate({ cardData, heroData }, { abortEarly: false });
       setErrors({});
-    } catch (err: any) {
-      const validationErrors: any = {};
-      err.inner.forEach((error: any) => {
-        validationErrors[error.path] = error.message;
-      });
-      setErrors(validationErrors);
-      
-      if (Object.keys(validationErrors).some(k => k.startsWith("cardData."))) {
-        setActiveTab(0);
-      } else if (Object.keys(validationErrors).some(k => k.startsWith("heroData."))) {
-        setActiveTab(1);
+    } catch (err: unknown) {
+      if (err instanceof yup.ValidationError) {
+        const validationErrors: Record<string, string | undefined> = {};
+        err.inner.forEach((error) => {
+          if (error.path) {
+            validationErrors[error.path] = error.message;
+          }
+        });
+        setErrors(validationErrors);
+        
+        if (Object.keys(validationErrors).some(k => k.startsWith("cardData."))) {
+          setActiveTab(0);
+        } else if (Object.keys(validationErrors).some(k => k.startsWith("heroData."))) {
+          setActiveTab(1);
+        }
       }
       return;
     }
@@ -330,24 +330,25 @@ export default function BlogsAdminLayout() {
       listingDescription: cardData.description,
       datePublished: cardData.date,
       readTime: cardData.readTime,
-      cardImageUrl: cardData.cardImageKey || (typeof cardData.img === 'string' ? cardData.img : (cardData.img?.src || "")),
+      cardImageUrl: cardData.rawCardImage || cardData.cardImage,
       heroTitle: heroData.title || cardData.title,
       category: heroData.category || "Patent Law",
-      badge: heroData.badge || "",
+      badge: "",
       authorName: heroData.author || "",
       authorTitle: heroData.authorTitle || "",
-      authorImageUrl: heroData.authorImageKey || (typeof heroData.authorImage === 'string' ? heroData.authorImage : (heroData.authorImage?.src || "")),
+      authorImageUrl: heroData.rawAuthorImage || heroData.authorImage,
       introduction: content.intro || "",
 
       isPublished: true,
-      sections: content.sections.map((sec: any, idx: number) => ({
+      sections: content.sections.map((sec, idx) => ({
         heading: sec.heading || "",
-        content: Array.isArray(sec.content) ? sec.content.join("\n") : (sec.content || ""),
+        content: sec.content || "",
         sortOrder: idx + 1
       }))
     };
 
     try {
+      setIsSaving(true);
       
       for (const key of keysToDeleteOnSave) {
         try {
@@ -368,8 +369,11 @@ export default function BlogsAdminLayout() {
       }
       setDialogOpen(false);
       fetchBlogs();
-    } catch (err: any) {
-      showNotification(err?.message || "Failed to save blog to API", "error");
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to save blog to API";
+      showNotification(errorMessage, "error");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -388,12 +392,7 @@ export default function BlogsAdminLayout() {
 
   const handleSectionChange = (idx: number, field: 'heading' | 'content', val: string) => {
     const newSections = [...content.sections];
-    if (field === 'content') {
-      const lines = val.split("\n").map(l => l.trim()).filter(Boolean);
-      newSections[idx][field] = lines.length > 1 ? lines : val;
-    } else {
-      newSections[idx][field] = val;
-    }
+    newSections[idx][field] = val;
     setContent({ ...content, sections: newSections });
   };
 
@@ -421,7 +420,7 @@ export default function BlogsAdminLayout() {
       </Box>
 
       <Grid container spacing={{ xs: 2, md: 4 }}>
-        {currentBlogs.map((blog: any) => (
+        {currentBlogs.map((blog) => (
           <BlogCardItem
             key={blog.id}
             blog={blog}
@@ -550,6 +549,7 @@ export default function BlogsAdminLayout() {
         handleRemoveSection={handleRemoveSection}
         handleSectionChange={handleSectionChange}
         getSectionContentString={getSectionContentString}
+        isSaving={isSaving}
       />
 
       {/* Delete Confirmation Dialog */}

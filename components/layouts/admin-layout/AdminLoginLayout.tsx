@@ -55,7 +55,7 @@ export default function AdminLoginLayout() {
           const emailToMatch = userEmail || values.email || "";
           const usersRes = await UserControllers.getAllUsers();
           const subAdmins = usersRes.data?.data?.data?.users || usersRes.data?.data?.users || [];
-          const foundUser = subAdmins.find((a: any) => a.email && a.email.toLowerCase() === emailToMatch.toLowerCase());
+          const foundUser = subAdmins.find((a: { email?: string; roleId?: number; permissionRole?: { id?: number }; role?: { id?: number } }) => a.email && a.email.toLowerCase() === emailToMatch.toLowerCase());
           const roleId = foundUser?.roleId || foundUser?.permissionRole?.id || foundUser?.role?.id;
           
           if (roleId) {
@@ -64,7 +64,7 @@ export default function AdminLoginLayout() {
              const roleRes = await RoleControllers.getRoleById(roleId);
              const rawData = roleRes.data?.data?.data || roleRes.data?.data || roleRes.data || {};
              const userRole = rawData.id ? rawData : (rawData.role || rawData);
-             const perms = userRole?.permissions?.map((p: any) => p.module) || [];
+             const perms = userRole?.permissions?.map((p: { module?: string }) => p.module) || [];
              
              if (perms.length > 0) {
                const hasPagesAccess = perms.some((p: string) => p.startsWith("pages/"));
@@ -77,9 +77,10 @@ export default function AdminLoginLayout() {
              document.cookie = `role=ADMIN; path=/; max-age=86400`;
              redirectPath = "/dashboard";
           }
-        } catch (e: any) {
+        } catch (e: unknown) {
           console.error("Failed to calculate initial path", e);
-          setError("Route Calc Error: " + (e?.message || "Unknown API error"));
+          const errMessage = e instanceof Error ? e.message : "Unknown API error";
+          setError("Route Calc Error: " + errMessage);
           stopLoading();
           return;
         }
@@ -103,8 +104,9 @@ export default function AdminLoginLayout() {
         setError(response.data.message || "Invalid email or password.");
         stopLoading();
       }
-    } catch (error: any) {
-      setError(error.response?.data?.message || "Invalid email or password. You do not have access.");
+    } catch (error: unknown) {
+      const apiErr = error as { response?: { data?: { message?: string } } };
+      setError(apiErr.response?.data?.message || "Invalid email or password. You do not have access.");
       stopLoading();
     }
   }});

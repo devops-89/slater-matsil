@@ -4,12 +4,13 @@ import { Delete } from "@mui/icons-material";
 import Image from "next/image";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic, adelle } from "@/utils/fonts";
+import { PROFESSIONAL_API_ITEM } from "@/utils/types";
 
 interface ProfessionalCardItemProps {
-  prof: any;
+  prof: PROFESSIONAL_API_ITEM;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
-  onImageLoad: () => void;
+  onImageLoad?: () => void;
 }
 
 export default function ProfessionalCardItem({ prof, onEdit, onDelete, onImageLoad }: ProfessionalCardItemProps) {
@@ -50,8 +51,8 @@ export default function ProfessionalCardItem({ prof, onEdit, onDelete, onImageLo
               <Image
                 onLoad={onImageLoad}
                 onError={onImageLoad}
-                src={typeof prof.img === 'string' ? prof.img : prof.img?.src}
-                alt={prof.name}
+                src={prof.img}
+                alt={prof.name || "Professional Profile"}
                 fill
                 style={{ objectFit: 'cover' }}
                 sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"

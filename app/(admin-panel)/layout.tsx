@@ -124,7 +124,12 @@ export default function DashboardProtectedLayout({ children }: { children: React
             if (isMounted) setIsAuthenticated(true);
           }
         } catch (error: any) {
-          console.error("Failed to verify RBAC access", error);
+          if (error?.response?.status === 401) {
+            localStorage.removeItem("adminAuth");
+            localStorage.removeItem("accessToken");
+          } else {
+            console.error("Failed to verify RBAC access", error);
+          }
           router.replace("/admin");
         } finally {
           if (isMounted) {

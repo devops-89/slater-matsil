@@ -18,7 +18,12 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Close, Delete } from "@mui/icons-material";
-import { COLORS } from "@/utils/enum";
+import { COLORS, INSIGHTS_TAB_DATA } from "@/utils/enum";
+import { 
+  INSIGHT_FORM_CARD_DATA, 
+  INSIGHT_FORM_HERO_DATA, 
+  INSIGHT_FORM_CONTENT_DATA 
+} from "@/utils/types";
 import { tradeGothic } from "@/utils/fonts";
 
 interface InsightFormModalProps {
@@ -27,17 +32,18 @@ interface InsightFormModalProps {
   activeId: number | null;
   activeTab: number;
   setActiveTab: (val: number) => void;
-  cardData: any;
-  setCardData: (data: any) => void;
-  heroData: any;
-  setHeroData: (data: any) => void;
-  contentSections: any;
-  setContentSections: (data: any) => void;
-  errors: any;
-  setErrors: (errors: any) => void;
+  cardData: INSIGHT_FORM_CARD_DATA;
+  setCardData: (data: INSIGHT_FORM_CARD_DATA) => void;
+  heroData: INSIGHT_FORM_HERO_DATA;
+  setHeroData: (data: INSIGHT_FORM_HERO_DATA) => void;
+  contentSections: INSIGHT_FORM_CONTENT_DATA;
+  setContentSections: (data: INSIGHT_FORM_CONTENT_DATA) => void;
+  errors: Record<string, string | undefined>;
+  setErrors: (errors: Record<string, string | undefined>) => void;
   isUploadingImage: boolean;
-  handleImageUpload: (file: File) => void;
-  handleDeleteImage: () => void;
+  handleImageUpload?: (file: File) => void;
+  handleDeleteImage?: () => void;
+  isSaving?: boolean;
   handleSave: () => void;
   handleContentSectionChange: (sectionKey: string, field: "heading" | "content", val: string) => void;
 }
@@ -59,6 +65,7 @@ export default function InsightFormModal({
   isUploadingImage,
   handleImageUpload,
   handleDeleteImage,
+  isSaving = false,
   handleSave,
   handleContentSectionChange,
 }: InsightFormModalProps) {
@@ -80,10 +87,10 @@ export default function InsightFormModal({
       }}
     >
       <DialogTitle sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", pb: 1 }}>
-        <Typography variant="h5" component="div" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-          {activeId ? "Edit Insight" : "Add Insight"}
+        <Typography component="span" variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          {activeId ? "Edit Insight" : "Add New Insight"}
         </Typography>
-        <IconButton onClick={onClose}>
+        <IconButton onClick={onClose} disabled={isSaving}>
           <Close />
         </IconButton>
       </DialogTitle>
@@ -179,7 +186,7 @@ export default function InsightFormModal({
                       <Box sx={{ position: "relative", mb: 2, height: 120, width: 120 }}>
                         <Box sx={{ height: "100%", width: "100%", borderRadius: "50%", overflow: "hidden" }}>
                           <img
-                            src={typeof heroData.profileImage === "string" ? heroData.profileImage : heroData.profileImage.src}
+                            src={heroData.profileImage}
                             alt="Preview"
                             style={{ width: "100%", height: "100%", objectFit: "cover" }}
                           />
@@ -202,7 +209,7 @@ export default function InsightFormModal({
                       accept="image/*"
                       style={{ display: "none" }}
                       id="hero-photo-upload"
-                      onChange={(e) => e.target.files?.[0] && handleImageUpload(e.target.files[0])}
+                      onChange={(e) => e.target.files?.[0] && handleImageUpload?.(e.target.files[0])}
                       disabled={isUploadingImage}
                     />
                     <label htmlFor="hero-photo-upload">
@@ -303,9 +310,11 @@ export default function InsightFormModal({
         </Box>
       </DialogContent>
       <DialogActions sx={{ p: 2 }}>
-        <Button onClick={onClose} color="inherit">Cancel</Button>
-        <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
-          {activeId ? "Update Insight" : "Save Insight"}
+        <Button onClick={onClose} color="inherit" disabled={isSaving}>
+          Cancel
+        </Button>
+        <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
+          {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Insight" : "Save Insight")}
         </Button>
       </DialogActions>
     </Dialog>

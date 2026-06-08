@@ -2,9 +2,10 @@ import React from "react";
 import { Card, CardMedia, CardContent, Typography, Stack, Box, IconButton, Grid } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
+import { BLOG_API_ITEM } from "@/utils/types";
 
 interface BlogCardItemProps {
-  blog: any;
+  blog: BLOG_API_ITEM;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }

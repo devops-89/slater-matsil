@@ -1,8 +1,9 @@
+import { AxiosResponse } from "axios";
 import { insightsPublicApi, insightsSecuredApi } from "./config";
 
 export const InsightControllers = {
   // Get all insights
-  getAllInsights: async (params?: Record<string, any>) => {
+  getAllInsights: async (params?: Record<string, string | number | boolean>): Promise<AxiosResponse> => {
     try {
       const result = await insightsPublicApi.get("all", { params });
       return result;
@@ -12,7 +13,7 @@ export const InsightControllers = {
   },
 
   // Get insight by ID
-  getInsightById: async (id: number | string) => {
+  getInsightById: async (id: number | string): Promise<AxiosResponse> => {
     try {
       const result = await insightsPublicApi.get(`${id}`);
       return result;
@@ -22,7 +23,7 @@ export const InsightControllers = {
   },
 
   // Create or Update insight
-  upsertInsight: async (data: any) => {
+  upsertInsight: async (data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       const result = await insightsSecuredApi.post("upsert", data);
       return result;
@@ -32,7 +33,7 @@ export const InsightControllers = {
   },
 
   // Delete insight
-  deleteInsight: async (id: number | string) => {
+  deleteInsight: async (id: number | string): Promise<AxiosResponse> => {
     try {
       const result = await insightsSecuredApi.delete(`${id}`);
       return result;

@@ -1,7 +1,8 @@
+import { AxiosResponse } from "axios";
 import { pagePublicApi, pageSecuredApi } from "./config";
 
 export const PageControllers = {
-  getAllPages: async () => {
+  getAllPages: async (): Promise<AxiosResponse> => {
     try {
       let result = await pageSecuredApi.get("all");
       return result;
@@ -10,7 +11,7 @@ export const PageControllers = {
     }
   },
 
-  updatePage: async (id: number | string, data: any) => {
+  updatePage: async (id: number | string, data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       let result = await pageSecuredApi.patch(`update/${id}`, data);
       return result;
@@ -19,7 +20,7 @@ export const PageControllers = {
     }
   },
 
-  getPageById: async (id: number | string) => {
+  getPageById: async (id: number | string): Promise<AxiosResponse> => {
     try {
       let result = await pageSecuredApi.get(`${id}`);
       return result;
@@ -28,7 +29,7 @@ export const PageControllers = {
     }
   },
 
-  getAllPublicPages: async () => {
+  getAllPublicPages: async (): Promise<AxiosResponse> => {
     try {
       let result = await pagePublicApi.get("all");
       return result;
@@ -37,7 +38,7 @@ export const PageControllers = {
     }
   },
 
-  getPublicPageById: async (id: number | string) => {
+  getPublicPageById: async (id: number | string): Promise<AxiosResponse> => {
     try {
       let result = await pagePublicApi.get(`${id}`);
       return result;

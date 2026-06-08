@@ -18,6 +18,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { PROFESSIONAL_FORM_CARD_DATA, PROFESSIONAL_FORM_BIO_DATA } from "@/utils/types";
 
 interface ProfessionalFormModalProps {
   open: boolean;
@@ -25,12 +26,12 @@ interface ProfessionalFormModalProps {
   activeId: number | null;
   activeTab: number;
   setActiveTab: (val: number) => void;
-  cardData: any;
-  setCardData: (data: any) => void;
-  bioData: any;
-  setBioData: (data: any) => void;
-  errors: any;
-  setErrors: (errors: any) => void;
+  cardData: PROFESSIONAL_FORM_CARD_DATA;
+  setCardData: (data: PROFESSIONAL_FORM_CARD_DATA) => void;
+  bioData: PROFESSIONAL_FORM_BIO_DATA;
+  setBioData: (data: PROFESSIONAL_FORM_BIO_DATA) => void;
+  errors: Record<string, string | undefined>;
+  setErrors: (errors: Record<string, string | undefined>) => void;
   isSaving: boolean;
   isUploadingCardImg: boolean;
   handleUploadImage: (file: File, type: "card" | "details") => void;
@@ -66,7 +67,7 @@ export default function ProfessionalFormModal({
 }: ProfessionalFormModalProps) {
 
   const renderSectionEditor = (key: string, label: string) => {
-    const data = bioData[key] || { paragraphs: "", bullets: [] };
+    const data = (bioData[key as keyof typeof bioData] as any) || { paragraphs: "", bullets: [] };
     return (
       <Stack spacing={3}>
         <Box>
@@ -89,7 +90,7 @@ export default function ProfessionalFormModal({
             </Button>
           </Box>
           <Stack spacing={2}>
-            {data.bullets.map((bullet: any, idx: number) => (
+            {data.bullets.map((bullet: { id?: number; label?: string; href?: string }, idx: number) => (
               <Stack direction={{ xs: "column", sm: "row" }} spacing={2} key={idx} alignItems={{ xs: "stretch", sm: "center" }}>
                 <TextField
                   fullWidth
@@ -163,7 +164,7 @@ export default function ProfessionalFormModal({
                           </IconButton>
                         </Box>
                         <Box sx={{ height: "100%", width: "100%", borderRadius: "50%", overflow: "hidden" }}>
-                          <img src={cardData.imageDownloadUrl || (typeof cardData.imageUrl === 'string' ? cardData.imageUrl : cardData.imageUrl?.src)} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                          <img src={cardData.imageDownloadUrl || cardData.imageUrl} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </Box>
                       </Box>
                     ) : (
