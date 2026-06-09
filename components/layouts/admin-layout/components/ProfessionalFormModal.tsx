@@ -1,5 +1,6 @@
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
+import { PROFESSIONAL_FORM_BIO_DATA, PROFESSIONAL_FORM_CARD_DATA } from "@/utils/types";
 import { AddCircle, Close, RemoveCircle } from "@mui/icons-material";
 import {
   Box,
@@ -18,7 +19,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { PROFESSIONAL_FORM_CARD_DATA, PROFESSIONAL_FORM_BIO_DATA } from "@/utils/types";
 
 interface ProfessionalFormModalProps {
   open: boolean;
@@ -155,7 +155,7 @@ export default function ProfessionalFormModal({
               <Grid container spacing={3}>
                 <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                   <Box sx={{ border: "1px dashed #ccc", p: 2, borderRadius: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-                    <Typography variant="caption" sx={{ mb: 1, fontWeight: 'bold' }}>Card Image (profileImageUrl)</Typography>
+                    <Typography variant="caption" sx={{ mb: 1, fontWeight: 'bold' }}>Upload Image</Typography>
                     {cardData.imageDownloadUrl || cardData.imageUrl ? (
                       <Box sx={{ position: 'relative', mb: 2, height: 120, width: 120 }}>
                         <Box sx={{ position: 'absolute', top: 0, right: 0, zIndex: 10, transform: 'translate(25%, -25%)' }}>
