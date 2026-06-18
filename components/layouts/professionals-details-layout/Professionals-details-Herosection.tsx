@@ -3,6 +3,7 @@ import contact from "@/icons/contact-card.svg";
 import print from "@/icons/print.svg";
 import { ProfessionalControllers } from "@/api/professionalControllers";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import {
@@ -27,6 +28,7 @@ import { useState } from "react";
 const ProfessionalsDetailsHeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const phone = useMediaQuery("(max-width:600px)");
   const { data } = useProfessionalDetailsData();
+  const { startLoading, stopLoading } = useLoading();
   const heroImg = data?.professionals_Details_HeroSection?.img;
   
   const [pdfModalOpen, setPdfModalOpen] = useState(false);
@@ -61,6 +63,7 @@ const ProfessionalsDetailsHeroSection = ({ onImageLoad }: { onImageLoad?: () => 
 
   const handlePrint = async () => {
     if (data?.id) {
+      startLoading();
       setIsLoadingPdf(true);
       try {
         const res = await ProfessionalControllers.downloadProfessionalPdf(data.id);
@@ -74,6 +77,7 @@ const ProfessionalsDetailsHeroSection = ({ onImageLoad }: { onImageLoad?: () => 
         alert("Failed to load PDF. Falling back to browser print.");
         window.print();
       } finally {
+        stopLoading();
         setIsLoadingPdf(false);
       }
     } else {
