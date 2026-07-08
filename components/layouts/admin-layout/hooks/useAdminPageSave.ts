@@ -102,7 +102,7 @@ export const useAdminPageSave = () => {
         };
       } else if (slug === "blogs") {
         payload = {
-          title: "Blogs",
+          title: "Blog",
           slug: "blogs",
           pageType: "static",
           status: "published",

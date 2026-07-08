@@ -44,7 +44,7 @@ const ALL_PERMISSIONS = [
   { id: "pages/firm-professionals", label: "Pages: Firm Professionals" },
   { id: "pages/firm-leadership", label: "Pages: Firm Leadership" },
   { id: "pages/insights", label: "Pages: Insights" },
-  { id: "pages/blogs", label: "Pages: Blogs" },
+  { id: "pages/blogs", label: "Pages: Blog" },
   { id: "pages/careers", label: "Pages: Careers" },
   { id: "pages/contact-us", label: "Pages: Contact Us" },
   { id: "pages/who-we-serve", label: "Pages: Who We Serve" },
@@ -53,7 +53,7 @@ const ALL_PERMISSIONS = [
   { id: "pages/disclaimer", label: "Pages: Disclaimer" },
   { id: "manage-professionals", label: "Database: Firm Professionals" },
   { id: "manage-insights", label: "Database: Insights" },
-  { id: "manage-blogs", label: "Database: Blogs" },
+  { id: "manage-blogs", label: "Database: Blog" },
 ];
 
 const roleSchema = yup.object().shape({

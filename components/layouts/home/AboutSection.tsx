@@ -178,7 +178,7 @@ const AboutSection = () => {
                       }}
                     >
                       {details?.homepage?.aboutSection?.experience?.subTitle ||
-                        "serving clients"}
+                        "IP Excellence"}
                     </Typography>
                   </Box>
                 </Box>

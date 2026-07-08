@@ -97,7 +97,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       experience: {
         years: "25",
         title: "Years of",
-        subTitle: "Pro Experiences",
+        subTitle: "IP Excellence",
       },
     },
     our_metrics: {
@@ -1090,7 +1090,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     insightsDetailsData: INSIGHTS_DETAILS_DATA,
     blogSection: {
       upcomingTitle: "Upcoming",
-      watchPastTitle: "Blogs",
+      watchPastTitle: "Blog",
       ctaTitle: "Ready to Safeguard Your Innovation?",
       ctaDescription:
         "At Slater Matsil, our patent professionals provide strategic guidance to protect your intellectual property and support your long-term growth.",

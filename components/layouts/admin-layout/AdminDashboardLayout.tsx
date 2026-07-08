@@ -12,7 +12,7 @@ export default function AdminDashboardLayout() {
   const [stats, setStats] = useState([
     { label: "Total Professionals", value: "0" },
     { label: "Published Insights", value: "0" },
-    { label: "Total Blogs", value: "0" },
+    { label: "Total Blog", value: "0" },
     { label: "Total Roles", value: "0" },
   ]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +40,7 @@ export default function AdminDashboardLayout() {
         setStats([
           { label: "Total Professionals", value: (counts.totalProfessionals || counts.professionalsCount || 0).toString() },
           { label: "Published Insights", value: (counts.publishedInsights || counts.insightsCount || 0).toString() },
-          { label: "Total Blogs", value: (counts.blogsCount || counts.totalBlogs || 0).toString() },
+          { label: "Total Blog", value: (counts.blogsCount || counts.totalBlogs || 0).toString() },
           { label: "Total Roles", value: (counts.rolesCount || counts.totalRoles || 0).toString() },
         ]);
       } catch (e) {

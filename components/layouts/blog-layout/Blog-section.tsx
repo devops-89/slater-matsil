@@ -265,7 +265,7 @@ const BlogSection = () => {
             mb: { lg: 6, xs: 4 },
           }}
         >
-          {blogSection?.watchPastTitle || "Blogs"}
+          {blogSection?.watchPastTitle || "Blog"}
         </Typography>
 
         <Grid container spacing={4}>
@@ -382,10 +382,7 @@ const BlogSection = () => {
                           fontSize: 15,
                           color: "rgba(0, 0, 0, 0.6)",
                           lineHeight: 1.6,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
+                          display: "block",
                           flex: 1,
                         }}
                       >

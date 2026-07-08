@@ -174,7 +174,7 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
         href: "/insights",
       },
       {
-        text: "Blogs",
+        text: "Blog",
         href: "/blogs",
       },
       {
@@ -264,7 +264,7 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
         href: "/insights",
       },
       {
-        text: "Blogs",
+        text: "Blog",
         href: "/blogs",
       },
       {

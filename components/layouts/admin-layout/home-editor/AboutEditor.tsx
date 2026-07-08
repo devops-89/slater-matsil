@@ -58,6 +58,14 @@ export const AboutEditor = ({ data, onChange }: { data: any, onChange: (newData:
         onChange={(e) => onChange({ ...data, experience: { ...data.experience, years: e.target.value } })}
       />
       <TextField 
+        fullWidth label="Experience Title" value={data.experience?.title || ""}
+        onChange={(e) => onChange({ ...data, experience: { ...data.experience, title: e.target.value } })}
+      />
+      <TextField 
+        fullWidth label="Experience Subtitle" value={data.experience?.subTitle || ""}
+        onChange={(e) => onChange({ ...data, experience: { ...data.experience, subTitle: e.target.value } })}
+      />
+      <TextField 
         fullWidth label="CTA Button Text" value={data.ctaButton?.text || ""}
         onChange={(e) => onChange({ ...data, ctaButton: { ...data.ctaButton, text: e.target.value } })}
       />

@@ -68,9 +68,13 @@ const ProfessionalList = () => {
   }, []);
 
   const sortedFullList = useMemo(() => {
-    return [...apiData].sort((a, b) =>
-      getLastName(a.name).localeCompare(getLastName(b.name)),
-    );
+    return [...apiData].sort((a, b) => {
+      const lastNameComparison = getLastName(a.name).localeCompare(getLastName(b.name));
+      if (lastNameComparison !== 0) {
+        return lastNameComparison;
+      }
+      return a.name.localeCompare(b.name);
+    });
   }, [apiData]);
 
   const [data, setData] = useState(sortedFullList);

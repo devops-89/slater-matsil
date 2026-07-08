@@ -377,7 +377,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
         </ListItem>
         )}
 
-        {/* Blogs Database Link */}
+        {/* Blog Database Link */}
         {hasAccess("manage-blogs") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
@@ -416,7 +416,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
                       : COLORS.PRIMARY_BLUE,
                   }}
                 >
-                  Blogs Database
+                  Blog Database
                 </Typography>
               }
             />
