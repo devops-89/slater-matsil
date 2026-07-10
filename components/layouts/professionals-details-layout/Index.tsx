@@ -69,9 +69,20 @@ const ProfessionalDetailsLayout = () => {
         function processUsers(users: any[]) {
           const mappedUsers = users.map((apiItem: any) => mapApiUserProfessionalToDetailsProps(apiItem));
 
+          const getLastName = (fullName: string) => {
+            if (!fullName) return "";
+            const cleanName = fullName.split(",")[0].trim();
+            const parts = cleanName.split(/\s+/);
+            return parts[parts.length - 1].toLowerCase();
+          };
+
           const sorted = mappedUsers.sort((a: any, b: any) => {
             const nameA = a.professionals_Details_HeroSection?.name || "";
             const nameB = b.professionals_Details_HeroSection?.name || "";
+            const lastNameComparison = getLastName(nameA).localeCompare(getLastName(nameB));
+            if (lastNameComparison !== 0) {
+              return lastNameComparison;
+            }
             return nameA.localeCompare(nameB);
           });
           setSortedProfessionals(sorted);

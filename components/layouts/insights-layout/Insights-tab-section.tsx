@@ -22,7 +22,14 @@ const InsightsTabSection = () => {
     const fetchApiInsights = async () => {
       try {
         startLoading();
-        const res = await InsightControllers.getAllInsights({ limit: 1000 });
+        const currentTabTitle = details?.insightsPage?.tab_data?.[value]?.title;
+        const queryParams: any = { limit: 1000 };
+        
+        if (currentTabTitle && currentTabTitle !== INSIGHTS_TAB_DATA.ALL) {
+          queryParams.category = currentTabTitle;
+        }
+
+        const res = await InsightControllers.getAllInsights(queryParams);
         const data = res.data?.data?.data?.insights || res.data?.data?.insights || [];
         setApiInsights(data);
       } catch (err: any) {
@@ -32,7 +39,7 @@ const InsightsTabSection = () => {
       }
     };
     fetchApiInsights();
-  }, []);
+  }, [value, details, startLoading, stopLoading]);
 
   const insightsData = (() => {
     // Ensure API insights are sorted newest first
@@ -42,14 +49,7 @@ const InsightsTabSection = () => {
       bgColor: insight.cardTheme || COLORS.PRIMARY_BLUE,
       slug: insight.id.toString(), // Use ID as slug for routing
     }));
-    if (!allData || allData.length === 0) return [];
-    
-    const currentTabTitle = details?.insightsPage?.tab_data?.[value]?.title;
-    if (!currentTabTitle || currentTabTitle === INSIGHTS_TAB_DATA.ALL) {
-      return allData;
-    }
-    
-    return allData.filter((item) => item.category === currentTabTitle);
+    return allData;
   })();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {

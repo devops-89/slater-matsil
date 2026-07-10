@@ -15,27 +15,14 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
       <Container maxWidth="lg">
         <Grid container spacing={5}>
           {data?.map((val, i) => (
-            <Grid size={{ xs: 12, md: 6, lg: 6 }} key={i}>
-              <Box
-                sx={{
-                  backgroundColor: COLORS.PRIMARY_GREEN,
-                  width: 40,
-                  height: 40,
-                  display: "flex ",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  borderRadius: "50%",
-                }}
-              >
-                <Image src={star} alt="Star" />
-              </Box>
+            <Grid size={{ xs: 12, md: 12, lg: 12 }} key={i}>
               <Typography
                 sx={{
                   fontSize: { lg: 17, xs: 15 },
                   color: COLORS.TEXT_PRIMARY_24,
                   mt: 3,
                   fontWeight: 600,
-                  textAlign: "justify",
+                  textAlign: "center",
                 }}
                 dangerouslySetInnerHTML={{__html: val.description || "" }}
               >
@@ -59,7 +46,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                         color: COLORS.TEXT_PRIMARY_24,
                         fontWeight: 500,
                         mb: 1,
-                        textAlign: "justify",
+                        textAlign: "left",
                       }}
                     >
                       {item.href ? (
@@ -93,7 +80,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                                 color: COLORS.TEXT_PRIMARY_24,
                                 fontWeight: 500,
                                 mb: 1,
-                                textAlign: "justify",
+                                textAlign: "left",
                               }}
                             >
                               {subItem.href ? (
