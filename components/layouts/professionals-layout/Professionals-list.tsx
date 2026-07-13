@@ -54,7 +54,7 @@ const sortedFullList = useMemo(() => {
 
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
-  const { setLoading } = useLoading();
+  const { startLoading, stopLoading } = useLoading();
   const [loadedCount, setLoadedCount] = useState(0);
 
   const paginatedData = data?.slice(
@@ -66,18 +66,18 @@ const sortedFullList = useMemo(() => {
 
   useEffect(() => {
     if (paginatedData?.length > 0) {
-      setLoading(true);
+      startLoading();
       setLoadedCount(0);
     } else {
-      setLoading(false);
+      stopLoading();
     }
   }, [currentKey]); // Trigger when page or data length changes
 
   useEffect(() => {
     if (paginatedData?.length > 0 && loadedCount >= paginatedData.length) {
-      setLoading(false);
+      stopLoading();
     }
-  }, [loadedCount, paginatedData?.length, setLoading]);
+  }, [loadedCount, paginatedData?.length, stopLoading]);
 
   const handleImageLoad = () => {
     // We don't call setLoading here, only update local state.

@@ -27,7 +27,6 @@ const SectionBlock = ({
           color: COLORS.TEXT_PRIMARY_4,
           textAlign: "left",
           letterSpacing: 1.5,
-          letterSpacing: 1.5,
         }}
       >
         {content}

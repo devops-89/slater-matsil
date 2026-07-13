@@ -1,10 +1,16 @@
-"use client";
 import React from "react";
+import type { Metadata } from "next";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic, georgia } from "@/utils/fonts";
 import { LEADERSHIP_DATA } from "@/public/data/leadership-data";
 import LeaderCard from "@/components/widgets/LeaderCard";
+
+export const metadata: Metadata = {
+  title: "Slater Matsil | Firm Leadership",
+  description:
+    "Meet the experienced leadership team and partners guiding our boutique intellectual property law practice.",
+};
 
 const FirmLeadership = () => {
   return (
@@ -46,36 +52,6 @@ const FirmLeadership = () => {
       </Box>
 
       <Container maxWidth="lg">
-        {/* Founders Section */}
-        {/* <Box sx={{ mb: 8 }}>
-          <Typography
-            align="center"
-            sx={{
-              fontSize: 18,
-              fontFamily: tradeGothic.style.fontFamily,
-              fontWeight: 700,
-              color: COLORS.PRIMARY_BLUE,
-              mb: 4,
-              textTransform: "uppercase",
-              letterSpacing: "1px",
-            }}
-          >
-            FOUNDERS/PARTNERS
-          </Typography>
-          <Grid
-            container
-            spacing={4}
-            justifyContent="center"
-            sx={{ px: { lg: 10, xs: 0 } }}
-          >
-            {LEADERSHIP_DATA.founders.map((leader, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 6, lg: 6 }} key={index}>
-                <LeaderCard {...leader} />
-              </Grid>
-            ))}
-          </Grid>
-        </Box> */}
-
         {/* Firm Mission Intro */}
         <Box sx={{ mb: 8, textAlign: "left" }}>
           <Typography

@@ -1,5 +1,6 @@
 import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 import { create } from "zustand";
+import { WEBSITE_DATA } from "@/public/data/website-data";
 
 interface storeData {
   details: HOMEPAGE_DATA_PROPS | null;
@@ -12,7 +13,7 @@ interface storeData {
 }
 
 export const usePageData = create<storeData>((set) => ({
-  details: null,
+  details: WEBSITE_DATA as any,
   setDetails: (details) => set({ details }),
   clearDetails: () => set({ details: null }),
   insightsTab: 0,

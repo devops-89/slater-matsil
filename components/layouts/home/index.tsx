@@ -21,7 +21,11 @@ const HomeLayout = () => {
   const hasFetched = useRef(false);
 
   useEffect(() => {
-    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
+    const isAdminRoute =
+      pathname.startsWith("/admin") ||
+      pathname.startsWith("/dashboard") ||
+      pathname.startsWith("/pages") ||
+      pathname.startsWith("/manage-");
     if (isAdminRoute) return;
     if (hasFetched.current) return;
     hasFetched.current = true;
@@ -32,17 +36,25 @@ const HomeLayout = () => {
         const res = await PageControllers.getPageById(1);
         const pageData = res.data?.data?.data || res.data?.data;
         if (pageData && isMounted) {
-          const updatedHomepage = mapBackendToHomepageState(pageData, WEBSITE_DATA.homepage);
-          const mergedWebsiteData = { ...WEBSITE_DATA, homepage: updatedHomepage };
+          const updatedHomepage = mapBackendToHomepageState(
+            pageData,
+            WEBSITE_DATA.homepage,
+          );
+          const mergedWebsiteData = {
+            ...WEBSITE_DATA,
+            homepage: updatedHomepage,
+          };
           setDetails(mergedWebsiteData as any);
         }
       } catch (error) {
         console.error("Error fetching home page data", error);
       }
     };
-    
+
     fetchHomeData();
-    return () => { isMounted = false; };
+    return () => {
+      isMounted = false;
+    };
   }, [setDetails]);
 
   return (
