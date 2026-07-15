@@ -1,7 +1,7 @@
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
-import { Upload, Delete } from "@mui/icons-material";
-import { Box, Button, Divider, Stack, TextField, Typography, CircularProgress, IconButton } from "@mui/material";
+import { Delete, Upload } from "@mui/icons-material";
+import { Box, Button, CircularProgress, Divider, IconButton, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 
 import { MediaControllers } from "@/api/mediaControllers";
@@ -57,7 +57,7 @@ export const AboutUsHeroEditor = ({ data, onChange, onDeleteMedia }: any) => {
         </Box>
 
 
-        {(data.videoDownloadUrl || data.videoUrl) ? (
+        {(data.videoDownloadUrl || "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4") ? (
           <Box sx={{ mt: 2, position: "relative", width: "100%", borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
             <video src={data.videoDownloadUrl || data.videoUrl} controls style={{ width: "100%", maxHeight: "250px", objectFit: "cover", display: "block" }} />
             <IconButton

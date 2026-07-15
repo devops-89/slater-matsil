@@ -59,7 +59,7 @@ const AboutHerosection = () => {
         <Grid container sx={{ mt: 14,mx:12 }}>
           <Grid size={12}>
             <ReactPlayer
-              src={details?.aboutPage?.heroSection?.videoDownloadUrl || details?.aboutPage?.heroSection?.videoUrl || "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"}
+              src={details?.aboutPage?.heroSection?.videoDownloadUrl || "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"}
               width={"100%"}
               height={"100%"}
               autoPlay
