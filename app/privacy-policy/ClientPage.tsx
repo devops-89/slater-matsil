@@ -5,6 +5,7 @@ import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import PrivacyLayout from "@/components/layouts/privacy-layout";
 
 
 const PrivacyPolicyPage = () => {
@@ -52,6 +53,12 @@ const PrivacyPolicyPage = () => {
   const data = details?.privacyPolicy;
 
   if (!data) return null;
+
+  return (
+    <div>
+      <PrivacyLayout />
+    </div>
+  );
 };
 
 export default PrivacyPolicyPage;

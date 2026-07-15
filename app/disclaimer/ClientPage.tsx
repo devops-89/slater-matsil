@@ -5,6 +5,7 @@ import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import DisclaimerLayout from "@/components/layouts/disclaimer-layout";
 
 
 const Disclaimer = () => {
@@ -53,6 +54,11 @@ const Disclaimer = () => {
 
   if (!data) return null;
 
+  return (
+    <div>
+      <DisclaimerLayout />
+    </div>
+  );
 };
 
 export default Disclaimer;

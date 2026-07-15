@@ -5,6 +5,7 @@ import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import TermsLayout from "@/components/layouts/terms-layout";
 
 
 const TermsOfUse = () => {
@@ -53,6 +54,11 @@ const TermsOfUse = () => {
 
   if (!data) return null;
 
+  return (
+    <div>
+      <TermsLayout />
+    </div>
+  );
 };
 
 export default TermsOfUse;
