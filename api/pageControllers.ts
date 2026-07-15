@@ -1,7 +1,8 @@
-import { pageSecuredApi, pagePublicApi } from "./config";
+import { AxiosResponse } from "axios";
+import { pagePublicApi, pageSecuredApi } from "./config";
 
 export const PageControllers = {
-  getAllPages: async () => {
+  getAllPages: async (): Promise<AxiosResponse> => {
     try {
       let result = await pageSecuredApi.get("all");
       return result;
@@ -10,16 +11,7 @@ export const PageControllers = {
     }
   },
 
-  createPage: async (data: any) => {
-    try {
-      let result = await pageSecuredApi.post("create", data);
-      return result;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  updatePage: async (id: number | string, data: any) => {
+  updatePage: async (id: number | string, data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       let result = await pageSecuredApi.patch(`update/${id}`, data);
       return result;
@@ -28,9 +20,27 @@ export const PageControllers = {
     }
   },
 
-  getPageById: async (id: number | string) => {
+  getPageById: async (id: number | string): Promise<AxiosResponse> => {
     try {
       let result = await pageSecuredApi.get(`${id}`);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getAllPublicPages: async (): Promise<AxiosResponse> => {
+    try {
+      let result = await pagePublicApi.get("all");
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getPublicPageById: async (id: number | string): Promise<AxiosResponse> => {
+    try {
+      let result = await pagePublicApi.get(`${id}`);
       return result;
     } catch (error) {
       throw error;

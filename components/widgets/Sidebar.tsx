@@ -23,6 +23,8 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { usePermissions } from "@/hooks/usePermissions";
+
 const DRAWER_WIDTH = 280;
 
 interface SidebarProps {
@@ -35,46 +37,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
   const pathname = usePathname();
   const router = useRouter();
   const { details } = usePageData();
-  const [permissions, setPermissions] = useState<string[] | null>(null);
-
-  useEffect(() => {
-    const auth = localStorage.getItem("adminAuth");
-    if (auth && auth !== "true") {
-      let subAdmins = details?.subAdmins || [];
-      if (subAdmins.length === 0) {
-        const stored = localStorage.getItem("subAdmins");
-        if (stored) {
-          subAdmins = JSON.parse(stored);
-        }
-      }
-      const found = subAdmins.find((a: any) => a.email.toLowerCase() === auth.toLowerCase());
-      if (found) {
-        let roles = details?.roles || [];
-        if (roles.length === 0) {
-          const storedRoles = localStorage.getItem("roles");
-          if (storedRoles) roles = JSON.parse(storedRoles);
-        }
-        const userRole = roles.find((r: any) => r.id === found.roleId);
-        if (userRole) {
-          setPermissions(userRole.permissions);
-        } else {
-          setPermissions([]);
-        }
-      }
-    } else {
-      setPermissions(null);
-    }
-  }, [details]);
-
-  const hasAccess = (page: string) => {
-    if (permissions === null) return true;
-    return permissions.includes(page);
-  };
-
-  const canSeePages = () => {
-    if (permissions === null) return true;
-    return permissions.some(p => ["home", "about-us", "services", "practice-groups", "firm-professionals", "firm-leadership", "insights", "blogs", "careers", "contact-us", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer"].includes(p));
-  };
+  const { hasAccess, hasPagesAccess, isSuperAdmin, isLoadingPermissions } = usePermissions();
 
   const navigateTo = (path: string) => {
     router.push(path);
@@ -97,8 +60,8 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
           width: { xs: "min(82vw, 280px)", sm: DRAWER_WIDTH },
           boxSizing: "border-box",
           backgroundColor: COLORS.WHITE,
-          color: COLORS.WHITE,
-          borderRight: "none",
+          color: COLORS.TEXT_PRIMARY,
+          borderRight: "1px solid rgba(0,0,0,0.05)",
           transition: "transform 0.3s ease",
         },
       }}
@@ -138,6 +101,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
 
       <List sx={{ px: 2 }}>
         {/* Dashboard Link */}
+        {isSuperAdmin && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => navigateTo("/dashboard")}
@@ -182,9 +146,10 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
             />
           </ListItemButton>
         </ListItem>
+        )}
 
         {/* Role Management Link */}
-        {permissions === null && (
+        {isSuperAdmin && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => navigateTo("/manage-roles")}
@@ -229,7 +194,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
         )}
 
         {/* Sub-Admin Management Link */}
-        {permissions === null && (
+        {isSuperAdmin && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => navigateTo("/manage-sub-admins")}
@@ -274,7 +239,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
         )}
 
         {/* Pages Link */}
-        {canSeePages() && (
+        {hasPagesAccess() && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
             onClick={() => navigateTo("/pages")}
@@ -412,7 +377,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
         </ListItem>
         )}
 
-        {/* Blogs Database Link */}
+        {/* Blog Database Link */}
         {hasAccess("manage-blogs") && (
         <ListItem disablePadding sx={{ mb: 1 }}>
           <ListItemButton
@@ -451,7 +416,7 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
                       : COLORS.PRIMARY_BLUE,
                   }}
                 >
-                  Blogs Database
+                  Blog Database
                 </Typography>
               }
             />

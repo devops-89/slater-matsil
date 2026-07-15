@@ -41,7 +41,7 @@ const ProfessionalSearchBar = ({
   const [open, setOpen] = useState(false);
 
   return (
-    <Grid size={{ lg: 7, xs: 12 }} margin="auto">
+    <Grid size={{ xs: 12, md: 9, lg: 7 }} margin="auto">
       <Autocomplete
               freeSolo
               options={options}

@@ -1,14 +1,20 @@
 "use client";
 
+import { AuthControllers } from "@/api/authControllers";
+import { usePermissionStore } from "@/store/usePermissionStore";
+import { RoleControllers } from "@/api/roleControllers";
+import { UserControllers } from "@/api/userControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
+import { useLoading } from "@/components/providers/LoadingProvider";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { EmailOutlined, LockOutlined, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Box, Button, Container, Grid, IconButton, InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { usePageData } from "@/store/usePageData";
 import * as yup from "yup";
-import { AuthControllers } from "@/api/authControllers";
+import { useFormik } from "formik";
 
 const loginSchema = yup.object().shape({
   email: yup.string().email("Please enter a valid email address").required("Email is required"),
@@ -17,43 +23,93 @@ const loginSchema = yup.object().shape({
 
 export default function AdminLoginLayout() {
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [validationErrors, setValidationErrors] = useState<any>({});
   const router = useRouter();
   const { details } = usePageData();
+  const { showNotification } = useNotification();
+  const { startLoading, stopLoading } = useLoading();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setValidationErrors({});
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      setError("");
+      startLoading();
 
-    try {
-      await loginSchema.validate({ email, password }, { abortEarly: false });
-    } catch (err: any) {
-      const vErrors: any = {};
-      err.inner.forEach((error: any) => {
-        vErrors[error.path] = error.message;
-      });
-      setValidationErrors(vErrors);
-      return;
-    }
+      try {
+        const response = await AuthControllers.login({ email: values.email, password: values.password });
+        if (response.data.success) {
+          const user = response.data.data.user;
+          const userEmail = user.email;
 
-    try {
-      const response = await AuthControllers.login({ email, password });
-      if (response.data.success) {
-        localStorage.setItem("adminAuth", response.data.data.user.email);
+        // Set tokens BEFORE the await so API calls inside the block can use them!
         localStorage.setItem("accessToken", response.data.data.accessToken);
         localStorage.setItem("refreshToken", response.data.data.refreshToken);
-        router.push("/dashboard");
+
+        let redirectPath = "/dashboard";
+        
+        try {
+          const emailToMatch = userEmail || values.email || "";
+          const usersRes = await UserControllers.getAllUsers();
+          const subAdmins = usersRes.data?.data?.data?.users || usersRes.data?.data?.users || [];
+          const foundUser = subAdmins.find((a: { email?: string; roleId?: number; permissionRole?: { id?: number }; role?: { id?: number } }) => a.email && a.email.toLowerCase() === emailToMatch.toLowerCase());
+          const roleId = foundUser?.roleId || foundUser?.permissionRole?.id || foundUser?.role?.id;
+          
+          if (roleId) {
+             // Sub-Admin role detected
+             document.cookie = `role=SUBADMIN; path=/; max-age=86400`;
+             const roleRes = await RoleControllers.getRoleById(roleId);
+             const rawData = roleRes.data?.data?.data || roleRes.data?.data || roleRes.data || {};
+             const userRole = rawData.id ? rawData : (rawData.role || rawData);
+             const perms = userRole?.permissions?.map((p: { module?: string }) => p.module) || [];
+             
+             if (perms.length > 0) {
+               const hasPagesAccess = perms.some((p: string) => p.startsWith("pages/"));
+               redirectPath = hasPagesAccess ? "/pages" : `/${perms[0]}`;
+             } else {
+               redirectPath = "/";
+             }
+          } else {
+             // Super Admin detected
+             document.cookie = `role=ADMIN; path=/; max-age=86400`;
+             redirectPath = "/dashboard";
+          }
+        } catch (e: unknown) {
+          console.error("Failed to calculate initial path", e);
+          const errMessage = e instanceof Error ? e.message : "Unknown API error";
+          setError("Route Calc Error: " + errMessage);
+          stopLoading();
+          return;
+        }
+
+        // NOW set localStorage so that layout.tsx doesn't prematurely redirect during the await above
+        localStorage.setItem("adminAuth", userEmail);
+
+        const fullName = user.fullName || (user.firstName ? `${user.firstName} ${user.lastName || ""}`.trim() : "User");
+        localStorage.setItem("userName", fullName);
+        
+        if (user.id) {
+          localStorage.setItem("adminUserId", user.id.toString());
+        }
+
+        usePermissionStore.getState().clearPermissions();
+
+        showNotification("Login successful!", "success");
+        stopLoading();
+        router.push(redirectPath);
       } else {
         setError(response.data.message || "Invalid email or password.");
+        stopLoading();
       }
-    } catch (error: any) {
-      setError(error.response?.data?.message || "Invalid email or password. You do not have access.");
+    } catch (error: unknown) {
+      const apiErr = error as { response?: { data?: { message?: string } } };
+      setError(apiErr.response?.data?.message || "Invalid email or password. You do not have access.");
+      stopLoading();
     }
-  };
+  }});
 
   return (
     <Box sx={{ minHeight: "100vh", display: "flex", backgroundColor: COLORS.OFF_WHITE }}>
@@ -135,7 +191,7 @@ export default function AdminLoginLayout() {
           }}
         >
           <Container maxWidth="sm">
-            <Box component="form" onSubmit={handleLogin} sx={{ width: "100%" }}>
+            <Box component="form" onSubmit={formik.handleSubmit} sx={{ width: "100%" }}>
               <Typography 
                 variant="h4" 
                 sx={{ 
@@ -166,11 +222,13 @@ export default function AdminLoginLayout() {
                 <TextField 
                   fullWidth 
                   label="Email Address" 
-                  variant="outlined" 
-                  value={email}
-                  onChange={(e) => { setEmail(e.target.value); setValidationErrors({ ...validationErrors, email: undefined }); }}
-                  error={!!validationErrors.email}
-                  helperText={validationErrors.email}
+                  variant="outlined"
+                  name="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                   slotProps={{
                     input: {
                       startAdornment: (
@@ -193,10 +251,12 @@ export default function AdminLoginLayout() {
                   label="Password" 
                   type={showPassword ? "text" : "password"}
                   variant="outlined"
-                  value={password}
-                  onChange={(e) => { setPassword(e.target.value); setValidationErrors({ ...validationErrors, password: undefined }); }}
-                  error={!!validationErrors.password}
-                  helperText={validationErrors.password}
+                  name="password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
+                  helperText={formik.touched.password && formik.errors.password}
                   slotProps={{
                     input: {
                       startAdornment: (

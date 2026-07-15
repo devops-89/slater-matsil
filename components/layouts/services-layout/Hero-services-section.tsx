@@ -62,6 +62,9 @@ const HeroServicesSection = () => {
               <Image
                 src={service_heroSection_data?.img}
                 alt=""
+                width={800}
+                height={600}
+                loading="lazy"
                 style={{ width: "100%", height: "auto", margin: "auto" }}
               />
             )}

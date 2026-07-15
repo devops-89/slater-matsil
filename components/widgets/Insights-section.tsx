@@ -2,17 +2,39 @@
 import InsightsCard from "@/components/layouts/insights-layout/components/Insights-Card";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
+import { InsightControllers } from "@/api/insightControllers";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import { Box, Grid, IconButton, Stack, Typography } from "@mui/material";
-import { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const InsightsSection = () => {
   const { details } = usePageData();
   const swiperRef = useRef<SwiperType | null>(null);
+  const [insights, setInsights] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchInsights = async () => {
+      try {
+        const res = await InsightControllers.getAllInsights({ limit: 1000 });
+        const data = res.data?.data?.data?.insights || res.data?.data?.insights || [];
+        setInsights(data);
+      } catch (e) {
+        console.error("Failed to fetch recent insights", e);
+      }
+    };
+    fetchInsights();
+  }, []);
+
+  const displayInsights = insights.length > 0 ? insights.map(insight => ({
+    title: insight.insightTitle || insight.title,
+    category: insight.category,
+    bgColor: insight.cardTheme || COLORS.PRIMARY_BLUE,
+    slug: insight.id.toString(),
+  })) : details?.insightsPage?.insightsData || [];
 
   return (
     <Box sx={{ py: 10 }}>
@@ -71,22 +93,42 @@ const InsightsSection = () => {
             </IconButton>
           </Stack>
         </Grid>
-        <Grid size={{ lg: 7, xs: 12 }} suppressHydrationWarning data-aos="fade-down">
+        <Grid 
+          size={{ lg: 7, xs: 12 }} 
+          suppressHydrationWarning 
+          data-aos="fade-down"
+          sx={{ 
+            pl: { lg: 0, xs: 2 },
+            pr: { lg: 0, xs: 2 },
+            mt: { xs: 4, lg: 0 },
+            pb: { xs: 2, lg: 0 }
+          }}
+        >
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
+            spaceBetween={20}
             breakpoints={{
-              640: {
+              320: {
                 slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
               },
               1024: {
+                slidesPerView: 2.5,
+                spaceBetween: 20,
+              },
+              1200: {
                 slidesPerView: 3,
                 spaceBetween: 20,
               },
             }}
           >
-            {details?.insightsPage?.insightsData?.map((val, i) => (
+            {displayInsights.map((val: any, i: number) => (
               <SwiperSlide key={i}>
                 <InsightsCard
                   title={val.title}

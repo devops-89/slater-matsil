@@ -31,27 +31,29 @@ import { Add, Close, Delete, Edit, Security } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
-import { ROLE_PROPS } from "@/utils/types";
+import { useLoading } from "@/components/providers/LoadingProvider";
+import { useNotification } from "@/components/providers/NotificationProvider";
+import { RoleControllers } from "@/api/roleControllers";
 import * as yup from "yup";
 
 const ALL_PERMISSIONS = [
-  { id: "home", label: "Home Page" },
-  { id: "about-us", label: "About Us" },
-  { id: "services", label: "Services Page" },
-  { id: "practice-groups", label: "Practice Groups" },
-  { id: "firm-professionals", label: "Firm Professionals" },
-  { id: "firm-leadership", label: "Firm Leadership" },
-  { id: "insights", label: "Insights" },
-  { id: "blogs", label: "Blogs" },
-  { id: "careers", label: "Careers" },
-  { id: "contact-us", label: "Contact Us" },
-  { id: "who-we-serve", label: "Who We Serve" },
-  { id: "privacy-policy", label: "Privacy Policy" },
-  { id: "terms-of-use", label: "Terms of Use" },
-  { id: "disclaimer", label: "Disclaimer" },
-  { id: "manage-professionals", label: "Firm Professionals Database" },
-  { id: "manage-insights", label: "Insights Database" },
-  { id: "manage-blogs", label: "Blogs Database" },
+  { id: "pages/home", label: "Pages: Home" },
+  { id: "pages/about-us", label: "Pages: About Us" },
+  { id: "pages/services", label: "Pages: Services" },
+  { id: "pages/practice-groups", label: "Pages: Practice Groups" },
+  { id: "pages/firm-professionals", label: "Pages: Firm Professionals" },
+  { id: "pages/firm-leadership", label: "Pages: Firm Leadership" },
+  { id: "pages/insights", label: "Pages: Insights" },
+  { id: "pages/blogs", label: "Pages: Blog" },
+  { id: "pages/careers", label: "Pages: Careers" },
+  { id: "pages/contact-us", label: "Pages: Contact Us" },
+  { id: "pages/who-we-serve", label: "Pages: Who We Serve" },
+  { id: "pages/privacy-policy", label: "Pages: Privacy Policy" },
+  { id: "pages/terms-of-use", label: "Pages: Terms of Use" },
+  { id: "pages/disclaimer", label: "Pages: Disclaimer" },
+  { id: "manage-professionals", label: "Database: Firm Professionals" },
+  { id: "manage-insights", label: "Database: Insights" },
+  { id: "manage-blogs", label: "Database: Blog" },
 ];
 
 const roleSchema = yup.object().shape({
@@ -59,28 +61,41 @@ const roleSchema = yup.object().shape({
 });
 
 export default function RoleAdminLayout() {
-  const { details, setDetails } = usePageData();
+  const { startLoading, stopLoading } = useLoading();
+  const { showNotification } = useNotification();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [errors, setErrors] = useState<any>({});
-  const [formData, setFormData] = useState<ROLE_PROPS>({
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [roles, setRoles] = useState<Record<string, any>[]>([]);
+  const [allFetchedRoles, setAllFetchedRoles] = useState<Record<string, any>[]>([]);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [roleToDelete, setRoleToDelete] = useState<string | number | null>(null);
+  const [formData, setFormData] = useState<{ id: string | number; name: string; permissions: string[] }>({
     id: "",
     name: "",
     permissions: [],
   });
 
-  useEffect(() => {
-    if (details && (!details.roles || details.roles.length === 0)) {
-      const stored = localStorage.getItem("roles");
-      if (stored) {
-        setDetails({
-          ...details,
-          roles: JSON.parse(stored),
-        });
-      }
+  const fetchRoles = async (showLoader = true) => {
+    try {
+      if (showLoader) startLoading();
+      const res = await RoleControllers.getAllRoles();
+      const fetchedRoles = res.data?.data?.data || res.data?.data || [];
+      
+      setAllFetchedRoles(fetchedRoles);
+      // Filter out soft-deleted roles for UI display
+      setRoles(fetchedRoles.filter((r: Record<string, any>) => r.isActive !== false));
+    } catch (e: unknown) {
+      console.error(e);
+      const apiErr = e as { message?: string };
+      showNotification(apiErr.message || "Failed to fetch roles", "error");
+    } finally {
+      if (showLoader) stopLoading();
     }
-  }, []);
+  };
 
-  const roles = details?.roles || [];
+  useEffect(() => {
+    fetchRoles();
+  }, []);
 
   const handleOpenNew = () => {
     setFormData({ id: "", name: "", permissions: [] });
@@ -88,22 +103,41 @@ export default function RoleAdminLayout() {
     setDialogOpen(true);
   };
 
-  const handleEdit = (role: ROLE_PROPS) => {
-    setFormData(role);
+  const handleEdit = (role: Record<string, any>) => {
+    const permIds = role.permissions?.map((p: { module: string }) => p.module) || [];
+    setFormData({
+      id: role.id,
+      name: role.name || "",
+      permissions: permIds,
+    });
     setErrors({});
     setDialogOpen(true);
   };
 
-  const handleDelete = (id: string) => {
-    const newRoles = roles.filter(r => r.id !== id);
-    setDetails({ ...details!, roles: newRoles });
-    localStorage.setItem("roles", JSON.stringify(newRoles));
+  const openDeleteModal = (id: string | number) => {
+    setRoleToDelete(id);
+    setDeleteModalOpen(true);
+  };
+
+  const handleDelete = async () => {
+    if (!roleToDelete) return;
+    try {
+      await RoleControllers.deleteRole(roleToDelete);
+      showNotification("Role deleted successfully", "success");
+      fetchRoles(false);
+    } catch (e: unknown) {
+      console.error(e);
+      showNotification("Failed to delete role", "error");
+    } finally {
+      setDeleteModalOpen(false);
+      setRoleToDelete(null);
+    }
   };
 
   const handleTogglePermission = (permId: string) => {
     const current = formData.permissions;
     if (current.includes(permId)) {
-      setFormData({ ...formData, permissions: current.filter(p => p !== permId) });
+      setFormData({ ...formData, permissions: current.filter((p: string) => p !== permId) });
     } else {
       setFormData({ ...formData, permissions: [...current, permId] });
     }
@@ -113,26 +147,45 @@ export default function RoleAdminLayout() {
     try {
       await roleSchema.validate(formData, { abortEarly: false });
       setErrors({});
-    } catch (err: any) {
-      const validationErrors: any = {};
-      err.inner.forEach((error: any) => {
-        validationErrors[error.path] = error.message;
-      });
-      setErrors(validationErrors);
+    } catch (err: unknown) {
+      if (err instanceof yup.ValidationError) {
+        const validationErrors: Record<string, string | undefined> = {};
+        err.inner.forEach((error) => {
+          if (error.path) validationErrors[error.path] = error.message;
+        });
+        setErrors(validationErrors);
+      }
       return;
     }
+    const payload = {
+      name: formData.name,
+      isActive: true,
+      permissions: formData.permissions.map((p: string) => ({
+        module: p,
+        canRead: true,
+        canWrite: true
+      }))
+    };
 
-    let newRoles = [...roles];
-    
-    if (formData.id) {
-      newRoles = newRoles.map(r => r.id === formData.id ? formData : r);
-    } else {
-      newRoles.push({ ...formData, id: Date.now().toString() });
+    try {
+      if (formData.id) {
+        await RoleControllers.updateRole(formData.id, payload);
+        showNotification("Role updated successfully", "success");
+      } else {
+        await RoleControllers.createRole(payload);
+        showNotification("Role created successfully", "success");
+      }
+      setDialogOpen(false);
+      fetchRoles(false);
+    } catch (e: unknown) {
+      console.error(e);
+      const apiErr = e as { response?: { status?: number; data?: { message?: string } } };
+      if (apiErr.response?.status === 409) {
+        showNotification(apiErr.response.data?.message || "A role with this name already exists.", "error");
+      } else {
+        showNotification("Failed to save role", "error");
+      }
     }
-
-    setDetails({ ...details!, roles: newRoles });
-    localStorage.setItem("roles", JSON.stringify(newRoles));
-    setDialogOpen(false);
   };
 
   return (
@@ -172,20 +225,21 @@ export default function RoleAdminLayout() {
                   </TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                      {role.permissions.map(perm => {
-                        const label = ALL_PERMISSIONS.find(p => p.id === perm)?.label || perm;
+                      {role.permissions?.map((permObj: { module: string }) => {
+                        const permId = permObj.module;
+                        const label = ALL_PERMISSIONS.find(p => p.id === permId)?.label || permId;
                         return (
-                          <Chip key={perm} label={label} size="small" sx={{ backgroundColor: "rgba(0,0,0,0.05)" }} />
+                          <Chip key={permId} label={label} size="small" sx={{ backgroundColor: "rgba(0,0,0,0.05)" }} />
                         );
                       })}
-                      {role.permissions.length === 0 && <Typography variant="caption" color="textSecondary">No permissions</Typography>}
+                      {(!role.permissions || role.permissions.length === 0) && <Typography variant="caption" color="textSecondary">No permissions</Typography>}
                     </Box>
                   </TableCell>
                   <TableCell align="right">
                     <IconButton color="primary" size="small" onClick={() => handleEdit(role)}>
                       <Edit fontSize="small" />
                     </IconButton>
-                    <IconButton color="error" size="small" onClick={() => handleDelete(role.id)}>
+                    <IconButton color="error" size="small" onClick={() => openDeleteModal(role.id)}>
                       <Delete fontSize="small" />
                     </IconButton>
                   </TableCell>
@@ -201,7 +255,7 @@ export default function RoleAdminLayout() {
         onClose={() => setDialogOpen(false)} 
         maxWidth="sm" 
         fullWidth
-        PaperProps={{ sx: { borderRadius: 4, m: 2 } }}
+        slotProps={{ paper: { sx: { borderRadius: 4, m: 2 } } }}
       >
         <DialogTitle component="div" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
           <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
@@ -247,6 +301,22 @@ export default function RoleAdminLayout() {
           <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
             Save Role
           </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog 
+        open={deleteModalOpen} 
+        onClose={() => setDeleteModalOpen(false)}
+        slotProps={{ paper: { sx: { borderRadius: 4, p: 2 } } }}
+      >
+        <DialogTitle sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          Confirm Delete
+        </DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete this role?</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteModalOpen(false)} color="inherit">No, Cancel</Button>
+          <Button onClick={handleDelete} variant="contained" color="error">Yes, Delete</Button>
         </DialogActions>
       </Dialog>
     </AdminLayout>

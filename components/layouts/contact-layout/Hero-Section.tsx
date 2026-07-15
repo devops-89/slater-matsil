@@ -58,7 +58,10 @@ const HeroSection = () => {
               {details?.contactPage?.hero_section_data?.img && (
                 <Image
                   src={details?.contactPage?.hero_section_data?.img}
-                  alt=""
+                  alt="Contact Hero Image"
+                  width={500}
+                  height={500}
+                  loading="lazy"
                   style={{ width: "100%", height: "auto" }}
                 />
               )}

@@ -21,11 +21,14 @@ import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
 import ProfessionalsCard from "./components/Professionals-Card";
 import ProfessionalSearchBar from "./components/Professionals-Search-Bar";
 import { useLoading } from "@/components/providers/LoadingProvider";
+import { ProfessionalControllers } from "@/api/professionalControllers";
+
 const ALPHABETS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 const ProfessionalList = () => {
   const { details } = usePageData();
-
+  const { startLoading, stopLoading } = useLoading();
+  const [apiData, setApiData] = useState<any[]>([]);
   const [search, setSearch] = useState("");
 
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,13 +41,41 @@ const ProfessionalList = () => {
   return parts[parts.length - 1].toLowerCase();
 };
 
-const sortedFullList = useMemo(() => {
-  const list = details?.firm_professionals?.PROFESSIONAL_LIST_PROPS || [];
+  useEffect(() => {
+    startLoading();
+    ProfessionalControllers.getAllProfessionalProfiles()
+      .then((res: any) => {
+        let users = res.data?.data?.users || [];
+        if (!users.length && res.data?.data?.data?.users) {
+          users = res.data.data.data.users;
+        }
+        
+        if (users && users.length > 0) {
+          const mapped = users.map((u: any) => ({
+            name: u.fullName,
+            designation: u.designation,
+            id: u.id,
+            img: u.profileImageDownloadUrl || u.imageDownloadUrl || u.profileImageUrl || u.imageUrl || ""
+          }));
+          setApiData(mapped);
+        }
+        stopLoading();
+      })
+      .catch((err) => {
+        console.error("Failed to fetch professionals", err);
+        stopLoading();
+      });
+  }, []);
 
-  return [...list].sort((a, b) =>
-    getLastName(a.name).localeCompare(getLastName(b.name)),
-  );
-}, [details]);
+  const sortedFullList = useMemo(() => {
+    return [...apiData].sort((a, b) => {
+      const lastNameComparison = getLastName(a.name).localeCompare(getLastName(b.name));
+      if (lastNameComparison !== 0) {
+        return lastNameComparison;
+      }
+      return a.name.localeCompare(b.name);
+    });
+  }, [apiData]);
 
   const [data, setData] = useState(sortedFullList);
 
@@ -54,14 +85,20 @@ const sortedFullList = useMemo(() => {
 
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
+<<<<<<< HEAD
   const { startLoading, stopLoading } = useLoading();
   const [loadedCount, setLoadedCount] = useState(0);
+=======
+  const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
+  const [isPaginating, setIsPaginating] = useState(false);
+>>>>>>> dd099903186d5348fe38065c56ae2bcddf793cae
 
   const paginatedData = data?.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE,
   );
 
+<<<<<<< HEAD
   const currentKey = `${page}-${data.length}`;
 
   useEffect(() => {
@@ -79,11 +116,24 @@ const sortedFullList = useMemo(() => {
     }
   }, [loadedCount, paginatedData?.length, stopLoading]);
 
+=======
+>>>>>>> dd099903186d5348fe38065c56ae2bcddf793cae
   const handleImageLoad = () => {
-    // We don't call setLoading here, only update local state.
-    // The useEffect above will handle setLoading(false) safely.
-    setLoadedCount((prev) => prev + 1);
+    if (isPaginating) {
+      setImagesLoadedCount((prev: number) => prev + 1);
+    }
   };
+
+  useEffect(() => {
+    if (isPaginating) {
+      const imagesToLoad = paginatedData.filter((p: any) => p.img).length;
+      if (imagesLoadedCount >= imagesToLoad) {
+        stopLoading();
+        setIsPaginating(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  }, [imagesLoadedCount, isPaginating, paginatedData, stopLoading]);
 
   const handleSearch = () => {
     const filteredData = sortedFullList.filter((item: any) =>
@@ -106,7 +156,19 @@ const sortedFullList = useMemo(() => {
     event: React.ChangeEvent<unknown>,
     value: number,
   ) => {
+    if (value === page) return;
     setPage(value);
+    
+    const newPageData = data?.slice((value - 1) * ITEMS_PER_PAGE, value * ITEMS_PER_PAGE);
+    const imagesToLoad = newPageData.filter((p: any) => p.img).length;
+    
+    if (imagesToLoad > 0) {
+      startLoading();
+      setIsPaginating(true);
+      setImagesLoadedCount(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -135,16 +197,15 @@ const sortedFullList = useMemo(() => {
             container
             spacing={5}
             rowSpacing={20}
-            key={currentKey}
           >
             {paginatedData?.length ? (
               paginatedData?.map((val, i) => (
-                <Grid size={{ lg: 4, xs: 12 }} key={i}>
+                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }} key={i}>
                   <ProfessionalsCard
                     img={val.img}
                     name={val.name}
                     designation={val.designation}
-                    slug={val.slug}
+                    id={val.id}
                     onLoad={handleImageLoad}
                   />
                 </Grid>

@@ -1,25 +1,39 @@
 "use client";
-import vCardsJs from "vcards-js";
 import contact from "@/icons/contact-card.svg";
 import print from "@/icons/print.svg";
+import { ProfessionalControllers } from "@/api/professionalControllers";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import {
   Box,
+  Button,
+  CircularProgress,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Grid,
   IconButton,
   Stack,
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import { Close, Download } from "@mui/icons-material";
 import Image from "next/image";
+import { useState } from "react";
 
-const ProfessionalsDetailsHeroSection = () => {
+const ProfessionalsDetailsHeroSection = ({ onImageLoad }: { onImageLoad?: () => void }) => {
   const phone = useMediaQuery("(max-width:600px)");
   const { data } = useProfessionalDetailsData();
+  const { startLoading, stopLoading } = useLoading();
   const heroImg = data?.professionals_Details_HeroSection?.img;
+  
+  const [pdfModalOpen, setPdfModalOpen] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState("");
+  const [isLoadingPdf, setIsLoadingPdf] = useState(false);
 
   const handleSaveContact = async () => {
     const res = await fetch("/api/vcard", {
@@ -47,26 +61,69 @@ const ProfessionalsDetailsHeroSection = () => {
     URL.revokeObjectURL(url);
   };
 
-  const handlePrint = () => {
-    window.print();
+  const handlePrint = async () => {
+    if (data?.id) {
+      startLoading();
+      setIsLoadingPdf(true);
+      try {
+        const res = await ProfessionalControllers.downloadProfessionalPdf(data.id);
+        const blob = new Blob([res.data], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        
+        setPdfUrl(url);
+        setPdfModalOpen(true);
+      } catch (error) {
+        console.error("Failed to load PDF", error);
+        alert("Failed to load PDF. Falling back to browser print.");
+        window.print();
+      } finally {
+        stopLoading();
+        setIsLoadingPdf(false);
+      }
+    } else {
+      window.print();
+    }
+  };
+
+  const handleDownloadPdf = () => {
+    if (pdfUrl) {
+      const link = document.createElement("a");
+      link.href = pdfUrl;
+      const fileName = data?.professionals_Details_HeroSection?.name 
+        ? `${data.professionals_Details_HeroSection.name.replace(/\s+/g, '_')}_Profile.pdf` 
+        : "Professional_Profile.pdf";
+      link.download = fileName;
+      link.click();
+    }
+  };
+
+  const handleClosePdfModal = () => {
+    setPdfModalOpen(false);
+    setTimeout(() => {
+      if (pdfUrl) {
+        URL.revokeObjectURL(pdfUrl);
+        setPdfUrl("");
+      }
+    }, 500);
   };
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-        minHeight: { xs: "auto", lg: "85vh" },
-        height: { xs: "auto", lg: "85vh" },
-        overflow: "hidden",
-        pt: { xs: 5, lg: 0 },
-        pb: { xs: 0, lg: 0 },
-      }}
-    >
+    <>
+      <Box
+        sx={{
+          position: "relative",
+          minHeight: { xs: "auto", md: "85vh", lg: "85vh" },
+          height: { xs: "auto", md: "85vh", lg: "85vh" },
+          overflow: "hidden",
+          pt: { xs: 5, lg: 0 },
+          pb: { xs: 0, lg: 0 },
+        }}
+      >
       <Box
         sx={{
           backgroundColor: COLORS.PRIMARY_BLUE,
-          width: { xs: "100%", lg: "35%" },
-          height: { xs: "300px", lg: "100%" },
+          width: { xs: "100%", md: "35%", lg: "35%" },
+          height: { xs: "300px", md: "100%", lg: "100%" },
           position: "absolute",
           right: 0,
           top: 0,
@@ -91,7 +148,7 @@ const ProfessionalsDetailsHeroSection = () => {
           sx={{ height: "100%", alignItems: "center" }}
         >
           <Grid
-            size={{ lg: 6, xs: 12 }}
+            size={{ xs: 12, md: 6, lg: 6 }}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -178,23 +235,23 @@ const ProfessionalsDetailsHeroSection = () => {
             </Box>
           </Grid>
           <Grid
-            size={{ lg: 6, xs: 12 }}
+            size={{ xs: 12, md: 6, lg: 6 }}
             sx={{
               height: "100%",
-              display: { xs: "none", lg: "flex" },
-              alignItems: { xs: "center", lg: "flex-end" },
+              display: { xs: "none", md: "flex", lg: "flex" },
+              alignItems: { xs: "center", md: "flex-end", lg: "flex-end" },
               justifyContent: "center",
               position: "relative",
-              minHeight: { xs: 300, lg: "auto" },
+              minHeight: { xs: 300, md: "auto", lg: "auto" },
             }}
           >
             {heroImg && (
               <Box
                 sx={{
                   position: "relative",
-                  width: { lg: "140%", xs: "100%" },
-                  height: { lg: 650, xs: 400 },
-                  right: { lg: "-10%", xs: "0" },
+                  width: { xs: "100%", md: "140%", lg: "140%" },
+                  height: { xs: 400, md: 650, lg: 650 },
+                  right: { xs: "0", md: "-10%", lg: "-10%" },
                 }}
               >
                 <Image
@@ -206,6 +263,8 @@ const ProfessionalsDetailsHeroSection = () => {
                     objectPosition: usingMobileImageStyles(phone),
                   }}
                   priority
+                  onLoad={onImageLoad}
+                  onError={onImageLoad}
                 />
               </Box>
             )}
@@ -213,6 +272,81 @@ const ProfessionalsDetailsHeroSection = () => {
         </Grid>
       </Container>
     </Box>
+
+      <Dialog 
+        open={pdfModalOpen} 
+        onClose={handleClosePdfModal}
+        maxWidth="lg"
+        fullWidth
+        PaperProps={{
+          sx: { 
+            height: '90vh', 
+            borderRadius: 3, 
+            overflow: 'hidden',
+            boxShadow: '0 24px 48px rgba(0,0,0,0.2)' 
+          }
+        }}
+      >
+        <DialogTitle component="div" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', p: 2, backgroundColor: COLORS.PRIMARY_BLUE, color: COLORS.WHITE }}>
+          <Typography variant="h6" component="span" sx={{ fontFamily: tradeGothic.style.fontFamily, fontWeight: 700, letterSpacing: '0.5px' }}>
+            {data?.professionals_Details_HeroSection?.name || "Professional"} Profile Preview
+          </Typography>
+          <IconButton onClick={handleClosePdfModal} sx={{ color: COLORS.WHITE, '&:hover': { backgroundColor: 'rgba(255,255,255,0.1)' } }}>
+            <Close />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent sx={{ p: 0, overflow: 'hidden', backgroundColor: '#525659' }}>
+          {pdfUrl ? (
+            <iframe 
+              src={pdfUrl} 
+              width="100%" 
+              height="100%" 
+              style={{ border: 'none', display: 'block' }}
+              title="PDF Preview"
+            />
+          ) : (
+            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+              <CircularProgress sx={{ color: COLORS.WHITE }} />
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions sx={{ p: 2, backgroundColor: '#f8f9fa', borderTop: '1px solid #e0e0e0' }}>
+          <Button 
+            onClick={handleClosePdfModal} 
+            color="inherit" 
+            variant="outlined"
+            sx={{ 
+              borderRadius: 2, 
+              textTransform: 'none', 
+              fontWeight: 600, 
+              px: 3,
+              borderColor: '#ccc'
+            }}
+          >
+            Cancel
+          </Button>
+          <Button 
+            onClick={handleDownloadPdf} 
+            variant="contained" 
+            startIcon={<Download />}
+            sx={{ 
+              backgroundColor: COLORS.PRIMARY_BLUE, 
+              borderRadius: 2, 
+              textTransform: 'none', 
+              fontWeight: 600, 
+              px: 3,
+              boxShadow: 'none',
+              '&:hover': { 
+                backgroundColor: '#0a365c', // slightly darker shade of primary
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)' 
+              } 
+            }}
+          >
+            Download PDF
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 };
 

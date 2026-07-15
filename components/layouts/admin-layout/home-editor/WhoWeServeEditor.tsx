@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Button, Card, IconButton, Stack, TextField, Typography } from "@mui/material";
-import { Delete } from "@mui/icons-material";
+import { Box, Button, Card, IconButton, Stack, TextField, Typography, CircularProgress } from "@mui/material";
+import { Delete, Upload } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { MediaControllers } from "@/api/mediaControllers";
@@ -30,43 +30,55 @@ export const WhoWeServeEditor = ({ data, onChange }: { data: any, onChange: (new
             onChange={(e) => onChange({ ...data, leftSection: { ...data.leftSection, servicesLabel: e.target.value } })}
           />
           <Box sx={{ mt: 2 }}>
-            <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontSize: 14, mb: 1, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-              {isUploading ? "Uploading..." : "Upload Hero Background Image"}
-            </Typography>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={async (e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                  try {
-                    setIsUploading(true);
-                    const formData = new FormData();
-                    formData.append("image", file);
-                    
-                    const res = await MediaControllers.uploadMedia(formData);
-                    const responseData = res.data?.data?.data || res.data?.data;
-                    const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
-                    if (uploadedUrl) {
-                      onChange({ ...data, leftSection: { ...data.leftSection, heroImage: uploadedUrl } });
-                      showNotification("Image uploaded successfully", "success");
+            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <Typography variant="subtitle2" color="text.secondary">Who We Serve Image</Typography>
+              <Button component="label" variant="outlined" startIcon={isUploading ? <CircularProgress size={16} /> : <Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE, borderColor: COLORS.PRIMARY_BLUE, whiteSpace: "nowrap" }} disabled={isUploading}>
+                {isUploading ? "Uploading..." : "Upload Image"}
+                <input
+                  type="file"
+                  hidden
+                  accept="image/*"
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      try {
+                        setIsUploading(true);
+                        const formData = new FormData();
+                        formData.append("image", file);
+                        
+                        const res = await MediaControllers.uploadMedia(formData);
+                        const responseData = res.data?.data?.data || res.data?.data;
+                        const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+                        const uploadedKey = responseData?.key || uploadedUrl;
+                        if (uploadedUrl) {
+                          onChange({ ...data, leftSection: { ...data.leftSection, heroImage: uploadedUrl, imageDownloadUrl: uploadedUrl, imageUrl: uploadedKey } });
+                          showNotification("Image uploaded successfully", "success");
+                        }
+                      } catch (error) {
+                        console.error("Failed to upload who we serve image", error);
+                        showNotification("Failed to upload image", "error");
+                      } finally {
+                        setIsUploading(false);
+                      }
                     }
-                  } catch (error) {
-                    console.error("Failed to upload who we serve image", error);
-                    showNotification("Failed to upload image", "error");
-                  } finally {
-                    setIsUploading(false);
-                  }
-                }
-              }}
-              style={{ display: "block", width: "100%", padding: "8px", border: "1px solid rgba(0,0,0,0.2)", borderRadius: "8px" }}
-            />
-            {data.leftSection?.heroImage && (
-              <Box sx={{ mt: 2, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
+                  }}
+                />
+              </Button>
+            </Box>
+            {(data.leftSection?.imageDownloadUrl || data.leftSection?.heroImage) ? (
+              <Box sx={{ mt: 2, position: "relative", width: "100%", borderRadius: 1, overflow: "hidden", border: "1px solid #ddd" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={data.leftSection.heroImage} alt="preview" style={{ width: "100%", maxHeight: "150px", objectFit: "cover" }} />
+                <img src={data.leftSection?.imageDownloadUrl || data.leftSection?.heroImage} alt="preview" style={{ width: "100%", maxHeight: "150px", objectFit: "cover" }} />
+                <IconButton
+                  size="small"
+                  color="error"
+                  onClick={() => onChange({ ...data, leftSection: { ...data.leftSection, heroImage: "", imageDownloadUrl: "", imageUrl: "" } })}
+                  sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
+                >
+                  <Delete fontSize="small" />
+                </IconButton>
               </Box>
-            )}
+            ) : null}
           </Box>
         </Stack>
       </Card>

@@ -5,13 +5,14 @@ import { CareersHeroEditor } from "./CareersHeroEditor";
 import { CareersWorkWithUsEditor } from "./CareersWorkWithUsEditor";
 import { CareersOpenRolesEditor } from "./CareersOpenRolesEditor";
 
-export const CareersPageForms = ({ activeSection, websiteData, updateCareerPage }: any) => {
+export const CareersPageForms = ({ activeSection, websiteData, updateCareerPage, onDeleteMedia }: any) => {
   switch (activeSection) {
     case 0:
       return (
         <CareersHeroEditor 
           data={websiteData?.careerPage?.career_hero_section} 
           onChange={(newData: any) => updateCareerPage('career_hero_section', newData)} 
+          onDeleteMedia={onDeleteMedia}
         />
       );
     case 1:
@@ -19,6 +20,7 @@ export const CareersPageForms = ({ activeSection, websiteData, updateCareerPage 
         <CareersWorkWithUsEditor 
           data={websiteData?.careerPage?.career_work_with_us} 
           onChange={(newData: any) => updateCareerPage('career_work_with_us', newData)} 
+          onDeleteMedia={onDeleteMedia}
         />
       );
     case 2:

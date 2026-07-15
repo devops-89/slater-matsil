@@ -66,8 +66,55 @@ export interface HOMEPAGE_DATA_PROPS {
   disclaimer?: LEGAL_PAGE_DATA;
 }
 
+export interface API_PROFESSIONAL_BULLET {
+  id?: number;
+  sectionId?: number;
+  bulletText: string;
+  sortOrder: number;
+}
+
+export interface API_PROFESSIONAL_SECTION {
+  id?: number;
+  profileId?: number;
+  sectionType: "BIOGRAPHY" | "EDUCATION" | "ADMISSIONS" | "ARTICLES_PUBLICATIONS" | "ASSOCIATIONS";
+  description?: string;
+  sortOrder: number;
+  bullets: API_PROFESSIONAL_BULLET[];
+}
+
+export interface API_PROFESSIONAL_PROFILE {
+  id?: number;
+  jobTitle: string;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  userId?: number;
+  sections: API_PROFESSIONAL_SECTION[];
+}
+
+export interface API_USER_PROFESSIONAL {
+  id?: number;
+  email: string;
+  fullName: string;
+  firstName: string;
+  lastName: string;
+  designation: string;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  profileImageUrl?: string;
+  profileImageDownloadUrl?: string;
+  phoneNumber: string;
+  role: "PROFESSIONAL";
+  status?: "ACTIVE" | "INACTIVE";
+  professionalProfiles: API_PROFESSIONAL_PROFILE[];
+}
+
 export interface PROFESSIONAL_DETAILS_PROPS {
-  slug: string;
+  id?: number | string;
+  slug?: string;
   professionals_Details_HeroSection: PROFESSIONAL_DETAILS_HERO_PROPS;
   PROFESSIONAL_BIO_DATA: PROFESSIONAL_BIO_PROPS[];
   PROFESSIONAL_EDUCATION_DATA: PROFESSIONAL_BIO_PROPS[];
@@ -82,6 +129,7 @@ export interface ABOUT_US_HEROSECTION {
   description: string;
   img: StaticImageData | string;
   videoUrl?: string;
+  videoDownloadUrl?: string;
 }
 
 interface HERO_SECTION_PROPS {
@@ -100,6 +148,8 @@ interface ABOUT_INNOVATION_INSIGHTS_PROPS {
 
 interface aboutSectionProps {
   image?: any;
+  imageDownloadUrl?: string;
+  imageUrl?: string;
   sectionTitle: string;
   heading: string;
   description: string;
@@ -119,7 +169,9 @@ interface ABOUT_US_SLATER {
   description: {
     label: string;
   }[];
-  img: StaticImageData;
+  img: StaticImageData | string;
+  imageDownloadUrl?: string;
+  imageUrl?: string;
 }
 
 interface REDEFINING_PATENT_SUCCESS_PROPS {
@@ -154,6 +206,8 @@ interface CTA_BUTTON_PROPS {
 interface WHO_WE_SERVE_SECTION_PROPS {
   leftSection: {
     heroImage: string;
+    imageDownloadUrl?: string;
+    key?: string;
     small_logo: StaticImageData;
     startingYear: string;
     servicesLabel: string;
@@ -230,7 +284,7 @@ interface AWARDS_ABOUT_PROPS {
   img: StaticImageData;
   heading1: string;
   heading2: string;
-  awards_img: { img: StaticImageData }[];
+  awards_img: { img: StaticImageData | string; imageDownloadUrl?: string; imageUrl?: string; }[];
 }
 
 export interface DATA_LIST_PROPS {
@@ -251,10 +305,10 @@ interface PROFESSIONALS_HEROSECTION_PROPS {
 }
 
 export interface PROFESSIONALS_CARD_PROPS {
-  img: StaticImageData;
+  id?: number;
+  img: StaticImageData | string;
   name: string;
   designation: string;
-  slug: string;
   onLoad?: () => void;
 }
 
@@ -364,10 +418,12 @@ interface PRACTICE_GROUPS_HEROSECTION_PROPS {
   title: string;
   heading: string;
   description1: string;
-  firstHeroImage: StaticImageData;
-  secondHeroImage: StaticImageData;
-  thirdHeroImage: StaticImageData;
+  firstHeroImage: StaticImageData | string;
+  secondHeroImage: StaticImageData | string;
+  thirdHeroImage: StaticImageData | string;
   description2: string;
+  imageDownloadUrl?: string;
+  imageUrl?: string;
 }
 
 interface PRACTICE_GROUPS_SECTION_PROPS {
@@ -534,10 +590,10 @@ export interface INSIGHTS_DETAIL_PROPS {
     additionalInformation?: INSIGHT_CONTENT_SECTION_PROPS;
     closingStatement?: INSIGHT_CONTENT_SECTION_PROPS;
     resource?: {
-    heading: string;
-    content: string;
-    link: string;
-  };
+      heading: string;
+      content: string;
+      link: string;
+    };
 
   };
 }
@@ -682,9 +738,9 @@ export interface BLOG_DETAIL_PROPS {
     date: string;
     readTime: string;
     author: string;
-    authorImage?: StaticImageData;
+    authorImage?: StaticImageData | string;
     authorTitle?: string;
-    bgImage?: StaticImageData;
+    bgImage?: StaticImageData | string;
     badge?: string;
   };
   content: {
@@ -700,4 +756,194 @@ export interface BLOG_DETAIL_PROPS {
     img: StaticImageData;
     date: string;
   }[];
+}
+
+export interface BLOG_FORM_CARD_DATA {
+  id?: number;
+  title: string;
+  date: string;
+  readTime: string;
+  description: string;
+  slug?: string;
+  authorImage?: string;
+  cardImage?: string;
+  rawCardImage?: string;
+}
+
+export interface BLOG_FORM_HERO_DATA {
+  title: string;
+  category: string;
+  author: string;
+  authorTitle: string;
+  bgImage?: string;
+  authorImage?: string;
+  rawAuthorImage?: string;
+}
+
+export interface BLOG_FORM_CONTENT_SECTION {
+  id?: number;
+  heading: string;
+  content: string;
+  sortOrder?: number;
+}
+
+export interface BLOG_FORM_CONTENT_DATA {
+  intro: string;
+  sections: BLOG_FORM_CONTENT_SECTION[];
+}
+
+export interface BLOG_API_ITEM {
+  id: number;
+  title?: string;
+  datePublished?: string;
+  readTime?: string;
+  listingDescription?: string;
+  cardImageDownloadUrl?: string;
+  cardImageUrl?: string;
+  slug?: string;
+  heroTitle?: string;
+  category?: string;
+  authorName?: string;
+  authorTitle?: string;
+  authorImageDownloadUrl?: string;
+  authorImageUrl?: string;
+  badge?: string;
+  introduction?: string;
+  sections?: { id?: number; heading?: string; content?: string }[];
+  [key: string]: unknown;
+}
+
+export interface INSIGHT_FORM_CONTACT {
+  firm?: string;
+  firmUrl?: string;
+  email?: string;
+  phone?: string;
+  shareLabel?: string;
+}
+
+export interface INSIGHT_FORM_CARD_DATA {
+  title: string;
+  category: string;
+  bgColor?: string;
+}
+
+export interface INSIGHT_FORM_HERO_DATA {
+  name: string;
+  band: string;
+  guide: string;
+  yearsRanked?: string;
+  profileImage?: string;
+  rawProfileImage?: string;
+}
+
+export interface INSIGHT_FORM_CONTENT_SECTION {
+  id?: number;
+  heading?: string;
+  content?: string;
+  sortOrder?: number;
+}
+
+export interface INSIGHT_FORM_CONTENT_DATA {
+  aboutProvidedBy?: string;
+  aboutProvidedByName?: string;
+  region?: string;
+  practiceAreas?: INSIGHT_FORM_CONTENT_SECTION;
+  professionalMemberships?: INSIGHT_FORM_CONTENT_SECTION;
+  career?: INSIGHT_FORM_CONTENT_SECTION;
+  personal?: INSIGHT_FORM_CONTENT_SECTION;
+  ChamberssReview?: INSIGHT_FORM_CONTENT_SECTION;
+  strengths?: INSIGHT_FORM_CONTENT_SECTION;
+  additionalInformation?: INSIGHT_FORM_CONTENT_SECTION;
+  closingStatement?: INSIGHT_FORM_CONTENT_SECTION;
+  resource?: INSIGHT_FORM_CONTENT_SECTION & { link?: string };
+}
+
+export interface INSIGHT_API_ITEM {
+  id: number;
+  listingTitle?: string;
+  category?: string;
+  bgColor?: string;
+  name?: string;
+  bandRole?: string;
+  guide?: string;
+  yearsRanked?: string;
+  profileImageUrl?: string;
+  profileImageDownloadUrl?: string;
+  firmName?: string;
+  firmUrl?: string;
+  email?: string;
+  phone?: string;
+  shareLabel?: string;
+  sections?: INSIGHT_FORM_CONTENT_SECTION[];
+  [key: string]: unknown;
+}
+
+export interface PROFESSIONAL_FORM_CARD_DATA {
+  id?: number;
+  name?: string;
+  designation?: string;
+  department?: string;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  detailsImageUrl?: string;
+  detailsImageDownloadUrl?: string;
+}
+
+export interface PROFESSIONAL_FORM_VCARD {
+  job_title?: string;
+  street?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  countryRegion?: string;
+}
+
+export interface PROFESSIONAL_FORM_SECTION {
+  paragraphs?: string;
+  bullets?: { id?: number; label?: string; href?: string }[];
+}
+
+export interface PROFESSIONAL_FORM_BIO_DATA {
+  email?: string;
+  phoneNumber?: string;
+  vCard?: PROFESSIONAL_FORM_VCARD;
+  bio?: PROFESSIONAL_FORM_SECTION;
+  education?: PROFESSIONAL_FORM_SECTION;
+  admissions?: PROFESSIONAL_FORM_SECTION;
+  articles?: PROFESSIONAL_FORM_SECTION;
+  associations?: PROFESSIONAL_FORM_SECTION;
+}
+
+export interface PROFESSIONAL_API_ITEM {
+  id: number;
+  fullName?: string;
+  name?: string;
+  img?: string;
+  detailsImg?: string;
+  designation?: string;
+  email?: string;
+  phoneNumber?: string;
+  profileImageUrl?: string;
+  profileImageDownloadUrl?: string;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  department?: string;
+  professionalProfiles?: {
+    id?: number;
+    job_title?: string;
+    street?: string;
+    city?: string;
+    state?: string;
+    postalCode?: string;
+    countryRegion?: string;
+    imageUrl?: string;
+    imageDownloadUrl?: string;
+    sections?: {
+      sectionType?: string;
+      description?: string;
+      sortOrder?: number;
+      bullets?: { id?: number; bulletText?: string; sortOrder?: number }[];
+    }[];
+  }[];
+  [key: string]: unknown;
 }

@@ -12,3 +12,56 @@ body {
 .d-none {
   display: none;
 }
+
+/* ==========================================================
+   PERMANENT GLOBAL SOLUTION FOR LANGUAGE TRANSLATION FORMATTING 
+   ========================================================== */
+
+/* 1. Neutralize Google Translate's <font> tags breaking CSS flexbox/grid layouts and inheriting system fonts */
+font, .goog-text-highlight {
+  display: contents !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  letter-spacing: inherit !important;
+  text-transform: inherit !important;
+  text-align: inherit !important;
+  white-space: inherit !important;
+  word-spacing: inherit !important;
+}
+
+/* 2. Prevent layout shifts (pushing page down) caused by Google Translate top banner */
+html.translated-ltr,
+html.translated-rtl {
+  height: 100%;
+  top: 0px !important;
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+
+body.translated-ltr,
+body.translated-rtl {
+  top: 0px !important;
+  padding-top: 0px !important;
+  margin-top: 0px !important;
+  position: relative !important;
+}
+
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+#goog-gt-tt {
+  display: none !important;
+}
+
+/* 3. Globally prevent Buttons and Nav Links from wrapping to multiple lines when translated text expands */
+html.translated-ltr .MuiButtonBase-root,
+html.translated-rtl .MuiButtonBase-root,
+html.translated-ltr button,
+html.translated-rtl button {
+  white-space: nowrap !important;
+  min-width: max-content !important;
+}

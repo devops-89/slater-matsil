@@ -21,13 +21,10 @@ const DrivingInnovation = () => {
                 color: COLORS.PRIMARY_BLUE,
               }}
             >
-              {details?.aboutPage?.drivingInnovationEverywhere?.heading || "Driving innovation everywhere"}
+              {details?.aboutPage?.drivingInnovationEverywhere?.heading}
             </Typography>
 
-            {(details?.aboutPage?.drivingInnovationEverywhere?.description?.length ? details.aboutPage.drivingInnovationEverywhere.description : [
-              { label: "We’re engineers focused on making things work. We’re attorneys driven to defend innovation. Above all, we’re proven professionals who draw upon our firsthand experience spanning diverse industries to deliver quality, accuracy, and a meticulous level of detail in our work product." },
-              { label: "We maintain this client-centric perspective, whether we are discussing technology with inventors in the design room, developing IP strategies with management in the board room, or advocating for our clients' rights in the courtroom." }
-            ]).map(
+            {(details?.aboutPage?.drivingInnovationEverywhere?.description || []).map(
               (val: any, i: number) => (
                 <Typography
                 key={i}
@@ -49,10 +46,13 @@ const DrivingInnovation = () => {
           <Grid size={{ lg: 6, xs: 12 }}>
             <Image
               src={
+                details?.aboutPage?.drivingInnovationEverywhere?.imageDownloadUrl ||
                 details?.aboutPage?.drivingInnovationEverywhere?.img ||
                 drivingInnovation
               }
               alt=""
+              width={600}
+              height={600}
               unoptimized={true}
               style={{ width: "100%", height: "auto" }}
             />

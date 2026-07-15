@@ -1,10 +1,9 @@
 "use client";
 
+import loadingData from "@/public/images/loading2.json";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect, useState, Suspense } from "react";
-import loadingData from "@/public/images/loading2.json";
-import { createContext, useContext, useCallback } from "react";
+import { createContext, Suspense, useCallback, useContext, useEffect, useState } from "react";
 
 export const LoadingContext = createContext({
   isLoading: false,
@@ -39,6 +38,20 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
       stopLoading();
     };
   }, [pathname, searchParams, startLoading, stopLoading]);
+
+  // Listen to global events from Axios interceptors or other non-React code
+  useEffect(() => {
+    const handleShowLoader = () => startLoading();
+    const handleHideLoader = () => stopLoading();
+
+    window.addEventListener("showLoader", handleShowLoader);
+    window.addEventListener("hideLoader", handleHideLoader);
+
+    return () => {
+      window.removeEventListener("showLoader", handleShowLoader);
+      window.removeEventListener("hideLoader", handleHideLoader);
+    };
+  }, [startLoading, stopLoading]);
 
   const isLoading = loadingCount > 0;
 

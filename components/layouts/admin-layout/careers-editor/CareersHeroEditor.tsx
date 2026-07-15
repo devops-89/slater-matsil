@@ -18,7 +18,10 @@ const DEFAULT_SLIDER_IMAGES = [
   slide5.src, slide6.src, slide8.src, slide9.src, slide10.src
 ];
 
-export function CareersHeroEditor({ data, onChange }: any) {
+export function CareersHeroEditor({ data, onChange, onDeleteMedia }: any) {
+  const { showNotification } = require("@/components/providers/NotificationProvider").useNotification();
+  const [isUploading, setIsUploading] = React.useState(false);
+
   const currentImages = (data?.carouselImages && data.carouselImages.length > 0) 
     ? data.carouselImages 
     : (data?.carouselImages === undefined ? DEFAULT_SLIDER_IMAGES : []);
@@ -27,29 +30,55 @@ export function CareersHeroEditor({ data, onChange }: any) {
     onChange({ ...data, [field]: value });
   };
 
-  const handleCarouselUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCarouselUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
-      const newImages: string[] = [];
-      let loaded = 0;
-      Array.from(files).forEach((file, i) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          newImages[i] = reader.result as string;
-          loaded++;
-          if (loaded === files.length) {
-            onChange({ ...data, carouselImages: [...currentImages, ...newImages] });
+      setIsUploading(true);
+      try {
+        const newImages: any[] = [];
+        const { MediaControllers } = require("@/api/mediaControllers");
+        
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          const formData = new FormData();
+          formData.append("image", file);
+          const res = await MediaControllers.uploadMedia(formData);
+          const responseData = res.data?.data?.data || res.data?.data;
+          const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+          const uploadedKey = responseData?.key || uploadedUrl;
+          
+          if (uploadedUrl) {
+            newImages.push({
+              img: uploadedUrl,
+              imageUrl: uploadedKey,
+              imageDownloadUrl: uploadedUrl,
+              key: uploadedKey
+            });
           }
-        };
-        reader.readAsDataURL(file);
-      });
+        }
+        
+        if (newImages.length > 0) {
+          onChange({ ...data, carouselImages: [...currentImages, ...newImages] });
+          showNotification("Image uploaded successfully", "success");
+        }
+      } catch (error) {
+        showNotification("Failed to upload image", "error");
+      } finally {
+        setIsUploading(false);
+      }
     }
   };
 
   const removeCarouselImage = (index: number) => {
+    const imgToRemove = currentImages[index];
+    if (imgToRemove && imgToRemove.key && onDeleteMedia) {
+      onDeleteMedia(imgToRemove.key);
+    }
+    
     const updatedImages = [...currentImages];
     updatedImages.splice(index, 1);
     onChange({ ...data, carouselImages: updatedImages });
+    showNotification("Image removed from preview. Click Save Changes to delete it.", "info");
   };
 
   return (
@@ -76,26 +105,29 @@ export function CareersHeroEditor({ data, onChange }: any) {
       <Box>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="subtitle2" color="text.secondary">Carousel Images</Typography>
-          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }}>
-            Add Images
+          <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
+            {isUploading ? "Uploading..." : "Add Images"}
             <input type="file" hidden accept="image/*" multiple onChange={handleCarouselUpload} />
           </Button>
         </Box>
         {currentImages.length > 0 && (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 2 }}>
-            {currentImages.map((img: any, i: number) => (
-              <Box key={i} sx={{ position: 'relative', width: 80, height: 80, borderRadius: 1, overflow: 'hidden', border: '1px solid #ddd' }}>
-                <img src={typeof img === 'string' ? img : img.src} alt={`Carousel ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <IconButton 
-                  size="small" 
-                  color="error" 
-                  onClick={() => removeCarouselImage(i)}
-                  sx={{ position: 'absolute', top: 2, right: 2, backgroundColor: 'rgba(255,255,255,0.8)', padding: '2px', '&:hover': { backgroundColor: 'white' } }}
-                >
-                  <Delete fontSize="small" />
-                </IconButton>
-              </Box>
-            ))}
+            {currentImages.map((img: any, i: number) => {
+              const srcUrl = img?.imageDownloadUrl || img?.imgUrl || img?.img || (typeof img === 'string' ? img : img.src);
+              return (
+                <Box key={i} sx={{ position: 'relative', width: 80, height: 80, borderRadius: 1, overflow: 'hidden', border: '1px solid #ddd' }}>
+                  <img src={srcUrl} alt={`Carousel ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <IconButton 
+                    size="small" 
+                    color="error" 
+                    onClick={() => removeCarouselImage(i)}
+                    sx={{ position: 'absolute', top: 2, right: 2, backgroundColor: 'rgba(255,255,255,0.8)', padding: '2px', '&:hover': { backgroundColor: 'white' } }}
+                  >
+                    <Delete fontSize="small" />
+                  </IconButton>
+                </Box>
+              );
+            })}
           </Box>
         )}
       </Box>

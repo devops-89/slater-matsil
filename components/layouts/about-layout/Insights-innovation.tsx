@@ -24,7 +24,7 @@ const InsightsInnovation = () => {
                 color: COLORS.TEXT_TERTIARY,
               }}
             >
-              {details?.aboutPage?.innovationInsights?.heading || "Where Insight Meets Innovation In Every Patent Strategy."}
+              {details?.aboutPage?.innovationInsights?.heading}
             </Typography>
             <Typography
               sx={{

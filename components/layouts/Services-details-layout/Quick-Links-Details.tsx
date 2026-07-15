@@ -26,6 +26,7 @@ import { Circle } from "@mui/icons-material";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { SERVICES_DETAILS } from "@/public/data/generic-array";
+import { usePageData } from "@/store/usePageData";
 const QuickLinksDetails = () => {
   const QUICk_LINKS_DATA = [
     {
@@ -81,17 +82,26 @@ const QuickLinksDetails = () => {
     next: { slug: string; title: string } | null;
   }>({ prev: null, next: null });
 
+  const { details } = usePageData();
+  const serviceAreasData = details?.homepage?.service_area?.section_Data || SERVICES_DETAILS;
+
   useEffect(() => {
-    const currentIndex = SERVICES_DETAILS.findIndex(
-      (item) => item.slug === slug,
+    const currentIndex = serviceAreasData.findIndex(
+      (item: any) => item.slug === slug,
     );
     if (currentIndex !== -1) {
-      setData(SERVICES_DETAILS[currentIndex]);
+      const serviceAreaItem: any = serviceAreasData[currentIndex];
+      
+      setData({
+        title: serviceAreaItem.title,
+        data: serviceAreaItem.detailsData || [],
+        slug: serviceAreaItem.slug
+      } as any);
 
-      const prev = currentIndex > 0 ? SERVICES_DETAILS[currentIndex - 1] : null;
-      const next =
-        currentIndex < SERVICES_DETAILS.length - 1
-          ? SERVICES_DETAILS[currentIndex + 1]
+      const prev: any = currentIndex > 0 ? serviceAreasData[currentIndex - 1] : null;
+      const next: any =
+        currentIndex < serviceAreasData.length - 1
+          ? serviceAreasData[currentIndex + 1]
           : null;
 
       setNavigation({
@@ -99,7 +109,7 @@ const QuickLinksDetails = () => {
         next: next ? { slug: next.slug, title: next.title } : null,
       });
     }
-  }, [slug]);
+  }, [slug, serviceAreasData]);
 
   return (
     <Box sx={{ py: 5 }}>

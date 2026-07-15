@@ -3,28 +3,59 @@
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams, notFound } from "next/navigation";
-import { BLOG_DETAILS_DATA } from "@/public/data/blog-details-data";
+import { BLOG_DETAIL_PROPS } from "@/utils/types";
+import { BlogControllers } from "@/api/blogControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import BlogDetailsHeroSection from "./BlogDetailsHeroSection";
 import BlogDetailsContentSection from "./BlogDetailsContentSection";
-import { BLOG_DETAIL_PROPS } from "@/utils/types";
-import { usePageData } from "@/store/usePageData";
 
 import { motion } from "framer-motion";
 
 const BlogDetailsLayout = () => {
-  const { slug } = useParams();
-  const { details } = usePageData();
+  const { id } = useParams();
+  const { startLoading, stopLoading } = useLoading();
   const [data, setData] = useState<BLOG_DETAIL_PROPS | null>(null);
 
   useEffect(() => {
-    const storeBlogs = details?.insightsPage?.blogDetailsData || [];
-    const blog = storeBlogs.find((item: any) => item.slug === slug) || BLOG_DETAILS_DATA.find((item) => item.slug === slug);
-    if (!blog) {
-      // notFound(); // Should usually use notFound() but let's be careful with client components
-      return;
-    }
-    setData(blog);
-  }, [slug, details]);
+    const fetchBlog = async () => {
+      if (!id) return;
+      try {
+        startLoading();
+        const res = await BlogControllers.getBlogById(id as string);
+        const blog = res.data?.data?.data || res.data?.data;
+        if (!blog) {
+          // notFound();
+          return;
+        }
+
+        const mappedData: any = {
+
+          hero: {
+            title: blog.heroTitle || blog.title,
+            category: blog.category,
+            date: blog.datePublished,
+            readTime: blog.readTime,
+            author: blog.authorName,
+            authorTitle: blog.authorTitle,
+            authorImage: blog.authorImageDownloadUrl || blog.authorImageUrl,
+            badge: blog.badge,
+          },
+          content: {
+            intro: blog.introduction,
+            sections: blog.sections
+          }
+        };
+
+        setData(mappedData);
+      } catch (err) {
+        console.error("Failed to fetch blog details", err);
+      } finally {
+        stopLoading();
+      }
+    };
+
+    fetchBlog();
+  }, [id, startLoading, stopLoading]);
 
   if (!data)
     return (

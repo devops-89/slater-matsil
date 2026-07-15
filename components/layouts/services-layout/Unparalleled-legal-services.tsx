@@ -49,6 +49,8 @@ const UnParalleledLegalService = () => {
       <Image
         src={unparalled?.img}
         alt=""
+        width={800}
+        height={400}
         style={{
           width: "100%",
           height: "auto",

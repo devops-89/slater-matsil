@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Stack, TextField, Typography, Box, Button, IconButton, Paper, Divider } from "@mui/material";
-import { Delete, KeyboardArrowUp, KeyboardArrowDown, Add } from "@mui/icons-material";
+import Image from "next/image";
+import { Stack, TextField, Typography, Box, Button, IconButton, Paper, CircularProgress } from "@mui/material";
+import { Delete, KeyboardArrowUp, KeyboardArrowDown, Add, Close } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
+import { adelle } from "@/utils/fonts";
+import { MediaControllers } from "@/api/mediaControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
 
-export default function FirmLeadershipForms({ activeSection, websiteData, updateFirmLeadershipPage }: any) {
+export default function FirmLeadershipForms({ activeSection, websiteData, updateFirmLeadershipPage, onDeleteMedia }: any) {
   const data = websiteData?.firm_leadership || {};
 
   const handleHeroChange = (field: string, value: string) => {
@@ -17,10 +20,18 @@ export default function FirmLeadershipForms({ activeSection, websiteData, update
 
   const ArrayEditor = ({ arrayKey, title }: { arrayKey: string, title: string }) => {
     const items = data[arrayKey] || [];
+    const { showNotification } = useNotification();
+    const [uploadingStates, setUploadingStates] = useState<{ [key: number]: boolean }>({});
 
     const handleUpdate = (index: number, field: string, value: any) => {
       const newItems = [...items];
       newItems[index] = { ...newItems[index], [field]: value };
+      updateFirmLeadershipPage(arrayKey, newItems);
+    };
+
+    const handleMultiUpdate = (index: number, updates: any) => {
+      const newItems = [...items];
+      newItems[index] = { ...newItems[index], ...updates };
       updateFirmLeadershipPage(arrayKey, newItems);
     };
 
@@ -78,27 +89,58 @@ export default function FirmLeadershipForms({ activeSection, websiteData, update
                 <Typography variant="caption" color="textSecondary" sx={{ mb: 1, display: 'block' }}>
                   Image File
                 </Typography>
-                <Button variant="outlined" component="label" size="small">
-                  Upload Image
+                <Button variant="outlined" component="label" size="small" disabled={uploadingStates[index]}>
+                  {uploadingStates[index] ? <CircularProgress size={20} /> : "Upload Image"}
                   <input 
                     type="file" 
                     hidden 
                     accept="image/*" 
-                    onChange={(e) => {
+                    onChange={async (e) => {
                       const file = e.target.files?.[0];
                       if (file) {
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                          handleUpdate(index, "img", reader.result);
-                        };
-                        reader.readAsDataURL(file);
+                        try {
+                          setUploadingStates(prev => ({ ...prev, [index]: true }));
+                          const formData = new FormData();
+                          formData.append("image", file);
+                          const res = await MediaControllers.uploadMedia(formData);
+                          const responseData = res.data?.data?.data || res.data?.data;
+                          const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+                          const uploadedKey = responseData?.key || uploadedUrl;
+                          
+                          if (uploadedUrl) {
+                            handleMultiUpdate(index, {
+                              img: uploadedUrl,
+                              imageUrl: uploadedKey,
+                              imageDownloadUrl: uploadedUrl,
+                              key: uploadedKey
+                            });
+                            showNotification("Image uploaded successfully", "success");
+                          }
+                        } catch (error) {
+                          showNotification("Failed to upload image", "error");
+                        } finally {
+                          setUploadingStates(prev => ({ ...prev, [index]: false }));
+                        }
                       }
                     }} 
                   />
                 </Button>
-                {item.img && (typeof item.img === 'string' || item.img.src) && (
-                  <Box mt={1}>
-                    <img src={typeof item.img === 'string' ? item.img : item.img.src} alt="preview" style={{ height: 40, objectFit: 'contain' }} />
+                {(item.imageDownloadUrl || item.img) && (typeof (item.imageDownloadUrl || item.img) === 'string' || item.img?.src) && (
+                  <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
+                    <Image src={item.imageDownloadUrl || (typeof item.img === 'string' ? item.img : item.img?.src)} alt="preview" fill sizes="96px" style={{ objectFit: "cover" }} />
+                    <IconButton
+                      size="small"
+                      color="error"
+                      sx={{ position: 'absolute', top: 2, right: 2, backgroundColor: 'rgba(255,255,255,0.8)', padding: "2px", '&:hover': { backgroundColor: 'white' } }}
+                      onClick={() => {
+                        if (item.key && onDeleteMedia) {
+                          onDeleteMedia(item.key);
+                        }
+                        handleMultiUpdate(index, { img: "", imageUrl: "", imageDownloadUrl: "", key: "" });
+                      }}
+                    >
+                      <Close fontSize="small" />
+                    </IconButton>
                   </Box>
                 )}
               </Box>

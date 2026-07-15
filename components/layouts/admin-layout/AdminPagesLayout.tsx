@@ -32,38 +32,33 @@ export default function AdminPagesLayout() {
   const [permissions, setPermissions] = useState<string[] | null>(null);
 
   useEffect(() => {
-    const auth = localStorage.getItem("adminAuth");
-    if (auth && auth !== "true") {
-      let subAdmins = details?.subAdmins || [];
-      if (subAdmins.length === 0) {
-        const stored = localStorage.getItem("subAdmins");
-        if (stored) {
-          subAdmins = JSON.parse(stored);
-        }
-      }
-      const found = subAdmins.find((a: any) => a.email.toLowerCase() === auth.toLowerCase());
-      if (found) {
-        let roles = details?.roles || [];
-        if (roles.length === 0) {
-          const storedRoles = localStorage.getItem("roles");
-          if (storedRoles) roles = JSON.parse(storedRoles);
-        }
-        const userRole = roles.find((r: any) => r.id === found.roleId);
-        if (userRole) {
-          setPermissions(userRole.permissions);
-        } else {
+    const isSuperAdmin = localStorage.getItem("isSuperAdmin");
+    
+    if (isSuperAdmin === "true") {
+      setPermissions(null); // Super admin gets access to all
+    } else if (isSuperAdmin === "false") {
+      const storedPerms = localStorage.getItem("userPermissions");
+      if (storedPerms) {
+        try {
+          setPermissions(JSON.parse(storedPerms));
+        } catch (e) {
           setPermissions([]);
         }
+      } else {
+        setPermissions([]);
       }
     } else {
+      // Fallback if not set
       setPermissions(null);
     }
-  }, [details]);
+  }, []);
 
   const filteredPageItems = PAGE_ITEMS.filter(item => {
-    if (permissions === null) return true;
-    const pageId = item.path.split("/pages/")[1];
-    return permissions.includes(pageId);
+    if (permissions === null) return true; // Super admin
+    
+    // item.path is like "/pages/home", permission is like "pages/home"
+    const permissionName = item.path.substring(1); 
+    return permissions.includes(permissionName);
   });
 
   return (

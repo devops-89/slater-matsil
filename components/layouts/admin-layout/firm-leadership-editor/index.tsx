@@ -14,8 +14,8 @@ export const renderDesktopPreview = (children: React.ReactNode) => (
   </Box>
 );
 
-export const FirmLeadershipPageForms = ({ activeSection, websiteData, updateFirmLeadershipPage }: any) => {
-  return <FirmLeadershipForms activeSection={activeSection} websiteData={websiteData} updateFirmLeadershipPage={updateFirmLeadershipPage} />;
+export const FirmLeadershipPageForms = ({ activeSection, websiteData, updateFirmLeadershipPage, onDeleteMedia }: any) => {
+  return <FirmLeadershipForms activeSection={activeSection} websiteData={websiteData} updateFirmLeadershipPage={updateFirmLeadershipPage} onDeleteMedia={onDeleteMedia} />;
 };
 
 export const FirmLeadershipPagePreviews = ({ activeSection, websiteData }: any) => {

@@ -3,6 +3,7 @@
 import slider4 from "@/home/slider/slider4.jpg";
 import slider5 from "@/home/slider/slider5.jpg";
 import slider6 from "@/home/slider/slider6.jpg";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
@@ -13,7 +14,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { usePageData } from "@/store/usePageData";
 
 const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
   return (
@@ -85,13 +85,37 @@ const HeroSection3 = () => {
     },
   ];
 
-  const banners =
-    Array.isArray(globalBanners) && globalBanners.length > 0
-      ? globalBanners.map((b: any, idx: number) => ({
-          ...b,
-          img: b.image || defaultBanners[idx]?.img || slider4,
-        }))
-      : defaultBanners;
+  const getValidImageUrl = (imageField: any) => {
+    if (!imageField || imageField === "deleted") return null;
+    
+    let url = "";
+    if (typeof imageField === "string") {
+      url = imageField;
+    } else if (typeof imageField === "object" && imageField.url) {
+      url = imageField.url;
+    } else {
+      return null;
+    }
+
+    if (url.trim() === "") return null;
+    let finalUrl = url.trim();
+    // Fix missing protocol for S3 or other external domains
+    if (!finalUrl.startsWith("http") && !finalUrl.startsWith("/") && finalUrl.includes("s3")) {
+      finalUrl = "https://" + finalUrl;
+    }
+    // Handle spaces in S3 filenames
+    return finalUrl.replace(/ /g, "%20");
+  };
+
+  const banners = defaultBanners.map((def: any, idx: number) => {
+    const apiSlide = (Array.isArray(globalBanners) ? globalBanners[idx] : null) || {};
+    return {
+      ...def,
+      title: apiSlide.title || def.title,
+      description: apiSlide.description || def.description,
+      img: getValidImageUrl(apiSlide.imageDownloadUrl || apiSlide.imageUrl || apiSlide.image) || def.img,
+    };
+  });
 
   return (
     <Box
@@ -119,6 +143,7 @@ const HeroSection3 = () => {
           autoplay={{ delay: 7000, disableOnInteraction: false }}
           spaceBetween={20}
           loop={true}
+          autoHeight={true}
           grabCursor
         >
           {banners.map((val, i) => (
@@ -185,11 +210,11 @@ const HeroSection3 = () => {
                     </Link>
                   </Box>
                 </Grid>
-                <Grid size={6}>
+                <Grid size={{ lg: 6, xs: 12 }}>
                   <Box
                     sx={{
                       width: "100%",
-                      height: "450px",
+                      height: { lg: "450px", sm: "350px", xs: "250px" },
                       position: "relative",
                     }}
                   >
@@ -197,13 +222,14 @@ const HeroSection3 = () => {
                       src={val.img}
                       alt="slider image"
                       fill
-                      priority={i === 0}
+
                       unoptimized={true}
                       sizes="(max-width: 1200px) 100vw, 50vw"
                       style={{
                         borderRadius: 20,
                         objectFit: "cover",
                       }}
+                      loading="lazy"
                     />
                   </Box>
                 </Grid>

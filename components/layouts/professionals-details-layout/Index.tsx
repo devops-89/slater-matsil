@@ -1,69 +1,141 @@
 "use client";
-import { Box, Container, IconButton, Stack, Tooltip, Typography } from "@mui/material";
-import React, { useEffect } from "react";
-import ProfessionalsDetailsHeroSection from "./Professionals-details-Herosection";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
-import { useParams, useRouter, notFound } from "next/navigation";
-import { PROFESSIONAL_DETAILS_DATA } from "@/public/data/professionals-details-data";
-import TabSection from "./Tab-Section";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
+import { Box, Container, Stack, Typography } from "@mui/material";
 import Link from "next/link";
+import { useParams, useRouter } from "next/navigation";
+import React, { useEffect } from "react";
+import ProfessionalsDetailsHeroSection from "./Professionals-details-Herosection";
+import TabSection from "./Tab-Section";
 //
 const ProfessionalDetailsLayout = () => {
   const { data, setProfessionalDetailsData, clearProfessionalDetailsData } =
     useProfessionalDetailsData();
-  const { slug } = useParams();
+  const { startLoading, stopLoading } = useLoading();
+  const { id } = useParams();
   const router = useRouter();
+  const [sortedProfessionals, setSortedProfessionals] = React.useState<any[]>([]);
+  const [professional, setProfessional] = React.useState<any>(null);
+  
+  const decodedId = React.useMemo(() => {
+    return typeof id === "string" ? decodeURIComponent(id).toLowerCase().trim() : "";
+  }, [id]);
 
-  const sortedProfessionals = React.useMemo(() => {
-    return [...PROFESSIONAL_DETAILS_DATA].sort((a, b) =>
-      a.professionals_Details_HeroSection.name.localeCompare(
-        b.professionals_Details_HeroSection.name,
-      ),
-    );
-  }, []);
+  useEffect(() => {
+    import("@/api/professionalControllers").then(({ ProfessionalControllers }) => {
+      import("@/utils/mappers/firmProfessionalsMapper").then(({ mapApiUserProfessionalToDetailsProps }) => {
+        
+        startLoading(); // Start loader immediately when fetching begins
+        
+        const isNumericId = !isNaN(Number(decodedId)) && decodedId.trim() !== "";
+        let idFetched = false;
 
-  const decodedSlug = React.useMemo(() => {
-    return typeof slug === "string" ? decodeURIComponent(slug).toLowerCase().trim() : "";
-  }, [slug]);
+        // 1. If we have an ID in the URL, fetch it immediately!
+        if (isNumericId) {
+          ProfessionalControllers.getProfessionalById(Number(decodedId))
+            .then((res: any) => {
+              let userObj = res.data;
+              while (userObj && userObj.data && !userObj.id && !userObj.fullName) {
+                userObj = userObj.data;
+              }
+              if (userObj && userObj.user && !userObj.id && !userObj.fullName) {
+                userObj = userObj.user;
+              }
+              if (userObj && (userObj.id || userObj.fullName)) {
+                setProfessional(mapApiUserProfessionalToDetailsProps(userObj));
+                idFetched = true;
+              }
+            })
+            .catch((err: any) => console.error("Failed to fetch professional by ID", err));
+        }
 
-  const professional = React.useMemo(() => {
-    if (!decodedSlug) return null;
-    return (
-      PROFESSIONAL_DETAILS_DATA.find(
-        (item) => item.slug.toLowerCase().trim() === decodedSlug
-      ) || null
-    );
-  }, [decodedSlug]);
+        // 2. Fetch all for Next/Prev functionality (Runs in parallel)
+        ProfessionalControllers.getAllProfessionalProfiles()
+          .then((res: any) => {
+            let users = res.data?.data?.users || [];
+            if (!users.length && res.data?.data?.data?.users) {
+              users = res.data.data.data.users;
+            }
+            processUsers(users);
+          })
+          .catch((err) => {
+            console.error("Failed to fetch professional profiles", err);
+            processUsers([]);
+          });
 
-  // If a slug is specified but no professional is found, return 404
-  if (slug && !professional) {
-    notFound();
-  }
+        function processUsers(users: any[]) {
+          const mappedUsers = users.map((apiItem: any) => mapApiUserProfessionalToDetailsProps(apiItem));
+
+          const getLastName = (fullName: string) => {
+            if (!fullName) return "";
+            const cleanName = fullName.split(",")[0].trim();
+            const parts = cleanName.split(/\s+/);
+            return parts[parts.length - 1].toLowerCase();
+          };
+
+          const sorted = mappedUsers.sort((a: any, b: any) => {
+            const nameA = a.professionals_Details_HeroSection?.name || "";
+            const nameB = b.professionals_Details_HeroSection?.name || "";
+            const lastNameComparison = getLastName(nameA).localeCompare(getLastName(nameB));
+            if (lastNameComparison !== 0) {
+              return lastNameComparison;
+            }
+            return nameA.localeCompare(nameB);
+          });
+          setSortedProfessionals(sorted);
+
+          // If we didn't already fetch the user via ID, set the data from the list
+          if (!idFetched) {
+            const currentProf = sorted.find((item: any) => 
+              (item.id && item.id.toString() === decodedId)
+            );
+            
+            setProfessional(currentProf || null);
+          }
+        }
+      });
+    });
+  }, [decodedId, startLoading]);
 
   const currentIndex = sortedProfessionals.findIndex(
-    (item) => item.slug.toLowerCase().trim() === decodedSlug,
+    (item) => (item.id && item.id.toString() === decodedId)
   );
   const prevProfessional =
     currentIndex > 0 ? sortedProfessionals[currentIndex - 1] : null;
   const nextProfessional =
-    currentIndex < sortedProfessionals.length - 1
+    currentIndex !== -1 && currentIndex < sortedProfessionals.length - 1
       ? sortedProfessionals[currentIndex + 1]
       : null;
 
   useEffect(() => {
     if (professional) {
       setProfessionalDetailsData(professional);
+      // Wait for image load event below, or stop if no image
+      if (!professional.professionals_Details_HeroSection?.img) {
+         stopLoading();
+      }
     }
+  }, [professional, setProfessionalDetailsData, stopLoading]);
+
+  useEffect(() => {
     return () => {
       clearProfessionalDetailsData();
+      stopLoading(); // safety
     };
-  }, [professional, setProfessionalDetailsData, clearProfessionalDetailsData]);
+  }, [clearProfessionalDetailsData, stopLoading]);
+
+  const handleImageLoad = () => {
+    stopLoading();
+  };
 
   // Prevent rendering details hero and tabs until data is properly loaded in store
-  if (!data || data.slug.toLowerCase().trim() !== decodedSlug) {
+  if (
+    !data ||
+    (data.id?.toString() !== decodedId)
+  ) {
     return (
       <Box
         sx={{
@@ -78,7 +150,12 @@ const ProfessionalDetailsLayout = () => {
 
   return (
     <Box>
-      <ProfessionalsDetailsHeroSection />
+      {data?.professionals_Details_HeroSection && (
+        <ProfessionalsDetailsHeroSection
+          {...data?.professionals_Details_HeroSection}
+          onImageLoad={handleImageLoad}
+        />
+      )}
       <TabSection />
 
       {/* Prev / Next Navigation */}
@@ -93,7 +170,7 @@ const ProfessionalDetailsLayout = () => {
             {/* Previous */}
             {prevProfessional ? (
               <Link
-                href={`/firm-professionals/${prevProfessional.slug}`}
+                href={`/firm-professionals/${prevProfessional.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="row" alignItems="center" spacing={1.5} sx={{
@@ -133,7 +210,7 @@ const ProfessionalDetailsLayout = () => {
             {/* Next */}
             {nextProfessional ? (
               <Link
-                href={`/firm-professionals/${nextProfessional.slug}`}
+                href={`/firm-professionals/${nextProfessional.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="row" alignItems="center" spacing={1.5} sx={{
@@ -177,4 +254,3 @@ const ProfessionalDetailsLayout = () => {
 };
 
 export default ProfessionalDetailsLayout;
-

@@ -129,7 +129,7 @@ const BlogDetailsHeroSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
           >
             <Stack direction="row" spacing={2} alignItems="center">
               <Avatar
-                src={hero.authorImage?.src}
+                src={typeof hero.authorImage === 'string' ? hero.authorImage : hero.authorImage?.src}
                 sx={{
                   width: 64,
                   height: 64,

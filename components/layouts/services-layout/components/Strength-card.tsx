@@ -47,7 +47,7 @@ const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
             transition: "background-color 0.3s ease",
           }}
         >
-          <Image src={img} alt="settings" />
+          {img && <Image src={img} alt="settings" width={50} height={50} style={{ width: "100%", height: "auto" }} />}
         </Box>
         <Typography
           sx={{

@@ -8,6 +8,7 @@ import {
   Grid,
   Card,
   CardContent,
+  CardMedia,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -19,14 +20,22 @@ import {
   Tabs,
   Tab,
   MenuItem,
-  Select
+  Select,
+  CircularProgress
 } from "@mui/material";
-import { Add, Close, Delete } from "@mui/icons-material";
+import { Add, Close, Delete, Edit } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
 import { BLOG_DETAILS_DATA } from "@/public/data/blog-details-data";
+import { BlogControllers } from "@/api/blogControllers";
+import { MediaControllers } from "@/api/mediaControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import * as yup from "yup";
+import BlogCardItem from "./components/BlogCardItem";
+import BlogFormModal from "./components/BlogFormModal";
+import { BLOG_FORM_CARD_DATA, BLOG_FORM_HERO_DATA, BLOG_FORM_CONTENT_SECTION, BLOG_FORM_CONTENT_DATA, BLOG_API_ITEM } from "@/utils/types";
 
 const blogSchema = yup.object().shape({
   cardData: yup.object().shape({
@@ -45,207 +54,327 @@ const blogSchema = yup.object().shape({
 
 export default function BlogsAdminLayout() {
   const { details, setDetails } = usePageData();
+  const { showNotification } = useNotification();
+  const { startLoading, stopLoading } = useLoading();
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [activeSlug, setActiveSlug] = useState<string | null>(null);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [blogToDelete, setBlogToDelete] = useState<number | null>(null);
+  const [activeId, setActiveId] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
-  const [errors, setErrors] = useState<any>({});
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [keysToDeleteOnSave, setKeysToDeleteOnSave] = useState<string[]>([]);
+  const [isUploadingCard, setIsUploadingCard] = useState(false);
+  const [initialState, setInitialState] = useState<string>("");
+  const [isUploadingAuthor, setIsUploadingAuthor] = useState(false);
+  const [blogCards, setBlogCards] = useState<BLOG_API_ITEM[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const fetchBlogs = async () => {
+    try {
+      startLoading();
+      const res = await BlogControllers.getAllBlogs({ limit: 100 });
+      let allBlogs = res.data?.data?.data || res.data?.data || [];
+      const totalPages = res.data?.data?.meta?.totalPages || res.data?.meta?.totalPages || 1;
+      
+      if (totalPages > 1) {
+        const promises = [];
+        for (let i = 2; i <= totalPages; i++) {
+          promises.push(BlogControllers.getAllBlogs({ page: i, limit: 100 }));
+        }
+        const results = await Promise.all(promises);
+        results.forEach(r => {
+          allBlogs = [...allBlogs, ...(r.data?.data?.data || r.data?.data || [])];
+        });
+      }
+      setBlogCards(allBlogs);
+    } catch (e) {
+      console.error(e);
+      showNotification("Failed to fetch blogs", "error");
+    } finally {
+      stopLoading();
+    }
+  };
+
+  React.useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const confirmDelete = async () => {
+    if (!blogToDelete) return;
+    try {
+      startLoading();
+      await BlogControllers.deleteBlog(blogToDelete);
+      showNotification("Blog deleted successfully", "success");
+      fetchBlogs();
+    } catch (e) {
+      showNotification("Failed to delete blog", "error");
+    } finally {
+      stopLoading();
+      setDeleteConfirmOpen(false);
+      setBlogToDelete(null);
+    }
+  };
+
+  const handleDeleteClick = (id: number) => {
+    setBlogToDelete(id);
+    setDeleteConfirmOpen(true);
+  };
 
   // Form States
-  const [cardData, setCardData] = useState<any>({
+  const [cardData, setCardData] = useState<BLOG_FORM_CARD_DATA>({
     title: "",
     date: "",
     readTime: "",
     description: "",
     slug: "",
-    img: ""
+    cardImage: "",
+    rawCardImage: ""
   });
 
-  const [heroData, setHeroData] = useState<any>({
+  const [heroData, setHeroData] = useState<BLOG_FORM_HERO_DATA>({
     title: "",
     category: "Patent Law",
-    date: "",
-    readTime: "",
     author: "",
     authorTitle: "",
     authorImage: "",
-    badge: ""
+    rawAuthorImage: ""
   });
 
-  const [content, setContent] = useState<any>({
-    intro: "",
-    sections: []
-  });
-
-  const storeCards = details?.insightsPage?.blogSection?.pastWebinars || [];
-  const storeDetails = details?.insightsPage?.blogDetailsData || [];
-
-  const combinedDetailsMap = new Map();
-  BLOG_DETAILS_DATA.forEach((d: any) => combinedDetailsMap.set(d.slug, d));
-  storeDetails.forEach((d: any) => combinedDetailsMap.set(d.slug, d));
-  const blogDetails = Array.from(combinedDetailsMap.values());
-
-  const combinedCardsMap = new Map();
-  BLOG_DETAILS_DATA.forEach((d: any, idx: number) => {
-    combinedCardsMap.set(d.slug, {
-      id: idx + 1000,
-      tag: d.hero?.category || "Blog",
-      title: d.hero?.title || "Untitled",
-      subtitle: d.hero?.title || "Untitled",
-      date: d.hero?.date || "",
-      description: d.content?.intro || "",
-      img: d.hero?.authorImage || "",
-      bg: "#0D5F6E",
-      slug: d.slug,
-      readTime: d.hero?.readTime || "5 min"
-    });
-  });
-  storeCards.forEach((c: any) => combinedCardsMap.set(c.slug, c));
-  const blogCards = Array.from(combinedCardsMap.values());
+  const [content, setContent] = useState<BLOG_FORM_CONTENT_DATA>({ intro: "", sections: [] });
 
   const handleOpenNew = () => {
-    setActiveSlug(null);
+    setActiveId(null);
     setActiveTab(0);
     setErrors({});
-    setCardData({ title: "", date: "", readTime: "", description: "", img: "" });
-    setHeroData({ title: "", category: "Patent Law", date: "", readTime: "", author: "", authorTitle: "", authorImage: "", badge: "" });
+    setKeysToDeleteOnSave([]);
+    setCardData({ title: "", date: "", readTime: "", description: "", slug: "", cardImage: "", rawCardImage: "" });
+    setHeroData({ title: "", category: "Patent Law", author: "", authorTitle: "", authorImage: "", rawAuthorImage: "" });
     setContent({ intro: "", sections: [] });
     setDialogOpen(true);
   };
 
-  const handleEdit = (slug: string) => {
-    setActiveSlug(slug);
-    setActiveTab(0);
+  const handleEdit = async (id?: number) => {
+    setActiveId(id || null);
     setErrors({});
-    const card = blogCards.find((c: any) => c.slug === slug);
-    const detailsObj = blogDetails.find((d: any) => d.slug === slug);
+    setKeysToDeleteOnSave([]);
+    setActiveTab(0);
 
-    setCardData(card ? JSON.parse(JSON.stringify(card)) : { title: "", date: "", readTime: "", description: "", img: "" });
-    
-    if (detailsObj) {
-      setHeroData(detailsObj.hero || { title: "", category: "Patent Law", date: "", readTime: "", author: "", authorTitle: "", authorImage: "", badge: "" });
-      setContent(detailsObj.content || { intro: "", sections: [] });
-    } else {
-      setHeroData({
-        title: card?.title || "",
-        category: "Patent Law",
-        date: card?.date || "",
-        readTime: card?.readTime || "",
-        author: "",
-        authorTitle: "",
-        authorImage: "",
-        badge: ""
-      });
-      setContent({ intro: card?.description || "", sections: [] });
+    // 1. Instantly load available summary data for a fast UI
+    const blog = blogCards.find((c) => c.id === id);
+    if (blog) {
+      const newCardData: BLOG_FORM_CARD_DATA = {
+        title: blog.title || "",
+        date: blog.datePublished || "",
+        readTime: blog.readTime || "",
+        description: blog.listingDescription || "",
+        cardImage: blog.cardImageDownloadUrl || blog.cardImageUrl || "",
+        rawCardImage: blog.cardImageUrl || "",
+        slug: blog.slug || ""
+      };
+
+      const newHeroData: BLOG_FORM_HERO_DATA = {
+        title: blog.heroTitle || blog.title || "",
+        category: blog.category || "Patent Law",
+        author: blog.authorName || "",
+        authorTitle: blog.authorTitle || "",
+        authorImage: blog.authorImageDownloadUrl || blog.authorImageUrl || "",
+        rawAuthorImage: blog.authorImageUrl || "",
+      };
+
+      const newContent: BLOG_FORM_CONTENT_DATA = {
+        intro: blog.introduction || "",
+        sections: blog.sections ? blog.sections.map((s: Record<string, unknown>) => ({
+          ...(s.id ? { id: s.id as number } : {}),
+          heading: (s.heading as string) || "",
+          content: (s.content as string) || ""
+        })) : []
+      };
+
+      setCardData(newCardData);
+      setHeroData(newHeroData);
+      setContent(newContent);
+      setInitialState(JSON.stringify({ cardData: newCardData, heroData: newHeroData, content: newContent }));
     }
 
     setDialogOpen(true);
+
+    // 2. Fetch full details in the background to get missing sections/intro
+    if (id) {
+      try {
+        const res = await BlogControllers.getBlogById(id);
+        const fullBlog = res.data?.data?.data || res.data?.data;
+        if (fullBlog) {
+          setContent((prev) => ({
+            intro: prev.intro || fullBlog.introduction || "",
+            sections: fullBlog.sections && prev.sections.length === 0 ? fullBlog.sections.map((s: Record<string, unknown>) => ({
+              ...(s.id ? { id: s.id } : {}),
+              heading: s.heading || "",
+              content: s.content || ""
+            })) : prev.sections
+          }));
+        }
+      } catch (e) {
+        console.error("Failed to fetch full blog details in background", e);
+      }
+    }
   };
 
-  const handleDelete = (slug: string) => {
-    const newCards = blogCards.filter((c: any) => c.slug !== slug);
-    const newDetails = blogDetails.filter((d: any) => d.slug !== slug);
-    
-    setDetails({
-      ...details!,
-      insightsPage: {
-        ...details!.insightsPage,
-        blogSection: {
-          ...details!.insightsPage.blogSection!,
-          pastWebinars: newCards
-        },
-        blogDetailsData: newDetails
-      } as any
-    });
+  const handleDelete = async (id: number) => {
+    if (!window.confirm("Are you sure you want to delete this blog?")) return;
+    try {
+      startLoading();
+      await BlogControllers.deleteBlog(id);
+      showNotification("Blog deleted successfully", "success");
+      fetchBlogs();
+    } catch (e) {
+      console.error(e);
+      showNotification("Failed to delete blog", "error");
+    } finally {
+      stopLoading();
+    }
   };
 
-  const handleAuthorImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const res = reader.result as string;
-      setHeroData({ ...heroData, authorImage: { src: res } });
-      setErrors({ ...errors, 'heroData.authorImage': undefined });
-    };
-    reader.readAsDataURL(file);
+  const handleDeleteImage = (type: "card" | "author") => {
+    if (type === "card") {
+      if (cardData.rawCardImage && !keysToDeleteOnSave.includes(cardData.rawCardImage)) {
+        setKeysToDeleteOnSave(prev => [...prev, cardData.rawCardImage as string]);
+      }
+      setCardData({ ...cardData, cardImage: "", rawCardImage: "" });
+    } else {
+      if (heroData.rawAuthorImage && !keysToDeleteOnSave.includes(heroData.rawAuthorImage)) {
+        setKeysToDeleteOnSave(prev => [...prev, heroData.rawAuthorImage as string]);
+      }
+      setHeroData({ ...heroData, authorImage: "", rawAuthorImage: "" });
+    }
   };
 
-  const handleCardImageUpload = (file: File) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const res = reader.result as string;
-      setCardData({ ...cardData, img: { src: res } });
-    };
-    reader.readAsDataURL(file);
+  const handleAuthorImageUpload = async (file: File) => {
+    try {
+      setIsUploadingAuthor(true);
+      const formData = new FormData();
+      formData.append("image", file);
+      const res = await MediaControllers.uploadMedia(formData);
+      const responseData = res.data?.data?.data || res.data?.data;
+      const uploadedUrl = responseData?.imgUrl || responseData?.url || responseData?.imageDownloadUrl;
+      const uploadedKey = responseData?.key || uploadedUrl;
+      
+      if (uploadedUrl) {
+        if (heroData.rawAuthorImage && !keysToDeleteOnSave.includes(heroData.rawAuthorImage)) {
+          setKeysToDeleteOnSave(prev => [...prev, heroData.rawAuthorImage as string]);
+        }
+        setHeroData({ ...heroData, authorImage: uploadedUrl, rawAuthorImage: uploadedKey });
+        setErrors({ ...errors, 'heroData.authorImage': undefined });
+        showNotification("Author image uploaded successfully", "success");
+      }
+    } catch (error) {
+      showNotification("Failed to upload author image", "error");
+    } finally {
+      setIsUploadingAuthor(false);
+    }
+  };
+
+  const handleCardImageUpload = async (file: File) => {
+    try {
+      setIsUploadingCard(true);
+      const formData = new FormData();
+      formData.append("image", file);
+      const res = await MediaControllers.uploadMedia(formData);
+      const responseData = res.data?.data?.data || res.data?.data;
+      const uploadedUrl = responseData?.imgUrl || responseData?.url || responseData?.imageDownloadUrl;
+      const uploadedKey = responseData?.key || uploadedUrl;
+      
+      if (uploadedUrl) {
+        if (cardData.rawCardImage && !keysToDeleteOnSave.includes(cardData.rawCardImage)) {
+          setKeysToDeleteOnSave(prev => [...prev, cardData.rawCardImage as string]);
+        }
+        setCardData({ ...cardData, cardImage: uploadedUrl, rawCardImage: uploadedKey });
+        showNotification("Card image uploaded successfully", "success");
+      }
+    } catch (error) {
+      showNotification("Failed to upload card image", "error");
+    } finally {
+      setIsUploadingCard(false);
+    }
   };
 
   const handleSave = async () => {
+    if (activeId && JSON.stringify({ cardData, heroData, content }) === initialState) {
+      showNotification("No changes detected. Please make changes before saving.", "info");
+      return;
+    }
+
     try {
       await blogSchema.validate({ cardData, heroData }, { abortEarly: false });
       setErrors({});
-    } catch (err: any) {
-      const validationErrors: any = {};
-      err.inner.forEach((error: any) => {
-        validationErrors[error.path] = error.message;
-      });
-      setErrors(validationErrors);
-      
-      if (Object.keys(validationErrors).some(k => k.startsWith("cardData."))) {
-        setActiveTab(0);
-      } else if (Object.keys(validationErrors).some(k => k.startsWith("heroData."))) {
-        setActiveTab(1);
+    } catch (err: unknown) {
+      if (err instanceof yup.ValidationError) {
+        const validationErrors: Record<string, string | undefined> = {};
+        err.inner.forEach((error) => {
+          if (error.path) {
+            validationErrors[error.path] = error.message;
+          }
+        });
+        setErrors(validationErrors);
+        
+        if (Object.keys(validationErrors).some(k => k.startsWith("cardData."))) {
+          setActiveTab(0);
+        } else if (Object.keys(validationErrors).some(k => k.startsWith("heroData."))) {
+          setActiveTab(1);
+        }
       }
       return;
     }
 
-    // Auto-generate slug from title
-    const slugToUse = activeSlug || cardData.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    
-    const finalCard = { 
-      ...cardData, 
-      id: cardData.id || Date.now(),
-      slug: slugToUse 
+    const apiPayload = {
+      title: cardData.title,
+      listingDescription: cardData.description,
+      datePublished: cardData.date,
+      readTime: cardData.readTime,
+      cardImageUrl: cardData.rawCardImage || cardData.cardImage,
+      heroTitle: heroData.title || cardData.title,
+      category: heroData.category || "Patent Law",
+      badge: "",
+      authorName: heroData.author || "",
+      authorTitle: heroData.authorTitle || "",
+      authorImageUrl: heroData.rawAuthorImage || heroData.authorImage,
+      introduction: content.intro || "",
+
+      isPublished: true,
+      sections: content.sections.map((sec, idx) => ({
+        heading: sec.heading || "",
+        content: sec.content || "",
+        sortOrder: idx + 1
+      }))
     };
 
-    const finalDetails = {
-      slug: slugToUse,
-      hero: {
-        ...heroData,
-        title: heroData.title || cardData.title,
-        date: heroData.date || cardData.date,
-        readTime: heroData.readTime || cardData.readTime,
-      },
-      content: content
-    };
-
-    let newCards = [...blogCards];
-    let newDetails = [...blogDetails];
-
-    if (activeSlug) {
-      newCards = newCards.map((c: any) => c.slug === activeSlug ? finalCard : c);
-      const detailsIdx = newDetails.findIndex((d: any) => d.slug === activeSlug);
-      if (detailsIdx !== -1) {
-        newDetails[detailsIdx] = finalDetails;
-      } else {
-        newDetails.push(finalDetails);
+    try {
+      setIsSaving(true);
+      
+      for (const key of keysToDeleteOnSave) {
+        try {
+          await MediaControllers.removeMedia({ key: String(key) });
+        } catch (e) {
+          console.error("Failed to delete media", key, e);
+        }
       }
-    } else {
-      newCards.push(finalCard);
-      newDetails.push(finalDetails);
+      setKeysToDeleteOnSave([]);
+
+      if (activeId) {
+        await BlogControllers.updateBlog(activeId, apiPayload);
+        setBlogCards(prev => prev.map(b => b.id === activeId ? { ...b, ...apiPayload, cardImageUrl: apiPayload.cardImageUrl, listingDescription: apiPayload.listingDescription } : b));
+        showNotification("Blog updated successfully", "success");
+      } else {
+        await BlogControllers.createBlog(apiPayload);
+        showNotification("Blog created successfully", "success");
+      }
+      setDialogOpen(false);
+      fetchBlogs();
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to save blog to API";
+      showNotification(errorMessage, "error");
+    } finally {
+      setIsSaving(false);
     }
-
-    setDetails({
-      ...details!,
-      insightsPage: {
-        ...details!.insightsPage,
-        blogSection: {
-          ...details!.insightsPage.blogSection!,
-          upcoming: details?.insightsPage?.blogSection?.upcoming || [],
-          pastWebinars: newCards
-        },
-        blogDetailsData: newDetails
-      } as any
-    });
-
-    setDialogOpen(false);
   };
 
   const handleAddSection = () => {
@@ -263,12 +392,7 @@ export default function BlogsAdminLayout() {
 
   const handleSectionChange = (idx: number, field: 'heading' | 'content', val: string) => {
     const newSections = [...content.sections];
-    if (field === 'content') {
-      const lines = val.split("\n").map(l => l.trim()).filter(Boolean);
-      newSections[idx][field] = lines.length > 1 ? lines : val;
-    } else {
-      newSections[idx][field] = val;
-    }
+    newSections[idx][field] = val;
     setContent({ ...content, sections: newSections });
   };
 
@@ -279,6 +403,14 @@ export default function BlogsAdminLayout() {
     return val || "";
   };
 
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 6;
+  const totalPages = Math.ceil(blogCards.length / cardsPerPage);
+  const startIndex = (currentPage - 1) * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
+  const currentBlogs = blogCards.slice(startIndex, endIndex);
+
   return (
     <AdminLayout title="Blogs Management">
       <Box sx={{ mb: 4, display: 'flex', justifyContent: { xs: 'stretch', sm: 'flex-end' }, alignItems: 'center' }}>
@@ -288,264 +420,149 @@ export default function BlogsAdminLayout() {
       </Box>
 
       <Grid container spacing={{ xs: 2, md: 4 }}>
-        {blogCards.map((blog: any, i: number) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={i} sx={{ display: 'flex' }}>
-            <Card sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', borderRadius: 4, cursor: "pointer", transition: "all 0.2s", "&:hover": { transform: "translateY(-4px)", boxShadow: "0 10px 30px rgba(0,0,0,0.1)" } }}>
-              <CardContent onClick={() => handleEdit(blog.slug)} sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
-                <Box sx={{ height: 120, mb: 2, borderRadius: 2, overflow: "hidden", display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: COLORS.PRIMARY_BLUE }}>
-                  {blog.img ? (
-                    <img src={blog.img.src || blog.img} alt={blog.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                  ) : (
-                    <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontWeight: 700, fontSize: 16, color: '#fff' }}>
-                      No Image
-                    </Typography>
-                  )}
-                </Box>
-                <Typography variant="caption" sx={{ color: COLORS.PRIMARY_GREEN, fontWeight: 700, mb: 0.5 }}>
-                  {blog.date} • {blog.readTime}
-                </Typography>
-                <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontWeight: 700, fontSize: 16, color: COLORS.PRIMARY_BLUE }}>
-                  {blog.title}
-                </Typography>
-              </CardContent>
-              <Box sx={{ px: 2, pb: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <Typography variant="caption" sx={{ color: 'text.secondary', fontStyle: 'italic' }}>
-                  /{blog.slug}
-                </Typography>
-                <IconButton color="error" size="small" onClick={(e) => { e.stopPropagation(); handleDelete(blog.slug); }}>
-                  <Delete fontSize="small" />
-                </IconButton>
-              </Box>
-            </Card>
-          </Grid>
+        {currentBlogs.map((blog) => (
+          <BlogCardItem
+            key={blog.id}
+            blog={blog}
+            onEdit={handleEdit}
+            onDelete={handleDeleteClick}
+          />
         ))}
       </Grid>
 
-      <Dialog 
-        open={dialogOpen} 
-        onClose={() => setDialogOpen(false)} 
-        maxWidth="md" 
-        fullWidth
-        PaperProps={{ sx: { borderRadius: 4, m: { xs: 1, sm: 2 }, width: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' }, maxHeight: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' } } }}
+      {/* Pagination */}
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+        spacing={2}
+        sx={{ mt: { lg: 10, xs: 6 } }}
       >
-        <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
-          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-            {activeSlug ? "Edit Blog Entry" : "Add Blog Entry"}
-          </Typography>
-          <IconButton onClick={() => setDialogOpen(false)}>
-            <Close />
-          </IconButton>
+        <Typography
+          onClick={() =>
+            currentPage > 1 &&
+            setCurrentPage(currentPage - 1)
+          }
+          sx={{
+            cursor:
+              currentPage === 1
+                ? "not-allowed"
+                : "pointer",
+            fontWeight: 700,
+            fontSize: 14,
+            color: COLORS.PRIMARY_BLUE,
+            opacity: currentPage === 1 ? 0.5 : 1,
+            "&:hover": {
+              opacity: currentPage === 1 ? 0.5 : 1,
+            },
+          }}
+        >
+          PREVIOUS
+        </Typography>
+
+        <Stack direction="row" spacing={1} alignItems="center">
+          {Array.from({ length: totalPages }).map((_, index) => (
+            <Box
+              key={index}
+              onClick={() => setCurrentPage(index + 1)}
+              sx={{
+                width: 40,
+                height: 40,
+                borderRadius: 2,
+                backgroundColor:
+                  currentPage === index + 1
+                    ? COLORS.PRIMARY_BLUE
+                    : "transparent",
+                color:
+                  currentPage === index + 1
+                    ? "white"
+                    : COLORS.PRIMARY_BLUE,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontWeight: 700,
+                cursor: "pointer",
+                boxShadow:
+                  currentPage === index + 1
+                    ? "0 4px 10px rgba(13, 95, 110, 0.2)"
+                    : "none",
+                "&:hover": {
+                  backgroundColor:
+                    currentPage === index + 1
+                      ? COLORS.PRIMARY_BLUE
+                      : "rgba(13, 95, 110, 0.05)",
+                },
+              }}
+            >
+              {index + 1}
+            </Box>
+          ))}
+        </Stack>
+
+        <Typography
+          onClick={() =>
+            currentPage < totalPages &&
+            setCurrentPage(currentPage + 1)
+          }
+          sx={{
+            cursor:
+              currentPage === totalPages || totalPages === 0
+                ? "not-allowed"
+                : "pointer",
+            fontWeight: 700,
+            fontSize: 14,
+            color: COLORS.PRIMARY_BLUE,
+            opacity: currentPage === totalPages || totalPages === 0 ? 0.5 : 1,
+            "&:hover": {
+              color:
+                currentPage === totalPages || totalPages === 0
+                  ? COLORS.PRIMARY_BLUE
+                  : COLORS.PRIMARY_GREEN,
+            },
+          }}
+        >
+          NEXT
+        </Typography>
+      </Stack>
+
+      <BlogFormModal
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        activeId={activeId}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        cardData={cardData}
+        setCardData={setCardData}
+        heroData={heroData}
+        setHeroData={setHeroData}
+        content={content}
+        setContent={setContent}
+        errors={errors}
+        setErrors={setErrors}
+        isUploadingCard={isUploadingCard}
+        isUploadingAuthor={isUploadingAuthor}
+        handleCardImageUpload={handleCardImageUpload}
+        handleAuthorImageUpload={handleAuthorImageUpload}
+        handleDeleteImage={handleDeleteImage}
+        handleSave={handleSave}
+        handleAddSection={handleAddSection}
+        handleRemoveSection={handleRemoveSection}
+        handleSectionChange={handleSectionChange}
+        getSectionContentString={getSectionContentString}
+        isSaving={isSaving}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteConfirmOpen} onClose={() => setDeleteConfirmOpen(false)}>
+        <DialogTitle sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          Confirm Delete
         </DialogTitle>
-        <DialogContent dividers>
-          <Tabs
-            value={activeTab}
-            onChange={(e, val) => setActiveTab(val)}
-            sx={{ mb: 3, borderBottom: 1, borderColor: 'divider' }}
-            variant="scrollable"
-            scrollButtons="auto"
-          >
-            <Tab label="Card Settings" />
-            <Tab label="Hero Settings" />
-            <Tab label="Content Body" />
-          </Tabs>
-
-          <Box sx={{ minHeight: 400 }}>
-            {/* Tab 0: Card Settings */}
-            {activeTab === 0 && (
-              <Stack spacing={3}>
-                <Typography variant="subtitle2" color="primary">Blog Listing Preview Settings</Typography>
-                <TextField 
-                  fullWidth 
-                  label="Blog Title" 
-                  value={cardData.title || ""} 
-                  onChange={(e) => { setCardData({ ...cardData, title: e.target.value }); setErrors({ ...errors, 'cardData.title': undefined }); }} 
-                  error={!!errors['cardData.title']}
-                  helperText={errors['cardData.title']}
-                />
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField 
-                      fullWidth 
-                      label="Date Published" 
-                      value={cardData.date || ""} 
-                      onChange={(e) => { setCardData({ ...cardData, date: e.target.value }); setErrors({ ...errors, 'cardData.date': undefined }); }} 
-                      error={!!errors['cardData.date']}
-                      helperText={errors['cardData.date'] || "e.g., September 2025"} 
-                    />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField 
-                      fullWidth 
-                      label="Read Time" 
-                      value={cardData.readTime || ""} 
-                      onChange={(e) => { setCardData({ ...cardData, readTime: e.target.value }); setErrors({ ...errors, 'cardData.readTime': undefined }); }} 
-                      error={!!errors['cardData.readTime']}
-                      helperText={errors['cardData.readTime'] || "e.g., 5 min"} 
-                    />
-                  </Grid>
-                </Grid>
-                <TextField 
-                  fullWidth 
-                  multiline 
-                  rows={3} 
-                  label="Listing Description" 
-                  value={cardData.description || ""} 
-                  onChange={(e) => { setCardData({ ...cardData, description: e.target.value }); setErrors({ ...errors, 'cardData.description': undefined }); }} 
-                  error={!!errors['cardData.description']}
-                  helperText={errors['cardData.description']}
-                />
-                <Box sx={{ border: "1px dashed #ccc", p: 2, borderRadius: 2, textAlign: 'center' }}>
-                  {cardData.img ? (
-                    <Box sx={{ mb: 2, height: 150, overflow: 'hidden', borderRadius: 2 }}>
-                      <img src={cardData.img.src || cardData.img} alt="Preview" style={{ height: "100%", width: "auto", objectFit: "contain" }} />
-                    </Box>
-                  ) : (
-                    <Box sx={{ mb: 2, py: 4, backgroundColor: '#eaeaea', borderRadius: 2 }}>
-                      <Typography variant="caption">No Card Image Uploaded</Typography>
-                    </Box>
-                  )}
-                  <input type="file" accept="image/*" style={{ display: 'none' }} id="card-photo-upload" onChange={(e) => e.target.files?.[0] && handleCardImageUpload(e.target.files[0])} />
-                  <label htmlFor="card-photo-upload">
-                    <Button variant="outlined" component="span" size="small">Upload Card Image</Button>
-                  </label>
-                </Box>
-              </Stack>
-            )}
-
-            {/* Tab 1: Hero Settings */}
-            {activeTab === 1 && (
-              <Stack spacing={3}>
-                <Typography variant="subtitle2" color="primary">Article Hero Banner Info</Typography>
-                <TextField 
-                  fullWidth 
-                  label="Hero Banner Title (Defaults to Card Title if blank)" 
-                  value={heroData.title || ""} 
-                  onChange={(e) => setHeroData({ ...heroData, title: e.target.value })} 
-                />
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField 
-                      fullWidth 
-                      label="Category" 
-                      value={heroData.category || ""} 
-                      onChange={(e) => { setHeroData({ ...heroData, category: e.target.value }); setErrors({ ...errors, 'heroData.category': undefined }); }} 
-                      error={!!errors['heroData.category']}
-                      helperText={errors['heroData.category'] || "e.g., Patent Law, Artificial Intelligence"} 
-                    />
-                  </Grid>
-                  <Grid size={{ xs: 12, sm: 6 }}>
-                    <TextField 
-                      fullWidth 
-                      label="Badge (Optional)" 
-                      value={heroData.badge || ""} 
-                      onChange={(e) => setHeroData({ ...heroData, badge: e.target.value })} 
-                      helperText="e.g. Upcoming, Trending"
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container spacing={2}>
-                  <Grid size={{ xs: 12, md: 4 }}>
-                    <Box sx={{ border: "1px dashed #ccc", p: 2, borderRadius: 2, textAlign: 'center', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                      {heroData.authorImage ? (
-                        <Box sx={{ mb: 2, height: 100, width: 100, borderRadius: "50%", overflow: "hidden" }}>
-                          <img src={heroData.authorImage.src || heroData.authorImage} alt="Author Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                        </Box>
-                      ) : (
-                        <Box sx={{ mb: 2, height: 100, width: 100, borderRadius: "50%", backgroundColor: '#eaeaea', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Typography variant="caption">No Image</Typography>
-                        </Box>
-                      )}
-                      <input type="file" accept="image/*" style={{ display: 'none' }} id="author-photo-upload" onChange={(e) => e.target.files?.[0] && handleAuthorImageUpload(e.target.files[0])} />
-                      <label htmlFor="author-photo-upload">
-                        <Button variant="outlined" component="span" size="small">Author Photo</Button>
-                      </label>
-                    </Box>
-                  </Grid>
-                  <Grid size={{ xs: 12, md: 8 }}>
-                    <Stack spacing={2}>
-                      <TextField 
-                        fullWidth 
-                        label="Author Name" 
-                        value={heroData.author || ""} 
-                        onChange={(e) => { setHeroData({ ...heroData, author: e.target.value }); setErrors({ ...errors, 'heroData.author': undefined }); }} 
-                        error={!!errors['heroData.author']}
-                        helperText={errors['heroData.author']}
-                      />
-                      <TextField 
-                        fullWidth 
-                        label="Author Title" 
-                        value={heroData.authorTitle || ""} 
-                        onChange={(e) => { setHeroData({ ...heroData, authorTitle: e.target.value }); setErrors({ ...errors, 'heroData.authorTitle': undefined }); }} 
-                        error={!!errors['heroData.authorTitle']}
-                        helperText={errors['heroData.authorTitle']}
-                      />
-                    </Stack>
-                  </Grid>
-                </Grid>
-              </Stack>
-            )}
-
-            {/* Tab 2: Content Body */}
-            {activeTab === 2 && (
-              <Stack spacing={3}>
-                <Typography variant="subtitle2" color="primary">Article Text & Paragraphs</Typography>
-                <TextField 
-                  fullWidth 
-                  multiline 
-                  rows={4} 
-                  label="Introductory Paragraph (Italicized top block)" 
-                  value={content.intro || ""} 
-                  onChange={(e) => setContent({ ...content, intro: e.target.value })} 
-                />
-                
-                <Divider sx={{ my: 2 }} />
-                
-                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-                  <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE }}>
-                    Detailed Content Sections
-                  </Typography>
-                  <Button variant="outlined" startIcon={<Add />} onClick={handleAddSection} size="small">
-                    Add Section
-                  </Button>
-                </Box>
-
-                {content.sections.map((section: any, idx: number) => (
-                  <Box key={idx} sx={{ p: 3, border: '1px solid rgba(0,0,0,0.1)', borderRadius: 2, backgroundColor: '#FAFAFA', position: 'relative' }}>
-                    <IconButton 
-                      color="error" 
-                      onClick={() => handleRemoveSection(idx)} 
-                      sx={{ position: 'absolute', top: 8, right: 8 }}
-                      size="small"
-                    >
-                      <Close fontSize="small" />
-                    </IconButton>
-                    <Stack spacing={2} sx={{ mt: 1 }}>
-                      <TextField 
-                        fullWidth 
-                        label={`Section ${idx + 1} Heading`} 
-                        value={section.heading || ""} 
-                        onChange={(e) => handleSectionChange(idx, 'heading', e.target.value)} 
-                      />
-                      <TextField 
-                        fullWidth 
-                        multiline 
-                        rows={5} 
-                        label={`Section ${idx + 1} Content (Tip: Use new lines for bullet points if this is a list)`} 
-                        value={getSectionContentString(section.content)} 
-                        onChange={(e) => handleSectionChange(idx, 'content', e.target.value)} 
-                      />
-                    </Stack>
-                  </Box>
-                ))}
-              </Stack>
-            )}
-          </Box>
+        <DialogContent>
+          <Typography>Are you sure you want to delete this blog? This action cannot be undone.</Typography>
         </DialogContent>
         <DialogActions sx={{ p: 2 }}>
-          <Button onClick={() => setDialogOpen(false)} color="inherit">Cancel</Button>
-          <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
-            Save Blog Entry
-          </Button>
+          <Button onClick={() => setDeleteConfirmOpen(false)} color="inherit">No, Cancel</Button>
+          <Button onClick={confirmDelete} color="error" variant="contained">Yes, Delete</Button>
         </DialogActions>
       </Dialog>
     </AdminLayout>

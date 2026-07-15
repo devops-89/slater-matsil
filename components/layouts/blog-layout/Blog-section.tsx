@@ -13,17 +13,47 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { BlogControllers } from "@/api/blogControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
 const BlogSection = () => {
   const { details } = usePageData();
   const pathname = usePathname();
+  const { startLoading, stopLoading } = useLoading();
   const blogSection = details?.insightsPage?.blogSection;
 
-  const upcomingWebinars = blogSection?.upcoming || [];
-  const pastWebinars = blogSection?.pastWebinars || [];
+  const [pastWebinars, setPastWebinars] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        startLoading();
+        const res = await BlogControllers.getAllBlogs({ limit: 100 });
+        let allBlogs = res.data?.data?.data || res.data?.data || [];
+        const totalPages = res.data?.data?.meta?.totalPages || res.data?.meta?.totalPages || 1;
+        
+        if (totalPages > 1) {
+          const promises = [];
+          for (let i = 2; i <= totalPages; i++) {
+            promises.push(BlogControllers.getAllBlogs({ page: i, limit: 100 }));
+          }
+          const results = await Promise.all(promises);
+          results.forEach(r => {
+            allBlogs = [...allBlogs, ...(r.data?.data?.data || r.data?.data || [])];
+          });
+        }
+        setPastWebinars(allBlogs);
+      } catch (err) {
+        console.error("Failed to fetch blogs", err);
+      } finally {
+        stopLoading();
+      }
+    };
+    fetchBlogs();
+  }, [startLoading, stopLoading]);
 
   // PAGINATION
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,7 +102,7 @@ const BlogSection = () => {
                   sx={{ height: "100%" }}
                 >
                   <Link
-                    href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.slug}`}
+                    href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.id}`}
                     style={{
                       textDecoration: "none",
                       color: "inherit",
@@ -235,7 +265,7 @@ const BlogSection = () => {
             mb: { lg: 6, xs: 4 },
           }}
         >
-          {blogSection?.watchPastTitle || "Blogs"}
+          {blogSection?.watchPastTitle || "Blog"}
         </Typography>
 
         <Grid container spacing={4}>
@@ -250,7 +280,7 @@ const BlogSection = () => {
                 sx={{ height: "100%" }}
               >
                 <Link
-                  href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.slug}`}
+                  href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.id}`}
                   style={{
                     textDecoration: "none",
                     color: "inherit",
@@ -277,18 +307,24 @@ const BlogSection = () => {
                       },
                     }}
                   >
-                    <Box sx={{ overflow: "hidden", height: 240 }}>
-                      <CardMedia
-                        component="img"
-                        image={webinar.img?.src || ""}
-                        alt={webinar.title}
-                        sx={{
-                          height: "100%",
-                          objectFit: "cover",
-                          transition: "transform 0.5s ease",
-                          "&hover": { transform: "scale(1.1)" },
-                        }}
-                      />
+                    <Box sx={{ overflow: "hidden", height: 240, backgroundColor: "#0D5F6E" }}>
+                      {webinar.cardImageDownloadUrl || webinar.cardImageUrl ? (
+                        <CardMedia
+                          component="img"
+                          image={webinar.cardImageDownloadUrl || webinar.cardImageUrl}
+                          alt={webinar.title}
+                          sx={{
+                            height: "100%",
+                            objectFit: "cover",
+                            transition: "transform 0.5s ease",
+                            "&:hover": { transform: "scale(1.1)" },
+                          }}
+                        />
+                      ) : (
+                        <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <Typography color="white" fontWeight={700} fontSize={32}>{webinar.title?.charAt(0) || "B"}</Typography>
+                        </Box>
+                      )}
                     </Box>
                     <CardContent
                       sx={{
@@ -307,12 +343,13 @@ const BlogSection = () => {
                           color: "rgba(13, 95, 110, 0.6)",
                           fontSize: 13,
                           fontWeight: 700,
+                          textTransform: 'uppercase'
                         }}
                       >
                         <Typography
                           sx={{ fontSize: "inherit", fontWeight: "inherit" }}
                         >
-                          {webinar.date}
+                          {webinar.datePublished}
                         </Typography>
                         <Box
                           component="span"
@@ -326,7 +363,7 @@ const BlogSection = () => {
                         <Typography
                           sx={{ fontSize: "inherit", fontWeight: "inherit" }}
                         >
-                          {webinar.readTime} READ
+                          {webinar.readTime}
                         </Typography>
                       </Stack>
                       <Typography
@@ -345,14 +382,11 @@ const BlogSection = () => {
                           fontSize: 15,
                           color: "rgba(0, 0, 0, 0.6)",
                           lineHeight: 1.6,
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                          overflow: "hidden",
+                          display: "block",
                           flex: 1,
                         }}
                       >
-                        {webinar.description}
+                        {webinar.listingDescription}
                       </Typography>
                     </CardContent>
                   </Card>

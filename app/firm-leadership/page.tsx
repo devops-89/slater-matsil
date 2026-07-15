@@ -1,10 +1,15 @@
-import React from "react";
-import type { Metadata } from "next";
-import { Box, Container, Grid, Typography } from "@mui/material";
-import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic, georgia } from "@/utils/fonts";
-import { LEADERSHIP_DATA } from "@/public/data/leadership-data";
+"use client";
+import { PageControllers } from "@/api/pageControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import LeaderCard from "@/components/widgets/LeaderCard";
+import { WEBSITE_DATA } from "@/public/data/website-data";
+import { usePageData } from "@/store/usePageData";
+import { COLORS } from "@/utils/enum";
+import { adelle, georgia, tradeGothic } from "@/utils/fonts";
+import { Box, Container, Grid, Typography } from "@mui/material";
+import type { Metadata } from "next";
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Firm Leadership",
@@ -13,6 +18,48 @@ export const metadata: Metadata = {
 };
 
 const FirmLeadership = () => {
+  const { details, setDetails } = usePageData();
+  const { startLoading, stopLoading } = useLoading();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
+    if (isAdminRoute) return;
+
+    let isMounted = true;
+    const fetchFirmLeadershipData = async () => {
+      try {
+        startLoading();
+
+        let pageData = null;
+        try {
+          const res = await PageControllers.getPublicPageById(6).catch(e => ({ data: { data: null } }));
+          pageData = res.data?.data?.data || res.data?.data;
+        } catch (e) {
+          console.error("Failed to fetch public page by ID 6", e);
+        }
+        
+        if (pageData && isMounted) {
+          const updatedFirmLeadershipPage = require("@/utils/pageDataMapper").mapBackendToFirmLeadershipState(pageData, WEBSITE_DATA.firm_leadership);
+          const mergedWebsiteData = { ...WEBSITE_DATA, firm_leadership: updatedFirmLeadershipPage };
+          setDetails(mergedWebsiteData as any);
+        }
+      } catch (error) {
+        console.error("Error fetching firm leadership data", error);
+      } finally {
+        stopLoading();
+      }
+    };
+    
+    fetchFirmLeadershipData();
+
+    return () => {
+      if (isMounted) stopLoading();
+      isMounted = false;
+    };
+  }, [setDetails, startLoading, stopLoading, pathname]);
+
+  const data = details?.firm_leadership || WEBSITE_DATA.firm_leadership;
   return (
     <Box sx={{ pb: 10 }}>
       <Box
@@ -46,7 +93,7 @@ const FirmLeadership = () => {
               textTransform: "lowercase",
             }}
           >
-            firm leadership
+            {data.heroTitle || "firm leadership"}
           </Typography>
         </Box>
       </Box>
@@ -62,10 +109,7 @@ const FirmLeadership = () => {
               lineHeight: 1.6,
             }}
           >
-            Effective leadership has contributed to the firm's substantial
-            growth since Steven Slater and Ira Matsil founded the firm in 1999.
-            The firm's mission statement defines Slater Matsil's core
-            competencies and values.
+            {data.missionIntro || ""}
           </Typography>
         </Box>
 
@@ -91,9 +135,9 @@ const FirmLeadership = () => {
               fontWeight: 500,
             }}
           >
-            Work with Excellence,
+            {data.missionQuote?.line1}
             <br />
-            in a Collegial Atmosphere.
+            {data.missionQuote?.line2}
           </Typography>
         </Box>
 
@@ -114,11 +158,14 @@ const FirmLeadership = () => {
             PARTNERS
           </Typography>
           <Grid container spacing={4}>
-            {LEADERSHIP_DATA.partners.map((leader, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
-                <LeaderCard {...leader} />
-              </Grid>
-            ))}
+            {(data.partners || []).map((leader: any, index: number) => {
+              const { key: _key, ...leaderProps } = leader;
+              return (
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+                  <LeaderCard {...leaderProps} img={leaderProps.imageDownloadUrl || leaderProps.img || leaderProps.imageUrl} />
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
 
@@ -144,11 +191,14 @@ const FirmLeadership = () => {
             justifyContent="center"
             sx={{ px: { lg: 10, xs: 0 } }}
           >
-            {LEADERSHIP_DATA.patentAgents.map((leader, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 6 }} key={index}>
-                <LeaderCard {...leader} />
-              </Grid>
-            ))}
+            {(data.patentAgents || []).map((leader: any, index: number) => {
+              const { key: _key, ...leaderProps } = leader;
+              return (
+                <Grid size={{ xs: 12, sm: 6, md: 6 }} key={index}>
+                  <LeaderCard {...leaderProps} img={leaderProps.imageDownloadUrl || leaderProps.img || leaderProps.imageUrl} />
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
 
@@ -169,11 +219,14 @@ const FirmLeadership = () => {
             ADMINISTRATION
           </Typography>
           <Grid container spacing={4}>
-            {LEADERSHIP_DATA.administration.map((staff, index) => (
-              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
-                <LeaderCard {...staff} isAdmin={true} />
-              </Grid>
-            ))}
+            {(data.administration || []).map((staff: any, index: number) => {
+              const { key: _key, ...staffProps } = staff;
+              return (
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={index}>
+                  <LeaderCard {...staffProps} isAdmin={true} img={staffProps.imageDownloadUrl || staffProps.img || staffProps.imageUrl} />
+                </Grid>
+              );
+            })}
           </Grid>
         </Box>
       </Container>

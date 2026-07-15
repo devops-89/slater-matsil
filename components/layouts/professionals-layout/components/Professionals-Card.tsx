@@ -5,17 +5,24 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const ProfessionalsCard = ({
   img,
   name,
   designation,
-  slug,
+  id,
   onLoad
 }: PROFESSIONALS_CARD_PROPS) => {
   const pathname = usePathname();
   const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
-  const linkHref = isPreview ? "/manage-professionals" : `/firm-professionals/${slug}`;
+  const linkHref = isPreview ? "/manage-professionals" : `/firm-professionals/${id}`;
+
+  useEffect(() => {
+    if (!img && onLoad) {
+      onLoad();
+    }
+  }, [img, onLoad]);
 
   return (
     <Link
@@ -58,18 +65,24 @@ const ProfessionalsCard = ({
               },
             }}
           >
-            <Image
-              className="profile-image"
-              src={img}
-              alt={name || ""}
-              fill
-              unoptimized
-              sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{
-                objectFit: "cover",
-              }}
-              onLoad={onLoad}
-            />
+            {img ? (
+              <Image
+                className="profile-image"
+                src={img}
+                alt={name || ""}
+                fill
+                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                style={{
+                  objectFit: "cover",
+                }}
+                onLoad={onLoad}
+                onError={onLoad}
+              />
+            ) : (
+              <Box sx={{ width: '100%', height: '100%', backgroundColor: COLORS.PRIMARY_BLUE, opacity: 0.05, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Typography variant="caption" sx={{ color: COLORS.PRIMARY_BLUE }}>No Image</Typography>
+              </Box>
+            )}
           </Box>
           <Box
             className="info-box"
