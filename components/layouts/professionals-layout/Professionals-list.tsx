@@ -85,39 +85,15 @@ const ProfessionalList = () => {
 
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 6;
-<<<<<<< HEAD
-  const { startLoading, stopLoading } = useLoading();
-  const [loadedCount, setLoadedCount] = useState(0);
-=======
   const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
   const [isPaginating, setIsPaginating] = useState(false);
->>>>>>> dd099903186d5348fe38065c56ae2bcddf793cae
 
   const paginatedData = data?.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE,
   );
 
-<<<<<<< HEAD
-  const currentKey = `${page}-${data.length}`;
 
-  useEffect(() => {
-    if (paginatedData?.length > 0) {
-      startLoading();
-      setLoadedCount(0);
-    } else {
-      stopLoading();
-    }
-  }, [currentKey]); // Trigger when page or data length changes
-
-  useEffect(() => {
-    if (paginatedData?.length > 0 && loadedCount >= paginatedData.length) {
-      stopLoading();
-    }
-  }, [loadedCount, paginatedData?.length, stopLoading]);
-
-=======
->>>>>>> dd099903186d5348fe38065c56ae2bcddf793cae
   const handleImageLoad = () => {
     if (isPaginating) {
       setImagesLoadedCount((prev: number) => prev + 1);

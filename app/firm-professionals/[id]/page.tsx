@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const decodedSlug = typeof slug === "string" ? decodeURIComponent(slug).toLowerCase().trim() : "";
   const professional = PROFESSIONAL_DETAILS_DATA.find(
     (item) =>
-      item.slug.toLowerCase().trim() === decodedSlug ||
-      item.professionals_Details_HeroSection.name.toLowerCase().trim().replace(/,/g, "").replace(/\./g, "").replace(/\s+/g, "-") === decodedSlug,
+      item.slug?.toLowerCase().trim() === decodedSlug ||
+      item.professionals_Details_HeroSection?.name?.toLowerCase().trim().replace(/,/g, "").replace(/\./g, "").replace(/\s+/g, "-") === decodedSlug,
   );
 
   if (!professional) {

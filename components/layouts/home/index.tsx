@@ -5,12 +5,12 @@ import { useLoading } from "@/components/providers/LoadingProvider";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
 import { mapBackendToHomepageState } from "@/utils/pageDataMapper";
+import { Box } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import InsightsSection from "../../widgets/Insights-section";
 import ServiceAreas from "../../widgets/Service-Areas";
 import AboutSection from "./AboutSection";
-import { Box } from "@mui/material";
 import ContactSection from "./ContactSection";
 import HeroSection3 from "./HeroSection3";
 import MetricsSection from "./MetricsSection";
@@ -34,19 +34,6 @@ const HomeLayout = () => {
     let isMounted = true;
     const fetchHomeData = async () => {
       try {
-<<<<<<< HEAD
-        const res = await PageControllers.getPageById(1);
-        const pageData = res.data?.data?.data || res.data?.data;
-        if (pageData && isMounted) {
-          const updatedHomepage = mapBackendToHomepageState(
-            pageData,
-            WEBSITE_DATA.homepage,
-          );
-          const mergedWebsiteData = {
-            ...WEBSITE_DATA,
-            homepage: updatedHomepage,
-          };
-=======
         startLoading();
 
         const [res1, res3] = await Promise.all([
@@ -67,7 +54,6 @@ const HomeLayout = () => {
             updatedHomepage.service_area = newServiceArea;
           }
           const mergedWebsiteData = { ...WEBSITE_DATA, homepage: updatedHomepage };
->>>>>>> dd099903186d5348fe38065c56ae2bcddf793cae
           setDetails(mergedWebsiteData as any);
         }
       } catch (error) {
@@ -78,13 +64,6 @@ const HomeLayout = () => {
     };
 
     fetchHomeData();
-<<<<<<< HEAD
-    return () => {
-      isMounted = false;
-    };
-  }, [setDetails]);
-=======
-
     return () => {
       if (isMounted) {
         // If unmounted before fetch finishes, we didn't stop loading
@@ -93,7 +72,6 @@ const HomeLayout = () => {
       isMounted = false; 
     };
   }, [setDetails, startLoading, stopLoading, pathname]);
->>>>>>> dd099903186d5348fe38065c56ae2bcddf793cae
 
   return (
     <Box sx={{ overflowX: "hidden", width: "100%" }}>

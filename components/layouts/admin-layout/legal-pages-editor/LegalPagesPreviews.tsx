@@ -2,9 +2,9 @@ import React from "react";
 import { Box } from "@mui/material";
 import Navbar from "@/components/widgets/navbar";
 import Footer from "@/components/widgets/Footer";
-import PrivacyPolicy from "@/app/privacy-policy/page";
-import TermsOfUse from "@/app/terms-of-use/page";
-import Disclaimer from "@/app/disclaimer/page";
+import PrivacyPolicy from "@/app/privacy-policy/ClientPage";
+import TermsOfUse from "@/app/terms-of-use/ClientPage";
+import Disclaimer from "@/app/disclaimer/ClientPage";
 import { useParams, useRouter } from "next/navigation";
 
 export const renderDesktopPreview = (children: React.ReactNode) => (
