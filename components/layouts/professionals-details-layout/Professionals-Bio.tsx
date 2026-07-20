@@ -1,8 +1,6 @@
-import star from "@/common/heading-star.png";
 import { COLORS } from "@/utils/enum";
 import { PROFESSIONAL_BIO_PROPS } from "@/utils/types";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import Image from "next/image";
 
 interface ProfessionalBioComponentProps {
   data: PROFESSIONAL_BIO_PROPS[] | undefined;
@@ -17,17 +15,20 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
           {data?.map((val, i) => (
             <Grid size={{ xs: 12, md: 12, lg: 12 }} key={i}>
               <Typography
+                component="div"
                 sx={{
                   fontSize: { lg: 17, xs: 15 },
                   color: COLORS.TEXT_PRIMARY_24,
-                  mt: 3,
+                  mt:1,
                   fontWeight: 600,
-                  textAlign: "center",
+                  textAlign: "left",
+                  whiteSpace: "pre-wrap",
+                  "& p": {
+                     marginBottom: "16px"
+                  }
                 }}
                 dangerouslySetInnerHTML={{__html: val.description || "" }}
-              >
-                
-              </Typography>
+              />
               {val.list && (
                 <Box
                   component="ul"

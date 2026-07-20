@@ -51,40 +51,21 @@ const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
             <Stack spacing={6}>
               {content.sections.map((section, idx) => (
                 <Stack key={idx} spacing={3}>
-                  <HeadingStar title={section.heading} />
                   {Array.isArray(section.content) ? (
-                    <List sx={{ pl: 2 }}>
-                      {section.content.map((item, i) => (
-                        <ListItem
-                          key={i}
-                          sx={{ alignItems: "flex-start", px: 0 }}
-                        >
-                          <ListItemIcon sx={{ minWidth: 32, mt: 1 }}>
-                            <Box
-                              sx={{
-                                width: 8,
-                                height: 8,
-                                borderRadius: "50%",
-                                backgroundColor: COLORS.PRIMARY_GREEN,
-                              }}
-                            />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={item}
-                            slotProps={{
-                              primary: {
-                                sx: {
-                                  fontFamily: adelle.style.fontFamily,
-                                  fontSize: { xs: 18, md: 20 },
-                                  lineHeight: 1.6,
-                                  color: COLORS.TEXT_PRIMARY,
-                                },
-                              },
-                            }}
-                          />
-                        </ListItem>
-                      ))}
-                    </List>
+                    section.content.map((item, i) => (
+                      <Typography
+                        key={i}
+                        sx={{
+                          fontFamily: adelle.style.fontFamily,
+                          fontSize: { xs: 18, md: 20 },
+                          lineHeight: 1.7,
+                          color: COLORS.TEXT_PRIMARY,
+                          textAlign: "left",
+                        }}
+                      >
+                        {item}
+                      </Typography>
+                    ))
                   ) : (
                     <Typography
                       sx={{
@@ -92,7 +73,7 @@ const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
                         fontSize: { xs: 18, md: 20 },
                         lineHeight: 1.7,
                         color: COLORS.TEXT_PRIMARY,
-                        textAlign: "justify",
+                        textAlign: "left",
                       }}
                     >
                       {section.content}

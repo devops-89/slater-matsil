@@ -45,27 +45,47 @@ const TabCard = ({ bigDescription, quote, data }: TAB_CARD_DATA_PROPS) => {
           )}
         </Grid>
 
-        <Grid container spacing={5} mt={4}>
-          {data.map((val, i) => (
-            <Grid size={{ lg: 6, xs: 12 }} key={i}>
-              <StarBox bgColor={COLORS.PRIMARY_GREEN} />
-
-              <Typography
-                sx={{
-                  fontSize: { lg: 24, xs: 16 },
-                  fontFamily: adelle.style.fontFamily,
-                  fontWeight: 500,
-                  lineHeight: { lg: "30px", xs: "20px" },
-                  // textTransform: "capitalize",
-                  color: COLORS.TEXT_PRIMARY_4,
-                  mt: { lg: 2, xs: 1 },
-                  textAlign: "justify",
-                }}
-              >
-                {val.description}
-              </Typography>
-            </Grid>
-          ))}
+        <Grid container spacing={3} mt={2}>
+          <Grid size={{ lg: 6, xs: 12 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              {data.filter((_, i) => i % 2 === 0).map((val, i) => (
+                <Typography
+                  key={i}
+                  sx={{
+                    fontSize: { lg: 24, xs: 16 },
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: 500,
+                    lineHeight: { lg: "30px", xs: "20px" },
+                    color: COLORS.TEXT_PRIMARY_4,
+                    mt: 0,
+                    textAlign: "justify",
+                  }}
+                >
+                  {val.description}
+                </Typography>
+              ))}
+            </Box>
+          </Grid>
+          <Grid size={{ lg: 6, xs: 12 }}>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+              {data.filter((_, i) => i % 2 !== 0).map((val, i) => (
+                <Typography
+                  key={i}
+                  sx={{
+                    fontSize: { lg: 24, xs: 16 },
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: 500,
+                    lineHeight: { lg: "30px", xs: "20px" },
+                    color: COLORS.TEXT_PRIMARY_4,
+                    mt: 0,
+                    textAlign: "justify",
+                  }}
+                >
+                  {val.description}
+                </Typography>
+              ))}
+            </Box>
+          </Grid>
         </Grid>
       </Container>
     </Box>
