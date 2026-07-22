@@ -8,13 +8,16 @@ import { mapBackendToHomepageState } from "@/utils/pageDataMapper";
 import { Box } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import InsightsSection from "../../widgets/Insights-section";
-import ServiceAreas from "../../widgets/Service-Areas";
+import dynamic from "next/dynamic";
+
+const InsightsSection = dynamic(() => import("../../widgets/Insights-section"), { ssr: true });
+const ServiceAreas = dynamic(() => import("../../widgets/Service-Areas"), { ssr: true });
+const MetricsSection = dynamic(() => import("./MetricsSection"), { ssr: true });
+const Whoweserve = dynamic(() => import("./Who-We-Serve"), { ssr: true });
+const ContactSection = dynamic(() => import("./ContactSection"), { ssr: true });
+
 import AboutSection from "./AboutSection";
-import ContactSection from "./ContactSection";
 import HeroSection3 from "./HeroSection3";
-import MetricsSection from "./MetricsSection";
-import Whoweserve from "./Who-We-Serve";
 
 const HomeLayout = () => {
   const { setDetails } = usePageData();
@@ -34,8 +37,6 @@ const HomeLayout = () => {
     let isMounted = true;
     const fetchHomeData = async () => {
       try {
-        startLoading();
-
         const [res1, res3] = await Promise.all([
           PageControllers.getPublicPageById(1).catch(e => ({ data: { data: null } })),
           PageControllers.getPublicPageById(3).catch(e => ({ data: { data: null } }))
@@ -58,17 +59,11 @@ const HomeLayout = () => {
         }
       } catch (error) {
         console.error("Error fetching home page data", error);
-      } finally {
-        if (isMounted) stopLoading();
       }
     };
 
     fetchHomeData();
     return () => {
-      if (isMounted) {
-        // If unmounted before fetch finishes, we didn't stop loading
-        stopLoading();
-      }
       isMounted = false; 
     };
   }, [setDetails, startLoading, stopLoading, pathname]);

@@ -15,41 +15,9 @@ const FirmProfessionals = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
-    if (isAdminRoute) return;
-
-    let isMounted = true;
-    const fetchPageData = async () => {
-      try {
-        startLoading();
-
-        let pageData = null;
-        try {
-          const res = await PageControllers.getPublicPageById(5).catch(e => ({ data: { data: null } }));
-          pageData = res.data?.data?.data || res.data?.data;
-        } catch (e) {
-          console.error("Failed to fetch public page by ID 5", e);
-        }
-        
-        if (pageData && isMounted) {
-          const updatedPage = require("@/utils/pageDataMapper").mapBackendToFirmProfessionalsState(pageData, WEBSITE_DATA.firm_professionals);
-          const mergedWebsiteData = { ...WEBSITE_DATA, firm_professionals: updatedPage };
-          setDetails(mergedWebsiteData as any);
-        }
-      } catch (error) {
-        console.error("Error fetching Firm Professionals data", error);
-      } finally {
-        if (isMounted) stopLoading();
-      }
-    };
-    
-    fetchPageData();
-
-    return () => {
-      if (isMounted) stopLoading();
-      isMounted = false;
-    };
-  }, [setDetails, startLoading, stopLoading, pathname]);
+    // Data is now fetched server-side in page.tsx and populated via StoreInitializer.
+    // No need to fetch client-side or trigger global loaders anymore!
+  }, [pathname]);
 
   return (
     <div>

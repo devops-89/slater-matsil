@@ -1,3 +1,4 @@
+import { getValidImageUrl } from "./commonMapper";
 export const mapWhoWeServeStateToBackend = (state: any) => {
   return [
     {
@@ -47,7 +48,7 @@ export const mapBackendToWhoWeServeState = (backendData: any, currentState: any)
         ...section.data
       };
       if (section.data?.imageUrl || section.data?.imageDownloadUrl) {
-        newState.whoWeServepageHeroSection.img = section.data.imageDownloadUrl || section.data.imageUrl;
+        newState.whoWeServepageHeroSection.img = getValidImageUrl(section.data.imageDownloadUrl || section.data.imageUrl);
         newState.whoWeServepageHeroSection.imageUrl = section.data.imageUrl;
         newState.whoWeServepageHeroSection.imageDownloadUrl = section.data.imageDownloadUrl || section.data.imageUrl;
       }

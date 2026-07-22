@@ -1,4 +1,4 @@
-import { getCleanImageUrl } from "./commonMapper";
+import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
 export const mapBackendToAboutPageState = (backendData: any, currentState: any) => {
   const newAboutPage = { ...currentState };
@@ -19,7 +19,7 @@ export const mapBackendToAboutPageState = (backendData: any, currentState: any) 
           ...section.data,
           imageDownloadUrl: section.data?.imageDownloadUrl || "",
           imageUrl: section.data?.imageUrl || section.data?.img || section.data?.key || "",
-          img: section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || "",
+          img: getValidImageUrl(section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || ""),
         };
         break;
       case "redefining_patent_success":
@@ -35,7 +35,7 @@ export const mapBackendToAboutPageState = (backendData: any, currentState: any) 
             ...award,
             imageDownloadUrl: award.imageDownloadUrl || "",
             imageUrl: award.imageUrl || award.img || award.key || "",
-            img: award.imageDownloadUrl || award.img || award.imageUrl || award.key || "",
+            img: getValidImageUrl(award.imageDownloadUrl || award.img || award.imageUrl || award.key || ""),
           }))
         };
         break;

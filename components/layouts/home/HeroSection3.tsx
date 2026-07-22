@@ -1,8 +1,8 @@
 "use client";
 
-import slider4 from "@/home/slider/slider4.jpg";
-import slider5 from "@/home/slider/slider5.jpg";
-import slider6 from "@/home/slider/slider6.jpg";
+import slider4 from "@/home/slider/slider4.webp";
+import slider5 from "@/home/slider/slider5.webp";
+import slider6 from "@/home/slider/slider6.webp";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
@@ -222,14 +222,13 @@ const HeroSection3 = () => {
                       src={val.img}
                       alt="slider image"
                       fill
-
+                      priority={i === 0}
                       unoptimized={true}
                       sizes="(max-width: 1200px) 100vw, 50vw"
                       style={{
                         borderRadius: 20,
                         objectFit: "cover",
                       }}
-                      loading="lazy"
                     />
                   </Box>
                 </Grid>

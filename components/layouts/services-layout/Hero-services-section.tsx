@@ -5,6 +5,7 @@ import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import React from "react";
+import { getValidImageUrl } from "@/utils/mappers/commonMapper";
 
 const HeroServicesSection = () => {
   const { details } = usePageData();
@@ -60,11 +61,11 @@ const HeroServicesSection = () => {
           <Grid size={{ lg: 6, xs: 12 }}>
             {service_heroSection_data?.img && (
               <Image
-                src={service_heroSection_data?.img}
+                src={getValidImageUrl(service_heroSection_data?.img)}
                 alt=""
                 width={800}
                 height={600}
-                loading="lazy"
+                priority
                 style={{ width: "100%", height: "auto", margin: "auto" }}
               />
             )}

@@ -275,7 +275,7 @@ export default function AdminPageEditorLayout() {
               <Box sx={{ width: 12, height: 12, borderRadius: '50%', backgroundColor: '#10B981' }} />
             </Box>
           </Box>
-          <Box sx={{ flexGrow: 1, overflowY: 'auto', minWidth: 0 }}>
+          <Box sx={{ flexGrow: 1, overflowY: 'auto', minWidth: 0, minHeight: '1000px' }}>
             {previewContainer}
           </Box>
         </Box>

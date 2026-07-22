@@ -1,4 +1,4 @@
-import { getCleanImageUrl } from "./commonMapper";
+import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
 export const mapInsightsStateToBackend = (state: any) => {
   return [
@@ -71,14 +71,16 @@ export const mapBackendToInsightsState = (backendData: any, currentState: any) =
     heroSectionData: {
       ...currentState.heroSectionData,
       ...data.heroSectionData,
-      img: data.heroSectionData?.imageDownloadUrl || data.heroSectionData?.img || data.heroSectionData?.imageUrl || ""
+      img: getValidImageUrl(data.heroSectionData?.imageDownloadUrl || data.heroSectionData?.img || data.heroSectionData?.imageUrl || ""),
+      title: data.heroSectionData?.title || "",
+      subTitle: data.heroSectionData?.subTitle || "",
     },
     quickLinks: {
       ...currentState.quickLinks,
       ...data.quickLinks,
       data: (data.quickLinks?.data || []).map((item: any) => ({
         ...item,
-        img: item.imageDownloadUrl || item.img || item.imageUrl || ""
+        img: getValidImageUrl(item.imageDownloadUrl || item.img || item.imageUrl || "")
       }))
     }
   };

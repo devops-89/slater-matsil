@@ -1,4 +1,4 @@
-import { getCleanImageUrl } from "./commonMapper";
+import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
 export const mapBackendToServicesPageState = (backendData: any, currentServicesState: any, currentServiceAreaState: any) => {
   const newServicesPage = { ...currentServicesState };
@@ -12,7 +12,7 @@ export const mapBackendToServicesPageState = (backendData: any, currentServicesS
         newServicesPage.heroSection = {
           ...section.data,
           imageDownloadUrl: section.data?.imageDownloadUrl || "",
-          img: section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || "",
+          img: getValidImageUrl(section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || ""),
         };
         break;
       case "why_choose_us":
@@ -23,7 +23,7 @@ export const mapBackendToServicesPageState = (backendData: any, currentServicesS
             data: (section.data?.our_strength?.data || []).map((item: any) => ({
               ...item,
               imageDownloadUrl: item.imageDownloadUrl || "",
-              img: item.imageDownloadUrl || item.img || item.imageUrl || item.key || "",
+              img: getValidImageUrl(item.imageDownloadUrl || item.img || item.imageUrl || item.key || ""),
             }))
           }
         };
@@ -32,7 +32,7 @@ export const mapBackendToServicesPageState = (backendData: any, currentServicesS
         newServicesPage.unparalleled_props = {
           ...section.data,
           imageDownloadUrl: section.data?.imageDownloadUrl || "",
-          img: section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || "",
+          img: getValidImageUrl(section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || ""),
         };
         break;
       case "service_framework":
@@ -42,11 +42,11 @@ export const mapBackendToServicesPageState = (backendData: any, currentServicesS
         newServiceArea = {
           ...section.data,
           imageDownloadUrl: section.data?.imageDownloadUrl || "",
-          img: section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || "",
+          img: getValidImageUrl(section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || ""),
           section_Data: (section.data?.section_Data || []).map((item: any) => ({
             ...item,
             imageDownloadUrl: item.imageDownloadUrl || "",
-            img: item.imageDownloadUrl || item.img || item.imageUrl || item.key || "",
+            img: getValidImageUrl(item.imageDownloadUrl || item.img || item.imageUrl || item.key || ""),
           }))
         };
         break;

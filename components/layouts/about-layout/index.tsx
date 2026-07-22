@@ -1,7 +1,6 @@
 "use client";
 import { PageControllers } from "@/api/pageControllers";
 import { useLoading } from "@/components/providers/LoadingProvider";
-import InsightsSection from "@/components/widgets/Insights-section";
 import { CAREER_HOME_DATA } from "@/public/data/generic-array";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
@@ -13,13 +12,16 @@ import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import RedefiningPatent from "../../widgets/Redefining-Patent";
+import dynamic from "next/dynamic";
 import AboutHerosection from "./About-Herosection";
-import Award from "./Award";
-import DrivingInnovation from "./Driving-innovation";
-import IndustriesWeServe from "./Industries-We-Serve";
-import InsightsInnovation from "./Insights-innovation";
-import WhoweServe from "./Who-we-serve";
+
+const DrivingInnovation = dynamic(() => import("./Driving-innovation"), { ssr: true });
+const RedefiningPatent = dynamic(() => import("../../widgets/Redefining-Patent"), { ssr: true });
+const InsightsInnovation = dynamic(() => import("./Insights-innovation"), { ssr: true });
+const Award = dynamic(() => import("./Award"), { ssr: true });
+const WhoweServe = dynamic(() => import("./Who-we-serve"), { ssr: true });
+const IndustriesWeServe = dynamic(() => import("./Industries-We-Serve"), { ssr: true });
+const InsightsSection = dynamic(() => import("@/components/widgets/Insights-section"), { ssr: true });
 
 const AboutLayout = () => {
   const { setDetails } = usePageData();
@@ -27,47 +29,6 @@ const AboutLayout = () => {
 
   const pathname = usePathname();
   const hasFetched = useRef(false);
-
-  useEffect(() => {
-    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
-    if (isAdminRoute) return;
-
-    let isMounted = true;
-    const fetchAboutData = async () => {
-      try {
-        startLoading();
-        const res = await PageControllers.getPublicPageById(2);
-        const pageData = res.data?.data?.data || res.data?.data;
-        if (pageData && isMounted) {
-          const updatedAboutPage = mapBackendToAboutPageState(pageData, WEBSITE_DATA.aboutPage);
-          const mergedWebsiteData = {
-            ...WEBSITE_DATA,
-            aboutPage: updatedAboutPage
-          };
-          setDetails(mergedWebsiteData as any);
-          
-          if (!updatedAboutPage?.heroSection?.videoDownloadUrl && !updatedAboutPage?.heroSection?.videoUrl) {
-            stopLoading();
-          }
-        } else if (isMounted) {
-          stopLoading();
-        }
-      } catch (error) {
-        console.error("Error fetching about page data", error);
-      } finally {
-        if (isMounted) stopLoading();
-      }
-    };
-    
-    fetchAboutData();
-
-    return () => {
-      if (isMounted) {
-        stopLoading();
-      }
-      isMounted = false; 
-    };
-  }, [setDetails, startLoading, stopLoading, pathname]);
 
   return (
     <div>

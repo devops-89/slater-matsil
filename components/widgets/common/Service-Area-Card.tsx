@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+import { getValidImageUrl } from "@/utils/mappers/commonMapper";
+
 const ServiceAreaCard = ({
   img,
   title,
@@ -40,7 +42,7 @@ const ServiceAreaCard = ({
     >
       <Box sx={{ textAlign: "center", minHeight: 100 }}>
         {img ? (
-          <Image src={img} alt="" width={100} height={100} style={{ width: 100, height: 100 }} />
+          <Image src={getValidImageUrl(img)} alt="" width={100} height={100} style={{ width: 100, height: 100 }} />
         ) : (
           <Box sx={{ width: 100, height: 100, margin: "0 auto", backgroundColor: "#E5E7EB", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
              <Typography sx={{ color: "#9CA3AF", fontSize: 12 }}>[Icon]</Typography>

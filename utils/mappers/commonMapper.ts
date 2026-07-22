@@ -12,6 +12,24 @@ export const getCleanImageUrl = (url?: string | any) => {
   return url;
 };
 
+export const getValidImageUrl = (url?: string | any) => {
+  if (!url) return "";
+  if (typeof url !== 'string') {
+    if (url.src && typeof url.src === 'string') {
+      return url.src;
+    }
+    return "";
+  }
+  let finalUrl = url.trim();
+  if (!finalUrl.startsWith("http") && !finalUrl.startsWith("/") && finalUrl.includes("s3")) {
+    finalUrl = "https://" + finalUrl;
+  }
+  if (!finalUrl.startsWith("http") && !finalUrl.startsWith("/") && !finalUrl.startsWith("_next") && !finalUrl.startsWith("blob:") && !finalUrl.startsWith("data:")) {
+    finalUrl = "/" + finalUrl;
+  }
+  return finalUrl;
+};
+
 export const genericMapToBackend = (state: any, sectionKey: string) => {
   return [
     {

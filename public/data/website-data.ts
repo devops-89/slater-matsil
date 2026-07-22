@@ -33,7 +33,7 @@ import blog7 from "@/public/images/blog/Blog7.png";
 import blog8 from "@/public/images/blog/Blog8.png";
 import blog9 from "@/public/images/blog/Blog9.png";
 import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
-import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.png";
+import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.webp";
 import serviceAreas1 from "@/public/images/home/practice_areas/practice_areas1.svg";
 import serviceAreas2 from "@/public/images/home/practice_areas/practice_areas2.svg";
 import serviceAreas3 from "@/public/images/home/practice_areas/practice_areas3.svg";
@@ -44,8 +44,8 @@ import {
   default as bigLogo,
   default as lightLogo,
 } from "@/public/images/home/slater-matsil-logo-light.png";
-import smallLogo from "@/public/images/home/slater-matsil-white.png";
-import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.png";
+import smallLogo from "@/public/images/home/slater-matsil-white.webp";
+import whoWeServeRightSectionHeroImage from "@/public/images/home/who_serve_shape.webp";
 import serviceAreas7 from "@/public/images/icons/services/ip-strategy.png";
 import serviceAreas8 from "@/public/images/icons/services/portfolio-management.png";
 import serviceAreas9 from "@/public/images/icons/services/trademarks.png";

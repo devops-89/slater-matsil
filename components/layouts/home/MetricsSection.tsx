@@ -3,7 +3,7 @@ import React, { JSX } from "react";
 import { Box, Grid, Typography, Button, Container } from "@mui/material";
 import Image from "next/image";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import FlowerImage from "@/public/images/home/Image.png";
+import FlowerImage from "@/public/images/home/Image.webp";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { COLORS } from "@/utils/enum";

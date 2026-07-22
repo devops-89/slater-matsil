@@ -1,4 +1,4 @@
-import { getCleanImageUrl } from "./commonMapper";
+import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
 export const mapFirmLeadershipStateToBackend = (state: any) => {
   const processArray = (arr: any[]) => (arr || []).map(item => ({
@@ -35,7 +35,7 @@ export const mapBackendToFirmLeadershipState = (backendData: any, currentState: 
   const processArray = (arr: any[]) => (arr || []).map(item => ({
     ...item,
     imageDownloadUrl: item.imageDownloadUrl || "",
-    img: item.imageDownloadUrl || item.img || item.imageUrl || item.key || ""
+    img: getValidImageUrl(item.imageDownloadUrl || item.img || item.imageUrl || item.key || "")
   }));
 
   return {

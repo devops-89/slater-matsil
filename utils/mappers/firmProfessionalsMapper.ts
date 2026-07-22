@@ -1,3 +1,4 @@
+import { getValidImageUrl } from "./commonMapper";
 export const mapBackendToFirmProfessionalsState = (backendData: any, currentState: any) => {
   const newState = { ...currentState };
   if (!backendData || !backendData.sections) return newState;
@@ -69,7 +70,7 @@ export const mapApiUserProfessionalToDetailsProps = (user: any) => {
     id: user.id,
     slug: user.slug,
     professionals_Details_HeroSection: {
-      img: user.profileImageDownloadUrl || user.profileImageUrl || user.imageDownloadUrl || user.imageUrl || "",
+      img: getValidImageUrl(user.profileImageDownloadUrl || user.profileImageUrl || user.imageDownloadUrl || user.imageUrl || ""),
       name: user.fullName || "",
       email: user.email || "",
       phoneNumber: user.phoneNumber || "",

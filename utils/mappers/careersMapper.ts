@@ -1,3 +1,4 @@
+import { getValidImageUrl } from "./commonMapper";
 export const mapCareersStateToBackend = (state: any) => {
   return [
     {
@@ -70,7 +71,7 @@ export const mapBackendToCareersState = (backendData: any, currentState: any) =>
         work_list_data: section.data?.work_list_data || newState.career_work_with_us?.work_list_data,
       };
       if (section.data?.imageUrl) {
-         newState.career_work_with_us.section_img = section.data.imageDownloadUrl || section.data.imageUrl;
+         newState.career_work_with_us.section_img = getValidImageUrl(section.data.imageDownloadUrl || section.data.imageUrl);
          newState.career_work_with_us.section_imageUrl = section.data.imageUrl;
          newState.career_work_with_us.section_imageDownloadUrl = section.data.imageDownloadUrl || section.data.imageUrl;
          newState.career_work_with_us.section_imageKey = section.data.imageUrl;

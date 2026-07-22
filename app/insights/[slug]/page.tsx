@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import InsightsDetailsLayout from "@/components/layouts/insights-details-layout/Index";
 import { Box } from "@mui/material";
 import { INSIGHTS_DETAILS_DATA } from "@/public/data/insights-details-data";
+export const revalidate = 60;
 
 type Props = {
   params: Promise<{ slug: string }> | { slug: string };

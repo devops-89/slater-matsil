@@ -183,6 +183,7 @@ const ProfessionalList = () => {
                     designation={val.designation}
                     id={val.id}
                     onLoad={handleImageLoad}
+                    priority={i < 4}
                   />
                 </Grid>
               ))

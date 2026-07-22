@@ -56,4 +56,14 @@ export const UserControllers = {
       throw error;
     }
   },
+
+  contactSupport: async (data: Record<string, unknown>): Promise<AxiosResponse> => {
+    try {
+      // The endpoint is likely /contact-support. Using baseURL override to match the pattern of other calls.
+      let result = await userSecuredApi.post("contact-support", data, { baseURL: "/backend-api/" });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

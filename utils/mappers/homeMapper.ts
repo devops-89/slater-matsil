@@ -1,4 +1,4 @@
-import { getCleanImageUrl } from "./commonMapper";
+import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
 export const mapBackendToHomepageState = (backendData: any, currentState: any) => {
   const newHomepage = { ...currentState };
@@ -16,7 +16,7 @@ export const mapBackendToHomepageState = (backendData: any, currentState: any) =
               ...rest,
               imageDownloadUrl: s.imageDownloadUrl || "",
               imageUrl: s.imageUrl || s.image || s.key || "",
-              image: s.imageDownloadUrl || s.image || s.imageUrl || s.key || "",
+              image: getValidImageUrl(s.imageDownloadUrl || s.image || s.imageUrl || s.key || ""),
             };
           });
         } else if (slidesData) {
@@ -25,7 +25,7 @@ export const mapBackendToHomepageState = (backendData: any, currentState: any) =
             ...rest,
             imageDownloadUrl: slidesData.imageDownloadUrl || "",
             imageUrl: slidesData.imageUrl || slidesData.image || slidesData.key || "",
-            image: slidesData.imageDownloadUrl || slidesData.image || slidesData.imageUrl || slidesData.key || "",
+            image: getValidImageUrl(slidesData.imageDownloadUrl || slidesData.image || slidesData.imageUrl || slidesData.key || ""),
           }];
         }
         break;
@@ -35,7 +35,7 @@ export const mapBackendToHomepageState = (backendData: any, currentState: any) =
           ...aboutRest,
           imageDownloadUrl: section.data?.imageDownloadUrl || "",
           imageUrl: section.data?.imageUrl || section.data?.image || section.data?.key || "",
-          image: section.data?.imageDownloadUrl || section.data?.image || section.data?.imageUrl || section.data?.key || ""
+          image: getValidImageUrl(section.data?.imageDownloadUrl || section.data?.image || section.data?.imageUrl || section.data?.key || "")
         };
         break;
       case "metrics":
@@ -48,7 +48,7 @@ export const mapBackendToHomepageState = (backendData: any, currentState: any) =
           leftSection: {
             ...wwsLeftRest,
             imageDownloadUrl: section.data?.leftSection?.imageDownloadUrl || "",
-            heroImage: section.data?.leftSection?.imageDownloadUrl || section.data?.leftSection?.heroImage || section.data?.leftSection?.imageUrl || section.data?.leftSection?.key || "",
+            heroImage: getValidImageUrl(section.data?.leftSection?.imageDownloadUrl || section.data?.leftSection?.heroImage || section.data?.leftSection?.imageUrl || section.data?.leftSection?.key || ""),
             imageUrl: section.data?.leftSection?.imageUrl || section.data?.leftSection?.heroImage || section.data?.leftSection?.key || ""
           }
         };

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ClientPage from "./ClientPage";
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Terms of Use",

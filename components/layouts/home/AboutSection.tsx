@@ -1,6 +1,6 @@
 "use client";
 import HeadingStar from "@/components/widgets/Heading-star";
-import AboutImage from "@/public/images/home/aboutUs.jpg";
+import AboutImage from "@/public/images/home/aboutUs.webp";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, inter, tradeGothic } from "@/utils/fonts";
@@ -41,17 +41,14 @@ const AboutSection = () => {
               {details?.homepage?.aboutSection?.heading ||
                 "Fluent in technology. Proven in law."}
             </Typography>
-            <Box>
+            <Box sx={{ position: "relative", width: "100%", aspectRatio: "4/3" }}>
               <Image
                 src={details?.homepage?.aboutSection?.imageDownloadUrl || details?.homepage?.aboutSection?.image || AboutImage}
                 alt="Team working together"
-                width={800}
-                height={600}
+                fill
                 unoptimized={true}
+                sizes="(max-width: 1200px) 100vw, 50vw"
                 style={{
-                  width: "100%",
-                  height: "auto",
-                  display: "block",
                   borderRadius: 20,
                   objectFit: "cover",
                 }}

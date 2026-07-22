@@ -1,4 +1,4 @@
-import { getCleanImageUrl } from "./commonMapper";
+import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
 export const mapContactStateToBackend = (state: any) => {
   return [
@@ -66,7 +66,7 @@ export const mapBackendToContactState = (backendData: any, currentState: any) =>
         description: section.data?.description || newState.hero_section_data?.description,
       };
       if (section.data?.imageUrl || section.data?.imageDownloadUrl) {
-         newState.hero_section_data.img = section.data.imageDownloadUrl || section.data.imageUrl;
+         newState.hero_section_data.img = getValidImageUrl(section.data.imageDownloadUrl || section.data.imageUrl);
          newState.hero_section_data.imageUrl = section.data.imageUrl;
          newState.hero_section_data.imageDownloadUrl = section.data.imageDownloadUrl || section.data.imageUrl;
       }

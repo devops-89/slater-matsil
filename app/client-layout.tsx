@@ -19,7 +19,7 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { setDetails } = usePageData();
+  const setDetails = usePageData((state) => state.setDetails);
   const [initialLoading, setInitialLoading] = useState(false);
   const pathname = usePathname();
 

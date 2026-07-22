@@ -1,6 +1,7 @@
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { STRENGTH_CARD_PROPS } from "@/utils/types";
+import { getValidImageUrl } from "@/utils/mappers/commonMapper";
 import { Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -47,7 +48,7 @@ const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
             transition: "background-color 0.3s ease",
           }}
         >
-          {img && <Image src={img} alt="settings" width={50} height={50} style={{ width: "100%", height: "auto" }} />}
+          {img && <Image src={getValidImageUrl(img)} alt="settings" width={50} height={50} style={{ width: "100%", height: "auto" }} />}
         </Box>
         <Typography
           sx={{

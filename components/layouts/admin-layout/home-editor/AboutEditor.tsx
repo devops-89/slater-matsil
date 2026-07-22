@@ -1,4 +1,4 @@
-import AboutImage from "@/public/images/home/aboutUs.jpg";
+import AboutImage from "@/public/images/home/aboutUs.webp";
 import React from 'react';
 import { Box, Button, Divider, IconButton, Stack, TextField, Typography, CircularProgress } from "@mui/material";
 import { Delete, Upload } from "@mui/icons-material";

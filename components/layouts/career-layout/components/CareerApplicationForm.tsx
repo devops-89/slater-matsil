@@ -17,6 +17,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import * as Yup from "yup";
 import ReCAPTCHA from "react-google-recaptcha";
+import { MediaControllers } from "@/api/mediaControllers";
 
 const CareerApplicationForm = () => {
   const { hideModal } = useModal();
@@ -34,29 +35,22 @@ const CareerApplicationForm = () => {
     setIsUploading(true);
 
     try {
-      const res = await fetch("/api/upload-url", {
-        method: "POST",
-
-        headers: { "Content-Type": "application/json" },
-
-        body: JSON.stringify({
-          fileName: file.name,
-
-          fileType: file.type,
-        }),
-      });
-
-      const { uploadUrl, key } = await res.json();
-
-      await fetch(uploadUrl, {
-        method: "PUT",
-
-        body: file,
-      });
-
-      formik.setFieldValue("resumeUrl", key);
+      const formData = new FormData();
+      formData.append("image", file);
+      
+      const res = await MediaControllers.uploadMedia(formData);
+      const responseData = res.data?.data?.data || res.data?.data;
+      const uploadedKey = responseData?.key || responseData?.url || responseData?.imgUrl;
+      
+      if (uploadedKey) {
+        formik.setFieldValue("resumeUrl", uploadedKey);
+      } else {
+        console.error("Upload failed: No key returned");
+      }
     } catch (err) {
       console.error("Upload failed", err);
+    } finally {
+      setIsUploading(false);
     }
   };
 

@@ -263,6 +263,7 @@ const ProfessionalsDetailsHeroSection = ({ onImageLoad }: { onImageLoad?: () => 
                     objectPosition: usingMobileImageStyles(phone),
                   }}
                   priority
+                  unoptimized
                   onLoad={onImageLoad}
                   onError={onImageLoad}
                 />

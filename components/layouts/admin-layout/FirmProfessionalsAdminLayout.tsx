@@ -31,11 +31,16 @@ import {
     PROFESSIONAL_FORM_BIO_DATA 
 } from "@/utils/types";
 
-export default function FirmProfessionalsAdminLayout() {
+interface FirmProfessionalsAdminLayoutProps {
+  initialProfessionals?: PROFESSIONAL_API_ITEM[];
+}
+
+export default function FirmProfessionalsAdminLayout({ initialProfessionals = [] }: FirmProfessionalsAdminLayoutProps) {
   const { details } = usePageData();
   const { startLoading, stopLoading } = useLoading();
   const { showNotification } = useNotification();
-  const [apiProfessionals, setApiProfessionals] = useState<PROFESSIONAL_API_ITEM[]>([]);
+  const [apiProfessionals, setApiProfessionals] = useState<PROFESSIONAL_API_ITEM[]>(initialProfessionals);
+  const [isFetching, setIsFetching] = useState(initialProfessionals.length === 0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [activeId, setActiveId] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
@@ -48,7 +53,7 @@ export default function FirmProfessionalsAdminLayout() {
 
   const fetchProfessionals = async () => {
     try {
-      startLoading();
+      setIsFetching(true);
       const res = await ProfessionalControllers.getAllProfessionalProfiles();
       let users = res.data?.data?.users || [];
       if (!users.length && res.data?.data?.data?.users) {
@@ -60,12 +65,14 @@ export default function FirmProfessionalsAdminLayout() {
     } catch (err) {
       console.error("Failed to fetch professionals", err);
     } finally {
-      stopLoading();
+      setIsFetching(false);
     }
   };
 
   useEffect(() => {
-    fetchProfessionals();
+    if (initialProfessionals.length === 0) {
+      fetchProfessionals();
+    }
   }, []);
 
   const getLastName = (fullName: string) => {
@@ -485,15 +492,23 @@ export default function FirmProfessionalsAdminLayout() {
       </Box>
 
       <Grid container spacing={{ xs: 2, md: 4 }}>
-        {paginatedData.map((prof, i) => (
-          <ProfessionalCardItem
-            key={i}
-            prof={prof}
-            onEdit={handleEdit}
-            onDelete={handleDeleteProfessional}
-            onImageLoad={handleImageLoad}
-          />
-        ))}
+        {isFetching ? (
+          Array.from(new Array(6)).map((_, i) => (
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={`skeleton-${i}`} sx={{ display: "flex", width: "100%" }}>
+              <Box sx={{ width: "100%", height: 350, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
+            </Grid>
+          ))
+        ) : (
+          paginatedData.map((prof, i) => (
+            <ProfessionalCardItem
+              key={i}
+              prof={prof}
+              onEdit={handleEdit}
+              onDelete={handleDeleteProfessional}
+              onImageLoad={handleImageLoad}
+            />
+          ))
+        )}
       </Grid>
 
       {hybridProfessionals && hybridProfessionals.length > ITEMS_PER_PAGE && (

@@ -3,6 +3,7 @@ import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
+import { getValidImageUrl } from "@/utils/mappers/commonMapper";
 const UnParalleledLegalService = () => {
   const { details } = usePageData();
 
@@ -47,7 +48,7 @@ const UnParalleledLegalService = () => {
       }}
     >
       <Image
-        src={unparalled?.img}
+        src={getValidImageUrl(unparalled?.img)}
         alt=""
         width={800}
         height={400}
@@ -59,42 +60,6 @@ const UnParalleledLegalService = () => {
           boxShadow: "0 20px 40px rgba(0,0,0,0.2)",
         }}
       />
-
-      <Box
-        sx={{
-          position: "absolute",
-          top: "10%",
-          left: "5%",
-          backgroundColor: "#22c55e",
-          color: "#fff",
-          px: 2,
-          py: "6px",
-          borderRadius: "16px",
-          fontSize: 13,
-          fontWeight: 600,
-          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-        }}
-      >
-        IP Portfolio Development
-      </Box>
-
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: "10%",
-          right: "5%",
-          backgroundColor: "#facc15",
-          color: "#000",
-          px: 2,
-          py: "6px",
-          borderRadius: "16px",
-          fontSize: 13,
-          fontWeight: 600,
-          boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
-        }}
-      >
-        Assertion of your IP
-      </Box>
     </Box>
               )}
             </Grid>

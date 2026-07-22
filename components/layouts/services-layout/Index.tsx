@@ -1,11 +1,13 @@
 "use client";
 import React from "react";
 import HeroServicesSection from "./Hero-services-section";
-import WhyChooseUs from "./Why-Choose-Us";
-import UnParalleledLegalService from "./Unparalleled-legal-services";
-import OurserviceFramework from "./Our-service-framework";
-import ServiceAreas from "@/components/widgets/Service-Areas";
-import NeedAssistance from "./Need-Assistance";
+import dynamic from "next/dynamic";
+
+const WhyChooseUs = dynamic(() => import("./Why-Choose-Us"), { ssr: true });
+const UnParalleledLegalService = dynamic(() => import("./Unparalleled-legal-services"), { ssr: true });
+const OurserviceFramework = dynamic(() => import("./Our-service-framework"), { ssr: true });
+const ServiceAreas = dynamic(() => import("@/components/widgets/Service-Areas"), { ssr: true });
+const NeedAssistance = dynamic(() => import("./Need-Assistance"), { ssr: true });
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { PageControllers } from "@/api/pageControllers";
@@ -20,50 +22,9 @@ const ServicesLayout = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
-    if (isAdminRoute) return;
-
-    let isMounted = true;
-    const fetchServicesData = async () => {
-      try {
-        startLoading();
-        const res = await PageControllers.getPublicPageById(3);
-        const pageData = res.data?.data?.data || res.data?.data;
-        if (pageData && isMounted) {
-          const { newServicesPage, newServiceArea } = mapBackendToServicesPageState(pageData, WEBSITE_DATA.servicesPage, WEBSITE_DATA.homepage.service_area);
-          const currentDetails = usePageData.getState().details || WEBSITE_DATA;
-          const mergedWebsiteData = {
-            ...currentDetails, // Preserve other state
-            servicesPage: newServicesPage,
-            homepage: {
-              ...currentDetails.homepage, // Preserve homepage state
-              service_area: newServiceArea
-            }
-          };
-          setDetails(mergedWebsiteData as any);
-
-          if (!newServicesPage?.heroSection?.img) {
-            stopLoading();
-          }
-        } else if (isMounted) {
-          stopLoading();
-        }
-      } catch (error) {
-        console.error("Error fetching services page data", error);
-      } finally {
-        if (isMounted) stopLoading();
-      }
-    };
-    
-    fetchServicesData();
-
-    return () => {
-      if (isMounted) {
-        stopLoading();
-      }
-      isMounted = false; 
-    };
-  }, [setDetails, startLoading, stopLoading, pathname]);
+    // Data is now fetched server-side in page.tsx and populated via StoreInitializer.
+    // No need to fetch client-side or trigger global loaders anymore!
+  }, [pathname]);
 
   return (
     <div>

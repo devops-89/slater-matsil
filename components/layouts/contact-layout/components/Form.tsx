@@ -18,6 +18,7 @@ import * as Yup from "yup";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useRef } from "react";
+import { UserControllers } from "@/api/userControllers";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
@@ -53,13 +54,19 @@ const Form = () => {
       }
 
       try {
-        const response = await fetch("/api/contact", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...values, recaptchaToken: token }),
-        });
+        const payload = {
+          firstName: values.firstName,
+          lastName: values.lastName,
+          email: values.email,
+          countryCode: "+1", // Add a default country code if not parsed
+          phoneNumber: values.phoneNumber,
+          company: values.company,
+          message: values.message,
+        };
+        
+        const response = await UserControllers.contactSupport(payload);
 
-        if (response.ok) {
+        if (response.status === 201 || response.status === 200) {
           showNotification("Message sent successfully!", "success");
           resetForm();
         } else {

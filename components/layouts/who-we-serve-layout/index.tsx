@@ -1,11 +1,13 @@
 "use client";
 import { Box, Container, Grid, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import WhoWeServeLayoutHero from "./Who-we-serve-layout-hero";
-import WhoWeServeAbout from "./Who-we-serve-layout-about";
-import QuoteCard from "./components/Quote-Card";
+
+const WhoWeServeAbout = dynamic(() => import("./Who-we-serve-layout-about"), { ssr: true });
+const QuoteCard = dynamic(() => import("./components/Quote-Card"), { ssr: true });
+const WhoServeTabSection = dynamic(() => import("./components/Who-serve-tab-section"), { ssr: true });
 import { usePageData } from "@/store/usePageData";
-import WhoServeTabSection from "./components/Who-serve-tab-section";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { usePathname } from "next/navigation";
 import { PageControllers } from "@/api/pageControllers";

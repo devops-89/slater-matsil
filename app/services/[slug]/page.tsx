@@ -3,6 +3,7 @@ import ServicesDetailsLayout from "@/components/layouts/Services-details-layout"
 import { Box } from "@mui/material";
 import React from "react";
 import { SERVICES_DETAILS } from "@/public/data/generic-array";
+export const revalidate = 60;
 
 type Props = {
   params: Promise<{ slug: string }> | { slug: string };

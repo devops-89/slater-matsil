@@ -2,9 +2,11 @@
 import { Box } from "@mui/material";
 import React from "react";
 import HeroSection from "./Hero-section";
-import WhyWorkWithus from "./Why-work-with-us";
-import OpenRoles from "./Open-Roles";
-import InsightsSection from "@/components/widgets/Insights-section";
+import dynamic from "next/dynamic";
+
+const WhyWorkWithus = dynamic(() => import("./Why-work-with-us"), { ssr: true });
+const OpenRoles = dynamic(() => import("./Open-Roles"), { ssr: true });
+const InsightsSection = dynamic(() => import("@/components/widgets/Insights-section"), { ssr: true });
 
 const CareerLayout = () => {
   return (

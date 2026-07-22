@@ -4,7 +4,8 @@ import { METRICSPROPS } from "@/utils/types";
 import { ArrowUpward } from "@mui/icons-material";
 import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-import CountUp from "react-countup";
+import dynamic from "next/dynamic";
+const CountUp = dynamic(() => import("react-countup"), { ssr: false });
 import { useInView } from "react-intersection-observer";
 
 const MetricsCard = ({ title, count }: METRICSPROPS) => {

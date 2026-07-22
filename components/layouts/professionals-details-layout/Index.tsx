@@ -10,14 +10,19 @@ import { useParams, useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import ProfessionalsDetailsHeroSection from "./Professionals-details-Herosection";
 import TabSection from "./Tab-Section";
-//
-const ProfessionalDetailsLayout = () => {
+interface ProfessionalDetailsLayoutProps {
+  initialRawData?: any;
+}
+
+const ProfessionalDetailsLayout = ({ initialRawData }: ProfessionalDetailsLayoutProps = {}) => {
   const { data, setProfessionalDetailsData, clearProfessionalDetailsData } =
     useProfessionalDetailsData();
   const { startLoading, stopLoading } = useLoading();
   const { id } = useParams();
   const router = useRouter();
   const [sortedProfessionals, setSortedProfessionals] = React.useState<any[]>([]);
+  
+  // Use initialRawData if provided, otherwise null
   const [professional, setProfessional] = React.useState<any>(null);
   
   const decodedId = React.useMemo(() => {
@@ -28,13 +33,21 @@ const ProfessionalDetailsLayout = () => {
     import("@/api/professionalControllers").then(({ ProfessionalControllers }) => {
       import("@/utils/mappers/firmProfessionalsMapper").then(({ mapApiUserProfessionalToDetailsProps }) => {
         
-        startLoading(); // Start loader immediately when fetching begins
+        // If we already have the professional from SSR, map it immediately
+        let idFetched = false;
+        if (initialRawData && (initialRawData.id || initialRawData.fullName)) {
+          setProfessional(mapApiUserProfessionalToDetailsProps(initialRawData));
+          idFetched = true;
+        }
+
+        if (!idFetched) {
+          startLoading(); // Only show loader if we didn't get SSR data
+        }
         
         const isNumericId = !isNaN(Number(decodedId)) && decodedId.trim() !== "";
-        let idFetched = false;
 
-        // 1. If we have an ID in the URL, fetch it immediately!
-        if (isNumericId) {
+        // 1. If we have an ID in the URL and no SSR data, fetch it immediately!
+        if (isNumericId && !idFetched) {
           ProfessionalControllers.getProfessionalById(Number(decodedId))
             .then((res: any) => {
               let userObj = res.data;

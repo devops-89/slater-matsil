@@ -1,8 +1,8 @@
 import { MediaControllers } from "@/api/mediaControllers";
 import { useNotification } from "@/components/providers/NotificationProvider";
-import slider4 from "@/public/images/home/slider/slider4.jpg";
-import slider5 from "@/public/images/home/slider/slider5.jpg";
-import slider6 from "@/public/images/home/slider/slider6.jpg";
+import slider4 from "@/public/images/home/slider/slider4.webp";
+import slider5 from "@/public/images/home/slider/slider5.webp";
+import slider6 from "@/public/images/home/slider/slider6.webp";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Delete, Upload } from "@mui/icons-material";

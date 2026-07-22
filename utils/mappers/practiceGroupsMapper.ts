@@ -1,4 +1,4 @@
-import { getCleanImageUrl } from "./commonMapper";
+import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
 export const mapBackendToPracticeGroupsState = (backendData: any, currentState: any) => {
   const newPracticeGroupPage = { ...currentState };
@@ -13,7 +13,7 @@ export const mapBackendToPracticeGroupsState = (backendData: any, currentState: 
           heading: section.data?.heading || "",
           description1: section.data?.description1 || "",
           description2: section.data?.description2 || "",
-          imageUrl: section.data?.imageDownloadUrl || section.data?.imageUrl || "",
+          imageUrl: getValidImageUrl(section.data?.imageDownloadUrl || section.data?.imageUrl || ""),
           imageDownloadUrl: section.data?.imageDownloadUrl || "",
         };
         break;

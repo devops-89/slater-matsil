@@ -18,41 +18,9 @@ const FirmLeadership = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
-    if (isAdminRoute) return;
-
-    let isMounted = true;
-    const fetchFirmLeadershipData = async () => {
-      try {
-        startLoading();
-
-        let pageData = null;
-        try {
-          const res = await PageControllers.getPublicPageById(6).catch(e => ({ data: { data: null } }));
-          pageData = res.data?.data?.data || res.data?.data;
-        } catch (e) {
-          console.error("Failed to fetch public page by ID 6", e);
-        }
-        
-        if (pageData && isMounted) {
-          const updatedFirmLeadershipPage = require("@/utils/pageDataMapper").mapBackendToFirmLeadershipState(pageData, WEBSITE_DATA.firm_leadership);
-          const mergedWebsiteData = { ...WEBSITE_DATA, firm_leadership: updatedFirmLeadershipPage };
-          setDetails(mergedWebsiteData as any);
-        }
-      } catch (error) {
-        console.error("Error fetching firm leadership data", error);
-      } finally {
-        stopLoading();
-      }
-    };
-    
-    fetchFirmLeadershipData();
-
-    return () => {
-      if (isMounted) stopLoading();
-      isMounted = false;
-    };
-  }, [setDetails, startLoading, stopLoading, pathname]);
+    // Data is now fetched server-side in page.tsx and populated via StoreInitializer.
+    // No need to fetch client-side or trigger global loaders anymore!
+  }, [pathname]);
 
   const data = details?.firm_leadership || WEBSITE_DATA.firm_leadership;
   return (

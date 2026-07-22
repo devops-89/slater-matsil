@@ -7,13 +7,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
+interface ExtendedProfessionalsCardProps extends PROFESSIONALS_CARD_PROPS {
+  priority?: boolean;
+}
+
 const ProfessionalsCard = ({
   img,
   name,
   designation,
   id,
-  onLoad
-}: PROFESSIONALS_CARD_PROPS) => {
+  onLoad,
+  priority = false
+}: ExtendedProfessionalsCardProps) => {
   const pathname = usePathname();
   const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
   const linkHref = isPreview ? "/manage-professionals" : `/firm-professionals/${id}`;
@@ -71,6 +76,7 @@ const ProfessionalsCard = ({
                 src={img}
                 alt={name || ""}
                 fill
+                priority={priority}
                 sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{
                   objectFit: "cover",

@@ -140,7 +140,7 @@ export default function BlogFormModal({
                         <CircularProgress size={30} />
                       </Box>
                     ) : cardData.cardImage ? (
-                      <Box sx={{ position: "relative", display: "inline-block", height: 120 }}>
+                      <Box sx={{ position: "relative", display: "inline-block", height: 120, mb: 2 }}>
                         <IconButton
                           size="small"
                           sx={{ position: "absolute", top: -10, right: -10, bgcolor: "white", boxShadow: 1 }}
@@ -295,7 +295,7 @@ export default function BlogFormModal({
                         </Box>
                         <Box sx={{ borderRadius: "50%", overflow: "hidden", height: "100%", width: "100%" }}>
                           <img
-                            src={heroData.rawAuthorImage}
+                            src={heroData.authorImage}
                             alt="Author Thumbnail"
                             style={{ width: "100%", height: "100%", objectFit: "cover" }}
                           />

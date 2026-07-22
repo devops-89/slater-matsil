@@ -1,5 +1,7 @@
 "use client";
 
+import { BlogControllers } from "@/api/blogControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import {
@@ -13,11 +15,9 @@ import {
   Typography,
 } from "@mui/material";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { BlogControllers } from "@/api/blogControllers";
-import { useLoading } from "@/components/providers/LoadingProvider";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const BlogSection = () => {
   const { details } = usePageData();
@@ -551,34 +551,36 @@ const BlogSection = () => {
               "At Slater Matsil, our patent professionals provide strategic guidance to protect your intellectual property and support your long-term growth."}
           </Typography>
 
-          <Box
-            sx={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              px: { lg: 6, xs: 4 },
-              py: 2.25,
-              borderRadius: 3,
-              backgroundColor: COLORS.WHITE,
-              color: COLORS.PRIMARY_BLUE,
-              fontWeight: 800,
-              fontSize: 16,
-              textTransform: "uppercase",
-              letterSpacing: "1px",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
-              "&:hover": {
-                transform: "scale(1.05)",
-                boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
-                backgroundColor: COLORS.PRIMARY_BLUE,
-                color: COLORS.WHITE,
-              },
-            }}
-          >
-            {blogSection?.ctaButtonText ||
-              "SCHEDULE A CONSULTATION"}
-          </Box>
+          <Link href="/contact-us" style={{ textDecoration: 'none' }}>
+            <Box
+              sx={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                px: { lg: 6, xs: 4 },
+                py: 2.25,
+                borderRadius: 3,
+                backgroundColor: COLORS.WHITE,
+                color: COLORS.PRIMARY_BLUE,
+                fontWeight: 800,
+                fontSize: 16,
+                textTransform: "uppercase",
+                letterSpacing: "1px",
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  color: COLORS.WHITE,
+                },
+              }}
+            >
+              {blogSection?.ctaButtonText ||
+                "SCHEDULE A CONSULTATION"}
+            </Box>
+          </Link>
         </Box>
       </Container>
     </Box>

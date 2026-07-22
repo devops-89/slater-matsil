@@ -78,7 +78,7 @@ const PracticeGroupsHeroSection = () => {
           objectFit: "cover",
           borderRadius: "20px",
         }}
-        loading="lazy"
+        priority
       />
     )}
   </Grid>
@@ -136,7 +136,6 @@ const PracticeGroupsHeroSection = () => {
               fontWeight: 700,
               lineHeight: { lg: "58px", xs: "20px" },
               mt: 5,
-              textTransform: "capitalize",
               color: COLORS.PRIMARY_BLUE,
             }}
           >

@@ -152,8 +152,11 @@ export default function DashboardProtectedLayout({ children }: { children: React
     };
   }, [router, pathname, startLoading, stopLoading, isLoadingPermissions, setPermissions, isSuperAdmin, permissions]);
 
-  if (isVerifying || (!isAuthenticated && pathname !== "/admin")) {
-    return null;
+  // To fix LCP on the login page, we only return null if we are navigating to a protected route.
+  // For the /admin page, we render the login page immediately.
+  // If the user happens to have a token, the useEffect will redirect them shortly.
+  if (pathname !== "/admin" && (isVerifying || !isAuthenticated)) {
+    return null; // or a loading spinner
   }
 
   return <>{children}</>;

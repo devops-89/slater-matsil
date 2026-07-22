@@ -44,7 +44,11 @@ const insightSchema = yup.object().shape({
   }),
 });
 
-export default function InsightsAdminLayout() {
+interface InsightsAdminLayoutProps {
+  initialInsights?: INSIGHT_API_ITEM[];
+}
+
+export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAdminLayoutProps) {
   const { details, setDetails } = usePageData();
   const { showNotification } = useNotification();
   const { isLoading, startLoading, stopLoading } = useLoading();
@@ -52,7 +56,7 @@ export default function InsightsAdminLayout() {
   const [activeId, setActiveId] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState(0);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
-  const [insightsCards, setInsightsCards] = useState<INSIGHT_API_ITEM[]>([]);
+  const [insightsCards, setInsightsCards] = useState<INSIGHT_API_ITEM[]>(initialInsights);
   const [keysToDeleteOnSave, setKeysToDeleteOnSave] = useState<string[]>([]);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -113,21 +117,25 @@ export default function InsightsAdminLayout() {
     resource: { heading: "", content: "", link: "" },
   });
 
+  const [isFetching, setIsFetching] = useState(initialInsights.length === 0);
+
   const fetchInsights = async () => {
     try {
-      startLoading();
+      setIsFetching(true);
       const res = await InsightControllers.getAllInsights({ limit: 1000 });
       const data = res.data?.data?.data?.insights || res.data?.data?.insights || [];
       setInsightsCards(data);
     } catch (err) {
       showNotification("Failed to fetch insights", "error");
     } finally {
-      stopLoading();
+      setIsFetching(false);
     }
   };
 
   useEffect(() => {
-    fetchInsights();
+    if (initialInsights.length === 0) {
+      fetchInsights();
+    }
   }, []);
 
   const handleOpenNew = () => {
@@ -418,7 +426,15 @@ export default function InsightsAdminLayout() {
       </Box>
 
       <Grid container spacing={{ xs: 2, md: 4 }}>
-        {currentItems.map((insight, i: number) => (
+        {isFetching ? (
+          // Render skeleton loaders
+          Array.from(new Array(6)).map((_, i) => (
+            <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }} key={`skeleton-${i}`} sx={{ display: "flex" }}>
+              <Box sx={{ width: "100%", height: 320, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
+            </Grid>
+          ))
+        ) : (
+          currentItems.map((insight, i: number) => (
             <Grid
               size={{ xs: 12, sm: 12, md: 6, lg: 4 }}
               key={i}
@@ -433,8 +449,9 @@ export default function InsightsAdminLayout() {
                 onEdit={() => handleEdit(insight.id)}
               />
             </Grid>
-          ))}
-        </Grid>
+          ))
+        )}
+      </Grid>
 
       {totalPages > 1 && (
         <Stack
