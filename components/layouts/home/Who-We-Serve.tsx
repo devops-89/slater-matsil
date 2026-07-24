@@ -51,6 +51,8 @@ const Whoweserve = () => {
                   <Image
                     src={details.homepage.who_we_serve.leftSection.small_logo}
                     alt="small logo"
+                    width={500}
+                    height={200}
                     unoptimized={true}
                     style={{ width: "100%", height: "auto" }}
                   />
@@ -92,8 +94,10 @@ const Whoweserve = () => {
               <Image
                 src={details.homepage.who_we_serve.leftSection.big_logo}
                 alt="big logo"
+                width={500}
+                height={200}
                 unoptimized={true}
-                style={{ width: "90%", height: "auto", margin: "auto" }}
+                style={{ width: "90%", height: "auto", margin: "auto", objectFit: "contain" }}
               />
             </Box>
           )}

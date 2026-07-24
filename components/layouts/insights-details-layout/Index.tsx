@@ -2,8 +2,6 @@
 
 import { Box, Container, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { notFound } from "next/navigation";
 import Link from "next/link";
 import { useInsightDetails } from "@/store/useInsightDetails";
 import InsightsDetailsHeroSection from "./InsightsDetailsHeroSection";
@@ -11,12 +9,10 @@ import InsightsDetailsTabBar from "./InsightsDetailsTabBar";
 import InsightsDetailsContentSection from "./InsightsDetailsContentSection";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { InsightControllers } from "@/api/insightControllers";
 
 const InsightsDetailsLayout = () => {
-  const { slug } = useParams();
   const [activeTab, setActiveTab] = useState(0); // 0 = About, 1 = Lawyer Rankings
-  const { setInsightDetailsData, clearInsightDetailsData, data } =
+  const { clearInsightDetailsData, data } =
     useInsightDetails();
 
   const [navigation, setNavigation] = useState<{
@@ -25,73 +21,20 @@ const InsightsDetailsLayout = () => {
   }>({ prev: null, next: null });
 
   useEffect(() => {
-    const fetchInsight = async () => {
-      if (!isNaN(Number(slug))) {
-        try {
-          const res = await InsightControllers.getInsightById(Number(slug));
-          const apiInsight = res.data?.data?.data || res.data?.data;
-          
-          if (apiInsight) {
-            const secMap: any = {
-              aboutProvidedBy: apiInsight.aboutProvidedBy || "Provided by",
-              aboutProvidedByName: apiInsight.aboutProvidedByName || "Slater Matsil, LLP",
-              region: apiInsight.region || "USA",
-            };
-            
-            apiInsight.sections?.forEach((sec: any) => {
-              if (sec.sectionType === "PRACTICE_AREAS") secMap.practiceAreas = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "PROFESSIONAL_MEMBERSHIPS") secMap.professionalMemberships = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "CAREER") secMap.career = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "PERSONAL") secMap.personal = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "CHAMBERS_REVIEW") secMap.ChamberssReview = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "STRENGTHS") secMap.strengths = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "ADDITIONAL_CONTENT" || sec.sectionType === "ADDITIONAL_INFORMATION") secMap.additionalInformation = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "MAIN_CONTENT" || sec.sectionType === "CLOSING_STATEMENT") secMap.closingStatement = { heading: sec.heading, content: sec.content };
-              if (sec.sectionType === "MISC_AND_RESOURCES" || sec.sectionType === "RESOURCE") secMap.resource = { heading: sec.heading, content: sec.content, link: sec.link || "" };
-            });
+    if (data) {
+      window.scrollTo(0, 0);
+    }
+  }, [data]);
 
-            const mappedInsight = {
-              slug: String(apiInsight.id),
-              hero: {
-                name: apiInsight.personName || "",
-                band: apiInsight.bandRole || "",
-                guide: apiInsight.guideOrganization || "",
-                yearsRanked: apiInsight.yearsRankedDate || "",
-                profileImage: apiInsight.imageDownloadUrl || apiInsight.imageUrl || "",
-              },
-              contact: apiInsight.contact || {
-                firm: "SlaterMatsil, LLP",
-                firmUrl: "www.slatermatsil.com",
-                email: "info@slatermatsil.com",
-                phone: "972 732 1001",
-                shareLabel: "Share",
-              },
-              contentSections: secMap,
-            };
-
-            setInsightDetailsData(mappedInsight as any);
-            setNavigation({
-              prev: null, // Next/prev for API could be implemented via another API call if needed
-              next: null,
-            });
-            return;
-          }
-        } catch (e) {
-          console.error("Failed to fetch API insight", e);
-        }
-      }
-
-      notFound();
-    };
-
-    fetchInsight();
-
+  useEffect(() => {
     return () => {
       clearInsightDetailsData();
     };
-  }, [slug, setInsightDetailsData, clearInsightDetailsData]);
+  }, [clearInsightDetailsData]);
 
-  if (!data) return null;
+  if (!data) {
+    return <Box sx={{ bgcolor: "white", minHeight: "100vh" }} />;
+  }
 
   return (
     <Box sx={{ bgcolor: "white", minHeight: "100vh" }}>

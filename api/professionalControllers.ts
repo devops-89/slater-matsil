@@ -20,9 +20,18 @@ export const ProfessionalControllers = {
     }
   },
 
-  getAllProfessionalProfiles: async (limit: number = 100): Promise<AxiosResponse> => {
+  getAllProfessionalProfiles: async (
+    page: number = 1,
+    limit: number = 6,
+    search: string = "",
+    alphabet: string = ""
+  ): Promise<AxiosResponse> => {
     try {
-      const result = await userPublicApi.get(`all?role=PROFESSIONAL&limit=${limit}`);
+      let query = `all?role=PROFESSIONAL&limit=${limit}&page=${page}`;
+      if (search) query += `&name=${search}`;
+      if (alphabet) query += `&alphabet=${alphabet}`;
+      
+      const result = await userPublicApi.get(query);
       return result;
     } catch (error) {
       throw error;

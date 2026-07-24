@@ -41,7 +41,13 @@ export default function DashboardProtectedLayout({ children }: { children: React
             let freshIsSuperAdmin = true;
             let freshPermissions: string[] = [];
 
-            if (auth) {
+            const cachedPerms = localStorage.getItem("userPermissions");
+            const cachedIsSuper = localStorage.getItem("isSuperAdmin");
+
+            if (cachedPerms !== null && cachedIsSuper !== null) {
+              freshPermissions = JSON.parse(cachedPerms);
+              freshIsSuperAdmin = cachedIsSuper === "true";
+            } else if (auth) {
               const usersRes = await UserControllers.getAllUsers();
               const subAdmins = usersRes.data?.data?.data?.users || usersRes.data?.data?.users || [];
               
@@ -156,7 +162,12 @@ export default function DashboardProtectedLayout({ children }: { children: React
   // For the /admin page, we render the login page immediately.
   // If the user happens to have a token, the useEffect will redirect them shortly.
   if (pathname !== "/admin" && (isVerifying || !isAuthenticated)) {
-    return null; // or a loading spinner
+    return (
+      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "#F8F9FA" }}>
+         <div style={{ width: 40, height: 40, border: "4px solid #003057", borderTop: "4px solid transparent", borderRadius: "50%", animation: "spin 1s linear infinite" }} />
+         <style>{`@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`}</style>
+      </div>
+    );
   }
 
   return <>{children}</>;

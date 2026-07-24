@@ -12,16 +12,14 @@ import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
 import AboutHerosection from "./About-Herosection";
-
-const DrivingInnovation = dynamic(() => import("./Driving-innovation"), { ssr: true });
-const RedefiningPatent = dynamic(() => import("../../widgets/Redefining-Patent"), { ssr: true });
-const InsightsInnovation = dynamic(() => import("./Insights-innovation"), { ssr: true });
-const Award = dynamic(() => import("./Award"), { ssr: true });
-const WhoweServe = dynamic(() => import("./Who-we-serve"), { ssr: true });
-const IndustriesWeServe = dynamic(() => import("./Industries-We-Serve"), { ssr: true });
-const InsightsSection = dynamic(() => import("@/components/widgets/Insights-section"), { ssr: true });
+import DrivingInnovation from "./Driving-innovation";
+import RedefiningPatent from "../../widgets/Redefining-Patent";
+import InsightsInnovation from "./Insights-innovation";
+import Award from "./Award";
+import WhoweServe from "./Who-we-serve";
+import IndustriesWeServe from "./Industries-We-Serve";
+import InsightsSection from "@/components/widgets/Insights-section";
 
 const AboutLayout = () => {
   const { setDetails } = usePageData();

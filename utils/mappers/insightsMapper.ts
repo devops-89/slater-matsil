@@ -85,3 +85,43 @@ export const mapBackendToInsightsState = (backendData: any, currentState: any) =
     }
   };
 };
+
+export const mapBackendToInsightDetailState = (apiInsight: any) => {
+  if (!apiInsight) return null;
+  const secMap: any = {
+    aboutProvidedBy: apiInsight.aboutProvidedBy || "Provided by",
+    aboutProvidedByName: apiInsight.aboutProvidedByName || "Slater Matsil, LLP",
+    region: apiInsight.region || "USA",
+  };
+  
+  apiInsight.sections?.forEach((sec: any) => {
+    if (sec.sectionType === "PRACTICE_AREAS") secMap.practiceAreas = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "PROFESSIONAL_MEMBERSHIPS") secMap.professionalMemberships = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "CAREER") secMap.career = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "PERSONAL") secMap.personal = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "CHAMBERS_REVIEW") secMap.ChamberssReview = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "STRENGTHS") secMap.strengths = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "ADDITIONAL_CONTENT" || sec.sectionType === "ADDITIONAL_INFORMATION") secMap.additionalInformation = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "MAIN_CONTENT" || sec.sectionType === "CLOSING_STATEMENT") secMap.closingStatement = { heading: sec.heading, content: sec.content };
+    if (sec.sectionType === "MISC_AND_RESOURCES" || sec.sectionType === "RESOURCE") secMap.resource = { heading: sec.heading, content: sec.content, link: sec.link || "" };
+  });
+
+  return {
+    slug: String(apiInsight.id),
+    hero: {
+      name: apiInsight.personName || "",
+      band: apiInsight.bandRole || "",
+      guide: apiInsight.guideOrganization || "",
+      yearsRanked: apiInsight.yearsRankedDate || "",
+      profileImage: apiInsight.imageDownloadUrl || apiInsight.imageUrl || "",
+    },
+    contact: apiInsight.contact || {
+      firm: "SlaterMatsil, LLP",
+      firmUrl: "www.slatermatsil.com",
+      email: "info@slatermatsil.com",
+      phone: "972 732 1001",
+      shareLabel: "Share",
+    },
+    contentSections: secMap,
+  };
+};

@@ -28,9 +28,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function InsightDetailPage() {
+import { notFound } from "next/navigation";
+import { mapBackendToInsightDetailState } from "@/utils/pageDataMapper";
+import InsightDetailsStoreInitializer from "@/components/providers/InsightDetailsStoreInitializer";
+
+async function getInsightData(slug: string) {
+  if (isNaN(Number(slug))) return null;
+  try {
+    const res = await fetch(`http://3.92.74.11/api/insights/${slug}`, { next: { revalidate: 60 } }).catch(() => null);
+    const data = res ? await res.json() : null;
+    const apiInsight = data?.data?.data || data?.data;
+    if (apiInsight) {
+      return mapBackendToInsightDetailState(apiInsight);
+    }
+    return null;
+  } catch (error) {
+    console.error("Error fetching insight data", error);
+    return null;
+  }
+}
+
+export default async function InsightDetailPage({ params }: Props) {
+  const resolvedParams = await params;
+  const slug = resolvedParams.slug;
+  const apiData = await getInsightData(slug);
+
+  if (!apiData) {
+    notFound();
+  }
+
   return (
     <Box>
+      <InsightDetailsStoreInitializer apiData={apiData} />
       <InsightsDetailsLayout />
     </Box>
   );

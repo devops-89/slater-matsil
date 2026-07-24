@@ -1,10 +1,8 @@
 "use client";
 import { Box } from "@mui/material";
 import React, { useEffect } from "react";
-import dynamic from "next/dynamic";
 import InsightsHeroSection from "./Insisghts-hero-section";
-
-const InsightsTabSection = dynamic(() => import("./Insights-tab-section"), { ssr: true });
+import InsightsTabSection from "./Insights-tab-section";
 import { usePageData } from "@/store/usePageData";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { usePathname } from "next/navigation";

@@ -35,6 +35,9 @@ const WhoWeServeAbout = () => {
                 <Image
                   src={details?.whoWeServePage?.whoWeServeAboutSection?.img}
                   alt={""}
+                  width={800}
+                  height={600}
+                  unoptimized={true}
                   style={{ width: "100%", height: "auto" }}
                 />
               )}

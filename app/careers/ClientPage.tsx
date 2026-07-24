@@ -15,43 +15,8 @@ const Career = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
-    if (isAdminRoute) return;
-
-    let isMounted = true;
-    const fetchCareersData = async () => {
-      try {
-        startLoading();
-
-        let pageData = null;
-        try {
-          const res = await PageControllers.getPublicPageById(9).catch(e => ({ data: { data: null } }));
-          pageData = res.data?.data?.data || res.data?.data;
-        } catch (e) {
-          console.error("Failed to fetch public page by ID 9", e);
-        }
-        
-        if (pageData && isMounted) {
-          const updatedCareersPage = require("@/utils/pageDataMapper").mapBackendToCareersState(pageData, WEBSITE_DATA.careerPage);
-          const currentDetails = usePageData.getState().details || WEBSITE_DATA;
-          setDetails({ ...currentDetails, careerPage: updatedCareersPage } as any);
-          if (isMounted) stopLoading();
-        } else if (isMounted) {
-          stopLoading();
-        }
-      } catch (error) {
-        console.error("Error fetching careers data", error);
-        if (isMounted) stopLoading();
-      }
-    };
-    
-    fetchCareersData();
-
-    return () => {
-      if (isMounted) stopLoading();
-      isMounted = false;
-    };
-  }, [setDetails, startLoading, stopLoading, pathname]);
+    // Data is now fetched via SSR in page.tsx and initialized via StoreInitializer
+  }, [setDetails, pathname]);
 
   return (
     <div>

@@ -54,16 +54,19 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
   const fetchProfessionals = async () => {
     try {
       setIsFetching(true);
-      const res = await ProfessionalControllers.getAllProfessionalProfiles();
+      const res = await ProfessionalControllers.getAllProfessionalProfiles(1, 1000);
       let users = res.data?.data?.users || [];
       if (!users.length && res.data?.data?.data?.users) {
         users = res.data.data.data.users;
       }
       if (users && users.length > 0) {
+        console.log("FETCHED_USERS_COUNT:", users.length);
         setApiProfessionals(users);
       }
+      return users;
     } catch (err) {
       console.error("Failed to fetch professionals", err);
+      return [];
     } finally {
       setIsFetching(false);
     }
@@ -338,9 +341,27 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
       ? bioData.bio.map((b: Record<string, any>) => b.description).join("\n") 
       : (typeof bioData.bio === 'string' ? bioData.bio : bioData.bio?.paragraphs || "");
 
+    const formatFullNameForBackend = (name: string) => {
+      const trimmed = (name || "").trim();
+      const cleanName = trimmed.split(",")[0].trim();
+      const suffix = trimmed.substring(cleanName.length);
+      
+      const parts = cleanName.split(/\s+/);
+      if (parts.length <= 2) {
+        return trimmed;
+      }
+      
+      // Join all parts except the last one with a Braille pattern blank (\u2800)
+      const firstNamePart = parts.slice(0, parts.length - 1).join("\u2800");
+      const lastNamePart = parts[parts.length - 1];
+      return `${firstNamePart} ${lastNamePart}${suffix}`;
+    };
+
+    const formattedFullName = formatFullNameForBackend(cardData.name || "");
+
     const payload: Record<string, any> = {
       email: bioData.email,
-      fullName: cardData.name,
+      fullName: formattedFullName,
       designation: cardData.designation,
       phoneNumber: bioData.phoneNumber,
       imageUrl: cardData.imageUrl || null,
@@ -399,7 +420,9 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
       }
       setPendingDeletes([]);
 
-      await fetchProfessionals();
+      const newUsers = await fetchProfessionals();
+      const maxPage = Math.ceil(newUsers.length / ITEMS_PER_PAGE);
+      setPage((prevPage) => Math.min(prevPage, maxPage || 1));
       setDialogOpen(false);
       showNotification(
         targetId 
@@ -470,7 +493,9 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
       await ProfessionalControllers.deleteProfessionalProfile(deleteTargetId);
       showNotification("Professional deleted successfully!", "success");
       setDeleteModalOpen(false);
-      await fetchProfessionals();
+      const newUsers = await fetchProfessionals();
+      const maxPage = Math.ceil(newUsers.length / ITEMS_PER_PAGE);
+      setPage((prevPage) => Math.min(prevPage, maxPage || 1));
     } catch (error: unknown) {
       const apiErr = error as { response?: { data?: { message?: string } }; message?: string };
       showNotification(apiErr.response?.data?.message || apiErr.message || "Failed to delete professional.", "error");

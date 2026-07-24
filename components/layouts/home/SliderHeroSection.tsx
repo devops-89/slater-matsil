@@ -41,6 +41,7 @@ const SliderHeroSection = () => {
       <Swiper
         effect="fade"
         modules={[EffectFade, Autoplay]}
+        loop={true}
         autoplay={{
           delay: 6000,
         }}

@@ -131,23 +131,32 @@ const HeroSection3 = () => {
         backgroundColor: COLORS.LIGHT_GREY,
         borderTop: "1px solid #000 ",
         borderBottom: "1px solid #000 ",
+        "& .swiper": {
+          width: "100%",
+          overflow: "hidden",
+        },
+        "& .swiper-wrapper": {
+          display: "flex",
+          alignItems: "stretch",
+        },
+        "& .swiper-slide": {
+          flexShrink: 0,
+          width: "100%",
+          height: "auto",
+        }
       }}
     >
       <Container maxWidth="lg">
         <Swiper
-          key={banners
-            .map((b) => (typeof b.img === "string" ? b.img : b.img?.src))
-            .join(",")}
           onSwiper={setSwiperInstance}
           modules={[Autoplay]}
           autoplay={{ delay: 7000, disableOnInteraction: false }}
           spaceBetween={20}
           loop={true}
-          autoHeight={true}
           grabCursor
         >
           {banners.map((val, i) => (
-            <SwiperSlide key={i}>
+            <SwiperSlide key={i} style={{ flexShrink: 0, width: "100%" }}>
               <Grid
                 container
                 alignItems={"center"}

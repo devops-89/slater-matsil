@@ -60,7 +60,34 @@ export const UserControllers = {
   contactSupport: async (data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       // The endpoint is likely /contact-support. Using baseURL override to match the pattern of other calls.
-      let result = await userSecuredApi.post("contact-support", data, { baseURL: "/backend-api/" });
+      let result = await userSecuredApi.post("contact-support/add", data, { baseURL: "/backend-api/" });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getAllContactSupports: async (): Promise<AxiosResponse> => {
+    try {
+      let result = await userSecuredApi.get("contact-support", { baseURL: "/backend-api/" });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  getContactSupportById: async (id: string | number): Promise<AxiosResponse> => {
+    try {
+      let result = await userSecuredApi.get(`contact-support/${id}`, { baseURL: "/backend-api/" });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  deleteContactSupport: async (id: string | number): Promise<AxiosResponse> => {
+    try {
+      let result = await userSecuredApi.delete(`contact-support/${id}`, { baseURL: "/backend-api/" });
       return result;
     } catch (error) {
       throw error;

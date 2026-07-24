@@ -3,7 +3,7 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Button, Grid, Tab, Tabs, Typography } from "@mui/material";
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useState, useEffect } from "react";
 import StarPara from "./Star-Para";
 import { ArrowForward } from "@mui/icons-material";
 import { useModal } from "@/store/useModal";
@@ -19,6 +19,16 @@ const CareerTabSection = () => {
   const [roleData, setRoleData] = useState(
     data?.tabContentData?.tab_attorney_content_Data,
   );
+
+  useEffect(() => {
+    if (data?.tabContentData) {
+      if (value === 0) {
+        setRoleData(data.tabContentData.tab_attorney_content_Data);
+      } else if (value === 1) {
+        setRoleData(data.tabContentData.tab_technical_advisor);
+      }
+    }
+  }, [data, value]);
 
   const handleChangeTab = (e: SyntheticEvent, newValue: number) => {
     setValue(newValue);

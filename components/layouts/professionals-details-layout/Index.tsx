@@ -66,7 +66,7 @@ const ProfessionalDetailsLayout = ({ initialRawData }: ProfessionalDetailsLayout
         }
 
         // 2. Fetch all for Next/Prev functionality (Runs in parallel)
-        ProfessionalControllers.getAllProfessionalProfiles()
+        ProfessionalControllers.getAllProfessionalProfiles(1, 1000)
           .then((res: any) => {
             let users = res.data?.data?.users || [];
             if (!users.length && res.data?.data?.data?.users) {

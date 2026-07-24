@@ -46,7 +46,13 @@ export default function ClientLayout({
         const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
 
         if (!isAdminRoute) {
-          if (isMounted) setDetails(WEBSITE_DATA as any);
+          if (isMounted) {
+            const currentDetails = usePageData.getState().details;
+            // Only initialize with WEBSITE_DATA if details is empty (no SSR occurred)
+            if (!currentDetails || Object.keys(currentDetails).length === 0) {
+              setDetails(WEBSITE_DATA as any);
+            }
+          }
         } else {
           setDetails(WEBSITE_DATA as any);
         }
@@ -86,9 +92,9 @@ export default function ClientLayout({
 
   return (
     <>
-      <Modal />
       <LoadingProvider>
         <NotificationProvider>
+          <Modal />
           <div
             style={{
               display: "flex",

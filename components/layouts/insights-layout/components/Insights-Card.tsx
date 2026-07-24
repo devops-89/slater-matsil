@@ -29,12 +29,6 @@ const InsightsCard = ({
         if (onEdit) {
           e.preventDefault();
           onEdit();
-          return;
-        }
-        if (slug) {
-          e.preventDefault();
-          router.push(linkHref);
-          window.scrollTo(0, 0);
         }
       }}
       sx={{

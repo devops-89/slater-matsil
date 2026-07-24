@@ -20,47 +20,9 @@ const WhoWeServelayout = () => {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    const isAdminRoute = pathname?.startsWith('/admin') || pathname?.startsWith('/dashboard') || pathname?.startsWith('/pages') || pathname?.startsWith('/manage-');
-    if (isAdminRoute) return;
-
-    let isMounted = true;
-    const fetchWhoWeServeData = async () => {
-      try {
-        startLoading();
-        let pageData = null;
-        try {
-          const res = await PageControllers.getPublicPageById(11).catch(e => ({ data: { data: null } }));
-          pageData = res?.data?.data?.data || res?.data?.data;
-        } catch (e) {
-          console.error("Failed to fetch public page by ID 11", e);
-        }
-        
-        if (pageData && isMounted) {
-          const updatedWhoWeServePage = require("@/utils/pageDataMapper").mapBackendToWhoWeServeState(pageData, WEBSITE_DATA.whoWeServePage);
-          const currentDetails = usePageData.getState().details || WEBSITE_DATA;
-          setDetails({ ...currentDetails, whoWeServePage: updatedWhoWeServePage } as any);
-          
-          if (!updatedWhoWeServePage?.whoWeServepageHeroSection?.img) {
-             stopLoading();
-          }
-        } else if (isMounted) {
-          stopLoading();
-        }
-      } catch (error) {
-        console.error("Error fetching who we serve page data", error);
-      } finally {
-        if (isMounted) stopLoading();
-        if (isMounted) setIsDataLoaded(true);
-      }
-    };
-    
-    fetchWhoWeServeData();
-
-    return () => {
-      if (isMounted) stopLoading();
-      isMounted = false;
-    };
-  }, [setDetails, startLoading, stopLoading, pathname]);
+    // Data is now fetched via SSR in page.tsx and initialized via StoreInitializer
+    setIsDataLoaded(true);
+  }, []);
 
   const handleHeroImageLoad = () => {
     stopLoading();

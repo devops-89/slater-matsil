@@ -11,11 +11,22 @@ export const metadata: Metadata = {
 
 async function getProfessionalsData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/5", { next: { revalidate: 60 } }).catch(() => null);
-    const data = res ? await res.json() : null;
-    return { data5: data?.data?.data || data?.data };
+    const pageRes = await fetch("http://3.92.74.11/api/pages/5", { next: { revalidate: 60 } }).catch(() => null);
+    const pageData = pageRes ? await pageRes.json().catch(() => null) : null;
+
+    const profsRes = await fetch("http://3.92.74.11/api/users/all?role=PROFESSIONAL&limit=6&page=1", { next: { revalidate: 60 } }).catch(() => null);
+    const profsData = profsRes ? await profsRes.json().catch(() => null) : null;
+
+    const users = profsData?.data?.data?.users || profsData?.data?.users || [];
+    const total = profsData?.data?.data?.meta?.total || profsData?.data?.meta?.total || 0;
+
+    return { 
+      data5: pageData?.data?.data || pageData?.data,
+      initialProfessionals: users,
+      initialTotal: total
+    };
   } catch (error) {
-    return { data5: null };
+    return { data5: null, initialProfessionals: [], initialTotal: 0 };
   }
 }
 

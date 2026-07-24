@@ -71,7 +71,7 @@ const PracticeGroupsHeroSection = () => {
         alt="hero"
         width={1200}
         height={600}
-        unoptimized={(typeof data?.imageDownloadUrl === "string" && data.imageDownloadUrl.startsWith("data:")) || (typeof data?.imageUrl === "string" && data.imageUrl.startsWith("data:"))}
+        unoptimized={true}
         style={{
           width: "100%",
           height: "auto",

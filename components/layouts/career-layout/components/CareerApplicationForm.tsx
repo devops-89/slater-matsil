@@ -1,3 +1,5 @@
+import { CareerControllers } from "@/api/careerControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
 import { useModal } from "@/store/useModal";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
@@ -14,13 +16,13 @@ import {
   TextField,
 } from "@mui/material";
 import { useFormik } from "formik";
-import React, { useEffect, useState, useCallback, useRef } from "react";
-import * as Yup from "yup";
+import React, { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import { MediaControllers } from "@/api/mediaControllers";
+import * as Yup from "yup";
 
 const CareerApplicationForm = () => {
   const { hideModal } = useModal();
+  const { showNotification } = useNotification();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const [currentDate, setCurrentDate] = useState("");
   const [resume, setResume] = useState<File | null>(null);
@@ -32,26 +34,7 @@ const CareerApplicationForm = () => {
     if (!file) return;
 
     setResume(file);
-    setIsUploading(true);
-
-    try {
-      const formData = new FormData();
-      formData.append("image", file);
-      
-      const res = await MediaControllers.uploadMedia(formData);
-      const responseData = res.data?.data?.data || res.data?.data;
-      const uploadedKey = responseData?.key || responseData?.url || responseData?.imgUrl;
-      
-      if (uploadedKey) {
-        formik.setFieldValue("resumeUrl", uploadedKey);
-      } else {
-        console.error("Upload failed: No key returned");
-      }
-    } catch (err) {
-      console.error("Upload failed", err);
-    } finally {
-      setIsUploading(false);
-    }
+    formik.setFieldValue("resumeUrl", file.name);
   };
 
   useEffect(() => {
@@ -79,15 +62,35 @@ const CareerApplicationForm = () => {
       const token = recaptchaRef.current?.getValue();
 
       if (!token) {
-        alert("Please complete the reCAPTCHA");
+        showNotification("Please complete the reCAPTCHA", "error");
         return;
       }
 
       try {
         console.log("values", values, "recaptchaToken", token);
-        // Here you would typically include the token in your API request
-      } catch (error) {
+        
+        const formData = new FormData();
+        formData.append("name", values.fullName);
+        formData.append("position", values.position);
+        formData.append("highestDegree", values.education);
+        formData.append("educationMajor", values.educationMajor);
+        formData.append("workExperience", values.workExperience);
+        if (resume) {
+          formData.append("resume", resume);
+        }
+
+        const response = await CareerControllers.createCareer(formData);
+        if (response.data?.success || response.status === 201 || response.status === 200) {
+          showNotification(response.data?.message || "Application submitted successfully!", "success");
+          formik.resetForm();
+          setResume(null);
+          hideModal();
+        } else {
+          showNotification(response.data?.message || "Something went wrong.", "error");
+        }
+      } catch (error: any) {
         console.error("Error submitting form:", error);
+        showNotification(error?.response?.data?.message || "Error submitting application", "error");
       }
     },
   });

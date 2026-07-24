@@ -1,6 +1,12 @@
 import { getValidImageUrl } from "./commonMapper";
 export const mapBackendToFirmProfessionalsState = (backendData: any, currentState: any) => {
-  const newState = { ...currentState };
+  const newState = { 
+    ...currentState,
+    professionals_hero_section: currentState.professionals_hero_section || {
+      heading: "",
+      description1: "",
+    }
+  };
   if (!backendData || !backendData.sections) return newState;
 
   backendData.sections.forEach((section: any) => {

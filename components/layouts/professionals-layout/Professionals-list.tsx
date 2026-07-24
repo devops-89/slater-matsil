@@ -16,8 +16,9 @@ import {
   Stack,
   TextField,
   Typography,
+  Skeleton,
 } from "@mui/material";
-import React, { ChangeEvent, useEffect, useMemo, useState } from "react";
+import React, { ChangeEvent, useEffect, useState, useRef } from "react";
 import ProfessionalsCard from "./components/Professionals-Card";
 import ProfessionalSearchBar from "./components/Professionals-Search-Bar";
 import { useLoading } from "@/components/providers/LoadingProvider";
@@ -28,28 +29,57 @@ const ALPHABETS = "abcdefghijklmnopqrstuvwxyz".split("");
 const ProfessionalList = () => {
   const { details } = usePageData();
   const { startLoading, stopLoading } = useLoading();
-  const [apiData, setApiData] = useState<any[]>([]);
+
+  const [apiData, setApiData] = useState<any[]>(() => {
+    const initial = (details?.firm_professionals as any)?.initialProfessionals;
+    if (initial && initial.length > 0) {
+      return initial.map((u: any) => ({
+        name: u.fullName,
+        designation: u.designation,
+        id: u.id,
+        img: u.profileImageDownloadUrl || u.imageDownloadUrl || u.profileImageUrl || u.imageUrl || ""
+      }));
+    }
+    return [];
+  });
   const [search, setSearch] = useState("");
+  const [appliedSearch, setAppliedSearch] = useState("");
+  const [alphabet, setAlphabet] = useState("");
+  const [appliedAlphabet, setAppliedAlphabet] = useState("");
+  const [isFetchingData, setIsFetchingData] = useState(() => {
+    const initial = (details?.firm_professionals as any)?.initialProfessionals;
+    return !(initial && initial.length > 0);
+  });
+  const [page, setPage] = useState(1);
+  const [totalCount, setTotalCount] = useState<number>(() => {
+    return (details?.firm_professionals as any)?.initialTotal || 0;
+  });
+  const ITEMS_PER_PAGE = 6;
+  const initialMount = useRef(true);
 
   const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const getLastName = (fullName: string) => {
-  const cleanName = fullName.split(",")[0].trim();
-  const parts = cleanName.split(/\s+/);
-  return parts[parts.length - 1].toLowerCase();
-};
-
   useEffect(() => {
-    startLoading();
-    ProfessionalControllers.getAllProfessionalProfiles()
+    if (initialMount.current) {
+      initialMount.current = false;
+      if (apiData.length > 0) {
+        return; // Skip fetch only if we successfully got SSR data
+      }
+    }
+
+    setIsFetchingData(true);
+    ProfessionalControllers.getAllProfessionalProfiles(page, ITEMS_PER_PAGE, appliedSearch, appliedAlphabet)
       .then((res: any) => {
         let users = res.data?.data?.users || [];
         if (!users.length && res.data?.data?.data?.users) {
           users = res.data.data.data.users;
         }
         
+        const total = res.data?.data?.meta?.total || res.data?.data?.data?.meta?.total || 0;
+        setTotalCount(total);
+
         if (users && users.length > 0) {
           const mapped = users.map((u: any) => ({
             name: u.fullName,
@@ -58,40 +88,21 @@ const ProfessionalList = () => {
             img: u.profileImageDownloadUrl || u.imageDownloadUrl || u.profileImageUrl || u.imageUrl || ""
           }));
           setApiData(mapped);
+        } else {
+          setApiData([]);
         }
-        stopLoading();
+        setIsFetchingData(false);
       })
       .catch((err) => {
         console.error("Failed to fetch professionals", err);
-        stopLoading();
+        setIsFetchingData(false);
       });
-  }, []);
+  }, [page, appliedSearch, appliedAlphabet]);
 
-  const sortedFullList = useMemo(() => {
-    return [...apiData].sort((a, b) => {
-      const lastNameComparison = getLastName(a.name).localeCompare(getLastName(b.name));
-      if (lastNameComparison !== 0) {
-        return lastNameComparison;
-      }
-      return a.name.localeCompare(b.name);
-    });
-  }, [apiData]);
-
-  const [data, setData] = useState(sortedFullList);
-
-  useEffect(() => {
-    setData(sortedFullList);
-  }, [sortedFullList]);
-
-  const [page, setPage] = useState(1);
-  const ITEMS_PER_PAGE = 6;
   const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
   const [isPaginating, setIsPaginating] = useState(false);
 
-  const paginatedData = data?.slice(
-    (page - 1) * ITEMS_PER_PAGE,
-    page * ITEMS_PER_PAGE,
-  );
+  const paginatedData = apiData;
 
 
   const handleImageLoad = () => {
@@ -112,21 +123,15 @@ const ProfessionalList = () => {
   }, [imagesLoadedCount, isPaginating, paginatedData, stopLoading]);
 
   const handleSearch = () => {
-    const filteredData = sortedFullList.filter((item: any) =>
-      item.name.toLowerCase().includes(search.toLowerCase()),
-    );
-    setData(filteredData);
+    setAppliedSearch(search);
     setPage(1);
   };
-  const [alphabet, setAlphabet] = useState("");
+  
   const searchByAlphabets = (letter: string) => {
-  setAlphabet(letter);
-  const filteredData = sortedFullList.filter((item: any) =>
-    getLastName(item.name).startsWith(letter.toLowerCase()),
-  );
-  setData(filteredData);
-  setPage(1);
-};
+    setAlphabet(letter);
+    setAppliedAlphabet(letter);
+    setPage(1);
+  };
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -135,16 +140,12 @@ const ProfessionalList = () => {
     if (value === page) return;
     setPage(value);
     
-    const newPageData = data?.slice((value - 1) * ITEMS_PER_PAGE, value * ITEMS_PER_PAGE);
-    const imagesToLoad = newPageData.filter((p: any) => p.img).length;
-    
-    if (imagesToLoad > 0) {
-      startLoading();
-      setIsPaginating(true);
-      setImagesLoadedCount(0);
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    // The useEffect will trigger data fetching.
+    // We just handle image loading states here.
+    startLoading();
+    setIsPaginating(true);
+    setImagesLoadedCount(0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -157,24 +158,45 @@ const ProfessionalList = () => {
               handleSearch={handleSearch}
               alphabet={alphabet}
               searchByAlphabets={searchByAlphabets}
-              options={sortedFullList.map((option: any) => option.name)}
+              options={[]}
               onSelect={(newValue) => {
                 setSearch(newValue);
               }}
               clearFilters={() => {
                 setAlphabet("");
-                setData(sortedFullList);
+                setAppliedAlphabet("");
+                setSearch("");
+                setAppliedSearch("");
                 setPage(1);
               }}
             />
         </Grid>
-        <Box sx={{ position: "relative", mt: 5, minHeight: 400 }}>
+        <Box sx={{ position: "relative", mt: 5, minHeight: { xs: 800, md: 920 } }}>
           <Grid
             container
             spacing={5}
             rowSpacing={20}
           >
-            {paginatedData?.length ? (
+            {isFetchingData ? (
+              Array.from(new Array(6)).map((_, index) => (
+                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }} key={index}>
+                  <Skeleton variant="rounded" width="100%" sx={{ height: { lg: "380px", md: "340px", sm: "300px", xs: "280px" }, borderRadius: "16px" }} />
+                </Grid>
+              ))
+            ) : !paginatedData?.length ? (
+              <Typography
+                sx={{
+                  fontSize: 20,
+                  fontFamily: tradeGothic.style.fontFamily,
+                  color: COLORS.PRIMARY_BLUE,
+                  fontWeight: 700,
+                  textAlign: "center",
+                  width: "100%",
+                }}
+              >
+                No Data Found
+              </Typography>
+            ) : (
               paginatedData?.map((val, i) => (
                 <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }} key={i}>
                   <ProfessionalsCard
@@ -187,26 +209,13 @@ const ProfessionalList = () => {
                   />
                 </Grid>
               ))
-            ) : (
-            <Typography
-              sx={{
-                fontSize: 20,
-                fontFamily: tradeGothic.style.fontFamily,
-                color: COLORS.PRIMARY_BLUE,
-                fontWeight: 700,
-                textAlign: "center",
-                width: "100%",
-              }}
-            >
-              No Data Found
-            </Typography>
-          )}
+            )}
           </Grid>
         </Box>
-        {data && data?.length > ITEMS_PER_PAGE && (
-          <Stack direction="row" justifyContent="center" sx={{ mt: 20 }}>
+        <Stack direction="row" justifyContent="center" sx={{ mt: 20, minHeight: "32px" }}>
+          {totalCount > ITEMS_PER_PAGE && (
             <Pagination
-              count={Math.ceil(data.length / ITEMS_PER_PAGE)}
+              count={Math.ceil(totalCount / ITEMS_PER_PAGE)}
               page={page}
               onChange={handlePageChange}
               sx={{
@@ -223,8 +232,8 @@ const ProfessionalList = () => {
                 },
               }}
             />
-          </Stack>
-        )}
+          )}
+        </Stack>
       </Container>
     </Box>
   );

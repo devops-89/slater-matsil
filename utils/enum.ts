@@ -61,3 +61,20 @@ export enum INSIGHTS_TAB_DATA {
   ARTICLES = "ARTICLES",
   LINKS = "LINKS",
 }
+
+export enum SUPPORT_SERVICE {
+  PORTFOLIO_DEVELOPMENT = 'Portfolio Development',
+  PATENT_MINING = 'Patent Mining',
+  PROCESS_DEFINITION = 'Process Definition',
+  IP_LANDSCAPE_ANALYSIS = 'IP Landscape Analysis',
+  PATENT_DRAFTING = 'Patent Drafting',
+  PATENT_PROSECUTION = 'Patent Prosecution',
+  TM_REGISTRATION = 'TM Registration',
+  INTERNATIONAL_FILLINGS = 'International Fillings',
+  VALUATION = 'Valuation',
+  LICENSING = 'Licensing',
+  LITIGATION = 'Litigation',
+  COMPETITIVE_ANALYSIS = 'Competitive Analysis',
+  POST_GRANT_CHALLENGES = 'Post Grant Challenges',
+  OPINIONS = 'Opinions',
+}

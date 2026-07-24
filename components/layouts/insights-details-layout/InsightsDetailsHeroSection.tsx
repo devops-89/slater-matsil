@@ -103,6 +103,7 @@ const InsightsDetailsHeroSection = () => {
                         objectPosition: "center",
                       }}
                       priority
+                      unoptimized={true}
                     />
                   </Box>
                 ) : (
@@ -202,6 +203,7 @@ const InsightsDetailsHeroSection = () => {
                     src={hero.badgeImage}
                     alt="Ranking badge"
                     fill
+                    unoptimized={true}
                     style={{ objectFit: "contain" }}
                   />
                 </Box>

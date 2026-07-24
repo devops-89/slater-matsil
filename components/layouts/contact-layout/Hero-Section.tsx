@@ -56,14 +56,16 @@ const HeroSection = () => {
             </Grid>
             <Grid size={{ lg: 6, xs: 12 }}>
               {details?.contactPage?.hero_section_data?.img && (
-                <Image
-                  src={details?.contactPage?.hero_section_data?.img}
-                  alt="Contact Hero Image"
-                  width={500}
-                  height={500}
-                  loading="lazy"
-                  style={{ width: "100%", height: "auto" }}
-                />
+                <Box sx={{ width: "100%", aspectRatio: "4/3", position: "relative" }}>
+                  <Image
+                    src={details?.contactPage?.hero_section_data?.img}
+                    alt="Contact Hero Image"
+                    fill
+                    priority
+                    unoptimized={true}
+                    style={{ objectFit: "cover", borderRadius: 20 }}
+                  />
+                </Box>
               )}
             </Grid>
           </Grid>

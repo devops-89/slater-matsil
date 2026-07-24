@@ -48,6 +48,8 @@ const ImageCarousel = () => {
       sx={{
         position: "relative",
         width: "100%",
+        height: { xs: "350px", md: "500px" },
+        boxSizing: "content-box",
         py: { xs: 4, md: 10 },
         overflow: "hidden",
         "& .swiper": {
@@ -56,15 +58,22 @@ const ImageCarousel = () => {
           maxWidth: "1600px",
           margin: "0 auto",
           px: { xs: 2, md: 4 },
+          height: "100%",
+        },
+        "& .swiper-wrapper": {
+          display: "flex",
+          flexDirection: "row",
+          height: "100%",
         },
         "& .swiper-slide": {
+          flexShrink: 0,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
           opacity: 0.4,
           transform: "scale(0.85)",
-          height: { xs: "350px", md: "500px" },
+          height: "100%",
         },
         "& .swiper-slide-active": {
           opacity: 1,
@@ -107,9 +116,10 @@ const ImageCarousel = () => {
           dynamicBullets: true,
         }}
         className="multiSwiper"
+        style={{ height: "100%", display: "flex", overflow: "hidden" }}
       >
         {validImages.map((item: any, i: number) => (
-          <SwiperSlide key={i}>
+          <SwiperSlide key={i} style={{ flexShrink: 0, height: "100%" }}>
             <Box
               sx={{
                 width: "100%",

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import ClientPage from "./ClientPage";
+import StoreInitializer from "@/components/providers/StoreInitializer";
+
 export const revalidate = 60;
 
 export const metadata: Metadata = {
@@ -7,6 +9,23 @@ export const metadata: Metadata = {
   description: "Join our team of experienced intellectual property attorneys, patent agents, and technical specialists.",
 };
 
-export default function Page() {
-  return <ClientPage />;
+async function getCareersData() {
+  try {
+    const res = await fetch("http://3.92.74.11/api/pages/9", { next: { revalidate: 60 } }).catch(() => null);
+    const data = res ? await res.json() : null;
+    return { data9: data?.data };
+  } catch (error) {
+    return { data9: null };
+  }
+}
+
+export default async function Page() {
+  const apiData = await getCareersData();
+  
+  return (
+    <>
+      <StoreInitializer pageType="careers" apiData={apiData} />
+      <ClientPage />
+    </>
+  );
 }

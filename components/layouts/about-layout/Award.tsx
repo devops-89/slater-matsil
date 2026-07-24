@@ -15,6 +15,62 @@ const ThreeEarth = dynamic(() => import("@/components/widgets/Three-Earth"), {
   ssr: false,
 });
 
+const LazyThreeEarth = () => {
+  const [visible, setVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <Box
+      ref={containerRef}
+      sx={{
+        width: "100%",
+        height: "550px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "relative",
+      }}
+    >
+      <style>{`
+        @keyframes loader-spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      `}</style>
+      {visible ? (
+        <ThreeEarth height="550px" />
+      ) : (
+        <Box
+          style={{
+            width: 60,
+            height: 60,
+            border: "5px solid #ECF8F8",
+            borderTop: "5px solid #00B1B0",
+            borderRadius: "50%",
+            animation: "loader-spin 1s linear infinite",
+          }}
+        />
+      )}
+    </Box>
+  );
+};
+
 const Award = () => {
   const { details } = usePageData();
 
@@ -32,7 +88,7 @@ const Award = () => {
               minHeight: "550px",
             }}
           >
-            <ThreeEarth height="550px" />
+            <LazyThreeEarth />
           </Grid>
 
           <Grid size={{ lg: 6, xs: 12 }}>

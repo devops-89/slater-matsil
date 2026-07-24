@@ -88,4 +88,16 @@ const roleSecuredApi = axios.create({
 });
 setupInterceptors(roleSecuredApi, true);
 
-export { authPublicApi, authSecuredApi, mediaSecuredApi, pagePublicApi, pageSecuredApi, userPublicApi, userSecuredApi, insightsPublicApi, insightsSecuredApi, roleSecuredApi };
+const careersPublicApi = axios.create({
+  baseURL: SERVER_ENDPOINTS.CAREERS_BASEURL,
+  headers: { "Content-Type": "application/json", Accept: "application/json, text/plain, */*" },
+});
+setupInterceptors(careersPublicApi, false);
+
+const careersSecuredApi = axios.create({
+  baseURL: SERVER_ENDPOINTS.CAREERS_BASEURL,
+  headers: { "Content-Type": "application/json", Accept: "application/json, text/plain, */*" },
+});
+setupInterceptors(careersSecuredApi, true);
+
+export { authPublicApi, authSecuredApi, mediaSecuredApi, pagePublicApi, pageSecuredApi, userPublicApi, userSecuredApi, insightsPublicApi, insightsSecuredApi, roleSecuredApi, careersPublicApi, careersSecuredApi };

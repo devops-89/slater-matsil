@@ -8,6 +8,8 @@ import {
   Dashboard,
   Pages as PagesIcon,
   People as PeopleIcon,
+  ContactSupport as ContactSupportIcon,
+  Work as WorkIcon,
 } from "@mui/icons-material";
 import {
   Box,
@@ -231,6 +233,96 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
                   }}
                 >
                   User Management
+                </Typography>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
+        )}
+
+        {/* Support Inquiries Link */}
+        {isSuperAdmin && (
+        <ListItem disablePadding sx={{ mb: 1 }}>
+          <ListItemButton
+            onClick={() => navigateTo("/manage-contact-support")}
+            sx={{
+              borderRadius: 2,
+              backgroundColor: pathname.includes("/manage-contact-support")
+                ? "rgba(255,255,255,0.05)"
+                : "transparent",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: pathname.includes("/manage-contact-support")
+                  ? COLORS.PRIMARY_GREEN
+                  : COLORS.PRIMARY_BLUE,
+                minWidth: 40,
+              }}
+            >
+              <ContactSupportIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary={
+                <Typography
+                  sx={{
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: pathname.includes("/manage-contact-support") ? 700 : 400,
+                    color: pathname.includes("/manage-contact-support")
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                  }}
+                >
+                  Support Inquiries
+                </Typography>
+              }
+            />
+          </ListItemButton>
+        </ListItem>
+        )}
+
+        {/* Careers Applications Link */}
+        {isSuperAdmin && (
+        <ListItem disablePadding sx={{ mb: 1 }}>
+          <ListItemButton
+            onClick={() => navigateTo("/manage-careers")}
+            sx={{
+              borderRadius: 2,
+              backgroundColor: pathname.includes("/manage-careers")
+                ? "rgba(255,255,255,0.05)"
+                : "transparent",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.15)",
+              },
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: pathname.includes("/manage-careers")
+                  ? COLORS.PRIMARY_GREEN
+                  : COLORS.PRIMARY_BLUE,
+                minWidth: 40,
+              }}
+            >
+              <WorkIcon />
+            </ListItemIcon>
+
+            <ListItemText
+              primary={
+                <Typography
+                  sx={{
+                    fontFamily: adelle.style.fontFamily,
+                    fontWeight: pathname.includes("/manage-careers") ? 700 : 400,
+                    color: pathname.includes("/manage-careers")
+                      ? COLORS.PRIMARY_GREEN
+                      : COLORS.PRIMARY_BLUE,
+                  }}
+                >
+                  Careers Applications
                 </Typography>
               }
             />

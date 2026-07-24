@@ -75,14 +75,16 @@ const WhoWeServeLayoutHero = () => {
             </Grid>
             <Grid size={{ lg: 6, xs: 12 }}>
               {details?.whoWeServePage?.whoWeServepageHeroSection?.img && (
-                <Image
-                  src={details?.whoWeServePage?.whoWeServepageHeroSection?.img}
-                  alt=""
-                  width={500}
-                  height={500}
-                  style={{ width: "100%", height: "auto", borderRadius: 20 }}
-                  loading="lazy"
-                />
+                <Box sx={{ width: "100%", aspectRatio: "4/3", position: "relative" }}>
+                  <Image
+                    src={details?.whoWeServePage?.whoWeServepageHeroSection?.img}
+                    alt=""
+                    fill
+                    unoptimized={true}
+                    style={{ objectFit: "cover", borderRadius: 20 }}
+                    priority
+                  />
+                </Box>
               )}
             </Grid>
           </Grid>

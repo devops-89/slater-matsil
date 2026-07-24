@@ -7,6 +7,24 @@ export const metadata: Metadata = {
   description: "Contact our offices in Dallas, Texas to consult with our intellectual property legal professionals.",
 };
 
-export default function Page() {
-  return <ClientPage />;
+import StoreInitializer from "../../components/providers/StoreInitializer";
+
+async function getContactData() {
+  try {
+    const res = await fetch("http://3.92.74.11/api/pages/10", { next: { revalidate: 60 } }).catch(() => null);
+    const data = res ? await res.json() : null;
+    return { data10: data?.data };
+  } catch (error) {
+    return { data10: null };
+  }
+}
+
+export default async function Page() {
+  const apiData = await getContactData();
+  return (
+    <>
+      <StoreInitializer pageType="contact" apiData={apiData} />
+      <ClientPage />
+    </>
+  );
 }

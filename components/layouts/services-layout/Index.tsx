@@ -1,13 +1,11 @@
 "use client";
 import React from "react";
 import HeroServicesSection from "./Hero-services-section";
-import dynamic from "next/dynamic";
-
-const WhyChooseUs = dynamic(() => import("./Why-Choose-Us"), { ssr: true });
-const UnParalleledLegalService = dynamic(() => import("./Unparalleled-legal-services"), { ssr: true });
-const OurserviceFramework = dynamic(() => import("./Our-service-framework"), { ssr: true });
-const ServiceAreas = dynamic(() => import("@/components/widgets/Service-Areas"), { ssr: true });
-const NeedAssistance = dynamic(() => import("./Need-Assistance"), { ssr: true });
+import WhyChooseUs from "./Why-Choose-Us";
+import UnParalleledLegalService from "./Unparalleled-legal-services";
+import OurserviceFramework from "./Our-service-framework";
+import ServiceAreas from "@/components/widgets/Service-Areas";
+import NeedAssistance from "./Need-Assistance";
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { PageControllers } from "@/api/pageControllers";

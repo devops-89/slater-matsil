@@ -25,7 +25,15 @@ const BlogSection = () => {
   const { startLoading, stopLoading } = useLoading();
   const blogSection = details?.insightsPage?.blogSection;
 
-  const [pastWebinars, setPastWebinars] = useState<any[]>([]);
+  const [pastWebinars, setPastWebinars] = useState<any[]>(
+    blogSection?.pastWebinars || []
+  );
+
+  useEffect(() => {
+    if (blogSection?.pastWebinars && blogSection.pastWebinars.length > 0) {
+      setPastWebinars(blogSection.pastWebinars);
+    }
+  }, [blogSection?.pastWebinars]);
 
   useEffect(() => {
     const fetchBlogs = async () => {

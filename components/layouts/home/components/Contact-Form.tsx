@@ -1,7 +1,7 @@
 import { useNotification } from "@/components/providers/NotificationProvider";
+import { COLORS, SUPPORT_SERVICE } from "@/utils/enum";
 import { SERVICES_AREAS_DATA } from "@/public/data/generic-array";
-import { COLORS } from "@/utils/enum";
-import { adelle } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import { TEXTFIELD_STYLES } from "@/utils/styles";
 import {
   ArrowForward,
@@ -45,14 +45,14 @@ const validationSchema = Yup.object({
   terms: Yup.boolean().oneOf([true], "You must agree to the terms"),
 });
 
-const ContactForm = () => {
+const ContactForm = ({ details }: { details?: any }) => {
   const { showNotification } = useNotification();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
-      service: null,
+      service: null as { label: string; category: string } | null,
       date: null,
       message: "",
       terms: false,
@@ -61,17 +61,27 @@ const ContactForm = () => {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       const token = recaptchaRef.current?.getValue();
 
-      if (!token) {
-        showNotification("Please complete the reCAPTCHA", "error");
-        setSubmitting(false);
-        return;
-      }
+      // Make reCAPTCHA optional for now
+      // if (!token) {
+      //   showNotification("Please complete the reCAPTCHA", "error");
+      //   setSubmitting(false);
+      //   return;
+      // }
 
       try {
-        const response = await fetch("/api/appointment", {
+        const payload = {
+          name: values.name,
+          email: values.email,
+          service: values.service?.label,
+          appointmentDate: values.date ? (values.date as any).format("YYYY-MM-DD") : null,
+          message: values.message,
+          agreedToTerms: values.terms,
+        };
+
+        const response = await fetch("/api/contact-support", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...values, recaptchaToken: token }),
+          body: JSON.stringify(payload),
         });
 
         if (response.ok) {
@@ -100,16 +110,22 @@ const ContactForm = () => {
       <Typography
         sx={{
           color: COLORS.PRIMARY_BLUE,
-          fontSize: 30,
-          fontfamily: adelle.style.fontFamily,
-          fontWeight: 600,
+          fontSize: { lg: 35, xs: 25 },
+          fontFamily: tradeGothic.style.fontFamily,
+          fontWeight: 700,
+          lineHeight: { lg: "72px", xs: "25px" },
+          textTransform: "capitalize",
         }}
       >
-        Let's Connect
+        {details?.homepage?.contactUsFormProps?.heading || "Connect Us"}
       </Typography>
+      <Box sx={{ display: "flex", gap: 1, my: 2 }}>
+        <Box sx={{ width: 40, height: 4, backgroundColor: COLORS.PRIMARY_BLUE }} />
+        <Box sx={{ width: 10, height: 4, backgroundColor: COLORS.PRIMARY_GREEN }} />
+      </Box>
 
-      <Grid container sx={{ mt: 2 }} spacing={3}>
-        <Grid size={{ sm: 6, xs: 12 }}>
+      <Grid container spacing={{ lg: 3, xs: 2 }} sx={{ mt: 3 }}>
+        <Grid size={12}>
           <TextField
             sx={{ ...TEXTFIELD_STYLES }}
             fullWidth
@@ -120,7 +136,7 @@ const ContactForm = () => {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.touched.name && Boolean(formik.errors.name)}
-            helperText={formik.touched.name && formik.errors.name}
+            helperText={formik.touched.name && (formik.errors.name as string)}
             slotProps={{
               input: {
                 startAdornment: (
@@ -132,18 +148,18 @@ const ContactForm = () => {
             }}
           />
         </Grid>
-        <Grid size={{ sm: 6, xs: 12 }}>
+        <Grid size={12}>
           <TextField
             sx={{ ...TEXTFIELD_STYLES }}
             fullWidth
-            label="Email"
+            label="E-Mail"
             id="email"
             name="email"
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             error={formik.touched.email && Boolean(formik.errors.email)}
-            helperText={formik.touched.email && formik.errors.email}
+            helperText={formik.touched.email && (formik.errors.email as string)}
             slotProps={{
               input: {
                 startAdornment: (
@@ -175,13 +191,11 @@ const ContactForm = () => {
               area.subCategories.map((sub) => ({
                 label: sub.label,
                 category: area.category,
-              })),
-            )}
+              }))
+            ).filter(item => Object.values(SUPPORT_SERVICE).includes(item.label as any))}
             groupBy={(option) => option.category}
             getOptionLabel={(option) => option.label}
-            isOptionEqualToValue={(option, value) =>
-              option.label === value?.label
-            }
+            isOptionEqualToValue={(option, value) => option.label === value?.label}
             renderGroup={(params) => (
               <li key={params.key}>
                 <Box

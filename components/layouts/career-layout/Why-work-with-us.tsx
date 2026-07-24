@@ -77,15 +77,27 @@ const WhyWorkWithus = () => {
 
         <Grid container sx={{ mt: 4 }} spacing={4} alignItems={"center"}>
           <Grid size={{ lg: 6, xs: 12 }}>
-            {data?.section_img && (
-              <Image
-                src={typeof data.section_img === 'string' ? data.section_img : data.section_img}
-                alt=""
-                width={800}
-                height={600}
-                style={{ width: "100%", height: "auto", borderRadius: "20px", objectFit: "cover" }}
-              />
-            )}
+            <Box
+              sx={{
+                width: "100%",
+                aspectRatio: "4/3",
+                borderRadius: "20px",
+                overflow: "hidden",
+                bgcolor: "rgba(0, 0, 0, 0.05)",
+                position: "relative"
+              }}
+            >
+              {data?.section_img && (
+                <Image
+                  src={typeof data.section_img === 'string' ? data.section_img : data.section_img}
+                  alt=""
+                  fill
+                  priority={true}
+                  unoptimized={true}
+                  style={{ objectFit: "cover" }}
+                />
+              )}
+            </Box>
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
             {data?.work_list_data.map((val, i) => (

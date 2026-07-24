@@ -96,9 +96,4 @@ const ThreeEarth = ({ height = "500px" }: { height?: any }) => {
   );
 };
 
-// Only preload if in a browser context to avoid SSR errors
-if (typeof window !== "undefined") {
-  useGLTF.preload("/images/home/earth/earth_ultra_pbr.glb");
-}
-
 export default ThreeEarth;

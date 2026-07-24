@@ -7,4 +7,6 @@ export const SERVER_ENDPOINTS = {
   USER_BASEURL: baseUrl + "users/",
   INSIGHTS_BASEURL: baseUrl + "insights/",
   ROLE_BASEURL: baseUrl + "role-management/roles",
+  CAREERS_BASEURL: baseUrl + "careers/",
 };
+

@@ -1,24 +1,22 @@
+import { UserControllers } from "@/api/userControllers";
+import { useNotification } from "@/components/providers/NotificationProvider";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { field_label_styles, FLAT_TEXTFIELD_STYLES } from "@/utils/styles";
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   Grid,
   InputLabel,
-  TextField,
-  FormHelperText,
-  CircularProgress,
+  TextField
 } from "@mui/material";
-import React from "react";
-import { MuiTelInput } from "mui-tel-input";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useNotification } from "@/components/providers/NotificationProvider";
-import ReCAPTCHA from "react-google-recaptcha";
+import { MuiTelInput } from "mui-tel-input";
 import { useRef } from "react";
-import { UserControllers } from "@/api/userControllers";
+import ReCAPTCHA from "react-google-recaptcha";
+import * as Yup from "yup";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
@@ -47,11 +45,11 @@ const Form = () => {
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       const token = recaptchaRef.current?.getValue();
 
-      if (!token) {
-        showNotification("Please complete the reCAPTCHA", "error");
-        setSubmitting(false);
-        return;
-      }
+      // if (!token) {
+      //   showNotification("Please complete the reCAPTCHA", "error");
+      //   setSubmitting(false);
+      //   return;
+      // }
 
       try {
         const payload = {
@@ -230,12 +228,12 @@ const Form = () => {
             />
           </Grid>
           <Grid size={12}>
-            <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}>
+            {/* <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}>
               <ReCAPTCHA
                 ref={recaptchaRef}
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
               />
-            </Box>
+            </Box> */}
             <Button
               type="submit"
               disabled={formik.isSubmitting}

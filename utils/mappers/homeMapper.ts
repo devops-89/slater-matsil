@@ -49,7 +49,13 @@ export const mapBackendToHomepageState = (backendData: any, currentState: any) =
             ...wwsLeftRest,
             imageDownloadUrl: section.data?.leftSection?.imageDownloadUrl || "",
             heroImage: getValidImageUrl(section.data?.leftSection?.imageDownloadUrl || section.data?.leftSection?.heroImage || section.data?.leftSection?.imageUrl || section.data?.leftSection?.key || ""),
-            imageUrl: section.data?.leftSection?.imageUrl || section.data?.leftSection?.heroImage || section.data?.leftSection?.key || ""
+            imageUrl: section.data?.leftSection?.imageUrl || section.data?.leftSection?.heroImage || section.data?.leftSection?.key || "",
+            small_logo: (section.data?.leftSection?.small_logo && (typeof section.data.leftSection.small_logo === "string" ? section.data.leftSection.small_logo : section.data.leftSection.small_logo?.src)?.includes("_next/static")) ? currentState?.who_we_serve?.leftSection?.small_logo : section.data?.leftSection?.small_logo,
+            big_logo: (section.data?.leftSection?.big_logo && (typeof section.data.leftSection.big_logo === "string" ? section.data.leftSection.big_logo : section.data.leftSection.big_logo?.src)?.includes("_next/static")) ? currentState?.who_we_serve?.leftSection?.big_logo : section.data?.leftSection?.big_logo,
+          },
+          rightSection: {
+            ...section.data?.rightSection,
+            bgImage: (section.data?.rightSection?.bgImage && typeof section.data?.rightSection?.bgImage === "string" && section.data.rightSection.bgImage.includes("_next/static")) ? currentState?.who_we_serve?.rightSection?.bgImage : section.data?.rightSection?.bgImage,
           }
         };
         break;

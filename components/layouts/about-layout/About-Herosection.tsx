@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
@@ -7,8 +8,13 @@ import { Box, Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import ReactPlayer from "react-player";
 const AboutHerosection = () => {
   const { details } = usePageData();
+  const [apiVideoReady, setApiVideoReady] = useState(false);
 
   const phone = useMediaQuery("(max-width:600px)");
+  
+  const apiVideoUrl = details?.aboutPage?.heroSection?.videoDownloadUrl;
+  const fallbackVideoUrl = "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4";
+
   return (
     <Box sx={{ py: { lg: 8, xs: 4 } }}>
       <Container maxWidth="lg">
@@ -56,18 +62,42 @@ const AboutHerosection = () => {
             }}
           />
         </Box> */}
-        <Grid container sx={{ mt: 14,mx:12 }}>
+        <Grid container sx={{ mt: 14, mx: 12 }}>
           <Grid size={12}>
-            <ReactPlayer
-              src={details?.aboutPage?.heroSection?.videoDownloadUrl || "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4"}
-              width={"100%"}
-              height={"100%"}
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{ borderRadius: 10 }}
-            />
+            {apiVideoUrl ? (
+              <>
+                {/* Hidden player to trigger ready state for API video */}
+                <div style={{ display: "none" }}>
+                  <ReactPlayer
+                    src={apiVideoUrl}
+                    autoPlay={false}
+                    muted={true}
+                    onReady={() => setApiVideoReady(true)}
+                  />
+                </div>
+                <ReactPlayer
+                  src={apiVideoReady ? apiVideoUrl : fallbackVideoUrl}
+                  width="100%"
+                  height="100%"
+                  autoPlay={true}
+                  muted={true}
+                  loop={true}
+                  playsInline={true}
+                  style={{ borderRadius: 10 }}
+                />
+              </>
+            ) : (
+              <ReactPlayer
+                src={fallbackVideoUrl}
+                width="100%"
+                height="100%"
+                autoPlay={true}
+                muted={true}
+                loop={true}
+                playsInline={true}
+                style={{ borderRadius: 10 }}
+              />
+            )}
           </Grid>
         </Grid>
       </Container>

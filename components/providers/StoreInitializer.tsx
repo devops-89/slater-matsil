@@ -6,7 +6,7 @@ import { WEBSITE_DATA } from "@/public/data/website-data";
 import { mapBackendToHomepageState, mapBackendToServicesPageState, mapBackendToAboutPageState } from "@/utils/pageDataMapper";
 
 type StoreInitializerProps = {
-  pageType: "home" | "about" | "professionals" | "insights" | "services" | "leadership" | "practiceGroups";
+  pageType: "home" | "about" | "professionals" | "insights" | "services" | "leadership" | "practiceGroups" | "careers" | "blogs" | "contact" | "who-we-serve";
   apiData: any;
 };
 
@@ -35,10 +35,14 @@ export default function StoreInitializer({ pageType, apiData }: StoreInitializer
       }
       newState = { aboutPage: updatedAboutPage };
     } else if (pageType === "professionals") {
-      let updatedProfPage = WEBSITE_DATA.firm_professionals;
+      let updatedProfPage: any = {};
       if (apiData?.data5) {
         const mapper = require("@/utils/pageDataMapper");
         updatedProfPage = mapper.mapBackendToFirmProfessionalsState(apiData.data5, updatedProfPage);
+      }
+      if (apiData?.initialProfessionals) {
+        updatedProfPage.initialProfessionals = apiData.initialProfessionals;
+        updatedProfPage.initialTotal = apiData.initialTotal;
       }
       newState = { firm_professionals: updatedProfPage };
     } else if (pageType === "insights") {
@@ -72,32 +76,52 @@ export default function StoreInitializer({ pageType, apiData }: StoreInitializer
         updatedPracticeGroupPage = mapper.mapBackendToPracticeGroupsState(apiData.data4, updatedPracticeGroupPage);
       }
       newState = { practiceGroupPage: updatedPracticeGroupPage };
+    } else if (pageType === "careers") {
+      let updatedCareersPage = WEBSITE_DATA.careerPage;
+      if (apiData?.data9) {
+        const mapper = require("@/utils/pageDataMapper");
+        updatedCareersPage = mapper.mapBackendToCareersState(apiData.data9, updatedCareersPage);
+      }
+      newState = { careerPage: updatedCareersPage };
+    } else if (pageType === "blogs") {
+      let updatedInsightsPage = WEBSITE_DATA.insightsPage;
+      if (apiData?.data8) {
+        const mapper = require("@/utils/pageDataMapper");
+        updatedInsightsPage = mapper.mapBackendToBlogsState(apiData.data8, updatedInsightsPage);
+      }
+      newState = { insightsPage: updatedInsightsPage };
+    } else if (pageType === "contact") {
+      let updatedContactPage = WEBSITE_DATA.contactPage;
+      if (apiData?.data10) {
+        const mapper = require("@/utils/pageDataMapper");
+        updatedContactPage = mapper.mapBackendToContactState(apiData.data10, updatedContactPage);
+      }
+      newState = { contactPage: updatedContactPage };
+    } else if (pageType === "who-we-serve") {
+      let updatedWhoWeServePage = WEBSITE_DATA.whoWeServePage;
+      if (apiData?.data11) {
+        const mapper = require("@/utils/pageDataMapper");
+        updatedWhoWeServePage = mapper.mapBackendToWhoWeServeState(apiData.data11, updatedWhoWeServePage);
+      }
+      newState = { whoWeServePage: updatedWhoWeServePage };
     }
     
     return newState;
   };
 
   // SSR and Initial Client Hydration
-  if (!initialized.current && typeof window === "undefined") {
-    usePageData.setState({ details: { ...WEBSITE_DATA, ...updateStore() } } as any);
-    initialized.current = true;
-  }
-
-  if (!initialized.current && typeof window !== "undefined" && !isClientInitialized) {
-    usePageData.setState({ details: { ...WEBSITE_DATA, ...updateStore() } } as any);
-    initialized.current = true;
-    isClientInitialized = true;
-  }
-
-  // Client-Side Navigations
-  const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect;
-  
-  useIsomorphicLayoutEffect(() => {
-    if (!initialized.current) {
+  if (!initialized.current) {
+    if (typeof window === 'undefined') {
+      // On server, setState is fine since reactivity doesn't apply
       usePageData.setState({ details: { ...WEBSITE_DATA, ...updateStore() } } as any);
-      initialized.current = true;
+    } else {
+      // On client, we must mutate the state directly to avoid "Cannot update a component while rendering" 
+      // warning, while still ensuring child components (like HeroSection) render with the API data 
+      // on their VERY FIRST pass to avoid Hydration Mismatch and CLS.
+      usePageData.getState().details = { ...WEBSITE_DATA, ...updateStore() } as any;
     }
-  }, []);
+    initialized.current = true;
+  }
 
   return null;
 }

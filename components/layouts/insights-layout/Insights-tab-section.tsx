@@ -11,12 +11,20 @@ import { useLoading } from "@/components/providers/LoadingProvider";
 
 const InsightsTabSection = () => {
   const { details, insightsTab, setInsightsTab, insightsPage, setInsightsPage } = usePageData();
-  const [apiInsights, setApiInsights] = useState<any[]>([]);
+  const [apiInsights, setApiInsights] = useState<any[]>(
+    details?.insightsPage?.insightsData || []
+  );
   const { startLoading, stopLoading } = useLoading();
   
   const value = insightsTab;
   const currentPage = insightsPage;
   const itemsPerPage = 6;
+
+  useEffect(() => {
+    if (details?.insightsPage?.insightsData && details.insightsPage.insightsData.length > 0) {
+      setApiInsights(details.insightsPage.insightsData);
+    }
+  }, [details?.insightsPage?.insightsData]);
 
   useEffect(() => {
     const fetchApiInsights = async () => {
@@ -43,12 +51,14 @@ const InsightsTabSection = () => {
 
   const insightsData = (() => {
     // Ensure API insights are sorted newest first
-    const allData = [...apiInsights].sort((a, b) => b.id - a.id).map((insight: any) => ({
-      title: insight.insightTitle || insight.title,
-      category: insight.category,
-      bgColor: insight.cardTheme || COLORS.PRIMARY_BLUE,
-      slug: insight.id.toString(), // Use ID as slug for routing
-    }));
+    const allData = [...apiInsights]
+      .sort((a, b) => (b.id || 0) - (a.id || 0))
+      .map((insight: any) => ({
+        title: insight.insightTitle || insight.title,
+        category: insight.category,
+        bgColor: insight.cardTheme || insight.bgColor || COLORS.PRIMARY_BLUE,
+        slug: insight.id ? insight.id.toString() : (insight.slug || ""),
+      }));
     return allData;
   })();
 
