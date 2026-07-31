@@ -135,7 +135,7 @@ const ImageCarousel = () => {
                 src={item.src}
                 alt={`Slide ${i + 1}`}
                 fill
-                priority={i < 4}
+                priority={i === 0}
                 unoptimized={true}
                 sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw"
                 style={{

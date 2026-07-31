@@ -125,7 +125,7 @@ const LeaderCard = ({
   if (slug) {
     return (
       <Link
-        href={`/firm-professionals/professionals/${slug}`}
+        href={`/professionals/professionals/${slug}`}
         style={{ textDecoration: "none" }}
       >
         {content}

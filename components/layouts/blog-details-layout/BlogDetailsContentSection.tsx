@@ -193,7 +193,7 @@ const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
                 >
                   Want to stay updated?
                 </Typography>
-                <Link href="/contact-us" style={{ textDecoration: "none" }}>
+                <Link href="/contact" style={{ textDecoration: "none" }}>
                   <Stack
                     direction="row"
                     spacing={1}

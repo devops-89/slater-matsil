@@ -47,7 +47,7 @@ export const FirmProfessionalsPagePreviews = ({ activeSection, websiteData }: an
         }
         if (href.startsWith('#')) return;
         const path = href.startsWith('/') ? href.slice(1) : href;
-        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'firm-professionals', 'firm-leadership', 'insights'];
+        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'professionals', 'leadership', 'insights'];
         if (validEditors.includes(path)) {
           router.push(`/pages/${path}`);
         } else if (href === '/') {

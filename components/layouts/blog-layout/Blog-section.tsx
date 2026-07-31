@@ -559,7 +559,7 @@ const BlogSection = () => {
               "At Slater Matsil, our patent professionals provide strategic guidance to protect your intellectual property and support your long-term growth."}
           </Typography>
 
-          <Link href="/contact-us" style={{ textDecoration: 'none' }}>
+          <Link href="/contact" style={{ textDecoration: 'none' }}>
             <Box
               sx={{
                 display: "inline-flex",

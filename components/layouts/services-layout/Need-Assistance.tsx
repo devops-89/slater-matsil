@@ -46,7 +46,7 @@ const NeedAssistance = () => {
             your intellectual property portfolio.
           </Typography>
 
-          <Link href="/contact-us">
+          <Link href="/contact">
             <Button
               sx={{
                 backgroundColor: COLORS.WHITE,

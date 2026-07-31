@@ -138,7 +138,7 @@ const MobileNavbar = () => {
         </List>
 
         <Box sx={{ mt: "auto", pt: 4, width: "100%", display: "flex", justifyContent: "center" }}>
-          <Link href="/contact-us" onClick={() => setOpen(false)} style={{ textDecoration: "none", width: "100%" }}>
+          <Link href="/contact" onClick={() => setOpen(false)} style={{ textDecoration: "none", width: "100%" }}>
             <Button
               fullWidth
               sx={{

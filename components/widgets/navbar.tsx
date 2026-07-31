@@ -183,12 +183,12 @@ const Navbar = () => {
       "about-us",
       "services",
       "practice-groups",
-      "firm-professionals",
-      "firm-leadership",
+      "professionals",
+      "leadership",
       "insights",
       "blogs",
       "careers",
-      "contact-us",
+      "contact",
       "who-we-serve",
       "privacy-policy",
       "terms-of-use",
@@ -196,8 +196,8 @@ const Navbar = () => {
     ].includes(baseRoute);
 
     if (hasEditorPage) {
-      // e.g. if the original url is /firm-professionals, the editor page is /pages/firm-professionals
-      // Note: for firm-professionals specifically, the user has /manage-professionals and /pages/firm-professionals.
+      // e.g. if the original url is /professionals, the editor page is /pages/professionals
+      // Note: for professionals specifically, the user has /manage-professionals and /pages/professionals.
       // But the generic one is /pages/[slug]. Let's stick to /pages/baseRoute.
       return `/pages/${baseRoute}`;
     }

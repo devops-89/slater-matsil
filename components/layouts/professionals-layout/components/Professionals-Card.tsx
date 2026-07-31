@@ -21,7 +21,7 @@ const ProfessionalsCard = ({
 }: ExtendedProfessionalsCardProps) => {
   const pathname = usePathname();
   const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
-  const linkHref = isPreview ? "/manage-professionals" : `/firm-professionals/${id}`;
+  const linkHref = isPreview ? "/manage-professionals" : `/professionals/${id}`;
 
   useEffect(() => {
     if (!img && onLoad) {

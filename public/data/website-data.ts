@@ -33,7 +33,7 @@ import blog7 from "@/public/images/blog/Blog7.png";
 import blog8 from "@/public/images/blog/Blog8.png";
 import blog9 from "@/public/images/blog/Blog9.png";
 import blogUpcoming from "@/public/images/blog/emergingTrend.jpg";
-import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact-us.webp";
+import whoWeServeLeftSectionHeroImage from "@/public/images/home/contact.webp";
 import serviceAreas1 from "@/public/images/home/practice_areas/practice_areas1.svg";
 import serviceAreas2 from "@/public/images/home/practice_areas/practice_areas2.svg";
 import serviceAreas3 from "@/public/images/home/practice_areas/practice_areas3.svg";

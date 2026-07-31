@@ -84,18 +84,18 @@ export const useAdminPageSave = () => {
           status: "published",
           sections: mapPracticeGroupsStateToBackend(websiteData.practiceGroupPage)
         };
-      } else if (slug === "firm-professionals") {
+      } else if (slug === "professionals") {
         payload = {
           title: "Firm Professionals",
-          slug: "firm-professionals",
+          slug: "professionals",
           pageType: "static",
           status: "published",
           sections: mapFirmProfessionalsStateToBackend(websiteData.firm_professionals)
         };
-      } else if (slug === "firm-leadership") {
+      } else if (slug === "leadership") {
         payload = {
           title: "Firm Leadership",
-          slug: "firm-leadership",
+          slug: "leadership",
           pageType: "static",
           status: "published",
           sections: mapFirmLeadershipStateToBackend(websiteData.firm_leadership)
@@ -124,10 +124,10 @@ export const useAdminPageSave = () => {
           status: "published",
           sections: mapCareersStateToBackend(websiteData.careerPage)
         };
-      } else if (slug === "contact-us") {
+      } else if (slug === "contact") {
         payload = {
           title: "Contact Us",
-          slug: "contact-us",
+          slug: "contact",
           pageType: "static",
           status: "published",
           sections: mapContactStateToBackend(websiteData.contactPage)

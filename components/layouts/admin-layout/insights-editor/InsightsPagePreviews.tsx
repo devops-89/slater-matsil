@@ -34,7 +34,7 @@ export function InsightsPagePreviews({ activeSection, websiteData }: any) {
         }
 
         const path = href.startsWith('/') ? href.slice(1) : href;
-        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'firm-professionals', 'firm-leadership', 'insights', 'blogs'];
+        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'professionals', 'leadership', 'insights', 'blogs'];
         if (validEditors.includes(path)) {
           router.push(`/pages/${path}`);
         } else if (href === '/') {

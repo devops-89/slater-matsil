@@ -183,7 +183,7 @@ const ProfessionalDetailsLayout = ({ initialRawData }: ProfessionalDetailsLayout
             {/* Previous */}
             {prevProfessional ? (
               <Link
-                href={`/firm-professionals/${prevProfessional.id}`}
+                href={`/professionals/${prevProfessional.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="row" alignItems="center" spacing={1.5} sx={{
@@ -223,7 +223,7 @@ const ProfessionalDetailsLayout = ({ initialRawData }: ProfessionalDetailsLayout
             {/* Next */}
             {nextProfessional ? (
               <Link
-                href={`/firm-professionals/${nextProfessional.id}`}
+                href={`/professionals/${nextProfessional.id}`}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="row" alignItems="center" spacing={1.5} sx={{

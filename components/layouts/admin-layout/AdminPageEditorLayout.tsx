@@ -24,14 +24,14 @@ const BlogsPagePreviews = dynamic(() => import('@/components/layouts/admin-layou
 const CareersPageForms = dynamic(() => import('@/components/layouts/admin-layout/careers-editor').then(mod => mod.CareersPageForms), { loading: LoadingFallback });
 const CareersPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/careers-editor').then(mod => mod.CareersPagePreviews), { loading: LoadingFallback });
 
-const ContactPageForms = dynamic(() => import('@/components/layouts/admin-layout/contact-us-editor').then(mod => mod.ContactPageForms), { loading: LoadingFallback });
-const ContactPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/contact-us-editor').then(mod => mod.ContactPagePreviews), { loading: LoadingFallback });
+const ContactPageForms = dynamic(() => import('@/components/layouts/admin-layout/contact-editor').then(mod => mod.ContactPageForms), { loading: LoadingFallback });
+const ContactPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/contact-editor').then(mod => mod.ContactPagePreviews), { loading: LoadingFallback });
 
-const FirmLeadershipPageForms = dynamic(() => import('@/components/layouts/admin-layout/firm-leadership-editor').then(mod => mod.FirmLeadershipPageForms), { loading: LoadingFallback });
-const FirmLeadershipPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/firm-leadership-editor').then(mod => mod.FirmLeadershipPagePreviews), { loading: LoadingFallback });
+const FirmLeadershipPageForms = dynamic(() => import('@/components/layouts/admin-layout/leadership-editor').then(mod => mod.FirmLeadershipPageForms), { loading: LoadingFallback });
+const FirmLeadershipPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/leadership-editor').then(mod => mod.FirmLeadershipPagePreviews), { loading: LoadingFallback });
 
-const FirmProfessionalsPageForms = dynamic(() => import('@/components/layouts/admin-layout/firm-professionals-editor').then(mod => mod.FirmProfessionalsPageForms), { loading: LoadingFallback });
-const FirmProfessionalsPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/firm-professionals-editor').then(mod => mod.FirmProfessionalsPagePreviews), { loading: LoadingFallback });
+const FirmProfessionalsPageForms = dynamic(() => import('@/components/layouts/admin-layout/professionals-editor').then(mod => mod.FirmProfessionalsPageForms), { loading: LoadingFallback });
+const FirmProfessionalsPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/professionals-editor').then(mod => mod.FirmProfessionalsPagePreviews), { loading: LoadingFallback });
 
 const HomePageForms = dynamic(() => import('@/components/layouts/admin-layout/home-editor').then(mod => mod.HomePageForms), { loading: LoadingFallback });
 const HomePagePreviews = dynamic(() => import('@/components/layouts/admin-layout/home-editor').then(mod => mod.HomePagePreviews), { loading: LoadingFallback });
@@ -103,9 +103,9 @@ export default function AdminPageEditorLayout() {
     sections = ["Hero Section", "Why Choose Us", "Unparalleled Legal Services", "Service Framework", "Service Areas"];
   } else if (slug === "practice-groups") {
     sections = ["Hero Section", "Practice Group Tabs"];
-  } else if (slug === "firm-professionals") {
+  } else if (slug === "professionals") {
     sections = ["Hero Section"];
-  } else if (slug === "firm-leadership") {
+  } else if (slug === "leadership") {
     sections = ["Hero Section", "Firm Mission", "Partners", "Patent Agents", "Administration"];
   } else if (slug === "insights") {
     sections = ["Hero Section", "Quick Links"];
@@ -113,7 +113,7 @@ export default function AdminPageEditorLayout() {
     sections = ["Hero Section"];
   } else if (slug === "careers") {
     sections = ["Hero Section", "Work With Us", "Open Roles"];
-  } else if (slug === "contact-us") {
+  } else if (slug === "contact") {
     sections = ["Hero Section", "Contact Form", "Contact Cards", "Social Follow"];
   } else if (slug === "who-we-serve") {
     sections = ["Hero Section", "About Section", "Serve Tabs"];
@@ -136,9 +136,9 @@ export default function AdminPageEditorLayout() {
       return <ServicesPageForms activeSection={index} websiteData={websiteData} updateServicesPage={updateServicesPage} updateServiceAreas={updateServiceAreas} onDeleteMedia={handleMediaDelete} />;
     } else if (slug === "practice-groups") {
       return <PracticeGroupsPageForms activeSection={index} websiteData={websiteData} updatePracticeGroupsPage={updatePracticeGroupsPage} onDeleteMedia={handleMediaDelete} />;
-    } else if (slug === "firm-professionals") {
+    } else if (slug === "professionals") {
       return <FirmProfessionalsPageForms activeSection={index} websiteData={websiteData} updateFirmProfessionalsPage={updateFirmProfessionalsPage} />;
-    } else if (slug === "firm-leadership") {
+    } else if (slug === "leadership") {
       return <FirmLeadershipPageForms activeSection={index} websiteData={websiteData} updateFirmLeadershipPage={updateFirmLeadershipPage} />;
     } else if (slug === "insights") {
       return <InsightsPageForms activeSection={index} websiteData={websiteData} updateInsightsPage={updateInsightsPage} />;
@@ -146,7 +146,7 @@ export default function AdminPageEditorLayout() {
       return <BlogsPageForms activeSection={index} websiteData={websiteData} updateInsightsPage={updateInsightsPage} />;
     } else if (slug === "careers") {
       return <CareersPageForms activeSection={index} websiteData={websiteData} updateCareerPage={updateCareerPage} />;
-    } else if (slug === "contact-us") {
+    } else if (slug === "contact") {
       return <ContactPageForms activeSection={index} websiteData={websiteData} updateContactPage={updateContactPage} />;
     } else if (slug === "who-we-serve") {
       return <WhoWeServePageForms activeSection={index} websiteData={websiteData} updateWhoWeServePage={updateWhoWeServePage} />;
@@ -169,9 +169,9 @@ export default function AdminPageEditorLayout() {
       return <ServicesPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "practice-groups") {
       return <PracticeGroupsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
-    } else if (slug === "firm-professionals") {
+    } else if (slug === "professionals") {
       return <FirmProfessionalsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
-    } else if (slug === "firm-leadership") {
+    } else if (slug === "leadership") {
       return <FirmLeadershipPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "insights") {
       return <InsightsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
@@ -179,7 +179,7 @@ export default function AdminPageEditorLayout() {
       return <BlogsPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "careers") {
       return <CareersPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
-    } else if (slug === "contact-us") {
+    } else if (slug === "contact") {
       return <ContactPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "who-we-serve") {
       return <WhoWeServePagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;

@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import contactUs from "@/public/images/home/contact-us.webp";
+import contactUs from "@/public/images/home/contact.webp";
 
 const Whoweserve = () => {
   const { details } = usePageData();

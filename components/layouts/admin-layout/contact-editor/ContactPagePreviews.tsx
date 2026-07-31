@@ -52,7 +52,7 @@ export function ContactPagePreviews({ activeSection, websiteData }: any) {
         }
 
         const path = href.startsWith('/') ? href.slice(1) : href;
-        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'firm-professionals', 'firm-leadership', 'insights', 'blogs', 'careers', 'contact-us'];
+        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'professionals', 'leadership', 'insights', 'blogs', 'careers', 'contact'];
         if (validEditors.includes(path)) {
           router.push(`/pages/${path}`);
         } else if (href === '/') {

@@ -150,11 +150,11 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Leadership",
-        href: "/firm-leadership",
+        href: "/leadership",
       },
       {
         text: "Professionals",
-        href: "/firm-professionals",
+        href: "/professionals",
       },
       {
         text: "Services",
@@ -179,7 +179,7 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Contact",
-        href: "/contact-us",
+        href: "/contact",
       },
     ],
   },
@@ -240,11 +240,11 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Leadership",
-        href: "/firm-leadership",
+        href: "/leadership",
       },
       {
         text: "Professionals",
-        href: "/firm-professionals",
+        href: "/professionals",
       },
       {
         text: "Services",
@@ -269,7 +269,7 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Contact",
-        href: "/contact-us",
+        href: "/contact",
       },
     ],
   },
@@ -455,7 +455,7 @@ export const CAREER_HOME_DATA = [
   {
     img: connectWithSlatermatsil,
     title: "Connect with Slatermatsil",
-    href: "/contact-us",
+    href: "/contact",
   },
   {
     img: practiceGroups,

@@ -13,21 +13,19 @@ export const LoadingContext = createContext({
 
 export const useLoading = () => useContext(LoadingContext);
 
-function LoadingProviderContent({ children }: { children: React.ReactNode }) {
+function RouteChangeListener() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [loadingCount, setLoadingCount] = useState(0);
+  const { startLoading, stopLoading } = useLoading();
+  const [isMounted, setIsMounted] = useState(false);
 
-  const startLoading = useCallback(() => {
-    setLoadingCount((c) => c + 1);
-  }, []);
-  
-  const stopLoading = useCallback(() => {
-    setLoadingCount((c) => Math.max(0, c - 1));
-  }, []);
-
-  // Show loader for 250ms on route change to give visual feedback
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return; // Skip initial load since it's handled by provider
+
     let isCancelled = false;
     startLoading();
 
@@ -40,9 +38,35 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
       clearTimeout(timer);
       stopLoading();
     };
-  }, [pathname, searchParams, startLoading, stopLoading]);
+  }, [pathname, searchParams, startLoading, stopLoading, isMounted]);
 
-  // Listen to global events from Axios interceptors or other non-React code
+  return null;
+}
+
+export default function LoadingProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [loadingCount, setLoadingCount] = useState(1);
+
+  const startLoading = useCallback(() => {
+    setLoadingCount((c) => c + 1);
+  }, []);
+  
+  const stopLoading = useCallback(() => {
+    setLoadingCount((c) => Math.max(0, c - 1));
+  }, []);
+
+  // Handle initial page load
+  useEffect(() => {
+    const initialTimer = setTimeout(() => {
+      stopLoading();
+    }, 1000);
+    return () => clearTimeout(initialTimer);
+  }, [stopLoading]);
+
+  // Listen to global events
   useEffect(() => {
     const handleShowLoader = () => startLoading();
     const handleHideLoader = () => stopLoading();
@@ -60,6 +84,9 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
 
   return (
     <LoadingContext.Provider value={{ isLoading, startLoading, stopLoading }}>
+      <Suspense fallback={null}>
+        <RouteChangeListener />
+      </Suspense>
       {isLoading && (
         <div
           style={{
@@ -83,19 +110,9 @@ function LoadingProviderContent({ children }: { children: React.ReactNode }) {
           />
         </div>
       )}
-      {children}
+      <div style={{ opacity: isLoading ? 0 : 1, transition: "opacity 0.3s ease-in-out" }}>
+        {children}
+      </div>
     </LoadingContext.Provider>
-  );
-}
-
-export default function LoadingProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <Suspense fallback={null}>
-      <LoadingProviderContent>{children}</LoadingProviderContent>
-    </Suspense>
   );
 }

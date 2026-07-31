@@ -93,7 +93,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
             >
               {details?.homepage?.our_metrics?.description2 || "Slater Matsil partners with the world's leading innovators to protect their most valuable intellectual property."}
             </Typography>
-            <Link href="/contact-us">
+            <Link href="/contact">
               <Button
                 endIcon={<MailOutlineIcon />}
                 sx={{

@@ -122,7 +122,7 @@ export const useAdminPageData = (slug: string) => {
             setDetails(WEBSITE_DATA as any);
             setInitialWebsiteData(WEBSITE_DATA as any);
           }
-        } else if (slug === "firm-professionals") {
+        } else if (slug === "professionals") {
           const res = await PageControllers.getPageById(5).catch(e => ({ data: { data: null } }));
           const pageData = res.data?.data?.data || res.data?.data;
           
@@ -141,7 +141,7 @@ export const useAdminPageData = (slug: string) => {
             setDetails(WEBSITE_DATA as any);
             setInitialWebsiteData(WEBSITE_DATA as any);
           }
-        } else if (slug === "firm-leadership") {
+        } else if (slug === "leadership") {
           const res = await PageControllers.getPageById(6).catch(e => ({ data: { data: null } }));
           const pageData = res.data?.data?.data || res.data?.data;
           
@@ -171,11 +171,11 @@ export const useAdminPageData = (slug: string) => {
             setDetails(WEBSITE_DATA as any);
             setInitialWebsiteData(WEBSITE_DATA as any);
           }
-        } else if (["careers", "contact-us", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer", "insights"].includes(slug as string)) {
+        } else if (["careers", "contact", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer", "insights"].includes(slug as string)) {
           const PAGE_IDS: Record<string, number> = {
             "insights": 7,
             "careers": 9,
-            "contact-us": 10,
+            "contact": 10,
             "who-we-serve": 11,
             "privacy-policy": 12,
             "terms-of-use": 13,
@@ -197,7 +197,7 @@ export const useAdminPageData = (slug: string) => {
               mergedWebsiteData.insightsPage = mapBackendToInsightsState(pageData, WEBSITE_DATA.insightsPage);
             } else if (slug === "careers") {
               mergedWebsiteData.careerPage = mapBackendToCareersState(pageData, WEBSITE_DATA.careerPage);
-            } else if (slug === "contact-us") {
+            } else if (slug === "contact") {
               mergedWebsiteData.contactPage = mapBackendToContactState(pageData, WEBSITE_DATA.contactPage);
             } else if (slug === "who-we-serve") {
               mergedWebsiteData.whoWeServePage = mapBackendToWhoWeServeState(pageData, WEBSITE_DATA.whoWeServePage);

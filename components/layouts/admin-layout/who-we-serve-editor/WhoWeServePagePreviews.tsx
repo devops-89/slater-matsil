@@ -51,7 +51,7 @@ export function WhoWeServePagePreviews({ activeSection, websiteData }: any) {
         }
 
         const path = href.startsWith('/') ? href.slice(1) : href;
-        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'firm-professionals', 'firm-leadership', 'insights', 'blogs', 'careers', 'contact-us', 'who-we-serve'];
+        const validEditors = ['home', 'about-us', 'services', 'practice-groups', 'professionals', 'leadership', 'insights', 'blogs', 'careers', 'contact', 'who-we-serve'];
         if (validEditors.includes(path)) {
           router.push(`/pages/${path}`);
         } else if (href === '/') {

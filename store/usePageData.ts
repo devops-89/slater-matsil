@@ -10,14 +10,42 @@ interface storeData {
   setInsightsTab: (tab: number) => void;
   insightsPage: number;
   setInsightsPage: (page: number) => void;
+  navOpen: boolean;
+  setNavOpen: (navOpen: boolean) => void;
+  activeSubmenu: string | null;
+  setActiveSubmenu: (activeSubmenu: string | null) => void;
 }
 
-export const usePageData = create<storeData>((set) => ({
-  details: WEBSITE_DATA as any,
+import { getUpdatedDetails } from "@/utils/storeUpdater";
+
+const getInitialState = () => {
+  if (typeof window !== 'undefined' && (window as any).__PAGE_TYPE__ && (window as any).__API_DATA__) {
+    return getUpdatedDetails((window as any).__PAGE_TYPE__, (window as any).__API_DATA__);
+  }
+  return WEBSITE_DATA;
+};
+
+const usePageDataStore = create<storeData>((set) => ({
+  details: getInitialState() as any,
   setDetails: (details) => set({ details }),
   clearDetails: () => set({ details: null }),
   insightsTab: 0,
   setInsightsTab: (insightsTab) => set({ insightsTab }),
   insightsPage: 1,
   setInsightsPage: (insightsPage) => set({ insightsPage }),
+  navOpen: false,
+  setNavOpen: (navOpen) => set({ navOpen }),
+  activeSubmenu: null,
+  setActiveSubmenu: (activeSubmenu) => set({ activeSubmenu }),
 }));
+
+export const usePageData = Object.assign(
+  <T,>(selector?: (state: storeData) => T): T | storeData => {
+    if (typeof window === 'undefined') {
+      const state = usePageDataStore.getState();
+      return selector ? selector(state) : state;
+    }
+    return selector ? usePageDataStore(selector) : usePageDataStore();
+  },
+  usePageDataStore
+) as typeof usePageDataStore;
