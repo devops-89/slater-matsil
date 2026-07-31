@@ -62,7 +62,7 @@ const HeroSection = () => {
                     alt="Contact Hero Image"
                     fill
                     priority
-                    unoptimized={true}
+                    
                     style={{ objectFit: "cover", borderRadius: 20 }}
                   />
                 </Box>

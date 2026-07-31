@@ -71,7 +71,7 @@ const PracticeGroupsHeroSection = () => {
         alt="hero"
         width={1200}
         height={600}
-        unoptimized={true}
+        
         style={{
           width: "100%",
           height: "auto",

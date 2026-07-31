@@ -1,13 +1,5 @@
+import { useState, useEffect } from "react";
 import { usePageData } from "@/store/usePageData";
-import slide1 from "@/career/slider/slide1.jpg";
-import slide2 from "@/career/slider/slide2.jpg";
-import slide3 from "@/career/slider/slide3.jpg";
-import slide10 from "@/career/slider/slider10.jpg";
-import slide4 from "@/career/slider/slider4.jpg";
-import slide5 from "@/career/slider/slider5.jpg";
-import slide6 from "@/career/slider/slider6.jpg";
-import slide8 from "@/career/slider/slider8.jpg";
-import slide9 from "@/career/slider/slider9.jpg";
 import { COLORS } from "@/utils/enum";
 import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
@@ -19,8 +11,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-const sliderImages = [slide1, slide2, slide3, slide4, slide5, slide6, slide8, slide9,slide10];
 
 const ImageCarousel = () => {
   const { details } = usePageData();
@@ -34,14 +24,21 @@ const ImageCarousel = () => {
     return src;
   };
 
-  const displayImages = (dynamicImages && dynamicImages.length > 0) ? dynamicImages : sliderImages;
+  const displayImages = (dynamicImages && dynamicImages.length > 0) ? dynamicImages : [];
   const validImages = displayImages.map((img: any) => ({
     original: img,
     src: getValidSrc(img)
   })).filter((item: any) => item.src !== null);
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.down("lg"));
+
+  if (!mounted || validImages.length === 0) return null;
 
   return (
     <Box

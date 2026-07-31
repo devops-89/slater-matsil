@@ -66,7 +66,7 @@ const HeroServicesSection = () => {
                 width={800}
                 height={600}
                 priority
-                unoptimized={true}
+                
                 style={{ width: "100%", height: "auto", margin: "auto" }}
               />
             )}

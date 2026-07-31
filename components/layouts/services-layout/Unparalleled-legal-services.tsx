@@ -52,7 +52,7 @@ const UnParalleledLegalService = () => {
         alt=""
         width={800}
         height={400}
-        unoptimized={true}
+        
         style={{
           width: "100%",
           height: "auto",

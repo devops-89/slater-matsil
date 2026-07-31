@@ -116,7 +116,7 @@ export const HeroCombined = ({ banners, onChange, onDeleteMedia }: { banners: an
                         src={banner.imageDownloadUrl || banner.image} 
                         alt="preview" 
                         fill 
-                        unoptimized 
+                         
                         style={{ objectFit: "cover" }} 
                       />
                       

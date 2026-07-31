@@ -13,7 +13,7 @@ async function getCareersData() {
   try {
     const res = await fetch("http://3.92.74.11/api/pages/9", { next: { revalidate: 60 } }).catch(() => null);
     const data = res ? await res.json() : null;
-    return { data9: data?.data };
+    return { data9: data?.data?.data || data?.data };
   } catch (error) {
     return { data9: null };
   }

@@ -16,7 +16,7 @@ const MetricsSection = dynamic(() => import("./MetricsSection"), { ssr: true });
 const Whoweserve = dynamic(() => import("./Who-We-Serve"), { ssr: true });
 const ContactSection = dynamic(() => import("./ContactSection"), { ssr: true });
 
-import AboutSection from "./AboutSection";
+const AboutSection = dynamic(() => import("./AboutSection"), { ssr: true });
 import HeroSection3 from "./HeroSection3";
 
 const HomeLayout = () => {

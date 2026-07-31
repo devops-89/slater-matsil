@@ -11,9 +11,10 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
   return (
@@ -61,8 +62,19 @@ const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
 };
 const HeroSection3 = () => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const { details } = usePageData();
-  const globalBanners = details?.homepage?.heroSection;
+  
+  // FIX: Next.js SSR hydration mismatch.
+  // The server renders the default WEBSITE_DATA because StoreInitializer hasn't mutated the global Zustand store yet.
+  // To match the server perfectly on hydration, the client must also render WEBSITE_DATA first.
+  // Then, immediately after hydration (when mounted becomes true), it switches to the API data from Zustand.
+  const globalBanners = mounted ? details?.homepage?.heroSection : undefined;
 
   const defaultBanners = [
     {
@@ -99,11 +111,9 @@ const HeroSection3 = () => {
 
     if (url.trim() === "") return null;
     let finalUrl = url.trim();
-    // Fix missing protocol for S3 or other external domains
     if (!finalUrl.startsWith("http") && !finalUrl.startsWith("/") && finalUrl.includes("s3")) {
       finalUrl = "https://" + finalUrl;
     }
-    // Handle spaces in S3 filenames
     return finalUrl.replace(/ /g, "%20");
   };
 
@@ -251,3 +261,4 @@ const HeroSection3 = () => {
 };
 
 export default HeroSection3;
+

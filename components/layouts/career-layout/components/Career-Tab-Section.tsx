@@ -13,7 +13,14 @@ import CareerApplicationForm from "./CareerApplicationForm";
 const CareerTabSection = () => {
   const { details } = usePageData();
   const { showModal } = useModal();
-  const data = details?.careerPage?.career_open_roles?.tabSectionData;
+  
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Use undefined on server and initial hydration to match server HTML (fallback to static data)
+  const data = mounted ? details?.careerPage?.career_open_roles?.tabSectionData : undefined;
 
   const [value, setValue] = useState(0);
   const [roleData, setRoleData] = useState(

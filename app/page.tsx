@@ -20,7 +20,7 @@ async function getHomeData() {
     const data1 = res1 ? await res1.json() : null;
     const data3 = res3 ? await res3.json() : null;
     
-    return { data1: data1?.data, data3: data3?.data };
+    return { data1: data1?.data?.data || data1?.data, data3: data3?.data?.data || data3?.data };
   } catch (error) {
     return { data1: null, data3: null };
   }

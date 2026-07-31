@@ -31,7 +31,7 @@ const QuickLinksCard = ({ title, img, href }: QUICK_LINKS_CARD_PROPS) => {
           flexShrink: 0,
         }}
       >
-        {img ? <Image src={img} alt={title || "link"} width={24} height={24} /> : null}
+        {img ? <Image src={img} alt={title || "link"} width={24} height={24} unoptimized={true} /> : null}
       </Box>
       <Typography
         className="title"

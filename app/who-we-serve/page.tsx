@@ -13,7 +13,7 @@ async function getWhoWeServeData() {
   try {
     const res = await fetch("http://3.92.74.11/api/pages/11", { next: { revalidate: 60 } }).catch(() => null);
     const data = res ? await res.json() : null;
-    return { data11: data?.data };
+    return { data11: data?.data?.data || data?.data };
   } catch (error) {
     return { data11: null };
   }

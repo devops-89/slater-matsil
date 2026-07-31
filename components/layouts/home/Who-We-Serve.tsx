@@ -53,7 +53,7 @@ const Whoweserve = () => {
                     alt="small logo"
                     width={500}
                     height={200}
-                    unoptimized={true}
+                    
                     style={{ width: "100%", height: "auto" }}
                   />
                 )}
@@ -96,7 +96,7 @@ const Whoweserve = () => {
                 alt="big logo"
                 width={500}
                 height={200}
-                unoptimized={true}
+                
                 style={{ width: "90%", height: "auto", margin: "auto", objectFit: "contain" }}
               />
             </Box>

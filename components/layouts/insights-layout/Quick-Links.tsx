@@ -2,11 +2,19 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import QuickLinksCard from "../../widgets/common/Quick-Links-Card";
 
 const QuickLinks = () => {
   const { details } = usePageData();
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const data = mounted ? details?.insightsPage?.quickLinks?.data : undefined;
+
   return (
     <Box sx={{ backgroundColor: COLORS.WHITE, pt: 3, pb: 3 }}>
       <Box>
@@ -43,7 +51,7 @@ const QuickLinks = () => {
       <Box sx={{ mt: 3 }}>
         <Container maxWidth="lg">
           <Grid container spacing={4}>
-            {details?.insightsPage?.quickLinks?.data.map((val, i) => (
+            {data?.map((val, i) => (
               <Grid size={{ lg: 3, md: 6, xs: 12 }} key={i}>
                 <QuickLinksCard
                   title={val.title}

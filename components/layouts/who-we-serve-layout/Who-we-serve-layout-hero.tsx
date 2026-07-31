@@ -80,7 +80,7 @@ const WhoWeServeLayoutHero = () => {
                     src={details?.whoWeServePage?.whoWeServepageHeroSection?.img}
                     alt=""
                     fill
-                    unoptimized={true}
+                    
                     style={{ objectFit: "cover", borderRadius: 20 }}
                     priority
                   />

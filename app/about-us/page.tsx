@@ -15,7 +15,7 @@ async function getAboutData() {
     const res = await fetch("http://3.92.74.11/api/pages/2", { next: { revalidate: 60 } }).catch(() => null);
     const data = res ? await res.json() : null;
     
-    return { data2: data?.data };
+    return { data2: data?.data?.data || data?.data };
   } catch (error) {
     return { data2: null };
   }
