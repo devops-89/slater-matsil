@@ -1,5 +1,5 @@
 import { WEBSITE_DATA } from "@/public/data/website-data";
-import { mapBackendToHomepageState, mapBackendToServicesPageState, mapBackendToAboutPageState, mapBackendToFirmProfessionalsState, mapBackendToInsightsState, mapBackendToFirmLeadershipState, mapBackendToPracticeGroupsState, mapBackendToCareersState, mapBackendToBlogsState, mapBackendToContactState, mapBackendToWhoWeServeState } from "@/utils/pageDataMapper";
+import { mapBackendToAboutPageState, mapBackendToBlogsState, mapBackendToCareersState, mapBackendToContactState, mapBackendToFirmLeadershipState, mapBackendToFirmProfessionalsState, mapBackendToHomepageState, mapBackendToInsightsState, mapBackendToPracticeGroupsState, mapBackendToServicesPageState, mapBackendToWhoWeServeState } from "@/utils/pageDataMapper";
 
 export const getUpdatedDetails = (pageType: string, apiData: any) => {
   let newState: any = {};

@@ -222,6 +222,7 @@ const Footer = () => {
                     href={val.href || "#"}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={val.title || "Social Media Link"}
                   >
                     <IconButton
                       sx={{

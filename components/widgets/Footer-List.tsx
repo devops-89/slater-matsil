@@ -4,6 +4,7 @@ import { FOOTER_LIST_DATA } from "@/utils/types";
 import {
   Box,
   List,
+  ListItem,
   ListItemButton,
   ListItemText,
   Typography,
@@ -53,31 +54,33 @@ const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
       </Typography>
       <List>
         {DATA?.map((item, i) => (
-          <ListItemButton sx={{ px: 1, width: "fit-content", py: 0 }} key={i}>
-            <Link href={getEditorHref(item.href || "")} style={{ textDecoration: "none" }}>
-              <ListItemText
-                primary={item.text}
-                slotProps={{
-                  primary: {
-                    sx: {
-                      color: COLORS.FOOTER_TEXT_COLOR,
-                      fontSize: 16,
-                      fontFamily: adelle.style.fontFamily,
-                      fontWeight: 400,
-                      lineHeight: "26px",
-                      opacity: 0.8,
-                      py: 0.5,
-                      transition: "color 0.2s",
-                      "&:hover": {
-                        color: COLORS.WHITE,
+          <ListItem disablePadding key={i}>
+            <ListItemButton sx={{ px: 1, width: "fit-content", py: 0 }}>
+              <Link href={getEditorHref(item.href || "")} style={{ textDecoration: "none" }}>
+                <ListItemText
+                  primary={item.text}
+                  slotProps={{
+                    primary: {
+                      sx: {
+                        color: COLORS.FOOTER_TEXT_COLOR,
+                        fontSize: 16,
+                        fontFamily: adelle.style.fontFamily,
+                        fontWeight: 400,
+                        lineHeight: "26px",
                         opacity: 1,
+                        py: 0.5,
+                        transition: "color 0.2s",
+                        "&:hover": {
+                          color: COLORS.WHITE,
+                          opacity: 1,
+                        },
                       },
                     },
-                  },
-                }}
-              />
-            </Link>
-          </ListItemButton>
+                  }}
+                />
+              </Link>
+            </ListItemButton>
+          </ListItem>
         ))}
       </List>
     </Box>

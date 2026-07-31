@@ -24,6 +24,7 @@ const CareerApplicationForm = () => {
   const { hideModal } = useModal();
   const { showNotification } = useNotification();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
   const [currentDate, setCurrentDate] = useState("");
   const [resume, setResume] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -106,7 +107,13 @@ const CareerApplicationForm = () => {
           <Close />
         </IconButton>
       </Box>
-      <form onSubmit={formik.handleSubmit}>
+      <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          onFocus={() => setShowRecaptcha(true)}
+          onMouseEnter={() => setShowRecaptcha(true)}
+          sx={{ mt: 3 }}
+        >
         <Container maxWidth="lg">
           <Grid container spacing={4}>
             <Grid size={{ lg: 6, xs: 12 }}>
@@ -268,10 +275,12 @@ const CareerApplicationForm = () => {
               <Box
                 sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}
               >
+                {showRecaptcha && (
                 <ReCAPTCHA
                   ref={recaptchaRef}
                   sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
                 />
+                )}
               </Box>
               <Button
                 sx={{
@@ -293,7 +302,7 @@ const CareerApplicationForm = () => {
             </Grid>
           </Grid>
         </Container>
-      </form>
+      </Box>
     </Box>
   );
 };

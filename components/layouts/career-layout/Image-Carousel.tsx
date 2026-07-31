@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
-import { Box, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { Box, IconButton, useMediaQuery, useTheme, CircularProgress } from "@mui/material";
 import Image from "next/image";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
@@ -38,7 +38,25 @@ const ImageCarousel = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isTablet = useMediaQuery(theme.breakpoints.down("lg"));
 
-  if (!mounted || validImages.length === 0) return null;
+  if (!mounted) {
+    return (
+      <Box
+        sx={{
+          width: "100%",
+          height: { xs: "350px", md: "500px" },
+          boxSizing: "content-box",
+          py: { xs: 4, md: 10 },
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <CircularProgress sx={{ color: COLORS.PRIMARY_BLUE }} />
+      </Box>
+    );
+  }
+
+  if (validImages.length === 0) return null;
 
   return (
     <Box
@@ -135,8 +153,7 @@ const ImageCarousel = () => {
                 src={item.src}
                 alt={`Slide ${i + 1}`}
                 fill
-                priority={i === 0}
-                unoptimized={true}
+                priority={i < 4}
                 sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw"
                 style={{
                   objectFit: "cover",

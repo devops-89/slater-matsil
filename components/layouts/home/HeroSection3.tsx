@@ -27,6 +27,7 @@ const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
     >
       <Button
         onClick={() => swiper?.slidePrev()}
+        aria-label="Previous Slide"
         sx={{
           minWidth: 50,
           height: 50,
@@ -43,6 +44,7 @@ const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
       </Button>
       <Button
         onClick={() => swiper?.slideNext()}
+        aria-label="Next Slide"
         sx={{
           minWidth: 50,
           height: 50,
@@ -242,7 +244,6 @@ const HeroSection3 = () => {
                       alt="slider image"
                       fill
                       priority={i === 0}
-                      unoptimized={true}
                       sizes="(max-width: 1200px) 100vw, 50vw"
                       style={{
                         borderRadius: 20,

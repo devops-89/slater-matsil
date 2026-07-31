@@ -29,7 +29,7 @@ import {
 } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useFormik } from "formik";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import * as Yup from "yup";
 
@@ -48,6 +48,7 @@ const validationSchema = Yup.object({
 const ContactForm = ({ details }: { details?: any }) => {
   const { showNotification } = useNotification();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -106,7 +107,7 @@ const ContactForm = ({ details }: { details?: any }) => {
   });
 
   return (
-    <Box component="form" onSubmit={formik.handleSubmit}>
+    <Box component="form" onSubmit={formik.handleSubmit} onFocus={() => setShowRecaptcha(true)} onMouseEnter={() => setShowRecaptcha(true)}>
       <Typography
         sx={{
           color: COLORS.PRIMARY_BLUE,
@@ -367,7 +368,7 @@ const ContactForm = ({ details }: { details?: any }) => {
         </Grid>
         <Grid size={12}>
           <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}>
-            {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+            {showRecaptcha && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
             <ReCAPTCHA
             ref={recaptchaRef}
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}

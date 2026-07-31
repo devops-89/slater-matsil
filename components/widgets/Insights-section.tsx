@@ -69,6 +69,7 @@ const InsightsSection = () => {
           >
             <IconButton
               onClick={() => swiperRef.current?.slidePrev()}
+              aria-label="Previous Insight"
               sx={{
                 backgroundColor: COLORS.PRIMARY_BLUE,
                 color: COLORS.WHITE,
@@ -81,6 +82,7 @@ const InsightsSection = () => {
             </IconButton>
             <IconButton
               onClick={() => swiperRef.current?.slideNext()}
+              aria-label="Next Insight"
               sx={{
                 backgroundColor: COLORS.PRIMARY_BLUE,
                 color: COLORS.WHITE,

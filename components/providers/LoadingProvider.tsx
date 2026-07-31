@@ -1,9 +1,16 @@
 "use client";
 
 import loadingData from "@/public/images/loading2.json";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { createContext, Suspense, useCallback, useContext, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import { CircularProgress } from "@mui/material";
+import { COLORS } from "@/utils/enum";
+
+const DotLottieReact = dynamic(
+  () => import("@lottiefiles/dotlottie-react").then((mod) => mod.DotLottieReact),
+  { ssr: false, loading: () => <CircularProgress sx={{ color: COLORS.PRIMARY_BLUE }} /> }
+);
 
 export const LoadingContext = createContext({
   isLoading: false,

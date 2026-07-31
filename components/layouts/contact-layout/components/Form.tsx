@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { MuiTelInput } from "mui-tel-input";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
 import * as Yup from "yup";
 
@@ -32,6 +32,7 @@ const validationSchema = Yup.object({
 const Form = () => {
   const { showNotification } = useNotification();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [showRecaptcha, setShowRecaptcha] = useState(false);
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -86,7 +87,17 @@ const Form = () => {
   });
 
   return (
-    <Box component="form" onSubmit={formik.handleSubmit}>
+    <Box
+      component="form"
+      onSubmit={formik.handleSubmit}
+      onFocus={() => setShowRecaptcha(true)}
+      onMouseEnter={() => setShowRecaptcha(true)}
+      sx={{
+        borderRadius: 4,
+        p: { lg: 5, xs: 2 },
+        backgroundColor: "#F2F7F9",
+      }}
+    >
       <Container maxWidth="lg">
         <Grid container spacing={4}>
           <Grid size={{ lg: 6, xs: 12 }}>
@@ -229,10 +240,12 @@ const Form = () => {
           </Grid>
           <Grid size={12}>
             {/* <Box sx={{ mb: 2, display: "flex", justifyContent: "flex-start" }}>
+              {showRecaptcha && (
               <ReCAPTCHA
                 ref={recaptchaRef}
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
               />
+              )}
             </Box> */}
             <Button
               type="submit"

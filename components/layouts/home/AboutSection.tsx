@@ -46,7 +46,6 @@ const AboutSection = () => {
                 src={details?.homepage?.aboutSection?.imageDownloadUrl || details?.homepage?.aboutSection?.image || AboutImage}
                 alt="Team working together"
                 fill
-                unoptimized={true}
                 sizes="(max-width: 1200px) 100vw, 50vw"
                 style={{
                   borderRadius: 20,
