@@ -12,9 +12,7 @@ import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import HeroSwiper from "./HeroSwiper";
 
 const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
   return (
@@ -62,21 +60,22 @@ const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
     </Stack>
   );
 };
-const HeroSection3 = () => {
+import { getUpdatedDetails } from "@/utils/storeUpdater";
+
+const HeroSection3 = ({ apiData }: { apiData?: any }) => {
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
+  const [swiperReady, setSwiperReady] = useState(false);
   
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const { details } = usePageData();
+  const { details: storeDetails } = usePageData();
   
-  // FIX: Next.js SSR hydration mismatch.
-  // The server renders the default WEBSITE_DATA because StoreInitializer hasn't mutated the global Zustand store yet.
-  // To match the server perfectly on hydration, the client must also render WEBSITE_DATA first.
-  // Then, immediately after hydration (when mounted becomes true), it switches to the API data from Zustand.
-  const globalBanners = mounted ? details?.homepage?.heroSection : undefined;
+  // Calculate details synchronously using apiData if available, otherwise fallback to store
+  const details = apiData ? getUpdatedDetails("home", apiData) : storeDetails;
+  const globalBanners = details?.homepage?.heroSection;
 
   const defaultBanners = [
     {
@@ -129,6 +128,94 @@ const HeroSection3 = () => {
     };
   });
 
+  const SlideContent = ({ val, priority = false }: { val: any, priority?: boolean }) => (
+    <Grid
+      container
+      alignItems={"center"}
+      spacing={{ lg: 5, xs: 4 }}
+      direction={{ xs: "column-reverse", lg: "row" }}
+    >
+      <Grid size={{ lg: 6, xs: 12 }}>
+        <Typography
+          sx={{
+            fontSize: { lg: 50, xs: 28 },
+            color: COLORS.PRIMARY_BLUE,
+            lineHeight: 1.2,
+            fontWeight: 700,
+            fontFamily: tradeGothic.style.fontFamily,
+            textAlign: { xs: "center", lg: "left" },
+          }}
+        >
+          {val.title}
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: { lg: 20, xs: 16 },
+            color: COLORS.BLACK,
+            fontWeight: 500,
+            lineHeight: 1.5,
+            mt: 3,
+            width: { lg: "80%", xs: "100%" },
+            textAlign: { xs: "center", lg: "justify" },
+          }}
+        >
+          {val.description}
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: { xs: "center", lg: "flex-start" },
+          }}
+        >
+          <Link href="/about-us">
+            <Button
+              sx={{
+                backgroundColor: COLORS.PRIMARY_BLUE,
+                color: COLORS.WHITE,
+                fontFamily: adelle.style.fontFamily,
+                fontSize: { lg: 16, xs: 14 },
+                fontWeight: 700,
+                lineHeight: "26px",
+                textTransform: "uppercase",
+                mt: { lg: 3, xs: 4 },
+                borderRadius: 20,
+                width: { lg: 200, xs: 180 },
+                p: 1.5,
+                "&:hover": {
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                },
+              }}
+            >
+              Learn More
+            </Button>
+          </Link>
+        </Box>
+      </Grid>
+      <Grid size={{ lg: 6, xs: 12 }}>
+        <Box
+          sx={{
+            width: "100%",
+            height: { lg: "450px", sm: "350px", xs: "250px" },
+            position: "relative",
+          }}
+        >
+          <Image
+            src={val.img}
+            alt="slider image"
+            fill
+            priority={priority}
+            fetchPriority={priority ? "high" : "auto"}
+            sizes="(max-width: 1200px) 100vw, 50vw"
+            style={{
+              borderRadius: 20,
+              objectFit: "cover",
+            }}
+          />
+        </Box>
+      </Grid>
+    </Grid>
+  );
+
   return (
     <Box
       sx={{
@@ -158,104 +245,14 @@ const HeroSection3 = () => {
         }
       }}
     >
-      <Container maxWidth="lg">
-        <Swiper
-          onSwiper={setSwiperInstance}
-          modules={[Autoplay]}
-          autoplay={{ delay: 7000, disableOnInteraction: false }}
-          spaceBetween={20}
-          loop={true}
-          grabCursor
-        >
-          {banners.map((val, i) => (
-            <SwiperSlide key={i} style={{ flexShrink: 0, width: "100%" }}>
-              <Grid
-                container
-                alignItems={"center"}
-                spacing={{ lg: 5, xs: 4 }}
-                direction={{ xs: "column-reverse", lg: "row" }}
-              >
-                <Grid size={{ lg: 6, xs: 12 }}>
-                  <Typography
-                    sx={{
-                      fontSize: { lg: 50, xs: 28 },
-                      color: COLORS.PRIMARY_BLUE,
-                      lineHeight: 1.2,
-                      fontWeight: 700,
-                      fontFamily: tradeGothic.style.fontFamily,
-                      textAlign: { xs: "center", lg: "left" },
-                    }}
-                  >
-                    {val.title}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      fontSize: { lg: 20, xs: 16 },
-                      color: COLORS.BLACK,
-                      fontWeight: 500,
-                      lineHeight: 1.5,
-                      mt: 3,
-                      width: { lg: "80%", xs: "100%" },
-                      textAlign: { xs: "center", lg: "justify" },
-                    }}
-                  >
-                    {val.description}
-                  </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: { xs: "center", lg: "flex-start" },
-                    }}
-                  >
-                    <Link href="/about-us">
-                      <Button
-                        sx={{
-                          backgroundColor: COLORS.PRIMARY_BLUE,
-                          color: COLORS.WHITE,
-                          fontFamily: adelle.style.fontFamily,
-                          fontSize: { lg: 16, xs: 14 },
-                          fontWeight: 700,
-                          lineHeight: "26px",
-                          textTransform: "uppercase",
-                          mt: { lg: 3, xs: 4 },
-                          borderRadius: 20,
-                          width: { lg: 200, xs: 180 },
-                          p: 1.5,
-                          "&:hover": {
-                            backgroundColor: COLORS.PRIMARY_BLUE,
-                          },
-                        }}
-                      >
-                        Learn More
-                      </Button>
-                    </Link>
-                  </Box>
-                </Grid>
-                <Grid size={{ lg: 6, xs: 12 }}>
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: { lg: "450px", sm: "350px", xs: "250px" },
-                      position: "relative",
-                    }}
-                  >
-                    <Image
-                      src={val.img}
-                      alt="slider image"
-                      fill
-                      priority={i === 0}
-                      sizes="(max-width: 1200px) 100vw, 50vw"
-                      style={{
-                        borderRadius: 20,
-                        objectFit: "cover",
-                      }}
-                    />
-                  </Box>
-                </Grid>
-              </Grid>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+      <Container maxWidth="lg" sx={{ position: "relative" }}>
+        <Box sx={{ width: "100%" }}>
+          <HeroSwiper 
+            banners={banners} 
+            SlideContent={SlideContent} 
+            onReady={() => {}} 
+          />
+        </Box>
       </Container>
     </Box>
   );

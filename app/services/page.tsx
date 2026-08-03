@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import ServicesLayout from "@/components/layouts/services-layout/Index";
-import React from "react";
 import StoreInitializer from "@/components/providers/StoreInitializer";
+import type { Metadata } from "next";
 
 export const revalidate = 60;
 
@@ -25,7 +24,7 @@ const Services = async () => {
   return (
     <>
       <StoreInitializer pageType="services" apiData={apiData} />
-      <ServicesLayout />
+      <ServicesLayout apiData={apiData} />
     </>
   );
 };

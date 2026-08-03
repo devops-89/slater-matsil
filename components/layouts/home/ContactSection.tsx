@@ -1,7 +1,7 @@
 import star from "@/common/heading-star.png";
 import contactImage from "@/home/contact_table.webp";
 import { COLORS } from "@/utils/enum";
-import { adelle, tradeGothic } from "@/utils/fonts";
+import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import ContactForm from "./components/Contact-Form";

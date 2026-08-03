@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import PracticeGroupsLayout from "@/components/layouts/practice-group-layout/Index";
-import React from "react";
 import StoreInitializer from "@/components/providers/StoreInitializer";
+import type { Metadata } from "next";
 
 export const revalidate = 60;
 
@@ -25,7 +24,7 @@ const PracticeGroups = async () => {
   return (
     <>
       <StoreInitializer pageType="practiceGroups" apiData={apiData} />
-      <PracticeGroupsLayout />
+      <PracticeGroupsLayout apiData={apiData} />
     </>
   );
 };

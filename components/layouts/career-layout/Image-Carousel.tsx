@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";

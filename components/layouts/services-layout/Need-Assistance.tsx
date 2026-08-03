@@ -2,7 +2,6 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Link from "next/link";
-import React from "react";
 
 const NeedAssistance = () => {
   return (

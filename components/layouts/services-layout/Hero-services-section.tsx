@@ -1,14 +1,16 @@
+"use client";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { getValidImageUrl } from "@/utils/mappers/commonMapper";
+import { getUpdatedDetails } from "@/utils/storeUpdater";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
-import { getValidImageUrl } from "@/utils/mappers/commonMapper";
 
-const HeroServicesSection = () => {
-  const { details } = usePageData();
+const HeroServicesSection = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("services", apiData) : storeDetails;
 
   const service_heroSection_data = details?.servicesPage?.heroSection;
   return (

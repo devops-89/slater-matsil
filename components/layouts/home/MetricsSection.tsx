@@ -1,17 +1,13 @@
 "use client";
-import React, { JSX } from "react";
-import { Box, Grid, Typography, Button, Container } from "@mui/material";
-import Image from "next/image";
-import { adelle, tradeGothic } from "@/utils/fonts";
-import FlowerImage from "@/public/images/home/Image.webp";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import { COLORS } from "@/utils/enum";
 import HeadingStar from "@/components/widgets/Heading-star";
 import { usePageData } from "@/store/usePageData";
-import { Mail } from "@mui/icons-material";
-import MetricsCard from "../../widgets/common/Metrics-Card";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Link from "next/link";
+import React, { JSX } from "react";
+import MetricsCard from "../../widgets/common/Metrics-Card";
 
 const MetricsSection: React.FC = (): JSX.Element => {
   const { details } = usePageData();

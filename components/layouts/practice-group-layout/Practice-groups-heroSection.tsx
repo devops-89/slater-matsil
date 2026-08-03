@@ -1,10 +1,13 @@
+"use client";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-const PracticeGroupsHeroSection = () => {
-  const { details } = usePageData();
+import { getUpdatedDetails } from "@/utils/storeUpdater";
+const PracticeGroupsHeroSection = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("practiceGroups", apiData) : storeDetails;
 
   const data = details?.practiceGroupPage?.practiceGroup_hero_section;
   return (

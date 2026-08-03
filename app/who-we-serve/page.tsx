@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ClientPage from "./ClientPage";
+import WhoWeServelayout from "@/components/layouts/who-we-serve-layout/index";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default async function Page() {
   return (
     <>
       <StoreInitializer pageType="who-we-serve" apiData={apiData} />
-      <ClientPage />
+      <WhoWeServelayout apiData={apiData} />
     </>
   );
 }

@@ -1,8 +1,6 @@
-import type { Metadata } from "next";
 import AboutLayout from "@/components/layouts/about-layout";
 import StoreInitializer from "@/components/providers/StoreInitializer";
-import { WEBSITE_DATA } from "@/public/data/website-data";
-import React from "react";
+import type { Metadata } from "next";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
@@ -26,7 +24,7 @@ export default async function Aboutus() {
   return (
     <div>
       <StoreInitializer pageType="about" apiData={apiData} />
-      <AboutLayout />
+      <AboutLayout apiData={apiData} />
     </div>
   );
 }

@@ -1,17 +1,16 @@
-"use client";
 import React from "react";
 import ContactHerosection from "./Hero-Section";
 import dynamic from "next/dynamic";
 
-const ContactForm = dynamic(() => import("./Contact-Form"), { ssr: true });
-const FindUsHere = dynamic(() => import("./Find-Us-Here"), { ssr: true });
-const Followus = dynamic(() => import("./Follow-us"), { ssr: true });
-const Map = dynamic(() => import("./Map"), { ssr: false }); // Map doesn't need SSR
+const ContactForm = dynamic(() => import("./Contact-Form"));
+const FindUsHere = dynamic(() => import("./Find-Us-Here"));
+const Followus = dynamic(() => import("./Follow-us"));
+const Map = dynamic(() => import("./Map"));
 
-const ContactLayout = () => {
+const ContactLayout = ({ apiData }: { apiData?: any }) => {
   return (
     <div>
-      <ContactHerosection />
+      <ContactHerosection apiData={apiData} />
       <ContactForm />
       <FindUsHere />
       <Followus />

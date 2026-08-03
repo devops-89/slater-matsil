@@ -134,7 +134,8 @@ const Navbar = () => {
         document.body.appendChild(script);
       }
     };
-    addGoogleTranslateScript();
+    // Defer for 3 seconds to improve performance
+    setTimeout(addGoogleTranslateScript, 3000);
 
     // Auto-localization logic
     let targetLang = "en";
@@ -337,6 +338,7 @@ const Navbar = () => {
                           src={option.flagUrl}
                           alt=""
                           width="20"
+                          height="15"
                           style={{ marginRight: "8px" }}
                         />
                         {option.label}
@@ -364,6 +366,7 @@ const Navbar = () => {
                                 src={selected.flagUrl}
                                 alt=""
                                 width="20"
+                                height="15"
                                 style={{
                                   marginLeft: "8px",
                                   marginRight: "4px",

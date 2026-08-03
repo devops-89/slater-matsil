@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ClientPage from "./ClientPage";
+import ProfessionalsLayout from "@/components/layouts/professionals-layout/Index";
 import StoreInitializer from "@/components/providers/StoreInitializer";
 
 export const revalidate = 60;
@@ -35,7 +35,7 @@ export default async function Page() {
   return (
     <>
       <StoreInitializer pageType="professionals" apiData={apiData} />
-      <ClientPage />
+      <ProfessionalsLayout apiData={apiData} />
     </>
   );
 }

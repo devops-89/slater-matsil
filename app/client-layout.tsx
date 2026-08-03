@@ -9,7 +9,7 @@ import Modal from "@/components/widgets/Modal";
 import Navbar from "@/components/widgets/navbar";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { usePageData } from "@/store/usePageData";
-import { useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
 import AOS from "aos";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -33,14 +33,14 @@ export default function ClientLayout({
     const initializeData = async () => {
       try {
         setInitialLoading(true);
-        // Add artificial delay for AOS + loader as originally implemented
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
-        AOS.init({
-          duration: 800,
-          once: true,
-        });
-        AOS.refresh();
+        // Defer AOS init so it doesn't block state setup or LCP
+        setTimeout(() => {
+          AOS.init({
+            duration: 800,
+            once: true,
+          });
+          AOS.refresh();
+        }, 1000);
 
         // Skip fetching homepage data if we are on an admin/dashboard route
         const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
@@ -87,7 +87,6 @@ export default function ClientLayout({
     return () => window.removeEventListener("message", handleMessage);
   }, [setDetails]);
 
-  const phone = useMediaQuery("(max-width:600px)");
   const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
 
   return (
@@ -102,7 +101,16 @@ export default function ClientLayout({
               minHeight: "100vh",
             }}
           >
-            {!isAdminRoute && (phone ? <MobileNavbar /> : <Navbar />)}
+            {!isAdminRoute && (
+              <>
+                <Box sx={{ display: { xs: "block", sm: "none" } }}>
+                  <MobileNavbar />
+                </Box>
+                <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                  <Navbar />
+                </Box>
+              </>
+            )}
             <div style={{ flex: 1 }}>{children}</div>
             {!isAdminRoute && <Footer />}
             {!isAdminRoute && <CookieConsent />}

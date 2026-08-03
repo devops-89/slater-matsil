@@ -45,7 +45,8 @@ function RouteChangeListener() {
       clearTimeout(timer);
       stopLoading();
     };
-  }, [pathname, searchParams, startLoading, stopLoading, isMounted]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname, searchParams]);
 
   return null;
 }
@@ -55,7 +56,7 @@ export default function LoadingProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [loadingCount, setLoadingCount] = useState(1);
+  const [loadingCount, setLoadingCount] = useState(0); // Start with 0 so server-rendered content is visible immediately
 
   const startLoading = useCallback(() => {
     setLoadingCount((c) => c + 1);
@@ -65,13 +66,7 @@ export default function LoadingProvider({
     setLoadingCount((c) => Math.max(0, c - 1));
   }, []);
 
-  // Handle initial page load
-  useEffect(() => {
-    const initialTimer = setTimeout(() => {
-      stopLoading();
-    }, 1000);
-    return () => clearTimeout(initialTimer);
-  }, [stopLoading]);
+  // Initial load timer is removed because loadingCount starts at 0
 
   // Listen to global events
   useEffect(() => {

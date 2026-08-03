@@ -1,11 +1,14 @@
+"use client";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Circle } from "@mui/icons-material";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
-const HeroSection = () => {
-  const { details } = usePageData();
+import { getUpdatedDetails } from "@/utils/storeUpdater";
+const HeroSection = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("contact", apiData) : storeDetails;
   return (
     <Box>
       <Container maxWidth="lg">

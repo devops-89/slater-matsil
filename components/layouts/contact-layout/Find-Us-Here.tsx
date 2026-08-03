@@ -1,11 +1,11 @@
+"use client";
 import StaticIndicators from "@/components/widgets/common/Indicators-static";
+import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { para_field_styles } from "@/utils/styles";
 import { Box, Container, Grid, Typography } from "@mui/material";
-import React from "react";
 import ContactCard from "./components/Contact-Card";
-import { usePageData } from "@/store/usePageData";
 
 const FindUsHere = () => {
   const { details } = usePageData();

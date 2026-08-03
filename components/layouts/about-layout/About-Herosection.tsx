@@ -6,8 +6,12 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import ReactPlayer from "react-player";
-const AboutHerosection = () => {
-  const { details } = usePageData();
+import { getUpdatedDetails } from "@/utils/storeUpdater";
+
+const AboutHerosection = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("about", apiData) : storeDetails;
+  
   const [apiVideoReady, setApiVideoReady] = useState(false);
 
   const phone = useMediaQuery("(max-width:600px)");

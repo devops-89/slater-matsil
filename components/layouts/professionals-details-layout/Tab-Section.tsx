@@ -1,12 +1,11 @@
 import CustomTabPanel from "@/components/widgets/Tab-panel";
+import TabSwitching from "@/components/widgets/Tab-Switching";
 import { PROFESSIONAL_DETAILS_TAB_DATA } from "@/public/data/generic-array";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
-import { COLORS, PROFESSIONAL_TABS_DATA } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
-import { Box, Container, Grid, Tab, Tabs } from "@mui/material";
+import { PROFESSIONAL_TABS_DATA } from "@/utils/enum";
+import { Box, Container, Grid } from "@mui/material";
 import React, { useState } from "react";
 import ProfessionalBio from "./Professionals-Bio";
-import TabSwitching from "@/components/widgets/Tab-Switching";
 
 const TabSection = () => {
   const [value, setValue] = useState(0);

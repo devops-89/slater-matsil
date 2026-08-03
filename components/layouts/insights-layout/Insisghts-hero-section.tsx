@@ -1,11 +1,14 @@
+"use client";
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
+import { getUpdatedDetails } from "@/utils/storeUpdater";
 
-const InsightsHeroSection = () => {
-  const { details } = usePageData();
+const InsightsHeroSection = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("insights", apiData) : storeDetails;
 
   return (
     <Box sx={{ mt: { lg: 3, xs: 2 }, mb: { lg: 6, xs: 4 } }}>

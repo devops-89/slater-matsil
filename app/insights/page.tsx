@@ -1,7 +1,6 @@
-import type { Metadata } from "next";
 import InsightsLayout from "@/components/layouts/insights-layout/Index";
-import React from "react";
 import StoreInitializer from "@/components/providers/StoreInitializer";
+import type { Metadata } from "next";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
@@ -24,7 +23,7 @@ const Insights = async () => {
   return (
     <>
       <StoreInitializer pageType="insights" apiData={apiData} />
-      <InsightsLayout />
+      <InsightsLayout apiData={apiData} />
     </>
   );
 };

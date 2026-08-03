@@ -1,3 +1,4 @@
+"use client";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";

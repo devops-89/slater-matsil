@@ -1,28 +1,20 @@
+import { ProfessionalControllers } from "@/api/professionalControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
-import { TEXTFIELD_STYLES } from "@/utils/styles";
-import { Search } from "@mui/icons-material";
 import {
-  Autocomplete,
   Box,
-  Button,
-  CircularProgress,
   Container,
   Grid,
-  IconButton,
-  InputAdornment,
   Pagination,
-  Stack,
-  TextField,
-  Typography,
   Skeleton,
+  Stack,
+  Typography
 } from "@mui/material";
-import React, { ChangeEvent, useEffect, useState, useRef } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import ProfessionalsCard from "./components/Professionals-Card";
 import ProfessionalSearchBar from "./components/Professionals-Search-Bar";
-import { useLoading } from "@/components/providers/LoadingProvider";
-import { ProfessionalControllers } from "@/api/professionalControllers";
 
 const ALPHABETS = "abcdefghijklmnopqrstuvwxyz".split("");
 

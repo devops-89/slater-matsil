@@ -31,7 +31,7 @@ export default async function Home() {
   return (
     <>
       <StoreInitializer pageType="home" apiData={apiData} />
-      <HomeLayout />
+      <HomeLayout apiData={apiData} />
     </>
   );
 }

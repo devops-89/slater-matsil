@@ -1,4 +1,3 @@
-"use client";
 import { Box } from "@mui/material";
 import React from "react";
 import HeroSection from "./Hero-section";
@@ -6,12 +5,12 @@ import WhyWorkWithus from "./Why-work-with-us";
 import OpenRoles from "./Open-Roles";
 import InsightsSection from "@/components/widgets/Insights-section";
 
-const CareerLayout = () => {
+const CareerLayout = ({ apiData }: { apiData?: any }) => {
   return (
     <div>
       <Box>
         <div suppressHydrationWarning>
-          <HeroSection />
+          <HeroSection apiData={apiData} />
         </div>
         <div suppressHydrationWarning>
           <WhyWorkWithus />

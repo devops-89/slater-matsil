@@ -1,3 +1,4 @@
+"use client";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import career from "@/career/CAREERS.png";
@@ -7,9 +8,11 @@ import careerimage from "@/career/hero-image.png";
 import Image from "next/image";
 import { usePageData } from "@/store/usePageData";
 import StaticIndicators from "@/components/widgets/common/Indicators-static";
+import { getUpdatedDetails } from "@/utils/storeUpdater";
 import ImageCarousel from "./Image-Carousel";
-const HeroSection = () => {
-  const { details } = usePageData();
+const HeroSection = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("careers", apiData) : storeDetails;
   return (
     <Box sx={{ py: { lg: 10, xs: 5 } }}>
       <Box

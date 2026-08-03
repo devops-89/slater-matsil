@@ -1,3 +1,4 @@
+"use client";
 import TabSwitching from "@/components/widgets/Tab-Switching";
 import { usePageData } from "@/store/usePageData";
 import { Box, Container, Grid, Stack, Typography, CircularProgress } from "@mui/material";

@@ -1,3 +1,4 @@
+"use client";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";

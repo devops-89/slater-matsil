@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: false,
   experimental: {
     proxyClientMaxBodySize: 50 * 1024 * 1024,
+    optimizePackageImports: ["@mui/material", "@mui/icons-material"],
   },
 
   /* config options here */

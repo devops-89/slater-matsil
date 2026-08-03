@@ -1,3 +1,5 @@
+"use client";
+
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { COLORS, SUPPORT_SERVICE } from "@/utils/enum";
 import { SERVICES_AREAS_DATA } from "@/public/data/generic-array";

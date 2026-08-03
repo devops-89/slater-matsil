@@ -1,12 +1,11 @@
 "use client";
-import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
-import React from "react";
-import upperQuote from "@/icons/Quote.svg";
 import lowerQuote from "@/icons/Quote-Inverted.svg";
-import Image from "next/image";
+import upperQuote from "@/icons/Quote.svg";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { QUOTE_CARD_DATA } from "@/utils/types";
+import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
+import Image from "next/image";
 const QuoteCard = ({ quote, author }: QUOTE_CARD_DATA) => {
   const phone = useMediaQuery("(max-width:600px)");
   return (

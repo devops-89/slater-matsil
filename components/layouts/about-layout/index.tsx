@@ -1,17 +1,9 @@
-"use client";
-import { PageControllers } from "@/api/pageControllers";
-import { useLoading } from "@/components/providers/LoadingProvider";
 import { CAREER_HOME_DATA } from "@/public/data/generic-array";
-import { WEBSITE_DATA } from "@/public/data/website-data";
-import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
-import { mapBackendToAboutPageState } from "@/utils/pageDataMapper";
 import { ArrowForward } from "@mui/icons-material";
 import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
 import AboutHerosection from "./About-Herosection";
 import DrivingInnovation from "./Driving-innovation";
 import RedefiningPatent from "../../widgets/Redefining-Patent";
@@ -21,16 +13,11 @@ import WhoweServe from "./Who-we-serve";
 import IndustriesWeServe from "./Industries-We-Serve";
 import InsightsSection from "@/components/widgets/Insights-section";
 
-const AboutLayout = () => {
-  const { setDetails } = usePageData();
-  const { startLoading, stopLoading } = useLoading();
-
-  const pathname = usePathname();
-  const hasFetched = useRef(false);
+const AboutLayout = ({ apiData }: { apiData?: any }) => {
 
   return (
     <div>
-      <AboutHerosection />
+      <AboutHerosection apiData={apiData} />
       <DrivingInnovation />
       <RedefiningPatent />
       <InsightsInnovation />

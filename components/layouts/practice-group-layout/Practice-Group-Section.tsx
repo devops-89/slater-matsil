@@ -1,3 +1,4 @@
+"use client";
 import StarBox from "@/components/widgets/common/Star-box";
 import { usePageData } from "@/store/usePageData";
 import { COLORS, PRACTICE_GROUP_TAB_DATA } from "@/utils/enum";

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ClientPage from "./ClientPage";
+import ContactLayout from "@/components/layouts/contact-layout";
 export const revalidate = 60;
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default async function Page() {
   return (
     <>
       <StoreInitializer pageType="contact" apiData={apiData} />
-      <ClientPage />
+      <ContactLayout apiData={apiData} />
     </>
   );
 }

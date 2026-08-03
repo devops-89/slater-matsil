@@ -1,10 +1,13 @@
+"use client";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-const WhoWeServeLayoutHero = () => {
-  const { details } = usePageData();
+import { getUpdatedDetails } from "@/utils/storeUpdater";
+const WhoWeServeLayoutHero = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("who-we-serve", apiData) : storeDetails;
   return (
     <div>
       <Box sx={{ py: { lg: 10, xs: 5 } }}>

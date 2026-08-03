@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ClientPage from "./ClientPage";
+import CareerLayout from "@/components/layouts/career-layout";
 import StoreInitializer from "@/components/providers/StoreInitializer";
 
 export const revalidate = 60;
@@ -25,7 +25,7 @@ export default async function Page() {
   return (
     <>
       <StoreInitializer pageType="careers" apiData={apiData} />
-      <ClientPage />
+      <CareerLayout apiData={apiData} />
     </>
   );
 }

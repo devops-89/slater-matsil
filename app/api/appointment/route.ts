@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import { verifyReCaptcha } from "@/utils/recaptcha";
+import { NextResponse } from "next/server";
 
 // Mailchimp API credentials from environment variables
 const API_KEY = process.env.MAILCHIMP_API_KEY; // e.g. "xxx-us1"
@@ -21,8 +21,8 @@ export async function POST(req: Request) {
         );
       }
     } else {
-       // If token is missing, we could reject it in production
-       // return NextResponse.json({ error: "Missing reCAPTCHA token" }, { status: 400 });
+      // If token is missing, we could reject it in production
+      // return NextResponse.json({ error: "Missing reCAPTCHA token" }, { status: 400 });
     }
 
     if (!API_KEY || !AUDIENCE_ID) {

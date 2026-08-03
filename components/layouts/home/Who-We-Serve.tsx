@@ -1,3 +1,5 @@
+"use client";
+
 import checkmark from "@/icons/checkmark.png";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
