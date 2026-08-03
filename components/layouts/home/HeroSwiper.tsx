@@ -2,10 +2,7 @@
 
 import { Box } from "@mui/material";
 import { useEffect, useRef } from "react";
-import { register } from "swiper/element/bundle";
 import React from "react";
-
-register();
 
 import { COLORS } from "@/utils/enum";
 
@@ -17,21 +14,24 @@ const HeroSwiper = ({ banners, SlideContent, onReady }: { banners: any[], SlideC
   const swiperRef = useRef<any>(null);
 
   useEffect(() => {
-    if (swiperRef.current) {
-      const swiperContainer = swiperRef.current;
-      const params = {
-        autoplay: { delay: 7000, disableOnInteraction: false },
-        spaceBetween: 20,
-        loop: true,
-        grabCursor: true,
-        on: {
-          init: onReady,
-        },
-      };
+    import("swiper/element/bundle").then(({ register }) => {
+      register();
+      if (swiperRef.current) {
+        const swiperContainer = swiperRef.current;
+        const params = {
+          autoplay: { delay: 7000, disableOnInteraction: false },
+          spaceBetween: 20,
+          loop: true,
+          grabCursor: true,
+          on: {
+            init: onReady,
+          },
+        };
 
-      Object.assign(swiperContainer, params);
-      swiperContainer.initialize();
-    }
+        Object.assign(swiperContainer, params);
+        swiperContainer.initialize();
+      }
+    });
   }, [onReady]);
 
   return (

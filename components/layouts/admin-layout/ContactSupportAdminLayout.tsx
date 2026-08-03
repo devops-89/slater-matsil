@@ -264,7 +264,11 @@ export default function ContactSupportAdminLayout() {
               {selectedInquiry.phoneNumber && (
                 <Box>
                   <Typography variant="caption" color="text.secondary">Phone</Typography>
-                  <Typography variant="body1">{selectedInquiry.countryCode || ''} {selectedInquiry.phoneNumber}</Typography>
+                  <Typography variant="body1">
+                    {selectedInquiry.countryCode && selectedInquiry.phoneNumber.startsWith(selectedInquiry.countryCode) 
+                      ? selectedInquiry.phoneNumber 
+                      : `${selectedInquiry.countryCode || ''} ${selectedInquiry.phoneNumber}`.trim()}
+                  </Typography>
                 </Box>
               )}
               {selectedInquiry.company && (
