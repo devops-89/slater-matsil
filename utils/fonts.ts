@@ -8,6 +8,7 @@ export const tradeGothic = localFont({
       style: "normal",
     },
   ],
+  display: 'swap',
 });
 
 export const adelle = localFont({
@@ -28,6 +29,7 @@ export const adelle = localFont({
       style: "italic",
     },
   ],
+  display: 'swap',
 });
 
 export const inter = localFont({
@@ -48,8 +50,10 @@ export const inter = localFont({
       style: "italic",
     },
   ],
+  display: 'swap',
 });
 
 export const georgia = localFont({
   src: "../public/fonts/georgia/georgia.ttf",
+  display: 'swap',
 });

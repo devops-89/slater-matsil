@@ -119,7 +119,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
                 { title: "Value", count: "$4.8B", description: "IP value protected" },
               ]).map((val: any, i: number) => (
                 <Grid size={{ lg: 6, sm: 6, xs: 12 }} key={i}>
-                  <MetricsCard title={val.title} count={val.count} />
+                  <MetricsCard title={val.title} count={val.count} description={val.description} />
                 </Grid>
               ))}
             </Grid>

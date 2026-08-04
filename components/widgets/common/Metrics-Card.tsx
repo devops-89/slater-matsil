@@ -8,7 +8,7 @@ import dynamic from "next/dynamic";
 const CountUp = dynamic(() => import("react-countup"), { ssr: false });
 import { useInView } from "react-intersection-observer";
 
-const MetricsCard = ({ title, count }: METRICSPROPS) => {
+const MetricsCard = ({ title, count, description }: METRICSPROPS) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -36,7 +36,7 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
           fontFamily: adelle.style.fontFamily,
           fontSize: { lg: 14, xs: 10 },
           fontWeight: 400,
-          lineHeight: { lg: "154px 140px 155.875px 130px", xs: "18px" },
+          lineHeight: "18px", // Fixed invalid line-height
           textTransform: "uppercase",
         }}
       >
@@ -79,6 +79,19 @@ const MetricsCard = ({ title, count }: METRICSPROPS) => {
           </Box>
         </Typography>
       </Stack>
+      {description && (
+        <Typography
+          sx={{
+            color: COLORS.TEXT_PRIMARY,
+            fontFamily: adelle.style.fontFamily,
+            fontSize: { lg: 14, xs: 12 },
+            fontWeight: 400,
+            mt: 1,
+          }}
+        >
+          {description}
+        </Typography>
+      )}
     </Box>
   );
 };

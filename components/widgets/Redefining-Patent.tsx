@@ -28,7 +28,7 @@ const RedefiningPatent = () => {
                     {(details?.aboutPage?.REDEFINING_PATENT_SUCCESS?.metrics_data || []).map(
                       (val: any, i: number) => (
                         <Grid size={{ lg: 6, xs: 12 }} key={i}>
-                          <MetricsCard title={val.title} count={val.count} />
+                          <MetricsCard title={val.title} count={val.count} description={val.description} />
                         </Grid>
                       ),
                     )}

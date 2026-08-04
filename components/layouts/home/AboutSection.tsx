@@ -6,7 +6,6 @@ import { COLORS } from "@/utils/enum";
 import { adelle, inter, tradeGothic } from "@/utils/fonts";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
-import "aos/dist/aos.css";
 import Image from "next/image";
 import Link from "next/link";
 //about section
@@ -46,7 +45,7 @@ const AboutSection = () => {
                 src={details?.homepage?.aboutSection?.imageDownloadUrl || details?.homepage?.aboutSection?.image || AboutImage}
                 alt="Team working together"
                 fill
-                sizes="(max-width: 1200px) 100vw, 50vw"
+                sizes="(max-width: 768px) 90vw, (max-width: 1200px) 100vw, 50vw"
                 style={{
                   borderRadius: 20,
                   objectFit: "cover",

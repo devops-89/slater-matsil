@@ -134,8 +134,16 @@ const Navbar = () => {
         document.body.appendChild(script);
       }
     };
-    // Defer for 3 seconds to improve performance
-    setTimeout(addGoogleTranslateScript, 3000);
+    const handleUserInteraction = () => {
+      addGoogleTranslateScript();
+      window.removeEventListener("scroll", handleUserInteraction);
+      window.removeEventListener("mousemove", handleUserInteraction);
+      window.removeEventListener("touchstart", handleUserInteraction);
+    };
+
+    window.addEventListener("scroll", handleUserInteraction, { once: true, passive: true });
+    window.addEventListener("mousemove", handleUserInteraction, { once: true, passive: true });
+    window.addEventListener("touchstart", handleUserInteraction, { once: true, passive: true });
 
     // Auto-localization logic
     let targetLang = "en";

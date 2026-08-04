@@ -1,75 +1,50 @@
 "use client";
 
-import slider4 from "@/home/slider/slider4.webp";
+import slider4 from "@/home/slider/slider4_opt.webp";
 import slider5 from "@/home/slider/slider5.webp";
 import slider6 from "@/home/slider/slider6.webp";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import { getUpdatedDetails } from "@/utils/storeUpdater";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import HeroSwiper from "./HeroSwiper";
+import { useEffect, useState } from "react";
 
-const SwiperNavButtons = ({ swiper }: { swiper: any }) => {
+const HeroSwiper = dynamic(() => import("./HeroSwiper"), {
+  ssr: false,
+});
+
+import { useMediaQuery, useTheme } from "@mui/material";
+
+const DelayedApiImage = ({ val, priority }: { val: any, priority: boolean }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const fallbackSrc = val.fallbackImg || slider4;
+  const imageSrc = isMobile ? fallbackSrc : (val.img || fallbackSrc);
+
   return (
-    <Stack
-      direction="row"
-      alignItems="center"
-      justifyContent={"flex-end"}
-      spacing={2}
-      sx={{ mt: 2 }}
-    >
-      <Button
-        onClick={() => swiper?.slidePrev()}
-        aria-label="Previous Slide"
-        sx={{
-          minWidth: 50,
-          height: 50,
-          borderRadius: "50%",
-          border: `1px solid ${COLORS.PRIMARY_BLUE}`,
-          color: COLORS.PRIMARY_BLUE,
-          "&:hover": {
-            backgroundColor: COLORS.PRIMARY_BLUE,
-            color: COLORS.WHITE,
-          },
-        }}
-      >
-        <KeyboardArrowLeftIcon />
-      </Button>
-      <Button
-        onClick={() => swiper?.slideNext()}
-        aria-label="Next Slide"
-        sx={{
-          minWidth: 50,
-          height: 50,
-          borderRadius: "50%",
-          border: `1px solid ${COLORS.PRIMARY_BLUE}`,
-          color: COLORS.PRIMARY_BLUE,
-          "&:hover": {
-            backgroundColor: COLORS.PRIMARY_BLUE,
-            color: COLORS.WHITE,
-          },
-        }}
-      >
-        <KeyboardArrowRightIcon />
-      </Button>
-    </Stack>
+    <Box sx={{ width: "100%", height: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <Image
+        src={imageSrc}
+        alt={val.title || "slider image"}
+        fill
+        sizes="(max-width:900px) 100vw, 50vw"
+        style={{ objectFit: "cover", borderRadius: 20 }}
+        priority={priority}
+        fetchPriority={priority ? "high" : "auto"}
+        loading={priority ? "eager" : "lazy"}
+        quality={45}
+      />
+    </Box>
   );
 };
-import { getUpdatedDetails } from "@/utils/storeUpdater";
+
 
 const HeroSection3 = ({ apiData }: { apiData?: any }) => {
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
-  const [mounted, setMounted] = useState(false);
-  const [swiperReady, setSwiperReady] = useState(false);
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const { details: storeDetails } = usePageData();
   
@@ -125,17 +100,24 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
       title: apiSlide.title || def.title,
       description: apiSlide.description || def.description,
       img: getValidImageUrl(apiSlide.imageDownloadUrl || apiSlide.imageUrl || apiSlide.image) || def.img,
+      fallbackImg: def.img,
     };
   });
 
-  const SlideContent = ({ val, priority = false }: { val: any, priority?: boolean }) => (
+  const SlideContent = ({ val, priority = false }: { val: any; priority?: boolean }) => (
     <Grid
       container
       alignItems={"center"}
       spacing={{ lg: 5, xs: 4 }}
       direction={{ xs: "column-reverse", lg: "row" }}
     >
-      <Grid size={{ lg: 6, xs: 12 }}>
+      <Grid 
+        size={{ lg: 6, xs: 12 }}
+        sx={{
+          width: "100%",
+          p: { xs: 1, lg: 0 },
+        }}
+      >
         <Typography
           sx={{
             fontSize: { lg: 50, xs: 28 },
@@ -199,22 +181,17 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
             position: "relative",
           }}
         >
-          <Image
-            src={val.img}
-            alt="slider image"
-            fill
-            priority={priority}
-            fetchPriority={priority ? "high" : "auto"}
-            sizes="(max-width: 1200px) 100vw, 50vw"
-            style={{
-              borderRadius: 20,
-              objectFit: "cover",
-            }}
-          />
+          <DelayedApiImage val={val} priority={priority} />
         </Box>
       </Grid>
     </Grid>
   );
+
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <Box
@@ -230,28 +207,21 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
         backgroundColor: COLORS.LIGHT_GREY,
         borderTop: "1px solid #000 ",
         borderBottom: "1px solid #000 ",
-        "& .swiper": {
-          width: "100%",
-          overflow: "hidden",
-        },
-        "& .swiper-wrapper": {
-          display: "flex",
-          alignItems: "stretch",
-        },
-        "& .swiper-slide": {
-          flexShrink: 0,
-          width: "100%",
-          height: "auto",
-        }
+        position: "relative",
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative" }}>
-        <Box sx={{ width: "100%" }}>
-          <HeroSwiper 
-            banners={banners} 
-            SlideContent={SlideContent} 
-            onReady={() => {}} 
-          />
+        
+        {/* Render only the Swiper. It will handle the LCP correctly if configured right. */}
+        <Box sx={{ width: "100%", position: "relative", zIndex: 1 }}>
+          {!mounted && banners.length > 0 ? (
+            <SlideContent val={banners[0]} priority={true} />
+          ) : (
+            <HeroSwiper 
+              banners={banners} 
+              SlideContent={SlideContent} 
+            />
+          )}
         </Box>
       </Container>
     </Box>
@@ -259,4 +229,3 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
 };
 
 export default HeroSection3;
-

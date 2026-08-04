@@ -22,6 +22,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { adelle, georgia, inter, tradeGothic } from "@/utils/fonts";
+import ThemeRegistry from "@/components/ThemeRegistry/ThemeRegistry";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -29,8 +32,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning>
-        <ClientLayout>{children}</ClientLayout>
+      <body suppressHydrationWarning className={`${adelle.className} ${tradeGothic.className} ${inter.className} ${georgia.className}`}>
+        <ThemeRegistry>
+          <ClientLayout>{children}</ClientLayout>
+        </ThemeRegistry>
       </body>
     </html>
   );

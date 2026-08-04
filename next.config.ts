@@ -1,11 +1,23 @@
-
 import type { NextConfig } from "next";
+import withBundleAnalyzer from "@next/bundle-analyzer";
+
+const analyzer = withBundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 const nextConfig: NextConfig = {
   reactStrictMode: false,
   experimental: {
     proxyClientMaxBodySize: 50 * 1024 * 1024,
-    optimizePackageImports: ["@mui/material", "@mui/icons-material"],
+    optimizePackageImports: [
+      "@mui/material",
+      "@mui/icons-material",
+      "@emotion/react",
+      "@emotion/styled",
+      "swiper",
+      "hamburger-react",
+      "react-intersection-observer"
+    ],
   },
 
   /* config options here */
@@ -60,5 +72,4 @@ const nextConfig: NextConfig = {
     ];
   },
 };
-
-export default nextConfig;
+export default analyzer(nextConfig);

@@ -1,31 +1,46 @@
 "use client";
 import { Box } from "@mui/material";
 import dynamic from "next/dynamic";
-
-const InsightsSection = dynamic(() => import("../../widgets/Insights-section"), { ssr: false });
-const ServiceAreas = dynamic(() => import("../../widgets/Service-Areas"), { ssr: false });
-const MetricsSection = dynamic(() => import("./MetricsSection"));
-const Whoweserve = dynamic(() => import("./Who-We-Serve"), { ssr: false });
-const ContactSection = dynamic(() => import("./ContactSection"), { ssr: false });
-
-const AboutSection = dynamic(() => import("./AboutSection"));
 import HeroSection3 from "./HeroSection3";
+import LazyLoad from "../../widgets/common/LazyLoad";
 
+// Wrap dynamic imports with webpack magic comments to completely stop Next.js from preloading their JS chunks over the network
+const DynamicAbout = dynamic(() => import(/* webpackPreload: false */ /* webpackPrefetch: false */ "./AboutSection"), { ssr: false });
+const DynamicMetrics = dynamic(() => import(/* webpackPreload: false */ /* webpackPrefetch: false */ "./MetricsSection"), { ssr: false });
+const DynamicInsights = dynamic(() => import(/* webpackPreload: false */ /* webpackPrefetch: false */ "../../widgets/Insights-section"), { ssr: false });
+const DynamicServiceAreas = dynamic(() => import(/* webpackPreload: false */ /* webpackPrefetch: false */ "../../widgets/Service-Areas"), { ssr: false });
+const DynamicWhoWeServe = dynamic(() => import(/* webpackPreload: false */ /* webpackPrefetch: false */ "./Who-We-Serve"), { ssr: false });
+const DynamicContact = dynamic(() => import(/* webpackPreload: false */ /* webpackPrefetch: false */ "./ContactSection"), { ssr: false });
 
 const HomeLayout = ({ apiData }: { apiData?: any }) => {
-
   return (
-    <Box sx={{ overflowX: "hidden", width: "100%" }}>
-      {/* <HeroSection /> */}
-      {/* <HeroSection2 /> */}
-      {/* <SliderHeroSection /> */}
+    <Box sx={{ width: "100%" }}>
       <HeroSection3 apiData={apiData} />
-      <AboutSection />
-      <MetricsSection />
-      <ServiceAreas limit={6} />
-      <Whoweserve />
-      <InsightsSection />
-      <ContactSection />
+      
+      {/* Load below fold sections dynamically when scrolled into view */}
+      <LazyLoad minHeight="400px">
+        <DynamicAbout />
+      </LazyLoad>
+
+      <LazyLoad minHeight="400px">
+        <DynamicMetrics />
+      </LazyLoad>
+      
+      <LazyLoad minHeight="400px">
+        <DynamicServiceAreas limit={6} />
+      </LazyLoad>
+      
+      <LazyLoad minHeight="600px">
+        <DynamicWhoWeServe />
+      </LazyLoad>
+      
+      <LazyLoad minHeight="400px">
+        <DynamicInsights />
+      </LazyLoad>
+      
+      <LazyLoad minHeight="300px">
+        <DynamicContact />
+      </LazyLoad>
     </Box>
   );
 };

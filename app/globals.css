@@ -65,3 +65,13 @@ html.translated-rtl button {
   white-space: nowrap !important;
   min-width: max-content !important;
 }
+
+/* 4. Fix for AOS animations staying invisible (opacity: 0) on mobile devices */
+@media (max-width: 960px) {
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    transition: none !important;
+  }
+}

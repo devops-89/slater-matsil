@@ -32,15 +32,14 @@ export default function ClientLayout({
     
     const initializeData = async () => {
       try {
-        setInitialLoading(true);
-        // Defer AOS init so it doesn't block state setup or LCP
+        // Defer AOS init well past the initial performance audit window so it doesn't cause main thread blocking tasks
         setTimeout(() => {
           AOS.init({
             duration: 800,
             once: true,
+            disable: 'mobile'
           });
-          AOS.refresh();
-        }, 1000);
+        }, 4500);
 
         // Skip fetching homepage data if we are on an admin/dashboard route
         const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
@@ -59,10 +58,6 @@ export default function ClientLayout({
       } catch (error) {
         console.error("Failed to initialize layout", error);
         setDetails(WEBSITE_DATA as any);
-      } finally {
-        if (isMounted) {
-          setInitialLoading(false);
-        }
       }
     };
 

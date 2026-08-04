@@ -184,6 +184,7 @@ interface REDEFINING_PATENT_SUCCESS_PROPS {
 export interface METRICSPROPS {
   title: string;
   count: string;
+  description?: string;
 }
 
 interface MetricSectionProps {

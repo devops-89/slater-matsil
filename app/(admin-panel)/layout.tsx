@@ -137,17 +137,16 @@ export default function DashboardProtectedLayout({ children }: { children: React
             console.error("Failed to verify RBAC access", error);
           }
           router.replace("/admin");
-        } finally {
           if (isMounted) {
             setIsVerifying(false);
-            stopLoading();
           }
+          stopLoading(); // Always stop loading to balance the counter, even if effect was cancelled
         }
       } else {
         if (isMounted) {
           setIsVerifying(false);
-          stopLoading();
         }
+        stopLoading();
       }
     };
     
