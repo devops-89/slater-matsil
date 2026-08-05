@@ -24,125 +24,124 @@ export default function DashboardProtectedLayout({ children }: { children: React
     const hydrateAndCheckAuth = async () => {
       startLoading();
       setIsVerifying(true);
-      const auth = localStorage.getItem("adminAuth");
       
-      if (!auth && pathname !== "/admin") {
-        router.replace("/admin");
-        return;
-      } else if (auth && pathname === "/admin") {
-        router.replace("/dashboard");
-        return;
-      }
+      try {
+        const auth = localStorage.getItem("adminAuth");
+        
+        if (!auth && pathname !== "/admin") {
+          router.replace("/admin");
+          return;
+        } else if (auth && pathname === "/admin") {
+          router.replace("/dashboard");
+          return;
+        }
 
-      if (auth && pathname !== "/admin") {
-        try {
-          if (isLoadingPermissions) {
-            let roleId = null;
-            let freshIsSuperAdmin = true;
-            let freshPermissions: string[] = [];
+        if (auth && pathname !== "/admin") {
+          try {
+            if (isLoadingPermissions) {
+              let roleId = null;
+              let freshIsSuperAdmin = true;
+              let freshPermissions: string[] = [];
 
-            const cachedPerms = localStorage.getItem("userPermissions");
-            const cachedIsSuper = localStorage.getItem("isSuperAdmin");
+              const cachedPerms = localStorage.getItem("userPermissions");
+              const cachedIsSuper = localStorage.getItem("isSuperAdmin");
 
-            if (cachedPerms !== null && cachedIsSuper !== null) {
-              freshPermissions = JSON.parse(cachedPerms);
-              freshIsSuperAdmin = cachedIsSuper === "true";
-            } else if (auth) {
-              const usersRes = await UserControllers.getAllUsers();
-              const subAdmins = usersRes.data?.data?.data?.users || usersRes.data?.data?.users || [];
-              
-              const foundUser = subAdmins.find((a: any) => a.email.toLowerCase() === auth.toLowerCase());
-              
-              if (foundUser) {
-                roleId = foundUser.roleId || foundUser.permissionRole?.id || foundUser.role?.id;
-                const fullName = foundUser.fullName || (foundUser.firstName ? `${foundUser.firstName} ${foundUser.lastName || ""}`.trim() : "");
-                if (fullName) {
-                  localStorage.setItem("userName", fullName);
-                  // Trigger a custom event so the Header can pick up the change immediately without a full reload
-                  window.dispatchEvent(new Event("userNameUpdated"));
+              if (cachedPerms !== null && cachedIsSuper !== null) {
+                freshPermissions = JSON.parse(cachedPerms);
+                freshIsSuperAdmin = cachedIsSuper === "true";
+              } else if (auth) {
+                const usersRes = await UserControllers.getAllUsers();
+                const subAdmins = usersRes.data?.data?.data?.users || usersRes.data?.data?.users || [];
+                
+                const foundUser = subAdmins.find((a: any) => a.email.toLowerCase() === auth.toLowerCase());
+                
+                if (foundUser) {
+                  roleId = foundUser.roleId || foundUser.permissionRole?.id || foundUser.role?.id;
+                  const fullName = foundUser.fullName || (foundUser.firstName ? `${foundUser.firstName} ${foundUser.lastName || ""}`.trim() : "");
+                  if (fullName) {
+                    localStorage.setItem("userName", fullName);
+                    // Trigger a custom event so the Header can pick up the change immediately without a full reload
+                    window.dispatchEvent(new Event("userNameUpdated"));
+                  }
                 }
               }
-            }
 
-            if (roleId) {
-              freshIsSuperAdmin = false;
-              const roleRes = await RoleControllers.getRoleById(roleId);
-              // Handle deep nesting from the backend (e.g. data.data.data)
-              const rawData = roleRes.data?.data?.data || roleRes.data?.data || roleRes.data || {};
-              const userRole = rawData.id ? rawData : (rawData.role || rawData);
+              if (roleId) {
+                freshIsSuperAdmin = false;
+                const roleRes = await RoleControllers.getRoleById(roleId);
+                // Handle deep nesting from the backend (e.g. data.data.data)
+                const rawData = roleRes.data?.data?.data || roleRes.data?.data || roleRes.data || {};
+                const userRole = rawData.id ? rawData : (rawData.role || rawData);
+                
+                freshPermissions = userRole?.permissions?.map((p: any) => p.module) || [];
+                
+                localStorage.setItem("userPermissions", JSON.stringify(freshPermissions));
+                localStorage.setItem("isSuperAdmin", "false");
+              } else {
+                localStorage.setItem("isSuperAdmin", "true");
+                localStorage.setItem("userPermissions", "[]");
+              }
+
+              if (isMounted) {
+                setPermissions(freshPermissions, freshIsSuperAdmin);
+              }
               
-              freshPermissions = userRole?.permissions?.map((p: any) => p.module) || [];
-              
-              localStorage.setItem("userPermissions", JSON.stringify(freshPermissions));
-              localStorage.setItem("isSuperAdmin", "false");
+              var currentIsSuperAdmin = freshIsSuperAdmin;
+              var currentPermissions = freshPermissions;
             } else {
-              localStorage.setItem("isSuperAdmin", "true");
-              localStorage.setItem("userPermissions", "[]");
+              var currentIsSuperAdmin = isSuperAdmin;
+              var currentPermissions = permissions;
             }
 
-            if (isMounted) {
-              setPermissions(freshPermissions, freshIsSuperAdmin);
-            }
-            
-            var currentIsSuperAdmin = freshIsSuperAdmin;
-            var currentPermissions = freshPermissions;
-          } else {
-            var currentIsSuperAdmin = isSuperAdmin;
-            var currentPermissions = permissions;
-          }
+            const getDefaultRedirectPath = (perms: string[]) => {
+              const hasPagesAccess = perms.some((p: string) => p.startsWith("pages/"));
+              if (hasPagesAccess) return "/pages";
+              if (perms.length > 0) return `/${perms[0]}`;
+              return "/";
+            };
 
-          const getDefaultRedirectPath = (perms: string[]) => {
-            const hasPagesAccess = perms.some((p: string) => p.startsWith("pages/"));
-            if (hasPagesAccess) return "/pages";
-            if (perms.length > 0) return `/${perms[0]}`;
-            return "/";
-          };
-
-          if (currentIsSuperAdmin) {
-            if (isMounted) setIsAuthenticated(true);
-          } else {
-            if (pathname.startsWith("/manage-roles") || pathname.startsWith("/manage-sub-admins") || pathname === "/dashboard") {
-              router.replace(getDefaultRedirectPath(currentPermissions));
-              return;
-            }
-
-            // Block exact /pages route if they have no pages permissions
-            if (pathname === "/pages") {
-              const hasPagesAccess = currentPermissions.some((p: string) => p.startsWith("pages/"));
-              if (!hasPagesAccess) {
+            if (currentIsSuperAdmin) {
+              if (isMounted) setIsAuthenticated(true);
+            } else {
+              if (pathname.startsWith("/manage-roles") || pathname.startsWith("/manage-sub-admins") || pathname === "/dashboard") {
                 router.replace(getDefaultRedirectPath(currentPermissions));
                 return;
               }
-            }
 
-            let requiredPermission = "";
-            if (pathname.startsWith("/pages/")) {
-              requiredPermission = pathname.substring(1); 
-            } else if (pathname.startsWith("/manage-")) {
-              requiredPermission = pathname.substring(1);
-            }
+              // Block exact /pages route if they have no pages permissions
+              if (pathname === "/pages") {
+                const hasPagesAccess = currentPermissions.some((p: string) => p.startsWith("pages/"));
+                if (!hasPagesAccess) {
+                  router.replace(getDefaultRedirectPath(currentPermissions));
+                  return;
+                }
+              }
 
-            if (requiredPermission && !currentPermissions.includes(requiredPermission)) {
-              router.replace(getDefaultRedirectPath(currentPermissions));
-              return;
-            }
+              let requiredPermission = "";
+              if (pathname.startsWith("/pages/")) {
+                requiredPermission = pathname.substring(1); 
+              } else if (pathname.startsWith("/manage-")) {
+                requiredPermission = pathname.substring(1);
+              }
 
-            if (isMounted) setIsAuthenticated(true);
+              if (requiredPermission && !currentPermissions.includes(requiredPermission)) {
+                router.replace(getDefaultRedirectPath(currentPermissions));
+                return;
+              }
+
+              if (isMounted) setIsAuthenticated(true);
+            }
+          } catch (error: any) {
+            if (error?.response?.status === 401) {
+              localStorage.removeItem("adminAuth");
+              localStorage.removeItem("accessToken");
+            } else {
+              console.error("Failed to verify RBAC access", error);
+            }
+            router.replace("/admin");
           }
-        } catch (error: any) {
-          if (error?.response?.status === 401) {
-            localStorage.removeItem("adminAuth");
-            localStorage.removeItem("accessToken");
-          } else {
-            console.error("Failed to verify RBAC access", error);
-          }
-          router.replace("/admin");
-          if (isMounted) {
-            setIsVerifying(false);
-          }
-          stopLoading(); // Always stop loading to balance the counter, even if effect was cancelled
         }
-      } else {
+      } finally {
         if (isMounted) {
           setIsVerifying(false);
         }

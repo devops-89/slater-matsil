@@ -5,7 +5,8 @@ export const InsightControllers = {
   // Get all insights
   getAllInsights: async (params?: Record<string, string | number | boolean>): Promise<AxiosResponse> => {
     try {
-      const result = await insightsPublicApi.get("all", { params });
+      const mergedParams = { orderType: "asc", ...params };
+      const result = await insightsPublicApi.get("all", { params: mergedParams });
       return result;
     } catch (error) {
       throw error;

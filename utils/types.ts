@@ -826,6 +826,7 @@ export interface INSIGHT_FORM_CARD_DATA {
   title: string;
   category: string;
   bgColor?: string;
+  order?: string | number;
 }
 
 export interface INSIGHT_FORM_HERO_DATA {

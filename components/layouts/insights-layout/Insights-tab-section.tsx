@@ -53,7 +53,11 @@ const InsightsTabSection = () => {
   const insightsData = (() => {
     // Ensure API insights are sorted newest first
     const allData = [...apiInsights]
-      .sort((a, b) => (b.id || 0) - (a.id || 0))
+      .sort((a, b) => {
+        const orderA = a.order !== undefined && a.order !== null ? Number(a.order) : 999999;
+        const orderB = b.order !== undefined && b.order !== null ? Number(b.order) : 999999;
+        return orderA - orderB;
+      })
       .map((insight: any) => ({
         title: insight.insightTitle || insight.title,
         category: insight.category,

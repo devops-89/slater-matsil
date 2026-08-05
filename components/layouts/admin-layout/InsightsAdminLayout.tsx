@@ -34,6 +34,7 @@ const insightSchema = yup.object().shape({
   cardData: yup.object().shape({
     title: yup.string().required("Title is required"),
     category: yup.string().required("Category is required"),
+    order: yup.number().typeError("Order must be a number").required("Order is required"),
   }),
   heroData: yup.object().shape({
     name: yup.string().required("Name is required"),
@@ -64,7 +65,11 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [insightToDelete, setInsightToDelete] = useState<{id?: number} | null>(null);
   
-  const allCards = [...insightsCards].sort((a, b) => b.id - a.id);
+  const allCards = [...insightsCards].sort((a, b) => {
+    const orderA = a.order !== undefined && a.order !== null ? Number(a.order) : 999999;
+    const orderB = b.order !== undefined && b.order !== null ? Number(b.order) : 999999;
+    return orderA - orderB;
+  });
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -93,6 +98,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
     title: "",
     category: "",
     bgColor: COLORS.PRIMARY_BLUE,
+    order: "",
   });
   const [heroData, setHeroData] = useState<INSIGHT_FORM_HERO_DATA>({
     name: "",
@@ -147,6 +153,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
       title: "",
       category: "",
       bgColor: COLORS.PRIMARY_BLUE,
+      order: "",
     });
     setHeroData({
       name: "",
@@ -190,6 +197,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
         bgColor: (insight.bgColor as string) || (insight.cardTheme as string) || COLORS.PRIMARY_BLUE,
         imageUrl: (insight.profileImageUrl as string) || (insight.imageUrl as string) || "",
         imageDownloadUrl: (insight.profileImageDownloadUrl as string) || (insight.imageUrl as string) || "",
+        order: insight.order !== undefined && insight.order !== null ? String(insight.order) : "",
       };
 
       const newHeroData = {
@@ -282,6 +290,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
       insightTitle: cardData.title,
       category: cardData.category ? cardData.category.charAt(0).toUpperCase() + cardData.category.slice(1).toLowerCase() : "",
       ...((heroData.rawProfileImage || heroData.profileImage) && { imageUrl: heroData.rawProfileImage || heroData.profileImage }),
+      order: cardData.order !== "" && cardData.order !== undefined ? Number(cardData.order) : undefined,
       personName: heroData.name,
       bandRole: heroData.band,
       guideOrganization: heroData.guide,

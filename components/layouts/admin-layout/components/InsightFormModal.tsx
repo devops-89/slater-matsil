@@ -155,6 +155,21 @@ export default function InsightFormModal({
                     <Typography variant="caption" color="error">{errors["cardData.category"]}</Typography>
                   )}
                 </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <Typography sx={{ fontWeight: 600, mb: 1, fontSize: 14 }}>Order Number</Typography>
+                  <TextField
+                    fullWidth
+                    type="number"
+                    placeholder="Enter order number (e.g. 1)"
+                    value={cardData.order || ""}
+                    onChange={(e) => {
+                      setCardData({ ...cardData, order: e.target.value });
+                      setErrors({ ...errors, "cardData.order": undefined });
+                    }}
+                    error={!!errors["cardData.order"]}
+                    helperText={errors["cardData.order"]}
+                  />
+                </Grid>
               </Grid>
             </Stack>
           )}
