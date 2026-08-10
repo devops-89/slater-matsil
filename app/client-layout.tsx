@@ -36,8 +36,7 @@ export default function ClientLayout({
         setTimeout(() => {
           AOS.init({
             duration: 800,
-            once: true,
-            disable: 'mobile'
+            once: true
           });
         }, 4500);
 

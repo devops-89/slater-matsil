@@ -23,7 +23,10 @@ const ProfessionalList = () => {
   const { startLoading, stopLoading } = useLoading();
 
   const [apiData, setApiData] = useState<any[]>(() => {
-    const initial = (details?.firm_professionals as any)?.initialProfessionals;
+    let initial = (details?.firm_professionals as any)?.initialProfessionals;
+    if (!initial && typeof window !== "undefined" && (window as any).__API_DATA__) {
+      initial = (window as any).__API_DATA__.initialProfessionals;
+    }
     if (initial && initial.length > 0) {
       return initial.map((u: any) => ({
         name: u.fullName,
@@ -39,7 +42,10 @@ const ProfessionalList = () => {
   const [alphabet, setAlphabet] = useState("");
   const [appliedAlphabet, setAppliedAlphabet] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(() => {
-    const initial = (details?.firm_professionals as any)?.initialProfessionals;
+    let initial = (details?.firm_professionals as any)?.initialProfessionals;
+    if (!initial && typeof window !== "undefined" && (window as any).__API_DATA__) {
+      initial = (window as any).__API_DATA__.initialProfessionals;
+    }
     return !(initial && initial.length > 0);
   });
   const [page, setPage] = useState(1);

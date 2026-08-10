@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ["mui-tel-input"],
   allowedDevOrigins: ["192.168.220.1"],
   images: {
+    qualities: [45, 75],
     remotePatterns: [
       {
         protocol: "https",
