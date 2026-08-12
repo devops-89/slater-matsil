@@ -183,7 +183,10 @@ export default function ProfessionalFormModal({
 
                 <Grid size={{ xs: 12, md: 4 }}>
                   <Stack spacing={2} sx={{ height: '100%', justifyContent: 'center' }}>
-                    <TextField fullWidth label="Full Name" value={cardData.name || ""} onChange={(e) => setCardData({ ...cardData, name: e.target.value })} error={!!errors.name} helperText={errors.name} />
+                    <Stack direction="row" spacing={2}>
+                      <TextField fullWidth label="First Name" value={cardData.firstName || ""} onChange={(e) => setCardData({ ...cardData, firstName: e.target.value })} error={!!errors.firstName} helperText={errors.firstName} />
+                      <TextField fullWidth label="Last Name" value={cardData.lastName || ""} onChange={(e) => setCardData({ ...cardData, lastName: e.target.value })} error={!!errors.lastName} helperText={errors.lastName} />
+                    </Stack>
                     <TextField fullWidth label="Designation (e.g., PARTNER)" value={cardData.designation || ""} onChange={(e) => setCardData({ ...cardData, designation: e.target.value })} error={!!errors.designation} helperText={errors.designation} />
                   </Stack>
                 </Grid>

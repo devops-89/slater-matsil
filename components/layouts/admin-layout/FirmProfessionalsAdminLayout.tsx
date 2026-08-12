@@ -99,7 +99,8 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
   }, [apiProfessionals]);
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Full Name is required"),
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
     designation: Yup.string().required("Designation is required"),
     email: Yup.string().email("Invalid email address").required("Email is required"),
     phoneNumber: Yup.string().required("Phone Number is required"),
@@ -177,7 +178,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
   const handleOpenNew = () => {
     setActiveId(null);
     setActiveTab(0);
-    setCardData({ name: "", designation: "", imageUrl: "", imageDownloadUrl: "", detailsImageUrl: "", detailsImageDownloadUrl: "" });
+    setCardData({ firstName: "", lastName: "", designation: "", imageUrl: "", imageDownloadUrl: "", detailsImageUrl: "", detailsImageDownloadUrl: "" });
     setBioData({
       email: "",
       phoneNumber: "",
@@ -207,7 +208,8 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
     if (!prof) return;
 
     const newCardData = {
-      name: prof.fullName || prof.name || "",
+      firstName: prof.firstName || "",
+      lastName: prof.lastName || "",
       designation: prof.designation || "",
       imageUrl: prof.profileImageUrl || prof.imageUrl || prof.img || "",
       imageDownloadUrl: prof.profileImageDownloadUrl || prof.imageDownloadUrl || prof.img || "",
@@ -296,7 +298,8 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
 
     try {
       await validationSchema.validate({
-        name: cardData.name,
+        firstName: cardData.firstName,
+        lastName: cardData.lastName,
         designation: cardData.designation,
         email: bioData.email,
         phoneNumber: bioData.phoneNumber
@@ -310,7 +313,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
         });
         setErrors(newErrors);
         
-        if (newErrors.name || newErrors.designation || newErrors.email || newErrors.phoneNumber) {
+        if (newErrors.firstName || newErrors.lastName || newErrors.designation || newErrors.email || newErrors.phoneNumber) {
           setActiveTab(0);
         }
       }
@@ -318,22 +321,6 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
     }
 
     setIsSaving(true);
-    const nameParts = (cardData.name || "").split(" ");
-    
-    const buildSection = (type: string, data: any, sortOrder: number) => {
-      const payload: any = {
-        sectionType: type,
-        description: data.paragraphs,
-        sortOrder,
-        bullets: data.bullets.map((b: any, idx: number) => {
-          const bulletPayload: any = { bulletText: b.label, sortOrder: idx + 1 };
-          if (b.id) bulletPayload.id = b.id;
-          return bulletPayload;
-        })
-      };
-      if (data.id) payload.id = data.id;
-      return payload;
-    };
 
     const activeProf = hybridProfessionals.find(p => p.id === activeId);
 
@@ -341,27 +328,13 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
       ? bioData.bio.map((b: Record<string, any>) => b.description).join("\n") 
       : (typeof bioData.bio === 'string' ? bioData.bio : bioData.bio?.paragraphs || "");
 
-    const formatFullNameForBackend = (name: string) => {
-      const trimmed = (name || "").trim();
-      const cleanName = trimmed.split(",")[0].trim();
-      const suffix = trimmed.substring(cleanName.length);
-      
-      const parts = cleanName.split(/\s+/);
-      if (parts.length <= 2) {
-        return trimmed;
-      }
-      
-      // Join all parts except the last one with a Braille pattern blank (\u2800)
-      const firstNamePart = parts.slice(0, parts.length - 1).join("\u2800");
-      const lastNamePart = parts[parts.length - 1];
-      return `${firstNamePart} ${lastNamePart}${suffix}`;
-    };
-
-    const formattedFullName = formatFullNameForBackend(cardData.name || "");
+    const formattedFullName = `${(cardData.firstName || "").trim()} ${(cardData.lastName || "").trim()}`;
 
     const payload: Record<string, any> = {
       email: bioData.email,
       fullName: formattedFullName,
+      firstName: (cardData.firstName || "").trim(),
+      lastName: (cardData.lastName || "").trim(),
       designation: cardData.designation,
       phoneNumber: bioData.phoneNumber,
       imageUrl: cardData.imageUrl || null,
@@ -394,7 +367,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
       // Bulletproof fallback: search the loaded API professionals by email
       const fallbackProf = apiProfessionals.find(p => 
         p.email?.toLowerCase().trim() === bioData.email?.toLowerCase().trim() || 
-        p.fullName?.toLowerCase().trim() === cardData.name?.toLowerCase().trim()
+        p.fullName?.toLowerCase().trim() === formattedFullName.toLowerCase().trim()
       );
       if (fallbackProf) {
         targetId = fallbackProf.id;

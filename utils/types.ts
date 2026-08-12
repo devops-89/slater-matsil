@@ -882,7 +882,8 @@ export interface INSIGHT_API_ITEM {
 
 export interface PROFESSIONAL_FORM_CARD_DATA {
   id?: number;
-  name?: string;
+  firstName?: string;
+  lastName?: string;
   designation?: string;
   department?: string;
   imageUrl?: string;
@@ -919,6 +920,8 @@ export interface PROFESSIONAL_FORM_BIO_DATA {
 export interface PROFESSIONAL_API_ITEM {
   id: number;
   fullName?: string;
+  firstName?: string;
+  lastName?: string;
   name?: string;
   img?: string;
   detailsImg?: string;
