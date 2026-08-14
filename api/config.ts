@@ -1,6 +1,21 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosError, InternalAxiosRequestConfig } from "axios";
 import { SERVER_ENDPOINTS } from "./serverConstant";
 
+import { AuthControllers } from "./authControllers";
+
+let isRefreshing = false;
+let failedQueue: { resolve: (value?: unknown) => void; reject: (reason?: any) => void }[] = [];
+
+const processQueue = (error: any, token: string | null = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) {
+      prom.reject(error);
+    } else {
+      prom.resolve(token);
+    }
+  });
+  failedQueue = [];
+};
 
 const setupInterceptors = (apiInstance: AxiosInstance, secured: boolean) => {
   apiInstance.interceptors.request.use(
@@ -22,7 +37,64 @@ const setupInterceptors = (apiInstance: AxiosInstance, secured: boolean) => {
     (response: AxiosResponse) => {
       return response;
     },
-    (error: AxiosError | Error) => {
+    async (error: any) => {
+      const originalRequest = error.config;
+
+      if (secured && error.response?.status === 401 && !originalRequest._retry) {
+        if (isRefreshing) {
+          try {
+            const token = await new Promise((resolve, reject) => {
+              failedQueue.push({ resolve, reject });
+            });
+            originalRequest.headers['Authorization'] = `Bearer ${token}`;
+            return apiInstance(originalRequest);
+          } catch (err) {
+            return Promise.reject(err);
+          }
+        }
+
+        originalRequest._retry = true;
+        isRefreshing = true;
+
+        try {
+          const refreshToken = localStorage.getItem("refreshToken");
+          if (!refreshToken) {
+            throw new Error("No refresh token available");
+          }
+
+          const response = await AuthControllers.refresh({ refreshToken });
+          const newAccessToken = response.data?.data?.accessToken;
+          const newRefreshToken = response.data?.data?.refreshToken;
+
+          if (newAccessToken && newRefreshToken) {
+            localStorage.setItem("accessToken", newAccessToken);
+            localStorage.setItem("refreshToken", newRefreshToken);
+            
+            processQueue(null, newAccessToken);
+            originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+            return apiInstance(originalRequest);
+          } else {
+             throw new Error("Failed to refresh token");
+          }
+        } catch (refreshError) {
+          processQueue(refreshError, null);
+          
+          if (typeof window !== "undefined") {
+             localStorage.removeItem("accessToken");
+             localStorage.removeItem("refreshToken");
+             localStorage.removeItem("adminAuth");
+             localStorage.removeItem("isSuperAdmin");
+             localStorage.removeItem("adminUserId");
+             localStorage.removeItem("userName");
+             document.cookie = "role=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+             window.location.href = "/admin";
+          }
+          return Promise.reject(refreshError);
+        } finally {
+          isRefreshing = false;
+        }
+      }
+
       return Promise.reject(error);
     }
   );

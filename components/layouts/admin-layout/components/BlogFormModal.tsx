@@ -74,6 +74,28 @@ export default function BlogFormModal({
   getSectionContentString,
   isSaving = false,
 }: BlogFormModalProps) {
+  const handleNext = () => {
+    let hasError = false;
+    const newErrors = { ...errors };
+
+    if (activeTab === 0) {
+      if (!cardData.title) { newErrors["cardData.title"] = "Title is required"; hasError = true; }
+      if (!cardData.date) { newErrors["cardData.date"] = "Date is required"; hasError = true; }
+      if (!cardData.readTime) { newErrors["cardData.readTime"] = "Read Time is required"; hasError = true; }
+      if (!cardData.description) { newErrors["cardData.description"] = "Description is required"; hasError = true; }
+    } else if (activeTab === 1) {
+      if (!heroData.category) { newErrors["heroData.category"] = "Category is required"; hasError = true; }
+      if (!heroData.author) { newErrors["heroData.author"] = "Author Name is required"; hasError = true; }
+      if (!heroData.authorTitle) { newErrors["heroData.authorTitle"] = "Author Title is required"; hasError = true; }
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
+      return;
+    }
+    setActiveTab(activeTab + 1);
+  };
+
   return (
     <Dialog
       open={open}
@@ -415,9 +437,15 @@ export default function BlogFormModal({
         <Button onClick={onClose} color="inherit" disabled={isSaving}>
           Cancel
         </Button>
-        <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
-          {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Blog" : "Save Blog")}
-        </Button>
+        {activeTab < 2 ? (
+          <Button onClick={handleNext} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
+            Next
+          </Button>
+        ) : (
+          <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
+            {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Blog" : "Save Blog")}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );

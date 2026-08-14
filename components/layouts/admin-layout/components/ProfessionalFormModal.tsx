@@ -122,6 +122,25 @@ export default function ProfessionalFormModal({
     );
   };
 
+  const handleNext = () => {
+    let hasError = false;
+    const newErrors = { ...errors };
+
+    if (activeTab === 0) {
+      if (!cardData.firstName) { newErrors.firstName = "First Name is required"; hasError = true; }
+      if (!cardData.lastName) { newErrors.lastName = "Last Name is required"; hasError = true; }
+      if (!cardData.designation) { newErrors.designation = "Designation is required"; hasError = true; }
+      if (!bioData.email) { newErrors.email = "Email is required"; hasError = true; }
+      if (!bioData.phoneNumber) { newErrors.phoneNumber = "Phone Number is required"; hasError = true; }
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
+      return;
+    }
+    setActiveTab(activeTab + 1);
+  };
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth slotProps={{ paper: { sx: { m: { xs: 1, sm: 2 }, width: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' }, maxHeight: { xs: 'calc(100% - 16px)', sm: 'calc(100% - 64px)' } } } }}>
       <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1 }}>
@@ -184,10 +203,10 @@ export default function ProfessionalFormModal({
                 <Grid size={{ xs: 12, md: 4 }}>
                   <Stack spacing={2} sx={{ height: '100%', justifyContent: 'center' }}>
                     <Stack direction="row" spacing={2}>
-                      <TextField fullWidth label="First Name" value={cardData.firstName || ""} onChange={(e) => setCardData({ ...cardData, firstName: e.target.value })} error={!!errors.firstName} helperText={errors.firstName} />
-                      <TextField fullWidth label="Last Name" value={cardData.lastName || ""} onChange={(e) => setCardData({ ...cardData, lastName: e.target.value })} error={!!errors.lastName} helperText={errors.lastName} />
+                      <TextField fullWidth label="First Name" value={cardData.firstName || ""} onChange={(e) => { setCardData({ ...cardData, firstName: e.target.value }); setErrors({ ...errors, firstName: undefined }); }} error={!!errors.firstName} helperText={errors.firstName} />
+                      <TextField fullWidth label="Last Name" value={cardData.lastName || ""} onChange={(e) => { setCardData({ ...cardData, lastName: e.target.value }); setErrors({ ...errors, lastName: undefined }); }} error={!!errors.lastName} helperText={errors.lastName} />
                     </Stack>
-                    <TextField fullWidth label="Designation (e.g., PARTNER)" value={cardData.designation || ""} onChange={(e) => setCardData({ ...cardData, designation: e.target.value })} error={!!errors.designation} helperText={errors.designation} />
+                    <TextField fullWidth label="Designation (e.g., PARTNER)" value={cardData.designation || ""} onChange={(e) => { setCardData({ ...cardData, designation: e.target.value }); setErrors({ ...errors, designation: undefined }); }} error={!!errors.designation} helperText={errors.designation} />
                   </Stack>
                 </Grid>
               </Grid>
@@ -196,10 +215,10 @@ export default function ProfessionalFormModal({
               <Typography variant="subtitle1" color="primary" sx={{ fontWeight: 'bold' }}>Contact Details</Typography>
               <Grid container spacing={2}>
                 <Grid size={{ xs: 12, sm: 6 }}>
-                  <TextField fullWidth label="Email Address" value={bioData.email || ""} onChange={(e) => setBioData({ ...bioData, email: e.target.value })} error={!!errors.email} helperText={errors.email} />
+                  <TextField fullWidth label="Email Address" value={bioData.email || ""} onChange={(e) => { setBioData({ ...bioData, email: e.target.value }); setErrors({ ...errors, email: undefined }); }} error={!!errors.email} helperText={errors.email} />
                 </Grid>
                 <Grid size={{ xs: 12, sm: 6 }}>
-                  <TextField fullWidth label="Phone Number" value={bioData.phoneNumber || ""} onChange={(e) => setBioData({ ...bioData, phoneNumber: e.target.value })} error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
+                  <TextField fullWidth label="Phone Number" value={bioData.phoneNumber || ""} onChange={(e) => { setBioData({ ...bioData, phoneNumber: e.target.value }); setErrors({ ...errors, phoneNumber: undefined }); }} error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
                 </Grid>
               </Grid>
 
@@ -234,9 +253,15 @@ export default function ProfessionalFormModal({
       </DialogContent>
       <DialogActions sx={{ p: 2 }}>
         <Button onClick={onClose} color="inherit" disabled={isSaving}>Cancel</Button>
-        <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
-          {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Changes" : "Save Changes")}
-        </Button>
+        {activeTab < 5 ? (
+          <Button onClick={handleNext} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
+            Next
+          </Button>
+        ) : (
+          <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
+            {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Changes" : "Save Changes")}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );

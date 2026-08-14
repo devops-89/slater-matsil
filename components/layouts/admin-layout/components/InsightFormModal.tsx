@@ -69,6 +69,32 @@ export default function InsightFormModal({
   handleSave,
   handleContentSectionChange,
 }: InsightFormModalProps) {
+  const handleNext = () => {
+    let hasError = false;
+    const newErrors = { ...errors };
+
+    if (activeTab === 0) {
+      if (!cardData.title) { newErrors["cardData.title"] = "Title is required"; hasError = true; }
+      if (!cardData.category) { newErrors["cardData.category"] = "Category is required"; hasError = true; }
+      if (!cardData.order) { newErrors["cardData.order"] = "Order is required"; hasError = true; }
+    } else if (activeTab === 1) {
+      if (!heroData.name) { newErrors["heroData.name"] = "Person Name is required"; hasError = true; }
+      if (!heroData.band) { newErrors["heroData.band"] = "Band / Role is required"; hasError = true; }
+      if (!heroData.guide) { newErrors["heroData.guide"] = "Guide Organization is required"; hasError = true; }
+    } else if (activeTab === 2) {
+      if (!contentSections.closingStatement?.content) {
+        newErrors["contentSections.closingStatement.content"] = "Content Body is required";
+        hasError = true;
+      }
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
+      return;
+    }
+    setActiveTab(activeTab + 1);
+  };
+
   return (
     <Dialog
       open={open}
@@ -236,9 +262,9 @@ export default function InsightFormModal({
                 </Grid>
                 <Grid size={{ xs: 12, md: 8 }}>
                   <Stack spacing={2}>
-                    <TextField fullWidth label="Person Name" value={heroData.name || ""} onChange={(e) => setHeroData({ ...heroData, name: e.target.value })} error={!!errors["heroData.name"]} helperText={errors["heroData.name"]} />
-                    <TextField fullWidth label="Band / Role" value={heroData.band || ""} onChange={(e) => setHeroData({ ...heroData, band: e.target.value })} error={!!errors["heroData.band"]} helperText={errors["heroData.band"]} />
-                    <TextField fullWidth label="Guide Organization" value={heroData.guide || ""} onChange={(e) => setHeroData({ ...heroData, guide: e.target.value })} error={!!errors["heroData.guide"]} helperText={errors["heroData.guide"]} />
+                    <TextField fullWidth label="Person Name" value={heroData.name || ""} onChange={(e) => { setHeroData({ ...heroData, name: e.target.value }); setErrors({ ...errors, "heroData.name": undefined }); }} error={!!errors["heroData.name"]} helperText={errors["heroData.name"]} />
+                    <TextField fullWidth label="Band / Role" value={heroData.band || ""} onChange={(e) => { setHeroData({ ...heroData, band: e.target.value }); setErrors({ ...errors, "heroData.band": undefined }); }} error={!!errors["heroData.band"]} helperText={errors["heroData.band"]} />
+                    <TextField fullWidth label="Guide Organization" value={heroData.guide || ""} onChange={(e) => { setHeroData({ ...heroData, guide: e.target.value }); setErrors({ ...errors, "heroData.guide": undefined }); }} error={!!errors["heroData.guide"]} helperText={errors["heroData.guide"]} />
                     <TextField fullWidth label="Years Ranked / Date" value={heroData.yearsRanked || ""} onChange={(e) => setHeroData({ ...heroData, yearsRanked: e.target.value })} />
                   </Stack>
                 </Grid>
@@ -250,8 +276,25 @@ export default function InsightFormModal({
           {activeTab === 2 && (
             <Stack spacing={3}>
               <Typography variant="subtitle2" color="primary">Main Biography / Closing Statement</Typography>
-              <TextField fullWidth label="Heading (Optional)" value={contentSections.closingStatement?.heading || ""} onChange={(e) => handleContentSectionChange("closingStatement", "heading", e.target.value)} />
-              <TextField fullWidth multiline rows={8} label="Content Body (Use new lines for paragraphs)" value={contentSections.closingStatement?.content || ""} onChange={(e) => handleContentSectionChange("closingStatement", "content", e.target.value)} />
+              <TextField 
+                fullWidth 
+                label="Heading (Optional)" 
+                value={contentSections.closingStatement?.heading || ""} 
+                onChange={(e) => handleContentSectionChange("closingStatement", "heading", e.target.value)} 
+              />
+              <TextField 
+                fullWidth 
+                multiline 
+                rows={8} 
+                label="Content Body (Use new lines for paragraphs) *" 
+                value={contentSections.closingStatement?.content || ""} 
+                onChange={(e) => {
+                  handleContentSectionChange("closingStatement", "content", e.target.value);
+                  setErrors({ ...errors, "contentSections.closingStatement.content": undefined });
+                }} 
+                error={!!errors["contentSections.closingStatement.content"]}
+                helperText={errors["contentSections.closingStatement.content"]}
+              />
             </Stack>
           )}
 
@@ -328,9 +371,15 @@ export default function InsightFormModal({
         <Button onClick={onClose} color="inherit" disabled={isSaving}>
           Cancel
         </Button>
-        <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
-          {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Insight" : "Save Insight")}
-        </Button>
+        {activeTab < 5 ? (
+          <Button onClick={handleNext} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
+            Next
+          </Button>
+        ) : (
+          <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }} disabled={isSaving}>
+            {isSaving ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : (activeId ? "Update Insight" : "Save Insight")}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );

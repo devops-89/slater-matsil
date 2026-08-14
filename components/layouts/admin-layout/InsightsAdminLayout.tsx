@@ -43,6 +43,11 @@ const insightSchema = yup.object().shape({
     yearsRanked: yup.string().optional(),
     profileImage: yup.mixed().optional(),
   }),
+  contentSections: yup.object().shape({
+    closingStatement: yup.object().shape({
+      content: yup.string().required("Content Body is required"),
+    })
+  })
 });
 
 interface InsightsAdminLayoutProps {
@@ -256,7 +261,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
 
     try {
       await insightSchema.validate(
-        { cardData, heroData },
+        { cardData, heroData, contentSections },
         { abortEarly: false },
       );
       setErrors({});
@@ -280,6 +285,10 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
           Object.keys(validationErrors).some((k) => k.startsWith("heroData."))
         ) {
           setActiveTab(1);
+        } else if (
+          Object.keys(validationErrors).some((k) => k.startsWith("contentSections."))
+        ) {
+          setActiveTab(2);
         }
       }
       return;
@@ -334,9 +343,14 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
 
       fetchInsights();
       setDialogOpen(false);
-    } catch (err: unknown) {
+    } catch (err: any) {
       console.error("Save error:", err);
-      const errorMessage = err instanceof Error ? err.message : "Failed to save insight";
+      let errorMessage = "Failed to save insight";
+      if (err?.response?.status === 422) {
+        errorMessage = err.response.data?.message || "Please fill all required fields correctly.";
+      } else if (err instanceof Error) {
+        errorMessage = err.message;
+      }
       showNotification(errorMessage, "error");
     } finally {
       setIsSaving(false);

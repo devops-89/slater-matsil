@@ -6,6 +6,7 @@ import { Logout, Menu, AdminPanelSettings, ManageAccounts } from "@mui/icons-mat
 import { Box, Typography, IconButton, Avatar, Menu as MuiMenu, MenuItem, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { AuthControllers } from "@/api/authControllers";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { usePermissions } from "@/hooks/usePermissions";
 
@@ -40,7 +41,13 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
   const displayName = isSuperAdmin ? "Admin" : (storedName || "User");
   const displayInitial = displayName.charAt(0).toUpperCase();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await AuthControllers.logout();
+    } catch (error) {
+      console.error("Logout API failed", error);
+    }
+
     localStorage.removeItem("adminAuth");
     localStorage.removeItem("isSuperAdmin");
     localStorage.removeItem("accessToken");
