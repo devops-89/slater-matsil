@@ -20,7 +20,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                   fontSize: { lg: 17, xs: 15 },
                   color: COLORS.TEXT_PRIMARY_24,
                   mt:1,
-                  fontWeight: 600,
+                  fontWeight: 400,
                   textAlign: "left",
                   whiteSpace: "pre-wrap",
                   "& p": {
@@ -45,7 +45,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                       sx={{
                         fontSize: { lg: 17, xs: 15 },
                         color: COLORS.TEXT_PRIMARY_24,
-                        fontWeight: 500,
+                        fontWeight: 400,
                         mb: 1,
                         textAlign: "left",
                       }}
@@ -79,7 +79,7 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                               sx={{
                                 fontSize: { lg: 17, xs: 15 },
                                 color: COLORS.TEXT_PRIMARY_24,
-                                fontWeight: 500,
+                                fontWeight: 400,
                                 mb: 1,
                                 textAlign: "left",
                               }}

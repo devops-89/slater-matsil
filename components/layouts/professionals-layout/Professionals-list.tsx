@@ -50,7 +50,11 @@ const ProfessionalList = () => {
   });
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState<number>(() => {
-    return (details?.firm_professionals as any)?.initialTotal || 0;
+    let initialTotal = (details?.firm_professionals as any)?.initialTotal;
+    if (!initialTotal && typeof window !== "undefined" && (window as any).__API_DATA__) {
+      initialTotal = (window as any).__API_DATA__.initialTotal;
+    }
+    return initialTotal || 0;
   });
   const ITEMS_PER_PAGE = 6;
   const initialMount = useRef(true);

@@ -81,7 +81,7 @@ const WhyWorkWithus = () => {
             <Box
               sx={{
                 width: "100%",
-                aspectRatio: "4/3",
+                aspectRatio: "16/9",
                 borderRadius: "20px",
                 overflow: "hidden",
                 bgcolor: "rgba(0, 0, 0, 0.05)",
@@ -95,14 +95,14 @@ const WhyWorkWithus = () => {
                   fill
                   priority={true}
                   unoptimized={true}
-                  style={{ objectFit: "cover" }}
+                  style={{ objectFit: "cover", objectPosition: "top center" }}
                 />
               )}
             </Box>
           </Grid>
           <Grid size={{ lg: 6, xs: 12 }}>
             {data?.work_list_data.map((val, i) => (
-              <Box key={i} sx={{ mb: 2, ml: i % 2 == 0 ? 0 : 3 }}>
+              <Box key={i} sx={{ mb: 2 }}>
                 <WorkList title={val.title} />
               </Box>
             ))}

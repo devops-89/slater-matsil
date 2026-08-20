@@ -120,7 +120,7 @@ const ContactForm = ({ details }: { details?: any }) => {
           textTransform: "capitalize",
         }}
       >
-        {details?.homepage?.contactUsFormProps?.heading || "Connect Us"}
+        {details?.homepage?.contactUsFormProps?.heading || "Contact Us"}
       </Typography>
       <Box sx={{ display: "flex", gap: 1, my: 2 }}>
         <Box sx={{ width: 40, height: 4, backgroundColor: COLORS.PRIMARY_BLUE }} />

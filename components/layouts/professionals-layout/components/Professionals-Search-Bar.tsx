@@ -49,7 +49,8 @@ const ProfessionalSearchBar = ({
               open={open && search.length > 0}
               onOpen={() => setOpen(true)}
               onClose={() => setOpen(false)}
-              onInputChange={(event, newInputValue) => {
+              onInputChange={(event, newInputValue, reason) => {
+                if (reason === "reset") return;
                 setSearch(newInputValue || "");
               }}
               onChange={(event, newValue) => {

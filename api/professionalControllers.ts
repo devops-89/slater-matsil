@@ -27,11 +27,15 @@ export const ProfessionalControllers = {
     alphabet: string = ""
   ): Promise<AxiosResponse> => {
     try {
-      let query = `all?role=PROFESSIONAL&limit=${limit}&page=${page}`;
-      if (search) query += `&name=${search}`;
-      if (alphabet) query += `&alphabet=${alphabet}`;
+      let params: any = {};
+      if (search) {
+        params.name = search;
+      } else {
+        params = { role: "PROFESSIONAL", limit, page };
+        if (alphabet) params.alphabet = alphabet;
+      }
       
-      const result = await userPublicApi.get(query);
+      const result = await userPublicApi.get("all", { params });
       return result;
     } catch (error) {
       throw error;

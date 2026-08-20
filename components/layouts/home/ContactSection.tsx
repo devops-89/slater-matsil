@@ -24,39 +24,7 @@ const ContactSection = () => {
               }}
             >
             </Typography> */}
-            <Stack
-              direction={"row"}
-              alignItems={"center"}
-              spacing={2}
-              sx={{ mt: 3 }}
-            >
-              <Box
-                sx={{
-                  backgroundColor: COLORS.PRIMARY_BLUE,
-                  width: 30,
-                  height: 30,
-                  borderRadius: "50%",
-                  padding: "11px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Image src={star} alt="" />
-              </Box>
-              <Typography
-                sx={{
-                  fontFamily: tradeGothic.style.fontFamily,
-                  fontSize: 17,
-                  fontWeight: 700,
-                  color: COLORS.PRIMARY_BLUE,
-                  lineHeight: "26px",
-                  textTransform: "uppercase",
-                }}
-              >
-                Free Consultation
-              </Typography>
-            </Stack>
+
             <Box sx={{ mt: 3, position: "relative" }}>
               {/* <Image
                 src={contactImage}

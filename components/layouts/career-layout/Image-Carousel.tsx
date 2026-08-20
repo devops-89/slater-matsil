@@ -158,7 +158,7 @@ const ImageCarousel = () => {
                 sizes="(max-width: 768px) 80vw, (max-width: 1200px) 50vw, 33vw"
                 style={{
                   objectFit: "cover",
-                  objectPosition: i === 4 ? "top center" : "center", 
+                  objectPosition: "top center", 
                 }}
               />
             </Box>

@@ -26,7 +26,6 @@ const StrengthCard = ({ img, title, description }: STRENGTH_CARD_PROPS) => {
           height: "100%", // Switch to 100% instead of 220 fixed
           minHeight: 200, // Add minHeight instead of fixed height
           transition: "all 0.3s ease-in-out",
-          cursor: "pointer",
           "&:hover": {
             boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
             backgroundColor: COLORS.WHITE,
