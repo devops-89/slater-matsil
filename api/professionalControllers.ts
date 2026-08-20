@@ -30,6 +30,7 @@ export const ProfessionalControllers = {
       let params: any = {};
       if (search) {
         params.name = search;
+        params.role = "PROFESSIONAL";
       } else {
         params = { role: "PROFESSIONAL", limit, page };
         if (alphabet) params.alphabet = alphabet;
