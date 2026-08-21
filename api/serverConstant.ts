@@ -9,4 +9,3 @@ export const SERVER_ENDPOINTS = {
   ROLE_BASEURL: baseUrl + "role-management/roles",
   CAREERS_BASEURL: baseUrl + "careers/",
 };
-
