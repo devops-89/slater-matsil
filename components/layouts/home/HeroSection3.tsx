@@ -19,15 +19,30 @@ const HeroSwiper = dynamic(() => import("./HeroSwiper"), {
 
 import { useMediaQuery, useTheme } from "@mui/material";
 
-const DelayedApiImage = ({ val, priority }: { val: any, priority: boolean }) => {
+const DelayedApiImage = ({
+  val,
+  priority,
+}: {
+  val: any;
+  priority: boolean;
+}) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const fallbackSrc = val.fallbackImg || slider4;
-  const imageSrc = isMobile ? fallbackSrc : (val.img || fallbackSrc);
+  const imageSrc = isMobile ? fallbackSrc : val.img || fallbackSrc;
 
   return (
-    <Box sx={{ width: "100%", height: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Image
         src={imageSrc}
         alt={val.title || "slider image"}
@@ -43,11 +58,9 @@ const DelayedApiImage = ({ val, priority }: { val: any, priority: boolean }) => 
   );
 };
 
-
 const HeroSection3 = ({ apiData }: { apiData?: any }) => {
-
   const { details: storeDetails } = usePageData();
-  
+
   // Calculate details synchronously using apiData if available, otherwise fallback to store
   const details = apiData ? getUpdatedDetails("home", apiData) : storeDetails;
   const globalBanners = details?.homepage?.heroSection;
@@ -75,7 +88,7 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
 
   const getValidImageUrl = (imageField: any) => {
     if (!imageField || imageField === "deleted") return null;
-    
+
     let url = "";
     if (typeof imageField === "string") {
       url = imageField;
@@ -87,31 +100,45 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
 
     if (url.trim() === "") return null;
     let finalUrl = url.trim();
-    if (!finalUrl.startsWith("http") && !finalUrl.startsWith("/") && finalUrl.includes("s3")) {
+    if (
+      !finalUrl.startsWith("http") &&
+      !finalUrl.startsWith("/") &&
+      finalUrl.includes("s3")
+    ) {
       finalUrl = "https://" + finalUrl;
     }
     return finalUrl.replace(/ /g, "%20");
   };
 
   const banners = defaultBanners.map((def: any, idx: number) => {
-    const apiSlide = (Array.isArray(globalBanners) ? globalBanners[idx] : null) || {};
+    const apiSlide =
+      (Array.isArray(globalBanners) ? globalBanners[idx] : null) || {};
     return {
       ...def,
       title: apiSlide.title || def.title,
       description: apiSlide.description || def.description,
-      img: getValidImageUrl(apiSlide.imageDownloadUrl || apiSlide.imageUrl || apiSlide.image) || def.img,
+      img:
+        getValidImageUrl(
+          apiSlide.imageDownloadUrl || apiSlide.imageUrl || apiSlide.image,
+        ) || def.img,
       fallbackImg: def.img,
     };
   });
 
-  const SlideContent = ({ val, priority = false }: { val: any; priority?: boolean }) => (
+  const SlideContent = ({
+    val,
+    priority = false,
+  }: {
+    val: any;
+    priority?: boolean;
+  }) => (
     <Grid
       container
       alignItems={"center"}
       spacing={{ lg: 5, xs: 4 }}
       direction={{ xs: "column-reverse", lg: "row" }}
     >
-      <Grid 
+      <Grid
         size={{ lg: 6, xs: 12 }}
         sx={{
           width: "100%",
@@ -188,7 +215,7 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
   );
 
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -211,16 +238,12 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative" }}>
-        
         {/* Render only the Swiper. It will handle the LCP correctly if configured right. */}
         <Box sx={{ width: "100%", position: "relative", zIndex: 1 }}>
           {!mounted && banners.length > 0 ? (
             <SlideContent val={banners[0]} priority={true} />
           ) : (
-            <HeroSwiper 
-              banners={banners} 
-              SlideContent={SlideContent} 
-            />
+            <HeroSwiper banners={banners} SlideContent={SlideContent} />
           )}
         </Box>
       </Container>
