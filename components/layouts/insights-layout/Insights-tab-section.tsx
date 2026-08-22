@@ -98,11 +98,18 @@ const InsightsTabSection = () => {
             </Grid>
           </Container>
         </Box>
-        <QuickLinks />
       </Box>
-      {details?.insightsPage?.tab_data.map((_, i) => (
-        <CustomTabPanel value={value} index={i} key={i}>
-          <Container maxWidth="lg" sx={{ my: 5 }}>
+      {details?.insightsPage?.tab_data.map((tab: any, i: number) => {
+        const isLinksTab = tab.title === INSIGHTS_TAB_DATA.LINKS;
+
+        return (
+          <CustomTabPanel value={value} index={i} key={i}>
+            {isLinksTab && (
+              <Box sx={{ mt: 5, mb: 0 }}>
+                <QuickLinks />
+              </Box>
+            )}
+            <Container maxWidth="lg" sx={{ my: 5 }}>
             {insightsData?.length === 0 ? (
               <Box sx={{ width: "100%", mt: 6, mb: 10, textAlign: "center" }}>
                 <Typography
@@ -268,12 +275,13 @@ const InsightsTabSection = () => {
                   NEXT
                 </Typography>
               </Stack>
-            )}
+                )}
               </>
             )}
           </Container>
         </CustomTabPanel>
-      ))}
+        );
+      })}
     </Box>
   );
 };
