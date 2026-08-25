@@ -111,16 +111,18 @@ const InsightsTabSection = () => {
             )}
             <Container maxWidth="lg" sx={{ my: 5 }}>
             {insightsData?.length === 0 ? (
-              <Box sx={{ width: "100%", mt: 6, mb: 10, textAlign: "center" }}>
-                <Typography
-                  sx={{
-                    color: COLORS.PRIMARY_BLUE,
-                    fontSize: { xs: 20, md: 24 },
-                  }}
-                >
-                  No Insights Found
-                </Typography>
-              </Box>
+              !isLinksTab && (
+                <Box sx={{ width: "100%", mt: 6, mb: 10, textAlign: "center" }}>
+                  <Typography
+                    sx={{
+                      color: COLORS.PRIMARY_BLUE,
+                      fontSize: { xs: 20, md: 24 },
+                    }}
+                  >
+                    No Insights Found
+                  </Typography>
+                </Box>
+              )
             ) : (
               <>
                 <Grid container spacing={4}>

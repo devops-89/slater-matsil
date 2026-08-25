@@ -13,7 +13,7 @@ import {
   INSIGHT_FORM_CONTENT_DATA,
   INSIGHT_FORM_HERO_DATA
 } from "@/utils/types";
-import { Add } from "@mui/icons-material";
+import { Add, Search } from "@mui/icons-material";
 import {
   Box,
   Button,
@@ -23,7 +23,9 @@ import {
   DialogTitle,
   Grid,
   Stack,
-  Typography
+  Typography,
+  TextField,
+  InputAdornment
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
@@ -45,7 +47,7 @@ const insightSchema = yup.object().shape({
   }),
   contentSections: yup.object().shape({
     closingStatement: yup.object().shape({
-      content: yup.string().required("Content Body is required"),
+      content: yup.string().optional(),
     })
   })
 });
@@ -70,6 +72,15 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [insightToDelete, setInsightToDelete] = useState<{id?: number} | null>(null);
   
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
   const allCards = [...insightsCards].sort((a, b) => {
     const orderA = a.order !== undefined && a.order !== null ? Number(a.order) : 999999;
     const orderB = b.order !== undefined && b.order !== null ? Number(b.order) : 999999;
@@ -130,12 +141,17 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
 
   const [isFetching, setIsFetching] = useState(initialInsights.length === 0);
 
-  const fetchInsights = async () => {
+  const fetchInsights = async (searchQuery: string = "") => {
     try {
       setIsFetching(true);
-      const res = await InsightControllers.getAllInsights({ limit: 1000 });
+      const params: any = { limit: 1000 };
+      if (searchQuery) {
+        params.insightTitle = searchQuery;
+      }
+      const res = await InsightControllers.getAllInsights(params);
       const data = res.data?.data?.data?.insights || res.data?.data?.insights || [];
       setInsightsCards(data);
+      setCurrentPage(1);
     } catch (err) {
       showNotification("Failed to fetch insights", "error");
     } finally {
@@ -144,10 +160,8 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
   };
 
   useEffect(() => {
-    if (initialInsights.length === 0) {
-      fetchInsights();
-    }
-  }, []);
+    fetchInsights(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
 
   const handleOpenNew = () => {
     setActiveId(null);
@@ -430,10 +444,32 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
         sx={{
           mb: 4,
           display: "flex",
-          justifyContent: { xs: "stretch", sm: "flex-end" },
+          justifyContent: "space-between",
           alignItems: "center",
+          flexDirection: { xs: "column", sm: "row" },
+          gap: 2,
         }}
       >
+        <TextField
+          placeholder="Search insights..."
+          variant="outlined"
+          size="small"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Search />
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            flex: 1,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "50px",
+            },
+          }}
+        />
         <Button
           variant="contained"
           startIcon={<Add />}
@@ -456,6 +492,12 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
               <Box sx={{ width: "100%", height: 320, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
             </Grid>
           ))
+        ) : currentItems.length === 0 ? (
+          <Grid size={{ xs: 12 }} sx={{ display: "flex", justifyContent: "center", py: 10 }}>
+            <Typography variant="h6" sx={{ color: "#666", fontWeight: 500 }}>
+              No insight found
+            </Typography>
+          </Grid>
         ) : (
           currentItems.map((insight, i: number) => (
             <Grid

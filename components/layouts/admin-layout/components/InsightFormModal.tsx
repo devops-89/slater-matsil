@@ -1,30 +1,29 @@
-import React from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Typography,
-  IconButton,
-  Button,
-  Tabs,
-  Tab,
-  Box,
-  Stack,
-  Grid,
-  CircularProgress,
-  TextField,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { Close, Delete } from "@mui/icons-material";
-import { COLORS, INSIGHTS_TAB_DATA } from "@/utils/enum";
-import { 
-  INSIGHT_FORM_CARD_DATA, 
-  INSIGHT_FORM_HERO_DATA, 
-  INSIGHT_FORM_CONTENT_DATA 
-} from "@/utils/types";
+import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
+import {
+  INSIGHT_FORM_CARD_DATA,
+  INSIGHT_FORM_CONTENT_DATA,
+  INSIGHT_FORM_HERO_DATA
+} from "@/utils/types";
+import { Close, Delete } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Grid,
+  IconButton,
+  MenuItem,
+  Select,
+  Stack,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 interface InsightFormModalProps {
   open: boolean;
@@ -82,10 +81,7 @@ export default function InsightFormModal({
       if (!heroData.band) { newErrors["heroData.band"] = "Band / Role is required"; hasError = true; }
       if (!heroData.guide) { newErrors["heroData.guide"] = "Guide Organization is required"; hasError = true; }
     } else if (activeTab === 2) {
-      if (!contentSections.closingStatement?.content) {
-        newErrors["contentSections.closingStatement.content"] = "Content Body is required";
-        hasError = true;
-      }
+      // Main Content is now optional
     }
 
     if (hasError) {
@@ -286,7 +282,7 @@ export default function InsightFormModal({
                 fullWidth 
                 multiline 
                 rows={8} 
-                label="Content Body (Use new lines for paragraphs) *" 
+                label="Content Body (Use new lines for paragraphs)" 
                 value={contentSections.closingStatement?.content || ""} 
                 onChange={(e) => {
                   handleContentSectionChange("closingStatement", "content", e.target.value);

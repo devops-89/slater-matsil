@@ -149,28 +149,28 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
             justifyContent: { xs: "center", lg: "flex-start" },
           }}
         >
-          <Link href="/about-us">
-            <Button
-              sx={{
+          <Button
+            component={Link}
+            href="/about-us"
+            sx={{
+              backgroundColor: COLORS.PRIMARY_BLUE,
+              color: COLORS.WHITE,
+              fontFamily: adelle.style.fontFamily,
+              fontSize: { lg: 16, xs: 14 },
+              fontWeight: 700,
+              lineHeight: "26px",
+              textTransform: "uppercase",
+              mt: { lg: 3, xs: 4 },
+              borderRadius: 20,
+              width: { lg: 200, xs: 180 },
+              p: 1.5,
+              "&:hover": {
                 backgroundColor: COLORS.PRIMARY_BLUE,
-                color: COLORS.WHITE,
-                fontFamily: adelle.style.fontFamily,
-                fontSize: { lg: 16, xs: 14 },
-                fontWeight: 700,
-                lineHeight: "26px",
-                textTransform: "uppercase",
-                mt: { lg: 3, xs: 4 },
-                borderRadius: 20,
-                width: { lg: 200, xs: 180 },
-                p: 1.5,
-                "&:hover": {
-                  backgroundColor: COLORS.PRIMARY_BLUE,
-                },
-              }}
-            >
-              Learn More
-            </Button>
-          </Link>
+              },
+            }}
+          >
+            Learn More
+          </Button>
         </Box>
       </Grid>
       <Grid size={{ lg: 6, xs: 12 }}>
