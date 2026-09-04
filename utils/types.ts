@@ -769,6 +769,7 @@ export interface BLOG_FORM_CARD_DATA {
   authorImage?: string;
   cardImage?: string;
   rawCardImage?: string;
+  order?: number | string;
 }
 
 export interface BLOG_FORM_HERO_DATA {
@@ -811,6 +812,7 @@ export interface BLOG_API_ITEM {
   badge?: string;
   introduction?: string;
   sections?: { id?: number; heading?: string; content?: string }[];
+  order?: number;
   [key: string]: unknown;
 }
 

@@ -5,7 +5,7 @@ export const BlogControllers = {
   // Get all blogs
   getAllBlogs: async (params?: Record<string, string | number | boolean>): Promise<AxiosResponse> => {
     try {
-      const result = await pagePublicApi.get("blogs/all", { params });
+      const result = await pagePublicApi.get("blogs/all?orderType=asc", { params });
       return result;
     } catch (error) {
       throw error;

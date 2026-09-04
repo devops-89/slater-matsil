@@ -128,7 +128,8 @@ export default function BlogsAdminLayout() {
     description: "",
     slug: "",
     cardImage: "",
-    rawCardImage: ""
+    rawCardImage: "",
+    order: ""
   });
 
   const [heroData, setHeroData] = useState<BLOG_FORM_HERO_DATA>({
@@ -147,7 +148,7 @@ export default function BlogsAdminLayout() {
     setActiveTab(0);
     setErrors({});
     setKeysToDeleteOnSave([]);
-    setCardData({ title: "", date: "", readTime: "", description: "", slug: "", cardImage: "", rawCardImage: "" });
+    setCardData({ title: "", date: "", readTime: "", description: "", slug: "", cardImage: "", rawCardImage: "", order: "" });
     setHeroData({ title: "", category: "Patent Law", author: "", authorTitle: "", authorImage: "", rawAuthorImage: "" });
     setContent({ intro: "", sections: [] });
     setDialogOpen(true);
@@ -169,7 +170,8 @@ export default function BlogsAdminLayout() {
         description: blog.listingDescription || "",
         cardImage: blog.cardImageDownloadUrl || blog.cardImageUrl || "",
         rawCardImage: blog.cardImageUrl || "",
-        slug: blog.slug || ""
+        slug: blog.slug || "",
+        order: blog.order || ""
       };
 
       const newHeroData: BLOG_FORM_HERO_DATA = {
@@ -331,6 +333,7 @@ export default function BlogsAdminLayout() {
       datePublished: cardData.date,
       readTime: cardData.readTime,
       cardImageUrl: cardData.rawCardImage || cardData.cardImage,
+      order: cardData.order ? Number(cardData.order) : undefined,
       heroTitle: heroData.title || cardData.title,
       category: heroData.category || "Patent Law",
       badge: "",

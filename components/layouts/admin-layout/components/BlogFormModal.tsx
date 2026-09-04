@@ -236,6 +236,18 @@ export default function BlogFormModal({
                           helperText={errors["cardData.readTime"] || "e.g., 5 min"}
                         />
                       </Grid>
+                      <Grid size={{ xs: 12, sm: 6 }}>
+                        <TextField
+                          fullWidth
+                          type="number"
+                          label="Order Number"
+                          value={cardData.order || ""}
+                          onChange={(e) => {
+                            setCardData({ ...cardData, order: e.target.value });
+                          }}
+                          helperText="e.g., 1, 2, 3 (Optional for manual ordering)"
+                        />
+                      </Grid>
                     </Grid>
                     <TextField
                       fullWidth
