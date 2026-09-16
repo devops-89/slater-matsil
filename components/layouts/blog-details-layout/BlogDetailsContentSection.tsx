@@ -50,7 +50,22 @@ const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
 
             <Stack spacing={6}>
               {content.sections.map((section, idx) => (
-                <Stack key={idx} spacing={3}>
+                <Stack key={idx} spacing={2.5}>
+                  {section.heading && (
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        fontFamily: tradeGothic.style.fontFamily,
+                        fontSize: { xs: 22, md: 26 },
+                        fontWeight: 700,
+                        color: COLORS.PRIMARY_BLUE,
+                        textAlign: "left",
+                        lineHeight: 1.35,
+                      }}
+                    >
+                      {section.heading}
+                    </Typography>
+                  )}
                   {Array.isArray(section.content) ? (
                     section.content.map((item, i) => (
                       <Typography
@@ -62,22 +77,23 @@ const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
                           color: COLORS.TEXT_PRIMARY,
                           textAlign: "left",
                         }}
-                      >
-                        {item}
-                      </Typography>
+                        dangerouslySetInnerHTML={{ __html: item }}
+                      />
                     ))
                   ) : (
-                    <Typography
-                      sx={{
-                        fontFamily: adelle.style.fontFamily,
-                        fontSize: { xs: 18, md: 20 },
-                        lineHeight: 1.7,
-                        color: COLORS.TEXT_PRIMARY,
-                        textAlign: "left",
-                      }}
-                    >
-                      {section.content}
-                    </Typography>
+                    (typeof section.content === "string" ? section.content.split(/\n+/).filter(Boolean) : [section.content]).map((item, i) => (
+                      <Typography
+                        key={i}
+                        sx={{
+                          fontFamily: adelle.style.fontFamily,
+                          fontSize: { xs: 18, md: 20 },
+                          lineHeight: 1.7,
+                          color: COLORS.TEXT_PRIMARY,
+                          textAlign: "left",
+                        }}
+                        dangerouslySetInnerHTML={{ __html: item }}
+                      />
+                    ))
                   )}
                 </Stack>
               ))}

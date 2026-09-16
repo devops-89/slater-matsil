@@ -1,3 +1,4 @@
+import BoldTextField from "./BoldTextField";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { PROFESSIONAL_FORM_BIO_DATA, PROFESSIONAL_FORM_CARD_DATA } from "@/utils/types";
@@ -72,13 +73,13 @@ export default function ProfessionalFormModal({
       <Stack spacing={3}>
         <Box>
           <Typography variant="subtitle2" sx={{ mb: 1, fontWeight: 700 }}>Description Paragraphs</Typography>
-          <TextField
+          <BoldTextField
             fullWidth
             multiline
             rows={6}
             placeholder="Enter description paragraphs here. Use a blank line (double enter) to separate paragraphs."
             value={data.paragraphs || ""}
-            onChange={(e) => handleParagraphChange(key, e.target.value)}
+            onChange={(val) => handleParagraphChange(key, val)}
           />
         </Box>
         <Divider />

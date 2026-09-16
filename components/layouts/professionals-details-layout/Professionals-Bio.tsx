@@ -64,11 +64,10 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                               color: "primary.main",
                             },
                           }}
-                        >
-                          {item.label}
-                        </Box>
+                          dangerouslySetInnerHTML={{ __html: item.label }}
+                        />
                       ) : (
-                        item.label
+                        <Box component="span" dangerouslySetInnerHTML={{ __html: item.label }} />
                       )}
                       {item.subList && (
                         <Box component="ul" sx={{ mt: 1, pl: 2 }}>

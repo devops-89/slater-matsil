@@ -24,7 +24,7 @@ const CareerApplicationForm = () => {
   const { hideModal } = useModal();
   const { showNotification } = useNotification();
   const recaptchaRef = useRef<ReCAPTCHA>(null);
-  const [showRecaptcha, setShowRecaptcha] = useState(false);
+  const [showRecaptcha, setShowRecaptcha] = useState(true);
   const [currentDate, setCurrentDate] = useState("");
   const [resume, setResume] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);

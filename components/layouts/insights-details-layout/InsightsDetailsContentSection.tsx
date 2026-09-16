@@ -28,9 +28,8 @@ const SectionBlock = ({
           textAlign: "left",
           letterSpacing: 1.5,
         }}
-      >
-        {content}
-      </Typography>
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
     </Stack>
   );
 };

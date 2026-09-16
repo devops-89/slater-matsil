@@ -1,3 +1,4 @@
+import BoldTextField from "./BoldTextField";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import {
@@ -278,14 +279,14 @@ export default function InsightFormModal({
                 value={contentSections.closingStatement?.heading || ""} 
                 onChange={(e) => handleContentSectionChange("closingStatement", "heading", e.target.value)} 
               />
-              <TextField 
+              <BoldTextField 
                 fullWidth 
                 multiline 
                 rows={8} 
                 label="Content Body (Use new lines for paragraphs)" 
                 value={contentSections.closingStatement?.content || ""} 
-                onChange={(e) => {
-                  handleContentSectionChange("closingStatement", "content", e.target.value);
+                onChange={(val) => {
+                  handleContentSectionChange("closingStatement", "content", val);
                   setErrors({ ...errors, "contentSections.closingStatement.content": undefined });
                 }} 
                 error={!!errors["contentSections.closingStatement.content"]}
@@ -301,21 +302,21 @@ export default function InsightFormModal({
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 2 }}>Practice Areas</Typography>
                 <Stack spacing={2}>
                   <TextField fullWidth label="Heading" value={contentSections.practiceAreas?.heading || ""} onChange={(e) => handleContentSectionChange("practiceAreas", "heading", e.target.value)} />
-                  <TextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists/paragraphs)" value={contentSections.practiceAreas?.content || ""} onChange={(e) => handleContentSectionChange("practiceAreas", "content", e.target.value)} />
+                  <BoldTextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists/paragraphs)" value={contentSections.practiceAreas?.content || ""} onChange={(val) => handleContentSectionChange("practiceAreas", "content", val)} />
                 </Stack>
               </Box>
               <Box>
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 2 }}>Career & Background</Typography>
                 <Stack spacing={2}>
                   <TextField fullWidth label="Heading" value={contentSections.career?.heading || ""} onChange={(e) => handleContentSectionChange("career", "heading", e.target.value)} />
-                  <TextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists/paragraphs)" value={contentSections.career?.content || ""} onChange={(e) => handleContentSectionChange("career", "content", e.target.value)} />
+                  <BoldTextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists/paragraphs)" value={contentSections.career?.content || ""} onChange={(val) => handleContentSectionChange("career", "content", val)} />
                 </Stack>
               </Box>
               <Box>
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 2 }}>Personal Notes / Education</Typography>
                 <Stack spacing={2}>
                   <TextField fullWidth label="Heading" value={contentSections.personal?.heading || ""} onChange={(e) => handleContentSectionChange("personal", "heading", e.target.value)} />
-                  <TextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists/paragraphs)" value={contentSections.personal?.content || ""} onChange={(e) => handleContentSectionChange("personal", "content", e.target.value)} />
+                  <BoldTextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists/paragraphs)" value={contentSections.personal?.content || ""} onChange={(val) => handleContentSectionChange("personal", "content", val)} />
                 </Stack>
               </Box>
             </Stack>
@@ -328,14 +329,14 @@ export default function InsightFormModal({
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 2 }}>Chambers / Industry Review</Typography>
                 <Stack spacing={2}>
                   <TextField fullWidth label="Heading" value={contentSections.ChamberssReview?.heading || ""} onChange={(e) => handleContentSectionChange("ChamberssReview", "heading", e.target.value)} />
-                  <TextField fullWidth multiline rows={4} label="Content Body (Use new lines for paragraphs)" value={contentSections.ChamberssReview?.content || ""} onChange={(e) => handleContentSectionChange("ChamberssReview", "content", e.target.value)} />
+                  <BoldTextField fullWidth multiline rows={4} label="Content Body (Use new lines for paragraphs)" value={contentSections.ChamberssReview?.content || ""} onChange={(val) => handleContentSectionChange("ChamberssReview", "content", val)} />
                 </Stack>
               </Box>
               <Box>
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 2 }}>Strengths / Quotes</Typography>
                 <Stack spacing={2}>
                   <TextField fullWidth label="Heading" value={contentSections.strengths?.heading || ""} onChange={(e) => handleContentSectionChange("strengths", "heading", e.target.value)} />
-                  <TextField fullWidth multiline rows={4} label="Content Body (Format: Quote text followed by '- Author')" value={contentSections.strengths?.content || ""} onChange={(e) => handleContentSectionChange("strengths", "content", e.target.value)} />
+                  <BoldTextField fullWidth multiline rows={4} label="Content Body (Format: Quote text followed by '- Author')" value={contentSections.strengths?.content || ""} onChange={(val) => handleContentSectionChange("strengths", "content", val)} />
                 </Stack>
               </Box>
             </Stack>
@@ -348,14 +349,14 @@ export default function InsightFormModal({
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 2 }}>Professional Memberships</Typography>
                 <Stack spacing={2}>
                   <TextField fullWidth label="Heading" value={contentSections.professionalMemberships?.heading || ""} onChange={(e) => handleContentSectionChange("professionalMemberships", "heading", e.target.value)} />
-                  <TextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists)" value={contentSections.professionalMemberships?.content || ""} onChange={(e) => handleContentSectionChange("professionalMemberships", "content", e.target.value)} />
+                  <BoldTextField fullWidth multiline rows={3} label="Content Body (Use new lines for lists)" value={contentSections.professionalMemberships?.content || ""} onChange={(val) => handleContentSectionChange("professionalMemberships", "content", val)} />
                 </Stack>
               </Box>
               <Box>
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 2 }}>External Resource / Link</Typography>
                 <Stack spacing={2}>
                   <TextField fullWidth label="Heading (e.g., Read More)" value={contentSections.resource?.heading || ""} onChange={(e) => handleContentSectionChange("resource", "heading", e.target.value)} />
-                  <TextField fullWidth multiline rows={2} label="Resource Description" value={contentSections.resource?.content || ""} onChange={(e) => handleContentSectionChange("resource", "content", e.target.value)} />
+                  <BoldTextField fullWidth multiline rows={2} label="Resource Description" value={contentSections.resource?.content || ""} onChange={(val) => handleContentSectionChange("resource", "content", val)} />
                   <TextField fullWidth label="Resource URL (Link)" placeholder="https://..." value={contentSections.resource?.link || ""} onChange={(e) => setContentSections({ ...contentSections, resource: { ...contentSections.resource, link: e.target.value } })} />
                 </Stack>
               </Box>

@@ -12,17 +12,16 @@ const WorkList = ({ title }: WORK_LIST_PROPS) => {
         backgroundColor: "#ECF8F8",
         borderRadius: "12px",
         padding: "15px",
-        // minHeight: "80px",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 1,
+        alignItems: "flex-start",
+        justifyContent: "flex-start",
+        gap: 2,
       }}
     >
       <Box
         sx={{
-          width: 50,
-          height: 50,
+          width: 44,
+          height: 44,
           backgroundColor: COLORS.PRIMARY_GREEN,
           borderRadius: "50%",
           display: "flex",
@@ -40,6 +39,7 @@ const WorkList = ({ title }: WORK_LIST_PROPS) => {
           fontSize: 15,
           fontWeight: 600,
           lineHeight: "24px",
+          pt: "10px",
         }}
       >
         {title}
