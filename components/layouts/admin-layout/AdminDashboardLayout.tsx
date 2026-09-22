@@ -59,6 +59,14 @@ export default function AdminDashboardLayout() {
 
   return (
     <AdminLayout title="Overview Dashboard">
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          Admin Dashboard
+        </Typography>
+        <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+          Overview of system activities, statistics, and quick page management.
+        </Typography>
+      </Box>
       <Grid container spacing={4}>
         {stats.map((stat, i) => (
           <Grid size={{ xs: 12, sm: 6, lg: 3 }} key={i}>

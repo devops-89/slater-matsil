@@ -7,12 +7,74 @@ import { useRef } from "react";
 
 import { clientLocations } from "@/public/data/client-locations";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
+import { CircularProgress } from "@mui/material";
+import { Public } from "@mui/icons-material";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
+const GlobeFallbackLoader = () => (
+  <Box
+    sx={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      background: "rgba(255, 255, 255, 0.95)",
+      backdropFilter: "blur(10px)",
+      padding: "24px 36px",
+      borderRadius: "24px",
+      boxShadow: "0px 16px 40px rgba(0, 32, 64, 0.12)",
+      border: "1.5px solid rgba(0, 177, 176, 0.25)",
+      textAlign: "center",
+      minWidth: "230px",
+    }}
+  >
+    <style>{`
+      @keyframes globe-pulse {
+        0% { transform: scale(0.95); opacity: 0.8; }
+        50% { transform: scale(1.05); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.8; }
+      }
+    `}</style>
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
+      <CircularProgress
+        size={64}
+        thickness={4}
+        sx={{ color: COLORS.PRIMARY_GREEN }}
+      />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Public sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 28, animation: "globe-pulse 2s ease-in-out infinite" }} />
+      </Box>
+    </Box>
+    <Typography
+      sx={{
+        fontFamily: tradeGothic.style.fontFamily,
+        fontWeight: 700,
+        fontSize: 16,
+        color: COLORS.PRIMARY_BLUE,
+      }}
+    >
+      Loading 3D Globe...
+    </Typography>
+  </Box>
+);
+
 const ThreeEarth = dynamic(() => import("@/components/widgets/Three-Earth"), {
   ssr: false,
+  loading: () => <GlobeFallbackLoader />,
 });
 
 const LazyThreeEarth = () => {
@@ -47,25 +109,10 @@ const LazyThreeEarth = () => {
         position: "relative",
       }}
     >
-      <style>{`
-        @keyframes loader-spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}</style>
       {visible ? (
         <ThreeEarth height="550px" />
       ) : (
-        <Box
-          style={{
-            width: 60,
-            height: 60,
-            border: "5px solid #ECF8F8",
-            borderTop: "5px solid #00B1B0",
-            borderRadius: "50%",
-            animation: "loader-spin 1s linear infinite",
-          }}
-        />
+        <GlobeFallbackLoader />
       )}
     </Box>
   );

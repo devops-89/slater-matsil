@@ -6,6 +6,7 @@ import { useLoading } from "@/components/providers/LoadingProvider";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import {
   INSIGHT_API_ITEM,
   INSIGHT_FORM_CARD_DATA,
@@ -440,6 +441,14 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
 
   return (
     <AdminLayout title="Insights Management">
+      <Box sx={{ mb: 3 }}>
+        <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          Insights Database
+        </Typography>
+        <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+          Manage, create, edit, and publish firm insights and legal publications.
+        </Typography>
+      </Box>
       <Box
         sx={{
           mb: 4,
@@ -488,7 +497,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
         {isFetching ? (
           // Render skeleton loaders
           Array.from(new Array(6)).map((_, i) => (
-            <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4 }} key={`skeleton-${i}`} sx={{ display: "flex" }}>
+            <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4, xl: 3 }} key={`skeleton-${i}`} sx={{ display: "flex" }}>
               <Box sx={{ width: "100%", height: 320, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
             </Grid>
           ))
@@ -501,7 +510,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
         ) : (
           currentItems.map((insight, i: number) => (
             <Grid
-              size={{ xs: 12, sm: 12, md: 6, lg: 4 }}
+              size={{ xs: 12, sm: 12, md: 6, lg: 4, xl: 3 }}
               key={i}
               sx={{ display: "flex" }}
             >

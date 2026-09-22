@@ -16,15 +16,23 @@ import { useFormik } from "formik";
 import { MuiTelInput } from "mui-tel-input";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { isValidEmail, isValidPhone, sanitizeEmailInput, sanitizePhoneInput } from "@/utils/validators";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
   email: Yup.string()
+    .required("Email is required")
     .email("Invalid email address")
-    .required("Email is required"),
-  phoneNumber: Yup.string().required("Phone number is required"),
+    .test("valid-tld", "Please enter a valid email address with a valid domain extension", (value) => {
+      return isValidEmail(value);
+    }),
+  phoneNumber: Yup.string()
+    .required("Phone number is required")
+    .test("valid-phone", "Please enter a valid phone number", (value) => {
+      return isValidPhone(value);
+    }),
   company: Yup.string().required("Company name is required"),
   message: Yup.string().required("Message is required"),
 });
@@ -156,7 +164,10 @@ const Form = () => {
               id="email"
               name="email"
               value={formik.values.email}
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                const val = sanitizeEmailInput(e.target.value);
+                formik.setFieldValue("email", val);
+              }}
               onBlur={formik.handleBlur}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
@@ -175,7 +186,10 @@ const Form = () => {
               defaultCountry="US"
               placeholder="+1 (555) 123-4567"
               value={formik.values.phoneNumber}
-              onChange={(value) => formik.setFieldValue("phoneNumber", value)}
+              onChange={(value, info) => {
+                const val = sanitizePhoneInput(value, info);
+                formik.setFieldValue("phoneNumber", val);
+              }}
               onBlur={() => formik.setFieldTouched("phoneNumber", true)}
               error={
                 formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)

@@ -108,7 +108,8 @@ const Whoweserve = () => {
           <Box
             sx={{
               backgroundColor: "#ECF2F3",
-              height: { lg: "80vh", xs: "70vh" },
+              minHeight: { lg: "80vh", xs: "auto" },
+              py: { xs: 4, lg: 6 },
               ...(details?.homepage?.who_we_serve?.rightSection?.bgImage && {
                 backgroundImage: `url(${details.homepage.who_we_serve.rightSection.bgImage})`,
               }),

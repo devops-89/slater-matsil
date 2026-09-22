@@ -5,7 +5,7 @@ import { useLoading } from "@/components/providers/LoadingProvider";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import { Add } from "@mui/icons-material";
 import {
     Box,
@@ -481,9 +481,14 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
   return (
     <AdminLayout title="Firm Professionals Management">
       <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'stretch', sm: 'center' }, gap: 2 }}>
-        <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE }}>
-          Professional Database
-        </Typography>
+        <Box>
+          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+            Professional Database
+          </Typography>
+          <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+            Manage profiles, bio details, and contact information for firm attorneys and advisors.
+          </Typography>
+        </Box>
         <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
           Add Professional
         </Button>

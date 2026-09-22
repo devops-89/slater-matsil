@@ -393,7 +393,7 @@ const Navbar = () => {
                           },
                         }}
                         sx={{
-                          width: 170,
+                          width: { xs: 120, sm: 170 },
                           backgroundColor: COLORS.WHITE,
                           borderRadius: "8px",
                           "& .MuiOutlinedInput-root": {
@@ -483,16 +483,17 @@ const Navbar = () => {
             pointerEvents: menuOpen ? "auto" : "none",
           }}
         >
-          <Container maxWidth="lg">
-            <Grid container>
+          <Container maxWidth="lg" sx={{ py: { xs: 8, md: 4 }, maxHeight: "100vh", overflowY: "auto" }}>
+            <Grid container spacing={{ xs: 3, md: 4 }}>
               {HEADER_DATA.map((val, i) => (
-                <Grid size={4} key={i}>
+                <Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}>
                   <Typography
                     sx={{
-                      fontSize: 20,
+                      fontSize: { xs: 18, md: 20 },
                       fontFamily: tradeGothic.style.fontFamily,
                       fontWeight: 700,
                       textAlign: "center",
+                      color: COLORS.PRIMARY_BLUE,
                     }}
                   >
                     {val.HEADING}
@@ -516,6 +517,7 @@ const Navbar = () => {
                                   fontFamily: tradeGothic.style.fontFamily,
                                   fontWeight: 400,
                                   textAlign: "center",
+                                  fontSize: { xs: 15, md: 16 },
                                 },
                               },
                             }}

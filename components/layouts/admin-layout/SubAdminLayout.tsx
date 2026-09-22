@@ -4,7 +4,7 @@ import { UserControllers } from "@/api/userControllers";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import { Add, Close, Delete, Edit } from "@mui/icons-material";
 import {
   Box,
@@ -29,7 +29,8 @@ import {
   TableHead,
   TableRow,
   TextField,
-  Typography
+  Typography,
+  TablePagination,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import * as yup from "yup";
@@ -57,6 +58,9 @@ export default function SubAdminLayout() {
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<string | number | null>(null);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalUsersCount, setTotalUsersCount] = useState(0);
   const [formData, setFormData] = useState<{ id: string | number; name: string; email: string; password?: string; roleId: string | number }>({
     id: "",
     name: "",
@@ -65,12 +69,14 @@ export default function SubAdminLayout() {
     roleId: "",
   });
 
-  const fetchUsers = async (showLoader = true) => {
+  const fetchUsers = async (showLoader = true, p = page, r = rowsPerPage) => {
     try {
       if (showLoader) startLoading();
-      const res = await UserControllers.getAllUsers();
-      const fetched = res.data?.data?.data?.users || res.data?.data?.users || [];
+      const res = await UserControllers.getAllUsers({ page: p + 1, limit: r });
+      const fetched = res.data?.data?.data?.users || res.data?.data?.users || res.data?.data || [];
+      const total = res.data?.data?.data?.total || res.data?.data?.total || res.data?.total || fetched.length;
       setSubAdmins(fetched);
+      setTotalUsersCount(total);
     } catch (e: unknown) {
       console.error(e);
       const apiErr = e as { message?: string };
@@ -93,8 +99,17 @@ export default function SubAdminLayout() {
 
   useEffect(() => {
     fetchRoles();
-    fetchUsers();
-  }, []);
+    fetchUsers(true, page, rowsPerPage);
+  }, [page, rowsPerPage]);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleOpenNew = () => {
     setFormData({ id: "", name: "", email: "", password: "", roleId: "" });
@@ -182,8 +197,16 @@ export default function SubAdminLayout() {
 
   return (
     <AdminLayout title="User Management">
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: { xs: 'stretch', sm: 'flex-end' }, alignItems: 'center' }}>
-        <Button fullWidth={false} variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px", width: { xs: '100%', sm: 'auto' } }}>
+      <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'stretch', sm: 'center' }, gap: 2 }}>
+        <Box>
+          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+            User Management
+          </Typography>
+          <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+            Manage sub-admin team members, credentials, and assigned access roles.
+          </Typography>
+        </Box>
+        <Button fullWidth={false} variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
           Add User
         </Button>
       </Box>
@@ -211,7 +234,7 @@ export default function SubAdminLayout() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {subAdmins.map((admin) => {
+                  {(subAdmins.length > rowsPerPage ? subAdmins.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : subAdmins).map((admin) => {
                     const roleName = admin.permissionRole?.name || roles.find((r: Record<string, any>) => r.id === admin.permissionRole?.id)?.name || "Unknown";
                     return (
                       <TableRow key={admin.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -237,6 +260,15 @@ export default function SubAdminLayout() {
                   })}
                 </TableBody>
               </Table>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                component="div"
+                count={totalUsersCount || subAdmins.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
             </TableContainer>
           )}
         </Grid>

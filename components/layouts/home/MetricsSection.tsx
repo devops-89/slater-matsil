@@ -111,7 +111,7 @@ const MetricsSection: React.FC = (): JSX.Element => {
           </Grid>
 
           <Grid size={{ lg: 6, xs: 12 }} data-aos="fade-down" suppressHydrationWarning>
-            <Grid container spacing={8}>
+            <Grid container spacing={{ xs: 3, sm: 4, lg: 6 }}>
               {(details?.homepage?.our_metrics?.metricsData?.length ? details.homepage.our_metrics.metricsData : [
                 { title: "Patents", count: "1,650", description: "patents issued in 2024" },
                 { title: "R&D", count: "$36B", description: "in annual client R&D" },

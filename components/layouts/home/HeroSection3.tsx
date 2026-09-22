@@ -108,37 +108,37 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
     <Grid
       container
       alignItems={"center"}
-      spacing={{ lg: 5, xs: 4 }}
-      direction={{ xs: "column-reverse", lg: "row" }}
+      spacing={{ xs: 3, md: 4, lg: 5 }}
+      direction={{ xs: "column-reverse", md: "row" }}
     >
       <Grid 
-        size={{ lg: 6, xs: 12 }}
+        size={{ md: 6, xs: 12 }}
         sx={{
           width: "100%",
-          p: { xs: 1, lg: 0 },
+          p: { xs: 1, md: 0 },
         }}
       >
         <Typography
           sx={{
-            fontSize: { lg: 50, xs: 28 },
+            fontSize: { xs: 24, sm: 28, md: 34, lg: 42, xl: 46 },
             color: COLORS.PRIMARY_BLUE,
             lineHeight: 1.2,
             fontWeight: 700,
             fontFamily: tradeGothic.style.fontFamily,
-            textAlign: { xs: "center", lg: "left" },
+            textAlign: { xs: "center", md: "left" },
           }}
         >
           {val.title}
         </Typography>
         <Typography
           sx={{
-            fontSize: { lg: 20, xs: 16 },
+            fontSize: { xs: 14, sm: 15, md: 16, lg: 18 },
             color: COLORS.BLACK,
             fontWeight: 500,
             lineHeight: 1.5,
-            mt: 3,
-            width: { lg: "80%", xs: "100%" },
-            textAlign: { xs: "center", lg: "justify" },
+            mt: { xs: 1.5, md: 2, lg: 3 },
+            width: { md: "95%", lg: "85%" },
+            textAlign: { xs: "center", md: "justify" },
           }}
         >
           {val.description}
@@ -146,7 +146,7 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
         <Box
           sx={{
             display: "flex",
-            justifyContent: { xs: "center", lg: "flex-start" },
+            justifyContent: { xs: "center", md: "flex-start" },
           }}
         >
           <Button
@@ -156,14 +156,14 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
               backgroundColor: COLORS.PRIMARY_BLUE,
               color: COLORS.WHITE,
               fontFamily: adelle.style.fontFamily,
-              fontSize: { lg: 16, xs: 14 },
+              fontSize: { xs: 14, md: 15, lg: 16 },
               fontWeight: 700,
-              lineHeight: "26px",
+              lineHeight: "24px",
               textTransform: "uppercase",
-              mt: { lg: 3, xs: 4 },
+              mt: { xs: 2, md: 3 },
               borderRadius: 20,
-              width: { lg: 200, xs: 180 },
-              p: 1.5,
+              width: { xs: 160, md: 180, lg: 200 },
+              p: 1.2,
               "&:hover": {
                 backgroundColor: COLORS.PRIMARY_BLUE,
               },
@@ -173,11 +173,13 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
           </Button>
         </Box>
       </Grid>
-      <Grid size={{ lg: 6, xs: 12 }}>
+      <Grid size={{ md: 6, xs: 12 }}>
         <Box
           sx={{
             width: "100%",
-            height: { lg: "450px", sm: "350px", xs: "250px" },
+            height: { xs: "220px", sm: "280px", md: "320px", lg: "370px", xl: "420px" },
+            maxWidth: { xs: "100%", md: "520px" },
+            mx: "auto",
             position: "relative",
           }}
         >
@@ -196,14 +198,14 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
   return (
     <Box
       sx={{
-        height: { lg: "70vh", xs: "auto" },
-        minHeight: { xs: "85vh", lg: "auto" },
+        height: "auto",
+        minHeight: { xs: "auto", md: "460px", lg: "520px" },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
         mt: 2,
         mb: 4,
-        py: { xs: 5, lg: 0 },
+        py: { xs: 4, md: 4, lg: 5 },
         backgroundColor: COLORS.LIGHT_GREY,
         borderTop: "1px solid #000 ",
         borderBottom: "1px solid #000 ",

@@ -85,26 +85,12 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
         borderBottom: `1px solid rgba(0,0,0,0.05)`,
       }}
     >
-      <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 2 }, minWidth: 0 }}>
+      <Box sx={{ display: "flex", alignItems: "center" }}>
         {onToggleSidebar && (
           <IconButton onClick={onToggleSidebar} edge="start" sx={{ color: COLORS.PRIMARY_BLUE }}>
             <Menu />
           </IconButton>
         )}
-        <Typography 
-          variant="h5" 
-          sx={{ 
-            fontFamily: adelle.style.fontFamily,
-            fontWeight: 700,
-            color: COLORS.PRIMARY_BLUE,
-            fontSize: { xs: 18, sm: 22, md: 24 },
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis"
-          }}
-        >
-          {title}
-        </Typography>
       </Box>
 
       <Box 

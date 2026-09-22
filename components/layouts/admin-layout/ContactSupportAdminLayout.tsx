@@ -3,7 +3,7 @@ import { UserControllers } from "@/api/userControllers";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import { Visibility, Close, Delete } from "@mui/icons-material";
 import {
   Box,
@@ -22,6 +22,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  TablePagination,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import AdminLayout from "./AdminLayout";
@@ -34,22 +35,25 @@ export default function ContactSupportAdminLayout() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [inquiryToDelete, setInquiryToDelete] = useState<string | number | null>(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalInquiriesCount, setTotalInquiriesCount] = useState(0);
 
-  const fetchInquiries = async (showLoader = true) => {
+  const fetchInquiries = async (showLoader = true, p = page, r = rowsPerPage) => {
     try {
       if (showLoader) startLoading();
-      const res = await UserControllers.getAllContactSupports();
+      const res = await UserControllers.getAllContactSupports({ page: p + 1, limit: r });
       const fetched = res.data?.data?.data || res.data?.data || [];
-      // If the API returns an object with a specific array property, adjust accordingly. 
-      // e.g. res.data?.data?.data?.supports
+      const total = res.data?.data?.total || res.data?.total || (Array.isArray(fetched) ? fetched.length : fetched.supports?.length || 0);
+
       if (Array.isArray(fetched)) {
         setInquiries(fetched);
       } else if (fetched.supports && Array.isArray(fetched.supports)) {
         setInquiries(fetched.supports);
       } else {
-         // Fallback if data structure is unknown
         setInquiries(Array.isArray(res.data) ? res.data : []);
       }
+      setTotalInquiriesCount(total);
     } catch (e: unknown) {
       console.error(e);
       showNotification("Failed to fetch support inquiries", "error");
@@ -59,8 +63,17 @@ export default function ContactSupportAdminLayout() {
   };
 
   useEffect(() => {
-    fetchInquiries();
-  }, []);
+    fetchInquiries(true, page, rowsPerPage);
+  }, [page, rowsPerPage]);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleView = async (inquiry: Record<string, any>) => {
     try {
@@ -104,7 +117,16 @@ export default function ContactSupportAdminLayout() {
 
   return (
     <AdminLayout title="Support Inquiries">
-      <Box sx={{ mb: 4 }}></Box>
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box>
+          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+            Support Inquiries
+          </Typography>
+          <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+            View and respond to incoming contact requests and client consultation inquiries.
+          </Typography>
+        </Box>
+      </Box>
 
       <Grid container spacing={4}>
         <Grid size={{ xs: 12 }}>
@@ -172,7 +194,7 @@ export default function ContactSupportAdminLayout() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {inquiries.map((inquiry, idx) => (
+                  {(inquiries.length > rowsPerPage ? inquiries.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : inquiries).map((inquiry, idx) => (
                     <TableRow
                       key={inquiry.id || idx}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -211,6 +233,15 @@ export default function ContactSupportAdminLayout() {
                   ))}
                 </TableBody>
               </Table>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                component="div"
+                count={totalInquiriesCount || inquiries.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
             </TableContainer>
           )}
         </Grid>

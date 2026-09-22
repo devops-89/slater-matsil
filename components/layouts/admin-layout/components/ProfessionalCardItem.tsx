@@ -15,7 +15,7 @@ interface ProfessionalCardItemProps {
 
 export default function ProfessionalCardItem({ prof, onEdit, onDelete, onImageLoad }: ProfessionalCardItemProps) {
   return (
-    <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} sx={{ display: 'flex' }}>
+    <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4, xl: 3 }} sx={{ display: 'flex' }}>
       <Card
         sx={{
           width: '100%',

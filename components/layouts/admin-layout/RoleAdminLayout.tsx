@@ -26,10 +26,11 @@ import {
   TableRow,
   Paper,
   Chip,
+  TablePagination,
 } from "@mui/material";
 import { Add, Close, Delete, Edit, Security } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { useNotification } from "@/components/providers/NotificationProvider";
@@ -69,21 +70,27 @@ export default function RoleAdminLayout() {
   const [allFetchedRoles, setAllFetchedRoles] = useState<Record<string, any>[]>([]);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [roleToDelete, setRoleToDelete] = useState<string | number | null>(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalRolesCount, setTotalRolesCount] = useState(0);
   const [formData, setFormData] = useState<{ id: string | number; name: string; permissions: string[] }>({
     id: "",
     name: "",
     permissions: [],
   });
 
-  const fetchRoles = async (showLoader = true) => {
+  const fetchRoles = async (showLoader = true, p = page, r = rowsPerPage) => {
     try {
       if (showLoader) startLoading();
-      const res = await RoleControllers.getAllRoles();
+      const res = await RoleControllers.getAllRoles({ page: p + 1, limit: r });
       const fetchedRoles = res.data?.data?.data || res.data?.data || [];
+      const total = res.data?.data?.total || res.data?.total || fetchedRoles.length;
       
       setAllFetchedRoles(fetchedRoles);
       // Filter out soft-deleted roles for UI display
-      setRoles(fetchedRoles.filter((r: Record<string, any>) => r.isActive !== false));
+      const activeRoles = fetchedRoles.filter((role: Record<string, any>) => role.isActive !== false);
+      setRoles(activeRoles);
+      setTotalRolesCount(total);
     } catch (e: unknown) {
       console.error(e);
       const apiErr = e as { message?: string };
@@ -94,8 +101,17 @@ export default function RoleAdminLayout() {
   };
 
   useEffect(() => {
-    fetchRoles();
-  }, []);
+    fetchRoles(true, page, rowsPerPage);
+  }, [page, rowsPerPage]);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleOpenNew = () => {
     setFormData({ id: "", name: "", permissions: [] });
@@ -190,8 +206,16 @@ export default function RoleAdminLayout() {
 
   return (
     <AdminLayout title="Role Management">
-      <Box sx={{ mb: 4, display: 'flex', justifyContent: { xs: 'stretch', sm: 'flex-end' }, alignItems: 'center' }}>
-        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px", width: { xs: '100%', sm: 'auto' } }}>
+      <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'stretch', sm: 'center' }, gap: 2 }}>
+        <Box>
+          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+            Role Management
+          </Typography>
+          <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+            Configure custom roles and permission levels for admin panel users.
+          </Typography>
+        </Box>
+        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
           Create New Role
         </Button>
       </Box>
@@ -216,7 +240,7 @@ export default function RoleAdminLayout() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {roles.map((role) => (
+              {(roles.length > rowsPerPage ? roles.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : roles).map((role) => (
                 <TableRow key={role.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                   <TableCell component="th" scope="row">
                     <Typography sx={{ fontFamily: tradeGothic.style.fontFamily, fontWeight: 700, fontSize: 16, color: COLORS.PRIMARY_BLUE }}>
@@ -247,6 +271,15 @@ export default function RoleAdminLayout() {
               ))}
             </TableBody>
           </Table>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25, 50]}
+            component="div"
+            count={totalRolesCount || roles.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </TableContainer>
       )}
 

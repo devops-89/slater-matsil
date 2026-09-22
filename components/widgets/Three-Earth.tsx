@@ -1,10 +1,13 @@
 "use client";
 
-import { Box } from "@mui/material";
-import { OrbitControls, Stage, useGLTF, Html } from "@react-three/drei";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import { OrbitControls, Stage, useGLTF, Html, useProgress } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useRef, useState } from "react";
 import * as THREE from "three";
+import { Public } from "@mui/icons-material";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
 
 // Suppress WebGL-related console errors in sandboxed or headless environments
 if (typeof window !== "undefined") {
@@ -97,6 +100,88 @@ const Pin = ({ position, pinSize, city }: { position: THREE.Vector3, pinSize: nu
   );
 };
 
+const CanvasLoader = () => {
+  const { progress } = useProgress();
+  const roundedProgress = Math.min(100, Math.max(0, Math.round(progress || 0)));
+
+  return (
+    <Html center zIndexRange={[100, 0]}>
+      <style>{`
+        @keyframes globe-pulse {
+          0% { transform: scale(0.95); opacity: 0.8; }
+          50% { transform: scale(1.05); opacity: 1; }
+          100% { transform: scale(0.95); opacity: 0.8; }
+        }
+      `}</style>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          background: "rgba(255, 255, 255, 0.95)",
+          backdropFilter: "blur(10px)",
+          padding: "24px 36px",
+          borderRadius: "24px",
+          boxShadow: "0px 16px 40px rgba(0, 32, 64, 0.12)",
+          border: "1.5px solid rgba(0, 177, 176, 0.25)",
+          textAlign: "center",
+          minWidth: "230px",
+          whiteSpace: "nowrap",
+        }}
+      >
+        <Box sx={{ position: "relative", display: "inline-flex" }}>
+          <CircularProgress
+            variant={roundedProgress > 0 ? "determinate" : "indeterminate"}
+            value={roundedProgress > 0 ? roundedProgress : 25}
+            size={64}
+            thickness={4}
+            sx={{ color: COLORS.PRIMARY_GREEN }}
+          />
+          <Box
+            sx={{
+              top: 0,
+              left: 0,
+              bottom: 0,
+              right: 0,
+              position: "absolute",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Public sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 28, animation: "globe-pulse 2s ease-in-out infinite" }} />
+          </Box>
+        </Box>
+        <Box>
+          <Typography
+            sx={{
+              fontFamily: tradeGothic.style.fontFamily,
+              fontWeight: 700,
+              fontSize: 16,
+              color: COLORS.PRIMARY_BLUE,
+            }}
+          >
+            Loading Globe
+          </Typography>
+          <Typography
+            sx={{
+              fontFamily: adelle.style.fontFamily,
+              fontWeight: 700,
+              fontSize: 14,
+              color: COLORS.PRIMARY_GREEN,
+              mt: 0.5,
+            }}
+          >
+            {roundedProgress}%
+          </Typography>
+        </Box>
+      </Box>
+    </Html>
+  );
+};
+
 const EarthModel = () => {
   const { scene } = useGLTF("/images/home/earth/earth_ultra_pbr.glb");
   const earthRef = useRef<THREE.Group>(null);
@@ -147,7 +232,7 @@ const ThreeEarth = ({ height = "500px" }: { height?: any }) => {
           camera={{ position: [0, 0, 6], fov: 45 }}
           gl={{ antialias: false, powerPreference: "default" }}
         >
-          <Suspense fallback={null}>
+          <Suspense fallback={<CanvasLoader />}>
             <Stage
               environment="city"
               intensity={1.5}

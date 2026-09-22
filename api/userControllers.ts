@@ -67,9 +67,9 @@ export const UserControllers = {
     }
   },
 
-  getAllContactSupports: async (): Promise<AxiosResponse> => {
+  getAllContactSupports: async (params?: Record<string, string | number | boolean>): Promise<AxiosResponse> => {
     try {
-      let result = await userSecuredApi.get("contact-support", { baseURL: "/backend-api/" });
+      let result = await userSecuredApi.get("contact-support", { baseURL: "/backend-api/", params });
       return result;
     } catch (error) {
       throw error;

@@ -3,7 +3,7 @@ import { CareerControllers } from "@/api/careerControllers";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { COLORS } from "@/utils/enum";
-import { tradeGothic } from "@/utils/fonts";
+import { adelle, tradeGothic } from "@/utils/fonts";
 import { Visibility, Close, Delete } from "@mui/icons-material";
 import {
   Box,
@@ -22,6 +22,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  TablePagination,
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import AdminLayout from "./AdminLayout";
@@ -34,17 +35,23 @@ export default function ManageCareersAdminLayout() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [applicationToDelete, setApplicationToDelete] = useState<string | number | null>(null);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [totalApplicationsCount, setTotalApplicationsCount] = useState(0);
 
-  const fetchApplications = async (showLoader = true) => {
+  const fetchApplications = async (showLoader = true, p = page, r = rowsPerPage) => {
     try {
       if (showLoader) startLoading();
-      const res = await CareerControllers.getAllCareers();
-      const fetched = res.data?.data || res.data || [];
+      const res = await CareerControllers.getAllCareers({ page: p + 1, limit: r });
+      const fetched = res.data?.data?.data || res.data?.data || [];
+      const total = res.data?.data?.total || res.data?.total || (Array.isArray(fetched) ? fetched.length : 0);
+
       if (Array.isArray(fetched)) {
         setApplications(fetched);
       } else {
         setApplications([]);
       }
+      setTotalApplicationsCount(total);
     } catch (e: unknown) {
       console.error(e);
       showNotification("Failed to fetch careers applications", "error");
@@ -54,8 +61,17 @@ export default function ManageCareersAdminLayout() {
   };
 
   useEffect(() => {
-    fetchApplications();
-  }, []);
+    fetchApplications(true, page, rowsPerPage);
+  }, [page, rowsPerPage]);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleView = async (application: Record<string, any>) => {
     try {
@@ -98,7 +114,16 @@ export default function ManageCareersAdminLayout() {
 
   return (
     <AdminLayout title="Careers Applications">
-      <Box sx={{ mb: 4 }}></Box>
+      <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box>
+          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+            Careers Applications
+          </Typography>
+          <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+            Review candidate applications, qualifications, and downloaded resume documents.
+          </Typography>
+        </Box>
+      </Box>
 
       <Grid container spacing={4}>
         <Grid size={{ xs: 12 }}>
@@ -184,7 +209,7 @@ export default function ManageCareersAdminLayout() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {applications.map((application, idx) => (
+                  {(applications.length > rowsPerPage ? applications.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) : applications).map((application, idx) => (
                     <TableRow
                       key={application.id || idx}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -225,6 +250,15 @@ export default function ManageCareersAdminLayout() {
                   ))}
                 </TableBody>
               </Table>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, 50]}
+                component="div"
+                count={totalApplicationsCount || applications.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
             </TableContainer>
           )}
         </Grid>

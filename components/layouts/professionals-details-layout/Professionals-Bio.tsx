@@ -23,6 +23,8 @@ const ProfessionalBio = ({ data }: ProfessionalBioComponentProps) => {
                   fontWeight: 400,
                   textAlign: "left",
                   whiteSpace: "pre-wrap",
+                  overflowWrap: "anywhere",
+                  wordBreak: "break-word",
                   "& p": {
                      marginBottom: "16px"
                   }

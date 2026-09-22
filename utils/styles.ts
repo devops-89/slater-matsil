@@ -3,20 +3,23 @@ import { adelle, tradeGothic } from "./fonts";
 
 export const TEXTFIELD_STYLES = {
   width: "100%",
-  height: "56px",
-  borderRadius: "28px",
 
-  "& .MuiInputBase-input": {
-    padding: "18px",
-    "&.MuiAutocomplete-input": {
-      paddingLeft: "18px",
-      paddingTop: "18px",
-      paddingBottom: "18px",
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "28px",
+    minHeight: "56px",
+    "&.MuiAutocomplete-inputRoot": {
+      paddingTop: "4px !important",
+      paddingBottom: "4px !important",
+      paddingLeft: "14px !important",
       paddingRight: "50px !important",
     },
   },
-  "& .MuiOutlinedInput-root": {
-    borderRadius: "28px",
+
+  "& .MuiInputBase-input": {
+    padding: "16px 18px",
+    "&.MuiAutocomplete-input": {
+      padding: "8px 0px !important",
+    },
   },
 
   "& .MuiOutlinedInput-notchedOutline": {
@@ -28,6 +31,10 @@ export const TEXTFIELD_STYLES = {
   },
   "& label": {
     color: COLORS.LABEL_COLOR,
+  },
+  "& .MuiFormHelperText-root": {
+    marginLeft: "14px",
+    marginTop: "4px",
   },
 };
 export const FLAT_TEXTFIELD_STYLES = {
@@ -57,6 +64,10 @@ export const FLAT_TEXTFIELD_STYLES = {
   },
   "& label": {
     color: COLORS.LABEL_COLOR,
+  },
+  "& .MuiFormHelperText-root": {
+    marginLeft: "4px",
+    marginTop: "4px",
   },
 };
 

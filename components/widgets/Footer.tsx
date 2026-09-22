@@ -132,8 +132,8 @@ const Footer = () => {
           direction={{ xs: "column-reverse", md: "row" }}
         >
           <Grid size={{ xs: 12, md: 4 }}>
-            <Stack direction={"row"} alignItems={"center"} spacing={2}>
-              <Box sx={{ maxWidth: 200, mx: { xs: "auto", md: 0 } }}>
+            <Stack direction={{ xs: "column", sm: "row" }} alignItems={"center"} spacing={2}>
+              <Box sx={{ maxWidth: 200, mx: { xs: "auto", sm: 0 } }}>
                 <Image
                   src={details?.homepage?.footerData?.logo || logo}
                   alt="Slater Matsil Logo"
@@ -143,6 +143,7 @@ const Footer = () => {
               <Divider
                 orientation="vertical"
                 sx={{
+                  display: { xs: "none", sm: "block" },
                   height: 50,
                   opacity: 1,
                   borderWidth: 2,
@@ -156,8 +157,8 @@ const Footer = () => {
                   fontFamily: adelle.style.fontFamily,
                   fontWeight: 400,
                   opacity: 0.6,
-                  mt: 2,
-                  textAlign: { xs: "center", md: "left" },
+                  mt: { xs: 1, sm: 2 },
+                  textAlign: { xs: "center", sm: "left" },
                 }}
               >
                 Fluent in technology. Proven in law.{" "}

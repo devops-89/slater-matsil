@@ -5,10 +5,10 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import {
+  ContactSupport as ContactSupportIcon,
   Dashboard,
   Pages as PagesIcon,
   People as PeopleIcon,
-  ContactSupport as ContactSupportIcon,
   Work as WorkIcon,
 } from "@mui/icons-material";
 import {
@@ -23,7 +23,6 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 
 import { usePermissions } from "@/hooks/usePermissions";
 
@@ -35,11 +34,16 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
-export default function Sidebar({ open = true, temporary = false, onClose }: SidebarProps) {
+export default function Sidebar({
+  open = true,
+  temporary = false,
+  onClose,
+}: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { details } = usePageData();
-  const { hasAccess, hasPagesAccess, isSuperAdmin, isLoadingPermissions } = usePermissions();
+  const { hasAccess, hasPagesAccess, isSuperAdmin, isLoadingPermissions } =
+    usePermissions();
 
   const navigateTo = (path: string) => {
     router.push(path);
@@ -101,420 +105,119 @@ export default function Sidebar({ open = true, temporary = false, onClose }: Sid
         </Typography>
       </Box>
 
-      <List sx={{ px: 2 }}>
-        {/* Dashboard Link */}
-        {isSuperAdmin && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/dashboard")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor:
-                pathname === "/dashboard"
-                  ? "rgba(255,255,255,0.1)"
-                  : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color:
-                  pathname === "/dashboard"
-                    ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <Dashboard />
-            </ListItemIcon>
+      <List sx={{ pr: 1.5, pl: 0 }}>
+        {[
+          {
+            label: "Dashboard",
+            path: "/dashboard",
+            icon: Dashboard,
+            show: isSuperAdmin,
+          },
+          {
+            label: "Role Management",
+            path: "/manage-roles",
+            icon: PeopleIcon,
+            show: isSuperAdmin,
+          },
+          {
+            label: "User Management",
+            path: "/manage-sub-admins",
+            icon: PeopleIcon,
+            show: isSuperAdmin,
+          },
+          {
+            label: "Support Inquiries",
+            path: "/manage-contact-support",
+            icon: ContactSupportIcon,
+            show: isSuperAdmin,
+          },
+          {
+            label: "Careers Applications",
+            path: "/manage-careers",
+            icon: WorkIcon,
+            show: isSuperAdmin,
+          },
+          {
+            label: "Pages",
+            path: "/pages",
+            icon: PagesIcon,
+            show: hasPagesAccess(),
+          },
+          {
+            label: "Firm Professionals Database",
+            path: "/manage-professionals",
+            icon: PeopleIcon,
+            show: hasAccess("manage-professionals"),
+          },
+          {
+            label: "Insights Database",
+            path: "/manage-insights",
+            icon: PagesIcon,
+            show: hasAccess("manage-insights"),
+          },
+          {
+            label: "Blog Database",
+            path: "/manage-blogs",
+            icon: PagesIcon,
+            show: hasAccess("manage-blogs"),
+          },
+        ]
+          .filter((item) => item.show)
+          .map((item) => {
+            const isActive =
+              pathname === item.path ||
+              (item.path !== "/dashboard" && pathname.startsWith(item.path));
+            const IconComp = item.icon;
 
-            <ListItemText
-              primary={
-                <Typography
+            return (
+              <ListItem key={item.path} disablePadding sx={{ mb: 0.5 }}>
+                <ListItemButton
+                  onClick={() => navigateTo(item.path)}
                   sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname === "/dashboard" ? 700 : 400,
-                    color:
-                      pathname === "/dashboard"
+                    py: 1.2,
+                    px: 2,
+                    borderRadius: "0 10px 10px 0",
+                    borderLeft: `4px solid ${isActive ? COLORS.PRIMARY_GREEN : "transparent"}`,
+                    backgroundColor: isActive ? "#F0F6F6" : "transparent",
+                    transition: "all 0.2s ease",
+                    "&:hover": {
+                      backgroundColor: isActive
+                        ? "#E8F2F3"
+                        : "rgba(6, 50, 50, 0.04)",
+                    },
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      color: isActive
                         ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Dashboard
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Role Management Link */}
-        {isSuperAdmin && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/manage-roles")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/manage-roles")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/manage-roles")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <PeopleIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/manage-roles") ? 700 : 400,
-                    color: pathname.includes("/manage-roles")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Role Management
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Sub-Admin Management Link */}
-        {isSuperAdmin && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/manage-sub-admins")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/manage-sub-admins")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/manage-sub-admins")
-                  ? COLORS.PRIMARY_GREEN
-                  : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <PeopleIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/manage-sub-admins") ? 700 : 400,
-                    color: pathname.includes("/manage-sub-admins")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  User Management
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Support Inquiries Link */}
-        {isSuperAdmin && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/manage-contact-support")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/manage-contact-support")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/manage-contact-support")
-                  ? COLORS.PRIMARY_GREEN
-                  : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <ContactSupportIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/manage-contact-support") ? 700 : 400,
-                    color: pathname.includes("/manage-contact-support")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Support Inquiries
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Careers Applications Link */}
-        {isSuperAdmin && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/manage-careers")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/manage-careers")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/manage-careers")
-                  ? COLORS.PRIMARY_GREEN
-                  : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <WorkIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/manage-careers") ? 700 : 400,
-                    color: pathname.includes("/manage-careers")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Careers Applications
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Pages Link */}
-        {hasPagesAccess() && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/pages")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/pages")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/pages")
-                  ? COLORS.PRIMARY_GREEN
-                  : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <PagesIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/pages") ? 700 : 400,
-                    color: pathname.includes("/pages")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Pages
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Firm Professionals Database Link */}
-        {hasAccess("manage-professionals") && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/manage-professionals")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/manage-professionals")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/manage-professionals")
-                  ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <PeopleIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/manage-professionals")
-                      ? 700
-                      : 400,
-                    color: pathname.includes("/manage-professionals")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Firm Professionals Database
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Insights Database Link */}
-        {hasAccess("manage-insights") && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/manage-insights")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/manage-insights")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/manage-insights")
-                  ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <PagesIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/manage-insights")
-                      ? 700
-                      : 400,
-                    color: pathname.includes("/manage-insights")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Insights Database
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
-
-        {/* Blog Database Link */}
-        {hasAccess("manage-blogs") && (
-        <ListItem disablePadding sx={{ mb: 1 }}>
-          <ListItemButton
-            onClick={() => navigateTo("/manage-blogs")}
-            sx={{
-              borderRadius: 2,
-              backgroundColor: pathname.includes("/manage-blogs")
-                ? "rgba(255,255,255,0.05)"
-                : "transparent",
-              "&:hover": {
-                backgroundColor: "rgba(255,255,255,0.15)",
-              },
-            }}
-          >
-            <ListItemIcon
-              sx={{
-                color: pathname.includes("/manage-blogs")
-                  ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                minWidth: 40,
-              }}
-            >
-              <PagesIcon />
-            </ListItemIcon>
-
-            <ListItemText
-              primary={
-                <Typography
-                  sx={{
-                    fontFamily: adelle.style.fontFamily,
-                    fontWeight: pathname.includes("/manage-blogs")
-                      ? 700
-                      : 400,
-                    color: pathname.includes("/manage-blogs")
-                      ? COLORS.PRIMARY_GREEN
-                      : COLORS.PRIMARY_BLUE,
-                  }}
-                >
-                  Blog Database
-                </Typography>
-              }
-            />
-          </ListItemButton>
-        </ListItem>
-        )}
+                        : COLORS.PRIMARY_BLUE,
+                      minWidth: 36,
+                    }}
+                  >
+                    <IconComp fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={
+                      <Typography
+                        sx={{
+                          fontFamily: adelle.style.fontFamily,
+                          fontWeight: isActive ? 700 : 500,
+                          fontSize: "14px",
+                          lineHeight: 1.3,
+                          color: isActive
+                            ? COLORS.PRIMARY_GREEN
+                            : COLORS.PRIMARY_BLUE,
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                    }
+                  />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
       </List>
     </Drawer>
   );

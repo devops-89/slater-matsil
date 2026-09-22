@@ -33,15 +33,27 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { useFormik } from "formik";
 import { useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
+import { isValidEmail, sanitizeEmailInput } from "@/utils/validators";
+import moment from "moment";
 import * as Yup from "yup";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   email: Yup.string()
+    .required("Email is required")
     .email("Invalid email address")
-    .required("Email is required"),
+    .test("valid-tld", "Please enter a valid email address with a valid domain extension", (value) => {
+      return isValidEmail(value);
+    }),
   service: Yup.object().nullable().required("Service is required"),
-  date: Yup.mixed().nullable().required("Date is required"),
+  date: Yup.mixed()
+    .nullable()
+    .required("Date is required")
+    .test("is-future-date", "Past dates are not allowed", (value) => {
+      if (!value) return false;
+      const selectedDate = moment(value);
+      return selectedDate.isValid() && selectedDate.isSameOrAfter(moment().startOf("day"));
+    }),
   // time: Yup.mixed().nullable().required("Time is required"),
   message: Yup.string().required("Message is required"),
   terms: Yup.boolean().oneOf([true], "You must agree to the terms"),
@@ -159,7 +171,10 @@ const ContactForm = ({ details }: { details?: any }) => {
             id="email"
             name="email"
             value={formik.values.email}
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              const val = sanitizeEmailInput(e.target.value);
+              formik.setFieldValue("email", val);
+            }}
             onBlur={formik.handleBlur}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && (formik.errors.email as string)}
@@ -234,6 +249,7 @@ const ContactForm = ({ details }: { details?: any }) => {
         <Grid size={12}>
           <LocalizationProvider dateAdapter={AdapterMoment}>
             <DatePicker
+              disablePast
               value={formik.values.date}
               onChange={(value) => formik.setFieldValue("date", value)}
               slots={{ openPickerIcon: CalendarMonth }}
