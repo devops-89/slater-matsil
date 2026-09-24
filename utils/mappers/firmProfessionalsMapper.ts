@@ -72,6 +72,10 @@ export const mapApiUserProfessionalToDetailsProps = (user: any) => {
     return result;
   };
 
+  const nameParts = (user.fullName || "").split(",")[0].trim().split(/\s+/);
+  const derivedFirstName = user.firstName || nameParts[0] || "";
+  const derivedLastName = user.lastName || nameParts.slice(1).join(" ") || "";
+
   return {
     id: user.id,
     slug: user.slug,
@@ -95,8 +99,8 @@ export const mapApiUserProfessionalToDetailsProps = (user: any) => {
           countryRegion: "USA"
         },
         url: "",
-        firstName: user.firstName || "",
-        lastName: user.lastName || ""
+        firstName: derivedFirstName,
+        lastName: derivedLastName
       }
     },
     PROFESSIONAL_BIO_DATA: getSectionData("BIOGRAPHY"),

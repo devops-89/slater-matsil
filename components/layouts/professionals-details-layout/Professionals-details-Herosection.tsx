@@ -36,29 +36,56 @@ const ProfessionalsDetailsHeroSection = ({ onImageLoad }: { onImageLoad?: () => 
   const [isLoadingPdf, setIsLoadingPdf] = useState(false);
 
   const handleSaveContact = async () => {
-    const res = await fetch("/api/vcard", {
-      method: "POST",
-      body: JSON.stringify({
-        firstName:
-          data?.professionals_Details_HeroSection?.vCardData?.firstName,
-        lastName: data?.professionals_Details_HeroSection?.vCardData?.lastName,
-        email:
-          data?.professionals_Details_HeroSection?.vCardData?.electronicMail,
-        phone:
-          data?.professionals_Details_HeroSection?.vCardData?.telephoneNumber,
-        address: data?.professionals_Details_HeroSection?.vCardData?.address,
-      }),
-    });
+    try {
+      const heroSection = data?.professionals_Details_HeroSection;
+      const vCardData = heroSection?.vCardData;
 
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
+      let firstName = vCardData?.firstName || "";
+      let lastName = vCardData?.lastName || "";
 
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${data?.professionals_Details_HeroSection?.vCardData?.firstName}_${data?.professionals_Details_HeroSection?.vCardData?.lastName}.vcf`;
-    link.click();
+      if (!firstName && !lastName && heroSection?.name) {
+        const cleanName = heroSection.name.split(",")[0].trim();
+        const parts = cleanName.split(/\s+/);
+        firstName = parts[0] || "";
+        lastName = parts.slice(1).join(" ") || "";
+      }
 
-    URL.revokeObjectURL(url);
+      const res = await fetch("/api/vcard", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          email: vCardData?.electronicMail || heroSection?.email || "",
+          phone: vCardData?.telephoneNumber || heroSection?.phoneNumber || "",
+          organization: vCardData?.organization || "Slater Matsil",
+          jobTitle: vCardData?.job_title || "",
+          address: vCardData?.address,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to generate vCard");
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+
+      const downloadFileName = `${firstName || "Contact"}_${lastName || "Card"}`.replace(/\s+/g, "_") + ".vcf";
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", downloadFileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error saving vCard contact:", error);
+    }
   };
 
   const handlePrint = async () => {
