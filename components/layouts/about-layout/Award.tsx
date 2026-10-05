@@ -16,59 +16,24 @@ import { useEffect, useState } from "react";
 const GlobeFallbackLoader = () => (
   <Box
     sx={{
+      width: "100%",
+      height: "550px",
       display: "flex",
-      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: 2,
-      background: "rgba(255, 255, 255, 0.95)",
-      backdropFilter: "blur(10px)",
-      padding: "24px 36px",
-      borderRadius: "24px",
-      boxShadow: "0px 16px 40px rgba(0, 32, 64, 0.12)",
-      border: "1.5px solid rgba(0, 177, 176, 0.25)",
-      textAlign: "center",
-      minWidth: "230px",
+      position: "relative",
     }}
   >
-    <style>{`
-      @keyframes globe-pulse {
-        0% { transform: scale(0.95); opacity: 0.8; }
-        50% { transform: scale(1.05); opacity: 1; }
-        100% { transform: scale(0.95); opacity: 0.8; }
-      }
-    `}</style>
-    <Box sx={{ position: "relative", display: "inline-flex" }}>
-      <CircularProgress
-        size={64}
-        thickness={4}
-        sx={{ color: COLORS.PRIMARY_GREEN }}
-      />
-      <Box
-        sx={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-          position: "absolute",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Public sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 28, animation: "globe-pulse 2s ease-in-out infinite" }} />
-      </Box>
-    </Box>
-    <Typography
+    <Box
+      component="img"
+      src="/images/home/earth/earth3dfallback"
+      alt="Globe Loading"
       sx={{
-        fontFamily: tradeGothic.style.fontFamily,
-        fontWeight: 700,
-        fontSize: 16,
-        color: COLORS.PRIMARY_BLUE,
+        width: "100%",
+        maxHeight: "500px",
+        objectFit: "contain",
       }}
-    >
-      Loading 3D Globe...
-    </Typography>
+    />
   </Box>
 );
 
@@ -135,7 +100,7 @@ const Award = () => {
               minHeight: "550px",
             }}
           >
-            <LazyThreeEarth />
+            <ThreeEarth height="550px" />
           </Grid>
 
           <Grid size={{ lg: 6, xs: 12 }}>

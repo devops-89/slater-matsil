@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, CircularProgress, Typography } from "@mui/material";
-import { OrbitControls, Stage, useGLTF, Html, useProgress } from "@react-three/drei";
+import { OrbitControls, Stage, useGLTF, Html } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useRef, useState } from "react";
 import * as THREE from "three";
@@ -56,7 +56,7 @@ import { clientLocations } from "../../public/data/client-locations";
 
 const latLongToVector3 = (lat: number, lng: number, radius: number) => {
   const phi = (90 - lat) * (Math.PI / 180);
-  const theta = (lng + 180) * (Math.PI / 180);
+  const theta = (lng + 90) * (Math.PI / 180);
 
   const x = -(radius * Math.sin(phi) * Math.cos(theta));
   const z = radius * Math.sin(phi) * Math.sin(theta);
@@ -101,82 +101,29 @@ const Pin = ({ position, pinSize, city }: { position: THREE.Vector3, pinSize: nu
 };
 
 const CanvasLoader = () => {
-  const { progress } = useProgress();
-  const roundedProgress = Math.min(100, Math.max(0, Math.round(progress || 0)));
-
   return (
     <Html center zIndexRange={[100, 0]}>
-      <style>{`
-        @keyframes globe-pulse {
-          0% { transform: scale(0.95); opacity: 0.8; }
-          50% { transform: scale(1.05); opacity: 1; }
-          100% { transform: scale(0.95); opacity: 0.8; }
-        }
-      `}</style>
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 2,
-          background: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(10px)",
-          padding: "24px 36px",
-          borderRadius: "24px",
-          boxShadow: "0px 16px 40px rgba(0, 32, 64, 0.12)",
-          border: "1.5px solid rgba(0, 177, 176, 0.25)",
-          textAlign: "center",
-          minWidth: "230px",
-          whiteSpace: "nowrap",
+          position: "relative",
+          width: "450px",
+          height: "450px",
         }}
       >
-        <Box sx={{ position: "relative", display: "inline-flex" }}>
-          <CircularProgress
-            variant={roundedProgress > 0 ? "determinate" : "indeterminate"}
-            value={roundedProgress > 0 ? roundedProgress : 25}
-            size={64}
-            thickness={4}
-            sx={{ color: COLORS.PRIMARY_GREEN }}
-          />
-          <Box
-            sx={{
-              top: 0,
-              left: 0,
-              bottom: 0,
-              right: 0,
-              position: "absolute",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Public sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 28, animation: "globe-pulse 2s ease-in-out infinite" }} />
-          </Box>
-        </Box>
-        <Box>
-          <Typography
-            sx={{
-              fontFamily: tradeGothic.style.fontFamily,
-              fontWeight: 700,
-              fontSize: 16,
-              color: COLORS.PRIMARY_BLUE,
-            }}
-          >
-            Loading Globe
-          </Typography>
-          <Typography
-            sx={{
-              fontFamily: adelle.style.fontFamily,
-              fontWeight: 700,
-              fontSize: 14,
-              color: COLORS.PRIMARY_GREEN,
-              mt: 0.5,
-            }}
-          >
-            {roundedProgress}%
-          </Typography>
-        </Box>
+        <Box
+          component="img"
+          src="/images/home/earth/earth3dfallback"
+          alt="Globe Loading"
+          sx={{
+            width: "100%",
+            height: "100%",
+            objectFit: "contain",
+          }}
+        />
       </Box>
     </Html>
   );
@@ -203,7 +150,7 @@ const EarthModel = () => {
   });
 
   return (
-    <group ref={earthRef}>
+    <group ref={earthRef} rotation={[0.3, -0.4, 0]}>
       <primitive object={scene} />
       {clientLocations.map((loc, i) => {
         const position = latLongToVector3(loc.lat, loc.lng, radius * 1.01); // Multiply by 1.01 to ensure pins sit just above the surface
@@ -248,5 +195,7 @@ const ThreeEarth = ({ height = "500px" }: { height?: any }) => {
     </Box>
   );
 };
+
+useGLTF.preload("/images/home/earth/earth_ultra_pbr.glb");
 
 export default ThreeEarth;
