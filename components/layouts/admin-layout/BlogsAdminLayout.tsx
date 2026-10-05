@@ -69,24 +69,29 @@ export default function BlogsAdminLayout() {
   const [blogCards, setBlogCards] = useState<BLOG_API_ITEM[]>([]);
   const [isSaving, setIsSaving] = useState(false);
 
-  const fetchBlogs = async () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const cardsPerPage = 8;
+
+  const fetchBlogs = async (page = currentPage) => {
     try {
       startLoading();
-      const res = await BlogControllers.getAllBlogs({ limit: 100 });
-      let allBlogs = res.data?.data?.data || res.data?.data || [];
-      const totalPages = res.data?.data?.meta?.totalPages || res.data?.meta?.totalPages || 1;
-      
-      if (totalPages > 1) {
-        const promises = [];
-        for (let i = 2; i <= totalPages; i++) {
-          promises.push(BlogControllers.getAllBlogs({ page: i, limit: 100 }));
-        }
-        const results = await Promise.all(promises);
-        results.forEach(r => {
-          allBlogs = [...allBlogs, ...(r.data?.data?.data || r.data?.data || [])];
-        });
+      const res = await BlogControllers.getAllBlogs({ page, limit: cardsPerPage });
+      const responseData = res.data?.data;
+      const blogsList = responseData?.data || (Array.isArray(responseData) ? responseData : []);
+      const meta = responseData?.meta || res.data?.meta;
+
+      let computedTotalPages = 1;
+      if (meta?.totalPages) {
+        computedTotalPages = meta.totalPages;
+      } else if (meta?.itemCount) {
+        computedTotalPages = Math.ceil(meta.itemCount / cardsPerPage);
+      } else {
+        computedTotalPages = Math.ceil(blogsList.length / cardsPerPage) || 1;
       }
-      setBlogCards(allBlogs);
+
+      setBlogCards(blogsList);
+      setTotalPages(computedTotalPages);
     } catch (e) {
       console.error(e);
       showNotification("Failed to fetch blogs", "error");
@@ -96,8 +101,8 @@ export default function BlogsAdminLayout() {
   };
 
   React.useEffect(() => {
-    fetchBlogs();
-  }, []);
+    fetchBlogs(currentPage);
+  }, [currentPage]);
 
   const confirmDelete = async () => {
     if (!blogToDelete) return;
@@ -135,6 +140,7 @@ export default function BlogsAdminLayout() {
   const [heroData, setHeroData] = useState<BLOG_FORM_HERO_DATA>({
     title: "",
     category: "Patent Law",
+    badge: "",
     author: "",
     authorTitle: "",
     authorImage: "",
@@ -149,7 +155,7 @@ export default function BlogsAdminLayout() {
     setErrors({});
     setKeysToDeleteOnSave([]);
     setCardData({ title: "", date: "", readTime: "", description: "", slug: "", cardImage: "", rawCardImage: "", order: "" });
-    setHeroData({ title: "", category: "Patent Law", author: "", authorTitle: "", authorImage: "", rawAuthorImage: "" });
+    setHeroData({ title: "", category: "Patent Law", badge: "", author: "", authorTitle: "", authorImage: "", rawAuthorImage: "" });
     setContent({ intro: "", sections: [] });
     setDialogOpen(true);
   };
@@ -177,6 +183,7 @@ export default function BlogsAdminLayout() {
       const newHeroData: BLOG_FORM_HERO_DATA = {
         title: blog.heroTitle || blog.title || "",
         category: blog.category || "Patent Law",
+        badge: blog.badge || "",
         author: blog.authorName || "",
         authorTitle: blog.authorTitle || "",
         authorImage: blog.authorImageDownloadUrl || blog.authorImageUrl || "",
@@ -188,7 +195,8 @@ export default function BlogsAdminLayout() {
         sections: blog.sections ? blog.sections.map((s: Record<string, unknown>) => ({
           ...(s.id ? { id: s.id as number } : {}),
           heading: (s.heading as string) || "",
-          content: (s.content as string) || ""
+          content: (s.content as any) || "",
+          table: (s.table as any) || null
         })) : []
       };
 
@@ -209,9 +217,10 @@ export default function BlogsAdminLayout() {
           setContent((prev) => ({
             intro: prev.intro || fullBlog.introduction || "",
             sections: fullBlog.sections && prev.sections.length === 0 ? fullBlog.sections.map((s: Record<string, unknown>) => ({
-              ...(s.id ? { id: s.id } : {}),
-              heading: s.heading || "",
-              content: s.content || ""
+              ...(s.id ? { id: s.id as number } : {}),
+              heading: (s.heading as string) || "",
+              content: (s.content as any) || "",
+              table: (s.table as any) || null
             })) : prev.sections
           }));
         }
@@ -327,27 +336,50 @@ export default function BlogsAdminLayout() {
       return;
     }
 
+    const generateSlug = (title: string) =>
+      title
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/(^-|-$)/g, "");
+
     const apiPayload = {
       title: cardData.title,
+      slug: cardData.slug ? cardData.slug : generateSlug(cardData.title),
       listingDescription: cardData.description,
       datePublished: cardData.date,
       readTime: cardData.readTime,
       cardImageUrl: cardData.rawCardImage || cardData.cardImage,
-      order: cardData.order ? Number(cardData.order) : undefined,
       heroTitle: heroData.title || cardData.title,
       category: heroData.category || "Patent Law",
-      badge: "",
+      badge: heroData.badge || "",
       authorName: heroData.author || "",
       authorTitle: heroData.authorTitle || "",
       authorImageUrl: heroData.rawAuthorImage || heroData.authorImage,
       introduction: content.intro || "",
-
       isPublished: true,
-      sections: content.sections.map((sec, idx) => ({
-        heading: sec.heading || "",
-        content: sec.content || "",
-        sortOrder: idx + 1
-      }))
+      order: cardData.order ? Number(cardData.order) : 1,
+      sections: content.sections.map((sec, idx) => {
+        let tablePayload = null;
+        if (
+          sec.table &&
+          Array.isArray(sec.table.headers) &&
+          sec.table.headers.length > 0
+        ) {
+          tablePayload = {
+            headers: sec.table.headers,
+            rows: Array.isArray(sec.table.rows) ? sec.table.rows : [],
+          };
+        }
+        return {
+          heading: sec.heading || "",
+          content: sec.content || "",
+          sortOrder: idx + 1,
+          table: tablePayload,
+        };
+      }),
     };
 
     try {
@@ -406,13 +438,10 @@ export default function BlogsAdminLayout() {
     return val || "";
   };
 
-  // Pagination State
-  const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 6;
-  const totalPages = Math.ceil(blogCards.length / cardsPerPage);
-  const startIndex = (currentPage - 1) * cardsPerPage;
-  const endIndex = startIndex + cardsPerPage;
-  const currentBlogs = blogCards.slice(startIndex, endIndex);
+  // Pagination Slicing Fallback
+  const currentBlogs = blogCards.length > cardsPerPage
+    ? blogCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
+    : blogCards;
 
   return (
     <AdminLayout title="Blogs Management">

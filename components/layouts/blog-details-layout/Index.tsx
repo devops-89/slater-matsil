@@ -28,8 +28,8 @@ const BlogDetailsLayout = () => {
           return;
         }
 
-        const mappedData: any = {
-
+        const mappedData: BLOG_DETAIL_PROPS = {
+          slug: (id as string) || "",
           hero: {
             title: blog.heroTitle || blog.title,
             category: blog.category,
@@ -42,7 +42,7 @@ const BlogDetailsLayout = () => {
           },
           content: {
             intro: blog.introduction,
-            sections: blog.sections
+            sections: blog.sections || []
           }
         };
 

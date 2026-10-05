@@ -749,6 +749,7 @@ export interface BLOG_DETAIL_PROPS {
     sections: {
       heading: string;
       content: string | string[];
+      table?: BLOG_TABLE_DATA;
     }[];
   };
   relatedPosts?: {
@@ -775,6 +776,7 @@ export interface BLOG_FORM_CARD_DATA {
 export interface BLOG_FORM_HERO_DATA {
   title: string;
   category: string;
+  badge?: string;
   author: string;
   authorTitle: string;
   bgImage?: string;
@@ -782,10 +784,16 @@ export interface BLOG_FORM_HERO_DATA {
   rawAuthorImage?: string;
 }
 
+export interface BLOG_TABLE_DATA {
+  headers: string[];
+  rows: string[][];
+}
+
 export interface BLOG_FORM_CONTENT_SECTION {
   id?: number;
   heading: string;
-  content: string;
+  content: string | string[];
+  table?: BLOG_TABLE_DATA | null;
   sortOrder?: number;
 }
 
@@ -811,7 +819,7 @@ export interface BLOG_API_ITEM {
   authorImageUrl?: string;
   badge?: string;
   introduction?: string;
-  sections?: { id?: number; heading?: string; content?: string }[];
+  sections?: { id?: number; heading?: string; content?: string | string[]; table?: BLOG_TABLE_DATA | null; sortOrder?: number }[];
   order?: number;
   [key: string]: unknown;
 }

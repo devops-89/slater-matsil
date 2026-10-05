@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import WhoWeServelayout from "@/components/layouts/who-we-serve-layout/index";
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Who We Serve",
@@ -11,8 +11,8 @@ import StoreInitializer from "../../components/providers/StoreInitializer";
 
 async function getWhoWeServeData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/11", { next: { revalidate: 60 } }).catch(() => null);
-    const data = res ? await res.json() : null;
+    const res = await fetch("http://3.92.74.11/api/pages/11", { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
     return { data11: data?.data?.data || data?.data };
   } catch (error) {
     return { data11: null };

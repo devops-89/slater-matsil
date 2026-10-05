@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import ClientPage from "./ClientPage";
 import StoreInitializer from "@/components/providers/StoreInitializer";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Firm Leadership",
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 async function getLeadershipData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/6", { next: { revalidate: 60 } }).catch(() => null);
-    const data = res ? await res.json() : null;
+    const res = await fetch("http://3.92.74.11/api/pages/6", { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
     return { data6: data?.data?.data || data?.data };
   } catch (error) {
     return { data6: null };

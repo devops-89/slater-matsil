@@ -3,7 +3,7 @@ import BlogLayout from "@/components/layouts/blog-layout/Index";
 import React from "react";
 import StoreInitializer from "@/components/providers/StoreInitializer";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Blog",
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 
 async function getBlogsData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/8", { next: { revalidate: 60 } }).catch(() => null);
-    const data = res ? await res.json() : null;
+    const res = await fetch("http://3.92.74.11/api/pages/8", { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
     return { data8: data?.data?.data || data?.data };
   } catch (error) {
     return { data8: null };

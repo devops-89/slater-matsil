@@ -95,6 +95,91 @@ const BlogDetailsContentSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
                       />
                     ))
                   )}
+
+                  {/* Render Table if Present */}
+                  {section.table && section.table.headers && section.table.headers.length > 0 && (
+                    <Box
+                      sx={{
+                        my: 4,
+                        width: "100%",
+                        overflowX: "auto",
+                        borderRadius: 3,
+                        border: "1px solid #E2E8F0",
+                        boxShadow: "0 4px 12px rgba(15, 23, 42, 0.05)",
+                        bgcolor: "#FFFFFF",
+                        "&::-webkit-scrollbar": { height: 6 },
+                        "&::-webkit-scrollbar-thumb": { bgcolor: "#CBD5E1", borderRadius: 3 },
+                      }}
+                    >
+                      <Box
+                        component="table"
+                        sx={{
+                          width: "100%",
+                          minWidth: { xs: 550, md: "100%" },
+                          borderCollapse: "separate",
+                          borderSpacing: 0,
+                          textAlign: "left",
+                          fontSize: { xs: 14, md: 16 },
+                          fontFamily: adelle.style.fontFamily,
+                        }}
+                      >
+                        <Box component="thead" sx={{ backgroundColor: "#F8FAFC" }}>
+                          <Box component="tr">
+                            {section.table.headers.map((header, hIdx) => (
+                              <Box
+                                key={hIdx}
+                                component="th"
+                                sx={{
+                                  py: { xs: 1.75, md: 2.25 },
+                                  px: { xs: 2, md: 2.5 },
+                                  fontWeight: 700,
+                                  fontFamily: tradeGothic.style.fontFamily,
+                                  color: COLORS.PRIMARY_BLUE,
+                                  fontSize: { xs: 14, md: 16 },
+                                  letterSpacing: "0.02em",
+                                  borderBottom: "2px solid #CBD5E1",
+                                  borderRight: hIdx < section.table!.headers.length - 1 ? "1px solid #E2E8F0" : "none",
+                                }}
+                              >
+                                {header || `Header ${hIdx + 1}`}
+                              </Box>
+                            ))}
+                          </Box>
+                        </Box>
+                        <Box component="tbody">
+                          {section.table.rows.map((row, rIdx) => (
+                            <Box
+                              key={rIdx}
+                              component="tr"
+                              sx={{
+                                backgroundColor: rIdx % 2 === 0 ? "#FFFFFF" : "#F8FAFC",
+                                "&:hover": { backgroundColor: "#F1F5F9" },
+                                transition: "background-color 0.15s ease-in-out",
+                              }}
+                            >
+                              {row.map((cell, cIdx) => (
+                                <Box
+                                  key={cIdx}
+                                  component="td"
+                                  sx={{
+                                    py: { xs: 1.75, md: 2.25 },
+                                    px: { xs: 2, md: 2.5 },
+                                    color: cIdx === 0 ? COLORS.PRIMARY_BLUE : COLORS.TEXT_PRIMARY,
+                                    fontWeight: cIdx === 0 ? 700 : 400,
+                                    borderBottom: rIdx < section.table!.rows.length - 1 ? "1px solid #E2E8F0" : "none",
+                                    borderRight: cIdx < row.length - 1 ? "1px solid #E2E8F0" : "none",
+                                    whiteSpace: "pre-line",
+                                    lineHeight: 1.6,
+                                  }}
+                                  dangerouslySetInnerHTML={{ __html: cell }}
+                                />
+                              ))}
+                            </Box>
+                          ))}
+                        </Box>
+                      </Box>
+                    </Box>
+                  )}
                 </Stack>
               ))}
             </Stack>

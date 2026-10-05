@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactLayout from "@/components/layouts/contact-layout";
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Contact Us",
@@ -11,8 +11,8 @@ import StoreInitializer from "../../components/providers/StoreInitializer";
 
 async function getContactData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/10", { next: { revalidate: 60 } }).catch(() => null);
-    const data = res ? await res.json() : null;
+    const res = await fetch("http://3.92.74.11/api/pages/10", { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
     return { data10: data?.data?.data || data?.data };
   } catch (error) {
     return { data10: null };

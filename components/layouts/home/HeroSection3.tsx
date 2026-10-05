@@ -17,19 +17,32 @@ const HeroSwiper = dynamic(() => import("./HeroSwiper"), {
   ssr: false,
 });
 
+import { StaticImageData } from "next/image";
 import { useMediaQuery, useTheme } from "@mui/material";
 
-const DelayedApiImage = ({ val, priority }: { val: any, priority: boolean }) => {
+interface BannerVal {
+  title?: string;
+  description?: string;
+  img?: string | StaticImageData;
+  fallbackImg?: string | StaticImageData;
+}
+
+const DelayedApiImage = ({ val, priority }: { val: BannerVal; priority: boolean }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const fallbackSrc = val.fallbackImg || slider4;
-  const imageSrc = isMobile ? fallbackSrc : (val.img || fallbackSrc);
+  const targetSrc = isMobile ? fallbackSrc : (val.img || fallbackSrc);
+  const [imgSrc, setImgSrc] = useState(targetSrc);
+
+  useEffect(() => {
+    setImgSrc(targetSrc);
+  }, [targetSrc]);
 
   return (
     <Box sx={{ width: "100%", height: "100%", position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <Image
-        src={imageSrc}
+        src={imgSrc}
         alt={val.title || "slider image"}
         fill
         sizes="(max-width:900px) 100vw, 50vw"
@@ -38,13 +51,18 @@ const DelayedApiImage = ({ val, priority }: { val: any, priority: boolean }) => 
         fetchPriority={priority ? "high" : "auto"}
         loading={priority ? "eager" : "lazy"}
         quality={45}
+        onError={() => {
+          if (imgSrc !== fallbackSrc) {
+            setImgSrc(fallbackSrc);
+          }
+        }}
       />
     </Box>
   );
 };
 
 
-const HeroSection3 = ({ apiData }: { apiData?: any }) => {
+const HeroSection3 = ({ apiData }: { apiData?: Record<string, unknown> }) => {
 
   const { details: storeDetails } = usePageData();
   
@@ -73,7 +91,7 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
     },
   ];
 
-  const getValidImageUrl = (imageField: any) => {
+  const getValidImageUrl = (imageField: string | { url?: string } | null | undefined) => {
     if (!imageField || imageField === "deleted") return null;
     
     let url = "";
@@ -93,7 +111,7 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
     return finalUrl.replace(/ /g, "%20");
   };
 
-  const banners = defaultBanners.map((def: any, idx: number) => {
+  const banners = defaultBanners.map((def: { img: StaticImageData; title: string; description: string }, idx: number) => {
     const apiSlide = (Array.isArray(globalBanners) ? globalBanners[idx] : null) || {};
     return {
       ...def,
@@ -104,7 +122,7 @@ const HeroSection3 = ({ apiData }: { apiData?: any }) => {
     };
   });
 
-  const SlideContent = ({ val, priority = false }: { val: any; priority?: boolean }) => (
+  const SlideContent = ({ val, priority = false }: { val: BannerVal; priority?: boolean }) => (
     <Grid
       container
       alignItems={"center"}

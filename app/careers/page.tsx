@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CareerLayout from "@/components/layouts/career-layout";
 import StoreInitializer from "@/components/providers/StoreInitializer";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Careers",
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 
 async function getCareersData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/9", { next: { revalidate: 60 } }).catch(() => null);
-    const data = res ? await res.json() : null;
+    const res = await fetch("http://3.92.74.11/api/pages/9", { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
     return { data9: data?.data?.data || data?.data };
   } catch (error) {
     return { data9: null };

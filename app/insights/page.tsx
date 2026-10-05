@@ -1,7 +1,7 @@
 import InsightsLayout from "@/components/layouts/insights-layout/Index";
 import StoreInitializer from "@/components/providers/StoreInitializer";
 import type { Metadata } from "next";
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | Insights",
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 async function getInsightsData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/7", { next: { revalidate: 60 } }).catch(() => null);
-    const data = res ? await res.json() : null;
+    const res = await fetch("http://3.92.74.11/api/pages/7", { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
     return { data7: data?.data?.data || data?.data };
   } catch (error) {
     return { data7: null };

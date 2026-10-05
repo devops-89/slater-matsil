@@ -35,25 +35,31 @@ const BlogSection = () => {
     }
   }, [blogSection?.pastWebinars]);
 
+  // PAGINATION
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const cardsPerPage = 6;
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         startLoading();
-        const res = await BlogControllers.getAllBlogs({ limit: 100 });
-        let allBlogs = res.data?.data?.data || res.data?.data || [];
-        const totalPages = res.data?.data?.meta?.totalPages || res.data?.meta?.totalPages || 1;
-        
-        if (totalPages > 1) {
-          const promises = [];
-          for (let i = 2; i <= totalPages; i++) {
-            promises.push(BlogControllers.getAllBlogs({ page: i, limit: 100 }));
-          }
-          const results = await Promise.all(promises);
-          results.forEach(r => {
-            allBlogs = [...allBlogs, ...(r.data?.data?.data || r.data?.data || [])];
-          });
+        const res = await BlogControllers.getAllBlogs({ page: currentPage, limit: cardsPerPage });
+        const responseData = res.data?.data;
+        const blogsList = responseData?.data || (Array.isArray(responseData) ? responseData : []);
+        const meta = responseData?.meta || res.data?.meta;
+
+        let computedTotalPages = 1;
+        if (meta?.totalPages) {
+          computedTotalPages = meta.totalPages;
+        } else if (meta?.itemCount) {
+          computedTotalPages = Math.ceil(meta.itemCount / cardsPerPage);
+        } else {
+          computedTotalPages = Math.ceil(blogsList.length / cardsPerPage) || 1;
         }
-        setPastWebinars(allBlogs);
+
+        setPastWebinars(blogsList);
+        setTotalPages(computedTotalPages);
       } catch (err) {
         console.error("Failed to fetch blogs", err);
       } finally {
@@ -61,23 +67,11 @@ const BlogSection = () => {
       }
     };
     fetchBlogs();
-  }, [startLoading, stopLoading]);
+  }, [currentPage, startLoading, stopLoading]);
 
-  // PAGINATION
-  const [currentPage, setCurrentPage] = useState(1);
-  const cardsPerPage = 6;
-
-  const totalPages = Math.ceil(
-    pastWebinars.length / cardsPerPage
-  );
-
-  const startIndex = (currentPage - 1) * cardsPerPage;
-  const endIndex = startIndex + cardsPerPage;
-
-  const currentBlogs = pastWebinars.slice(
-    startIndex,
-    endIndex
-  );
+  const currentBlogs = pastWebinars.length > cardsPerPage
+    ? pastWebinars.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
+    : pastWebinars;
 
   return (
     <Box sx={{ mb: { lg: 10, xs: 6 } }}>
