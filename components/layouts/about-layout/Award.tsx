@@ -54,7 +54,7 @@ const LazyThreeEarth = () => {
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "200px" },
     );
     if (containerRef.current) {
       observer.observe(containerRef.current);
@@ -74,18 +74,13 @@ const LazyThreeEarth = () => {
         position: "relative",
       }}
     >
-      {visible ? (
-        <ThreeEarth height="550px" />
-      ) : (
-        <GlobeFallbackLoader />
-      )}
+      {visible ? <ThreeEarth height="550px" /> : <GlobeFallbackLoader />}
     </Box>
   );
 };
 
 const Award = () => {
   const { details } = usePageData();
-
 
   return (
     <Box sx={{ pb: { lg: 10, xs: 5 } }}>
@@ -146,31 +141,37 @@ const Award = () => {
               {details?.aboutPage?.AWARDSPROPS?.heading2}
             </Typography>
             <Grid container spacing={3} sx={{ mt: 5 }}>
-              {(details?.aboutPage?.AWARDSPROPS?.awards_img || []).map((val: any, i: number) => (
-                <Grid size={{ lg: 4, xs: 6 }} key={i}>
-                  <Box sx={{
-                    height: '100px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }}>
-                    {(val?.imageDownloadUrl || val?.img?.src || val?.img) ? (
-                      <Image
-                        src={val?.imageDownloadUrl || val?.img?.src || val?.img}
-                        alt=""
-                        width={100}
-                        height={100}
-                        unoptimized={true}
-                        style={{ 
-                          objectFit: "contain",
-                          maxWidth: '100%',
-                          maxHeight: '100%'
-                        }}
-                      />
-                    ) : null}
-                  </Box>
-                </Grid>
-              ))}
+              {(details?.aboutPage?.AWARDSPROPS?.awards_img || []).map(
+                (val: any, i: number) => (
+                  <Grid size={{ lg: 4, xs: 6 }} key={i}>
+                    <Box
+                      sx={{
+                        height: "100px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {val?.imageDownloadUrl || val?.img?.src || val?.img ? (
+                        <Image
+                          src={
+                            val?.imageDownloadUrl || val?.img?.src || val?.img
+                          }
+                          alt=""
+                          width={100}
+                          height={100}
+                          unoptimized={true}
+                          style={{
+                            objectFit: "contain",
+                            maxWidth: "100%",
+                            maxHeight: "100%",
+                          }}
+                        />
+                      ) : null}
+                    </Box>
+                  </Grid>
+                ),
+              )}
             </Grid>
           </Grid>
         </Grid>
