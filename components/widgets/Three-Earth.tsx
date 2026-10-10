@@ -1,13 +1,20 @@
 "use client";
 
 import { Box, CircularProgress, Typography } from "@mui/material";
-import { OrbitControls, Stage, useGLTF, Html, useProgress } from "@react-three/drei";
+import {
+  OrbitControls,
+  Stage,
+  useGLTF,
+  Html,
+  useProgress,
+} from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import React, { Suspense, useRef, useState, useCallback, useMemo } from "react";
 import * as THREE from "three";
 import { Public } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { useInView } from "react-intersection-observer";
 import { clientLocations } from "../../public/data/client-locations";
 
 // Suppress WebGL-related console errors in sandboxed or headless environments
@@ -270,7 +277,23 @@ const CanvasLoader = () => {
   );
 };
 
-const EarthModel = () => {
+export type GlobeFocusRegion = "texas" | "uk";
+
+export const GLOBE_FOCUS_ROTATIONS: Record<GlobeFocusRegion, [number, number, number]> = {
+  // Centers Texas (Dallas / Houston / Austin, ~97° W, 32° N) directly in front of the viewer
+  // Texas is Slater Matsil's home hub and has the most pins by far (20 pins in Texas, 48 total in US).
+  texas: [0.22, 0.12, 0],
+  // Centers UK & Western Europe (~0° W, 51.5° N) directly in front of the viewer
+  uk: [0.22, -1.57, 0],
+};
+
+const EarthModel = ({
+  initialFocus = "texas",
+  inView = true,
+}: {
+  initialFocus?: GlobeFocusRegion;
+  inView?: boolean;
+}) => {
   const { scene } = useGLTF("/images/home/earth/earth_ultra_pbr.glb");
   const earthRef = useRef<THREE.Group>(null);
   const [hoveredCount, setHoveredCount] = useState(0);
@@ -283,10 +306,16 @@ const EarthModel = () => {
     return { radius: r, pinSize: r * 0.016 };
   }, [scene]);
 
+  const startRotation = useMemo(
+    () => GLOBE_FOCUS_ROTATIONS[initialFocus] || GLOBE_FOCUS_ROTATIONS.texas,
+    [initialFocus]
+  );
+
   // Gentle, smooth rotation speed
-  // Pauses automatically when user is hovering or inspecting any pin
+  // Pauses automatically when user is hovering or inspecting any pin,
+  // and only rotates when visible in the viewport so it doesn't spin away off-screen.
   useFrame((state, delta) => {
-    if (earthRef.current && hoveredCount === 0) {
+    if (earthRef.current && hoveredCount === 0 && inView) {
       earthRef.current.rotation.y += delta * 0.035;
     }
   });
@@ -296,7 +325,7 @@ const EarthModel = () => {
   }, []);
 
   return (
-    <group ref={earthRef} rotation={[0.2, 0.1, 0]}>
+    <group ref={earthRef} rotation={startRotation}>
       <primitive object={scene} />
       {clientLocations.map((loc, i) => {
         const position = latLongToVector3(loc.lat, loc.lng, radius * 1.01);
@@ -314,9 +343,22 @@ const EarthModel = () => {
   );
 };
 
-const ThreeEarth = ({ height = "500px" }: { height?: any }) => {
+export interface ThreeEarthProps {
+  height?: any;
+  initialFocus?: GlobeFocusRegion;
+}
+
+const ThreeEarth = ({
+  height = "500px",
+  initialFocus = "texas",
+}: ThreeEarthProps) => {
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+  });
+
   return (
     <Box
+      ref={ref}
       sx={{
         width: "100%",
         height: height,
@@ -338,7 +380,7 @@ const ThreeEarth = ({ height = "500px" }: { height?: any }) => {
               shadows={false}
               adjustCamera
             >
-              <EarthModel />
+              <EarthModel initialFocus={initialFocus} inView={inView} />
             </Stage>
             <OrbitControls enableZoom={false} makeDefault />
           </Suspense>
