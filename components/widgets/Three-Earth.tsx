@@ -280,11 +280,11 @@ const CanvasLoader = () => {
 export type GlobeFocusRegion = "texas" | "uk";
 
 export const GLOBE_FOCUS_ROTATIONS: Record<GlobeFocusRegion, [number, number, number]> = {
-  // Centers Texas (Dallas / Houston / Austin, ~97° W, 32° N) directly in front of the viewer
-  // Texas is Slater Matsil's home hub and has the most pins by far (20 pins in Texas, 48 total in US).
-  texas: [0.22, 0.12, 0],
-  // Centers UK & Western Europe (~0° W, 51.5° N) directly in front of the viewer
-  uk: [0.22, -1.57, 0],
+  // Top-down angle (rotX: 0.60 rad ~34.4°) focuses on the Northern Hemisphere where client pins reside
+  // (Texas, US, Europe, Asia), keeping landmasses front-and-center instead of empty southern oceans.
+  texas: [0.6, 0.12, 0],
+  // UK & Europe focus with the same high-angle perspective
+  uk: [0.6, -1.57, 0],
 };
 
 const EarthModel = ({
