@@ -1,83 +1,65 @@
 "use client";
 
 import { usePageData } from "@/store/usePageData";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRef } from "react";
-
-import { clientLocations } from "@/public/data/client-locations";
-import { COLORS } from "@/utils/enum";
-import { CircularProgress } from "@mui/material";
 import { Public } from "@mui/icons-material";
-import { adelle, tradeGothic } from "@/utils/fonts";
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
 
-const GlobeFallbackLoader = () => (
+import { COLORS } from "@/utils/enum";
+import { tradeGothic } from "@/utils/fonts";
+import dynamic from "next/dynamic";
+
+const GlobeLoadingPlaceholder = () => (
   <Box
     sx={{
       width: "100%",
       height: "550px",
       display: "flex",
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      position: "relative",
+      gap: 2,
     }}
   >
-    <Box
-      component="img"
-      src="/images/home/earth/earth3dfallback"
-      alt="Globe Loading"
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
+      <CircularProgress
+        size={64}
+        thickness={4}
+        sx={{ color: COLORS.PRIMARY_GREEN }}
+      />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Public sx={{ color: COLORS.PRIMARY_BLUE, fontSize: 28 }} />
+      </Box>
+    </Box>
+    <Typography
       sx={{
-        width: "100%",
-        maxHeight: "500px",
-        objectFit: "contain",
+        fontFamily: tradeGothic.style.fontFamily,
+        fontWeight: 700,
+        fontSize: 16,
+        color: COLORS.PRIMARY_BLUE,
       }}
-    />
+    >
+      Loading Globe...
+    </Typography>
   </Box>
 );
 
 const ThreeEarth = dynamic(() => import("@/components/widgets/Three-Earth"), {
   ssr: false,
-  loading: () => <GlobeFallbackLoader />,
+  loading: () => <GlobeLoadingPlaceholder />,
 });
-
-const LazyThreeEarth = () => {
-  const [visible, setVisible] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" },
-    );
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <Box
-      ref={containerRef}
-      sx={{
-        width: "100%",
-        height: "550px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-      }}
-    >
-      {visible ? <ThreeEarth height="550px" /> : <GlobeFallbackLoader />}
-    </Box>
-  );
-};
 
 const Award = () => {
   const { details } = usePageData();
