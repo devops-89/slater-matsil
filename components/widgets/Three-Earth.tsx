@@ -9,7 +9,7 @@ import {
   useProgress,
 } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import React, { Suspense, useRef, useState, useCallback, useMemo } from "react";
+import React, { Suspense, useRef, useState, useCallback, useMemo, useEffect } from "react";
 import * as THREE from "three";
 import { Public } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
@@ -280,9 +280,9 @@ const CanvasLoader = () => {
 export type GlobeFocusRegion = "texas" | "uk";
 
 export const GLOBE_FOCUS_ROTATIONS: Record<GlobeFocusRegion, [number, number, number]> = {
-  // Centers on the US East Coast & Western Atlantic (~68° W longitude) at a natural ~17° tilt (rotX: 0.30 rad),
-  // allowing the United States and Texas to start on the left and smoothly rotate into prime center view.
-  texas: [0.3, -0.38, 0],
+  // Centers directly on the US East Coast & Atlantic boundary (~74° W longitude) at a natural ~17° tilt (rotX: 0.30 rad),
+  // placing the Atlantic on the right and continental US on the left, so the US rotates smoothly into prime position.
+  texas: [0.3, -0.28, 0],
   // UK & Europe focus with matching natural angle
   uk: [0.3, -1.57, 0],
 };
@@ -313,6 +313,13 @@ const EarthModel = ({
     () => GLOBE_FOCUS_ROTATIONS[initialFocus] || GLOBE_FOCUS_ROTATIONS.texas,
     [initialFocus]
   );
+
+  // Ensure globe starts cleanly from the designated focus when entering view or on mount
+  useEffect(() => {
+    if (earthRef.current && inView) {
+      earthRef.current.rotation.set(...startRotation);
+    }
+  }, [inView, startRotation]);
 
   // Smooth rotation speed (~25s per full rotation)
   // Pauses automatically when user is hovering or inspecting any pin,
