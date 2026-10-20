@@ -280,12 +280,15 @@ const CanvasLoader = () => {
 export type GlobeFocusRegion = "texas" | "uk";
 
 export const GLOBE_FOCUS_ROTATIONS: Record<GlobeFocusRegion, [number, number, number]> = {
-  // Top-down angle (rotX: 0.60 rad ~34.4°) focuses on the Northern Hemisphere where client pins reside
-  // (Texas, US, Europe, Asia), keeping landmasses front-and-center instead of empty southern oceans.
-  texas: [0.6, 0.12, 0],
-  // UK & Europe focus with the same high-angle perspective
-  uk: [0.6, -1.57, 0],
+  // Centers on the US East Coast & Western Atlantic (~68° W longitude) at a natural ~17° tilt (rotX: 0.30 rad),
+  // allowing the United States and Texas to start on the left and smoothly rotate into prime center view.
+  texas: [0.3, -0.38, 0],
+  // UK & Europe focus with matching natural angle
+  uk: [0.3, -1.57, 0],
 };
+
+// 1 full revolution (2 * PI radians) per ~25 seconds (dynamic and clearly visible rotation)
+const ROTATION_SPEED = (2 * Math.PI) / 25;
 
 const EarthModel = ({
   initialFocus = "texas",
@@ -311,12 +314,12 @@ const EarthModel = ({
     [initialFocus]
   );
 
-  // Gentle, smooth rotation speed
+  // Smooth rotation speed (~25s per full rotation)
   // Pauses automatically when user is hovering or inspecting any pin,
   // and only rotates when visible in the viewport so it doesn't spin away off-screen.
   useFrame((state, delta) => {
     if (earthRef.current && hoveredCount === 0 && inView) {
-      earthRef.current.rotation.y += delta * 0.035;
+      earthRef.current.rotation.y += delta * ROTATION_SPEED;
     }
   });
 
