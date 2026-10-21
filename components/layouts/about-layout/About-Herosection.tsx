@@ -11,13 +11,14 @@ import { getUpdatedDetails } from "@/utils/storeUpdater";
 const AboutHerosection = ({ apiData }: { apiData?: any }) => {
   const { details: storeDetails } = usePageData();
   const details = apiData ? getUpdatedDetails("about", apiData) : storeDetails;
-  
+
   const [apiVideoReady, setApiVideoReady] = useState(false);
 
   const phone = useMediaQuery("(max-width:600px)");
-  
+
   const apiVideoUrl = details?.aboutPage?.heroSection?.videoDownloadUrl;
-  const fallbackVideoUrl = "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4";
+  const fallbackVideoUrl =
+    "https://q2mvljsahlkv8cmn.public.blob.vercel-storage.com/SlaterMatsil%20Website%20Video%20%28online-video-cutter.com%29.mp4";
 
   return (
     <Box sx={{ py: { lg: 8, xs: 4 } }}>
@@ -66,7 +67,7 @@ const AboutHerosection = ({ apiData }: { apiData?: any }) => {
             }}
           />
         </Box> */}
-        <Grid container sx={{ mt: 14, mx: 12 }}>
+        <Grid container sx={{ mt: 14, mx: { lg: 12, xs: 0 } }}>
           <Grid size={12}>
             {apiVideoUrl ? (
               <>

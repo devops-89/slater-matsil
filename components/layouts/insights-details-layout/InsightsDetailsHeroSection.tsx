@@ -103,7 +103,6 @@ const InsightsDetailsHeroSection = () => {
                         objectPosition: "center",
                       }}
                       priority
-                      
                     />
                   </Box>
                 ) : (
@@ -203,7 +202,6 @@ const InsightsDetailsHeroSection = () => {
                     src={hero.badgeImage}
                     alt="Ranking badge"
                     fill
-                    
                     style={{ objectFit: "contain" }}
                   />
                 </Box>
@@ -409,7 +407,7 @@ const InsightsDetailsHeroSection = () => {
                 {contact.shareLabel}
               </Typography>
               <Stack direction="row" spacing={0.5} alignItems="center">
-                <IconButton
+                {/* <IconButton
                   size="small"
                   sx={{
                     width: 30,
@@ -433,7 +431,7 @@ const InsightsDetailsHeroSection = () => {
                   aria-label="Share on X (Twitter)"
                 >
                   <FaXTwitter style={{ fontSize: 14 }} />
-                </IconButton>
+                </IconButton> */}
                 <IconButton
                   size="small"
                   sx={{
