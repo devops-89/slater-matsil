@@ -1,6 +1,7 @@
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { PROFESSIONALS_CARD_PROPS } from "@/utils/types";
+import { generateSlug } from "@/utils/generateSlug";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,11 +18,14 @@ const ProfessionalsCard = ({
   designation,
   id,
   onLoad,
-  priority = false
+  priority = false,
 }: ExtendedProfessionalsCardProps) => {
   const pathname = usePathname();
-  const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
-  const linkHref = isPreview ? "/manage-professionals" : `/professionals/${id}`;
+  const isPreview =
+    pathname?.includes("/pages") || pathname?.includes("/manage-");
+  const linkHref = isPreview
+    ? "/manage-professionals"
+    : `/professionals/${generateSlug(name)}`;
 
   useEffect(() => {
     if (!img && onLoad) {
@@ -61,7 +65,8 @@ const ProfessionalsCard = ({
               "& .profile-image": {
                 transform: "none",
                 transformOrigin: "bottom center",
-                transition: "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                transition:
+                  "transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               },
               "&:hover": {
                 "& .profile-image": {
@@ -77,7 +82,6 @@ const ProfessionalsCard = ({
                 alt={name || ""}
                 fill
                 priority={priority}
-                
                 sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{
                   objectFit: "cover",
@@ -86,8 +90,23 @@ const ProfessionalsCard = ({
                 onError={onLoad}
               />
             ) : (
-              <Box sx={{ width: '100%', height: '100%', backgroundColor: COLORS.PRIMARY_BLUE, opacity: 0.05, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Typography variant="caption" sx={{ color: COLORS.PRIMARY_BLUE }}>No Image</Typography>
+              <Box
+                sx={{
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  opacity: 0.05,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography
+                  variant="caption"
+                  sx={{ color: COLORS.PRIMARY_BLUE }}
+                >
+                  No Image
+                </Typography>
               </Box>
             )}
           </Box>
