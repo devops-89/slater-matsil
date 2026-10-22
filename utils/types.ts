@@ -256,10 +256,10 @@ export interface SERVICES_AREAS_DATA {
   }[];
 }
 
-interface SERVICES_AREA_PROPS {
+export interface SERVICES_AREA_PROPS {
   sectionTitle: string;
   heading: string;
-  img: StaticImageData;
+  img?: StaticImageData | string;
   section_Data: SERVICES_AREAS_DATA[];
 }
 

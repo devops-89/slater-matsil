@@ -6,9 +6,11 @@ import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
 import { getValidImageUrl } from "@/utils/mappers/commonMapper";
+import { getUpdatedDetails } from "@/utils/storeUpdater";
 
-const ServicesDetailsHeroSection = () => {
-  const { details } = usePageData();
+const ServicesDetailsHeroSection = ({ apiData }: { apiData?: any }) => {
+  const { details: storeDetails } = usePageData();
+  const details = apiData ? getUpdatedDetails("services", apiData) : storeDetails;
   const heroData = details?.servicesPage?.heroSection;
   const bgImg = heroData?.img ? getValidImageUrl(heroData.img) : heroImage.src;
 
@@ -16,8 +18,8 @@ const ServicesDetailsHeroSection = () => {
     <div>
       <Container>
         <Box
+          style={{ backgroundImage: `url(${bgImg})` }}
           sx={{
-            backgroundImage: `url(${bgImg})`,
             height: "80vh",
             borderRadius: "20px",
             backgroundPosition: "center 20%",

@@ -116,7 +116,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     service_area: {
       sectionTitle: "Service Area",
       heading: "A Range Of Practice Areas",
-      img: lightLogo,
+      img: "",
       section_Data: [
         {
           img: serviceAreas1,
