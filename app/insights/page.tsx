@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 
 async function getInsightsData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/7", { cache: "no-store" }).catch(() => null);
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const res = await fetch(`${backendUrl}/api/pages/7`, { cache: "no-store" }).catch(() => null);
     const data = res ? await res.json().catch(() => null) : null;
     return { data7: data?.data?.data || data?.data };
   } catch (error) {

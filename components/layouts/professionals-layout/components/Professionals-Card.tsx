@@ -1,7 +1,7 @@
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { PROFESSIONALS_CARD_PROPS } from "@/utils/types";
-import { generateSlug } from "@/utils/generateSlug";
+import { generateProfessionalSlug } from "@/utils/generateSlug";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { useEffect } from "react";
 
 interface ExtendedProfessionalsCardProps extends PROFESSIONALS_CARD_PROPS {
   priority?: boolean;
+  slug?: string;
 }
 
 const ProfessionalsCard = ({
@@ -17,15 +18,17 @@ const ProfessionalsCard = ({
   name,
   designation,
   id,
+  slug,
   onLoad,
   priority = false,
 }: ExtendedProfessionalsCardProps) => {
   const pathname = usePathname();
   const isPreview =
     pathname?.includes("/pages") || pathname?.includes("/manage-");
+  const targetSlug = slug || generateProfessionalSlug(name);
   const linkHref = isPreview
     ? "/manage-professionals"
-    : `/professionals/${generateSlug(name)}`;
+    : `/professionals/${targetSlug}`;
 
   useEffect(() => {
     if (!img && onLoad) {

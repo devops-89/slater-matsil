@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 
 async function getCareersData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/9", { cache: "no-store" }).catch(() => null);
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const res = await fetch(`${backendUrl}/api/pages/9`, { cache: "no-store" }).catch(() => null);
     const data = res ? await res.json().catch(() => null) : null;
     return { data9: data?.data?.data || data?.data };
   } catch (error) {
@@ -21,7 +22,7 @@ async function getCareersData() {
 
 export default async function Page() {
   const apiData = await getCareersData();
-  
+
   return (
     <>
       <StoreInitializer pageType="careers" apiData={apiData} />

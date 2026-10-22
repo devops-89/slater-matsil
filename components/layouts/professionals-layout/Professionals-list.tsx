@@ -4,6 +4,7 @@ import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { formatProfessionalDisplayName } from "@/utils/mappers/firmProfessionalsMapper";
+import { generateProfessionalSlug } from "@/utils/generateSlug";
 import {
   Box,
   Container,
@@ -37,6 +38,7 @@ const ProfessionalList = () => {
         name: formatProfessionalDisplayName(u),
         designation: u.designation,
         id: u.id,
+        slug: generateProfessionalSlug(u),
         img:
           u.profileImageDownloadUrl ||
           u.imageDownloadUrl ||
@@ -111,6 +113,7 @@ const ProfessionalList = () => {
             name: formatProfessionalDisplayName(u),
             designation: u.designation,
             id: u.id,
+            slug: generateProfessionalSlug(u),
             img:
               u.profileImageDownloadUrl ||
               u.imageDownloadUrl ||
@@ -244,6 +247,7 @@ const ProfessionalList = () => {
                     name={val.name}
                     designation={val.designation}
                     id={val.id}
+                    slug={val.slug}
                     onLoad={handleImageLoad}
                     priority={i < 4}
                     key={val.id}

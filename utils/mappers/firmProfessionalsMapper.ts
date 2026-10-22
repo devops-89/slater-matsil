@@ -1,4 +1,5 @@
 import { getValidImageUrl } from "./commonMapper";
+import { generateProfessionalSlug } from "@/utils/generateSlug";
 export const mapBackendToFirmProfessionalsState = (backendData: any, currentState: any) => {
   const newState = { 
     ...currentState,
@@ -112,7 +113,9 @@ export const mapApiUserProfessionalToDetailsProps = (user: any) => {
 
   return {
     id: user.id,
-    slug: user.slug,
+    slug: generateProfessionalSlug(user),
+    firstName: derivedFirstName,
+    lastName: derivedLastName,
     professionals_Details_HeroSection: {
       img: getValidImageUrl(user.profileImageDownloadUrl || user.profileImageUrl || user.imageDownloadUrl || user.imageUrl || ""),
       name: displayName,

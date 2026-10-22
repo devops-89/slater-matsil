@@ -46,30 +46,40 @@ const nextConfig: NextConfig = {
     ],
   },
   async rewrites() {
+    const rawBackend =
+      process.env.BACKEND_URL ||
+      process.env.NEXT_PUBLIC_BACKEND_URL ||
+      process.env.BACKEND_IP ||
+      "3.92.74.11";
+    const backendOrigin =
+      rawBackend.startsWith("http://") || rawBackend.startsWith("https://")
+        ? rawBackend.replace(/\/+$/, "")
+        : `http://${rawBackend.replace(/\/+$/, "")}`;
+
     return [
       {
         source: "/backend-api/users-create",
-        destination: "http://3.92.74.11/api/users/",
+        destination: `${backendOrigin}/api/users/`,
       },
       {
         source: "/backend-api/contact-support",
-        destination: "http://3.92.74.11/api/contact-support/",
+        destination: `${backendOrigin}/api/contact-support/`,
       },
       {
         source: "/backend-api/contact-support/:id",
-        destination: "http://3.92.74.11/api/contact-support/:id/",
+        destination: `${backendOrigin}/api/contact-support/:id/`,
       },
       {
         source: "/backend-api/careers",
-        destination: "http://3.92.74.11/api/careers/",
+        destination: `${backendOrigin}/api/careers/`,
       },
       {
         source: "/backend-api/careers/:id",
-        destination: "http://3.92.74.11/api/careers/:id/",
+        destination: `${backendOrigin}/api/careers/:id/`,
       },
       {
         source: "/backend-api/:path*",
-        destination: "http://3.92.74.11/api/:path*", // Proxy to backend to fix CORS
+        destination: `${backendOrigin}/api/:path*`, // Proxy to backend to fix CORS
       },
     ];
   },

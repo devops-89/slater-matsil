@@ -35,7 +35,8 @@ import InsightDetailsStoreInitializer from "@/components/providers/InsightDetail
 async function getInsightData(slug: string) {
   if (isNaN(Number(slug))) return null;
   try {
-    const res = await fetch(`http://3.92.74.11/api/insights/${slug}`, { next: { revalidate: 60 } }).catch(() => null);
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const res = await fetch(`${backendUrl}/api/insights/${slug}`, { next: { revalidate: 60 } }).catch(() => null);
     const data = res ? await res.json() : null;
     const apiInsight = data?.data?.data || data?.data;
     if (apiInsight) {
