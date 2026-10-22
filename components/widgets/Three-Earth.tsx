@@ -67,14 +67,14 @@ const latLongToVector3 = (lat: number, lng: number, radius: number) => {
 
 const Pin = ({ position, pinSize, city }: { position: THREE.Vector3, pinSize: number, city: string }) => {
   const [hovered, setHovered] = useState(false);
-  
+
   React.useEffect(() => {
     document.body.style.cursor = hovered ? 'pointer' : 'auto';
     return () => { document.body.style.cursor = 'auto'; }
   }, [hovered]);
 
   return (
-    <mesh 
+    <mesh
       position={position}
       onPointerOver={(e) => { e.stopPropagation(); setHovered(true); }}
       onPointerOut={(e) => { e.stopPropagation(); setHovered(false); }}
@@ -132,7 +132,7 @@ const CanvasLoader = () => {
 const EarthModel = () => {
   const { scene } = useGLTF("/images/home/earth/earth_ultra_pbr.glb");
   const earthRef = useRef<THREE.Group>(null);
-  
+
   // Calculate bounding box and radius dynamically based on the actual earth model scale
   const { radius, pinSize } = React.useMemo(() => {
     const box = new THREE.Box3().setFromObject(scene);

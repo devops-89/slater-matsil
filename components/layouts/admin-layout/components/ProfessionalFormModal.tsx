@@ -201,13 +201,70 @@ export default function ProfessionalFormModal({
                   </Box>
                 </Grid>
 
-                <Grid size={{ xs: 12, md: 4 }}>
+                <Grid size={{ xs: 12, md: 8 }}>
                   <Stack spacing={2} sx={{ height: '100%', justifyContent: 'center' }}>
-                    <Stack direction="row" spacing={2}>
-                      <TextField fullWidth label="First Name" value={cardData.firstName || ""} onChange={(e) => { setCardData({ ...cardData, firstName: e.target.value }); setErrors({ ...errors, firstName: undefined }); }} error={!!errors.firstName} helperText={errors.firstName} />
-                      <TextField fullWidth label="Last Name" value={cardData.lastName || ""} onChange={(e) => { setCardData({ ...cardData, lastName: e.target.value }); setErrors({ ...errors, lastName: undefined }); }} error={!!errors.lastName} helperText={errors.lastName} />
-                    </Stack>
-                    <TextField fullWidth label="Designation (e.g., PARTNER)" value={cardData.designation || ""} onChange={(e) => { setCardData({ ...cardData, designation: e.target.value }); setErrors({ ...errors, designation: undefined }); }} error={!!errors.designation} helperText={errors.designation} />
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, sm: 4 }}>
+                        <TextField
+                          fullWidth
+                          label="First Name"
+                          value={cardData.firstName || ""}
+                          onChange={(e) => {
+                            setCardData({ ...cardData, firstName: e.target.value });
+                            setErrors({ ...errors, firstName: undefined });
+                          }}
+                          error={!!errors.firstName}
+                          helperText={errors.firstName}
+                        />
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 4 }}>
+                        <TextField
+                          fullWidth
+                          label="Middle Name"
+                          placeholder="e.g., Alexander or A."
+                          value={cardData.middleName || ""}
+                          onChange={(e) => setCardData({ ...cardData, middleName: e.target.value })}
+                        />
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 4 }}>
+                        <TextField
+                          fullWidth
+                          label="Last Name"
+                          value={cardData.lastName || ""}
+                          onChange={(e) => {
+                            setCardData({ ...cardData, lastName: e.target.value });
+                            setErrors({ ...errors, lastName: undefined });
+                          }}
+                          error={!!errors.lastName}
+                          helperText={errors.lastName}
+                        />
+                      </Grid>
+                    </Grid>
+
+                    <Grid container spacing={2}>
+                      <Grid size={{ xs: 12, sm: 6 }}>
+                        <TextField
+                          fullWidth
+                          label="Qualification"
+                          placeholder="e.g., Ph.D., J.D."
+                          value={cardData.qualification || ""}
+                          onChange={(e) => setCardData({ ...cardData, qualification: e.target.value })}
+                        />
+                      </Grid>
+                      <Grid size={{ xs: 12, sm: 6 }}>
+                        <TextField
+                          fullWidth
+                          label="Designation (e.g., PARTNER)"
+                          value={cardData.designation || ""}
+                          onChange={(e) => {
+                            setCardData({ ...cardData, designation: e.target.value });
+                            setErrors({ ...errors, designation: undefined });
+                          }}
+                          error={!!errors.designation}
+                          helperText={errors.designation}
+                        />
+                      </Grid>
+                    </Grid>
                   </Stack>
                 </Grid>
               </Grid>

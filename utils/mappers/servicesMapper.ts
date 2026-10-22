@@ -1,5 +1,16 @@
 import { getCleanImageUrl, getValidImageUrl } from "./commonMapper";
 
+export const generateSlug = (text: string) => {
+  if (!text) return "";
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[/\\_]+/g, '-')
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+};
+
 export const mapBackendToServicesPageState = (backendData: any, currentServicesState: any, currentServiceAreaState: any) => {
   const newServicesPage = { ...currentServicesState };
   let newServiceArea = { ...currentServiceAreaState };
@@ -45,6 +56,9 @@ export const mapBackendToServicesPageState = (backendData: any, currentServicesS
           img: getValidImageUrl(section.data?.imageDownloadUrl || section.data?.img || section.data?.imageUrl || section.data?.key || ""),
           section_Data: (section.data?.section_Data || []).map((item: any) => ({
             ...item,
+            slug: (item.slug && item.slug.trim()) 
+              ? item.slug.trim() 
+              : generateSlug(item.title || ""),
             imageDownloadUrl: item.imageDownloadUrl || "",
             img: getValidImageUrl(item.imageDownloadUrl || item.img || item.imageUrl || item.key || ""),
           }))
@@ -111,6 +125,7 @@ export const mapServicesPageStateToBackend = (servicesPageState: any, serviceAre
         imageUrl: getCleanImageUrl(serviceAreaState?.imageUrl || serviceAreaState?.img || serviceAreaState?.key || ""),
         section_Data: (serviceAreaState?.section_Data || []).map((item: any) => ({
           ...item,
+          slug: (item.slug && item.slug.trim()) ? item.slug.trim() : generateSlug(item.title || ""),
           imageUrl: getCleanImageUrl(item.imageUrl || item.img || item.key || "")
         }))
       }

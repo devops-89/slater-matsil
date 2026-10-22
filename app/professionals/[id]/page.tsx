@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ProfessionalDetailsLayout from "@/components/layouts/professionals-details-layout/Index";
+import { formatProfessionalDisplayName } from "@/utils/mappers/firmProfessionalsMapper";
 import { Box } from "@mui/material";
 
 export const revalidate = 60;
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const name = professional.fullName || professional.name;
+  const name = formatProfessionalDisplayName(professional) || professional.fullName || professional.name;
   const title = professional.professionalProfiles?.[0]?.jobTitle || "IP Legal Professional";
   return {
     title: `${name} | Slater Matsil`,

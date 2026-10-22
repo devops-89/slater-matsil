@@ -4,13 +4,20 @@ import heroImage from "@/services/details/practice-details-hero.jpg";
 import { Container } from "@mui/material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { usePageData } from "@/store/usePageData";
+import { getValidImageUrl } from "@/utils/mappers/commonMapper";
+
 const ServicesDetailsHeroSection = () => {
+  const { details } = usePageData();
+  const heroData = details?.servicesPage?.heroSection;
+  const bgImg = heroData?.img ? getValidImageUrl(heroData.img) : heroImage.src;
+
   return (
     <div>
       <Container>
         <Box
           sx={{
-            backgroundImage: `url(${heroImage.src})`,
+            backgroundImage: `url(${bgImg})`,
             height: "80vh",
             borderRadius: "20px",
             backgroundPosition: "center 20%",

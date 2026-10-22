@@ -6,6 +6,7 @@ import { useNotification } from "@/components/providers/NotificationProvider";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { formatProfessionalDisplayName } from "@/utils/mappers/firmProfessionalsMapper";
 import { Add } from "@mui/icons-material";
 import {
     Box,
@@ -88,7 +89,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
   const hybridProfessionals = useMemo(() => {
     const mappedApi = apiProfessionals.map(apiItem => ({
       ...apiItem, 
-      name: apiItem.fullName, 
+      name: formatProfessionalDisplayName(apiItem), 
       img: apiItem.profileImageDownloadUrl || apiItem.imageDownloadUrl || apiItem.profileImageUrl || apiItem.imageUrl, 
       detailsImg: apiItem.professionalProfiles?.[0]?.imageDownloadUrl || apiItem.professionalProfiles?.[0]?.imageUrl || "" 
     }));
@@ -178,7 +179,17 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
   const handleOpenNew = () => {
     setActiveId(null);
     setActiveTab(0);
-    setCardData({ firstName: "", lastName: "", designation: "", imageUrl: "", imageDownloadUrl: "", detailsImageUrl: "", detailsImageDownloadUrl: "" });
+    setCardData({ 
+      firstName: "", 
+      middleName: "", 
+      lastName: "", 
+      qualification: "", 
+      designation: "", 
+      imageUrl: "", 
+      imageDownloadUrl: "", 
+      detailsImageUrl: "", 
+      detailsImageDownloadUrl: "" 
+    });
     setBioData({
       email: "",
       phoneNumber: "",
@@ -207,9 +218,46 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
     const prof = hybridProfessionals.find(p => p.id === id);
     if (!prof) return;
 
-    const newCardData = {
-      firstName: prof.firstName || "",
-      lastName: prof.lastName || "",
+    let firstName = prof.firstName || "";
+    let middleName = prof.middleName || prof.professionalProfiles?.[0]?.middleName || "";
+    let lastName = prof.lastName || "";
+    let qualification = prof.qualification || prof.professionalProfiles?.[0]?.qualification || "";
+
+    if (!qualification && prof.fullName && prof.fullName.includes(",")) {
+      const commaParts = prof.fullName.split(",");
+      qualification = commaParts.slice(1).join(",").trim();
+      if (!firstName && !lastName) {
+        const namePart = commaParts[0].trim().split(/\s+/);
+        if (namePart.length === 1) {
+          firstName = namePart[0];
+        } else if (namePart.length === 2) {
+          firstName = namePart[0];
+          lastName = namePart[1];
+        } else if (namePart.length >= 3) {
+          firstName = namePart[0];
+          middleName = namePart.slice(1, -1).join(" ");
+          lastName = namePart[namePart.length - 1];
+        }
+      }
+    } else if (!firstName && !lastName && prof.fullName) {
+      const namePart = prof.fullName.trim().split(/\s+/);
+      if (namePart.length === 1) {
+        firstName = namePart[0];
+      } else if (namePart.length === 2) {
+        firstName = namePart[0];
+        lastName = namePart[1];
+      } else if (namePart.length >= 3) {
+        firstName = namePart[0];
+        middleName = namePart.slice(1, -1).join(" ");
+        lastName = namePart[namePart.length - 1];
+      }
+    }
+
+    const newCardData: PROFESSIONAL_FORM_CARD_DATA = {
+      firstName,
+      middleName,
+      lastName,
+      qualification,
       designation: prof.designation || "",
       imageUrl: prof.profileImageUrl || prof.imageUrl || prof.img || "",
       imageDownloadUrl: prof.profileImageDownloadUrl || prof.imageDownloadUrl || prof.img || "",
@@ -328,13 +376,17 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
       ? bioData.bio.map((b: Record<string, any>) => b.description).join("\n") 
       : (typeof bioData.bio === 'string' ? bioData.bio : bioData.bio?.paragraphs || "");
 
-    const formattedFullName = `${(cardData.firstName || "").trim()} ${(cardData.lastName || "").trim()}`;
+    const nameParts = [cardData.firstName?.trim(), cardData.middleName?.trim(), cardData.lastName?.trim()].filter(Boolean).join(" ");
+    const cleanQualification = (cardData.qualification || "").replace(/^,\s*/, "").trim();
+    const formattedFullName = cleanQualification ? `${nameParts}, ${cleanQualification}` : nameParts;
 
     const payload: Record<string, any> = {
       email: bioData.email,
       fullName: formattedFullName,
       firstName: (cardData.firstName || "").trim(),
+      middleName: (cardData.middleName || "").trim(),
       lastName: (cardData.lastName || "").trim(),
+      qualification: cleanQualification,
       designation: cardData.designation,
       phoneNumber: bioData.phoneNumber,
       imageUrl: cardData.imageUrl || null,

@@ -8,6 +8,7 @@ import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
 import { MediaControllers } from "@/api/mediaControllers";
 import { useNotification } from "@/components/providers/NotificationProvider";
+import { generateSlug } from "@/utils/mappers/servicesMapper";
 
 export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: any, onChange: (newData: any) => void, onDeleteMedia?: any }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -77,13 +78,14 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
 
   const handleSave = () => {
     let newSectionData = [...(data.section_Data || [])];
+    const finalSlug = (formData.slug && formData.slug.trim()) ? formData.slug.trim() : generateSlug(formData.title);
     
     if (editingIdx !== null) {
       newSectionData[editingIdx] = { 
         ...newSectionData[editingIdx], 
         title: formData.title, 
         description: formData.description,
-        slug: formData.slug || formData.title.toLowerCase().replace(/\s+/g, '-'),
+        slug: finalSlug,
         detailsData: formData.detailsData,
         img: formData.img || newSectionData[editingIdx].img || ""
       };
@@ -92,7 +94,7 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
         serialNumber: `0${newSectionData.length + 1}`.slice(-2),
         title: formData.title,
         description: formData.description,
-        slug: formData.slug || formData.title.toLowerCase().replace(/\s+/g, '-'),
+        slug: finalSlug,
         detailsData: formData.detailsData,
         img: formData.img || ""
       });
@@ -201,12 +203,32 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
         </DialogTitle>
         <DialogContent dividers>
           <Stack spacing={3} sx={{ mt: 1 }}>
-            <TextField 
-              fullWidth 
-              label="Service Title" 
-              value={formData.title} 
-              onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            />
+            <Box>
+              <TextField 
+                fullWidth 
+                label="Service Title" 
+                value={formData.title} 
+                onChange={(e) => {
+                  const newTitle = e.target.value;
+                  setFormData((prev) => ({
+                    ...prev,
+                    title: newTitle,
+                    slug: prev.slug ? prev.slug : generateSlug(newTitle),
+                  }));
+                }}
+              />
+            </Box>
+
+            <Box>
+              <TextField 
+                fullWidth 
+                label="URL Slug" 
+                value={formData.slug} 
+                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                placeholder={generateSlug(formData.title) || "service-slug"}
+                helperText={`Website Route: /services/${formData.slug?.trim() || generateSlug(formData.title) || "..."}`}
+              />
+            </Box>
 
             <TextField 
               fullWidth 
