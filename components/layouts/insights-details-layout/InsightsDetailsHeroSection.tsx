@@ -103,7 +103,6 @@ const InsightsDetailsHeroSection = () => {
                         objectPosition: "center",
                       }}
                       priority
-                      
                     />
                   </Box>
                 ) : (
@@ -203,7 +202,6 @@ const InsightsDetailsHeroSection = () => {
                     src={hero.badgeImage}
                     alt="Ranking badge"
                     fill
-                    
                     style={{ objectFit: "contain" }}
                   />
                 </Box>
@@ -409,31 +407,6 @@ const InsightsDetailsHeroSection = () => {
                 {contact.shareLabel}
               </Typography>
               <Stack direction="row" spacing={0.5} alignItems="center">
-                <IconButton
-                  size="small"
-                  sx={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: "50%",
-                    bgcolor: "rgba(114, 181, 43, 0.8)",
-                    color: "white",
-                    "&:hover": { bgcolor: COLORS.PRIMARY_GREEN },
-                  }}
-                  onClick={() =>
-                    window.open(
-                      "https://twitter.com/intent/tweet?url=" +
-                        encodeURIComponent(
-                          typeof window !== "undefined"
-                            ? window.location.href
-                            : "",
-                        ),
-                      "_blank",
-                    )
-                  }
-                  aria-label="Share on X (Twitter)"
-                >
-                  <FaXTwitter style={{ fontSize: 14 }} />
-                </IconButton>
                 <IconButton
                   size="small"
                   sx={{

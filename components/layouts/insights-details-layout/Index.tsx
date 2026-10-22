@@ -12,8 +12,7 @@ import { adelle, tradeGothic } from "@/utils/fonts";
 
 const InsightsDetailsLayout = () => {
   const [activeTab, setActiveTab] = useState(0); // 0 = About, 1 = Lawyer Rankings
-  const { clearInsightDetailsData, data } =
-    useInsightDetails();
+  const { clearInsightDetailsData, data } = useInsightDetails();
 
   const [navigation, setNavigation] = useState<{
     prev: { slug: string; name: string } | null;

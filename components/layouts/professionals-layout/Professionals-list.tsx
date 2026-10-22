@@ -11,7 +11,7 @@ import {
   Pagination,
   Skeleton,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import ProfessionalsCard from "./components/Professionals-Card";
@@ -25,7 +25,11 @@ const ProfessionalList = () => {
 
   const [apiData, setApiData] = useState<any[]>(() => {
     let initial = (details?.firm_professionals as any)?.initialProfessionals;
-    if (!initial && typeof window !== "undefined" && (window as any).__API_DATA__) {
+    if (
+      !initial &&
+      typeof window !== "undefined" &&
+      (window as any).__API_DATA__
+    ) {
       initial = (window as any).__API_DATA__.initialProfessionals;
     }
     if (initial && initial.length > 0) {
@@ -33,7 +37,12 @@ const ProfessionalList = () => {
         name: formatProfessionalDisplayName(u),
         designation: u.designation,
         id: u.id,
-        img: u.profileImageDownloadUrl || u.imageDownloadUrl || u.profileImageUrl || u.imageUrl || ""
+        img:
+          u.profileImageDownloadUrl ||
+          u.imageDownloadUrl ||
+          u.profileImageUrl ||
+          u.imageUrl ||
+          "",
       }));
     }
     return [];
@@ -44,7 +53,11 @@ const ProfessionalList = () => {
   const [appliedAlphabet, setAppliedAlphabet] = useState("");
   const [isFetchingData, setIsFetchingData] = useState(() => {
     let initial = (details?.firm_professionals as any)?.initialProfessionals;
-    if (!initial && typeof window !== "undefined" && (window as any).__API_DATA__) {
+    if (
+      !initial &&
+      typeof window !== "undefined" &&
+      (window as any).__API_DATA__
+    ) {
       initial = (window as any).__API_DATA__.initialProfessionals;
     }
     return !(initial && initial.length > 0);
@@ -52,7 +65,11 @@ const ProfessionalList = () => {
   const [page, setPage] = useState(1);
   const [totalCount, setTotalCount] = useState<number>(() => {
     let initialTotal = (details?.firm_professionals as any)?.initialTotal;
-    if (!initialTotal && typeof window !== "undefined" && (window as any).__API_DATA__) {
+    if (
+      !initialTotal &&
+      typeof window !== "undefined" &&
+      (window as any).__API_DATA__
+    ) {
       initialTotal = (window as any).__API_DATA__.initialTotal;
     }
     return initialTotal || 0;
@@ -73,14 +90,20 @@ const ProfessionalList = () => {
     }
 
     setIsFetchingData(true);
-    ProfessionalControllers.getAllProfessionalProfiles(page, ITEMS_PER_PAGE, appliedSearch, appliedAlphabet)
+    ProfessionalControllers.getAllProfessionalProfiles(
+      page,
+      ITEMS_PER_PAGE,
+      appliedSearch,
+      appliedAlphabet,
+    )
       .then((res: any) => {
         let users = res.data?.data?.users || [];
         if (!users.length && res.data?.data?.data?.users) {
           users = res.data.data.data.users;
         }
-        
-        const total = res.data?.data?.meta?.total || res.data?.data?.data?.meta?.total || 0;
+
+        const total =
+          res.data?.data?.meta?.total || res.data?.data?.data?.meta?.total || 0;
         setTotalCount(total);
 
         if (users && users.length > 0) {
@@ -88,7 +111,12 @@ const ProfessionalList = () => {
             name: formatProfessionalDisplayName(u),
             designation: u.designation,
             id: u.id,
-            img: u.profileImageDownloadUrl || u.imageDownloadUrl || u.profileImageUrl || u.imageUrl || ""
+            img:
+              u.profileImageDownloadUrl ||
+              u.imageDownloadUrl ||
+              u.profileImageUrl ||
+              u.imageUrl ||
+              "",
           }));
           setApiData(mapped);
         } else {
@@ -106,7 +134,6 @@ const ProfessionalList = () => {
   const [isPaginating, setIsPaginating] = useState(false);
 
   const paginatedData = apiData;
-
 
   const handleImageLoad = () => {
     if (isPaginating) {
@@ -129,7 +156,7 @@ const ProfessionalList = () => {
     setAppliedSearch(search);
     setPage(1);
   };
-  
+
   const searchByAlphabets = (letter: string) => {
     setAlphabet(letter);
     setAppliedAlphabet(letter);
@@ -142,7 +169,7 @@ const ProfessionalList = () => {
   ) => {
     if (value === page) return;
     setPage(value);
-    
+
     // The useEffect will trigger data fetching.
     // We just handle image loading states here.
     startLoading();
@@ -155,35 +182,45 @@ const ProfessionalList = () => {
     <Box sx={{ mt: 10 }}>
       <Container maxWidth="lg">
         <Grid container>
-            <ProfessionalSearchBar
-              search={search}
-              setSearch={setSearch}
-              handleSearch={handleSearch}
-              alphabet={alphabet}
-              searchByAlphabets={searchByAlphabets}
-              options={[]}
-              onSelect={(newValue) => {
-                setSearch(newValue);
-              }}
-              clearFilters={() => {
-                setAlphabet("");
-                setAppliedAlphabet("");
-                setSearch("");
-                setAppliedSearch("");
-                setPage(1);
-              }}
-            />
+          <ProfessionalSearchBar
+            search={search}
+            setSearch={setSearch}
+            handleSearch={handleSearch}
+            alphabet={alphabet}
+            searchByAlphabets={searchByAlphabets}
+            options={[]}
+            onSelect={(newValue) => {
+              setSearch(newValue);
+            }}
+            clearFilters={() => {
+              setAlphabet("");
+              setAppliedAlphabet("");
+              setSearch("");
+              setAppliedSearch("");
+              setPage(1);
+            }}
+          />
         </Grid>
-        <Box sx={{ position: "relative", mt: 5, minHeight: { xs: 800, md: 920 } }}>
-          <Grid
-            container
-            spacing={5}
-            rowSpacing={20}
-          >
+        <Box
+          sx={{ position: "relative", mt: 5, minHeight: { xs: 800, md: 920 } }}
+        >
+          <Grid container spacing={5} rowSpacing={20}>
             {isFetchingData ? (
               Array.from(new Array(6)).map((_, index) => (
                 <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }} key={index}>
-                  <Skeleton variant="rounded" width="100%" sx={{ height: { lg: "380px", md: "340px", sm: "300px", xs: "280px" }, borderRadius: "16px" }} />
+                  <Skeleton
+                    variant="rounded"
+                    width="100%"
+                    sx={{
+                      height: {
+                        lg: "380px",
+                        md: "340px",
+                        sm: "300px",
+                        xs: "280px",
+                      },
+                      borderRadius: "16px",
+                    }}
+                  />
                 </Grid>
               ))
             ) : !paginatedData?.length ? (
@@ -209,13 +246,18 @@ const ProfessionalList = () => {
                     id={val.id}
                     onLoad={handleImageLoad}
                     priority={i < 4}
+                    key={val.id}
                   />
                 </Grid>
               ))
             )}
           </Grid>
         </Box>
-        <Stack direction="row" justifyContent="center" sx={{ mt: 20, minHeight: "32px" }}>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          sx={{ mt: 20, minHeight: "32px" }}
+        >
           {totalCount > ITEMS_PER_PAGE && (
             <Pagination
               count={Math.ceil(totalCount / ITEMS_PER_PAGE)}

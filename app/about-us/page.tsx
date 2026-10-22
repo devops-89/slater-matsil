@@ -5,14 +5,17 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Slater Matsil | About Us",
-  description: "Learn about Slater Matsil, a pure-play intellectual property firm built by a collaborative team of attorneys and technical specialists.",
+  description:
+    "Learn about Slater Matsil, a pure-play intellectual property firm built by a collaborative team of attorneys and technical specialists.",
 };
 
 async function getAboutData() {
   try {
-    const res = await fetch("http://3.92.74.11/api/pages/2", { cache: "no-store" }).catch(() => null);
+    const res = await fetch("http://3.92.74.11/api/pages/2", {
+      cache: "no-store",
+    }).catch(() => null);
     const data = res ? await res.json().catch(() => null) : null;
-    
+
     return { data2: data?.data?.data || data?.data };
   } catch (error) {
     return { data2: null };
