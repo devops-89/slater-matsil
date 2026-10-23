@@ -1,0 +1,31 @@
+import type { Metadata } from "next";
+import WhoWeServelayout from "@/components/layouts/who-we-serve-layout/index";
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Slater Matsil | Who We Serve",
+  description: "We represent large multinational companies, emerging businesses, and academic institutions in securing and leveraging intellectual property.",
+};
+
+import StoreInitializer from "../../components/providers/StoreInitializer";
+
+async function getWhoWeServeData() {
+  try {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const res = await fetch(`${backendUrl}/api/pages/11`, { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
+    return { data11: data?.data?.data || data?.data };
+  } catch (error) {
+    return { data11: null };
+  }
+}
+
+export default async function Page() {
+  const apiData = await getWhoWeServeData();
+  return (
+    <>
+      <StoreInitializer pageType="who-we-serve" apiData={apiData} />
+      <WhoWeServelayout apiData={apiData} />
+    </>
+  );
+}

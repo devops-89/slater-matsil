@@ -1,0 +1,33 @@
+import PracticeGroupsLayout from "@/components/layouts/practice-group-layout/Index";
+import StoreInitializer from "@/components/providers/StoreInitializer";
+import type { Metadata } from "next";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Slater Matsil | Practice Groups",
+  description: "Learn about our technological and legal practice groups covering electrical engineering, software, biotechnology, and more.",
+};
+
+async function getPracticeGroupsData() {
+  try {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const res = await fetch(`${backendUrl}/api/pages/4`, { cache: "no-store" }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
+    return { data4: data?.data?.data || data?.data };
+  } catch (error) {
+    return { data4: null };
+  }
+}
+
+const PracticeGroups = async () => {
+  const apiData = await getPracticeGroupsData();
+  return (
+    <>
+      <StoreInitializer pageType="practiceGroups" apiData={apiData} />
+      <PracticeGroupsLayout apiData={apiData} />
+    </>
+  );
+};
+
+export default PracticeGroups;

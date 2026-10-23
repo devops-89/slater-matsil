@@ -1,0 +1,59 @@
+import localFont from "next/font/local";
+
+export const tradeGothic = localFont({
+  src: [
+    {
+      path: "../public/fonts/Trade Gothic LT Std Extended/Trade Gothic LT Std Extended.otf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  display: 'swap',
+});
+
+export const adelle = localFont({
+  src: [
+    {
+      path: "../public/fonts/Adelle Font/Adelle Reg.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Adelle Font/Adelle Bold.otf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Adelle Font/Adelle Italic.otf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  display: 'swap',
+});
+
+export const inter = localFont({
+  src: [
+    {
+      path: "../public/fonts/Inter/static/Inter_18pt-Black.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Inter/static/Inter_18pt-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Inter/static/Inter_18pt-Italic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  display: 'swap',
+});
+
+export const georgia = localFont({
+  src: "../public/fonts/georgia/georgia.ttf",
+  display: 'swap',
+});

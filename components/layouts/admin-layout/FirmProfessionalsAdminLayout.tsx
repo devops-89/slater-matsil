@@ -1,0 +1,636 @@
+"use client";
+import { MediaControllers } from "@/api/mediaControllers";
+import { ProfessionalControllers } from "@/api/professionalControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
+import { useNotification } from "@/components/providers/NotificationProvider";
+import { usePageData } from "@/store/usePageData";
+import { COLORS } from "@/utils/enum";
+import { adelle, tradeGothic } from "@/utils/fonts";
+import { formatProfessionalDisplayName } from "@/utils/mappers/firmProfessionalsMapper";
+import { Add } from "@mui/icons-material";
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    Grid,
+    Pagination,
+    Stack,
+    Typography
+} from "@mui/material";
+import React, { useEffect, useMemo, useState } from "react";
+import * as Yup from "yup";
+import AdminLayout from "./AdminLayout";
+import ProfessionalCardItem from "./components/ProfessionalCardItem";
+import ProfessionalFormModal from "./components/ProfessionalFormModal";
+import { 
+    PROFESSIONAL_API_ITEM, 
+    PROFESSIONAL_FORM_CARD_DATA, 
+    PROFESSIONAL_FORM_BIO_DATA 
+} from "@/utils/types";
+
+interface FirmProfessionalsAdminLayoutProps {
+  initialProfessionals?: PROFESSIONAL_API_ITEM[];
+}
+
+export default function FirmProfessionalsAdminLayout({ initialProfessionals = [] }: FirmProfessionalsAdminLayoutProps) {
+  const { details } = usePageData();
+  const { startLoading, stopLoading } = useLoading();
+  const { showNotification } = useNotification();
+  const [apiProfessionals, setApiProfessionals] = useState<PROFESSIONAL_API_ITEM[]>(initialProfessionals);
+  const [isFetching, setIsFetching] = useState(initialProfessionals.length === 0);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [activeId, setActiveId] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState(0);
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
+  
+  const [isUploadingCardImg, setIsUploadingCardImg] = useState(false);
+  const [isUploadingDetailsImg, setIsUploadingDetailsImg] = useState(false);
+  const [pendingDeletes, setPendingDeletes] = useState<string[]>([]);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const fetchProfessionals = async () => {
+    try {
+      setIsFetching(true);
+      const res = await ProfessionalControllers.getAllProfessionalProfiles(1, 1000);
+      let users = res.data?.data?.users || [];
+      if (!users.length && res.data?.data?.data?.users) {
+        users = res.data.data.data.users;
+      }
+      if (users && users.length > 0) {
+        console.log("FETCHED_USERS_COUNT:", users.length);
+        setApiProfessionals(users);
+      }
+      return users;
+    } catch (err) {
+      console.error("Failed to fetch professionals", err);
+      return [];
+    } finally {
+      setIsFetching(false);
+    }
+  };
+
+  useEffect(() => {
+    if (initialProfessionals.length === 0) {
+      fetchProfessionals();
+    }
+  }, []);
+
+  const getLastName = (fullName: string) => {
+    if (!fullName) return "";
+    const cleanName = fullName.split(",")[0].trim();
+    const parts = cleanName.split(/\s+/);
+    return parts[parts.length - 1].toLowerCase();
+  };
+
+  const hybridProfessionals = useMemo(() => {
+    const mappedApi = apiProfessionals.map(apiItem => ({
+      ...apiItem, 
+      name: formatProfessionalDisplayName(apiItem), 
+      img: apiItem.profileImageDownloadUrl || apiItem.imageDownloadUrl || apiItem.profileImageUrl || apiItem.imageUrl, 
+      detailsImg: apiItem.professionalProfiles?.[0]?.imageDownloadUrl || apiItem.professionalProfiles?.[0]?.imageUrl || "" 
+    }));
+
+    return mappedApi.sort((a, b) =>
+      getLastName(a.name || "").localeCompare(getLastName(b.name || "")),
+    );
+  }, [apiProfessionals]);
+
+  const validationSchema = Yup.object().shape({
+    firstName: Yup.string().required("First Name is required"),
+    lastName: Yup.string().required("Last Name is required"),
+    designation: Yup.string().required("Designation is required"),
+    email: Yup.string().email("Invalid email address").required("Email is required"),
+    phoneNumber: Yup.string().required("Phone Number is required"),
+  });
+
+  const [cardData, setCardData] = useState<PROFESSIONAL_FORM_CARD_DATA>({});
+  const [bioData, setBioData] = useState<PROFESSIONAL_FORM_BIO_DATA>({
+    email: "",
+    phoneNumber: "",
+    vCard: {
+      job_title: "",
+      street: "17304 Preston Rd, Suite 900",
+      city: "Dallas",
+      state: "TX",
+      postalCode: "75252",
+      countryRegion: "USA"
+    },
+    bio: { paragraphs: "", bullets: [] },
+    education: { paragraphs: "", bullets: [] },
+    admissions: { paragraphs: "", bullets: [] },
+    articles: { paragraphs: "", bullets: [] },
+    associations: { paragraphs: "", bullets: [] }
+  });
+
+  const [page, setPage] = useState(1);
+  const ITEMS_PER_PAGE = 8;
+  const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
+  const [isPaginating, setIsPaginating] = useState(false);
+  
+  const paginatedData = hybridProfessionals.slice(
+    (page - 1) * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE
+  );
+
+  const currentKey = `${page}-${hybridProfessionals.length}`;
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [deleteTargetId, setDeleteTargetId] = useState<number | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [initialState, setInitialState] = useState<string>("");
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    if (value === page) return;
+    setPage(value);
+    
+    const newPageData = hybridProfessionals.slice((value - 1) * ITEMS_PER_PAGE, value * ITEMS_PER_PAGE);
+    const imagesToLoad = newPageData.filter((p) => p.img).length;
+    
+    if (imagesToLoad > 0) {
+      startLoading();
+      setIsPaginating(true);
+      setImagesLoadedCount(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleImageLoad = () => {
+    if (isPaginating) {
+      setImagesLoadedCount((prev) => prev + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (isPaginating) {
+      const imagesToLoad = paginatedData.filter((p) => p.img).length;
+      if (imagesLoadedCount >= imagesToLoad) {
+        stopLoading();
+        setIsPaginating(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  }, [imagesLoadedCount, isPaginating, paginatedData, stopLoading]);
+
+  const handleOpenNew = () => {
+    setActiveId(null);
+    setActiveTab(0);
+    setCardData({ 
+      firstName: "", 
+      middleName: "", 
+      lastName: "", 
+      qualification: "", 
+      designation: "", 
+      imageUrl: "", 
+      imageDownloadUrl: "", 
+      detailsImageUrl: "", 
+      detailsImageDownloadUrl: "" 
+    });
+    setBioData({
+      email: "",
+      phoneNumber: "",
+      vCard: {
+        job_title: "Attorney at Law",
+        street: "17304 Preston Rd, Suite 900",
+        city: "Dallas",
+        state: "TX",
+        postalCode: "75252",
+        countryRegion: "USA"
+      },
+      bio: { paragraphs: "", bullets: [] },
+      education: { paragraphs: "", bullets: [] },
+      admissions: { paragraphs: "", bullets: [] },
+      articles: { paragraphs: "", bullets: [] },
+      associations: { paragraphs: "", bullets: [] }
+    });
+    setErrors({});
+    setPendingDeletes([]);
+    setDialogOpen(true);
+  };
+
+  const handleEdit = (id: number) => {
+    setActiveId(id);
+    setActiveTab(0);
+    const prof = hybridProfessionals.find(p => p.id === id);
+    if (!prof) return;
+
+    let firstName = prof.firstName || "";
+    let middleName = prof.middleName || prof.professionalProfiles?.[0]?.middleName || "";
+    let lastName = prof.lastName || "";
+    let qualification = prof.qualification || prof.professionalProfiles?.[0]?.qualification || "";
+
+    if (!qualification && prof.fullName && prof.fullName.includes(",")) {
+      const commaParts = prof.fullName.split(",");
+      qualification = commaParts.slice(1).join(",").trim();
+      if (!firstName && !lastName) {
+        const namePart = commaParts[0].trim().split(/\s+/);
+        if (namePart.length === 1) {
+          firstName = namePart[0];
+        } else if (namePart.length === 2) {
+          firstName = namePart[0];
+          lastName = namePart[1];
+        } else if (namePart.length >= 3) {
+          firstName = namePart[0];
+          middleName = namePart.slice(1, -1).join(" ");
+          lastName = namePart[namePart.length - 1];
+        }
+      }
+    } else if (!firstName && !lastName && prof.fullName) {
+      const namePart = prof.fullName.trim().split(/\s+/);
+      if (namePart.length === 1) {
+        firstName = namePart[0];
+      } else if (namePart.length === 2) {
+        firstName = namePart[0];
+        lastName = namePart[1];
+      } else if (namePart.length >= 3) {
+        firstName = namePart[0];
+        middleName = namePart.slice(1, -1).join(" ");
+        lastName = namePart[namePart.length - 1];
+      }
+    }
+
+    const newCardData: PROFESSIONAL_FORM_CARD_DATA = {
+      firstName,
+      middleName,
+      lastName,
+      qualification,
+      designation: prof.designation || "",
+      imageUrl: prof.profileImageUrl || prof.imageUrl || prof.img || "",
+      imageDownloadUrl: prof.profileImageDownloadUrl || prof.imageDownloadUrl || prof.img || "",
+      detailsImageUrl: prof.professionalProfiles?.[0]?.imageUrl || prof.detailsImg || "",
+      detailsImageDownloadUrl: prof.professionalProfiles?.[0]?.imageDownloadUrl || prof.detailsImg || ""
+    };
+    setCardData(newCardData);
+
+    const profile = prof.professionalProfiles?.[0] || {};
+    const sections = profile.sections || [];
+    const getSection = (type: string) => sections.find((s: Record<string, unknown>) => s.sectionType === type) || { description: "", bullets: [] };
+    const parseSection = (s: Record<string, any>) => ({
+      id: s.id,
+      paragraphs: s.description || "",
+      bullets: (s.bullets || []).map((b: Record<string, any>) => ({ id: b.id, label: b.bulletText, href: "" }))
+    });
+    const newBioData = {
+      profileId: profile.id,
+      email: prof.email || "",
+      phoneNumber: prof.phoneNumber || "",
+      vCard: {
+        job_title: profile.job_title || "",
+        street: profile.street || "",
+        city: profile.city || "",
+        state: profile.state || "",
+        postalCode: profile.postalCode || "",
+        countryRegion: "USA"
+      },
+      bio: parseSection(getSection("BIOGRAPHY")),
+      education: parseSection(getSection("EDUCATION")),
+      admissions: parseSection(getSection("ADMISSIONS")),
+      articles: parseSection(getSection("ARTICLES_PUBLICATIONS")),
+      associations: parseSection(getSection("ASSOCIATIONS"))
+    };
+    setBioData(newBioData);
+
+    setErrors({});
+    setPendingDeletes([]);
+    setInitialState(JSON.stringify({ cardData: newCardData, bioData: newBioData }));
+    setDialogOpen(true);
+  };
+
+  const handleUploadImage = async (file: File, type: "card" | "details") => {
+    const formData = new FormData();
+    formData.append("image", file);
+    try {
+      if (type === "card") setIsUploadingCardImg(true);
+      else setIsUploadingDetailsImg(true);
+      const res = await MediaControllers.uploadMedia(formData);
+      
+      // Handle double-nested API response
+      const responseData = res.data?.data?.data || res.data?.data || res.data;
+      const key = responseData?.key;
+      const downloadUrl = responseData?.url || responseData?.imageDownloadUrl || URL.createObjectURL(file);
+      
+      if (key) {
+        if (type === "card") {
+          setCardData((prev) => ({ ...prev, imageUrl: key, imageDownloadUrl: downloadUrl }));
+        } else {
+          setCardData((prev) => ({ ...prev, detailsImageUrl: key, detailsImageDownloadUrl: downloadUrl }));
+        }
+      }
+    } catch (error) {
+      console.error("Upload failed", error);
+      alert("Image upload failed");
+    } finally {
+      if (type === "card") setIsUploadingCardImg(false);
+      else setIsUploadingDetailsImg(false);
+    }
+  };
+
+  const handleDeleteImage = (type: "card" | "details") => {
+    const keyToDelete = type === "card" ? cardData.imageUrl : cardData.detailsImageUrl;
+    if (keyToDelete && typeof keyToDelete === "string" && !keyToDelete.startsWith("data:") && !keyToDelete.startsWith("http") && !keyToDelete.startsWith("blob:")) {
+      setPendingDeletes((prev: string[]) => [...prev, keyToDelete]);
+    }
+    if (type === "card") setCardData((prev) => ({ ...prev, imageUrl: "", imageDownloadUrl: "" }));
+    else setCardData((prev) => ({ ...prev, detailsImageUrl: "", detailsImageDownloadUrl: "" }));
+  };
+
+  const handleSave = async () => {
+    if (activeId && JSON.stringify({ cardData, bioData }) === initialState) {
+      showNotification("No changes detected. Please make changes before saving.", "info");
+      return;
+    }
+
+    try {
+      await validationSchema.validate({
+        firstName: cardData.firstName,
+        lastName: cardData.lastName,
+        designation: cardData.designation,
+        email: bioData.email,
+        phoneNumber: bioData.phoneNumber
+      }, { abortEarly: false });
+      setErrors({});
+    } catch (err: unknown) {
+      if (err instanceof Yup.ValidationError) {
+        const newErrors: Record<string, string | undefined> = {};
+        err.inner.forEach((e) => {
+          if (e.path) newErrors[e.path] = e.message;
+        });
+        setErrors(newErrors);
+        
+        if (newErrors.firstName || newErrors.lastName || newErrors.designation || newErrors.email || newErrors.phoneNumber) {
+          setActiveTab(0);
+        }
+      }
+      return;
+    }
+
+    setIsSaving(true);
+
+    const activeProf = hybridProfessionals.find(p => p.id === activeId);
+
+    const bioText = Array.isArray(bioData.bio) 
+      ? bioData.bio.map((b: Record<string, any>) => b.description).join("\n") 
+      : (typeof bioData.bio === 'string' ? bioData.bio : bioData.bio?.paragraphs || "");
+
+    const nameParts = [cardData.firstName?.trim(), cardData.middleName?.trim(), cardData.lastName?.trim()].filter(Boolean).join(" ");
+    const cleanQualification = (cardData.qualification || "").replace(/^,\s*/, "").trim();
+    const formattedFullName = cleanQualification ? `${nameParts}, ${cleanQualification}` : nameParts;
+
+    const payload: Record<string, any> = {
+      email: bioData.email,
+      fullName: formattedFullName,
+      firstName: (cardData.firstName || "").trim(),
+      middleName: (cardData.middleName || "").trim(),
+      lastName: (cardData.lastName || "").trim(),
+      qualification: cleanQualification,
+      designation: cardData.designation,
+      phoneNumber: bioData.phoneNumber,
+      imageUrl: cardData.imageUrl || null,
+      jobTitle: bioData.vCard?.job_title,
+      streetAddress: bioData.vCard?.street,
+      city: bioData.vCard?.city,
+      state: bioData.vCard?.state,
+      postalCode: bioData.vCard?.postalCode,
+      sections: [
+        { sectionType: "BIOGRAPHY", sortOrder: 1, description: bioText },
+        { sectionType: "EDUCATION", sortOrder: 2, description: bioData.education?.paragraphs, bullets: bioData.education?.bullets },
+        { sectionType: "ADMISSIONS", sortOrder: 3, description: bioData.admissions?.paragraphs, bullets: bioData.admissions?.bullets },
+        { sectionType: "ARTICLES_PUBLICATIONS", sortOrder: 4, description: bioData.articles?.paragraphs, bullets: bioData.articles?.bullets },
+        { sectionType: "ASSOCIATIONS", sortOrder: 5, description: bioData.associations?.paragraphs, bullets: bioData.associations?.bullets }
+      ].map(sec => {
+        const cleaned: Record<string, any> = { sectionType: sec.sectionType, sortOrder: sec.sortOrder };
+        if (sec.description) cleaned.description = sec.description;
+        if (sec.bullets && sec.bullets.length > 0) {
+          cleaned.bullets = sec.bullets.map((b: { label?: string }, idx: number) => ({
+            bulletText: b.label,
+            sortOrder: idx + 1
+          }));
+        }
+        return cleaned;
+      }).filter(sec => sec.description || sec.bullets)
+    };
+
+    let targetId = activeProf?.id;
+    if (!targetId) {
+      // Bulletproof fallback: search the loaded API professionals by email
+      const fallbackProf = apiProfessionals.find(p => 
+        p.email?.toLowerCase().trim() === bioData.email?.toLowerCase().trim() || 
+        p.fullName?.toLowerCase().trim() === formattedFullName.toLowerCase().trim()
+      );
+      if (fallbackProf) {
+        targetId = fallbackProf.id;
+      }
+    }
+
+    if (targetId) {
+      payload.userId = targetId;
+    }
+
+    try {
+      // Backend uses POST endpoint for both Create and Update (Upsert).
+      // If targetId is present, it is sent in payload.userId which triggers an update.
+      await ProfessionalControllers.createProfessionalProfile(payload);
+
+      // Execute pending deletes
+      for (const key of pendingDeletes) {
+        try {
+          await MediaControllers.removeMedia({ key });
+        } catch (e) {
+          console.error("Failed to delete media", e);
+        }
+      }
+      setPendingDeletes([]);
+
+      const newUsers = await fetchProfessionals();
+      const maxPage = Math.ceil(newUsers.length / ITEMS_PER_PAGE);
+      setPage((prevPage) => Math.min(prevPage, maxPage || 1));
+      setDialogOpen(false);
+      showNotification(
+        targetId 
+          ? "Professional profile has been successfully updated." 
+          : "Professional profile has been successfully created.", 
+        "success"
+      );
+    } catch (err: unknown) {
+      console.error("Save failed", err);
+      const apiErr = err as { response?: { data?: { error?: any; message?: string } }; message?: string };
+      const backendError = apiErr.response?.data?.error;
+      if (Array.isArray(backendError)) {
+        const errorDetails = backendError.map((e: Record<string, any>) => {
+          const property = e.property || e.path || e.field || "Unknown Field";
+          const constraints = e.constraints ? Object.values(e.constraints).join(", ") : JSON.stringify(e);
+          return `${property}: ${constraints}`;
+        }).join("\n");
+        alert("Validation failed:\n" + errorDetails);
+      } else if (apiErr.response?.data?.message) {
+        alert(`Failed to save: ${apiErr.response.data.message}`);
+      } else {
+        alert(`Failed to save professional profile: ${apiErr.message || "Unknown error"}`);
+      }
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  type SectionKey = "bio" | "education" | "admissions" | "articles" | "associations";
+
+  const handleAddBullet = (section: string) => {
+    const key = section as SectionKey;
+    const updated = { ...bioData };
+    if (updated[key]) updated[key]!.bullets!.push({ id: undefined, label: "", href: "" });
+    setBioData(updated);
+  };
+
+  const handleRemoveBullet = (section: string, index: number) => {
+    const key = section as SectionKey;
+    const updated = { ...bioData };
+    if (updated[key]) updated[key]!.bullets!.splice(index, 1);
+    setBioData(updated);
+  };
+
+  const handleBulletChange = (section: string, index: number, field: string, value: string) => {
+    const key = section as SectionKey;
+    const updated = { ...bioData };
+    if (updated[key]) (updated[key]!.bullets![index] as any)[field] = value;
+    setBioData(updated);
+  };
+
+  const handleParagraphChange = (section: string, value: string) => {
+    const key = section as SectionKey;
+    const updated = { ...bioData };
+    if (updated[key]) updated[key]!.paragraphs = value;
+    setBioData(updated);
+  };
+
+  const handleDeleteProfessional = (id: number) => {
+    setDeleteTargetId(id);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDeleteProfessional = async () => {
+    if (!deleteTargetId) return;
+    setIsDeleting(true);
+    try {
+      await ProfessionalControllers.deleteProfessionalProfile(deleteTargetId);
+      showNotification("Professional deleted successfully!", "success");
+      setDeleteModalOpen(false);
+      const newUsers = await fetchProfessionals();
+      const maxPage = Math.ceil(newUsers.length / ITEMS_PER_PAGE);
+      setPage((prevPage) => Math.min(prevPage, maxPage || 1));
+    } catch (error: unknown) {
+      const apiErr = error as { response?: { data?: { message?: string } }; message?: string };
+      showNotification(apiErr.response?.data?.message || apiErr.message || "Failed to delete professional.", "error");
+      console.error("Delete failed", error);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  return (
+    <AdminLayout title="Firm Professionals Management">
+      <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'stretch', sm: 'center' }, gap: 2 }}>
+        <Box>
+          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+            Professional Database
+          </Typography>
+          <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+            Manage profiles, bio details, and contact information for firm attorneys and advisors.
+          </Typography>
+        </Box>
+        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
+          Add Professional
+        </Button>
+      </Box>
+
+      <Grid container spacing={{ xs: 2, md: 4 }}>
+        {isFetching ? (
+          Array.from(new Array(6)).map((_, i) => (
+            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={`skeleton-${i}`} sx={{ display: "flex", width: "100%" }}>
+              <Box sx={{ width: "100%", height: 350, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
+            </Grid>
+          ))
+        ) : (
+          paginatedData.map((prof, i) => (
+            <ProfessionalCardItem
+              key={i}
+              prof={prof}
+              onEdit={handleEdit}
+              onDelete={handleDeleteProfessional}
+              onImageLoad={handleImageLoad}
+            />
+          ))
+        )}
+      </Grid>
+
+      {hybridProfessionals && hybridProfessionals.length > ITEMS_PER_PAGE && (
+        <Stack direction="row" justifyContent="center" sx={{ mt: 5 }}>
+          <Pagination
+            count={Math.ceil(hybridProfessionals.length / ITEMS_PER_PAGE)}
+            page={page}
+            onChange={handlePageChange}
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: COLORS.PRIMARY_BLUE,
+                borderColor: COLORS.PRIMARY_BLUE,
+                "&.Mui-selected": {
+                  backgroundColor: COLORS.PRIMARY_BLUE,
+                  color: COLORS.WHITE,
+                  "&:hover": {
+                    backgroundColor: COLORS.PRIMARY_BLUE,
+                  },
+                },
+              },
+            }}
+          />
+        </Stack>
+      )}
+
+      <ProfessionalFormModal
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        activeId={activeId}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        cardData={cardData}
+        setCardData={setCardData}
+        bioData={bioData}
+        setBioData={setBioData}
+        errors={errors}
+        setErrors={setErrors}
+        isSaving={isSaving}
+        isUploadingCardImg={isUploadingCardImg}
+        handleUploadImage={handleUploadImage}
+        handleDeleteImage={handleDeleteImage}
+        handleSave={handleSave}
+        handleParagraphChange={handleParagraphChange}
+        handleAddBullet={handleAddBullet}
+        handleRemoveBullet={handleRemoveBullet}
+        handleBulletChange={handleBulletChange}
+      />
+
+      {/* Delete Confirmation Modal */}
+      <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>
+        <DialogTitle sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+          Confirm Deletion
+        </DialogTitle>
+        <DialogContent>
+          <Typography>Are you sure you want to delete this firm professional? This action cannot be undone.</Typography>
+        </DialogContent>
+        <DialogActions sx={{ p: 2 }}>
+          <Button onClick={() => setDeleteModalOpen(false)} color="inherit" disabled={isDeleting}>No, Cancel</Button>
+          <Button onClick={confirmDeleteProfessional} variant="contained" color="error" disabled={isDeleting}>
+            {isDeleting ? <CircularProgress size={24} sx={{ color: '#fff' }} /> : "Yes, Delete"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
+    </AdminLayout>
+  );
+
+
+}

@@ -1,0 +1,35 @@
+import AboutLayout from "@/components/layouts/about-layout";
+import StoreInitializer from "@/components/providers/StoreInitializer";
+import type { Metadata } from "next";
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Slater Matsil | About Us",
+  description:
+    "Learn about Slater Matsil, a pure-play intellectual property firm built by a collaborative team of attorneys and technical specialists.",
+};
+
+async function getAboutData() {
+  try {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+    const res = await fetch(`${backendUrl}/api/pages/2`, {
+      cache: "no-store",
+    }).catch(() => null);
+    const data = res ? await res.json().catch(() => null) : null;
+
+    return { data2: data?.data?.data || data?.data };
+  } catch (error) {
+    return { data2: null };
+  }
+}
+
+export default async function Aboutus() {
+  const apiData = await getAboutData();
+  return (
+    <div>
+      <StoreInitializer pageType="about" apiData={apiData} />
+      <AboutLayout apiData={apiData} />
+    </div>
+  );
+}

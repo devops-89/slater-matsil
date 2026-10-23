@@ -1,3 +1,80 @@
 export enum COLORS {
   HEADER_BG = "rgba(255,255,255,0.80)",
+  WHITE = "#FFFFFF",
+  BLACK = "#000000",
+  PRIMARY_GREEN = "#72B52B",
+  OFF_WHITE = "#F4F8EC",
+  PRIMARY_BLUE = "#0D5F6E",
+  TEXT_PRIMARY = "#727272",
+  PRIMARY_BLUE_LIGHT = "#ECF8F8",
+  TEXT_SECONDARY = "#063232",
+  LABEL_COLOR = "#5A7779",
+  FOOTER_TEXT_COLOR = "#D0DAF5",
+  TEXT_TERTIARY = "#14363f",
+  TEXT_PRIMARY_24 = "#000202ff",
+  TEXT_PRIMARY_4 = "#1D8D96",
+  TRANSPARENT = "transparent",
+  LIGHT_GREY = "#F5F5F5",
+  PRIMARY_LIGHT_GREEN = "#C5E5A3",
+}
+
+export enum TABS {
+  FIRM = "Firm",
+  PROFESSIONALS = "Professionals",
+  WHO_WE_SERVE = "Who We Serve",
+}
+
+export enum PROFESSIONAL_TABS_DATA {
+  BIO = "BIO",
+  EDUCATION = "EDUCATION",
+  ADMISSIONS_HONORS = "ADMISSIONS & HONORS",
+  ARTICLES_PRESENTATIONS = "ARTICLES & PRESENTATIONS",
+  ASSOCIATIONS = "ASSOCIATIONS",
+}
+
+export enum CAREER_OPEN_ROLES_TAB_DATA {
+  ATTORNEY = "Attorney",
+  TECHNICAL_ADVISOR = "Technical Advisor/Patent Agent",
+}
+
+export enum PRACTICE_GROUP_TAB_DATA {
+  CIRCUITS_SYSTEMS_AND_SIGNAL_PROCESSING = "Circuits, Systems and Signal Processing",
+  NOVEL_MATERIALS_DEVICES_AND_APPLIED_PHYSICS = "Novel Materials, Devices, and Applied Physics",
+  ARTIFICIAL_INTELLIGENCE = "Artificial Intelligence",
+  COMMUNICATIONS_AND_NETWORK_TECHNOLOGIES = "Communications and Network Technologies",
+  CHEMISTRY_AND_MATERIALS_SCIENCE = "Chemistry and Materials Science",
+  LITIGATION_GROUP = "Litigation",
+  ASIA_PACIFIC_GROUP = "Asia Pacific",
+  COMPUTER_SYSTEMS_AND_SOFTWARE = "Computer Systems and Software",
+}
+
+export enum WHO_WE_SERVE_PAGE_TAB_DATA {
+  LARGE_CORPORATIONS = "LARGE CORPORATIONS",
+  SMALL_COMPANIES = "SMALL COMPANIES/ START-UPS",
+  US_LAW_FIRMS = "U.S. LAW FIRMS",
+  INTERNATIONAL_LAW_FIRMS = "INTERNATIONAL LAW FIRMS",
+}
+
+export enum INSIGHTS_TAB_DATA {
+  ALL = "ALL",
+  NEWS = "NEWS",
+  ARTICLES = "ARTICLES",
+  LINKS = "LINKS",
+}
+
+export enum SUPPORT_SERVICE {
+  PORTFOLIO_DEVELOPMENT = 'Portfolio Development',
+  PATENT_MINING = 'Patent Mining',
+  PROCESS_DEFINITION = 'Process Definition',
+  IP_LANDSCAPE_ANALYSIS = 'IP Landscape Analysis',
+  PATENT_DRAFTING = 'Patent Drafting',
+  PATENT_PROSECUTION = 'Patent Prosecution',
+  TM_REGISTRATION = 'TM Registration',
+  INTERNATIONAL_FILLINGS = 'International Fillings',
+  VALUATION = 'Valuation',
+  LICENSING = 'Licensing',
+  LITIGATION = 'Litigation',
+  COMPETITIVE_ANALYSIS = 'Competitive Analysis',
+  POST_GRANT_CHALLENGES = 'Post Grant Challenges',
+  OPINIONS = 'Opinions',
 }

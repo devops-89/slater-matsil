@@ -1,0 +1,50 @@
+import type { Metadata } from "next";
+import ProfessionalsLayout from "@/components/layouts/professionals-layout/Index";
+import StoreInitializer from "@/components/providers/StoreInitializer";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Slater Matsil | Professionals",
+  description:
+    "Browse the biographies and expertise of our intellectual property attorneys, patent agents, and specialists.",
+};
+
+async function getProfessionalsData() {
+  try {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+    const pageRes = await fetch(`${backendUrl}/api/pages/5`, {
+      cache: "no-store",
+    }).catch(() => null);
+    const pageData = pageRes ? await pageRes.json().catch(() => null) : null;
+
+    const profsRes = await fetch(
+      `${backendUrl}/api/users/all?role=PROFESSIONAL&limit=6&page=1`,
+      { cache: "no-store" },
+    ).catch(() => null);
+    const profsData = profsRes ? await profsRes.json().catch(() => null) : null;
+
+    const users = profsData?.data?.data?.users || profsData?.data?.users || [];
+    const total =
+      profsData?.data?.data?.meta?.total || profsData?.data?.meta?.total || 0;
+
+    return {
+      data5: pageData?.data?.data || pageData?.data,
+      initialProfessionals: users,
+      initialTotal: total,
+    };
+  } catch (error) {
+    return { data5: null, initialProfessionals: [], initialTotal: 0 };
+  }
+}
+
+export default async function Page() {
+  const apiData = await getProfessionalsData();
+  return (
+    <>
+      <StoreInitializer pageType="professionals" apiData={apiData} />
+      <ProfessionalsLayout apiData={apiData} />
+    </>
+  );
+}
