@@ -210,6 +210,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
     setErrors({});
     setPendingDeletes([]);
     setDialogOpen(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleEdit = (id: number) => {
@@ -298,6 +299,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
     setPendingDeletes([]);
     setInitialState(JSON.stringify({ cardData: newCardData, bioData: newBioData }));
     setDialogOpen(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleUploadImage = async (file: File, type: "card" | "details") => {
@@ -362,7 +364,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
         setErrors(newErrors);
         
         if (newErrors.firstName || newErrors.lastName || newErrors.designation || newErrors.email || newErrors.phoneNumber) {
-          setActiveTab(0);
+          window.scrollTo({ top: 0, behavior: "smooth" });
         }
       }
       return;
@@ -396,7 +398,7 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
       state: bioData.vCard?.state,
       postalCode: bioData.vCard?.postalCode,
       sections: [
-        { sectionType: "BIOGRAPHY", sortOrder: 1, description: bioText },
+        { sectionType: "BIOGRAPHY", sortOrder: 1, description: bioText, bullets: bioData.bio?.bullets },
         { sectionType: "EDUCATION", sortOrder: 2, description: bioData.education?.paragraphs, bullets: bioData.education?.bullets },
         { sectionType: "ADMISSIONS", sortOrder: 3, description: bioData.admissions?.paragraphs, bullets: bioData.admissions?.bullets },
         { sectionType: "ARTICLES_PUBLICATIONS", sortOrder: 4, description: bioData.articles?.paragraphs, bullets: bioData.articles?.bullets },
@@ -405,13 +407,18 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
         const cleaned: Record<string, any> = { sectionType: sec.sectionType, sortOrder: sec.sortOrder };
         if (sec.description) cleaned.description = sec.description;
         if (sec.bullets && sec.bullets.length > 0) {
-          cleaned.bullets = sec.bullets.map((b: { label?: string }, idx: number) => ({
-            bulletText: b.label,
-            sortOrder: idx + 1
-          }));
+          const validBullets = sec.bullets
+            .filter((b: { label?: string; bulletText?: string }) => (b.label || b.bulletText || "").trim() !== "")
+            .map((b: { label?: string; bulletText?: string }, idx: number) => ({
+              bulletText: (b.label || b.bulletText || "").trim(),
+              sortOrder: idx + 1
+            }));
+          if (validBullets.length > 0) {
+            cleaned.bullets = validBullets;
+          }
         }
         return cleaned;
-      }).filter(sec => sec.description || sec.bullets)
+      }).filter(sec => sec.description || (sec.bullets && sec.bullets.length > 0))
     };
 
     let targetId = activeProf?.id;
@@ -532,85 +539,89 @@ export default function FirmProfessionalsAdminLayout({ initialProfessionals = []
 
   return (
     <AdminLayout title="Firm Professionals Management">
-      <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'stretch', sm: 'center' }, gap: 2 }}>
-        <Box>
-          <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-            Professional Database
-          </Typography>
-          <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
-            Manage profiles, bio details, and contact information for firm attorneys and advisors.
-          </Typography>
-        </Box>
-        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
-          Add Professional
-        </Button>
-      </Box>
+      {dialogOpen ? (
+        <ProfessionalFormModal
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          activeId={activeId}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          cardData={cardData}
+          setCardData={setCardData}
+          bioData={bioData}
+          setBioData={setBioData}
+          errors={errors}
+          setErrors={setErrors}
+          isSaving={isSaving}
+          isUploadingCardImg={isUploadingCardImg}
+          handleUploadImage={handleUploadImage}
+          handleDeleteImage={handleDeleteImage}
+          handleSave={handleSave}
+          handleParagraphChange={handleParagraphChange}
+          handleAddBullet={handleAddBullet}
+          handleRemoveBullet={handleRemoveBullet}
+          handleBulletChange={handleBulletChange}
+        />
+      ) : (
+        <>
+          <Box sx={{ mb: 4, display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { xs: 'stretch', sm: 'center' }, gap: 2 }}>
+            <Box>
+              <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
+                Professional Database
+              </Typography>
+              <Typography variant="body2" sx={{ fontFamily: adelle.style.fontFamily, color: COLORS.TEXT_PRIMARY, opacity: 0.8, mt: 0.5 }}>
+                Manage profiles, bio details, and contact information for firm attorneys and advisors.
+              </Typography>
+            </Box>
+            <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
+              Add Professional
+            </Button>
+          </Box>
 
-      <Grid container spacing={{ xs: 2, md: 4 }}>
-        {isFetching ? (
-          Array.from(new Array(6)).map((_, i) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={`skeleton-${i}`} sx={{ display: "flex", width: "100%" }}>
-              <Box sx={{ width: "100%", height: 350, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
-            </Grid>
-          ))
-        ) : (
-          paginatedData.map((prof, i) => (
-            <ProfessionalCardItem
-              key={i}
-              prof={prof}
-              onEdit={handleEdit}
-              onDelete={handleDeleteProfessional}
-              onImageLoad={handleImageLoad}
-            />
-          ))
-        )}
-      </Grid>
+          <Grid container spacing={{ xs: 2, md: 4 }}>
+            {isFetching ? (
+              Array.from(new Array(6)).map((_, i) => (
+                <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={`skeleton-${i}`} sx={{ display: "flex", width: "100%" }}>
+                  <Box sx={{ width: "100%", height: 350, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
+                </Grid>
+              ))
+            ) : (
+              paginatedData.map((prof, i) => (
+                <ProfessionalCardItem
+                  key={i}
+                  prof={prof}
+                  onEdit={handleEdit}
+                  onDelete={handleDeleteProfessional}
+                  onImageLoad={handleImageLoad}
+                />
+              ))
+            )}
+          </Grid>
 
-      {hybridProfessionals && hybridProfessionals.length > ITEMS_PER_PAGE && (
-        <Stack direction="row" justifyContent="center" sx={{ mt: 5 }}>
-          <Pagination
-            count={Math.ceil(hybridProfessionals.length / ITEMS_PER_PAGE)}
-            page={page}
-            onChange={handlePageChange}
-            sx={{
-              "& .MuiPaginationItem-root": {
-                color: COLORS.PRIMARY_BLUE,
-                borderColor: COLORS.PRIMARY_BLUE,
-                "&.Mui-selected": {
-                  backgroundColor: COLORS.PRIMARY_BLUE,
-                  color: COLORS.WHITE,
-                  "&:hover": {
-                    backgroundColor: COLORS.PRIMARY_BLUE,
+          {hybridProfessionals && hybridProfessionals.length > ITEMS_PER_PAGE && (
+            <Stack direction="row" justifyContent="center" sx={{ mt: 5 }}>
+              <Pagination
+                count={Math.ceil(hybridProfessionals.length / ITEMS_PER_PAGE)}
+                page={page}
+                onChange={handlePageChange}
+                sx={{
+                  "& .MuiPaginationItem-root": {
+                    color: COLORS.PRIMARY_BLUE,
+                    borderColor: COLORS.PRIMARY_BLUE,
+                    "&.Mui-selected": {
+                      backgroundColor: COLORS.PRIMARY_BLUE,
+                      color: COLORS.WHITE,
+                      "&:hover": {
+                        backgroundColor: COLORS.PRIMARY_BLUE,
+                      },
+                    },
                   },
-                },
-              },
-            }}
-          />
-        </Stack>
+                }}
+              />
+            </Stack>
+          )}
+        </>
       )}
-
-      <ProfessionalFormModal
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-        activeId={activeId}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        cardData={cardData}
-        setCardData={setCardData}
-        bioData={bioData}
-        setBioData={setBioData}
-        errors={errors}
-        setErrors={setErrors}
-        isSaving={isSaving}
-        isUploadingCardImg={isUploadingCardImg}
-        handleUploadImage={handleUploadImage}
-        handleDeleteImage={handleDeleteImage}
-        handleSave={handleSave}
-        handleParagraphChange={handleParagraphChange}
-        handleAddBullet={handleAddBullet}
-        handleRemoveBullet={handleRemoveBullet}
-        handleBulletChange={handleBulletChange}
-      />
 
       {/* Delete Confirmation Modal */}
       <Dialog open={deleteModalOpen} onClose={() => setDeleteModalOpen(false)}>

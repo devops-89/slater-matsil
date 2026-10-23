@@ -6,7 +6,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-
+///sdfgh
 const InsightsCard = ({
   bgColor,
   category,
