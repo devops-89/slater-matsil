@@ -15,7 +15,8 @@ import {
   mapBackendToCareersState,
   mapBackendToContactState,
   mapBackendToWhoWeServeState,
-  mapBackendToLegalPageState
+  mapBackendToLegalPageState,
+  mapBackendToAiPageState
 } from "@/utils/pageDataMapper";
 
 export const useAdminPageData = (slug: string) => {
@@ -171,7 +172,7 @@ export const useAdminPageData = (slug: string) => {
             setDetails(WEBSITE_DATA as any);
             setInitialWebsiteData(WEBSITE_DATA as any);
           }
-        } else if (["careers", "contact", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer", "insights"].includes(slug as string)) {
+        } else if (["careers", "contact", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer", "insights", "ai"].includes(slug as string)) {
           const PAGE_IDS: Record<string, number> = {
             "insights": 7,
             "careers": 9,
@@ -179,7 +180,8 @@ export const useAdminPageData = (slug: string) => {
             "who-we-serve": 11,
             "privacy-policy": 12,
             "terms-of-use": 13,
-            "disclaimer": 14
+            "disclaimer": 14,
+            "ai": 15
           };
           const targetId = PAGE_IDS[slug as string];
           let pageData = null;
@@ -207,6 +209,8 @@ export const useAdminPageData = (slug: string) => {
               mergedWebsiteData.termsOfUse = mapBackendToLegalPageState(pageData, WEBSITE_DATA.termsOfUse, "termsOfUse_content");
             } else if (slug === "disclaimer") {
               mergedWebsiteData.disclaimer = mapBackendToLegalPageState(pageData, WEBSITE_DATA.disclaimer, "disclaimer_content");
+            } else if (slug === "ai") {
+              mergedWebsiteData.aiPage = mapBackendToAiPageState(pageData, WEBSITE_DATA.aiPage);
             }
 
             setWebsiteData(mergedWebsiteData);
@@ -365,6 +369,17 @@ export const useAdminPageData = (slug: string) => {
     setWebsiteData(updated);
   };
 
+  const updateAiPage = (key: string, newData: any) => {
+    const updated = {
+      ...websiteData,
+      aiPage: {
+        ...websiteData.aiPage,
+        [key]: newData
+      }
+    };
+    setWebsiteData(updated);
+  };
+
   return {
     websiteData,
     initialWebsiteData,
@@ -382,6 +397,7 @@ export const useAdminPageData = (slug: string) => {
     updateCareerPage,
     updateContactPage,
     updateWhoWeServePage,
-    updateLegalPage
+    updateLegalPage,
+    updateAiPage
   };
 };

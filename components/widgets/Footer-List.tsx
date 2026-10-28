@@ -31,7 +31,7 @@ const FooterList = ({ HEADING, DATA }: FOOTER_LIST_DATA) => {
     const hasEditorPage = [
       "home", "about-us", "services", "practice-groups", "professionals", 
       "leadership", "insights", "blogs", "careers", "contact", 
-      "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer"
+      "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer", "ai"
     ].includes(baseRoute);
 
     if (hasEditorPage) {

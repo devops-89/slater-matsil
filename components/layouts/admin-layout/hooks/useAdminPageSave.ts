@@ -15,7 +15,8 @@ import {
   mapCareersStateToBackend,
   mapContactStateToBackend,
   mapWhoWeServeStateToBackend,
-  mapLegalPageStateToBackend
+  mapLegalPageStateToBackend,
+  mapAiPageStateToBackend
 } from "@/utils/pageDataMapper";
 
 const homePageSchema = yup.object().shape({
@@ -151,6 +152,14 @@ export const useAdminPageSave = () => {
           pageType: "static",
           status: "published",
           sections: mapLegalPageStateToBackend(websiteData[stateKey], stateKey + "_content")
+        };
+      } else if (slug === "ai") {
+        payload = {
+          title: "Artificial Intelligence",
+          slug: "ai",
+          pageType: "static",
+          status: "published",
+          sections: mapAiPageStateToBackend(websiteData.aiPage)
         };
       }
 

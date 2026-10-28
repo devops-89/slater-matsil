@@ -10,3 +10,4 @@ export * from "./mappers/careersMapper";
 export * from "./mappers/contactMapper";
 export * from "./mappers/whoWeServeMapper";
 export * from "./mappers/legalMapper";
+export * from "./mappers/aiMapper";

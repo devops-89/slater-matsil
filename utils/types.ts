@@ -64,6 +64,7 @@ export interface HOMEPAGE_DATA_PROPS {
   privacyPolicy?: LEGAL_PAGE_DATA;
   termsOfUse?: LEGAL_PAGE_DATA;
   disclaimer?: LEGAL_PAGE_DATA;
+  aiPage?: AI_PAGE_DATA;
 }
 
 export interface API_PROFESSIONAL_BULLET {
@@ -729,6 +730,102 @@ export interface LEGAL_PAGE_DATA {
     title: string;
     contentBlocks: LEGAL_CONTENT_BLOCK[];
   }[];
+}
+
+export interface AI_HERO_SECTION {
+  tagTitle: string;
+  heading: string;
+  spanHeading?: string;
+  subHeading: string;
+  description: string;
+  img?: any;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  key?: string;
+}
+
+export interface AI_MATTER_ITEM {
+  title: string;
+  description: string;
+}
+
+export interface AI_MATTERS_SECTION {
+  sectionTitle: string;
+  heading: string;
+  subHeading?: string;
+  description?: string;
+  items: AI_MATTER_ITEM[];
+  img?: any;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  key?: string;
+}
+
+export interface AI_APPROACH_ITEM {
+  title: string;
+  description: string;
+}
+
+export interface AI_APPROACH_SECTION {
+  sectionTitle: string;
+  heading: string;
+  description?: string;
+  items: AI_APPROACH_ITEM[];
+  img?: any;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  key?: string;
+}
+
+export interface AI_TOOL_ITEM {
+  title: string;
+  description: string;
+  tag?: string;
+}
+
+export interface AI_TOOLS_SECTION {
+  sectionTitle: string;
+  heading: string;
+  description?: string;
+  items: AI_TOOL_ITEM[];
+  img?: any;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  key?: string;
+}
+
+export interface AI_CHOICE_ITEM {
+  title: string;
+  description: string;
+}
+
+export interface AI_CHOICE_SECTION {
+  sectionTitle: string;
+  heading: string;
+  description?: string;
+  items: AI_CHOICE_ITEM[];
+  img?: any;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  key?: string;
+}
+
+export interface AI_QUESTIONS_SECTION {
+  heading: string;
+  description: string;
+  email: string;
+  buttonText: string;
+  buttonLink: string;
+}
+
+export interface AI_PAGE_DATA {
+  pageTitle?: string;
+  heroSection: AI_HERO_SECTION;
+  mattersSection: AI_MATTERS_SECTION;
+  approachSection: AI_APPROACH_SECTION;
+  toolsSection: AI_TOOLS_SECTION;
+  choiceSection: AI_CHOICE_SECTION;
+  questionsSection: AI_QUESTIONS_SECTION;
 }
 
 export interface BLOG_DETAIL_PROPS {

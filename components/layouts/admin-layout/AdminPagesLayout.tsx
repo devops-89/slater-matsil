@@ -5,13 +5,14 @@ import AdminLayout from "./AdminLayout";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
-import { Home, Info, Build, Group, Article, Person, Star, Work, ContactPhone, Public, Policy, Gavel, Warning, LibraryBooks } from "@mui/icons-material";
+import { Home, Info, Build, Group, Article, Person, Star, Work, ContactPhone, Public, Policy, Gavel, Warning, LibraryBooks, AutoAwesome } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { usePageData } from "@/store/usePageData";
 
 const PAGE_ITEMS = [
   { text: "Home Page", icon: <Home fontSize="large" />, path: "/pages/home", desc: "Manage Hero, About, Metrics, and Services sections." },
   { text: "About Us", icon: <Info fontSize="large" />, path: "/pages/about-us", desc: "Update Firm History and Mission Statements." },
+  { text: "Artificial Intelligence", icon: <AutoAwesome fontSize="large" />, path: "/pages/ai", desc: "Manage AI overview, client impact, approach, tools, and policy sections." },
   { text: "Services", icon: <Build fontSize="large" />, path: "/pages/services", desc: "Manage the list of services and details." },
   { text: "Practice Groups", icon: <Group fontSize="large" />, path: "/pages/practice-groups", desc: "Update Practice Group directories." },
   { text: "Firm Professionals", icon: <Person fontSize="large" />, path: "/pages/professionals", desc: "Manage Team Member profiles and bios." },

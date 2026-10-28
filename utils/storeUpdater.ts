@@ -1,5 +1,5 @@
 import { WEBSITE_DATA } from "@/public/data/website-data";
-import { mapBackendToAboutPageState, mapBackendToBlogsState, mapBackendToCareersState, mapBackendToContactState, mapBackendToFirmLeadershipState, mapBackendToFirmProfessionalsState, mapBackendToHomepageState, mapBackendToInsightsState, mapBackendToPracticeGroupsState, mapBackendToServicesPageState, mapBackendToWhoWeServeState } from "@/utils/pageDataMapper";
+import { mapBackendToAboutPageState, mapBackendToAiPageState, mapBackendToBlogsState, mapBackendToCareersState, mapBackendToContactState, mapBackendToFirmLeadershipState, mapBackendToFirmProfessionalsState, mapBackendToHomepageState, mapBackendToInsightsState, mapBackendToPracticeGroupsState, mapBackendToServicesPageState, mapBackendToWhoWeServeState } from "@/utils/pageDataMapper";
 
 export const getUpdatedDetails = (pageType: string, apiData: any) => {
   let newState: any = {};
@@ -60,6 +60,12 @@ export const getUpdatedDetails = (pageType: string, apiData: any) => {
     let updatedWhoWeServePage = WEBSITE_DATA.whoWeServePage;
     if (apiData?.data11) updatedWhoWeServePage = mapBackendToWhoWeServeState(apiData.data11, updatedWhoWeServePage);
     newState = { whoWeServePage: updatedWhoWeServePage };
+  } else if (pageType === "ai") {
+    let updatedAiPage = WEBSITE_DATA.aiPage;
+    if (apiData?.dataAi || apiData?.data15) {
+      updatedAiPage = mapBackendToAiPageState(apiData.dataAi || apiData.data15, updatedAiPage!);
+    }
+    newState = { aiPage: updatedAiPage };
   }
   return { ...WEBSITE_DATA, ...newState };
 };

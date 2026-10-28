@@ -1,4 +1,8 @@
 import award1 from "@/about/award-1.png";
+import aiHeroImage from "@/public/images/ai/ai-hero.jpg";
+import aiApproachImage from "@/public/images/ai/ai-approach.jpg";
+import aiToolsImage from "@/public/images/ai/ai-tools.jpg";
+import aiSecurityImage from "@/public/images/ai/ai-security.jpg";
 import award2 from "@/about/award-2.png";
 import award3 from "@/about/award-3.png";
 import award4 from "@/about/award-4.png";
@@ -1672,5 +1676,106 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
         ]
       }
     ]
-  }
+  },
+  aiPage: {
+    pageTitle: "Artificial Intelligence",
+    heroSection: {
+      tagTitle: "Artificial Intelligence",
+      heading: "Fluent in Technology. Proven in Law. Amplified by AI.",
+      spanHeading: "Amplified by AI.",
+      subHeading: "Patent drafting and prosecution led by practitioners and strengthened by tools we built ourselves.",
+      description: "Since 1999, we have helped clients protect their technology in the U.S. and around the world. AI is the newest tool in that work. Our patent attorneys and agents built our tools around their own practice and the problems they solve every day. We use these tools carefully, and a practitioner remains responsible for every piece of work.",
+      img: aiHeroImage,
+    },
+    mattersSection: {
+      sectionTitle: "Client Value",
+      heading: "What This Means for Your Matters",
+      subHeading: "More strategy, deeper prosecution, and zero-compromise precision.",
+      description: "Our tools take on the first pass of reading, organizing, and cross-checking. That gives our practitioners more time for claim strategy, persuasive arguments to examiners, and your business goals.",
+      img: aiToolsImage,
+      items: [
+        {
+          title: "More attorney time on strategy.",
+          description: "Our tools take on the first pass of reading, organizing, and cross-checking. That gives our practitioners more time for claim strategy, persuasive arguments to examiners, and your business goals.",
+        },
+        {
+          title: "More thorough prosecution.",
+          description: "Every rejection is checked against your claim language and the cited references. When we recommend a path forward, it rests on a complete picture.",
+        },
+        {
+          title: "Fewer errors at filing.",
+          description: "Custom checks catch inconsistencies and formalities issues before they become problems at the USPTO.",
+        },
+      ],
+    },
+    approachSection: {
+      sectionTitle: "Our Principles",
+      heading: "How We Approach AI",
+      description: "Human expertise and legal judgment remain front and center. AI empowers our workflows; our practitioners stand behind every outcome.",
+      img: aiApproachImage,
+      items: [
+        {
+          title: "Our practitioners decide.",
+          description: "A practitioner who understands both the technology and the law reviews every draft application and every Office Action response. That practitioner is accountable for the final work, just as they would be for work done entirely by hand.",
+        },
+        {
+          title: "Technical depth comes first.",
+          description: "Half of our patent professionals hold advanced technical degrees. Our tools organize information. Our practitioners bring the technical and legal judgment that turns it into strong patents.",
+        },
+        {
+          title: "Built around our professional obligations.",
+          description: "Our workflows are designed to meet our duties to clients and to the USPTO, including the duty of candor and the requirement that a practitioner review and stand behind every filing.",
+        },
+        {
+          title: "Confidential by design.",
+          description: "Protecting client information shapes how we build, select, and use every tool, from the first design decision through daily practice.",
+        },
+      ],
+    },
+    toolsSection: {
+      sectionTitle: "Proprietary Technology",
+      heading: "Our Tools",
+      description: "Proprietary systems designed by our own attorneys to solve the real daily challenges of patent drafting and prosecution.",
+      items: [
+        {
+          title: "Office Action Response.",
+          description: "Our tools review each Office Action and the cited references and map every rejection against your claims. They also flag where the examiner’s reasoning may be most open to challenge. Your practitioner then decides which arguments and amendments best serve your goals.",
+          tag: "Office Actions",
+        },
+        {
+          title: "Application Drafting.",
+          description: "Our drafting tool turns invention disclosures, drawings, and inventor notes into a structured starting point. The claims and the overall strategy always come from your practitioner, informed by the technology and your business.",
+          tag: "Drafting",
+        },
+        {
+          title: "Filing Support.",
+          description: "Our paralegal team uses custom-built tools to prepare and check each filing. These tools handle the routine work so that our staff can focus on the details that need a careful human eye.",
+          tag: "Formalities",
+        },
+      ],
+    },
+    choiceSection: {
+      sectionTitle: "Trust & Transparency",
+      heading: "Your Matters, Your Choice",
+      description: "We believe client autonomy and information security are non-negotiable.",
+      img: aiSecurityImage,
+      items: [
+        {
+          title: "You decide.",
+          description: "You may ask that we not use AI tools on your matters. Tell us, and we will honor that request.",
+        },
+        {
+          title: "Your information is protected.",
+          description: "The outside providers we use do not acquire ownership of your information and are contractually prohibited from using it to train their models.",
+        },
+      ],
+    },
+    questionsSection: {
+      heading: "Questions?",
+      description: "To learn how we use AI on your matters, talk to your Slater Matsil attorney or write to info@slatermatsil.com.",
+      email: "info@slatermatsil.com",
+      buttonText: "Contact Slater Matsil",
+      buttonLink: "/contact",
+    },
+  },
 };

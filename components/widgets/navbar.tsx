@@ -202,6 +202,7 @@ const Navbar = () => {
       "privacy-policy",
       "terms-of-use",
       "disclaimer",
+      "ai",
     ].includes(baseRoute);
 
     if (hasEditorPage) {

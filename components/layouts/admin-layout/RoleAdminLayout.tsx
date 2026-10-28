@@ -40,6 +40,7 @@ import * as yup from "yup";
 const ALL_PERMISSIONS = [
   { id: "pages/home", label: "Pages: Home" },
   { id: "pages/about-us", label: "Pages: About Us" },
+  { id: "pages/ai", label: "Pages: Artificial Intelligence" },
   { id: "pages/services", label: "Pages: Services" },
   { id: "pages/practice-groups", label: "Pages: Practice Groups" },
   { id: "pages/professionals", label: "Pages: Firm Professionals" },

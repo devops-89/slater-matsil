@@ -16,7 +16,8 @@ type StoreInitializerProps = {
     | "careers"
     | "blogs"
     | "contact"
-    | "who-we-serve";
+    | "who-we-serve"
+    | "ai";
   apiData: Record<string, unknown> | null | undefined;
 };
 
@@ -54,6 +55,7 @@ const fetchFreshPageData = async (
         careers: 9,
         contact: 10,
         "who-we-serve": 11,
+        ai: 15,
       };
       const pageId = pageIdMap[pageType];
       if (pageId) {

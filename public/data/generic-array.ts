@@ -178,6 +178,10 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
         href: "/blogs",
       },
       {
+        text: "AI",
+        href: "/ai",
+      },
+      {
         text: "Contact",
         href: "/contact",
       },
@@ -266,6 +270,10 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       {
         text: "Blog",
         href: "/blogs",
+      },
+      {
+        text: "AI",
+        href: "/ai",
       },
       {
         text: "Contact",

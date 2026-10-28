@@ -51,6 +51,9 @@ const WhoWeServePagePreviews = dynamic(() => import('@/components/layouts/admin-
 const LegalPagesForms = dynamic(() => import('@/components/layouts/admin-layout/legal-pages-editor').then(mod => mod.LegalPagesForms), { loading: LoadingFallback });
 const LegalPagesPreviews = dynamic(() => import('@/components/layouts/admin-layout/legal-pages-editor').then(mod => mod.LegalPagesPreviews), { loading: LoadingFallback });
 
+const AiPageForms = dynamic(() => import('@/components/layouts/admin-layout/ai-editor').then(mod => mod.AiPageForms), { loading: LoadingFallback });
+const AiPagePreviews = dynamic(() => import('@/components/layouts/admin-layout/ai-editor').then(mod => mod.AiPagePreviews), { loading: LoadingFallback });
+
 export default function AdminPageEditorLayout() {
   const params = useParams();
   const router = useRouter();
@@ -76,7 +79,8 @@ export default function AdminPageEditorLayout() {
     updateCareerPage,
     updateContactPage,
     updateWhoWeServePage,
-    updateLegalPage
+    updateLegalPage,
+    updateAiPage
   } = useAdminPageData(slug);
 
   const { handleSave: _handleSave } = useAdminPageSave();
@@ -119,6 +123,15 @@ export default function AdminPageEditorLayout() {
     sections = ["Hero Section", "About Section", "Serve Tabs"];
   } else if (slug === "privacy-policy" || slug === "terms-of-use" || slug === "disclaimer") {
     sections = ["Page Header", "Content Sections"];
+  } else if (slug === "ai") {
+    sections = [
+      "Hero Section",
+      "What This Means for Your Matters",
+      "How We Approach AI",
+      "Our Tools",
+      "Your Matters, Your Choice",
+      "Questions & Contact"
+    ];
   }
 
   const handleAccordionChange = (panelIndex: number) => (event: React.SyntheticEvent, isExpanded: boolean) => {
@@ -156,6 +169,8 @@ export default function AdminPageEditorLayout() {
       return <LegalPagesForms activeSection={index} data={websiteData.termsOfUse} onChange={(newData: LEGAL_PAGE_DATA) => updateLegalPage("termsOfUse", newData)} />;
     } else if (slug === "disclaimer") {
       return <LegalPagesForms activeSection={index} data={websiteData.disclaimer} onChange={(newData: LEGAL_PAGE_DATA) => updateLegalPage("disclaimer", newData)} />;
+    } else if (slug === "ai") {
+      return <AiPageForms activeSection={index} websiteData={websiteData} updateAiPage={updateAiPage} onDeleteMedia={handleMediaDelete} />;
     }
     return <Typography sx={{ fontFamily: adelle.style.fontFamily }}>Forms for {slug} are coming soon.</Typography>;
   };
@@ -185,6 +200,8 @@ export default function AdminPageEditorLayout() {
       return <WhoWeServePagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     } else if (slug === "privacy-policy" || slug === "terms-of-use" || slug === "disclaimer") {
       return <LegalPagesPreviews />;
+    } else if (slug === "ai") {
+      return <AiPagePreviews activeSection={activeSection} websiteData={debouncedWebsiteData} />;
     }
     return (
       <Box sx={{ border: "2px dashed #ccc", p: 4, borderRadius: 2, textAlign: "center" }}>
