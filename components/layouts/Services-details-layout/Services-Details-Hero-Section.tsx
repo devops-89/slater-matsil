@@ -33,7 +33,7 @@ const ServicesDetailsHeroSection = () => {
               alignItems: "center",
               justifyContent: "flex-start",
               paddingLeft: "60px",
-              background: "rgba(0, 0, 0, 0.5)",
+              background: "rgba(0, 0, 0, 0.3)",
             }}
           >
             <Box sx={{ maxWidth: "500px" }}>

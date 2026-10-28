@@ -2,13 +2,33 @@ import { Box, Container, Typography, Stack, Avatar, Chip } from "@mui/material";
 import { BLOG_DETAIL_PROPS } from "@/utils/types";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic, adelle } from "@/utils/fonts";
-import { CalendarMonth, AccessTime } from "@mui/icons-material";
+import { CalendarMonth, AccessTime, ArrowBack } from "@mui/icons-material";
 import React from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { usePageData } from "@/store/usePageData";
 
 import { motion } from "framer-motion";
 
 const BlogDetailsHeroSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
   const { hero } = data;
+  const searchParams = useSearchParams();
+  const { blogsPage } = usePageData();
+  const pageParam = searchParams.get("page") || searchParams.get("fromPage");
+
+  let fromPage = 1;
+  if (pageParam) {
+    const p = parseInt(pageParam, 10);
+    if (!isNaN(p) && p > 0) fromPage = p;
+  } else if (blogsPage && blogsPage > 1) {
+    fromPage = blogsPage;
+  } else if (typeof window !== "undefined") {
+    const saved = sessionStorage.getItem("blogs_current_page");
+    const sp = saved ? parseInt(saved, 10) : NaN;
+    if (!isNaN(sp) && sp > 0) fromPage = sp;
+  }
+
+  const backUrl = fromPage > 1 ? `/blogs?page=${fromPage}` : "/blogs";
 
   return (
     <Box
@@ -42,6 +62,57 @@ const BlogDetailsHeroSection = ({ data }: { data: BLOG_DETAIL_PROPS }) => {
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Stack spacing={3} alignItems="flex-start">
+          {/* Back to Blogs */}
+          <Box
+            component={motion.div}
+            initial={{ opacity: 0, x: -15 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Link
+              href={backUrl}
+              style={{
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+              }}
+            >
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                sx={{
+                  color: COLORS.PRIMARY_BLUE,
+                  fontFamily: tradeGothic.style.fontFamily,
+                  fontWeight: 700,
+                  fontSize: 14,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
+                  cursor: "pointer",
+                  transition: "all 0.25s ease",
+                  "&:hover": {
+                    color: COLORS.PRIMARY_GREEN,
+                    transform: "translateX(-4px)",
+                  },
+                }}
+              >
+                <ArrowBack sx={{ fontSize: 18 }} />
+                <Typography
+                  sx={{
+                    fontFamily: tradeGothic.style.fontFamily,
+                    fontWeight: 700,
+                    fontSize: 14,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.5px",
+                    color: "inherit",
+                  }}
+                >
+                  Back to Blogs
+                </Typography>
+              </Stack>
+            </Link>
+          </Box>
+
           <Stack
             component={motion.div}
             initial={{ opacity: 0, x: -20 }}

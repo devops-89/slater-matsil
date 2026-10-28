@@ -10,6 +10,8 @@ interface storeData {
   setInsightsTab: (tab: number) => void;
   insightsPage: number;
   setInsightsPage: (page: number) => void;
+  blogsPage: number;
+  setBlogsPage: (page: number) => void;
   navOpen: boolean;
   setNavOpen: (navOpen: boolean) => void;
   activeSubmenu: string | null;
@@ -33,6 +35,8 @@ const usePageDataStore = create<storeData>((set) => ({
   setInsightsTab: (insightsTab) => set({ insightsTab }),
   insightsPage: 1,
   setInsightsPage: (insightsPage) => set({ insightsPage }),
+  blogsPage: 1,
+  setBlogsPage: (blogsPage) => set({ blogsPage }),
   navOpen: false,
   setNavOpen: (navOpen) => set({ navOpen }),
   activeSubmenu: null,

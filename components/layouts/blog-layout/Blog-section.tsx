@@ -16,17 +16,18 @@ import {
 } from "@mui/material";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const BlogSection = () => {
-  const { details } = usePageData();
+  const { details, blogsPage, setBlogsPage } = usePageData();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { startLoading, stopLoading } = useLoading();
   const blogSection = details?.insightsPage?.blogSection;
 
   const [pastWebinars, setPastWebinars] = useState<any[]>(
-    blogSection?.pastWebinars || []
+    blogSection?.pastWebinars || [],
   );
 
   useEffect(() => {
@@ -36,17 +37,97 @@ const BlogSection = () => {
   }, [blogSection?.pastWebinars]);
 
   // PAGINATION
-  const [currentPage, setCurrentPage] = useState(1);
+  const getInitialPage = () => {
+    const pageParam = searchParams.get("page");
+    if (pageParam) {
+      const p = parseInt(pageParam, 10);
+      if (!isNaN(p) && p > 0) return p;
+    }
+    if (blogsPage && blogsPage > 1) {
+      return blogsPage;
+    }
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("blogs_current_page");
+      const sp = saved ? parseInt(saved, 10) : NaN;
+      if (!isNaN(sp) && sp > 0) return sp;
+    }
+    return 1;
+  };
+
+  const [currentPage, setCurrentPage] = useState<number>(getInitialPage);
   const [totalPages, setTotalPages] = useState(1);
   const cardsPerPage = 6;
+
+  // Sync with searchParams if user navigates with browser back/forward buttons
+  useEffect(() => {
+    const pageParam = searchParams.get("page");
+    const target = pageParam ? parseInt(pageParam, 10) : 1;
+    if (!isNaN(target) && target > 0 && target !== currentPage) {
+      setCurrentPage(target);
+      setBlogsPage(target);
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("blogs_current_page", String(target));
+      }
+    }
+  }, [searchParams]);
+
+  // Also listen for native window popstate for immediate history navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pageParam = urlParams.get("page");
+      const target = pageParam ? parseInt(pageParam, 10) : 1;
+      if (!isNaN(target) && target > 0 && target !== currentPage) {
+        setCurrentPage(target);
+        setBlogsPage(target);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("blogs_current_page", String(target));
+        }
+      }
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [currentPage, setBlogsPage]);
+
+  // Ensure URL reflects current page on initial load if restored from store/session
+  useEffect(() => {
+    if (currentPage > 1 && !searchParams.get("page") && typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      url.searchParams.set("page", String(currentPage));
+      window.history.replaceState(null, "", url.toString());
+    }
+  }, []);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage < 1 || newPage > totalPages || newPage === currentPage) return;
+    setCurrentPage(newPage);
+    setBlogsPage(newPage);
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("blogs_current_page", String(newPage));
+      const url = new URL(window.location.href);
+      if (newPage === 1) {
+        url.searchParams.delete("page");
+      } else {
+        url.searchParams.set("page", String(newPage));
+      }
+      window.history.pushState(null, "", url.toString());
+      window.scrollTo({ top: 350, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         startLoading();
-        const res = await BlogControllers.getAllBlogs({ page: currentPage, limit: cardsPerPage });
+        const res = await BlogControllers.getAllBlogs({
+          page: currentPage,
+          limit: cardsPerPage,
+        });
         const responseData = res.data?.data;
-        const blogsList = responseData?.data || (Array.isArray(responseData) ? responseData : []);
+        const blogsList =
+          responseData?.data ||
+          (Array.isArray(responseData) ? responseData : []);
         const meta = responseData?.meta || res.data?.meta;
 
         let computedTotalPages = 1;
@@ -69,190 +150,16 @@ const BlogSection = () => {
     fetchBlogs();
   }, [currentPage, startLoading, stopLoading]);
 
-  const currentBlogs = pastWebinars.length > cardsPerPage
-    ? pastWebinars.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage)
-    : pastWebinars;
+  const currentBlogs =
+    pastWebinars.length > cardsPerPage
+      ? pastWebinars.slice(
+          (currentPage - 1) * cardsPerPage,
+          currentPage * cardsPerPage,
+        )
+      : pastWebinars;
 
   return (
     <Box sx={{ mb: { lg: 10, xs: 6 } }}>
-      {/* Upcoming section */}
-      {/* <Box sx={{ backgroundColor: "#ECF8F8", py: { lg: 8, xs: 4 } }}>
-        <Container maxWidth="lg">
-          <Typography
-            component={motion.h2}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            sx={{
-              fontSize: { lg: 36, md: 30, xs: 24 },
-              fontWeight: 700,
-              color: COLORS.PRIMARY_BLUE,
-              mb: { lg: 4, xs: 3 },
-            }}
-          >
-            {blogSection?.upcomingTitle || "Upcoming"}
-          </Typography>
-          <Grid container spacing={4}>
-            {upcomingWebinars.map((webinar, index) => (
-              <Grid key={webinar.id} size={{ lg: 6, xs: 12 }}>
-                <Box
-                  component={motion.div}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  sx={{ height: "100%" }}
-                >
-                  <Link
-                    href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.id}`}
-                    style={{
-                      textDecoration: "none",
-                      color: "inherit",
-                      display: "flex",
-                      height: "100%",
-                    }}
-                  >
-                    <Card
-                      sx={{
-                        borderRadius: 4,
-                        boxShadow: "0 10px 30px rgba(13, 95, 110, 0.05)",
-                        overflow: "hidden",
-                        height: "100%",
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        cursor: "pointer",
-                        transition: "all 0.3s ease",
-                        "&:hover": {
-                          transform: "translateY(-8px)",
-                          boxShadow: "0 20px 40px rgba(13, 95, 110, 0.1)",
-                          "& .view-more": {
-                            backgroundColor: COLORS.PRIMARY_GREEN,
-                          },
-                        },
-                      }}
-                    >
-                      <Box
-                        sx={{
-                          backgroundColor: webinar.bg,
-                          display: "flex",
-                          flexDirection: { xs: "column", sm: "row" },
-                          alignItems: "stretch",
-                          height: { sm: 240, xs: "auto" },
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            flex: 1,
-                            p: { lg: 4, xs: 3 },
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                          }}
-                        >
-                          <Typography
-                            sx={{
-                              fontSize: 14,
-                              fontWeight: 700,
-                              color: COLORS.PRIMARY_BLUE,
-                              textTransform: "uppercase",
-                              mb: 1,
-                              opacity: 0.7,
-                            }}
-                          >
-                            {webinar.tag}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: { lg: 24, xs: 20 },
-                              fontWeight: 700,
-                              color: COLORS.PRIMARY_BLUE,
-                              lineHeight: 1.2,
-                              mb: 2,
-                            }}
-                          >
-                            {webinar.title}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: 16,
-                              color: "rgba(13, 95, 110, 0.6)",
-                              fontWeight: 500,
-                            }}
-                          >
-                            {webinar.date}
-                          </Typography>
-                        </Box>
-                        <CardMedia
-                          component="img"
-                          image={webinar.img?.src || ""}
-                          alt={webinar.title}
-                          sx={{
-                            width: { lg: 220, md: 200, xs: "100%" },
-                            height: "100%",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </Box>
-                      <CardContent
-                        sx={{
-                          flex: 1,
-                          p: 4,
-                          display: "flex",
-                          flexDirection: "column",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontSize: 20,
-                            fontWeight: 600,
-                            color: COLORS.PRIMARY_BLUE,
-                            mb: 1.5,
-                          }}
-                        >
-                          {webinar.subtitle}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: 16,
-                            color: "rgba(0, 0, 0, 0.7)",
-                            lineHeight: 1.6,
-                            mb: 4,
-                            flex: 1,
-                          }}
-                        >
-                          {webinar.description}
-                        </Typography>
-                        <Box sx={{ mt: "auto" }}>
-                          <Typography
-                            className="view-more"
-                            sx={{
-                              display: "inline-flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              px: 4,
-                              py: 1.5,
-                              borderRadius: "999px",
-                              backgroundColor: COLORS.PRIMARY_BLUE,
-                              color: COLORS.WHITE,
-                              fontSize: 15,
-                              fontWeight: 700,
-                              transition: "all 0.3s ease",
-                            }}
-                          >
-                            VIEW DETAILS
-                          </Typography>
-                        </Box>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                </Box>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box> */}
-
       {/* Watch Past Webinars */}
       <Container maxWidth="lg" sx={{ mt: { lg: 12, xs: 8 } }}>
         <Typography
@@ -282,7 +189,12 @@ const BlogSection = () => {
                 sx={{ height: "100%" }}
               >
                 <Link
-                  href={pathname?.includes("/pages") || pathname?.includes("/manage-") ? "/pages/blogs" : `/blogs/${webinar.id}`}
+                  href={
+                    pathname?.includes("/pages") ||
+                    pathname?.includes("/manage-")
+                      ? "/pages/blogs"
+                      : `/blogs/${webinar.id}${currentPage > 1 ? `?page=${currentPage}` : ""}`
+                  }
                   style={{
                     textDecoration: "none",
                     color: "inherit",
@@ -309,11 +221,19 @@ const BlogSection = () => {
                       },
                     }}
                   >
-                    <Box sx={{ overflow: "hidden", height: 240, backgroundColor: "#0D5F6E" }}>
+                    <Box
+                      sx={{
+                        overflow: "hidden",
+                        height: 240,
+                        backgroundColor: "#0D5F6E",
+                      }}
+                    >
                       {webinar.cardImageDownloadUrl || webinar.cardImageUrl ? (
                         <CardMedia
                           component="img"
-                          image={webinar.cardImageDownloadUrl || webinar.cardImageUrl}
+                          image={
+                            webinar.cardImageDownloadUrl || webinar.cardImageUrl
+                          }
                           alt={webinar.title}
                           sx={{
                             height: "100%",
@@ -323,8 +243,22 @@ const BlogSection = () => {
                           }}
                         />
                       ) : (
-                        <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <Typography color="white" fontWeight={700} fontSize={32}>{webinar.title?.charAt(0) || "B"}</Typography>
+                        <Box
+                          sx={{
+                            width: "100%",
+                            height: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Typography
+                            color="white"
+                            fontWeight={700}
+                            fontSize={32}
+                          >
+                            {webinar.title?.charAt(0) || "B"}
+                          </Typography>
                         </Box>
                       )}
                     </Box>
@@ -345,7 +279,7 @@ const BlogSection = () => {
                           color: "rgba(13, 95, 110, 0.6)",
                           fontSize: 13,
                           fontWeight: 700,
-                          textTransform: 'uppercase'
+                          textTransform: "uppercase",
                         }}
                       >
                         <Typography
@@ -407,15 +341,9 @@ const BlogSection = () => {
           sx={{ mt: { lg: 10, xs: 6 } }}
         >
           <Typography
-            onClick={() =>
-              currentPage > 1 &&
-              setCurrentPage(currentPage - 1)
-            }
+            onClick={() => handlePageChange(currentPage - 1)}
             sx={{
-              cursor:
-                currentPage === 1
-                  ? "not-allowed"
-                  : "pointer",
+              cursor: currentPage === 1 ? "not-allowed" : "pointer",
               fontWeight: 700,
               fontSize: 14,
               color: COLORS.PRIMARY_BLUE,
@@ -432,7 +360,7 @@ const BlogSection = () => {
             {Array.from({ length: totalPages }).map((_, index) => (
               <Box
                 key={index}
-                onClick={() => setCurrentPage(index + 1)}
+                onClick={() => handlePageChange(index + 1)}
                 sx={{
                   width: 40,
                   height: 40,
@@ -442,9 +370,7 @@ const BlogSection = () => {
                       ? COLORS.PRIMARY_BLUE
                       : "transparent",
                   color:
-                    currentPage === index + 1
-                      ? "white"
-                      : COLORS.PRIMARY_BLUE,
+                    currentPage === index + 1 ? "white" : COLORS.PRIMARY_BLUE,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -468,15 +394,9 @@ const BlogSection = () => {
           </Stack>
 
           <Typography
-            onClick={() =>
-              currentPage < totalPages &&
-              setCurrentPage(currentPage + 1)
-            }
+            onClick={() => handlePageChange(currentPage + 1)}
             sx={{
-              cursor:
-                currentPage === totalPages
-                  ? "not-allowed"
-                  : "pointer",
+              cursor: currentPage === totalPages ? "not-allowed" : "pointer",
               fontWeight: 700,
               fontSize: 14,
               color: COLORS.PRIMARY_BLUE,
@@ -535,8 +455,7 @@ const BlogSection = () => {
               lineHeight: 1.2,
             }}
           >
-            {blogSection?.ctaTitle ||
-              "Ready to Safeguard Your Innovation?"}
+            {blogSection?.ctaTitle || "Ready to Safeguard Your Innovation?"}
           </Typography>
 
           <Typography
@@ -553,7 +472,7 @@ const BlogSection = () => {
               "At Slater Matsil, our patent professionals provide strategic guidance to protect your intellectual property and support your long-term growth."}
           </Typography>
 
-          <Link href="/contact" style={{ textDecoration: 'none' }}>
+          <Link href="/contact" style={{ textDecoration: "none" }}>
             <Box
               sx={{
                 display: "inline-flex",
@@ -579,8 +498,7 @@ const BlogSection = () => {
                 },
               }}
             >
-              {blogSection?.ctaButtonText ||
-                "SCHEDULE A CONSULTATION"}
+              {blogSection?.ctaButtonText || "SCHEDULE A CONSULTATION"}
             </Box>
           </Link>
         </Box>

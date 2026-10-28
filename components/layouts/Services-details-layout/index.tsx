@@ -16,7 +16,11 @@ const ServicesDetailsLayout = () => {
   const pathname = usePathname();
 
   useEffect(() => {
-    const isAdminRoute = pathname.startsWith('/admin') || pathname.startsWith('/dashboard') || pathname.startsWith('/pages') || pathname.startsWith('/manage-');
+    const isAdminRoute =
+      pathname.startsWith("/admin") ||
+      pathname.startsWith("/dashboard") ||
+      pathname.startsWith("/pages") ||
+      pathname.startsWith("/manage-");
     if (isAdminRoute) return;
 
     let isMounted = true;
@@ -26,14 +30,19 @@ const ServicesDetailsLayout = () => {
         const res = await PageControllers.getPublicPageById(3);
         const pageData = res.data?.data?.data || res.data?.data;
         if (pageData && isMounted) {
-          const { newServicesPage, newServiceArea } = mapBackendToServicesPageState(pageData, WEBSITE_DATA.servicesPage, WEBSITE_DATA.homepage.service_area);
+          const { newServicesPage, newServiceArea } =
+            mapBackendToServicesPageState(
+              pageData,
+              WEBSITE_DATA.servicesPage,
+              WEBSITE_DATA.homepage.service_area,
+            );
           const mergedWebsiteData = {
             ...WEBSITE_DATA,
             servicesPage: newServicesPage,
             homepage: {
               ...WEBSITE_DATA.homepage,
-              service_area: newServiceArea
-            }
+              service_area: newServiceArea,
+            },
           };
           setDetails(mergedWebsiteData as any);
         }
@@ -43,14 +52,14 @@ const ServicesDetailsLayout = () => {
         stopLoading();
       }
     };
-    
+
     fetchServicesData();
 
     return () => {
       if (isMounted) {
         stopLoading();
       }
-      isMounted = false; 
+      isMounted = false;
     };
   }, [setDetails, startLoading, stopLoading, pathname]);
 

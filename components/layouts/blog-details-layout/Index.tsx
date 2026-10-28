@@ -1,7 +1,7 @@
 "use client";
 
 import { Box } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useParams, notFound } from "next/navigation";
 import { BLOG_DETAIL_PROPS } from "@/utils/types";
 import { BlogControllers } from "@/api/blogControllers";
@@ -79,7 +79,9 @@ const BlogDetailsLayout = () => {
       transition={{ duration: 0.6 }}
       sx={{ bgcolor: "white", minHeight: "100vh" }}
     >
-      <BlogDetailsHeroSection data={data} />
+      <Suspense fallback={null}>
+        <BlogDetailsHeroSection data={data} />
+      </Suspense>
       <BlogDetailsContentSection data={data} />
     </Box>
   );

@@ -7,7 +7,9 @@ import Image from "next/image";
 import { getUpdatedDetails } from "@/utils/storeUpdater";
 const PracticeGroupsHeroSection = ({ apiData }: { apiData?: any }) => {
   const { details: storeDetails } = usePageData();
-  const details = apiData ? getUpdatedDetails("practiceGroups", apiData) : storeDetails;
+  const details = apiData
+    ? getUpdatedDetails("practiceGroups", apiData)
+    : storeDetails;
 
   const data = details?.practiceGroupPage?.practiceGroup_hero_section;
   return (
@@ -66,26 +68,25 @@ const PracticeGroupsHeroSection = ({ apiData }: { apiData?: any }) => {
             </Grid>
           </Grid>
 
-            <Grid container sx={{ mt: { lg: 0, xs: 3 } }}>
-  <Grid size={{ lg: 12, xs: 12 }}>
-    {(data?.imageDownloadUrl || data?.imageUrl) && (
-      <Image
-        src={data?.imageDownloadUrl || data?.imageUrl || ""}
-        alt="hero"
-        width={1200}
-        height={600}
-        
-        style={{
-          width: "100%",
-          height: "auto",
-          objectFit: "cover",
-          borderRadius: "20px",
-        }}
-        priority
-      />
-    )}
-  </Grid>
-</Grid>
+          <Grid container sx={{ mt: { lg: 0, xs: 3 } }}>
+            <Grid size={{ lg: 12, xs: 12 }}>
+              {(data?.imageDownloadUrl || data?.imageUrl) && (
+                <Image
+                  src={data?.imageDownloadUrl || data?.imageUrl || ""}
+                  alt="hero"
+                  width={1200}
+                  height={600}
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "cover",
+                    borderRadius: "20px",
+                  }}
+                  priority
+                />
+              )}
+            </Grid>
+          </Grid>
           {/* <Grid container spacing={2} sx={{ mt: { lg: 0, xs: 3 } }}>
             <Grid size={{ lg: 7, xs: 12 }}>
               {data?.firstHeroImage && (
