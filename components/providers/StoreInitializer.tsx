@@ -109,8 +109,13 @@ export default function StoreInitializer({
   const initialized = useRef(false);
 
   if (!initialized.current) {
-    if (typeof window === "undefined") {
-      usePageData.setState({ details: getUpdatedDetails(pageType, apiData) });
+    if (apiData) {
+      if (typeof window === "undefined") {
+        usePageData.setState({ details: getUpdatedDetails(pageType, apiData) });
+      } else {
+        const state = usePageData.getState();
+        state.details = getUpdatedDetails(pageType, apiData);
+      }
     }
     initialized.current = true;
   }

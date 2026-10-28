@@ -12,14 +12,15 @@ export const metadata: Metadata = {
 
 async function getHomeData() {
   try {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
     const [res1, res3] = await Promise.all([
-      fetch("http://3.92.74.11/api/pages/1", { cache: "no-store" }).catch(() => null),
-      fetch("http://3.92.74.11/api/pages/3", { cache: "no-store" }).catch(() => null)
+      fetch(`${backendUrl}/api/pages/1`, { cache: "no-store" }).catch(() => null),
+      fetch(`${backendUrl}/api/pages/3`, { cache: "no-store" }).catch(() => null)
     ]);
-    
+
     const data1 = res1 ? await res1.json().catch(() => null) : null;
     const data3 = res3 ? await res3.json().catch(() => null) : null;
-    
+
     return { data1: data1?.data?.data || data1?.data, data3: data3?.data?.data || data3?.data };
   } catch (error) {
     return { data1: null, data3: null };

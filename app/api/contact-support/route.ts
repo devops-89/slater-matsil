@@ -3,8 +3,9 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const payload = await req.json();
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-    const response = await fetch("http://3.92.74.11/api/contact-support/add", {
+    const response = await fetch(`${backendUrl}/api/contact-support/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

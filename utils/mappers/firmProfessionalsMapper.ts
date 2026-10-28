@@ -1,4 +1,5 @@
 import { getValidImageUrl } from "./commonMapper";
+import { generateProfessionalSlug } from "@/utils/generateSlug";
 export const mapBackendToFirmProfessionalsState = (backendData: any, currentState: any) => {
   const newState = { 
     ...currentState,
@@ -37,6 +38,39 @@ export const mapFirmProfessionalsStateToBackend = (state: any) => {
   ];
 };
 
+export const formatProfessionalDisplayName = (user: {
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+  qualification?: string;
+  fullName?: string;
+  name?: string;
+  professionalProfiles?: any[];
+}) => {
+  if (!user) return "";
+
+  const firstName = (user.firstName || "").trim();
+  const middleName = (user.middleName || user.professionalProfiles?.[0]?.middleName || "").trim();
+  const lastName = (user.lastName || "").trim();
+  const qualification = (user.qualification || user.professionalProfiles?.[0]?.qualification || "").replace(/^,\s*/, "").trim();
+
+  // If separate name parts are available
+  if (firstName || lastName) {
+    const namePart = [firstName, middleName, lastName].filter(Boolean).join(" ");
+    return qualification ? `${namePart}, ${qualification}` : namePart;
+  }
+
+  // Fallback to fullName or name
+  let rawName = (user.fullName || user.name || "").trim();
+  if (!rawName) return "";
+
+  // If rawName doesn't already include the qualification, append it
+  if (qualification && !rawName.toLowerCase().includes(qualification.toLowerCase())) {
+    return `${rawName}, ${qualification}`;
+  }
+  return rawName;
+};
+
 export const mapApiUserProfessionalToDetailsProps = (user: any) => {
   const profile = user.professionalProfiles?.[0] || {};
   const sections = profile.sections || [];
@@ -72,21 +106,24 @@ export const mapApiUserProfessionalToDetailsProps = (user: any) => {
     return result;
   };
 
-  const nameParts = (user.fullName || "").split(",")[0].trim().split(/\s+/);
+  const displayName = formatProfessionalDisplayName(user);
+  const nameParts = (user.fullName || displayName || "").split(",")[0].trim().split(/\s+/);
   const derivedFirstName = user.firstName || nameParts[0] || "";
-  const derivedLastName = user.lastName || nameParts.slice(1).join(" ") || "";
+  const derivedLastName = user.lastName || (nameParts.length > 1 ? nameParts[nameParts.length - 1] : "");
 
   return {
     id: user.id,
-    slug: user.slug,
+    slug: generateProfessionalSlug(user),
+    firstName: derivedFirstName,
+    lastName: derivedLastName,
     professionals_Details_HeroSection: {
       img: getValidImageUrl(user.profileImageDownloadUrl || user.profileImageUrl || user.imageDownloadUrl || user.imageUrl || ""),
-      name: user.fullName || "",
+      name: displayName,
       email: user.email || "",
       phoneNumber: user.phoneNumber || "",
       vCardData: {
-        name: user.fullName || "",
-        formattedName: user.fullName || "",
+        name: displayName,
+        formattedName: displayName,
         electronicMail: user.email || "",
         telephoneNumber: user.phoneNumber || "",
         organization: "Slater Matsil",

@@ -1,16 +1,19 @@
 "use client";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLoading } from "@/components/providers/LoadingProvider";
 import { useProfessionalDetailsData } from "@/store/useProfessionalDetails";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
-import { generateSlug } from "@/utils/generateSlug";
+import { generateSlug, generateProfessionalSlug } from "@/utils/generateSlug";
+import { ProfessionalControllers } from "@/api/professionalControllers";
+import { mapApiUserProfessionalToDetailsProps } from "@/utils/mappers/firmProfessionalsMapper";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack, Typography, CircularProgress } from "@mui/material";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { useParams } from "next/navigation";
 import ProfessionalsDetailsHeroSection from "./Professionals-details-Herosection";
 import TabSection from "./Tab-Section";
+
 interface ProfessionalDetailsLayoutProps {
   initialRawData?: any;
 }
@@ -23,178 +26,199 @@ const ProfessionalDetailsLayout = ({
   const { startLoading, stopLoading } = useLoading();
   const params = useParams();
   const slugOrId = (params?.slug as string) || (params?.id as string) || "";
-  const [sortedProfessionals, setSortedProfessionals] = React.useState<any[]>(
-    [],
-  );
+  const [sortedProfessionals, setSortedProfessionals] = useState<any[]>([]);
 
-  // Use initialRawData if provided, otherwise null
-  const [professional, setProfessional] = React.useState<any>(null);
-
-  const decodedSlug = React.useMemo(() => {
+  const decodedSlug = useMemo(() => {
     return typeof slugOrId === "string"
       ? decodeURIComponent(slugOrId).toLowerCase().trim()
       : "";
   }, [slugOrId]);
 
+  const initialMapped = useMemo(() => {
+    if (initialRawData && (initialRawData.id || initialRawData.fullName)) {
+      return mapApiUserProfessionalToDetailsProps(initialRawData);
+    }
+    return null;
+  }, [initialRawData]);
+
+  const [professional, setProfessional] = useState<any>(initialMapped);
+
+  // Sync initial SSR data immediately into store
   useEffect(() => {
-    import("@/api/professionalControllers").then(
-      ({ ProfessionalControllers }) => {
-        import("@/utils/mappers/firmProfessionalsMapper").then(
-          ({ mapApiUserProfessionalToDetailsProps }) => {
-            // If we already have the professional from SSR, map it immediately
-            let idFetched = false;
-            if (
-              initialRawData &&
-              (initialRawData.id || initialRawData.fullName)
-            ) {
-              setProfessional(
-                mapApiUserProfessionalToDetailsProps(initialRawData),
-              );
-              idFetched = true;
-            }
+    if (initialMapped) {
+      setProfessional(initialMapped);
+      setProfessionalDetailsData(initialMapped);
+      if (!initialMapped.professionals_Details_HeroSection?.img) {
+        stopLoading();
+      }
+    }
+  }, [initialMapped, setProfessionalDetailsData, stopLoading]);
 
-            if (!idFetched) {
-              startLoading(); // Only show loader if we didn't get SSR data
-            }
+  useEffect(() => {
+    let isMounted = true;
+    let idFetched = Boolean(initialMapped?.id);
 
-            const isNumericId =
-              !isNaN(Number(decodedSlug)) && decodedSlug.trim() !== "";
+    if (!idFetched) {
+      startLoading();
+    }
 
-            // 1. If we have a numeric ID in the URL and no SSR data, fetch it immediately!
-            if (isNumericId && !idFetched) {
-              ProfessionalControllers.getProfessionalById(Number(decodedSlug))
-                .then((res: any) => {
-                  let userObj = res.data;
-                  while (
-                    userObj &&
-                    userObj.data &&
-                    !userObj.id &&
-                    !userObj.fullName
-                  ) {
-                    userObj = userObj.data;
-                  }
-                  if (
-                    userObj &&
-                    userObj.user &&
-                    !userObj.id &&
-                    !userObj.fullName
-                  ) {
-                    userObj = userObj.user;
-                  }
-                  if (userObj && (userObj.id || userObj.fullName)) {
-                    setProfessional(
-                      mapApiUserProfessionalToDetailsProps(userObj),
-                    );
-                    idFetched = true;
-                  }
-                })
-                .catch((err: any) =>
-                  console.error("Failed to fetch professional by ID", err),
-                );
-            }
+    const isNumericId =
+      !isNaN(Number(decodedSlug)) && decodedSlug.trim() !== "";
 
-            // 2. Fetch all for Next/Prev functionality & slug resolution
-            ProfessionalControllers.getAllProfessionalProfiles(1, 1000)
-              .then((res: any) => {
-                let users = res.data?.data?.users || [];
-                if (!users.length && res.data?.data?.data?.users) {
-                  users = res.data.data.data.users;
-                }
-                processUsers(users);
-              })
-              .catch((err) => {
-                console.error("Failed to fetch professional profiles", err);
-                processUsers([]);
-              });
+    // 1. If numeric ID and no SSR data, fetch directly by ID
+    if (isNumericId && !idFetched) {
+      ProfessionalControllers.getProfessionalById(Number(decodedSlug))
+        .then((res: any) => {
+          if (!isMounted) return;
+          let userObj = res.data;
+          while (userObj && userObj.data && !userObj.id && !userObj.fullName) {
+            userObj = userObj.data;
+          }
+          if (userObj && userObj.user && !userObj.id && !userObj.fullName) {
+            userObj = userObj.user;
+          }
+          if (userObj && (userObj.id || userObj.fullName)) {
+            const mapped = mapApiUserProfessionalToDetailsProps(userObj);
+            setProfessional(mapped);
+            setProfessionalDetailsData(mapped);
+            idFetched = true;
+          }
+        })
+        .catch((err: any) =>
+          console.error("Failed to fetch professional by ID", err),
+        )
+        .finally(() => {
+          if (!idFetched && isMounted) stopLoading();
+        });
+    }
 
-            function processUsers(users: any[]) {
-              const mappedUsers = users.map((apiItem: any) =>
-                mapApiUserProfessionalToDetailsProps(apiItem),
-              );
+    // 2. Fetch all for Next/Prev navigation & slug resolution
+    ProfessionalControllers.getAllProfessionalProfiles(1, 1000)
+      .then((res: any) => {
+        if (!isMounted) return;
+        let users = res.data?.data?.users || [];
+        if (!users.length && res.data?.data?.data?.users) {
+          users = res.data.data.data.users;
+        }
 
-              const getLastName = (fullName: string) => {
-                if (!fullName) return "";
-                const cleanName = fullName.split(",")[0].trim();
-                const parts = cleanName.split(/\s+/);
-                return parts[parts.length - 1].toLowerCase();
-              };
-
-              const sorted = mappedUsers.sort((a: any, b: any) => {
-                const nameA = a.professionals_Details_HeroSection?.name || "";
-                const nameB = b.professionals_Details_HeroSection?.name || "";
-                const lastNameComparison = getLastName(nameA).localeCompare(
-                  getLastName(nameB),
-                );
-                if (lastNameComparison !== 0) {
-                  return lastNameComparison;
-                }
-                return nameA.localeCompare(nameB);
-              });
-              setSortedProfessionals(sorted);
-
-              // If we didn't already fetch the user via SSR/ID, match by slug or ID
-              if (!idFetched) {
-                const currentProf = sorted.find((item: any) => {
-                  const itemSlug = generateSlug(
-                    item.professionals_Details_HeroSection?.name || "",
-                  );
-                  return (
-                    (item.id && item.id.toString() === decodedSlug) ||
-                    itemSlug === decodedSlug
-                  );
-                });
-
-                if (currentProf?.id) {
-                  ProfessionalControllers.getProfessionalById(Number(currentProf.id))
-                    .then((res: any) => {
-                      let userObj = res.data;
-                      while (
-                        userObj &&
-                        userObj.data &&
-                        !userObj.id &&
-                        !userObj.fullName
-                      ) {
-                        userObj = userObj.data;
-                      }
-                      if (
-                        userObj &&
-                        userObj.user &&
-                        !userObj.id &&
-                        !userObj.fullName
-                      ) {
-                        userObj = userObj.user;
-                      }
-                      if (userObj && (userObj.id || userObj.fullName)) {
-                        setProfessional(
-                          mapApiUserProfessionalToDetailsProps(userObj),
-                        );
-                      } else {
-                        setProfessional(currentProf);
-                      }
-                    })
-                    .catch(() => {
-                      setProfessional(currentProf);
-                    });
-                } else {
-                  setProfessional(null);
-                }
-              }
-            }
-          },
+        const mappedUsers = users.map((apiItem: any) =>
+          mapApiUserProfessionalToDetailsProps(apiItem),
         );
-      },
-    );
-  }, [decodedSlug, startLoading]);
+
+        const getLastName = (fullName: string) => {
+          if (!fullName) return "";
+          const cleanName = fullName.split(",")[0].trim();
+          const parts = cleanName.split(/\s+/);
+          return parts[parts.length - 1].toLowerCase();
+        };
+
+        const sorted = mappedUsers.sort((a: any, b: any) => {
+          const nameA = a.professionals_Details_HeroSection?.name || "";
+          const nameB = b.professionals_Details_HeroSection?.name || "";
+          const lastNameComparison = getLastName(nameA).localeCompare(
+            getLastName(nameB),
+          );
+          if (lastNameComparison !== 0) {
+            return lastNameComparison;
+          }
+          return nameA.localeCompare(nameB);
+        });
+
+        setSortedProfessionals(sorted);
+
+        // If we didn't already have SSR data, match by slug or ID
+        if (!idFetched) {
+          const currentProf = sorted.find((item: any) => {
+            const profSlug = generateProfessionalSlug(
+              item.professionals_Details_HeroSection?.vCardData || item,
+            );
+            const itemSlug = generateSlug(
+              item.professionals_Details_HeroSection?.name || "",
+            );
+            return (
+              (item.id && item.id.toString() === decodedSlug) ||
+              profSlug === decodedSlug ||
+              itemSlug === decodedSlug ||
+              item.slug === decodedSlug
+            );
+          });
+
+          if (currentProf?.id) {
+            ProfessionalControllers.getProfessionalById(Number(currentProf.id))
+              .then((res: any) => {
+                if (!isMounted) return;
+                let userObj = res.data;
+                while (
+                  userObj &&
+                  userObj.data &&
+                  !userObj.id &&
+                  !userObj.fullName
+                ) {
+                  userObj = userObj.data;
+                }
+                if (
+                  userObj &&
+                  userObj.user &&
+                  !userObj.id &&
+                  !userObj.fullName
+                ) {
+                  userObj = userObj.user;
+                }
+                if (userObj && (userObj.id || userObj.fullName)) {
+                  const mapped = mapApiUserProfessionalToDetailsProps(userObj);
+                  setProfessional(mapped);
+                  setProfessionalDetailsData(mapped);
+                } else {
+                  setProfessional(currentProf);
+                  setProfessionalDetailsData(currentProf);
+                }
+              })
+              .catch(() => {
+                if (!isMounted) return;
+                setProfessional(currentProf);
+                setProfessionalDetailsData(currentProf);
+              })
+              .finally(() => {
+                if (isMounted) stopLoading();
+              });
+          } else {
+            if (isMounted) stopLoading();
+          }
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch professional profiles", err);
+        if (isMounted) stopLoading();
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [decodedSlug, initialMapped, setProfessionalDetailsData, startLoading, stopLoading]);
+
+  // Clean up store on unmount
+  useEffect(() => {
+    return () => {
+      clearProfessionalDetailsData();
+      stopLoading();
+    };
+  }, [clearProfessionalDetailsData, stopLoading]);
 
   const currentIndex = sortedProfessionals.findIndex((item) => {
+    const profSlug = generateProfessionalSlug(
+      item.professionals_Details_HeroSection?.vCardData || item,
+    );
     const itemSlug = generateSlug(
       item.professionals_Details_HeroSection?.name || "",
     );
     return (
       (item.id && item.id.toString() === decodedSlug) ||
-      itemSlug === decodedSlug
+      profSlug === decodedSlug ||
+      itemSlug === decodedSlug ||
+      item.slug === decodedSlug
     );
   });
+
   const prevProfessional =
     currentIndex > 0 ? sortedProfessionals[currentIndex - 1] : null;
   const nextProfessional =
@@ -202,36 +226,13 @@ const ProfessionalDetailsLayout = ({
       ? sortedProfessionals[currentIndex + 1]
       : null;
 
-  useEffect(() => {
-    if (professional) {
-      setProfessionalDetailsData(professional);
-      // Wait for image load event below, or stop if no image
-      if (!professional.professionals_Details_HeroSection?.img) {
-        stopLoading();
-      }
-    }
-  }, [professional, setProfessionalDetailsData, stopLoading]);
-
-  useEffect(() => {
-    return () => {
-      clearProfessionalDetailsData();
-      stopLoading(); // safety
-    };
-  }, [clearProfessionalDetailsData, stopLoading]);
-
   const handleImageLoad = () => {
     stopLoading();
   };
 
-  // Prevent rendering details hero and tabs until data is properly loaded in store
-  const dataSlug = generateSlug(
-    data?.professionals_Details_HeroSection?.name || "",
-  );
-  const isMatch =
-    data &&
-    (data.id?.toString() === decodedSlug || dataSlug === decodedSlug);
+  const activeData = data?.professionals_Details_HeroSection ? data : professional;
 
-  if (!isMatch) {
+  if (!activeData?.professionals_Details_HeroSection) {
     return (
       <Box
         sx={{
@@ -240,48 +241,44 @@ const ProfessionalDetailsLayout = ({
           alignItems: "center",
           justifyContent: "center",
         }}
-      />
+      >
+        <CircularProgress sx={{ color: COLORS.PRIMARY_GREEN }} />
+      </Box>
     );
   }
 
   return (
     <Box>
-      {data?.professionals_Details_HeroSection && (
-        <ProfessionalsDetailsHeroSection
-          {...data?.professionals_Details_HeroSection}
-          onImageLoad={handleImageLoad}
-        />
-      )}
+      <ProfessionalsDetailsHeroSection
+        {...activeData.professionals_Details_HeroSection}
+        onImageLoad={handleImageLoad}
+      />
       <TabSection />
 
-      {/* Prev / Next Navigation */}
-      <Box sx={{ borderTop: `1px solid rgba(0,0,0,0.08)`, mt: 4 }}>
-        <Container maxWidth="lg">
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            alignItems="center"
-            sx={{ py: 3 }}
-          >
-            {/* Previous */}
-            {prevProfessional ? (
+      {/* Navigation Buttons */}
+      <Container maxWidth="lg" sx={{ mt: 10, mb: 6 }}>
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{
+            py: 4,
+            borderTop: `1px solid ${COLORS.PRIMARY_BLUE}20`,
+            borderBottom: `1px solid ${COLORS.PRIMARY_BLUE}20`,
+          }}
+        >
+          {/* Previous */}
+          <Box sx={{ minWidth: "200px" }}>
+            {prevProfessional && (
               <Link
-                href={`/professionals/${generateSlug(
-                  prevProfessional.professionals_Details_HeroSection?.name ||
+                href={`/professionals/${generateProfessionalSlug(
+                  prevProfessional.professionals_Details_HeroSection?.vCardData ||
+                    prevProfessional.professionals_Details_HeroSection?.name ||
                     prevProfessional.id,
                 )}`}
                 style={{ textDecoration: "none" }}
               >
-                <Stack
-                  direction="row"
-                  alignItems="center"
-                  spacing={1.5}
-                  sx={{
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    "&:hover .nav-arrow": { transform: "translateX(-4px)" },
-                  }}
-                >
+                <Stack direction="row" alignItems="center" spacing={1.5}>
                   <Box
                     className="nav-arrow"
                     sx={{
@@ -317,6 +314,8 @@ const ProfessionalDetailsLayout = ({
                         fontWeight: 700,
                         color: COLORS.PRIMARY_BLUE,
                         fontFamily: tradeGothic.style.fontFamily,
+                        "&:hover": { color: COLORS.PRIMARY_GREEN },
+                        transition: "color 0.2s",
                       }}
                     >
                       {prevProfessional.professionals_Details_HeroSection.name}
@@ -324,15 +323,16 @@ const ProfessionalDetailsLayout = ({
                   </Box>
                 </Stack>
               </Link>
-            ) : (
-              <Box />
             )}
+          </Box>
 
-            {/* Next */}
-            {nextProfessional ? (
+          {/* Next */}
+          <Box sx={{ minWidth: "200px", textAlign: "right" }}>
+            {nextProfessional && (
               <Link
-                href={`/professionals/${generateSlug(
-                  nextProfessional.professionals_Details_HeroSection?.name ||
+                href={`/professionals/${generateProfessionalSlug(
+                  nextProfessional.professionals_Details_HeroSection?.vCardData ||
+                    nextProfessional.professionals_Details_HeroSection?.name ||
                     nextProfessional.id,
                 )}`}
                 style={{ textDecoration: "none" }}
@@ -340,12 +340,8 @@ const ProfessionalDetailsLayout = ({
                 <Stack
                   direction="row"
                   alignItems="center"
+                  justifyContent="flex-end"
                   spacing={1.5}
-                  sx={{
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                    "&:hover .nav-arrow": { transform: "translateX(4px)" },
-                  }}
                 >
                   <Box sx={{ textAlign: "right" }}>
                     <Typography
@@ -365,6 +361,8 @@ const ProfessionalDetailsLayout = ({
                         fontWeight: 700,
                         color: COLORS.PRIMARY_BLUE,
                         fontFamily: tradeGothic.style.fontFamily,
+                        "&:hover": { color: COLORS.PRIMARY_GREEN },
+                        transition: "color 0.2s",
                       }}
                     >
                       {nextProfessional.professionals_Details_HeroSection.name}
@@ -389,12 +387,10 @@ const ProfessionalDetailsLayout = ({
                   </Box>
                 </Stack>
               </Link>
-            ) : (
-              <Box />
             )}
-          </Stack>
-        </Container>
-      </Box>
+          </Box>
+        </Stack>
+      </Container>
     </Box>
   );
 };

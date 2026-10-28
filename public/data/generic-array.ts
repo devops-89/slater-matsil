@@ -220,7 +220,7 @@ export const FOOTER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Trusted Advice and Counsel",
-        href: "/services/trusted-advice-counsel",
+        href: "/services/trusted-advice-and-counsel",
       },
       {
         text: "Trademarks",
@@ -302,7 +302,7 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Patent Litigation",
-        href: "/services/patent-litigation",
+        href: "/services/patent-litigation-litigation-support",
       },
       {
         text: "Post Grant Challenges",
@@ -314,7 +314,7 @@ export const HEADER_DATA: FOOTER_LIST_DATA[] = [
       },
       {
         text: "Trusted Advice and Counsel",
-        href: "/services/trusted-advice-counsel",
+        href: "/services/trusted-advice-and-counsel",
       },
       {
         text: "Trademarks",
@@ -1546,7 +1546,7 @@ export const SERVICES_DETAILS = [
     ],
   },
   {
-    slug: "patent-litigation",
+    slug: "patent-litigation-litigation-support",
     title: "PATENT LITIGATION/LITIGATION SUPPORT",
     data: [
       {
@@ -1659,7 +1659,7 @@ export const SERVICES_DETAILS = [
     ],
   },
   {
-    slug: "trusted-advice-counsel",
+    slug: "trusted-advice-and-counsel",
     title: "TRUSTED ADVICE AND COUNSEL",
     data: [
       {

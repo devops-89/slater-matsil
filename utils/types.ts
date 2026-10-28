@@ -257,10 +257,10 @@ export interface SERVICES_AREAS_DATA {
   }[];
 }
 
-interface SERVICES_AREA_PROPS {
+export interface SERVICES_AREA_PROPS {
   sectionTitle: string;
   heading: string;
-  img: StaticImageData;
+  img?: StaticImageData | string;
   section_Data: SERVICES_AREAS_DATA[];
 }
 
@@ -990,7 +990,9 @@ export interface INSIGHT_API_ITEM {
 export interface PROFESSIONAL_FORM_CARD_DATA {
   id?: number;
   firstName?: string;
+  middleName?: string;
   lastName?: string;
+  qualification?: string;
   designation?: string;
   department?: string;
   imageUrl?: string;
@@ -1028,7 +1030,9 @@ export interface PROFESSIONAL_API_ITEM {
   id: number;
   fullName?: string;
   firstName?: string;
+  middleName?: string;
   lastName?: string;
+  qualification?: string;
   name?: string;
   img?: string;
   detailsImg?: string;
@@ -1050,6 +1054,8 @@ export interface PROFESSIONAL_API_ITEM {
     countryRegion?: string;
     imageUrl?: string;
     imageDownloadUrl?: string;
+    middleName?: string;
+    qualification?: string;
     sections?: {
       sectionType?: string;
       description?: string;

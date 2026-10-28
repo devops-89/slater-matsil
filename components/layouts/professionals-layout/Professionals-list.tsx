@@ -3,6 +3,8 @@ import { useLoading } from "@/components/providers/LoadingProvider";
 import { usePageData } from "@/store/usePageData";
 import { COLORS } from "@/utils/enum";
 import { tradeGothic } from "@/utils/fonts";
+import { formatProfessionalDisplayName } from "@/utils/mappers/firmProfessionalsMapper";
+import { generateProfessionalSlug } from "@/utils/generateSlug";
 import {
   Box,
   Container,
@@ -33,9 +35,10 @@ const ProfessionalList = () => {
     }
     if (initial && initial.length > 0) {
       return initial.map((u: any) => ({
-        name: u.fullName,
+        name: formatProfessionalDisplayName(u),
         designation: u.designation,
         id: u.id,
+        slug: generateProfessionalSlug(u),
         img:
           u.profileImageDownloadUrl ||
           u.imageDownloadUrl ||
@@ -107,9 +110,10 @@ const ProfessionalList = () => {
 
         if (users && users.length > 0) {
           const mapped = users.map((u: any) => ({
-            name: u.fullName,
+            name: formatProfessionalDisplayName(u),
             designation: u.designation,
             id: u.id,
+            slug: generateProfessionalSlug(u),
             img:
               u.profileImageDownloadUrl ||
               u.imageDownloadUrl ||
@@ -243,6 +247,7 @@ const ProfessionalList = () => {
                     name={val.name}
                     designation={val.designation}
                     id={val.id}
+                    slug={val.slug}
                     onLoad={handleImageLoad}
                     priority={i < 4}
                     key={val.id}

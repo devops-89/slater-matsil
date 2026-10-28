@@ -18,6 +18,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ServiceAreaCard from "./common/Service-Area-Card";
 import { SERVICES_AREAS_DATA } from "@/utils/types";
+import { generateSlug } from "@/utils/mappers/servicesMapper";
 
 interface ServiceAreasProps {
   data?: SERVICES_AREAS_DATA[];
@@ -29,12 +30,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
   const pathname = usePathname();
   const [showAll, setShowAll] = useState(false);
   
-  const defaultSectionData = [
-    { title: "PATENT PROSECUTION", description: "We are engineers. We are lawyers.", serialNumber: "01", slug: "patent-prosecution" },
-    { title: "POST GRANT CHALLENGES", description: "Our experience in litigation provides us with insight.", serialNumber: "02", slug: "post-grant" },
-    { title: "PATENT LITIGATION", description: "Global economics can complicate the patent journey.", serialNumber: "03", slug: "litigation" }
-  ];
-  let displayData = data || (details?.homepage?.service_area?.section_Data?.length ? details.homepage.service_area.section_Data : defaultSectionData);
+  let displayData = data || details?.homepage?.service_area?.section_Data || [];
 
   if (limit && !showAll) {
     displayData = displayData.slice(0, limit);
@@ -85,7 +81,7 @@ const ServiceAreas = ({ data, limit }: ServiceAreasProps) => {
               suppressHydrationWarning
             >
               <Link
-                href={`/services/${val.slug}`}
+                href={`/services/${val.slug || generateSlug(val.title || "")}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
                 <ServiceAreaCard

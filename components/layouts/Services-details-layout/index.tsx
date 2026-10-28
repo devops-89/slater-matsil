@@ -9,11 +9,25 @@ import { useLoading } from "@/components/providers/LoadingProvider";
 import { WEBSITE_DATA } from "@/public/data/website-data";
 import { mapBackendToServicesPageState } from "@/utils/pageDataMapper";
 import { usePageData } from "@/store/usePageData";
+import { getUpdatedDetails } from "@/utils/storeUpdater";
 
-const ServicesDetailsLayout = () => {
-  const { setDetails } = usePageData();
+interface ServicesDetailsLayoutProps {
+  slug?: string;
+  apiData?: any;
+}
+
+const ServicesDetailsLayout = ({ slug, apiData }: ServicesDetailsLayoutProps) => {
+  const { details, setDetails } = usePageData();
   const { startLoading, stopLoading } = useLoading();
   const pathname = usePathname();
+
+  // If initial apiData was passed from SSR, ensure store is updated
+  useEffect(() => {
+    if (apiData?.data3) {
+      const updated = getUpdatedDetails("services", apiData);
+      setDetails(updated as any);
+    }
+  }, [apiData, setDetails]);
 
   useEffect(() => {
     const isAdminRoute =
@@ -22,6 +36,9 @@ const ServicesDetailsLayout = () => {
       pathname.startsWith("/pages") ||
       pathname.startsWith("/manage-");
     if (isAdminRoute) return;
+
+    // If section_Data is already present, we don't necessarily have to refetch unless missing
+    if (details?.homepage?.service_area?.section_Data?.length) return;
 
     let isMounted = true;
     const fetchServicesData = async () => {
@@ -61,13 +78,13 @@ const ServicesDetailsLayout = () => {
       }
       isMounted = false;
     };
-  }, [setDetails, startLoading, stopLoading, pathname]);
+  }, [details?.homepage?.service_area?.section_Data, setDetails, startLoading, stopLoading, pathname]);
 
   return (
     <div>
-      <ServicesDetailsHeroSection />
-      <QuickLinksDetails />
-      <ServiceAreas />
+      <ServicesDetailsHeroSection apiData={apiData} />
+      <QuickLinksDetails slug={slug} />
+      <ServiceAreas data={details?.homepage?.service_area?.section_Data} />
     </div>
   );
 };

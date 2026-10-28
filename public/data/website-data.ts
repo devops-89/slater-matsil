@@ -120,7 +120,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
     service_area: {
       sectionTitle: "Service Area",
       heading: "A Range Of Practice Areas",
-      img: lightLogo,
+      img: "",
       section_Data: [
         {
           img: serviceAreas1,
@@ -146,8 +146,8 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             "Global economics can complicate the patent journey, but we make the process clear and manageable for our clients.",
           serialNumber: "03",
-          slug: "patent-litigation",
-          detailsData: SERVICES_DETAILS.find(d => d.slug === "patent-litigation")?.data || [],
+          slug: "patent-litigation-litigation-support",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "patent-litigation-litigation-support" || d.slug === "patent-litigation")?.data || [],
         },
         {
           img: serviceAreas4,
@@ -173,8 +173,8 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
           description:
             'Slater Matsil is proud to be known as a "strategic partner," helping our clients reach their intellectual property goals all around the world.',
           serialNumber: "06",
-          slug: "trusted-advice-counsel",
-          detailsData: SERVICES_DETAILS.find(d => d.slug === "trusted-advice-counsel")?.data || [],
+          slug: "trusted-advice-and-counsel",
+          detailsData: SERVICES_DETAILS.find(d => d.slug === "trusted-advice-and-counsel" || d.slug === "trusted-advice-counsel")?.data || [],
         },
         {
           img: serviceAreas7,

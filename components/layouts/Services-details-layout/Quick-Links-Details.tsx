@@ -25,9 +25,14 @@ import QuickLinksCard from "@/components/widgets/common/Quick-Links-Card";
 import { Circle } from "@mui/icons-material";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { SERVICES_DETAILS } from "@/public/data/generic-array";
 import { usePageData } from "@/store/usePageData";
-const QuickLinksDetails = () => {
+import { generateSlug } from "@/utils/mappers/servicesMapper";
+
+interface QuickLinksDetailsProps {
+  slug?: string;
+}
+
+const QuickLinksDetails = ({ slug: propSlug }: QuickLinksDetailsProps) => {
   const QUICk_LINKS_DATA = [
     {
       img: globeOutline,
@@ -71,7 +76,8 @@ const QuickLinksDetails = () => {
     },
   ];
 
-  const { slug } = useParams();
+  const params = useParams();
+  const rawSlug = (propSlug || params?.slug || "") as string;
 
   const [data, setData] = useState<
     SERVICES_DETAILS_DATA_PROPS | null | undefined
@@ -83,19 +89,48 @@ const QuickLinksDetails = () => {
   }>({ prev: null, next: null });
 
   const { details } = usePageData();
-  const serviceAreasData = details?.homepage?.service_area?.section_Data || SERVICES_DETAILS;
+  const serviceAreasData = details?.homepage?.service_area?.section_Data || [];
 
   useEffect(() => {
-    const currentIndex = serviceAreasData.findIndex(
-      (item: any) => item.slug === slug,
-    );
+    if (!serviceAreasData || serviceAreasData.length === 0) return;
+
+    const normalize = (s: string) => {
+      return (s || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[/\\_]+/g, "-")
+        .replace(/[^a-z0-9-]+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+    };
+
+    const targetSlug = rawSlug.trim();
+
+    const currentIndex = serviceAreasData.findIndex((item: any) => {
+      const itemSlug = (item.slug || "").trim();
+      const titleSlug = generateSlug(item.title || "");
+      return (
+        itemSlug === targetSlug ||
+        titleSlug === targetSlug ||
+        normalize(itemSlug) === normalize(targetSlug) ||
+        normalize(titleSlug) === normalize(targetSlug)
+      );
+    });
+
     if (currentIndex !== -1) {
       const serviceAreaItem: any = serviceAreasData[currentIndex];
       
+      const detailsList =
+        serviceAreaItem.detailsData && serviceAreaItem.detailsData.length > 0
+          ? serviceAreaItem.detailsData
+          : serviceAreaItem.description
+          ? [{ description: serviceAreaItem.description }]
+          : [];
+
       setData({
         title: serviceAreaItem.title,
-        data: serviceAreaItem.detailsData || [],
-        slug: serviceAreaItem.slug
+        data: detailsList,
+        slug: serviceAreaItem.slug || generateSlug(serviceAreaItem.title || ""),
       } as any);
 
       const prev: any = currentIndex > 0 ? serviceAreasData[currentIndex - 1] : null;
@@ -105,11 +140,21 @@ const QuickLinksDetails = () => {
           : null;
 
       setNavigation({
-        prev: prev ? { slug: prev.slug, title: prev.title } : null,
-        next: next ? { slug: next.slug, title: next.title } : null,
+        prev: prev
+          ? {
+              slug: prev.slug || generateSlug(prev.title || ""),
+              title: prev.title,
+            }
+          : null,
+        next: next
+          ? {
+              slug: next.slug || generateSlug(next.title || ""),
+              title: next.title,
+            }
+          : null,
       });
     }
-  }, [slug, serviceAreasData]);
+  }, [rawSlug, serviceAreasData]);
 
   return (
     <Box sx={{ py: 5 }}>

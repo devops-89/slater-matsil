@@ -5,7 +5,7 @@ import { adelle } from "@/utils/fonts";
 import { Logout, Menu, AdminPanelSettings, ManageAccounts } from "@mui/icons-material";
 import { Box, Typography, IconButton, Avatar, Menu as MuiMenu, MenuItem, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AuthControllers } from "@/api/authControllers";
 import { useNotification } from "@/components/providers/NotificationProvider";
 import { usePermissions } from "@/hooks/usePermissions";
@@ -18,6 +18,7 @@ interface HeaderProps {
 export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderProps) {
   const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const { showNotification } = useNotification();
   const { isSuperAdmin } = usePermissions();
   const [storedName, setStoredName] = useState("");
@@ -35,7 +36,12 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
     
     // Listen for hydration updates
     window.addEventListener("userNameUpdated", updateName);
-    return () => window.removeEventListener("userNameUpdated", updateName);
+    return () => {
+      window.removeEventListener("userNameUpdated", updateName);
+      if (closeTimeoutRef.current) {
+        clearTimeout(closeTimeoutRef.current);
+      }
+    };
   }, []);
 
   const displayName = isSuperAdmin ? "Admin" : (storedName || "User");
@@ -63,12 +69,27 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
   };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    if (anchorEl !== event.currentTarget) {
-      setAnchorEl(event.currentTarget);
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
     }
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleDelayedClose = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() => {
+      setAnchorEl(null);
+    }, 200);
   };
 
   const handleMenuClose = () => {
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
     setAnchorEl(null);
   };
 
@@ -95,14 +116,31 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
 
       <Box 
         sx={{ display: "flex", alignItems: "center", gap: 2 }}
-        onMouseLeave={handleMenuClose}
+        onMouseEnter={() => {
+          if (closeTimeoutRef.current) {
+            clearTimeout(closeTimeoutRef.current);
+            closeTimeoutRef.current = null;
+          }
+        }}
+        onMouseLeave={handleDelayedClose}
       >
         <IconButton 
-          onClick={handleMenuOpen} 
+          onClick={(e) => {
+            if (closeTimeoutRef.current) {
+              clearTimeout(closeTimeoutRef.current);
+              closeTimeoutRef.current = null;
+            }
+            setAnchorEl(prev => prev ? null : e.currentTarget);
+          }} 
           onMouseEnter={handleMenuOpen}
-          sx={{ p: 0 }}
+          sx={{ 
+            p: 0,
+            width: 40,
+            height: 40,
+            "&:hover": { bgcolor: "transparent" }
+          }}
         >
-          <Avatar sx={{ bgcolor: COLORS.PRIMARY_BLUE }}>
+          <Avatar sx={{ bgcolor: COLORS.PRIMARY_BLUE, width: 40, height: 40, fontWeight: 700 }}>
             {displayInitial}
           </Avatar>
         </IconButton>
@@ -111,8 +149,17 @@ export default function Header({ title = "Dashboard", onToggleSidebar }: HeaderP
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleMenuClose}
+          disableScrollLock
+          autoFocus={false}
+          disableRestoreFocus
           MenuListProps={{
-            onMouseLeave: handleMenuClose,
+            onMouseEnter: () => {
+              if (closeTimeoutRef.current) {
+                clearTimeout(closeTimeoutRef.current);
+                closeTimeoutRef.current = null;
+              }
+            },
+            onMouseLeave: handleDelayedClose,
           }}
           PaperProps={{
             elevation: 0,

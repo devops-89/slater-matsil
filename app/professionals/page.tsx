@@ -12,13 +12,15 @@ export const metadata: Metadata = {
 
 async function getProfessionalsData() {
   try {
-    const pageRes = await fetch("http://3.92.74.11/api/pages/5", {
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+
+    const pageRes = await fetch(`${backendUrl}/api/pages/5`, {
       cache: "no-store",
     }).catch(() => null);
     const pageData = pageRes ? await pageRes.json().catch(() => null) : null;
 
     const profsRes = await fetch(
-      "http://3.92.74.11/api/users/all?role=PROFESSIONAL&limit=6&page=1",
+      `${backendUrl}/api/users/all?role=PROFESSIONAL&limit=6&page=1`,
       { cache: "no-store" },
     ).catch(() => null);
     const profsData = profsRes ? await profsRes.json().catch(() => null) : null;
