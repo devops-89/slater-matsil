@@ -6,18 +6,18 @@ import { getUpdatedDetails } from "@/utils/storeUpdater";
 
 type StoreInitializerProps = {
   pageType:
-    | "home"
-    | "about"
-    | "professionals"
-    | "insights"
-    | "services"
-    | "leadership"
-    | "practiceGroups"
-    | "careers"
-    | "blogs"
-    | "contact"
-    | "who-we-serve"
-    | "ai";
+  | "home"
+  | "about"
+  | "professionals"
+  | "insights"
+  | "services"
+  | "leadership"
+  | "practiceGroups"
+  | "careers"
+  | "blogs"
+  | "contact"
+  | "who-we-serve"
+  | "ai";
   apiData: Record<string, unknown> | null | undefined;
 };
 
@@ -107,6 +107,7 @@ export default function StoreInitializer({
   apiData,
 }: StoreInitializerProps) {
   const initialized = useRef(false);
+
 
   if (!initialized.current) {
     if (apiData) {
