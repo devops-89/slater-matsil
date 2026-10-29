@@ -82,7 +82,7 @@ const ServicesDetailsLayout = ({ slug, apiData }: ServicesDetailsLayoutProps) =>
 
   return (
     <div>
-      <ServicesDetailsHeroSection apiData={apiData} />
+      <ServicesDetailsHeroSection apiData={apiData} slug={slug} />
       <QuickLinksDetails slug={slug} />
       <ServiceAreas data={details?.homepage?.service_area?.section_Data} />
     </div>

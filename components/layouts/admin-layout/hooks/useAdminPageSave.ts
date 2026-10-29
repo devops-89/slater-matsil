@@ -40,9 +40,10 @@ export const useAdminPageSave = () => {
     deletedMediaKeys: string[],
     setInitialWebsiteData: (data: any) => void,
     setDeletedMediaKeys: (keys: string[]) => void,
-    setIsSubmitting: (isSubmitting: boolean) => void
+    setIsSubmitting: (isSubmitting: boolean) => void,
+    setPageId?: (id: number | null) => void
   ) => {
-    if (JSON.stringify(websiteData) === JSON.stringify(initialWebsiteData)) {
+    if (JSON.stringify(websiteData) === JSON.stringify(initialWebsiteData) && pageId !== null) {
       showNotification("No changes to save", "info");
       return;
     }
@@ -167,6 +168,13 @@ export const useAdminPageSave = () => {
         if (pageId) {
           await PageControllers.updatePage(pageId, payload);
           showNotification(`${payload.title} page updated successfully`, "success");
+        } else {
+          const createRes = await PageControllers.createPage(payload);
+          const createdPage = createRes.data?.data?.data || createRes.data?.data || createRes.data;
+          if (createdPage?.id && setPageId) {
+            setPageId(createdPage.id);
+          }
+          showNotification(`${payload.title} page created successfully`, "success");
         }
 
         setInitialWebsiteData(websiteData);
@@ -190,7 +198,7 @@ export const useAdminPageSave = () => {
       if (error.name === "ValidationError") {
         showNotification(error.inner[0]?.message || "Validation failed", "error");
       } else {
-        showNotification("Failed to save page", "error");
+        showNotification(error?.response?.data?.message || "Failed to save page", "error");
       }
     } finally {
       setIsSubmitting(false);

@@ -61,6 +61,9 @@ export const mapBackendToServicesPageState = (backendData: any, currentServicesS
               : generateSlug(item.title || ""),
             imageDownloadUrl: item.imageDownloadUrl || "",
             img: getValidImageUrl(item.imageDownloadUrl || item.img || item.imageUrl || item.key || ""),
+            heroImageDownloadUrl: item.heroImageDownloadUrl || item.detailsHeroDownloadUrl || "",
+            heroImg: getValidImageUrl(item.heroImageDownloadUrl || item.detailsHeroDownloadUrl || item.heroImg || item.heroImageUrl || item.detailsHeroImg || item.detailsHeroUrl || ""),
+            heroImageUrl: item.heroImageUrl || item.detailsHeroUrl || item.heroKey || "",
           }))
         };
         break;
@@ -126,7 +129,8 @@ export const mapServicesPageStateToBackend = (servicesPageState: any, serviceAre
         section_Data: (serviceAreaState?.section_Data || []).map((item: any) => ({
           ...item,
           slug: (item.slug && item.slug.trim()) ? item.slug.trim() : generateSlug(item.title || ""),
-          imageUrl: getCleanImageUrl(item.imageUrl || item.img || item.key || "")
+          imageUrl: getCleanImageUrl(item.imageUrl || item.img || item.key || ""),
+          heroImageUrl: getCleanImageUrl(item.heroImageUrl || item.heroImg || item.detailsHeroImg || item.heroKey || "")
         }))
       }
     }

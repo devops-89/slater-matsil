@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
-import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography } from "@mui/material";
+import { Box, Card, CardActionArea, CardContent, Container, Grid, Typography, Chip } from "@mui/material";
 import { Home, Info, Build, Group, Article, Person, Star, Work, ContactPhone, Public, Policy, Gavel, Warning, LibraryBooks, AutoAwesome } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 import { usePageData } from "@/store/usePageData";
+import { PageControllers } from "@/api/pageControllers";
+import { useLoading } from "@/components/providers/LoadingProvider";
 
 const PAGE_ITEMS = [
   { text: "Home Page", icon: <Home fontSize="large" />, path: "/pages/home", desc: "Manage Hero, About, Metrics, and Services sections." },
@@ -30,7 +32,41 @@ const PAGE_ITEMS = [
 export default function AdminPagesLayout() {
   const router = useRouter();
   const { details } = usePageData();
+  const { startLoading, stopLoading } = useLoading();
   const [permissions, setPermissions] = useState<string[] | null>(null);
+  const [pagesList, setPagesList] = useState<any[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchAllPages = async () => {
+      try {
+        startLoading();
+        let res;
+        try {
+          res = await PageControllers.getAllPages();
+        } catch (authErr) {
+          res = await PageControllers.getAllPublicPages();
+        }
+        const data = res?.data?.data?.data || res?.data?.data || (Array.isArray(res?.data) ? res.data : []);
+        if (isMounted) {
+          setPagesList(data);
+        }
+      } catch (error) {
+        console.error("Error fetching all pages:", error);
+      } finally {
+        if (isMounted) {
+          stopLoading();
+        }
+      }
+    };
+
+    fetchAllPages();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     const isSuperAdmin = localStorage.getItem("isSuperAdmin");
@@ -53,6 +89,31 @@ export default function AdminPagesLayout() {
       setPermissions(null);
     }
   }, []);
+
+  const getApiPage = (path: string) => {
+    const slug = path.replace("/pages/", "");
+    const slugMap: Record<string, string[]> = {
+      home: ["home"],
+      "about-us": ["about-us", "about"],
+      ai: ["ai", "artificial-intelligence"],
+      services: ["services"],
+      "practice-groups": ["practice-groups"],
+      professionals: ["firm-professionals", "professionals"],
+      leadership: ["firm-leadership", "leadership"],
+      insights: ["insights"],
+      blogs: ["blogs", "blog"],
+      careers: ["careers"],
+      contact: ["contact-us", "contact"],
+      "who-we-serve": ["who-we-serve"],
+      "privacy-policy": ["privacy-policy"],
+      "terms-of-use": ["terms-of-use"],
+      disclaimer: ["disclaimer"],
+    };
+    const possibleSlugs = slugMap[slug] || [slug];
+    return pagesList.find((p: any) =>
+      possibleSlugs.includes(p.slug?.toLowerCase())
+    );
+  };
 
   const filteredPageItems = PAGE_ITEMS.filter(item => {
     if (permissions === null) return true; // Super admin
@@ -87,50 +148,70 @@ export default function AdminPagesLayout() {
         </Typography>
 
         <Grid container spacing={{ xs: 2, md: 4 }}>
-          {filteredPageItems.map((item, i) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}>
-              <Card 
-                sx={{ 
-                  borderRadius: 4,
-                  boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                  "&:hover": {
-                    transform: "translateY(-5px)",
-                    boxShadow: "0 8px 30px 0 rgba(0,0,0,0.1)",
-                  }
-                }}
-              >
-                <CardActionArea onClick={() => router.push(item.path)} sx={{ p: { xs: 2.5, md: 4 }, minHeight: { xs: 180, md: 220 }, display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
-                  <Box sx={{ color: COLORS.PRIMARY_GREEN, mb: 2 }}>
-                    {item.icon}
-                  </Box>
-                  <CardContent sx={{ p: 0 }}>
-                    <Typography 
-                      variant="h6" 
-                      sx={{ 
-                        fontFamily: tradeGothic.style.fontFamily, 
-                        color: COLORS.PRIMARY_BLUE,
-                        fontWeight: 700,
-                        mb: 1
-                      }}
-                    >
-                      {item.text}
-                    </Typography>
-                    <Typography 
-                      variant="body2" 
-                      sx={{ 
-                        fontFamily: adelle.style.fontFamily, 
-                        color: COLORS.TEXT_PRIMARY,
-                        lineHeight: 1.6
-                      }}
-                    >
-                      {item.desc}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-          ))}
+          {filteredPageItems.map((item, i) => {
+            const apiPage = getApiPage(item.path);
+
+            return (
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={i}>
+                <Card 
+                  sx={{ 
+                    borderRadius: 4,
+                    boxShadow: "0 4px 20px 0 rgba(0,0,0,0.05)",
+                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                    "&:hover": {
+                      transform: "translateY(-5px)",
+                      boxShadow: "0 8px 30px 0 rgba(0,0,0,0.1)",
+                    }
+                  }}
+                >
+                  <CardActionArea onClick={() => router.push(item.path)} sx={{ p: { xs: 2.5, md: 4 }, minHeight: { xs: 180, md: 220 }, display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center" }}>
+                    <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", mb: 2 }}>
+                      <Box sx={{ color: COLORS.PRIMARY_GREEN }}>
+                        {item.icon}
+                      </Box>
+                      {apiPage?.status && (
+                        <Chip
+                          label={apiPage.status.toUpperCase()}
+                          size="small"
+                          sx={{
+                            fontSize: "0.65rem",
+                            fontWeight: 700,
+                            height: 22,
+                            letterSpacing: "0.5px",
+                            backgroundColor: apiPage.status.toLowerCase() === "published" ? "#E8F5E9" : "#FFF3E0",
+                            color: apiPage.status.toLowerCase() === "published" ? "#2E7D32" : "#E65100",
+                          }}
+                        />
+                      )}
+                    </Box>
+                    <CardContent sx={{ p: 0, width: "100%" }}>
+                      <Typography 
+                        variant="h6" 
+                        sx={{ 
+                          fontFamily: tradeGothic.style.fontFamily, 
+                          color: COLORS.PRIMARY_BLUE,
+                          fontWeight: 700,
+                          mb: 1
+                        }}
+                      >
+                        {item.text}
+                      </Typography>
+                      <Typography 
+                        variant="body2" 
+                        sx={{ 
+                          fontFamily: adelle.style.fontFamily, 
+                          color: COLORS.TEXT_PRIMARY,
+                          lineHeight: 1.6
+                        }}
+                      >
+                        {item.desc}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
+            );
+          })}
         </Grid>
       </Container>
     </AdminLayout>

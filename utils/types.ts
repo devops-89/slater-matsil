@@ -247,6 +247,11 @@ interface FOOTER_CONTACT_DATA {
 
 export interface SERVICES_AREAS_DATA {
   img?: any;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+  heroImg?: any;
+  heroImageUrl?: string;
+  heroImageDownloadUrl?: string;
   title: string;
   description: string;
   serialNumber: string;

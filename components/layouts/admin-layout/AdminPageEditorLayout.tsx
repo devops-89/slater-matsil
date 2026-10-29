@@ -67,6 +67,7 @@ export default function AdminPageEditorLayout() {
     initialWebsiteData,
     debouncedWebsiteData,
     pageId,
+    setPageId,
     setInitialWebsiteData,
     updateHomepage,
     updateAboutPage,
@@ -94,7 +95,8 @@ export default function AdminPageEditorLayout() {
       deletedMediaKeys,
       setInitialWebsiteData,
       setDeletedMediaKeys,
-      setIsSubmitting
+      setIsSubmitting,
+      setPageId
     );
   };
 

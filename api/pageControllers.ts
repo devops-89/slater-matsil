@@ -11,6 +11,15 @@ export const PageControllers = {
     }
   },
 
+  createPage: async (data: Record<string, unknown>): Promise<AxiosResponse> => {
+    try {
+      let result = await pageSecuredApi.post("create", data);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   updatePage: async (id: number | string, data: Record<string, unknown>): Promise<AxiosResponse> => {
     try {
       let result = await pageSecuredApi.patch(`update/${id}`, data);

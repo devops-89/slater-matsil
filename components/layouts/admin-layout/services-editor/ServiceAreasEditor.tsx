@@ -13,9 +13,21 @@ import { generateSlug } from "@/utils/mappers/servicesMapper";
 export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: any, onChange: (newData: any) => void, onDeleteMedia?: any }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
-  const [formData, setFormData] = useState({ title: "", description: "", slug: "", img: "", detailsData: [] as any[], imageUrl: "", imageDownloadUrl: "" });
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    slug: "",
+    img: "",
+    detailsData: [] as any[],
+    imageUrl: "",
+    imageDownloadUrl: "",
+    heroImg: "",
+    heroImageUrl: "",
+    heroImageDownloadUrl: "",
+  });
   
   const [isUploading, setIsUploading] = useState(false);
+  const [isUploadingHero, setIsUploadingHero] = useState(false);
   const { showNotification } = useNotification();
 
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,19 +44,55 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
       const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
       const uploadedKey = responseData?.key || uploadedUrl;
       if (uploadedUrl) {
-        setFormData((prev) => ({ ...prev, imageUrl: uploadedKey, imageDownloadUrl: uploadedUrl, img: uploadedKey }));
-        showNotification("Image uploaded successfully", "success");
+        setFormData((prev) => ({ ...prev, imageUrl: uploadedKey, imageDownloadUrl: uploadedUrl, img: uploadedUrl }));
+        showNotification("Icon uploaded successfully", "success");
       }
     } catch (error) {
-      console.error("Failed to upload image", error);
-      showNotification("Failed to upload image", "error");
+      console.error("Failed to upload icon", error);
+      showNotification("Failed to upload icon", "error");
     } finally {
       setIsUploading(false);
     }
   };
 
+  const handleHeroImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsUploadingHero(true);
+      const formDataUpload = new FormData();
+      formDataUpload.append("image", file);
+      
+      const res = await MediaControllers.uploadMedia(formDataUpload);
+      const responseData = res.data?.data?.data || res.data?.data;
+      const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
+      const uploadedKey = responseData?.key || uploadedUrl;
+      if (uploadedUrl) {
+        setFormData((prev) => ({ ...prev, heroImageUrl: uploadedKey, heroImageDownloadUrl: uploadedUrl, heroImg: uploadedUrl }));
+        showNotification("Details Hero image uploaded successfully", "success");
+      }
+    } catch (error) {
+      console.error("Failed to upload hero image", error);
+      showNotification("Failed to upload hero image", "error");
+    } finally {
+      setIsUploadingHero(false);
+    }
+  };
+
   const handleOpenNew = () => {
-    setFormData({ title: "", description: "", slug: "", img: "", detailsData: [], imageUrl: "", imageDownloadUrl: "" });
+    setFormData({
+      title: "",
+      description: "",
+      slug: "",
+      img: "",
+      detailsData: [],
+      imageUrl: "",
+      imageDownloadUrl: "",
+      heroImg: "",
+      heroImageUrl: "",
+      heroImageDownloadUrl: "",
+    });
     setEditingIdx(null);
     setDialogOpen(true);
   };
@@ -57,6 +105,9 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
       img: item.img || "",
       imageUrl: item.imageUrl || item.key || "",
       imageDownloadUrl: item.imageDownloadUrl || "",
+      heroImg: item.heroImg || item.detailsHeroImg || "",
+      heroImageUrl: item.heroImageUrl || item.detailsHeroUrl || item.heroKey || "",
+      heroImageDownloadUrl: item.heroImageDownloadUrl || item.detailsHeroDownloadUrl || "",
       detailsData: item.detailsData ? JSON.parse(JSON.stringify(item.detailsData)) : []
     });
     setEditingIdx(idx);
@@ -87,7 +138,12 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
         description: formData.description,
         slug: finalSlug,
         detailsData: formData.detailsData,
-        img: formData.img || newSectionData[editingIdx].img || ""
+        img: formData.imageDownloadUrl || formData.img || newSectionData[editingIdx].img || "",
+        imageUrl: formData.imageUrl || newSectionData[editingIdx].imageUrl || "",
+        imageDownloadUrl: formData.imageDownloadUrl || newSectionData[editingIdx].imageDownloadUrl || "",
+        heroImg: formData.heroImageDownloadUrl || formData.heroImg || newSectionData[editingIdx].heroImg || "",
+        heroImageUrl: formData.heroImageUrl || newSectionData[editingIdx].heroImageUrl || "",
+        heroImageDownloadUrl: formData.heroImageDownloadUrl || newSectionData[editingIdx].heroImageDownloadUrl || "",
       };
     } else {
       newSectionData.push({
@@ -96,7 +152,12 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
         description: formData.description,
         slug: finalSlug,
         detailsData: formData.detailsData,
-        img: formData.img || ""
+        img: formData.imageDownloadUrl || formData.img || "",
+        imageUrl: formData.imageUrl || "",
+        imageDownloadUrl: formData.imageDownloadUrl || "",
+        heroImg: formData.heroImageDownloadUrl || formData.heroImg || "",
+        heroImageUrl: formData.heroImageUrl || "",
+        heroImageDownloadUrl: formData.heroImageDownloadUrl || "",
       });
     }
 
@@ -239,10 +300,11 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             />
 
+            {/* Service Icon / Image */}
             <Box sx={{ mt: 1 }}>
               <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <Typography variant="subtitle2" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, mb: 1 }}>
-                  Service Icon / Image
+                  Service Icon / Image (Card Preview)
                 </Typography>
                 <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
                   {isUploading ? "Uploading..." : "Upload Image"}
@@ -268,6 +330,48 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
                       showNotification("Image removed from preview. Don't forget to save changes.", "info");
                     }}
                     sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
+                  >
+                    <Delete fontSize="small" />
+                  </IconButton>
+                </Box>
+              )}
+            </Box>
+
+            {/* Details Page Hero Image */}
+            <Box sx={{ mt: 1, pt: 2, borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 2 }}>
+                <Box>
+                  <Typography variant="subtitle2" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE }}>
+                    Hero Image (For Details Page)
+                  </Typography>
+                  <Typography variant="caption" color="textSecondary" sx={{ display: "block", mt: 0.5 }}>
+                    Banner background image displayed on this service's details page (/services/{formData.slug?.trim() || generateSlug(formData.title) || "..."})
+                  </Typography>
+                </Box>
+                <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE, whiteSpace: "nowrap" }} disabled={isUploadingHero}>
+                  {isUploadingHero ? "Uploading..." : "Upload Hero Image"}
+                  <input type="file" hidden accept="image/*" onChange={handleHeroImageUpload} />
+                </Button>
+              </Box>
+              {(formData.heroImageDownloadUrl || formData.heroImageUrl || formData.heroImg) && (
+                <Box sx={{ mt: 2, position: "relative", width: "100%", height: 160, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={formData.heroImageDownloadUrl || formData.heroImg || formData.heroImageUrl}
+                    alt="Details Hero Banner"
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
+                  <IconButton
+                    size="small"
+                    color="error"
+                    onClick={() => {
+                      if (onDeleteMedia && formData.heroImageUrl) {
+                        onDeleteMedia(formData.heroImageUrl);
+                      }
+                      setFormData({ ...formData, heroImg: "", heroImageUrl: "", heroImageDownloadUrl: "" });
+                      showNotification("Hero image removed. Don't forget to save changes.", "info");
+                    }}
+                    sx={{ position: "absolute", top: 4, right: 4, backgroundColor: "rgba(255,255,255,0.8)", padding: "4px", "&:hover": { backgroundColor: "white" } }}
                   >
                     <Delete fontSize="small" />
                   </IconButton>

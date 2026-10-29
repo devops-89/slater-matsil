@@ -1,18 +1,64 @@
-import { Box, Typography } from "@mui/material";
+"use client";
+
+import { Box, Typography, Container } from "@mui/material";
 import React from "react";
 import heroImage from "@/services/details/practice-details-hero.jpg";
-import { Container } from "@mui/material";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 import { usePageData } from "@/store/usePageData";
 import { getValidImageUrl } from "@/utils/mappers/commonMapper";
 import { getUpdatedDetails } from "@/utils/storeUpdater";
+import { useParams } from "next/navigation";
+import { generateSlug } from "@/utils/mappers/servicesMapper";
 
-const ServicesDetailsHeroSection = ({ apiData }: { apiData?: any }) => {
+interface ServicesDetailsHeroSectionProps {
+  apiData?: any;
+  slug?: string;
+}
+
+const ServicesDetailsHeroSection = ({ apiData, slug: propSlug }: ServicesDetailsHeroSectionProps) => {
+  const params = useParams();
+  const rawSlug = ((propSlug || (params?.slug as string) || "") as string).trim();
   const { details: storeDetails } = usePageData();
   const details = apiData ? getUpdatedDetails("services", apiData) : storeDetails;
+  
+  const serviceAreas =
+    details?.homepage?.service_area?.section_Data ||
+    details?.servicesPage?.service_areas?.section_Data ||
+    [];
+
+  const normalize = (s: string) => {
+    return (s || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[/\\_]+/g, "-")
+      .replace(/[^a-z0-9-]+/g, "-")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+  };
+
+  const currentService = serviceAreas.find((item: any) => {
+    const itemSlug = (item.slug || "").trim();
+    const titleSlug = generateSlug(item.title || "");
+    return (
+      itemSlug === rawSlug ||
+      titleSlug === rawSlug ||
+      normalize(itemSlug) === normalize(rawSlug) ||
+      normalize(titleSlug) === normalize(rawSlug)
+    );
+  });
+
   const heroData = details?.servicesPage?.heroSection;
-  const bgImg = heroData?.img ? getValidImageUrl(heroData.img) : heroImage.src;
+  const customHeroImg =
+    currentService?.heroImageDownloadUrl ||
+    currentService?.heroImg ||
+    currentService?.heroImageUrl;
+
+  const bgImg = customHeroImg
+    ? getValidImageUrl(customHeroImg)
+    : heroData?.img
+    ? getValidImageUrl(heroData.img)
+    : heroImage.src;
 
   return (
     <div>
@@ -34,18 +80,16 @@ const ServicesDetailsHeroSection = ({ apiData }: { apiData?: any }) => {
         >
           <Box
             sx={{
-              // background:
-              //   "linear-gradient(270deg, rgba(0, 0, 0, 0.00) 0.02%, #000 82.38%)",
               height: "100%",
               width: "100%",
               display: "flex",
               alignItems: "center",
               justifyContent: "flex-start",
-              paddingLeft: "60px",
-              background: "rgba(0, 0, 0, 0.3)",
+              paddingLeft: { xs: "24px", md: "60px" },
+              background: "rgba(0, 0, 0, 0.35)",
             }}
           >
-            <Box sx={{ maxWidth: "500px" }}>
+            <Box sx={{ maxWidth: "550px" }}>
               <Box
                 sx={{
                   backgroundColor: COLORS.PRIMARY_BLUE,

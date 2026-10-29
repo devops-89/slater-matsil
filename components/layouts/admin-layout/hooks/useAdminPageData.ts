@@ -11,6 +11,7 @@ import {
   mapBackendToFirmProfessionalsState,
   mapBackendToFirmLeadershipState,
   mapBackendToBlogsState,
+  mapInsightsStateToBackend,
   mapBackendToInsightsState,
   mapBackendToCareersState,
   mapBackendToContactState,
@@ -41,25 +42,75 @@ export const useAdminPageData = (slug: string) => {
       try {
         startLoading();
 
+        // 1. Fetch all pages to check if the current page already exists
+        let allPages: any[] = [];
+        try {
+          let allRes;
+          try {
+            allRes = await PageControllers.getAllPages();
+          } catch (e) {
+            allRes = await PageControllers.getAllPublicPages();
+          }
+          allPages = allRes?.data?.data?.data || allRes?.data?.data || (Array.isArray(allRes?.data) ? allRes?.data : []);
+        } catch (e) {
+          console.warn("Could not fetch getAllPages:", e);
+        }
+
+        const slugMap: Record<string, string[]> = {
+          home: ["home"],
+          "about-us": ["about-us", "about"],
+          ai: ["ai", "artificial-intelligence"],
+          services: ["services"],
+          "practice-groups": ["practice-groups"],
+          professionals: ["firm-professionals", "professionals"],
+          leadership: ["firm-leadership", "leadership"],
+          insights: ["insights"],
+          blogs: ["blogs", "blog"],
+          careers: ["careers"],
+          contact: ["contact-us", "contact"],
+          "who-we-serve": ["who-we-serve"],
+          "privacy-policy": ["privacy-policy"],
+          "terms-of-use": ["terms-of-use"],
+          disclaimer: ["disclaimer"],
+        };
+
+        const possibleSlugs = slugMap[slug as string] || [slug as string];
+        const matchedPage = allPages.find((p: any) =>
+          possibleSlugs.includes(p.slug?.toLowerCase())
+        );
+
+        // If the page does not exist in getAllPages, set pageId = null so save triggers POST /pages/create
+        if (!matchedPage) {
+          if (isMounted) {
+            setPageId(null);
+            setWebsiteData(WEBSITE_DATA);
+            setInitialWebsiteData(WEBSITE_DATA);
+            setDetails(WEBSITE_DATA as any);
+          }
+          return;
+        }
+
+        const resolvedPageId = matchedPage.id;
+        if (isMounted) {
+          setPageId(resolvedPageId);
+        }
+
+        // 2. Load and map page-specific content
         if (slug === "home") {
           const [res1, res3] = await Promise.all([
-            PageControllers.getPageById(1).catch(e => ({ data: { data: null } })),
-            PageControllers.getPageById(3).catch(e => ({ data: { data: null } }))
+            PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } })),
+            PageControllers.getPageById(3).catch(() => ({ data: { data: null } }))
           ]);
-          const pageData1 = res1.data?.data?.data || res1.data?.data;
+          const pageData1 = res1.data?.data?.data || res1.data?.data || matchedPage;
           const pageData3 = res3.data?.data?.data || res3.data?.data;
-          
-          if (pageData1 && isMounted) {
-            setPageId(pageData1.id || 1);
-          }
-          
+
           if (isMounted) {
             let updatedHomepage = WEBSITE_DATA.homepage;
-            
+
             if (pageData1) {
               updatedHomepage = mapBackendToHomepageState(pageData1, updatedHomepage);
             }
-            
+
             if (pageData3) {
               const { newServiceArea } = mapBackendToServicesPageState(pageData3, WEBSITE_DATA.servicesPage, updatedHomepage.service_area);
               updatedHomepage.service_area = newServiceArea;
@@ -74,10 +125,9 @@ export const useAdminPageData = (slug: string) => {
             setDetails(mergedWebsiteData as any);
           }
         } else if (slug === "about-us") {
-          const res = await PageControllers.getPageById(2).catch(e => ({ data: { data: null } }));
-          const pageData = res.data?.data?.data || res.data?.data;
+          const res = await PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } }));
+          const pageData = res.data?.data?.data || res.data?.data || matchedPage;
           if (pageData && isMounted) {
-            setPageId(pageData.id || 2);
             const updatedAboutPage = mapBackendToAboutPageState(pageData, WEBSITE_DATA.aboutPage);
             const mergedWebsiteData = {
               ...WEBSITE_DATA,
@@ -88,10 +138,9 @@ export const useAdminPageData = (slug: string) => {
             setDetails(mergedWebsiteData as any);
           }
         } else if (slug === "services") {
-          const res = await PageControllers.getPageById(3).catch(e => ({ data: { data: null } }));
-          const pageData = res.data?.data?.data || res.data?.data;
+          const res = await PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } }));
+          const pageData = res.data?.data?.data || res.data?.data || matchedPage;
           if (pageData && isMounted) {
-            setPageId(pageData.id || 3);
             const { newServicesPage, newServiceArea } = mapBackendToServicesPageState(pageData, WEBSITE_DATA.servicesPage, WEBSITE_DATA.homepage.service_area);
             const mergedWebsiteData = {
               ...WEBSITE_DATA,
@@ -106,10 +155,9 @@ export const useAdminPageData = (slug: string) => {
             setDetails(mergedWebsiteData as any);
           }
         } else if (slug === "practice-groups") {
-          const res = await PageControllers.getPageById(4).catch(e => ({ data: { data: null } }));
-          const pageData = res.data?.data?.data || res.data?.data;
+          const res = await PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } }));
+          const pageData = res.data?.data?.data || res.data?.data || matchedPage;
           if (pageData && isMounted) {
-            setPageId(pageData.id);
             const updatedPracticeGroupPage = mapBackendToPracticeGroupsState(pageData, WEBSITE_DATA.practiceGroupPage);
             const mergedWebsiteData = {
               ...WEBSITE_DATA,
@@ -118,17 +166,12 @@ export const useAdminPageData = (slug: string) => {
             setWebsiteData(mergedWebsiteData);
             setInitialWebsiteData(mergedWebsiteData);
             setDetails(mergedWebsiteData as any);
-          } else if (!pageData && isMounted) {
-            setPageId(null);
-            setDetails(WEBSITE_DATA as any);
-            setInitialWebsiteData(WEBSITE_DATA as any);
           }
         } else if (slug === "professionals") {
-          const res = await PageControllers.getPageById(5).catch(e => ({ data: { data: null } }));
-          const pageData = res.data?.data?.data || res.data?.data;
-          
+          const res = await PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } }));
+          const pageData = res.data?.data?.data || res.data?.data || matchedPage;
+
           if (pageData && isMounted) {
-            setPageId(pageData.id || 5);
             const updatedFirmProfessionalsPage = mapBackendToFirmProfessionalsState(pageData, WEBSITE_DATA.firm_professionals);
             const mergedWebsiteData = {
               ...WEBSITE_DATA,
@@ -137,62 +180,32 @@ export const useAdminPageData = (slug: string) => {
             setWebsiteData(mergedWebsiteData);
             setInitialWebsiteData(mergedWebsiteData);
             setDetails(mergedWebsiteData as any);
-          } else if (isMounted) {
-            setPageId(5);
-            setDetails(WEBSITE_DATA as any);
-            setInitialWebsiteData(WEBSITE_DATA as any);
           }
         } else if (slug === "leadership") {
-          const res = await PageControllers.getPageById(6).catch(e => ({ data: { data: null } }));
-          const pageData = res.data?.data?.data || res.data?.data;
-          
+          const res = await PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } }));
+          const pageData = res.data?.data?.data || res.data?.data || matchedPage;
+
           if (pageData && isMounted) {
-            setPageId(pageData.id || 6);
             const updatedFirmLeadershipPage = mapBackendToFirmLeadershipState(pageData, WEBSITE_DATA.firm_leadership);
             setWebsiteData({ ...WEBSITE_DATA, firm_leadership: updatedFirmLeadershipPage });
             setInitialWebsiteData({ ...WEBSITE_DATA, firm_leadership: updatedFirmLeadershipPage });
             setDetails({ ...WEBSITE_DATA, firm_leadership: updatedFirmLeadershipPage } as any);
-          } else if (isMounted) {
-            setPageId(6); 
-            setDetails(WEBSITE_DATA as any);
-            setInitialWebsiteData(WEBSITE_DATA as any);
           }
         } else if (slug === "blogs") {
-          const res = await PageControllers.getPageById(8).catch(e => ({ data: { data: null } }));
-          const pageData = res.data?.data?.data || res.data?.data;
-          
+          const res = await PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } }));
+          const pageData = res.data?.data?.data || res.data?.data || matchedPage;
+
           if (pageData && isMounted) {
-            setPageId(pageData.id || 8);
             const updatedBlogsPage = mapBackendToBlogsState(pageData, WEBSITE_DATA.insightsPage);
             setWebsiteData({ ...WEBSITE_DATA, insightsPage: updatedBlogsPage });
             setInitialWebsiteData({ ...WEBSITE_DATA, insightsPage: updatedBlogsPage });
             setDetails({ ...WEBSITE_DATA, insightsPage: updatedBlogsPage } as any);
-          } else if (isMounted) {
-            setPageId(8); 
-            setDetails(WEBSITE_DATA as any);
-            setInitialWebsiteData(WEBSITE_DATA as any);
           }
         } else if (["careers", "contact", "who-we-serve", "privacy-policy", "terms-of-use", "disclaimer", "insights", "ai"].includes(slug as string)) {
-          const PAGE_IDS: Record<string, number> = {
-            "insights": 7,
-            "careers": 9,
-            "contact": 10,
-            "who-we-serve": 11,
-            "privacy-policy": 12,
-            "terms-of-use": 13,
-            "disclaimer": 14,
-            "ai": 15
-          };
-          const targetId = PAGE_IDS[slug as string];
-          let pageData = null;
-          
-          if (targetId) {
-            const res = await PageControllers.getPageById(targetId).catch(e => ({ data: { data: null } }));
-            pageData = res.data?.data?.data || res.data?.data;
-          }
+          const res = await PageControllers.getPageById(resolvedPageId).catch(() => ({ data: { data: matchedPage } }));
+          const pageData = res.data?.data?.data || res.data?.data || matchedPage;
 
           if (pageData && isMounted) {
-            setPageId(pageData.id || targetId);
             let mergedWebsiteData = { ...WEBSITE_DATA };
 
             if (slug === "insights") {
@@ -216,10 +229,6 @@ export const useAdminPageData = (slug: string) => {
             setWebsiteData(mergedWebsiteData);
             setInitialWebsiteData(mergedWebsiteData);
             setDetails(mergedWebsiteData as any);
-          } else if (isMounted) {
-            setPageId(targetId);
-            setDetails(WEBSITE_DATA as any);
-            setInitialWebsiteData(WEBSITE_DATA as any);
           }
         } else {
           setDetails(WEBSITE_DATA as any);
@@ -232,9 +241,9 @@ export const useAdminPageData = (slug: string) => {
         stopLoading();
       }
     };
-    
+
     fetchPageData();
-    
+
     return () => {
       isMounted = false;
     };
@@ -385,6 +394,7 @@ export const useAdminPageData = (slug: string) => {
     initialWebsiteData,
     debouncedWebsiteData,
     pageId,
+    setPageId,
     setInitialWebsiteData,
     updateHomepage,
     updateAboutPage,
