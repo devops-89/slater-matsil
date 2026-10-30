@@ -42,9 +42,23 @@ export const mapBackendToAboutPageState = (backendData: any, currentState: any) 
       case "who_we_serve_props":
         newAboutPage.who_we_serve_props = section.data || newAboutPage.who_we_serve_props;
         break;
-      case "industries_we_serve":
-        newAboutPage.industriesWeServe = section.data || newAboutPage.industriesWeServe;
+      case "industries_we_serve": {
+        const indData = section.data || newAboutPage.industriesWeServe;
+        newAboutPage.industriesWeServe = {
+          ...indData,
+          cards: indData?.cards?.map((card: any, idx: number) => {
+            const fallbackCard = newAboutPage.industriesWeServe?.cards?.[idx];
+            const validUrl = getValidImageUrl(card.imageDownloadUrl || card.imageUrl || card.img || "");
+            return {
+              ...card,
+              img: validUrl ? { src: validUrl } : (fallbackCard?.img || card.img),
+              imageDownloadUrl: card.imageDownloadUrl || validUrl || "",
+              imageUrl: card.imageUrl || card.img || fallbackCard?.imageUrl || "",
+            };
+          }) || newAboutPage.industriesWeServe?.cards,
+        };
         break;
+      }
     }
   });
 
@@ -114,7 +128,15 @@ export const mapAboutPageStateToBackend = (aboutPageState: any) => {
       sectionType: "industries_we_serve",
       sortOrder: 7,
       isVisible: true,
-      data: aboutPageState.industriesWeServe
+      data: {
+        ...aboutPageState.industriesWeServe,
+        cards: (aboutPageState.industriesWeServe?.cards || []).map((card: any) => ({
+          title: card.title || "",
+          href: card.href || "",
+          imageUrl: getCleanImageUrl(card.imageUrl || (typeof card.img === "string" ? card.img : card.img?.src) || ""),
+          imageDownloadUrl: card.imageDownloadUrl || "",
+        }))
+      }
     }
   ];
 };

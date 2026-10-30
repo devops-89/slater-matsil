@@ -1,3 +1,5 @@
+"use client";
+
 import { COLORS } from "@/utils/enum";
 import { adelle } from "@/utils/fonts";
 import { INSIGHTS_DATA_PROPS } from "@/utils/types";
@@ -12,18 +14,22 @@ const InsightsCard = ({
   category,
   title,
   slug,
+  url,
+  externalUrl,
   onDelete,
   onEdit,
 }: INSIGHTS_DATA_PROPS & { onDelete?: (e?: any) => void; onEdit?: () => void }) => {
   const pathname = usePathname();
   const router = useRouter();
   const isPreview = pathname?.includes("/pages") || pathname?.includes("/manage-");
-  const linkHref = isPreview ? "/pages/insights" : `/insights/${slug}`;
+  const rawUrl = (externalUrl || url)?.trim() || "";
+  const isExternal = rawUrl.startsWith("http://") || rawUrl.startsWith("https://");
+  const linkHref = isPreview ? "/pages/insights" : (rawUrl || `/insights/${slug}`);
 
   const cardContent = (
     <Box
       component={motion.div}
-      whileHover={{ y: -10 }}
+      whileHover={{ y: -8 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       onClick={(e) => {
         if (onEdit) {
@@ -34,6 +40,10 @@ const InsightsCard = ({
       sx={{
         position: "relative",
         cursor: "pointer",
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
         "&:hover": {
           "& .main-card": {
             boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
@@ -55,14 +65,18 @@ const InsightsCard = ({
         className="main-card"
         sx={{
           backgroundColor: bgColor,
-          height: "347px",
+          height: "360px",
+          minHeight: "360px",
+          width: "100%",
           borderRadius: "20px",
-          p: { xs: 3, sm: 4 },
+          p: { xs: 2.5, sm: 3 },
           transition: "box-shadow 0.3s ease",
           position: "relative",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
+          boxSizing: "border-box",
+          overflow: "hidden",
           // Circular notch at top-right
           maskImage:
             "radial-gradient(circle at 100% 0%, transparent 45px, black 46.5px)",
@@ -70,44 +84,66 @@ const InsightsCard = ({
             "radial-gradient(circle at 100% 0%, transparent 45px, black 46.5px)",
         }}
       >
-        <Box
-          sx={{
-            width: "fit-content",
-            height: "36px",
-            px: 3,
-            borderRadius: "54px",
-            backgroundColor: "#DFFFFF",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: COLORS.BLACK,
-            fontFamily: adelle.style.fontFamily,
-            fontWeight: 700,
-            fontSize: 14,
-            letterSpacing: "0.05em",
-            textTransform: "uppercase",
-          }}
-        >
-          {category}
+        {/* Top: Category Pill with right clearance for the notch */}
+        <Box sx={{ pr: 6, flexShrink: 0 }}>
+          <Box
+            sx={{
+              width: "fit-content",
+              height: "32px",
+              px: 2.5,
+              borderRadius: "54px",
+              backgroundColor: "#DFFFFF",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: COLORS.BLACK,
+              fontFamily: adelle.style.fontFamily,
+              fontWeight: 700,
+              fontSize: 13,
+              letterSpacing: "0.05em",
+              textTransform: "uppercase",
+            }}
+          >
+            {category}
+          </Box>
         </Box>
 
-        <Box>
+        {/* Center: Title with dynamic scaling and line clamp */}
+        <Box
+          sx={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
+            my: 1.5,
+            overflow: "hidden",
+          }}
+        >
           <Typography
             sx={{
-              fontSize: { xs: 16, sm: title.length > 150 ? 18 : 24 },
+              fontSize: {
+                xs: 15,
+                sm: title.length > 110 ? 16 : title.length > 70 ? 18 : 20,
+                xl: title.length > 110 ? 17 : title.length > 70 ? 19 : 22,
+              },
               fontFamily: adelle.style.fontFamily,
               fontWeight: 600,
-              lineHeight: 1.3,
-              mb: 2,
+              lineHeight: 1.35,
               color: bgColor === COLORS.PRIMARY_BLUE ? COLORS.WHITE : "#14363F",
-              display: { xs: "-webkit-box", md: "block" },
-              WebkitLineClamp: { xs: 5, md: "unset" },
+              display: "-webkit-box",
+              WebkitLineClamp: 5,
               WebkitBoxOrient: "vertical",
-              overflow: { xs: "hidden", md: "visible" },
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              wordBreak: "normal",
+              overflowWrap: "break-word",
             }}
           >
             {title}
           </Typography>
+        </Box>
+
+        {/* Bottom: Learn More */}
+        <Box sx={{ pt: 0.5, flexShrink: 0 }}>
           <Stack
             direction="row"
             alignItems="center"
@@ -137,7 +173,7 @@ const InsightsCard = ({
         </Box>
       </Box>
 
-      {/* Top Right Arrow Circle */}
+      {/* Top Right Action Circle */}
       <Box
         sx={{
           position: "absolute",
@@ -198,9 +234,21 @@ const InsightsCard = ({
     </Box>
   );
 
-  if (slug && !onEdit) {
+  if ((slug || rawUrl) && !onEdit) {
+    if (isExternal) {
+      return (
+        <a
+          href={linkHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none", color: "inherit", display: "block", width: "100%", height: "100%" }}
+        >
+          {cardContent}
+        </a>
+      );
+    }
     return (
-      <Link href={linkHref} style={{ textDecoration: "none" }}>
+      <Link href={linkHref} style={{ textDecoration: "none", display: "block", width: "100%", height: "100%" }}>
         {cardContent}
       </Link>
     );

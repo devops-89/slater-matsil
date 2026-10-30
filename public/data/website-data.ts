@@ -65,6 +65,7 @@ import { HOMEPAGE_DATA_PROPS } from "@/utils/types";
 import whoweserveHero from "@/who-we-serve/hero-img2.jpg";
 import { FaLinkedinIn } from "react-icons/fa";
 import {
+  CAREER_HOME_DATA,
   CAREER_WORK_LIST_DATA,
   CONTACT_US_CARD_DATA,
   FOOTER_DATA,
@@ -365,6 +366,7 @@ export const WEBSITE_DATA: HOMEPAGE_DATA_PROPS = {
       description:
         "We collaborate with a wide range of industries to deliver innovative, reliable solutions.",
       section_data: INDUSTRIES_DATA,
+      cards: CAREER_HOME_DATA,
     },
   },
   firm_professionals: {

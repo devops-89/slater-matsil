@@ -30,9 +30,10 @@ import { generateSlug } from "@/utils/mappers/servicesMapper";
 
 interface QuickLinksDetailsProps {
   slug?: string;
+  pageData?: any;
 }
 
-const QuickLinksDetails = ({ slug: propSlug }: QuickLinksDetailsProps) => {
+const QuickLinksDetails = ({ slug: propSlug, pageData }: QuickLinksDetailsProps) => {
   const QUICk_LINKS_DATA = [
     {
       img: globeOutline,
@@ -89,7 +90,10 @@ const QuickLinksDetails = ({ slug: propSlug }: QuickLinksDetailsProps) => {
   }>({ prev: null, next: null });
 
   const { details } = usePageData();
-  const serviceAreasData = details?.homepage?.service_area?.section_Data || [];
+  const sections = pageData?.sections || [];
+  const saSection = sections.find((s: any) => s.sectionKey === "service_areas");
+  const rawServiceAreas = saSection?.data?.section_Data;
+  const serviceAreasData = rawServiceAreas || details?.homepage?.service_area?.section_Data || [];
 
   useEffect(() => {
     if (!serviceAreasData || serviceAreasData.length === 0) return;
@@ -154,33 +158,92 @@ const QuickLinksDetails = ({ slug: propSlug }: QuickLinksDetailsProps) => {
           : null,
       });
     }
-  }, [rawSlug, serviceAreasData]);
+  }, [rawSlug, serviceAreasData, pageData]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const shouldScroll =
+      window.location.hash === "#service-details" ||
+      sessionStorage.getItem("scrollToServiceDetails") === "true";
+
+    if (shouldScroll) {
+      sessionStorage.removeItem("scrollToServiceDetails");
+
+      const scrollToDetails = () => {
+        const el = document.getElementById("service-details");
+        if (el) {
+          const isMobile = window.innerWidth < 900;
+          const offset = isMobile ? 85 : 0;
+          const rect = el.getBoundingClientRect();
+          const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          const targetY = Math.max(0, rect.top + scrollTop - offset);
+          window.scrollTo({
+            top: targetY,
+            behavior: "smooth",
+          });
+        }
+      };
+
+      scrollToDetails();
+      const t1 = setTimeout(scrollToDetails, 100);
+      const t2 = setTimeout(scrollToDetails, 350);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, [rawSlug]);
+
+  const handleNavClick = () => {
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("scrollToServiceDetails", "true");
+    }
+  };
 
   return (
-    <Box sx={{ py: 5 }}>
+    <Box id="service-details" sx={{ py: 5, scrollMarginTop: { xs: "85px", md: "0px" } }}>
       <Container maxWidth="lg">
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
+                <Stack
+          direction={{ xs: "column", md: "row" }}
+          alignItems={{ xs: "flex-start", md: "center" }}
           justifyContent={"space-between"}
+          spacing={{ xs: 3, md: 4 }}
         >
-          <Box>
+          <Box sx={{ flex: 1, maxWidth: { md: "700px", xs: "100%" } }}>
             <HeadingStar title="Services" />
             <Typography
+              variant="h1"
               sx={{
-                fontSize: 42,
+                fontSize: { xs: 32, sm: 38, md: 44 },
+                lineHeight: 1.25,
                 fontFamily: tradeGothic.style.fontFamily,
                 fontWeight: 700,
                 textTransform: "capitalize",
-                width: "400px",
                 color: COLORS.PRIMARY_BLUE,
+                wordBreak: "normal",
+                overflowWrap: "break-word",
                 mt: 2,
               }}
             >
-              {data?.title}
+              {data?.title ? data.title.replace(/\/(?=[^\s])/g, "/ ") : ""}
             </Typography>
           </Box>
-          <Image src={lightLogo} alt="" width={400} />
+          <Box
+            sx={{
+              display: { xs: "none", md: "block" },
+              flexShrink: 0,
+              maxWidth: "360px",
+            }}
+          >
+            <Image
+              src={lightLogo}
+              alt="Slater Matsil"
+              width={360}
+              style={{ width: "100%", height: "auto" }}
+            />
+          </Box>
         </Stack>
       </Container>
 
@@ -251,7 +314,9 @@ const QuickLinksDetails = ({ slug: propSlug }: QuickLinksDetailsProps) => {
           <Box sx={{ minWidth: "200px" }}>
             {navigation.prev && (
               <Link
-                href={`/services/${navigation.prev.slug}`}
+                href={`/services/${navigation.prev.slug}#service-details`}
+                scroll={false}
+                onClick={handleNavClick}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="column" spacing={0.5}>
@@ -288,7 +353,9 @@ const QuickLinksDetails = ({ slug: propSlug }: QuickLinksDetailsProps) => {
           <Box sx={{ minWidth: "200px", textAlign: "right" }}>
             {navigation.next && (
               <Link
-                href={`/services/${navigation.next.slug}`}
+                href={`/services/${navigation.next.slug}#service-details`}
+                scroll={false}
+                onClick={handleNavClick}
                 style={{ textDecoration: "none" }}
               >
                 <Stack direction="column" spacing={0.5} alignItems="flex-end">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ServicesDetailsHeroSection from "./Services-Details-Hero-Section";
 import QuickLinksDetails from "./Quick-Links-Details";
 import ServiceAreas from "@/components/widgets/Service-Areas";
@@ -20,15 +20,18 @@ const ServicesDetailsLayout = ({ slug, apiData }: ServicesDetailsLayoutProps) =>
   const { details, setDetails } = usePageData();
   const { startLoading, stopLoading } = useLoading();
   const pathname = usePathname();
+  const [pageData, setPageData] = useState<any>(apiData?.data3 || null);
 
-  // If initial apiData was passed from SSR, ensure store is updated
+  // If initial apiData was passed from SSR, update state & store immediately
   useEffect(() => {
     if (apiData?.data3) {
+      setPageData(apiData.data3);
       const updated = getUpdatedDetails("services", apiData);
       setDetails(updated as any);
     }
   }, [apiData, setDetails]);
 
+  // Always fetch fresh /api/pages/3 when on details page or when slug changes
   useEffect(() => {
     const isAdminRoute =
       pathname.startsWith("/admin") ||
@@ -37,19 +40,17 @@ const ServicesDetailsLayout = ({ slug, apiData }: ServicesDetailsLayoutProps) =>
       pathname.startsWith("/manage-");
     if (isAdminRoute) return;
 
-    // If section_Data is already present, we don't necessarily have to refetch unless missing
-    if (details?.homepage?.service_area?.section_Data?.length) return;
-
     let isMounted = true;
     const fetchServicesData = async () => {
       try {
         startLoading();
         const res = await PageControllers.getPublicPageById(3);
-        const pageData = res.data?.data?.data || res.data?.data;
-        if (pageData && isMounted) {
+        const fetchedData = res.data?.data?.data || res.data?.data;
+        if (fetchedData && isMounted) {
+          setPageData(fetchedData);
           const { newServicesPage, newServiceArea } =
             mapBackendToServicesPageState(
-              pageData,
+              fetchedData,
               WEBSITE_DATA.servicesPage,
               WEBSITE_DATA.homepage.service_area,
             );
@@ -64,27 +65,31 @@ const ServicesDetailsLayout = ({ slug, apiData }: ServicesDetailsLayoutProps) =>
           setDetails(mergedWebsiteData as any);
         }
       } catch (error) {
-        console.error("Error fetching services details page data", error);
+        console.error("Error fetching services details page data from pages/3", error);
       } finally {
-        stopLoading();
+        if (isMounted) {
+          stopLoading();
+        }
       }
     };
 
     fetchServicesData();
 
     return () => {
-      if (isMounted) {
-        stopLoading();
-      }
       isMounted = false;
+      stopLoading();
     };
-  }, [details?.homepage?.service_area?.section_Data, setDetails, startLoading, stopLoading, pathname]);
+  }, [slug, pathname, setDetails, startLoading, stopLoading]);
+
+  // Extract service areas list from fresh pageData if available
+  const serviceAreasSection = pageData?.sections?.find((s: any) => s.sectionKey === "service_areas");
+  const displayServiceAreas = serviceAreasSection?.data?.section_Data || details?.homepage?.service_area?.section_Data;
 
   return (
     <div>
-      <ServicesDetailsHeroSection apiData={apiData} slug={slug} />
-      <QuickLinksDetails slug={slug} />
-      <ServiceAreas data={details?.homepage?.service_area?.section_Data} />
+      <ServicesDetailsHeroSection apiData={apiData} pageData={pageData} slug={slug} />
+      <QuickLinksDetails pageData={pageData} slug={slug} />
+      <ServiceAreas data={displayServiceAreas} />
     </div>
   );
 };

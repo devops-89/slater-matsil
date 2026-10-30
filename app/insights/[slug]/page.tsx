@@ -61,7 +61,7 @@ export default async function InsightDetailPage({ params }: Props) {
   return (
     <Box>
       <InsightDetailsStoreInitializer apiData={apiData} />
-      <InsightsDetailsLayout />
+      <InsightsDetailsLayout initialData={apiData} />
     </Box>
   );
 }

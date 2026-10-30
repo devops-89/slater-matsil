@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   Box, Button, Typography, Grid, IconButton,
-  Dialog, DialogActions, DialogContent, DialogTitle, TextField, Stack
+  Dialog, DialogActions, DialogContent, DialogTitle, TextField, Stack, CircularProgress
 } from "@mui/material";
 import { Add, Delete, Close, Upload } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
@@ -26,61 +26,46 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
     heroImageDownloadUrl: "",
   });
   
-  const [isUploading, setIsUploading] = useState(false);
-  const [isUploadingHero, setIsUploadingHero] = useState(false);
+  const [pendingHeroFile, setPendingHeroFile] = useState<File | null>(null);
+  const [pendingIconFile, setPendingIconFile] = useState<File | null>(null);
+  const [heroPreviewUrl, setHeroPreviewUrl] = useState<string>("");
+  const [iconPreviewUrl, setIconPreviewUrl] = useState<string>("");
+  const [isSavingService, setIsSavingService] = useState(false);
   const { showNotification } = useNotification();
 
-  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleIconFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    try {
-      setIsUploading(true);
-      const formDataUpload = new FormData();
-      formDataUpload.append("image", file);
-      
-      const res = await MediaControllers.uploadMedia(formDataUpload);
-      const responseData = res.data?.data?.data || res.data?.data;
-      const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
-      const uploadedKey = responseData?.key || uploadedUrl;
-      if (uploadedUrl) {
-        setFormData((prev) => ({ ...prev, imageUrl: uploadedKey, imageDownloadUrl: uploadedUrl, img: uploadedUrl }));
-        showNotification("Icon uploaded successfully", "success");
-      }
-    } catch (error) {
-      console.error("Failed to upload icon", error);
-      showNotification("Failed to upload icon", "error");
-    } finally {
-      setIsUploading(false);
-    }
+    setPendingIconFile(file);
+    const localUrl = URL.createObjectURL(file);
+    setIconPreviewUrl(localUrl);
+    setFormData((prev) => ({
+      ...prev,
+      imageDownloadUrl: localUrl,
+      img: localUrl,
+    }));
   };
 
-  const handleHeroImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleHeroFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    try {
-      setIsUploadingHero(true);
-      const formDataUpload = new FormData();
-      formDataUpload.append("image", file);
-      
-      const res = await MediaControllers.uploadMedia(formDataUpload);
-      const responseData = res.data?.data?.data || res.data?.data;
-      const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url;
-      const uploadedKey = responseData?.key || uploadedUrl;
-      if (uploadedUrl) {
-        setFormData((prev) => ({ ...prev, heroImageUrl: uploadedKey, heroImageDownloadUrl: uploadedUrl, heroImg: uploadedUrl }));
-        showNotification("Details Hero image uploaded successfully", "success");
-      }
-    } catch (error) {
-      console.error("Failed to upload hero image", error);
-      showNotification("Failed to upload hero image", "error");
-    } finally {
-      setIsUploadingHero(false);
-    }
+    setPendingHeroFile(file);
+    const localUrl = URL.createObjectURL(file);
+    setHeroPreviewUrl(localUrl);
+    setFormData((prev) => ({
+      ...prev,
+      heroImageDownloadUrl: localUrl,
+      heroImg: localUrl,
+    }));
   };
 
   const handleOpenNew = () => {
+    setPendingHeroFile(null);
+    setPendingIconFile(null);
+    setHeroPreviewUrl("");
+    setIconPreviewUrl("");
     setFormData({
       title: "",
       description: "",
@@ -98,16 +83,20 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
   };
 
   const handleEdit = (item: any, idx: number) => {
+    setPendingHeroFile(null);
+    setPendingIconFile(null);
+    setHeroPreviewUrl("");
+    setIconPreviewUrl("");
     setFormData({ 
       title: item.title || "", 
       description: item.description || "",
       slug: item.slug || "",
       img: item.img || "",
       imageUrl: item.imageUrl || item.key || "",
-      imageDownloadUrl: item.imageDownloadUrl || "",
+      imageDownloadUrl: item.imageDownloadUrl || item.img || "",
       heroImg: item.heroImg || item.detailsHeroImg || "",
       heroImageUrl: item.heroImageUrl || item.detailsHeroUrl || item.heroKey || "",
-      heroImageDownloadUrl: item.heroImageDownloadUrl || item.detailsHeroDownloadUrl || "",
+      heroImageDownloadUrl: item.heroImageDownloadUrl || item.detailsHeroDownloadUrl || item.heroImg || "",
       detailsData: item.detailsData ? JSON.parse(JSON.stringify(item.detailsData)) : []
     });
     setEditingIdx(idx);
@@ -127,86 +116,110 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
     onChange({ ...data, section_Data: updatedData });
   };
 
-  const handleSave = () => {
-    let newSectionData = [...(data.section_Data || [])];
-    const finalSlug = (formData.slug && formData.slug.trim()) ? formData.slug.trim() : generateSlug(formData.title);
-    
-    if (editingIdx !== null) {
-      newSectionData[editingIdx] = { 
-        ...newSectionData[editingIdx], 
-        title: formData.title, 
-        description: formData.description,
-        slug: finalSlug,
-        detailsData: formData.detailsData,
-        img: formData.imageDownloadUrl || formData.img || newSectionData[editingIdx].img || "",
-        imageUrl: formData.imageUrl || newSectionData[editingIdx].imageUrl || "",
-        imageDownloadUrl: formData.imageDownloadUrl || newSectionData[editingIdx].imageDownloadUrl || "",
-        heroImg: formData.heroImageDownloadUrl || formData.heroImg || newSectionData[editingIdx].heroImg || "",
-        heroImageUrl: formData.heroImageUrl || newSectionData[editingIdx].heroImageUrl || "",
-        heroImageDownloadUrl: formData.heroImageDownloadUrl || newSectionData[editingIdx].heroImageDownloadUrl || "",
-      };
-    } else {
-      newSectionData.push({
-        serialNumber: `0${newSectionData.length + 1}`.slice(-2),
+  const handleSave = async () => {
+    setIsSavingService(true);
+    try {
+      let finalHeroImageUrl = formData.heroImageUrl;
+      let finalHeroImageDownloadUrl = formData.heroImageDownloadUrl;
+      let finalHeroImg = formData.heroImg;
+
+      if (pendingHeroFile) {
+        const formDataUpload = new FormData();
+        formDataUpload.append("image", pendingHeroFile);
+        const res = await MediaControllers.uploadMedia(formDataUpload);
+        const responseData = res.data?.data?.data || res.data?.data;
+        const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url || responseData?.imageDownloadUrl;
+        const uploadedKey = responseData?.key || uploadedUrl;
+        if (uploadedUrl) {
+          finalHeroImageUrl = uploadedKey;
+          finalHeroImageDownloadUrl = uploadedUrl;
+          finalHeroImg = uploadedUrl;
+        }
+      }
+
+      let finalImageUrl = formData.imageUrl;
+      let finalImageDownloadUrl = formData.imageDownloadUrl;
+      let finalImg = formData.img;
+
+      if (pendingIconFile) {
+        const formDataUpload = new FormData();
+        formDataUpload.append("image", pendingIconFile);
+        const res = await MediaControllers.uploadMedia(formDataUpload);
+        const responseData = res.data?.data?.data || res.data?.data;
+        const uploadedUrl = responseData?.imgUrl || responseData?.videoUrl || responseData?.url || responseData?.imageDownloadUrl;
+        const uploadedKey = responseData?.key || uploadedUrl;
+        if (uploadedUrl) {
+          finalImageUrl = uploadedKey;
+          finalImageDownloadUrl = uploadedUrl;
+          finalImg = uploadedUrl;
+        }
+      }
+
+      let newSectionData = [...(data.section_Data || [])];
+      const finalSlug = (formData.slug && formData.slug.trim()) ? formData.slug.trim() : generateSlug(formData.title);
+
+      const updatedItem = {
         title: formData.title,
         description: formData.description,
         slug: finalSlug,
         detailsData: formData.detailsData,
-        img: formData.imageDownloadUrl || formData.img || "",
-        imageUrl: formData.imageUrl || "",
-        imageDownloadUrl: formData.imageDownloadUrl || "",
-        heroImg: formData.heroImageDownloadUrl || formData.heroImg || "",
-        heroImageUrl: formData.heroImageUrl || "",
-        heroImageDownloadUrl: formData.heroImageDownloadUrl || "",
-      });
-    }
+        img: finalImageDownloadUrl || finalImg || "",
+        imageUrl: finalImageUrl || "",
+        imageDownloadUrl: finalImageDownloadUrl || "",
+        heroImg: finalHeroImageDownloadUrl || finalHeroImg || "",
+        heroImageUrl: finalHeroImageUrl || "",
+        heroImageDownloadUrl: finalHeroImageDownloadUrl || "",
+      };
 
-    onChange({ ...data, section_Data: newSectionData });
-    setDialogOpen(false);
+      if (editingIdx !== null) {
+        newSectionData[editingIdx] = { 
+          ...newSectionData[editingIdx], 
+          ...updatedItem,
+        };
+      } else {
+        newSectionData.push({
+          serialNumber: `0${newSectionData.length + 1}`.slice(-2),
+          ...updatedItem,
+        });
+      }
+
+      onChange({ ...data, section_Data: newSectionData });
+      setPendingHeroFile(null);
+      setPendingIconFile(null);
+      setHeroPreviewUrl("");
+      setIconPreviewUrl("");
+      setDialogOpen(false);
+    } catch (err) {
+      console.error("Failed to upload service media", err);
+      showNotification("Failed to upload image", "error");
+    } finally {
+      setIsSavingService(false);
+    }
   };
 
   return (
-    <Box>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700, mb: 2 }}>
-          Section Headers
+    <Box sx={{ mt: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE }}>
+          Services List ({data.section_Data?.length || 0})
         </Typography>
-        <Grid container spacing={3}>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <TextField 
-              fullWidth label="Section Title" value={data.sectionTitle || ""}
-              onChange={(e) => onChange({ ...data, sectionTitle: e.target.value })}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <TextField 
-              fullWidth label="Main Heading" value={data.heading || ""}
-              onChange={(e) => onChange({ ...data, heading: e.target.value })}
-            />
-          </Grid>
-        </Grid>
-      </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2, mt: 4 }}>
-        <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
-          Services List
-        </Typography>
-        <Button variant="contained" startIcon={<Add />} onClick={handleOpenNew} sx={{ backgroundColor: COLORS.PRIMARY_GREEN, borderRadius: "50px" }}>
+        <Button 
+          variant="contained" 
+          startIcon={<Add />} 
+          onClick={handleOpenNew}
+          sx={{ backgroundColor: COLORS.PRIMARY_GREEN }}
+        >
           Add Service
         </Button>
       </Box>
 
+      {/* Grid of existing services */}
       {(!data.section_Data || data.section_Data.length === 0) ? (
-        <Box sx={{ py: 6, textAlign: "center", border: `1px solid rgba(0,0,0,0.1)`, borderRadius: 4, backgroundColor: COLORS.OFF_WHITE }}>
-          <Typography variant="h6" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE }}>
-            No services found.
-          </Typography>
-          <Typography variant="body2" sx={{ color: COLORS.TEXT_PRIMARY, mt: 1 }}>
-            Click "Add Service" to create your first service area.
-          </Typography>
+        <Box sx={{ p: 4, textAlign: 'center', backgroundColor: '#FAFAFA', borderRadius: 2 }}>
+          <Typography color="textSecondary">No services added yet.</Typography>
         </Box>
       ) : (
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
           {data.section_Data.map((item: any, idx: number) => (
             <Box 
               key={idx} 
@@ -214,8 +227,8 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
                 display: 'flex', 
                 alignItems: 'center', 
                 justifyContent: 'space-between',
-                p: 2,
-                border: '1px solid rgba(0,0,0,0.1)',
+                p: 2, 
+                border: '1px solid rgba(0,0,0,0.08)', 
                 borderRadius: 2,
                 backgroundColor: '#FFFFFF',
                 boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
@@ -249,7 +262,7 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
 
       <Dialog 
         open={dialogOpen} 
-        onClose={() => setDialogOpen(false)} 
+        onClose={() => !isSavingService && setDialogOpen(false)} 
         maxWidth="md" 
         fullWidth
         slotProps={{ paper: { sx: { borderRadius: 4, m: 2 } } }}
@@ -258,7 +271,7 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
           <Typography variant="h5" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, fontWeight: 700 }}>
             {editingIdx !== null ? "Edit Service" : "Add Service"}
           </Typography>
-          <IconButton onClick={() => setDialogOpen(false)}>
+          <IconButton onClick={() => setDialogOpen(false)} disabled={isSavingService}>
             <Close />
           </IconButton>
         </DialogTitle>
@@ -306,18 +319,18 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
                 <Typography variant="subtitle2" sx={{ fontFamily: tradeGothic.style.fontFamily, color: COLORS.PRIMARY_BLUE, mb: 1 }}>
                   Service Icon / Image (Card Preview)
                 </Typography>
-                <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isUploading}>
-                  {isUploading ? "Uploading..." : "Upload Image"}
-                  <input type="file" hidden accept="image/*" onChange={handleImageUpload} />
+                <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE }} disabled={isSavingService}>
+                  Upload Image
+                  <input type="file" hidden accept="image/*" onChange={handleIconFileSelect} />
                 </Button>
               </Box>
-              {(formData.imageDownloadUrl || (formData as any).imageUrl || formData.img) && (
-                <Box sx={{ mt: 2, position: "relative", width: 96, height: 96, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
+              {(iconPreviewUrl || formData.imageDownloadUrl || (formData as any).imageUrl || formData.img) && (
+                <Box sx={{ mt: 2, position: "relative", width: 100, height: 100, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.12)", bgcolor: "#fafafa" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={(formData as any).imageDownloadUrl || (typeof formData.img === "string" ? formData.img : (formData.img as any)?.src) || (typeof (formData as any).imageUrl === 'string' ? (formData as any).imageUrl : (formData as any).imageUrl?.src)}
+                    src={iconPreviewUrl || (formData as any).imageDownloadUrl || (typeof formData.img === "string" ? formData.img : (formData.img as any)?.src) || (typeof (formData as any).imageUrl === 'string' ? (formData as any).imageUrl : (formData as any).imageUrl?.src)}
                     alt="Service icon"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    style={{ width: "100%", height: "100%", objectFit: "contain" }}
                   />
                   <IconButton
                     size="small"
@@ -326,10 +339,11 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
                       if (onDeleteMedia && (formData.imageUrl || (formData as any).key)) {
                         onDeleteMedia(formData.imageUrl || (formData as any).key);
                       }
+                      setPendingIconFile(null);
+                      setIconPreviewUrl("");
                       setFormData({ ...formData, img: "", imageUrl: "", imageDownloadUrl: "" } as any);
-                      showNotification("Image removed from preview. Don't forget to save changes.", "info");
                     }}
-                    sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.8)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
+                    sx={{ position: "absolute", top: 2, right: 2, backgroundColor: "rgba(255,255,255,0.85)", padding: "2px", "&:hover": { backgroundColor: "white" } }}
                   >
                     <Delete fontSize="small" />
                   </IconButton>
@@ -337,7 +351,7 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
               )}
             </Box>
 
-            {/* Details Page Hero Image */}
+            {/* Details Page Hero Image (Square Preview) */}
             <Box sx={{ mt: 1, pt: 2, borderTop: "1px solid rgba(0,0,0,0.08)" }}>
               <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 2 }}>
                 <Box>
@@ -348,18 +362,38 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
                     Banner background image displayed on this service's details page (/services/{formData.slug?.trim() || generateSlug(formData.title) || "..."})
                   </Typography>
                 </Box>
-                <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE, whiteSpace: "nowrap" }} disabled={isUploadingHero}>
-                  {isUploadingHero ? "Uploading..." : "Upload Hero Image"}
-                  <input type="file" hidden accept="image/*" onChange={handleHeroImageUpload} />
+                <Button component="label" variant="outlined" startIcon={<Upload />} size="small" sx={{ color: COLORS.PRIMARY_BLUE, whiteSpace: "nowrap" }} disabled={isSavingService}>
+                  Upload Hero Image
+                  <input type="file" hidden accept="image/*" onChange={handleHeroFileSelect} />
                 </Button>
               </Box>
-              {(formData.heroImageDownloadUrl || formData.heroImageUrl || formData.heroImg) && (
-                <Box sx={{ mt: 2, position: "relative", width: "100%", height: 160, borderRadius: 2, overflow: "hidden", border: "1px solid rgba(0,0,0,0.1)" }}>
+              {(heroPreviewUrl || formData.heroImageDownloadUrl || formData.heroImg || formData.heroImageUrl) && (
+                <Box 
+                  sx={{ 
+                    mt: 2, 
+                    position: "relative", 
+                    width: 120, 
+                    height: 120, 
+                    borderRadius: 2, 
+                    overflow: "hidden", 
+                    border: "1px solid rgba(0,0,0,0.15)",
+                    bgcolor: "#f9f9f9",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                  }}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={formData.heroImageDownloadUrl || formData.heroImg || formData.heroImageUrl}
+                    src={heroPreviewUrl || formData.heroImageDownloadUrl || formData.heroImg || formData.heroImageUrl}
                     alt="Details Hero Banner"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      if (formData.heroImg && target.src !== formData.heroImg) {
+                        target.src = formData.heroImg;
+                      }
+                    }}
                   />
                   <IconButton
                     size="small"
@@ -368,10 +402,19 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
                       if (onDeleteMedia && formData.heroImageUrl) {
                         onDeleteMedia(formData.heroImageUrl);
                       }
+                      setPendingHeroFile(null);
+                      setHeroPreviewUrl("");
                       setFormData({ ...formData, heroImg: "", heroImageUrl: "", heroImageDownloadUrl: "" });
-                      showNotification("Hero image removed. Don't forget to save changes.", "info");
                     }}
-                    sx={{ position: "absolute", top: 4, right: 4, backgroundColor: "rgba(255,255,255,0.8)", padding: "4px", "&:hover": { backgroundColor: "white" } }}
+                    sx={{ 
+                      position: "absolute", 
+                      top: 4, 
+                      right: 4, 
+                      backgroundColor: "rgba(255,255,255,0.85)", 
+                      padding: "4px", 
+                      boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                      "&:hover": { backgroundColor: "white" } 
+                    }}
                   >
                     <Delete fontSize="small" />
                   </IconButton>
@@ -453,9 +496,14 @@ export const ServiceAreasEditor = ({ data, onChange, onDeleteMedia }: { data: an
           </Stack>
         </DialogContent>
         <DialogActions sx={{ p: 2 }}>
-          <Button onClick={() => setDialogOpen(false)} color="inherit">Cancel</Button>
-          <Button onClick={handleSave} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
-            Save Service
+          <Button onClick={() => setDialogOpen(false)} color="inherit" disabled={isSavingService}>Cancel</Button>
+          <Button 
+            onClick={handleSave} 
+            variant="contained" 
+            disabled={isSavingService}
+            sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}
+          >
+            {isSavingService ? "Saving..." : "Save Service"}
           </Button>
         </DialogActions>
       </Dialog>

@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import { FormatBold } from "@mui/icons-material";
+import { Box, Button, Stack, Typography, Tooltip } from "@mui/material";
+import { FormatBold, FormatItalic } from "@mui/icons-material";
 import { COLORS } from "@/utils/enum";
 
 interface BoldTextFieldProps {
@@ -15,6 +15,12 @@ interface BoldTextFieldProps {
   error?: boolean;
 }
 
+export const isHtmlEmpty = (html?: string) => {
+  if (!html) return true;
+  const clean = html.replace(/<[^>]*>/g, "").replace(/&nbsp;|\u200B|\s+/g, "");
+  return clean.length === 0;
+};
+
 export default function BoldTextField({
   label,
   value,
@@ -27,6 +33,7 @@ export default function BoldTextField({
 }: BoldTextFieldProps) {
   const editorRef = useRef<HTMLDivElement | null>(null);
   const [isBold, setIsBold] = useState(false);
+  const [isItalic, setIsItalic] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
@@ -34,7 +41,7 @@ export default function BoldTextField({
       const currentHtml = editorRef.current.innerHTML;
       const normalizedValue = value || "";
       if (currentHtml !== normalizedValue) {
-        editorRef.current.innerHTML = normalizedValue;
+        editorRef.current.innerHTML = isHtmlEmpty(normalizedValue) ? "" : normalizedValue;
       }
     }
   }, [value]);
@@ -42,20 +49,21 @@ export default function BoldTextField({
   const updateStateAndValue = () => {
     if (editorRef.current) {
       let html = editorRef.current.innerHTML;
-      if (html === "<br>" || html === "<div><br></div>" || html === "<p><br></p>") {
+      if (isHtmlEmpty(html)) {
         html = "";
       }
       onChange(html);
-      checkBoldState();
+      checkFormatState();
     }
   };
 
-  const checkBoldState = () => {
+  const checkFormatState = () => {
     try {
-      const state = document.queryCommandState("bold");
-      setIsBold(!!state);
+      setIsBold(!!document.queryCommandState("bold"));
+      setIsItalic(!!document.queryCommandState("italic"));
     } catch {
       setIsBold(false);
+      setIsItalic(false);
     }
   };
 
@@ -64,7 +72,17 @@ export default function BoldTextField({
     if (editorRef.current) {
       editorRef.current.focus();
       document.execCommand("bold", false);
-      checkBoldState();
+      checkFormatState();
+      updateStateAndValue();
+    }
+  };
+
+  const handleToggleItalic = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (editorRef.current) {
+      editorRef.current.focus();
+      document.execCommand("italic", false);
+      checkFormatState();
       updateStateAndValue();
     }
   };
@@ -86,29 +104,61 @@ export default function BoldTextField({
         ) : (
           <Box />
         )}
-        <Button
-          size="small"
-          variant={isBold ? "contained" : "outlined"}
-          color="primary"
-          startIcon={<FormatBold />}
-          onMouseDown={handleToggleBold}
-          sx={{
-            textTransform: "none",
-            py: 0.3,
-            px: 1.5,
-            fontSize: "12px",
-            height: "28px",
-            backgroundColor: isBold ? COLORS.PRIMARY_BLUE : "transparent",
-            color: isBold ? "#fff" : COLORS.PRIMARY_BLUE,
-            fontWeight: 600,
-            borderColor: COLORS.PRIMARY_BLUE,
-            "&:hover": {
-              backgroundColor: isBold ? COLORS.PRIMARY_BLUE : "rgba(27, 54, 93, 0.08)",
-            },
-          }}
-        >
-          {isBold ? "Bold Active (B)" : "Bold (B)"}
-        </Button>
+
+        <Stack direction="row" spacing={1} alignItems="center">
+          <Tooltip title="Bold (B)">
+            <Button
+              size="small"
+              variant={isBold ? "contained" : "outlined"}
+              color="primary"
+              startIcon={<FormatBold />}
+              onMouseDown={handleToggleBold}
+              sx={{
+                textTransform: "none",
+                py: 0.3,
+                px: 1.5,
+                fontSize: "12px",
+                height: "28px",
+                backgroundColor: isBold ? COLORS.PRIMARY_BLUE : "transparent",
+                color: isBold ? "#fff" : COLORS.PRIMARY_BLUE,
+                fontWeight: 600,
+                borderColor: COLORS.PRIMARY_BLUE,
+                "&:hover": {
+                  backgroundColor: isBold ? COLORS.PRIMARY_BLUE : "rgba(27, 54, 93, 0.08)",
+                },
+              }}
+            >
+              Bold
+            </Button>
+          </Tooltip>
+
+          <Tooltip title="Italic (I)">
+            <Button
+              size="small"
+              variant={isItalic ? "contained" : "outlined"}
+              color="primary"
+              startIcon={<FormatItalic />}
+              onMouseDown={handleToggleItalic}
+              sx={{
+                textTransform: "none",
+                py: 0.3,
+                px: 1.5,
+                fontSize: "12px",
+                height: "28px",
+                fontStyle: "italic",
+                backgroundColor: isItalic ? COLORS.PRIMARY_BLUE : "transparent",
+                color: isItalic ? "#fff" : COLORS.PRIMARY_BLUE,
+                fontWeight: 600,
+                borderColor: COLORS.PRIMARY_BLUE,
+                "&:hover": {
+                  backgroundColor: isItalic ? COLORS.PRIMARY_BLUE : "rgba(27, 54, 93, 0.08)",
+                },
+              }}
+            >
+              Italic
+            </Button>
+          </Tooltip>
+        </Stack>
       </Stack>
 
       <Box
@@ -125,7 +175,7 @@ export default function BoldTextField({
           },
         }}
       >
-        {!value && (
+        {(!value || isHtmlEmpty(value)) && (
           <Typography
             sx={{
               position: "absolute",
@@ -146,14 +196,18 @@ export default function BoldTextField({
           contentEditable
           suppressContentEditableWarning
           onInput={updateStateAndValue}
-          onKeyUp={checkBoldState}
-          onMouseUp={checkBoldState}
+          onKeyUp={checkFormatState}
+          onMouseUp={checkFormatState}
           onFocus={() => {
             setIsFocused(true);
-            checkBoldState();
+            checkFormatState();
           }}
           onBlur={() => {
             setIsFocused(false);
+            if (editorRef.current && isHtmlEmpty(editorRef.current.innerHTML)) {
+              editorRef.current.innerHTML = "";
+              onChange("");
+            }
           }}
           sx={{
             outline: "none",
@@ -166,6 +220,9 @@ export default function BoldTextField({
             "& b, & strong": {
               fontWeight: 700,
               color: COLORS.PRIMARY_BLUE,
+            },
+            "& i, & em": {
+              fontStyle: "italic",
             },
             "& p": {
               margin: 0,

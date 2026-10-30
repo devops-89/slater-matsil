@@ -11,11 +11,7 @@ export default function InsightDetailsStoreInitializer({ apiData }: InsightDetai
   const initialized = useRef(false);
 
   if (!initialized.current) {
-    if (typeof window === 'undefined') {
-      useInsightDetails.setState({ data: apiData });
-    } else {
-      useInsightDetails.getState().data = apiData;
-    }
+    useInsightDetails.setState({ data: apiData });
     initialized.current = true;
   }
 

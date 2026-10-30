@@ -297,11 +297,20 @@ interface AWARDS_ABOUT_PROPS {
 export interface DATA_LIST_PROPS {
   dataList: { label: string }[];
 }
+export interface ABOUT_CARD_ITEM {
+  title: string;
+  href: string;
+  img?: any;
+  imageUrl?: string;
+  imageDownloadUrl?: string;
+}
+
 interface INDUSTRIES_WE_SERVE_PROPS {
   heading1: string;
   heading2: string;
   description: string;
   section_data: DATA_LIST_PROPS[];
+  cards?: ABOUT_CARD_ITEM[];
 }
 
 interface PROFESSIONALS_HEROSECTION_PROPS {
@@ -552,6 +561,8 @@ export interface INSIGHTS_DATA_PROPS {
   bgColor: string;
   category?: string;
   slug?: string;
+  externalUrl?: string;
+  url?: string;
 }
 
 export interface INSIGHT_DETAIL_HERO_PROPS {
@@ -939,6 +950,8 @@ export interface INSIGHT_FORM_CARD_DATA {
   category: string;
   bgColor?: string;
   order?: string | number;
+  externalUrl?: string;
+  url?: string;
 }
 
 export interface INSIGHT_FORM_HERO_DATA {

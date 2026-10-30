@@ -63,6 +63,8 @@ const InsightsTabSection = () => {
         category: insight.category,
         bgColor: insight.cardTheme || insight.bgColor || COLORS.PRIMARY_BLUE,
         slug: insight.id ? insight.id.toString() : (insight.slug || ""),
+        url: insight.externalUrl || insight.url || insight.link || insight.redirectUrl || (typeof insight.title === "string" && (insight.title.startsWith("http") || insight.title.startsWith("/")) ? insight.title : "") || "",
+        externalUrl: insight.externalUrl || insight.url || "",
       }));
     return allData;
   })();
@@ -137,6 +139,8 @@ const InsightsTabSection = () => {
                           category={val.category}
                           bgColor={alternatingColor}
                           slug={val.slug}
+                          url={val.url}
+                          externalUrl={val.externalUrl}
                         />
                       </Grid>
                     );

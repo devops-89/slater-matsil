@@ -13,16 +13,22 @@ import { generateSlug } from "@/utils/mappers/servicesMapper";
 
 interface ServicesDetailsHeroSectionProps {
   apiData?: any;
+  pageData?: any;
   slug?: string;
 }
 
-const ServicesDetailsHeroSection = ({ apiData, slug: propSlug }: ServicesDetailsHeroSectionProps) => {
+const ServicesDetailsHeroSection = ({ apiData, pageData, slug: propSlug }: ServicesDetailsHeroSectionProps) => {
   const params = useParams();
   const rawSlug = ((propSlug || (params?.slug as string) || "") as string).trim();
   const { details: storeDetails } = usePageData();
-  const details = apiData ? getUpdatedDetails("services", apiData) : storeDetails;
+  const details = storeDetails || (apiData ? getUpdatedDetails("services", apiData) : null);
   
+  const sections = pageData?.sections || apiData?.data3?.sections || [];
+  const saSection = sections.find((s: any) => s.sectionKey === "service_areas");
+  const freshServiceAreas = saSection?.data?.section_Data;
+
   const serviceAreas =
+    freshServiceAreas ||
     details?.homepage?.service_area?.section_Data ||
     details?.servicesPage?.service_areas?.section_Data ||
     [];
@@ -52,7 +58,10 @@ const ServicesDetailsHeroSection = ({ apiData, slug: propSlug }: ServicesDetails
   const customHeroImg =
     currentService?.heroImageDownloadUrl ||
     currentService?.heroImg ||
-    currentService?.heroImageUrl;
+    currentService?.heroImageUrl ||
+    currentService?.imageDownloadUrl ||
+    currentService?.img ||
+    currentService?.imageUrl;
 
   const bgImg = customHeroImg
     ? getValidImageUrl(customHeroImg)

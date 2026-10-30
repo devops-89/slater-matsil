@@ -19,8 +19,13 @@ import {
 } from "@mui/icons-material";
 import { FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
-const InsightsDetailsHeroSection = () => {
-  const { data } = useInsightDetails();
+interface InsightsDetailsHeroSectionProps {
+  data?: any;
+}
+
+const InsightsDetailsHeroSection = ({ data: propData }: InsightsDetailsHeroSectionProps) => {
+  const { data: storeData } = useInsightDetails();
+  const data = propData || storeData;
   const hero = data?.hero;
   const contact = data?.contact;
 

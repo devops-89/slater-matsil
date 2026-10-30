@@ -28,7 +28,7 @@ import {
   TextField,
   InputAdornment
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as yup from "yup";
 import AdminLayout from "./AdminLayout";
 import InsightFormModal from "./components/InsightFormModal";
@@ -38,11 +38,24 @@ const insightSchema = yup.object().shape({
     title: yup.string().required("Title is required"),
     category: yup.string().required("Category is required"),
     order: yup.number().typeError("Order must be a number").required("Order is required"),
+    externalUrl: yup.string().optional(),
   }),
   heroData: yup.object().shape({
-    name: yup.string().required("Name is required"),
-    band: yup.string().required("Band / Role is required"),
-    guide: yup.string().required("Guide is required"),
+    name: yup.string().when("$hasUrl", {
+      is: true,
+      then: (schema) => schema.optional(),
+      otherwise: (schema) => schema.required("Name is required"),
+    }),
+    band: yup.string().when("$hasUrl", {
+      is: true,
+      then: (schema) => schema.optional(),
+      otherwise: (schema) => schema.required("Band / Role is required"),
+    }),
+    guide: yup.string().when("$hasUrl", {
+      is: true,
+      then: (schema) => schema.optional(),
+      otherwise: (schema) => schema.required("Guide is required"),
+    }),
     yearsRanked: yup.string().optional(),
     profileImage: yup.mixed().optional(),
   }),
@@ -71,8 +84,8 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
   const [isSaving, setIsSaving] = useState(false);
   const [initialState, setInitialState] = useState<string>("");
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
-  const [insightToDelete, setInsightToDelete] = useState<{id?: number} | null>(null);
-  
+  const [insightToDelete, setInsightToDelete] = useState<{ id?: number } | null>(null);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
 
@@ -89,15 +102,15 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
   });
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  
-  const totalPages = Math.ceil((allCards?.length || 0) / itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = allCards?.slice(indexOfFirstItem, indexOfLastItem);
-  
+  const [apiTotalPages, setApiTotalPages] = useState(1);
+  const itemsPerPage = 8;
+
+  const totalPages = apiTotalPages || Math.ceil((allCards?.length || 0) / itemsPerPage) || 1;
+  const currentItems = allCards.length > itemsPerPage ? allCards.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage) : allCards;
+
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
+    fetchInsights(debouncedSearchTerm, pageNumber);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -116,6 +129,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
     category: "",
     bgColor: COLORS.PRIMARY_BLUE,
     order: "",
+    externalUrl: "",
   });
   const [heroData, setHeroData] = useState<INSIGHT_FORM_HERO_DATA>({
     name: "",
@@ -142,17 +156,24 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
 
   const [isFetching, setIsFetching] = useState(initialInsights.length === 0);
 
-  const fetchInsights = async (searchQuery: string = "") => {
+  const fetchInsights = async (searchQuery: string = debouncedSearchTerm, page: number = currentPage) => {
     try {
       setIsFetching(true);
-      const params: any = { limit: 1000 };
+      const params: any = { limit: itemsPerPage, page };
       if (searchQuery) {
         params.insightTitle = searchQuery;
       }
       const res = await InsightControllers.getAllInsights(params);
-      const data = res.data?.data?.data?.insights || res.data?.data?.insights || [];
+      const resData = res.data?.data?.data || res.data?.data || {};
+      const data = resData.insights || (Array.isArray(resData) ? resData : []);
+      const meta = resData.meta || res.data?.meta || res.data?.data?.meta;
+
       setInsightsCards(data);
-      setCurrentPage(1);
+      if (meta?.totalPages) {
+        setApiTotalPages(meta.totalPages);
+      } else if (meta?.total) {
+        setApiTotalPages(Math.ceil(meta.total / itemsPerPage));
+      }
     } catch (err) {
       showNotification("Failed to fetch insights", "error");
     } finally {
@@ -161,7 +182,8 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
   };
 
   useEffect(() => {
-    fetchInsights(debouncedSearchTerm);
+    setCurrentPage(1);
+    fetchInsights(debouncedSearchTerm, 1);
   }, [debouncedSearchTerm]);
 
   const handleOpenNew = () => {
@@ -211,6 +233,12 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
     const insight = insightsCards.find((c) => c.id === id);
 
     if (insight) {
+      const extUrl = (insight.externalUrl as string) || (insight.url as string) || (insight.link as string) || (insight.redirectUrl as string) || (typeof insight.title === "string" && (insight.title.startsWith("http") || insight.title.startsWith("/")) ? insight.title : "") || "";
+      const resourceLink = ((insight.sections as any[]) || [])?.find(
+        (sec: any) => (sec.sectionType === "MISC_AND_RESOURCES" || sec.sectionType === "RESOURCE") && sec.link
+      )?.link || "";
+      const finalUrl = extUrl || resourceLink;
+
       const newCardData = {
         title: (insight.listingTitle as string) || (insight.insightTitle as string) || (insight.title as string) || "",
         category: (insight.category as string) || "",
@@ -218,6 +246,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
         imageUrl: (insight.profileImageUrl as string) || (insight.imageUrl as string) || "",
         imageDownloadUrl: (insight.profileImageDownloadUrl as string) || (insight.imageUrl as string) || "",
         order: insight.order !== undefined && insight.order !== null ? String(insight.order) : "",
+        externalUrl: finalUrl,
       };
 
       const newHeroData = {
@@ -275,9 +304,11 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
     }
 
     try {
+      const enteredUrl = (cardData.externalUrl || cardData.url || "").trim();
+      const isUrlMode = !!enteredUrl;
       await insightSchema.validate(
         { cardData, heroData, contentSections },
-        { abortEarly: false },
+        { abortEarly: false, context: { hasUrl: isUrlMode } },
       );
       setErrors({});
     } catch (err: unknown) {
@@ -309,39 +340,68 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
       return;
     }
 
+    const enteredUrl = (cardData.externalUrl || cardData.url || "").trim();
+    const isUrlMode = !!enteredUrl;
     const payload = {
       ...(activeId ? { insightId: activeId } : {}),
       insightTitle: cardData.title,
+      ...(enteredUrl ? { externalUrl: enteredUrl } : {}),
       category: cardData.category ? cardData.category.charAt(0).toUpperCase() + cardData.category.slice(1).toLowerCase() : "",
       ...((heroData.rawProfileImage || heroData.profileImage) && { imageUrl: heroData.rawProfileImage || heroData.profileImage }),
       order: cardData.order !== "" && cardData.order !== undefined ? Number(cardData.order) : undefined,
-      personName: heroData.name,
-      bandRole: heroData.band,
-      guideOrganization: heroData.guide,
-      yearsRankedDate: heroData.yearsRanked,
-      sections: [
-        { sectionType: "PRACTICE_AREAS", heading: contentSections.practiceAreas?.heading, content: contentSections.practiceAreas?.content, sortOrder: 1 },
-        { sectionType: "CAREER", heading: contentSections.career?.heading, content: contentSections.career?.content, sortOrder: 2 },
-        { sectionType: "PROFESSIONAL_MEMBERSHIPS", heading: contentSections.professionalMemberships?.heading, content: contentSections.professionalMemberships?.content, sortOrder: 3 },
-        { sectionType: "PERSONAL", heading: contentSections.personal?.heading, content: contentSections.personal?.content, sortOrder: 4 },
-        { sectionType: "CHAMBERS_REVIEW", heading: contentSections.ChamberssReview?.heading, content: contentSections.ChamberssReview?.content, sortOrder: 5 },
-        { sectionType: "STRENGTHS", heading: contentSections.strengths?.heading, content: contentSections.strengths?.content, sortOrder: 6 },
-        { sectionType: "ADDITIONAL_CONTENT", heading: contentSections.additionalInformation?.heading, content: contentSections.additionalInformation?.content, sortOrder: 7 },
-        { sectionType: "MAIN_CONTENT", heading: contentSections.closingStatement?.heading, content: contentSections.closingStatement?.content, sortOrder: 8 },
-        { 
-          sectionType: "MISC_AND_RESOURCES", 
-          heading: contentSections.resource?.heading, 
-          content: contentSections.resource?.link ? `${contentSections.resource?.content || ""}\n\nLink: ${contentSections.resource?.link}` : contentSections.resource?.content, 
-          sortOrder: 9 
-        },
-      ].filter(s => s.heading?.trim() || s.content?.trim())
+      personName: heroData.name?.trim() || (isUrlMode ? "Slater Matsil" : ""),
+      bandRole: heroData.band?.trim() || (isUrlMode ? (cardData.category || "Article") : ""),
+      guideOrganization: heroData.guide?.trim() || (isUrlMode ? "Slater Matsil" : ""),
+      yearsRankedDate: heroData.yearsRanked?.trim() || (isUrlMode ? new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : ""),
+      sections: (() => {
+        const cleanContent = (val?: string) => {
+          if (!val) return "";
+          const text = val.replace(/<[^>]*>/g, "").replace(/&nbsp;|\u200B|\s+/g, "");
+          return text.length === 0 ? "" : val.trim();
+        };
+
+        const list = [
+          { sectionType: "PRACTICE_AREAS", heading: contentSections.practiceAreas?.heading?.trim() || "", content: cleanContent(contentSections.practiceAreas?.content), sortOrder: 1 },
+          { sectionType: "CAREER", heading: contentSections.career?.heading?.trim() || "", content: cleanContent(contentSections.career?.content), sortOrder: 2 },
+          { sectionType: "PROFESSIONAL_MEMBERSHIPS", heading: contentSections.professionalMemberships?.heading?.trim() || "", content: cleanContent(contentSections.professionalMemberships?.content), sortOrder: 3 },
+          { sectionType: "PERSONAL", heading: contentSections.personal?.heading?.trim() || "", content: cleanContent(contentSections.personal?.content), sortOrder: 4 },
+          { sectionType: "CHAMBERS_REVIEW", heading: contentSections.ChamberssReview?.heading?.trim() || "", content: cleanContent(contentSections.ChamberssReview?.content), sortOrder: 5 },
+          { sectionType: "STRENGTHS", heading: contentSections.strengths?.heading?.trim() || "", content: cleanContent(contentSections.strengths?.content), sortOrder: 6 },
+          { sectionType: "ADDITIONAL_CONTENT", heading: contentSections.additionalInformation?.heading?.trim() || "", content: cleanContent(contentSections.additionalInformation?.content), sortOrder: 7 },
+          {
+            sectionType: "MAIN_CONTENT",
+            heading: contentSections.closingStatement?.heading?.trim() || (cleanContent(contentSections.closingStatement?.content) ? "Overview" : ""),
+            content: cleanContent(contentSections.closingStatement?.content),
+            sortOrder: 8
+          },
+          {
+            sectionType: "MISC_AND_RESOURCES",
+            heading: contentSections.resource?.heading?.trim() || "",
+            content: contentSections.resource?.link ? `${cleanContent(contentSections.resource?.content)}\n\nLink: ${contentSections.resource?.link}`.trim() : cleanContent(contentSections.resource?.content),
+            sortOrder: 9
+          },
+        ];
+
+        const activeSections = list.filter(s => s.content && s.heading);
+        if (activeSections.length === 0 && isUrlMode) {
+          return [
+            {
+              sectionType: "MAIN_CONTENT",
+              heading: "Overview",
+              content: `<p><a href="${enteredUrl}" target="_blank" rel="noopener noreferrer">${enteredUrl}</a></p>`,
+              sortOrder: 1
+            }
+          ];
+        }
+        return activeSections;
+      })()
     };
 
     try {
       setIsSaving(true);
       await InsightControllers.upsertInsight(payload);
       showNotification(activeId ? "Insight updated successfully" : "Insight created successfully", "success");
-      
+
       setDialogOpen(false);
       await fetchInsights();
 
@@ -380,9 +440,9 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
   const handleDelete = async () => {
     if (!insightToDelete) return;
     const { id } = insightToDelete;
-    
+
     setDeleteConfirmOpen(false);
-    
+
     if (id) {
       try {
         startLoading();
@@ -406,7 +466,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
       const responseData = response.data?.data?.data || response.data?.data;
       const uploadedUrl = responseData?.imgUrl || responseData?.url;
       const uploadedKey = responseData?.key || uploadedUrl;
-      
+
       if (response.data?.success && uploadedUrl) {
         if (heroData.rawProfileImage && !keysToDeleteOnSave.includes(heroData.rawProfileImage)) {
           setKeysToDeleteOnSave(prev => [...prev, heroData.rawProfileImage as string]);
@@ -496,7 +556,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
       <Grid container spacing={{ xs: 2, md: 4 }}>
         {isFetching ? (
           // Render skeleton loaders
-          Array.from(new Array(6)).map((_, i) => (
+          Array.from(new Array(8)).map((_, i) => (
             <Grid size={{ xs: 12, sm: 12, md: 6, lg: 4, xl: 3 }} key={`skeleton-${i}`} sx={{ display: "flex" }}>
               <Box sx={{ width: "100%", height: 320, borderRadius: 3, bgcolor: "rgba(0,0,0,0.05)", animation: "pulse 1.5s infinite" }} />
             </Grid>
@@ -509,8 +569,7 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
           </Grid>
         ) : (
           currentItems.map((insight, i: number) => (
-            <Grid
-              size={{ xs: 12, sm: 12, md: 6, lg: 4, xl: 3 }}
+            <Grid size={{ xs: 12, sm: 6, md: 6, lg: 4, xl: 3 }}
               key={i}
               sx={{ display: "flex" }}
             >
@@ -519,6 +578,8 @@ export default function InsightsAdminLayout({ initialInsights = [] }: InsightsAd
                 category={(insight.category as string) || "News"}
                 title={(insight.insightTitle as string) || (insight.title as string) || ""}
                 slug={insight.id?.toString()}
+                url={(insight.externalUrl as string) || (insight.url as string) || (insight.link as string) || (insight.redirectUrl as string) || (typeof insight.title === "string" && (insight.title.startsWith("http") || insight.title.startsWith("/")) ? insight.title : "")}
+                externalUrl={(insight.externalUrl as string) || (insight.url as string) || (insight.link as string) || ""}
                 onDelete={() => openDeleteConfirm(insight.id)}
                 onEdit={() => handleEdit(insight.id)}
               />

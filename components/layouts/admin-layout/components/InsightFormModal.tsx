@@ -78,9 +78,11 @@ export default function InsightFormModal({
       if (!cardData.category) { newErrors["cardData.category"] = "Category is required"; hasError = true; }
       if (!cardData.order) { newErrors["cardData.order"] = "Order is required"; hasError = true; }
     } else if (activeTab === 1) {
-      if (!heroData.name) { newErrors["heroData.name"] = "Person Name is required"; hasError = true; }
-      if (!heroData.band) { newErrors["heroData.band"] = "Band / Role is required"; hasError = true; }
-      if (!heroData.guide) { newErrors["heroData.guide"] = "Guide Organization is required"; hasError = true; }
+      if (!cardData.url?.trim() && !cardData.externalUrl?.trim()) {
+        if (!heroData.name) { newErrors["heroData.name"] = "Person Name is required"; hasError = true; }
+        if (!heroData.band) { newErrors["heroData.band"] = "Band / Role is required"; hasError = true; }
+        if (!heroData.guide) { newErrors["heroData.guide"] = "Guide Organization is required"; hasError = true; }
+      }
     } else if (activeTab === 2) {
       // Main Content is now optional
     }
@@ -193,6 +195,25 @@ export default function InsightFormModal({
                     helperText={errors["cardData.order"]}
                   />
                 </Grid>
+                <Grid size={{ xs: 12, md: 6 }}>
+                  <Typography sx={{ fontWeight: 600, mb: 1, fontSize: 14 }}>
+                    External / Article URL
+                  </Typography>
+                  <TextField
+                    fullWidth
+                    placeholder="e.g. https://doi.org/... or https://..."
+                    value={cardData.externalUrl || cardData.url || ""}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setCardData({ ...cardData, url: val, externalUrl: val });
+                      setErrors({ ...errors, "cardData.url": undefined, "cardData.externalUrl": undefined });
+                    }}
+                    error={!!errors["cardData.url"]}
+                    helperText={(cardData.externalUrl || cardData.url) ? "URL entered: Other tabs are optional. Clicking the card will open this URL."
+                      : "Optional: If entered, clicking the card will open this link directly."
+                    }
+                  />
+                </Grid>
               </Grid>
             </Stack>
           )}
@@ -273,22 +294,22 @@ export default function InsightFormModal({
           {activeTab === 2 && (
             <Stack spacing={3}>
               <Typography variant="subtitle2" color="primary">Main Biography / Closing Statement</Typography>
-              <TextField 
-                fullWidth 
-                label="Heading (Optional)" 
-                value={contentSections.closingStatement?.heading || ""} 
-                onChange={(e) => handleContentSectionChange("closingStatement", "heading", e.target.value)} 
+              <TextField
+                fullWidth
+                label="Heading"
+                value={contentSections.closingStatement?.heading || ""}
+                onChange={(e) => handleContentSectionChange("closingStatement", "heading", e.target.value)}
               />
-              <BoldTextField 
-                fullWidth 
-                multiline 
-                rows={8} 
-                label="Content Body (Use new lines for paragraphs)" 
-                value={contentSections.closingStatement?.content || ""} 
+              <BoldTextField
+                fullWidth
+                multiline
+                rows={8}
+                label="Content Body (Use new lines for paragraphs)"
+                value={contentSections.closingStatement?.content || ""}
                 onChange={(val) => {
                   handleContentSectionChange("closingStatement", "content", val);
                   setErrors({ ...errors, "contentSections.closingStatement.content": undefined });
-                }} 
+                }}
                 error={!!errors["contentSections.closingStatement.content"]}
                 helperText={errors["contentSections.closingStatement.content"]}
               />
@@ -368,6 +389,16 @@ export default function InsightFormModal({
         <Button onClick={onClose} color="inherit" disabled={isSaving}>
           Cancel
         </Button>
+        {(cardData.externalUrl?.trim() || cardData.url?.trim()) && activeTab < 5 && (
+          <Button
+            onClick={handleSave}
+            variant="contained"
+            disabled={isSaving}
+            sx={{ backgroundColor: COLORS.PRIMARY_GREEN, color: COLORS.WHITE, fontWeight: 700, "&:hover": { backgroundColor: "#5f9a24" } }}
+          >
+            {isSaving ? <CircularProgress size={20} sx={{ color: "#fff" }} /> : (activeId ? "Update Insight Now" : "Save Insight Now")}
+          </Button>
+        )}
         {activeTab < 5 ? (
           <Button onClick={handleNext} variant="contained" sx={{ backgroundColor: COLORS.PRIMARY_BLUE }}>
             Next

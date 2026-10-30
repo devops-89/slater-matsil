@@ -4,6 +4,7 @@ import HeadingStar from "@/components/widgets/Heading-star";
 import { useInsightDetails } from "@/store/useInsightDetails";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
+import { formatRichText } from "@/utils/textFormatter";
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 
 const SectionBlock = ({
@@ -13,11 +14,11 @@ const SectionBlock = ({
   heading: string;
   content: string;
 }) => {
-  if (!content || !heading) return null;
+  if (!content) return null;
 
   return (
     <Stack spacing={3} sx={{ mb: 8 }}>
-      <HeadingStar title={heading} />
+      {heading ? <HeadingStar title={heading} /> : null}
       <Typography
         sx={{
           fontFamily: adelle.style.fontFamily,
@@ -27,8 +28,29 @@ const SectionBlock = ({
           color: COLORS.TEXT_PRIMARY_4,
           textAlign: "left",
           letterSpacing: 1.5,
+          wordBreak: "break-word",
+          "& strong, & b": {
+            fontWeight: 700,
+            color: COLORS.PRIMARY_BLUE,
+          },
+          "& em, & i": {
+            fontStyle: "italic",
+          },
+          "& a": {
+            color: COLORS.PRIMARY_GREEN,
+            textDecoration: "underline",
+            fontWeight: 600,
+            wordBreak: "break-all",
+            transition: "color 0.2s ease",
+            "&:hover": {
+              color: COLORS.PRIMARY_BLUE,
+            },
+          },
+          "& p": {
+            mb: 2,
+          },
         }}
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: formatRichText(content) }}
       />
     </Stack>
   );
@@ -36,12 +58,15 @@ const SectionBlock = ({
 
 interface InsightsDetailsContentSectionProps {
   activeTab: number;
+  data?: any;
 }
 
 const InsightsDetailsContentSection = ({
   activeTab,
+  data: propData,
 }: InsightsDetailsContentSectionProps) => {
-  const { data } = useInsightDetails();
+  const { data: storeData } = useInsightDetails();
+  const data = propData || storeData;
   const sections = data?.contentSections;
   const hero = data?.hero;
 
@@ -205,6 +230,16 @@ const InsightsDetailsContentSection = ({
           </Typography>
         </Box>
 
+        {/* Main Content (Biography / Closing Statement) */}
+        {sections.closingStatement && (
+          <Box sx={{ mb: 8 }}>
+            <SectionBlock
+              heading={sections.closingStatement.heading}
+              content={sections.closingStatement.content}
+            />
+          </Box>
+        )}
+
         {/* Main Two Columns */}
         <Grid container spacing={{ xs: 6, md: 12 }} sx={{ mb: 10 }}>
           <Grid size={{ xs: 12, md: 6 }}>
@@ -248,12 +283,6 @@ const InsightsDetailsContentSection = ({
           <SectionBlock
             heading={sections.additionalInformation.heading}
             content={sections.additionalInformation.content}
-          />
-        )}
-        {sections.closingStatement && (
-          <SectionBlock
-            heading={sections.closingStatement.heading}
-            content={sections.closingStatement.content}
           />
         )}
         {sections.resource && (

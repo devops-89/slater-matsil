@@ -34,6 +34,8 @@ const InsightsSection = () => {
     category: insight.category,
     bgColor: insight.cardTheme || COLORS.PRIMARY_BLUE,
     slug: insight.id.toString(),
+    url: insight.externalUrl || insight.url || insight.link || insight.redirectUrl || (typeof insight.title === "string" && (insight.title.startsWith("http") || insight.title.startsWith("/")) ? insight.title : "") || "",
+    externalUrl: insight.externalUrl || insight.url || "",
   })) : details?.insightsPage?.insightsData || [];
 
   return (
@@ -137,6 +139,8 @@ const InsightsSection = () => {
                   category={val.category}
                   bgColor={val.bgColor}
                   slug={val.slug}
+                  url={val.url}
+                  externalUrl={val.externalUrl}
                 />
               </SwiperSlide>
             ))}

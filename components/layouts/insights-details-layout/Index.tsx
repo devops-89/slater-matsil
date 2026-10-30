@@ -10,9 +10,20 @@ import InsightsDetailsContentSection from "./InsightsDetailsContentSection";
 import { COLORS } from "@/utils/enum";
 import { adelle, tradeGothic } from "@/utils/fonts";
 
-const InsightsDetailsLayout = () => {
+interface InsightsDetailsLayoutProps {
+  initialData?: any;
+}
+
+const InsightsDetailsLayout = ({ initialData }: InsightsDetailsLayoutProps) => {
   const [activeTab, setActiveTab] = useState(0); // 0 = About, 1 = Lawyer Rankings
-  const { clearInsightDetailsData, data } = useInsightDetails();
+  const { clearInsightDetailsData, data: storeData, setInsightDetailsData } = useInsightDetails();
+  const data = storeData || initialData;
+
+  useEffect(() => {
+    if (initialData) {
+      setInsightDetailsData(initialData);
+    }
+  }, [initialData, setInsightDetailsData]);
 
   const [navigation, setNavigation] = useState<{
     prev: { slug: string; name: string } | null;
@@ -37,9 +48,9 @@ const InsightsDetailsLayout = () => {
 
   return (
     <Box sx={{ bgcolor: "white", minHeight: "100vh" }}>
-      <InsightsDetailsHeroSection />
+      <InsightsDetailsHeroSection data={data} />
       <InsightsDetailsTabBar activeTab={activeTab} onTabChange={setActiveTab} />
-      <InsightsDetailsContentSection activeTab={activeTab} />
+      <InsightsDetailsContentSection activeTab={activeTab} data={data} />
 
       {/* Navigation Buttons */}
       <Container maxWidth="lg" sx={{ mt: 8, mb: 10 }}>
